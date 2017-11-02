@@ -3,7 +3,7 @@
 <html>
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>运营管理系统</title>
+    <title>供应链登录页</title>
 
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/js/easyui1.4.5/css/bglogin.css"/>
     <!-- 引入JQuery 库-->
@@ -32,7 +32,7 @@
 
         <div class="login_top">
             <div class="login_title">
-                运营管理系统登录页
+                供应链登录页
             </div>
         </div>
         <div style="float:left;width:100%;">

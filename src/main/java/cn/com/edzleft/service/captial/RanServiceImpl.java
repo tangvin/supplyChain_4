@@ -1,7 +1,6 @@
-package cn.com.edzleft.service.impl;
+package cn.com.edzleft.service.captial;
 
 import cn.com.edzleft.dao.captial.RainMapper;
-import cn.com.edzleft.service.Rainservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
