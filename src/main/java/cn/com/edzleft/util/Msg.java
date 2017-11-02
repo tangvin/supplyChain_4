@@ -1,9 +1,10 @@
 package cn.com.edzleft.util;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 
 public class Msg {
 	/**

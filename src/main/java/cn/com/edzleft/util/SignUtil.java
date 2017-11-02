@@ -4,9 +4,6 @@ package cn.com.edzleft.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import java.util.Properties;
-
-import org.springframework.beans.factory.annotation.Value;
 
 /**
  * 请求检验工具类

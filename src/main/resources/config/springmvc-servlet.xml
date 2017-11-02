@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+<!-- 自动扫描,完成bean创建和依赖注入 -->
+ <context:component-scan base-package="cn.com.edzleft.controller.*" />
+ 
+<!--<mvc:annotation-driven /> 是一种简写，其实是给 Spring 容器中注入了两个 Bean ，
+      分别是： DefaultAnnotationHandlerMapping 和AnnotationMethodHandlerAdapter 。 
+      @DateTimeFormat 注解的内部需要使用到前面注入的两个 bean 去处理 -->
+<mvc:annotation-driven /> 
+
+   
+	<!-- 视图解析器  设置返回页面的路径 和后缀 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+	    <property name="prefix" value="/WEB-INF/jsp/" />
+	    <property name="suffix" value=".jsp" />  
+	</bean> 
+	
+	
+	<!--  上传设置 CommonsMultipartResolver 通用组件解析器    -->
+	<!-- 上传文件配置bean，配置上传文件编码，大小，类型等 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="maxUploadSize">
+			<value>32505856</value><!-- 上传文件大小限制为31M，31*1024*1024 -->
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+	
+
+	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- 系统拦截器定义 -->
+	<!--<mvc:interceptors>-->
+		<!--<mvc:interceptor>-->
+			<!--&lt;!&ndash; 	拦截的 &ndash;&gt;-->
+			<!--<mvc:mapping path="/WEB-INF/*"/>-->
+			<!--<mvc:mapping path="/WEB-INF/*"/>-->
+			<!--&lt;!&ndash;  不拦截的 &ndash;&gt;-->
+			<!--&lt;!&ndash;<mvc:exclude-mapping path="/usermanger/shootIndex"/>&ndash;&gt;-->
+			<!--&lt;!&ndash;<mvc:exclude-mapping path="/usermanger/login"/>&ndash;&gt;-->
+			<!--&lt;!&ndash;<mvc:exclude-mapping path="/usermanger/index"/>&ndash;&gt;-->
+			<!--&lt;!&ndash;<mvc:exclude-mapping path="/usermanger/doLogin"/>&ndash;&gt;-->
+			<!--&lt;!&ndash;<mvc:exclude-mapping path="/shoot/system/personData/index"/>&ndash;&gt;-->
+			<!--&lt;!&ndash;         定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的   &ndash;&gt;-->
+			<!--&lt;!&ndash;<bean class="com.bhcx.interceptor.ManageInterceptor"/>&ndash;&gt;-->
+		<!--</mvc:interceptor>-->
+	<!--</mvc:interceptors>-->
+
+
+
+
+
+
+</beans>
