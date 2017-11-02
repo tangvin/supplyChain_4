@@ -1,6 +1,6 @@
-package cn.com.edzleft.controller.captial;
+package cn.com.edzleft.controller.captial.homepage;
 
-import cn.com.edzleft.service.captial.Rainservice;
+import cn.com.edzleft.service.captial.homepage.Rainservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -15,7 +15,7 @@
 
 
 <!-- 自动扫描,完成bean创建和依赖注入 -->
- <context:component-scan base-package="cn.com.edzleft.controller.*" />
+ <context:component-scan base-package="cn.com.edzleft.controller.*.*" />
  
 <!--<mvc:annotation-driven /> 是一种简写，其实是给 Spring 容器中注入了两个 Bean ，
       分别是： DefaultAnnotationHandlerMapping 和AnnotationMethodHandlerAdapter 。 

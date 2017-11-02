@@ -1,4 +1,4 @@
-package cn.com.edzleft.dao.captial;
+package cn.com.edzleft.dao.captial.homepage;
 
 import cn.com.edzleft.entity.Rain;
 
