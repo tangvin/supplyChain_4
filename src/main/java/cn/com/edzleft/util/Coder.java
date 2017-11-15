@@ -1,11 +1,10 @@
-package com.hdzx.base.utils;
-
-import java.security.MessageDigest;
+package cn.com.edzleft.util;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.MessageDigest;
 
 
 /**

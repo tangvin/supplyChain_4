@@ -1,11 +1,13 @@
 package cn.com.edzleft.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**合同表
  * gyl_contract
  */
-public class Contract {
+public class Contract implements Serializable{
+    private static final long serialVersionUID = 5213670568749427280L;
     /**
      * 合同id
      */
@@ -59,7 +61,7 @@ public class Contract {
      */
     private Integer orderContractId;
     /**
-     * 合同状态
+     * 合同状态 0未生效、1正常、2已终止、3历史
      */
     private Integer contractStatus;
     /**
@@ -86,6 +88,19 @@ public class Contract {
      * 关联到附件表，多页取多条
      */
     private Integer contractElectronicsId;
+
+    /**
+     * 合同扫描件
+     */
+    private Integer contractScanner;
+    /**
+     * 融信申请（是与否）
+     */
+    private Integer letterApply;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public Integer getContractId() {
         return contractId;
@@ -247,6 +262,22 @@ public class Contract {
         this.contractElectronicsId = contractElectronicsId;
     }
 
+    public Integer getContractScanner() {
+        return contractScanner;
+    }
+
+    public void setContractScanner(Integer contractScanner) {
+        this.contractScanner = contractScanner;
+    }
+
+    public Integer getLetterApply() {
+        return letterApply;
+    }
+
+    public void setLetterApply(Integer letterApply) {
+        this.letterApply = letterApply;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -289,7 +320,11 @@ public class Contract {
             return false;
         if (contractFounder != null ? !contractFounder.equals(contract.contractFounder) : contract.contractFounder != null)
             return false;
-        return contractElectronicsId != null ? contractElectronicsId.equals(contract.contractElectronicsId) : contract.contractElectronicsId == null;
+        if (contractElectronicsId != null ? !contractElectronicsId.equals(contract.contractElectronicsId) : contract.contractElectronicsId != null)
+            return false;
+        if (contractScanner != null ? !contractScanner.equals(contract.contractScanner) : contract.contractScanner != null)
+            return false;
+        return letterApply != null ? letterApply.equals(contract.letterApply) : contract.letterApply == null;
     }
 
     @Override
@@ -314,6 +349,8 @@ public class Contract {
         result = 31 * result + (contractCreateTime != null ? contractCreateTime.hashCode() : 0);
         result = 31 * result + (contractFounder != null ? contractFounder.hashCode() : 0);
         result = 31 * result + (contractElectronicsId != null ? contractElectronicsId.hashCode() : 0);
+        result = 31 * result + (contractScanner != null ? contractScanner.hashCode() : 0);
+        result = 31 * result + (letterApply != null ? letterApply.hashCode() : 0);
         return result;
     }
 
@@ -340,6 +377,8 @@ public class Contract {
                 ", contractCreateTime=" + contractCreateTime +
                 ", contractFounder='" + contractFounder + '\'' +
                 ", contractElectronicsId=" + contractElectronicsId +
+                ", contractScanner=" + contractScanner +
+                ", letterApply=" + letterApply +
                 '}';
     }
 }

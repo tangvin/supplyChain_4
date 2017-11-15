@@ -1,4 +1,4 @@
-package com.bhcx.entity;
+package cn.com.edzleft.entity;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class DataTableEntity {
 		this.total = total;
 		this.pageData = pageData;
 	}
-	public DataTableEntity(Integer draw,Integer pageNumber, Integer total, List<?> pageData) {
+	public DataTableEntity(Integer draw, Integer pageNumber, Integer total, List<?> pageData) {
 		this.draw = draw;
 		this.total = total;
 		this.pageData = pageData;
@@ -22,7 +22,7 @@ public class DataTableEntity {
 
 	private Integer total;//总记录数
 
-	private  Integer pageNumber;//当前页数
+	private Integer pageNumber;//当前页数
 
 	private List<?> pageData;//具体的数据对象数组
 

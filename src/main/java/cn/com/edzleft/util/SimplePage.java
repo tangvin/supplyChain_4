@@ -16,7 +16,7 @@ public class SimplePage implements Serializable {
     /**
      * 分页查询的行数
      */
-    protected int             pageSize         = 20;
+    protected int             pageSize         = 10;
     /**
      * 分页查询的起始行数
      */

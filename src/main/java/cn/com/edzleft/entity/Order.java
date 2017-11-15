@@ -3,7 +3,7 @@ package cn.com.edzleft.entity;
 import java.util.Date;
 
 /**订单表
- * gyl_oreder
+ * gyl_order
  */
 public class Order {
     /**
@@ -13,11 +13,11 @@ public class Order {
     /**
      * 订单编号
      */
-    private String orederNumber;
+    private String orderNumber;
     /**
      * 订单创建时间
      */
-    private Date orederCreatTime;
+    private Date orderCreatTime;
     /**
      * 订单创建者（采方）
      */
@@ -90,6 +90,18 @@ public class Order {
      * 支付时间(关联到三方账户表)
      */
     private Date paymentTime;
+    /**
+     * 发票
+     */
+    private String invoice;
+    /**
+     * 货运单位
+     */
+    private String freightUnit;
+    /**
+     * 货运单号
+     */
+    private String freightNumber;
 
     public Integer getOrderId() {
         return orderId;
@@ -99,20 +111,20 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public String getOrederNumber() {
-        return orederNumber;
+    public String getOrderNumber() {
+        return orderNumber;
     }
 
-    public void setOrederNumber(String orederNumber) {
-        this.orederNumber = orederNumber == null ? null : orederNumber.trim();
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber == null ? null : orderNumber.trim();
     }
 
-    public Date getOrederCreatTime() {
-        return orederCreatTime;
+    public Date getOrderCreatTime() {
+        return orderCreatTime;
     }
 
-    public void setOrederCreatTime(Date orederCreatTime) {
-        this.orederCreatTime = orederCreatTime;
+    public void setOrderCreatTime(Date orderCreatTime) {
+        this.orderCreatTime = orderCreatTime;
     }
 
     public String getOrderCreator() {
@@ -259,31 +271,28 @@ public class Order {
         this.paymentTime = paymentTime;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderId=" + orderId +
-                ", orederNumber='" + orederNumber + '\'' +
-                ", orederCreatTime=" + orederCreatTime +
-                ", orderCreator='" + orderCreator + '\'' +
-                ", orderCreatorTrade='" + orderCreatorTrade + '\'' +
-                ", orderConfirmationTime=" + orderConfirmationTime +
-                ", orderStatus=" + orderStatus +
-                ", logisticsUnit='" + logisticsUnit + '\'' +
-                ", logisticsNum='" + logisticsNum + '\'' +
-                ", receivingAddress='" + receivingAddress + '\'' +
-                ", ogisticsName='" + ogisticsName + '\'' +
-                ", contactPhone=" + contactPhone +
-                ", principalOrder=" + principalOrder +
-                ", creditGet=" + creditGet +
-                ", creditUse=" + creditUse +
-                ", creditGrantor='" + creditGrantor + '\'' +
-                ", orderAmount=" + orderAmount +
-                ", amountPayable=" + amountPayable +
-                ", amountActuallyPaid=" + amountActuallyPaid +
-                ", paymentAccount='" + paymentAccount + '\'' +
-                ", paymentTime=" + paymentTime +
-                '}';
+    public String getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(String invoice) {
+        this.invoice = invoice;
+    }
+
+    public String getFreightUnit() {
+        return freightUnit;
+    }
+
+    public void setFreightUnit(String freightUnit) {
+        this.freightUnit = freightUnit;
+    }
+
+    public String getFreightNumber() {
+        return freightNumber;
+    }
+
+    public void setFreightNumber(String freightNumber) {
+        this.freightNumber = freightNumber;
     }
 
     @Override
@@ -294,8 +303,8 @@ public class Order {
         Order order = (Order) o;
 
         if (orderId != null ? !orderId.equals(order.orderId) : order.orderId != null) return false;
-        if (orederNumber != null ? !orederNumber.equals(order.orederNumber) : order.orederNumber != null) return false;
-        if (orederCreatTime != null ? !orederCreatTime.equals(order.orederCreatTime) : order.orederCreatTime != null)
+        if (orderNumber != null ? !orderNumber.equals(order.orderNumber) : order.orderNumber != null) return false;
+        if (orderCreatTime != null ? !orderCreatTime.equals(order.orderCreatTime) : order.orderCreatTime != null)
             return false;
         if (orderCreator != null ? !orderCreator.equals(order.orderCreator) : order.orderCreator != null) return false;
         if (orderCreatorTrade != null ? !orderCreatorTrade.equals(order.orderCreatorTrade) : order.orderCreatorTrade != null)
@@ -323,14 +332,17 @@ public class Order {
             return false;
         if (paymentAccount != null ? !paymentAccount.equals(order.paymentAccount) : order.paymentAccount != null)
             return false;
-        return paymentTime != null ? paymentTime.equals(order.paymentTime) : order.paymentTime == null;
+        if (paymentTime != null ? !paymentTime.equals(order.paymentTime) : order.paymentTime != null) return false;
+        if (invoice != null ? !invoice.equals(order.invoice) : order.invoice != null) return false;
+        if (freightUnit != null ? !freightUnit.equals(order.freightUnit) : order.freightUnit != null) return false;
+        return freightNumber != null ? freightNumber.equals(order.freightNumber) : order.freightNumber == null;
     }
 
     @Override
     public int hashCode() {
         int result = orderId != null ? orderId.hashCode() : 0;
-        result = 31 * result + (orederNumber != null ? orederNumber.hashCode() : 0);
-        result = 31 * result + (orederCreatTime != null ? orederCreatTime.hashCode() : 0);
+        result = 31 * result + (orderNumber != null ? orderNumber.hashCode() : 0);
+        result = 31 * result + (orderCreatTime != null ? orderCreatTime.hashCode() : 0);
         result = 31 * result + (orderCreator != null ? orderCreator.hashCode() : 0);
         result = 31 * result + (orderCreatorTrade != null ? orderCreatorTrade.hashCode() : 0);
         result = 31 * result + (orderConfirmationTime != null ? orderConfirmationTime.hashCode() : 0);
@@ -349,6 +361,40 @@ public class Order {
         result = 31 * result + (amountActuallyPaid != null ? amountActuallyPaid.hashCode() : 0);
         result = 31 * result + (paymentAccount != null ? paymentAccount.hashCode() : 0);
         result = 31 * result + (paymentTime != null ? paymentTime.hashCode() : 0);
+        result = 31 * result + (invoice != null ? invoice.hashCode() : 0);
+        result = 31 * result + (freightUnit != null ? freightUnit.hashCode() : 0);
+        result = 31 * result + (freightNumber != null ? freightNumber.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", orderNumber='" + orderNumber + '\'' +
+                ", orderCreatTime=" + orderCreatTime +
+                ", orderCreator='" + orderCreator + '\'' +
+                ", orderCreatorTrade='" + orderCreatorTrade + '\'' +
+                ", orderConfirmationTime=" + orderConfirmationTime +
+                ", orderStatus=" + orderStatus +
+                ", logisticsUnit='" + logisticsUnit + '\'' +
+                ", logisticsNum='" + logisticsNum + '\'' +
+                ", receivingAddress='" + receivingAddress + '\'' +
+                ", ogisticsName='" + ogisticsName + '\'' +
+                ", contactPhone=" + contactPhone +
+                ", principalOrder=" + principalOrder +
+                ", creditGet=" + creditGet +
+                ", creditUse=" + creditUse +
+                ", creditGrantor='" + creditGrantor + '\'' +
+                ", orderAmount=" + orderAmount +
+                ", amountPayable=" + amountPayable +
+                ", amountActuallyPaid=" + amountActuallyPaid +
+                ", paymentAccount='" + paymentAccount + '\'' +
+                ", paymentTime=" + paymentTime +
+                ", invoice='" + invoice + '\'' +
+                ", freightUnit='" + freightUnit + '\'' +
+                ", freightNumber='" + freightNumber + '\'' +
+                '}';
+    }
+
 }

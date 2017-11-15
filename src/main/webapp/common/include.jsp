@@ -10,44 +10,52 @@
 <%String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();%>
 <%String contextPath = request.getContextPath();%>
 
-    
-<!-- 引入 CSS -->
-<link rel="stylesheet" type="text/css" href="/js/easyui1.4.5/themes/icon.css">
-<!-- 主题 css -->
-<link   style="text/css" href="<%=request.getContextPath() %>/js/easyui1.4.5/themes/default/easyui.css" rel="stylesheet"   />
-<!-- 图标 css  -->
-<link   style="text/css" rel="stylesheet"  href="<%=request.getContextPath() %>/js/easyui1.4.5/themes/icon.css"  />
+<!-- 引入bootstrap的css -->
+<link  href="<%=request.getContextPath()%>/js/static/css/bootstrap.css" rel="stylesheet" >
+<link href="<%=request.getContextPath()%>/js/static/css/index.css" rel="stylesheet" >
+
+
 
 <!-- css渲染页面效果  -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/js/uploadify/uploadify.css">
-<link href="<%=request.getContextPath() %>/js/easyui1.4.5/icons/icon-all.css" rel="stylesheet" style="text/css" />
+<%--<link rel="stylesheet" href="<%=request.getContextPath()%>/js/uploadify/uploadify.css">--%>
+
+
+
+<!-- 引入bootstrap-treeview的css -->
+<%--<link  href="<%=request.getContextPath()%>/js/bootstrap/treeview/bootstrap-treeview.min.css" rel="stylesheet" >--%>
+<!-- 引入bootstrap-addTabs的css -->
+<%--<link  href="<%=request.getContextPath()%>/js/bootstrap/addTabs/addTabs.css" rel="stylesheet" >--%>
+<!-- 引入bootstrap-table的css -->
+<%--<link  href="<%=request.getContextPath()%>/js/bootstrap/table/bootstrap-table.min.css" rel="stylesheet" >--%>
+
+<%--<link rel="stylesheet" type="text/css" media="all" href="<%=request.getContextPath()%>/js/bootstrap/css/daterangepicker-bs3.css" />--%>
+
 <!-- 引入JQuery -->
 <!-- 引入JQuery 库-->
-<script type="text/javascript" src="<%=request.getContextPath() %>/js/easyui1.4.5/jquery.min.js"></script>
 
 
 <!-- uploadify库 -->
-<script src="<%=request.getContextPath()%>/js/uploadify/jquery.uploadify.min.js"></script>
+<%--<script src="<%=request.getContextPath()%>/js/uploadify/jquery.uploadify.min.js"></script>--%>
 
 <!-- 引入my97 -->
-<script type="text/javascript" src="<%=request.getContextPath() %>/js/my97/WdatePicker.js"></script>
+<%--<script type="text/javascript" src="<%=request.getContextPath() %>/js/my97/WdatePicker.js"></script>--%>
+<!-- 引入bootstrap的js-->
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/index.js"></script>
 
 
+<!-- 引入bootstrap的js-->
+<%--<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/treeview/bootstrap-treeview.min.js"></script>--%>
+<%--<!-- 引入bootstrap的js-->--%>
+<%--<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/addTabs/addTabs.js"></script>--%>
+<%--<!-- 引入bootstrap-table的js-->--%>
+<%--<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/table/bootstrap-table.min.js"></script>--%>
+<%--<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/table/locale/bootstrap-table-zh-CN.min.js"></script>--%>
+<%--<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/table/bootstrap-table-locale-all.js"></script>--%>
 
-<!-- 引入EasyUI库-->
-<script type="text/javascript" src="<%=request.getContextPath() %>/js/easyui1.4.5/jquery.easyui.min.js"></script>
-<!-- 引入EasyUI语言库-->
-<script type="text/javascript" src="<%=request.getContextPath() %>/js/easyui1.4.5/locale/easyui-lang-zh_CN.js"></script>
-
-
-<%-- 引入扩展图标 --%>
-<link rel="stylesheet" href="<%=contextPath%>/style/extIcon.css" type="text/css">
-
-<%-- 引入自定义样式 --%>
-<link rel="stylesheet" href="<%=contextPath%>/style/extCss.css" type="text/css">
-    
-
-
+<%--<!-- 引入bootbox.js -->--%>
+<%--<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/bootbox/bootbox.js"></script>--%>
 
 
 <script type="text/javascript">

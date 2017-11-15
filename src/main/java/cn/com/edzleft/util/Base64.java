@@ -1,4 +1,4 @@
-package com.hdzx.base.utils;
+package cn.com.edzleft.util;
 /**
  * <p>Encodes and decodes to and from Base64 notation.</p>
  * <p>Homepage: <a href="http://iharder.net/base64">http://iharder.net/base64</a>.</p>
@@ -612,7 +612,7 @@ public class Base64
      * @throws NullPointerException if serializedObject is null
      * @since 1.4
      */
-    public static String encodeObject( java.io.Serializable serializableObject )
+    public static String encodeObject(java.io.Serializable serializableObject )
     throws java.io.IOException {
         return encodeObject( serializableObject, NO_OPTIONS );
     }   // end encodeObject
@@ -648,7 +648,7 @@ public class Base64
      * @throws java.io.IOException if there is an error
      * @since 2.0
      */
-    public static String encodeObject( java.io.Serializable serializableObject, int options )
+    public static String encodeObject(java.io.Serializable serializableObject, int options )
     throws java.io.IOException {
 
         if( serializableObject == null ){
@@ -710,7 +710,7 @@ public class Base64
      * @throws NullPointerException if source array is null
      * @since 1.4
      */
-    public static String encodeBytes( byte[] source ) {
+    public static String encodeBytes(byte[] source ) {
         // Since we're not going to have the GZIP encoding turned on,
         // we're not going to have an java.io.IOException thrown, so
         // we should not force the user to have to catch it.
@@ -755,7 +755,7 @@ public class Base64
      * @throws NullPointerException if source array is null
      * @since 2.0
      */
-    public static String encodeBytes( byte[] source, int options ) throws java.io.IOException {
+    public static String encodeBytes(byte[] source, int options ) throws java.io.IOException {
         return encodeBytes( source, 0, source.length, options );
     }   // end encodeBytes
     
@@ -778,7 +778,7 @@ public class Base64
      * @throws IllegalArgumentException if source array, offset, or length are invalid
      * @since 1.4
      */
-    public static String encodeBytes( byte[] source, int off, int len ) {
+    public static String encodeBytes(byte[] source, int off, int len ) {
         // Since we're not going to have the GZIP encoding turned on,
         // we're not going to have an java.io.IOException thrown, so
         // we should not force the user to have to catch it.
@@ -826,7 +826,7 @@ public class Base64
      * @throws IllegalArgumentException if source array, offset, or length are invalid
      * @since 2.0
      */
-    public static String encodeBytes( byte[] source, int off, int len, int options ) throws java.io.IOException {
+    public static String encodeBytes(byte[] source, int off, int len, int options ) throws java.io.IOException {
         byte[] encoded = encodeBytesToBytes( source, off, len, options );
 
         // Return value according to relevant encoding.
@@ -1159,7 +1159,7 @@ public class Base64
         if( len == 0 ){
             return new byte[0];
         }else if( len < 4 ){
-            throw new IllegalArgumentException( 
+            throw new IllegalArgumentException(
             "Base64-encoded string must have at least four characters, but length specified was " + len );
         }   // end if
         
@@ -1203,7 +1203,7 @@ public class Base64
         }   // each input character
                                    
         byte[] out = new byte[ outBuffPosn ];
-        System.arraycopy( outBuff, 0, out, 0, outBuffPosn ); 
+        System.arraycopy( outBuff, 0, out, 0, outBuffPosn );
         return out;
     }   // end decode
     
@@ -1236,7 +1236,7 @@ public class Base64
      * @throws NullPointerException if <tt>s</tt> is null
      * @since 1.4
      */
-    public static byte[] decode( String s, int options ) throws java.io.IOException {
+    public static byte[] decode(String s, int options ) throws java.io.IOException {
         
         if( s == null ){
             throw new NullPointerException( "Input string was null." );
@@ -1311,7 +1311,7 @@ public class Base64
      *         class that cannot be found by the JVM
      * @since 1.5
      */
-    public static Object decodeToObject( String encodedObject )
+    public static Object decodeToObject(String encodedObject )
     throws java.io.IOException, ClassNotFoundException {
         return decodeToObject(encodedObject,NO_OPTIONS,null);
     }
@@ -1329,12 +1329,12 @@ public class Base64
      * @return The decoded and deserialized object
      * @throws NullPointerException if encodedObject is null
      * @throws java.io.IOException if there is a general error
-     * @throws ClassNotFoundException if the decoded object is of a 
+     * @throws ClassNotFoundException if the decoded object is of a
      *         class that cannot be found by the JVM
      * @since 2.3.4
      */
-    public static Object decodeToObject( 
-    String encodedObject, int options, final ClassLoader loader )
+    public static Object decodeToObject(
+            String encodedObject, int options, final ClassLoader loader )
     throws java.io.IOException, ClassNotFoundException {
         
         // Decode and gunzip if necessary
@@ -1437,7 +1437,7 @@ public class Base64
      * @throws java.io.IOException if there is an error
      * @since 2.1
      */
-    public static void decodeToFile( String dataToDecode, String filename )
+    public static void decodeToFile(String dataToDecode, String filename )
     throws java.io.IOException {
         
         OutputStream bos = null;
@@ -1533,7 +1533,7 @@ public class Base64
      * @throws java.io.IOException if there is an error
      * @since 2.1
      */
-    public static String encodeFromFile( String filename )
+    public static String encodeFromFile(String filename )
     throws java.io.IOException {
         
         String encodedData = null;
@@ -1578,7 +1578,7 @@ public class Base64
      * @throws java.io.IOException if there is an error
      * @since 2.2
      */
-    public static void encodeFileToFile( String infile, String outfile )
+    public static void encodeFileToFile(String infile, String outfile )
     throws java.io.IOException {
         
         String encoded = Base64.encodeFromFile( infile );
@@ -1606,7 +1606,7 @@ public class Base64
      * @throws java.io.IOException if there is an error
      * @since 2.2
      */
-    public static void decodeFileToFile( String infile, String outfile )
+    public static void decodeFileToFile(String infile, String outfile )
     throws java.io.IOException {
         
         byte[] decoded = Base64.decodeFromFile( infile );

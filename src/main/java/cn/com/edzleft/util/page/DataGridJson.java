@@ -1,4 +1,4 @@
-package com.mxp.util;
+package cn.com.edzleft.util.page;
 
 import java.io.Serializable;
 import java.util.List;

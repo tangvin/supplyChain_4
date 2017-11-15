@@ -24,6 +24,10 @@ public class Freight {
      * 是否默认货运单位
      */
     private Integer freightDefaultAddress;
+    /**
+     * 货运单号
+     */
+    private String freightNumber;
 
     public Integer getFreightId() {
         return freightId;
@@ -65,6 +69,14 @@ public class Freight {
         this.freightDefaultAddress = freightDefaultAddress;
     }
 
+    public String getFreightNumber() {
+        return freightNumber;
+    }
+
+    public void setFreightNumber(String freightNumber) {
+        this.freightNumber = freightNumber;
+    }
+
     @Override
     public String toString() {
         return "Freight{" +
@@ -73,6 +85,7 @@ public class Freight {
                 ", freightContactPerson='" + freightContactPerson + '\'' +
                 ", freightContactPhone='" + freightContactPhone + '\'' +
                 ", freightDefaultAddress=" + freightDefaultAddress +
+                ", freightNumber='" + freightNumber + '\'' +
                 '}';
     }
 
@@ -89,7 +102,9 @@ public class Freight {
             return false;
         if (freightContactPhone != null ? !freightContactPhone.equals(freight.freightContactPhone) : freight.freightContactPhone != null)
             return false;
-        return freightDefaultAddress != null ? freightDefaultAddress.equals(freight.freightDefaultAddress) : freight.freightDefaultAddress == null;
+        if (freightDefaultAddress != null ? !freightDefaultAddress.equals(freight.freightDefaultAddress) : freight.freightDefaultAddress != null)
+            return false;
+        return freightNumber != null ? freightNumber.equals(freight.freightNumber) : freight.freightNumber == null;
     }
 
     @Override
@@ -99,6 +114,7 @@ public class Freight {
         result = 31 * result + (freightContactPerson != null ? freightContactPerson.hashCode() : 0);
         result = 31 * result + (freightContactPhone != null ? freightContactPhone.hashCode() : 0);
         result = 31 * result + (freightDefaultAddress != null ? freightDefaultAddress.hashCode() : 0);
+        result = 31 * result + (freightNumber != null ? freightNumber.hashCode() : 0);
         return result;
     }
 }

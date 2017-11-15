@@ -50,6 +50,8 @@
 		<property name="supportedMediaTypes">
 			<list>
 				<value>text/html;charset=UTF-8</value>
+				<value>application/json;charset=utf-8</value>
+				<value>text/json</value>
 			</list>
 		</property>
 	</bean>

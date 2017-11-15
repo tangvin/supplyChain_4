@@ -1,17 +1,19 @@
-package com.mxp.util;
+package cn.com.edzleft.util.page;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
 /** 
- * <pre>项目名称：ssh-02    
+ *
  * 类名称：Page    
  * 类描述：    分页工具类
  * 修改备注：       
  * @version </pre>    
  */
-public class PageUtil<T> {
-	
+public class PageUtil<T> implements Serializable{
+
+	private static final long serialVersionUID = -655979833118135118L;
 	//当前页
 	private Integer cpage;
 	
@@ -58,9 +60,9 @@ public class PageUtil<T> {
 	}
 
 	public Integer getPageSize() {
-		if (pageSize == null) {
-			this.pageSize = 5;
-		}
+//		if (pageSize == null) {
+//			this.pageSize = 5;
+//		}
 		return pageSize;
 	}
 

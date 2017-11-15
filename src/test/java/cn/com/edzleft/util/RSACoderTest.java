@@ -1,14 +1,12 @@
-package com.hdzx.ras.util;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Map;
+package cn.com.edzleft.util;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hdzx.base.utils.RSACoder;
+import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * 
@@ -55,8 +53,8 @@ public class RSACoderTest {
 
 		byte[] encodedData = RSACoder.encryptByPrivateKey(data, privateKey);
 		
-		System.err.println("加密后basetr："+RSACoder.encryptBASE64(encodedData));
-		System.err.println("加密后hexstr："+RSACoder.parseByte2HexStr(encodedData));
+		System.err.println("加密后basetr："+ RSACoder.encryptBASE64(encodedData));
+		System.err.println("加密后hexstr："+ RSACoder.parseByte2HexStr(encodedData));
 
 		byte[] decodedData = RSACoder
 				.decryptByPublicKey(encodedData, publicKey);

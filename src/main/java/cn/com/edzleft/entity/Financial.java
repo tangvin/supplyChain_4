@@ -38,6 +38,22 @@ public class Financial {
      * 账单时间
      */
     private Date billTime;
+    /**
+     * 贸易商名称
+     */
+    private String tradeName;
+    /**
+     * 资金方名称
+     */
+    private String capitalName;
+    /**
+     * 发生的银行账户类型
+     */
+    private Integer bankAcountType;
+    /**
+     * 发生的银行账户
+     */
+    private String bankAccount;
 
     public Integer getId() {
         return id;
@@ -103,6 +119,38 @@ public class Financial {
         this.billTime = billTime;
     }
 
+    public String getTradeName() {
+        return tradeName;
+    }
+
+    public void setTradeName(String tradeName) {
+        this.tradeName = tradeName;
+    }
+
+    public String getCapitalName() {
+        return capitalName;
+    }
+
+    public void setCapitalName(String capitalName) {
+        this.capitalName = capitalName;
+    }
+
+    public Integer getBankAcountType() {
+        return bankAcountType;
+    }
+
+    public void setBankAcountType(Integer bankAcountType) {
+        this.bankAcountType = bankAcountType;
+    }
+
+    public String getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -121,7 +169,13 @@ public class Financial {
             return false;
         if (belongOrder != null ? !belongOrder.equals(financial.belongOrder) : financial.belongOrder != null)
             return false;
-        return billTime != null ? billTime.equals(financial.billTime) : financial.billTime == null;
+        if (billTime != null ? !billTime.equals(financial.billTime) : financial.billTime != null) return false;
+        if (tradeName != null ? !tradeName.equals(financial.tradeName) : financial.tradeName != null) return false;
+        if (capitalName != null ? !capitalName.equals(financial.capitalName) : financial.capitalName != null)
+            return false;
+        if (bankAcountType != null ? !bankAcountType.equals(financial.bankAcountType) : financial.bankAcountType != null)
+            return false;
+        return bankAccount != null ? bankAccount.equals(financial.bankAccount) : financial.bankAccount == null;
     }
 
     @Override
@@ -134,6 +188,10 @@ public class Financial {
         result = 31 * result + (receivingSide != null ? receivingSide.hashCode() : 0);
         result = 31 * result + (belongOrder != null ? belongOrder.hashCode() : 0);
         result = 31 * result + (billTime != null ? billTime.hashCode() : 0);
+        result = 31 * result + (tradeName != null ? tradeName.hashCode() : 0);
+        result = 31 * result + (capitalName != null ? capitalName.hashCode() : 0);
+        result = 31 * result + (bankAcountType != null ? bankAcountType.hashCode() : 0);
+        result = 31 * result + (bankAccount != null ? bankAccount.hashCode() : 0);
         return result;
     }
 
@@ -148,6 +206,10 @@ public class Financial {
                 ", receivingSide='" + receivingSide + '\'' +
                 ", belongOrder='" + belongOrder + '\'' +
                 ", billTime=" + billTime +
+                ", tradeName='" + tradeName + '\'' +
+                ", capitalName='" + capitalName + '\'' +
+                ", bankAcountType=" + bankAcountType +
+                ", bankAccount='" + bankAccount + '\'' +
                 '}';
     }
 }

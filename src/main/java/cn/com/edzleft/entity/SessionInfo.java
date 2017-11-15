@@ -1,20 +1,20 @@
-package com.mxp.pojo;
+package cn.com.edzleft.entity;
 
 import java.io.Serializable;
 
 /**
  * Created by ASUS on 2017/6/2.
  */
-public class SessionInfo implements Serializable{
+public class SessionInfo implements Serializable {
 
     private static final long serialVersionUID = -4990366528213963606L;
-    private Admins admin;
+    private Account account;
 
 
     @Override
     public String toString() {
         return "SessionInfo{" +
-                "admin=" + admin +
+                "admin=" + account +
                 '}';
     }
 
@@ -22,11 +22,11 @@ public class SessionInfo implements Serializable{
         return serialVersionUID;
     }
 
-    public Admins getAdmin() {
-        return admin;
+    public Account getAdmin() {
+        return account;
     }
 
-    public void setAdmin(Admins admin) {
-        this.admin = admin;
+    public void setAdmin(Account admin) {
+        this.account = admin;
     }
 }

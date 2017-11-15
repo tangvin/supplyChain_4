@@ -42,6 +42,22 @@ public class CreditTable {
      * 授信编号
      */
     private String creditNumber;
+    /**
+     * 授信状态
+     */
+    private Integer creditStatus;
+    /**
+     * 授信人
+     */
+    private String applicant;
+    /**
+     * 申请时间
+     */
+    private Date applicationTime;
+    /**
+     * 批准时间
+     */
+    private Date approvalTime;
 
     public Integer getId() {
         return id;
@@ -115,6 +131,38 @@ public class CreditTable {
         this.creditNumber = creditNumber == null ? null : creditNumber.trim();
     }
 
+    public Integer getCreditStatus() {
+        return creditStatus;
+    }
+
+    public void setCreditStatus(Integer creditStatus) {
+        this.creditStatus = creditStatus;
+    }
+
+    public String getApplicant() {
+        return applicant;
+    }
+
+    public void setApplicant(String applicant) {
+        this.applicant = applicant;
+    }
+
+    public Date getApplicationTime() {
+        return applicationTime;
+    }
+
+    public void setApplicationTime(Date applicationTime) {
+        this.applicationTime = applicationTime;
+    }
+
+    public Date getApprovalTime() {
+        return approvalTime;
+    }
+
+    public void setApprovalTime(Date approvalTime) {
+        this.approvalTime = approvalTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -134,7 +182,12 @@ public class CreditTable {
         if (tradeInformationAttachment != null ? !tradeInformationAttachment.equals(that.tradeInformationAttachment) : that.tradeInformationAttachment != null)
             return false;
         if (creditWay != null ? !creditWay.equals(that.creditWay) : that.creditWay != null) return false;
-        return creditNumber != null ? creditNumber.equals(that.creditNumber) : that.creditNumber == null;
+        if (creditNumber != null ? !creditNumber.equals(that.creditNumber) : that.creditNumber != null) return false;
+        if (creditStatus != null ? !creditStatus.equals(that.creditStatus) : that.creditStatus != null) return false;
+        if (applicant != null ? !applicant.equals(that.applicant) : that.applicant != null) return false;
+        if (applicationTime != null ? !applicationTime.equals(that.applicationTime) : that.applicationTime != null)
+            return false;
+        return approvalTime != null ? approvalTime.equals(that.approvalTime) : that.approvalTime == null;
     }
 
     @Override
@@ -148,6 +201,10 @@ public class CreditTable {
         result = 31 * result + (tradeInformationAttachment != null ? tradeInformationAttachment.hashCode() : 0);
         result = 31 * result + (creditWay != null ? creditWay.hashCode() : 0);
         result = 31 * result + (creditNumber != null ? creditNumber.hashCode() : 0);
+        result = 31 * result + (creditStatus != null ? creditStatus.hashCode() : 0);
+        result = 31 * result + (applicant != null ? applicant.hashCode() : 0);
+        result = 31 * result + (applicationTime != null ? applicationTime.hashCode() : 0);
+        result = 31 * result + (approvalTime != null ? approvalTime.hashCode() : 0);
         return result;
     }
 
@@ -163,6 +220,10 @@ public class CreditTable {
                 ", tradeInformationAttachment='" + tradeInformationAttachment + '\'' +
                 ", creditWay=" + creditWay +
                 ", creditNumber='" + creditNumber + '\'' +
+                ", creditStatus=" + creditStatus +
+                ", applicant='" + applicant + '\'' +
+                ", applicationTime=" + applicationTime +
+                ", approvalTime=" + approvalTime +
                 '}';
     }
 }
