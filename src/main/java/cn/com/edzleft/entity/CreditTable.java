@@ -59,6 +59,10 @@ public class CreditTable {
      */
     private Date approvalTime;
 
+
+
+
+
     public Integer getId() {
         return id;
     }

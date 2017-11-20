@@ -30,11 +30,11 @@
                             <div class="khh">
                                 <form class="form-inline khh_form khh_form1">
                                     <div class="form-group form-group1">
-                                        <label for="exampleInputName2">开户行</label>
+                                        <label for="exampleInputName2">授信编号</label>
                                         <input type="text" class="form-control" id="exampleInputName2">
                                     </div>
                                     <div class="form-group form-group1">
-                                        <label for="exampleInputEmail2">户主</label>
+                                        <label for="exampleInputEmail2">授信方</label>
                                         <input type="email" class="form-control" id="exampleInputEmail2">
                                     </div>
                                     <div class="form-group form-group1">
@@ -156,15 +156,15 @@
                             <div class="khh">
                                 <form class="form-inline khh_form khh_form1">
                                     <div class="form-group form-group1">
-                                        <label>开户行1</label>
+                                        <label>用新编号</label>
                                         <input type="text" class="form-control">
                                     </div>
                                     <div class="form-group form-group1">
-                                        <label>户主1</label>
+                                        <label>所属授信</label>
                                         <input type="email" class="form-control">
                                     </div>
                                     <div class="form-group form-group1">
-                                        <label for="exampleInputEmail2">状态1</label>
+                                        <label for="exampleInputEmail2">状态</label>
                                         <select class="form-control select">
                                             <option>全部</option>
                                             <option>全部1</option>
@@ -174,7 +174,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group form-group1">
-                                        <label>申请人1</label>
+                                        <label>申请人</label>
                                         <input type="email" class="form-control">
                                     </div>
                                     <button type="submit" class="btn btn-danger btn-default">查询</button>
