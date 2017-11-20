@@ -1,73 +1,43 @@
 package cn.com.edzleft.util;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Properties;
+import java.util.ResourceBundle;
 
 /**
- * 读取配置文件
- * @author MR.Chan
- *
+ * 项目参数工具类
+ * 
  */
 public class ConfigUtil {
-	private static Properties props = new Properties();
+	
+	
+//	这个类的作用就是读取资源属性文件（properties），然后根据.properties文件的名称信息（本地化信息），匹配当前系统的国别语言信息（也可以程序指定），然后获取相应的properties文件的内容。
+	
 
-	static {
-		try {
-			//play框架下要用这种方式加载
-			props.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("/config/wechat.properties"));
-			//props.load(ConfKit.class.getResourceAsStream("/wechat.properties"));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	//config代表 properties配置文件的名称！！！
+	private static final ResourceBundle bundle = ResourceBundle.getBundle("config/config");
+
+	/**
+	 * 获得sessionInfo名字
+	 * 
+	 * @return
+	*/
+	public static final String getSessionInfoName() {
+
+		return bundle.getString("sessionInfoName");
+	}
+
+	/**
+	 * 通过键获取值
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public static final String get(String key) {
+		return bundle.getString(key);
 	}
 	
-	public static void settingValue(String key,String value){
-		// 读取配置文件
-        FileInputStream inputStream=null;
-		// 写到配置文件
-        FileOutputStream outputStream=null;
-        Properties prop = new Properties();
-		try { 
-	        inputStream = new FileInputStream(props.getProperty("ConfigFileName"));
-	        // 加载
-	        prop.load(inputStream);
-	        // 获取
-	        prop.getProperty(key);
-	        // 设置
-	        prop.setProperty(key, value);
-			outputStream = new FileOutputStream(props.getProperty("ConfigFileName"));
-			prop.store(outputStream, "修改成功.....................");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}finally{
-			try {
-				if(inputStream!=null){
-					inputStream.close();
-				}
-				if(outputStream!=null){
-					outputStream.close();
-				}
-				if(prop!=null){
-					prop.clear();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+	public static void main(String[] args) {
+		String str = get("uploadPath");
+		System.out.println(str);
 	}
-
-	public static String get(String key) {
-		return props.getProperty(key);
-	}
-
-    public static void setProps(Properties p){
-        props = p;
-    }
+	
 }

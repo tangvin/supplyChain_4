@@ -22,7 +22,7 @@ $(function(){
         $('#load').load(projectName+'/main/tradeZhxx.action')
     });
     $('#xtsys').click(function(){
-        $('#load').load(projectName+'${basePath}/main/tradeXtsy.action')
+        $('#load').load(projectName+'/main/tradeXtsy.action')
     })
     $('#syxgls').click(function(){
         $('#load').load(projectName+'/main/tradeSyxgls.action')

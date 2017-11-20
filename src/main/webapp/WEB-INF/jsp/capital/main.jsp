@@ -9,7 +9,7 @@
 <%@ include file="/common/include.jsp"%>
 <html>
 <head>
-    <title>资金方系统首页</title>
+    <title>资方</title>
 </head>
 <body>
     <form class="form-inline" id="f">

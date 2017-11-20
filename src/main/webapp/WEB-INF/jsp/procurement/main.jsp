@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>供应链</title>
+    <title>采购方</title>
 </head>
 <body>
 <!--top 开始-->
