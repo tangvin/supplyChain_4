@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html style="overflow: auto;">
 <%@ include file="/common/include.jsp"%>
-<html>
 <head>
     <meta charset="UTF-8">
     <title></title>
 </head>
-<body style="margin: 0;padding: 0">
+<body style="padding: 0;margin: 0;overflow: auto;">
 <div class="container-fluid login-top">
     <div class='container container-logo'>
         <img src='<%=request.getContextPath()%>/js/static/images/logo@1x.png'>
@@ -45,7 +45,7 @@
 </div>
 <script>
     function login(){
-        location.href="<%=request.getContextPath()%>/main/signingInfo.action";
+        location.href="<%=request.getContextPath()%>/tradeMain/tradeMain.action";
     }
     var countdown=10;
     //随机生成验证码图片

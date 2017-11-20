@@ -11,8 +11,10 @@
 <%String contextPath = request.getContextPath();%>
 
 <!-- 引入bootstrap的css -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/js/static/css/bootstrap.min.css">
 <link  href="<%=request.getContextPath()%>/js/static/css/bootstrap.css" rel="stylesheet" >
 <link href="<%=request.getContextPath()%>/js/static/css/index.css" rel="stylesheet" >
+<link rel="stylesheet" type="text/css" media="all" href="<%=request.getContextPath()%>/js/static/css/daterangepicker-bs3.css" />
 
 
 
@@ -42,9 +44,12 @@
 <!-- 引入bootstrap的js-->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/moment.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/daterangepicker.js"></script>
+<script  src="<%=request.getContextPath() %>/js/static/js/Area.js"></script>
+<script src="<%=request.getContextPath() %>/js/static/js/AreaData_min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/index.js"></script>
-
-
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/uploadImg.js"></script>
 <!-- 引入bootstrap的js-->
 <%--<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/treeview/bootstrap-treeview.min.js"></script>--%>
 <%--<!-- 引入bootstrap的js-->--%>

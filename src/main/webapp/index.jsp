@@ -5,9 +5,17 @@
 <%
     cn.com.edzleft.entity.SessionInfo sessionInfo=(cn.com.edzleft.entity.SessionInfo) session.getAttribute("sessionInfo");
     if(sessionInfo!=null){//session中有值  登陆成功
-        response.sendRedirect(request.getContextPath()+"/main/signingInfo.action");
+        if(sessionInfo.getAdmin().getAccountType() == 0){//采购方
+            response.sendRedirect(request.getContextPath()+"/main/procurementMain.action");
+        }
+        if(sessionInfo.getAdmin().getAccountType() == 1){//贸易方
+            response.sendRedirect(request.getContextPath()+"/main/tradeMain.action");
+        }
+        if(sessionInfo.getAdmin().getAccountType() == 2){//资方
+            response.sendRedirect(request.getContextPath()+"/main/captialMain.action");
+        }
     }else{
-        response.sendRedirect(request.getContextPath()+"/main/login.action");
+        response.sendRedirect(request.getContextPath()+"/captialMain/login.action");
     }
 %>
 </body>

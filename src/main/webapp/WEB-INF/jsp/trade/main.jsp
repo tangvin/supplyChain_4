@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>供应链</title>
+    <title>贸易方首页</title>
 </head>
 <body>
 <!--top 开始-->
@@ -33,7 +33,7 @@
                                 <span class="caret"></span>
                             </p>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li class='text-center' id="ones"><a href="#">资料维护</a></li>
+                                <li class='text-center' id="one2"><a href="#">资料维护</a></li>
                                 <li class='text-center'><a href="#">退出登录</a></li>
                             </ul>
                         </div>
@@ -49,51 +49,51 @@
     <div class="index_left">
         <div class="page-sidebar">
             <ul class="nav panel-group sidebar-menu">
-                <li class="panel" id="xtsys">
-                    <a href="javascript:void(0)">
-                        <img class='img_con' src='<%=request.getContextPath()%>/js/static/images/leftbar_contract_selected@1x.png'>
+                <li class="panel" id="xtsy2">
+                    <a href="#">
+                        <img class='img_con' src='<%=request.getContextPath()%>/js/static/images/leftbar_home_selected@1x.png'>
                         <span class="menu-text">系统首页</span>
                     </a>
                 </li>
-                <li class="panel" id="syxgls">
-                    <a href="#">
-                        <img class='img_con' src='<%=request.getContextPath()%>/js/static/images/leftbar_credit_selected@1x.png'>
-                        <span class="menu-text">授用信管理</span>
-                    </a>
-                </li>
-                <li class="panel" id="htqy">
-                    <a href="#">
+                <li class="panel" >
+                    <a href="#" id="htqy2">
                         <img class='img_con' src='<%=request.getContextPath()%>/js/static/images/leftbar_contract_selected@1x.png'>
                         <span class="menu-text">合同签约</span>
                     </a>
                 </li>
-                <li class="panel">
+                <li class="panel" id="ddgl2">
                     <a href="#">
                         <img class='img_con' src='<%=request.getContextPath()%>/js/static/images/leftbar_order_selected@1x.png'>
                         <span class="menu-text">订单管理</span>
                     </a>
                 </li>
-                <li class="panel">
+                <li class="panel" id="syxgl2">
+                    <a href="#">
+                        <img class='img_con' src='<%=request.getContextPath()%>/js/static/images/leftbar_credit_selected@1x.png'>
+                        <span class="menu-text">授用信管理</span>
+                    </a>
+                </li>
+                <li class="panel" id="cwgl2">
                     <a href="#">
                         <img class='img_con' src='<%=request.getContextPath()%>/js/static/images/leftbar_finance_selected@1x.png'>
                         <span class="menu-text">财务管理</span>
                     </a>
                 </li>
-                <li class="panel">
+                <li class="panel" id="fpgl2">
                     <a href="#">
                         <img class='img_con' src='<%=request.getContextPath()%>/js/static/images/leftbar_invoice_selected@1x.png'>
                         <span class="menu-text">发票管理</span>
                     </a>
                 </li>
-                <li class="panel">
+                <li class="panel" id="ukeyZs2">
                     <a href="#">
                         <img class='img_con' src='<%=request.getContextPath()%>/js/static/images/leftbar_ukey_selected@1x.png'>
                         <span class="menu-text">Ukey与证书</span>
                     </a>
                 </li>
-                <li class="panel">
+                <li class="panel" id="setting2">
                     <a href="#">
-                        <img class='img_con' src='<%=request.getContextPath()%>/js/static/images/leftbar_home_selected@1x.png'>
+                        <img class='img_con' src='<%=request.getContextPath()%>/js/static/images/leftbar_setting_selected@1x.png'>
                         <span class="menu-text">我的设置</span>
                     </a>
                 </li>
@@ -103,9 +103,10 @@
     <!--列表 左侧导航 结束-->
     <!--列表 右侧内容 开始-->
     <div class="index_right" id="load">
+        <!-- 右边的主题内容 col-xs-10 开始 -->
         <div class='row row_xtsy_zjzh'>
             <!-- 中精众和投资管理有限公司 开始 -->
-            <div class='col-xs-12' style="padding-right: 0px;">
+            <div class='col-xs-12 row_xtsy_zjzh_div'>
                 <div class='row zjzh_wrap'>
                     <div class='panel-body'>
                         <div class='col-xs-6'>
@@ -113,7 +114,7 @@
                                 <li class='col-xs-8'>
                                     <h3>中精众和投资管理有限公司</h3>
                                 </li>
-                                <li class='col-xs-1'>
+                                <li class='col-xs-1 zjzh_logo_sm'>
                                     <img src='<%=request.getContextPath()%>/js/static/images/identify1@1x.png'>
                                 </li>
                                 <li class='col-xs-3 yrz'>|<span>已认证</span>|</li>
@@ -139,78 +140,29 @@
                         </div>
                         <div class='col-xs-6 text-right'>
                             <div class='zjzh_button'>
-                                <button type="button" class="btn btn1 btn-danger">登录账号安全</button>
-                                <button type="button" class="btn  btn-danger">基础资料</button>
-                                <button type="button" class="btn  btn-danger btnn">资金帐户</button>
+                                <a id="zhanghu" href="#"><button type="button" class="btn btn1 btn-danger">账号安全</button></a>
+                                <a id="ziliao" href="#"><button type="button" class="btn  btn-danger">基础资料</button></a>
+                                <a id="zijin" href="#"><button type="button" class="btn  btn-danger btnn">资金帐户</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- 中精众和投资管理有限公司 结束 -->
-            <!-- 中精众和投资管理有限公司 可视化图 -->
-
-            <div class='col-xs-12 index_ksh'>
-                <div class='row'>
-                    <!-- 圆 开始 -->
-                    <div class='col-xs-6 ksh_con'>
-                        <h5 class='ksh_con_h5'>授信情况</h5>
-                        <div class='yuan'>
-                            <h4 class="text-center" style="margin-top: 40px;">可用总额</h4>
-                            <h4 class="text-center">6,000,000,00</h4>
-                            <div class='yuan_div row'>
-                                <div class='col-xs-6 ed_p ed_p1'>
-                                    <p class="text-center">已使用</p>
-                                    <p class="text-center">2,000,000,00</p>
-                                </div>
-                                <div class='col-xs-6 ed_p  ed_p2'>
-                                    <p class="text-center">已使用</p>
-                                    <p class="text-center">2,000,000,00</p>
-                                </div>
-                            </div>
-                            <h5 class="text-center">消费总额：2,000,000,000,00</h5>
-                        </div>
-                        <div class='yuan_button text-center'>
-                            <button type="button" class="btn  btn-danger">登录账号安全</button>
-                            <button type="button" class="btn  btn-danger">基础资料</button>
-                            <button type="button" class="btn  btn-danger btnn">资金帐户</button>
-                        </div>
-                    </div>
-                    <!-- 圆 结束 -->
-                    <!-- 上传发票 开始  -->
-                    <div class='col-xs-6' style="border-left:10px solid #ffffff">
-                        <div class="row row_yuan">
-                            <div class='col-xs-12 rzqk'>
-                                <h5>融资情况</h5>
-                                <ul class='nav ye_list'>
-                                    <li class='navbar-text'>最近一笔融资：<span>2017/12/31</span></li>
-                                    <li class='navbar-text'>余额：<span>8000,000.001</span></li>
-                                    <li class='navbar-text'>
-                                        <button type="button" class="btn btn-danger scfp_btn">上传发票</button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="row ">
-                            <div class='col-xs-12 rzqk'>
-                                <h5>融资情况</h5>
-                                <ul class='nav ye_list'>
-                                    <li class='navbar-text'>最近一笔融资：<span>2017/12/31</span></li>
-                                    <li class='navbar-text'>余额：<span>8000,000.001</span></li>
-                                    <p class='navbar-text'>逾期：无</p>
-                                </ul>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 上传发票 结束  -->
-                </div>
-            </div>
-            <!-- 中精众和投资管理有限公司 可视化图 -->
         </div>
     </div>
     <!--列表 右侧内容 结束-->
 </div>
+<script>
+    $('#zhanghu').click(function(){
+        $('#load').load('<%=request.getContextPath()%>/tradeMain/messages.action')
+    })
+    $('#ziliao').click(function(){
+        $('#load').load('<%=request.getContextPath()%>/tradeMain/ziliao.action')
+    })
+    $('#zijin').click(function(){
+        $('#load').load('<%=request.getContextPath()%>/tradeMain/zijin.action')
+    })
+</script>
 </body>
 </html>

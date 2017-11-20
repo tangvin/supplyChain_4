@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>资料维护</title>
 </head>
 <body>
 
 <div class='col-xs-12'>
     <div class='row row_zhxx'>
-        <div class="col-xs-12 zlxx_top" style="background: #f6f6f6;box-sizing: border-box">
-            <a href="../main.jsp">系统首页</a>
+        <div class="col-xs-12 zlxx_top">
+            <a href="<%=request.getContextPath()%>/tradeMain/tradeMain.action">系统首页</a>
             <span>></span>
             <a href="#">资料维护</a>
         </div>
@@ -25,6 +24,7 @@
                     <li><a href="#messages">银行账户</a></li>
                     <li><a href="#settings">三方账户</a></li>
                     <li><a href="#settings1">货运管理</a></li>
+                    <li><a href="#recieverAddress">收获地址</a></li>
                 </ul>
                 <!--tab 导航 结束-->
                 <!--tab 内容 开始-->
@@ -215,7 +215,7 @@
                         <!--账户安全 结束-->
                         <!--银行账户 开始-->
                         <div class="tab-pane" id="messages">
-                            <h5>密码修改</h5>
+                            <button type="button" class="btn   btn-danger btn-default tjyhk">添加银行卡</button>
                             <div class="row">
                                 <div class="col-xs-8 col-xs-offset-1">
                                     <ul class="media-list">
@@ -295,7 +295,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <button type="button" class="btn   btn-danger btn-default tjyhk">添加银行卡</button>
+
                                 </div>
                             </div>
                         </div>
@@ -303,7 +303,7 @@
                         <!--三方账户 开始   -->
                         <div class="tab-pane" id="settings">
                             <!--三方账户 开户行开始-->
-                            <div class="khh">
+                            <div class="khh sfzh">
                                 <form class="form-inline khh_form khh_form1">
                                     <div class="form-group form-group1">
                                         <label for="exampleInputName2">开户行</label>
@@ -313,8 +313,8 @@
                                         <label for="exampleInputEmail2">户主</label>
                                         <input type="email" class="form-control" id="exampleInputEmail2">
                                     </div>
-                                    <button type="submit" class="btn  btn-danger">查询</button>
-                                    <button type="submit" class="btn  btn-default">重置</button>
+                                    <button type="button" class="btn  btn-danger">查询</button>
+                                    <button type="button" class="btn  btn-default">重置</button>
                                 </form>
                             </div>
                             <!--三方账户 开户行结束-->
@@ -511,9 +511,6 @@
                                                 </div>
                                                 <div class="hygl_right">
                                                     <div class="panel-body">
-                                                        <!--<div class="mored hy_moren">-->
-                                                        <!--<img src="<%=request.getContextPath()%>/js/static/images/default_blue@1x.png"><span>默认</span>-->
-                                                        <!--</div>-->
                                                         <div class="hy_logo">
                                                             <img src="<%=request.getContextPath()%>/js/static/images/logo_yuantong@1x.png">
                                                         </div>
@@ -528,11 +525,166 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <button type="button" class="btn  btn-primary  btn-default tjhydw">添加货运单位</button>
+                                    <button type="button" class="btn  btn-danger  btn-default tjhydw" data-toggle="modal" data-target="#exampleModal11">添加货运单位</button>
                                 </div>
                             </div>
+
+                            <!--货运单位 蒙泰框-->
+                            <div class="modal fade" id="exampleModal11" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">选择收获地址11</h4>
+                                        </div>
+                                        <div class="modal-header sh_div">
+                                            <div class="row">
+                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>货运单位名称</div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>货运方联系人</div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>货运方联系人手机号</div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>设为默认</div>
+                                                <div class="col-xs-9">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="inlineRadioOptions2" checked> 是
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="inlineRadioOptions2"> 否
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+                                            <button type="button" class="btn btn-primary">取消</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--货运单位 蒙泰框 结束-->
                         </div>
                         <!--运货单位 结束-->
+                        <!--收获地址 开始-->
+                        <div class="tab-pane" id="recieverAddress">
+                            <button type="button" class="btn btn-danger btn-default tjyhk" data-toggle="modal" data-target="#exampleModal">添加收获地址</button>
+                            <div class="row row_shdz">
+                                <div class="col-xs-7 shdz">
+                                    <div class="panel-body">
+                                        <div class="col-xs-9">
+                                            <p>收获地址: nbsp 北京市大兴区亦庄</p>
+                                            <p>收货地: nbsp 亦庄文化园国际企业文化园西园</p>
+                                            <p>邮政编码: nbsp 100176</p>
+                                            <p>收货人: &nbsp 王二</p>
+                                            <p>收货人手机号: &nbsp 13914319412</p>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <div class="radio center-block">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" checked value="option1">设为默认
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5">
+                                    <button type="button" class="btn btn-danger btn-default shanchu">删除</button>
+                                </div>
+                            </div>
+                            <div class="row row_shdz">
+                                <div class="col-xs-7 shdz">
+                                    <div class="panel-body">
+                                        <div class="col-xs-9">
+                                            <p>收获地址: nbsp 北京市大兴区亦庄</p>
+                                            <p>收货地: nbsp 亦庄文化园国际企业文化园西园</p>
+                                            <p>邮政编码: nbsp 100176</p>
+                                            <p>收货人: &nbsp 王二</p>
+                                            <p>收货人手机号: &nbsp 13914319412</p>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <div class="radio center-block">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" value="option1">设为默认
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5">
+                                    <button type="button" class="btn btn-danger btn-default shanchu">删除</button>
+                                </div>
+                            </div>
+                            <!--收获地址 蒙泰框-->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="exampleModalLabel">选择收获地址</h4>
+                                        </div>
+
+                                        <div class="modal-header sh_div">
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <span class="xingxing xx1">*</span>收货区域
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    <div class="row sjld ">
+                                                        <select class="col-xs-3 form-control" id="seachprov" name="seachprov" onChange="changeComplexProvince(this.value, sub_array, 'seachcity', 'seachdistrict');"></select>
+                                                        <select style="margin-left:20px;" class="col-xs-3 form-control" id="seachcity" name="homecity" onChange="changeCity(this.value,'seachdistrict','seachdistrict');"></select>
+                                                        <span class="col-xs-3"  id="seachdistrict_div">
+                                                            <select class="form-control" id="seachdistrict" name="seachdistrict"></select>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>收货区域</div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>邮政编码</div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>邮政编码</div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>收货人手机号</div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>设为默认</div>
+                                                <div class="col-xs-9">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="inlineRadioOptions" checked value="option1"> 是
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="inlineRadioOptions"  value="option2"> 否
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+                                            <button type="button" class="btn btn-primary">取消</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--收获地址 蒙泰框 结束-->
+                        </div>
+                        <!--收获地址 开始-->
                     </div>
                 </div>
                 <!--tab 内容 结束-->
@@ -552,6 +704,23 @@
         e.preventDefault();
         $(this).tab('show');
     })
+
+    $(function (){
+        initComplexArea('seachprov', 'seachcity', 'seachdistrict', area_array, sub_array, '44', '0', '0');
+    });
+
+    console.log('${messages}')
+    switch ('${messages}'){
+        case 'profile':
+            $('#myTab a[href="#profile"]').tab('show')
+            break;
+        case 'home':
+            $('#myTab a[href="#home"]').tab('show')
+            break;
+        case 'settings':
+            $('#myTab a[href="#settings"]').tab('show')
+            break;
+    }
 </script>
 
 
