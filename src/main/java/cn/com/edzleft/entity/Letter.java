@@ -5,7 +5,7 @@ import java.util.Date;
 /**用信表
  * gyl_letter
  */
-public class Leffer {
+public class Letter {
     /**
      * id
      */
@@ -189,7 +189,7 @@ public class Leffer {
 
     @Override
     public String toString() {
-        return "Leffer{" +
+        return "Letter{" +
                 "id=" + id +
                 ", letterName='" + letterName + '\'' +
                 ", letterCredit=" + letterCredit +
@@ -213,7 +213,7 @@ public class Leffer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Leffer leffer = (Leffer) o;
+        Letter leffer = (Letter) o;
 
         if (id != null ? !id.equals(leffer.id) : leffer.id != null) return false;
         if (letterName != null ? !letterName.equals(leffer.letterName) : leffer.letterName != null) return false;

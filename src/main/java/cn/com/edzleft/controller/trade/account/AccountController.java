@@ -77,7 +77,7 @@ public class AccountController {
         String code = (String)session.getAttribute("imageCode");
         if (account != null && code!=null) {
             //加密后的密码
-           // String encrypt_pwd = MD5.sign(a.getUserPwd());
+           // String encrypt_pwd = MD5.sign(account.getUserPwd());
             //数据库查询出来的密码
             String queryPwds=account.getUserPwd();
                 if (queryPwds.equals(userPwd)) {

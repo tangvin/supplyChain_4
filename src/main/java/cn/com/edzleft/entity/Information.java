@@ -91,7 +91,7 @@ public class Information {
     /**
      * 企业联系人手机
      */
-    private Integer mobilePhone;
+    private String mobilePhone;
     /**
      * 联系人电子邮箱
      */
@@ -132,6 +132,11 @@ public class Information {
      * 财务报表电子档
      */
     private String financialFile;
+
+    /**
+     *组织机构电子档
+     */
+    private String organizationElectronicFile;
 
     public Integer getId() {
         return id;
@@ -301,11 +306,11 @@ public class Information {
         this.businessContact = businessContact == null ? null : businessContact.trim();
     }
 
-    public Integer getMobilePhone() {
+    public String getMobilePhone() {
         return mobilePhone;
     }
 
-    public void setMobilePhone(Integer mobilePhone) {
+    public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
     }
 
@@ -389,6 +394,14 @@ public class Information {
         this.financialFile = financialFile == null ? null : financialFile.trim();
     }
 
+    public String getOrganizationElectronicFile() {
+        return organizationElectronicFile;
+    }
+
+    public void setOrganizationElectronicFile(String organizationElectronicFile) {
+        this.organizationElectronicFile = organizationElectronicFile;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -443,6 +456,8 @@ public class Information {
         if (taxNumber != null ? !taxNumber.equals(that.taxNumber) : that.taxNumber != null) return false;
         if (openAccountFile != null ? !openAccountFile.equals(that.openAccountFile) : that.openAccountFile != null)
             return false;
+        if (organizationElectronicFile != null ? !organizationElectronicFile.equals(that.organizationElectronicFile) : that.organizationElectronicFile != null)
+            return false;
         return financialFile != null ? financialFile.equals(that.financialFile) : that.financialFile == null;
     }
 
@@ -480,6 +495,7 @@ public class Information {
         result = 31 * result + (taxNumber != null ? taxNumber.hashCode() : 0);
         result = 31 * result + (openAccountFile != null ? openAccountFile.hashCode() : 0);
         result = 31 * result + (financialFile != null ? financialFile.hashCode() : 0);
+        result = 31 * result + (organizationElectronicFile != null ? organizationElectronicFile.hashCode() : 0);
         return result;
     }
 
@@ -518,6 +534,7 @@ public class Information {
                 ", taxNumber=" + taxNumber +
                 ", openAccountFile='" + openAccountFile + '\'' +
                 ", financialFile='" + financialFile + '\'' +
+                ", organizationElectronicFile='" + organizationElectronicFile + '\'' +
                 '}';
     }
 }
