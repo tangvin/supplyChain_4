@@ -1,8 +1,8 @@
 package cn.com.edzleft.controller.captial.letter;
 
 import cn.com.edzleft.entity.CreditTable;
-import cn.com.edzleft.entity.Leffer;
-import cn.com.edzleft.service.captial.letter.LetterService;
+import cn.com.edzleft.entity.Letter;
+import cn.com.edzleft.service.captial.letter.CaptialLetterService;
 import cn.com.edzleft.util.page.DataGridJson;
 import cn.com.edzleft.util.page.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +18,10 @@ import java.util.HashMap;
  */
 @Controller
 @RequestMapping(value="/letter")
-public class LetterController {
+public class CaptialLetterController {
 
     @Autowired
-    private LetterService letterService;
+    private CaptialLetterService letterService;
 
 
     /**
@@ -37,7 +37,7 @@ public class LetterController {
     @RequestMapping(value = "/letterSelect",method = RequestMethod.POST)
     @ResponseBody
     public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String letterNumber,String belongCredit,String letterStatus,String applicant){
-        PageUtil<Leffer> userPage = new PageUtil<>();
+        PageUtil<Letter> userPage = new PageUtil<>();
         HashMap<String,Object> whereMaps =new HashMap<>();
         whereMaps.put("letterNumber",letterNumber);
         whereMaps.put("belongCredit",belongCredit);

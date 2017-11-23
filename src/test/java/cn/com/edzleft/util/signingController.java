@@ -1,7 +1,7 @@
 package cn.com.edzleft.util;
 
-import cn.com.edzleft.entity.Leffer;
-import cn.com.edzleft.service.captial.letter.LetterService;
+import cn.com.edzleft.entity.Letter;
+import cn.com.edzleft.service.captial.letter.CaptialLetterService;
 import cn.com.edzleft.util.page.DataGridJson;
 import cn.com.edzleft.util.page.PageUtil;
 import org.junit.runner.RunWith;
@@ -19,13 +19,13 @@ import java.util.HashMap;
 public class signingController {
 
     @Autowired
-    private LetterService letterService;
+    private CaptialLetterService letterService;
 
     @org.junit.Test
     public void test() throws Exception {
         Integer pageNumber =1;
         Integer pageSize =3;
-        PageUtil<Leffer> userPage = new PageUtil<>();
+        PageUtil<Letter> userPage = new PageUtil<>();
         HashMap<String,Object> whereMaps =new HashMap<>();
         String name = null;
         DataGridJson dgj = new DataGridJson();

@@ -183,28 +183,28 @@
                             <h5>修改密码</h5>
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <form class="form-horizontal" role="form">
+                                    <form class="form-horizontal" role="form" id="f">
                                         <div class="form-group">
-                                            <label for="firstname" class="col-xs-4 control-label">原密码</label>
+                                            <label for="firstname" class="col-xs-4 control-label" >原密码</label>
                                             <div class="col-xs-8">
-                                                <input type="text" class="form-control" id="firstname">
+                                                <input type="text" class="form-control" id="firstname" name="oldpwd">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="lastname" class="col-xs-4 control-label">新密码</label>
                                             <div class="col-xs-8">
-                                                <input type="text" class="form-control" id="lastname">
+                                                <input type="text" class="form-control" id="lastname" name="newpwd">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="lastname" class="col-xs-4 control-label">确认密码</label>
                                             <div class="col-xs-8">
-                                                <input type="text" class="form-control" id="lastname1">
+                                                <input type="text" class="form-control" id="lastname1" name="confirm">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-xs-offset-4 col-xs-8">
-                                                <button type="button" class="btn  btn-danger aq_qr_but">确认</button>
+                                                <button type="button" class="btn  btn-danger aq_qr_but" id="upd">确认</button>
                                             </div>
                                         </div>
 
@@ -722,6 +722,20 @@
     }
 
 </script>
-
-
+<!-- 修改密码 -->
+<script type="text/javascript">
+	$(function(){
+		$("#upd").click(function(){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/password/changePwd.action",
+				type:'post',
+				data:$("#f").serialize(),
+				dataType:"json",
+				success:function(data){
+					alert("aaa");
+				}
+			});
+		});
+	});
+</script>
 </html>

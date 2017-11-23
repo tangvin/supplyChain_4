@@ -21,4 +21,9 @@ public interface AccountMapper {
      */
     public void insertAccount(Account account);
 
+    /**
+     * 修改账号密码
+     */
+    public int updatePassword(Account loginer);
+
 }

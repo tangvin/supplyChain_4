@@ -5,7 +5,7 @@ import java.util.Date;
 /**用信表
  * gyl_letter
  */
-public class Leffer {
+public class Letter {
     /**
      * id
      */
@@ -200,58 +200,36 @@ public class Leffer {
     }
 
     @Override
-    public String toString() {
-        return "Leffer{" +
-                "id=" + id +
-                ", letterName='" + letterName + '\'' +
-                ", letterCredit=" + letterCredit +
-                ", letterTime=" + letterTime +
-                ", belongOrder='" + belongOrder + '\'' +
-                ", belongMasterContract='" + belongMasterContract + '\'' +
-                ", confirmPerson='" + confirmPerson + '\'' +
-                ", confirmTime=" + confirmTime +
-                ", letterStatus=" + letterStatus +
-                ", belongCredit='" + belongCredit + '\'' +
-                ", letterContract='" + letterContract + '\'' +
-                ", orderId='" + orderId + '\'' +
-                ", applicant='" + applicant + '\'' +
-                ", applicationTime=" + applicationTime +
-                ", approvalTime=" + approvalTime +
-                ", letterNumber='" + letterNumber + '\'' +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Leffer leffer = (Leffer) o;
+        Letter letter = (Letter) o;
 
-        if (id != null ? !id.equals(leffer.id) : leffer.id != null) return false;
-        if (letterName != null ? !letterName.equals(leffer.letterName) : leffer.letterName != null) return false;
-        if (letterCredit != null ? !letterCredit.equals(leffer.letterCredit) : leffer.letterCredit != null)
+        if (id != null ? !id.equals(letter.id) : letter.id != null) return false;
+        if (letterName != null ? !letterName.equals(letter.letterName) : letter.letterName != null) return false;
+        if (letterCredit != null ? !letterCredit.equals(letter.letterCredit) : letter.letterCredit != null)
             return false;
-        if (letterTime != null ? !letterTime.equals(leffer.letterTime) : leffer.letterTime != null) return false;
-        if (belongOrder != null ? !belongOrder.equals(leffer.belongOrder) : leffer.belongOrder != null) return false;
-        if (belongMasterContract != null ? !belongMasterContract.equals(leffer.belongMasterContract) : leffer.belongMasterContract != null)
+        if (letterTime != null ? !letterTime.equals(letter.letterTime) : letter.letterTime != null) return false;
+        if (belongOrder != null ? !belongOrder.equals(letter.belongOrder) : letter.belongOrder != null) return false;
+        if (belongMasterContract != null ? !belongMasterContract.equals(letter.belongMasterContract) : letter.belongMasterContract != null)
             return false;
-        if (confirmPerson != null ? !confirmPerson.equals(leffer.confirmPerson) : leffer.confirmPerson != null)
+        if (confirmPerson != null ? !confirmPerson.equals(letter.confirmPerson) : letter.confirmPerson != null)
             return false;
-        if (confirmTime != null ? !confirmTime.equals(leffer.confirmTime) : leffer.confirmTime != null) return false;
-        if (letterStatus != null ? !letterStatus.equals(leffer.letterStatus) : leffer.letterStatus != null)
+        if (confirmTime != null ? !confirmTime.equals(letter.confirmTime) : letter.confirmTime != null) return false;
+        if (letterStatus != null ? !letterStatus.equals(letter.letterStatus) : letter.letterStatus != null)
             return false;
-        if (belongCredit != null ? !belongCredit.equals(leffer.belongCredit) : leffer.belongCredit != null)
+        if (belongCredit != null ? !belongCredit.equals(letter.belongCredit) : letter.belongCredit != null)
             return false;
-        if (letterContract != null ? !letterContract.equals(leffer.letterContract) : leffer.letterContract != null)
+        if (letterContract != null ? !letterContract.equals(letter.letterContract) : letter.letterContract != null)
             return false;
-        if (orderId != null ? !orderId.equals(leffer.orderId) : leffer.orderId != null) return false;
-        if (applicant != null ? !applicant.equals(leffer.applicant) : leffer.applicant != null) return false;
-        if (applicationTime != null ? !applicationTime.equals(leffer.applicationTime) : leffer.applicationTime != null)
+        if (orderId != null ? !orderId.equals(letter.orderId) : letter.orderId != null) return false;
+        if (applicant != null ? !applicant.equals(letter.applicant) : letter.applicant != null) return false;
+        if (applicationTime != null ? !applicationTime.equals(letter.applicationTime) : letter.applicationTime != null)
             return false;
-        if (approvalTime != null ? !approvalTime.equals(leffer.approvalTime) : leffer.approvalTime != null)
+        if (approvalTime != null ? !approvalTime.equals(letter.approvalTime) : letter.approvalTime != null)
             return false;
-        return letterNumber != null ? letterNumber.equals(leffer.letterNumber) : leffer.letterNumber == null;
+        return letterNumber != null ? letterNumber.equals(letter.letterNumber) : letter.letterNumber == null;
     }
 
     @Override
@@ -273,5 +251,27 @@ public class Leffer {
         result = 31 * result + (approvalTime != null ? approvalTime.hashCode() : 0);
         result = 31 * result + (letterNumber != null ? letterNumber.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Letter{" +
+                "id=" + id +
+                ", letterName='" + letterName + '\'' +
+                ", letterCredit=" + letterCredit +
+                ", letterTime=" + letterTime +
+                ", belongOrder='" + belongOrder + '\'' +
+                ", belongMasterContract='" + belongMasterContract + '\'' +
+                ", confirmPerson='" + confirmPerson + '\'' +
+                ", confirmTime=" + confirmTime +
+                ", letterStatus=" + letterStatus +
+                ", belongCredit='" + belongCredit + '\'' +
+                ", letterContract='" + letterContract + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", applicant='" + applicant + '\'' +
+                ", applicationTime=" + applicationTime +
+                ", approvalTime=" + approvalTime +
+                ", letterNumber='" + letterNumber + '\'' +
+                '}';
     }
 }

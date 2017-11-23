@@ -29,7 +29,7 @@ public class Tripartite {
     /**
      * 三方银行账户之账号
      */
-    private Integer tripartiteAccountNumber;
+    private String tripartiteAccountNumber;
     /**
      * 三方银行账户之账号开通时间
      */
@@ -95,11 +95,11 @@ public class Tripartite {
         this.tripartiteCreditHolderCapital = tripartiteCreditHolderCapital == null ? null : tripartiteCreditHolderCapital.trim();
     }
 
-    public Integer getTripartiteAccountNumber() {
+    public String getTripartiteAccountNumber() {
         return tripartiteAccountNumber;
     }
 
-    public void setTripartiteAccountNumber(Integer tripartiteAccountNumber) {
+    public void setTripartiteAccountNumber(String tripartiteAccountNumber) {
         this.tripartiteAccountNumber = tripartiteAccountNumber;
     }
 
