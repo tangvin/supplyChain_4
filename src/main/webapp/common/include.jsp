@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/js/static/css/bootstrap.min.css">
 <link  href="<%=request.getContextPath()%>/js/static/css/bootstrap.css" rel="stylesheet" >
 <link href="<%=request.getContextPath()%>/js/static/css/index.css" rel="stylesheet" >
+<link href="<%=request.getContextPath()%>/js/static/css/bootstrap-table.css" rel="stylesheet" >
 <link rel="stylesheet" type="text/css" media="all" href="<%=request.getContextPath()%>/js/static/css/daterangepicker-bs3.css" />
 
 
@@ -50,6 +51,9 @@
 <script src="<%=request.getContextPath() %>/js/static/js/AreaData_min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/index.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/uploadImg.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/bootstrap-table.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/bootstrap-table-zh-CN.js"></script>
+
 <!-- 引入bootstrap的js-->
 <%--<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/treeview/bootstrap-treeview.min.js"></script>--%>
 <%--<!-- 引入bootstrap的js-->--%>

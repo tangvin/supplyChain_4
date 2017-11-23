@@ -17,7 +17,7 @@ public class Leffer {
     /**
      * 用信额
      */
-    private Double letterCredit;
+    private Integer letterCredit;
     /**
      * 用信时间
      */
@@ -66,6 +66,10 @@ public class Leffer {
      * 批准时间
      */
     private Date approvalTime;
+    /**
+     * 用信编号
+     */
+    private String letterNumber;
 
     public Integer getId() {
         return id;
@@ -83,11 +87,11 @@ public class Leffer {
         this.letterName = letterName == null ? null : letterName.trim();
     }
 
-    public Double getLetterCredit() {
+    public Integer getLetterCredit() {
         return letterCredit;
     }
 
-    public void setLetterCredit(Double letterCredit) {
+    public void setLetterCredit(Integer letterCredit) {
         this.letterCredit = letterCredit;
     }
 
@@ -187,6 +191,14 @@ public class Leffer {
         this.approvalTime = approvalTime;
     }
 
+    public String getLetterNumber() {
+        return letterNumber;
+    }
+
+    public void setLetterNumber(String letterNumber) {
+        this.letterNumber = letterNumber;
+    }
+
     @Override
     public String toString() {
         return "Leffer{" +
@@ -201,10 +213,11 @@ public class Leffer {
                 ", letterStatus=" + letterStatus +
                 ", belongCredit='" + belongCredit + '\'' +
                 ", letterContract='" + letterContract + '\'' +
-                ", letterOrder='" + orderId + '\'' +
+                ", orderId='" + orderId + '\'' +
                 ", applicant='" + applicant + '\'' +
                 ", applicationTime=" + applicationTime +
                 ", approvalTime=" + approvalTime +
+                ", letterNumber='" + letterNumber + '\'' +
                 '}';
     }
 
@@ -236,7 +249,9 @@ public class Leffer {
         if (applicant != null ? !applicant.equals(leffer.applicant) : leffer.applicant != null) return false;
         if (applicationTime != null ? !applicationTime.equals(leffer.applicationTime) : leffer.applicationTime != null)
             return false;
-        return approvalTime != null ? approvalTime.equals(leffer.approvalTime) : leffer.approvalTime == null;
+        if (approvalTime != null ? !approvalTime.equals(leffer.approvalTime) : leffer.approvalTime != null)
+            return false;
+        return letterNumber != null ? letterNumber.equals(leffer.letterNumber) : leffer.letterNumber == null;
     }
 
     @Override
@@ -256,6 +271,7 @@ public class Leffer {
         result = 31 * result + (applicant != null ? applicant.hashCode() : 0);
         result = 31 * result + (applicationTime != null ? applicationTime.hashCode() : 0);
         result = 31 * result + (approvalTime != null ? approvalTime.hashCode() : 0);
+        result = 31 * result + (letterNumber != null ? letterNumber.hashCode() : 0);
         return result;
     }
 }

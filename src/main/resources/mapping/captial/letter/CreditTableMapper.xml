@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.captial.letter.CreditTableMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.CreditTable" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="credit_grantor" property="creditGrantor" jdbcType="VARCHAR" />
+    <result column="credit_time" property="creditTime" jdbcType="TIMESTAMP" />
+    <result column="credit_amount" property="creditAmount" jdbcType="DOUBLE" />
+    <result column="credit_master_contract" property="creditMasterContract" jdbcType="VARCHAR" />
+    <result column="buyer_information_attachment" property="buyerInformationAttachment" jdbcType="VARCHAR" />
+    <result column="trade_information_attachment" property="tradeInformationAttachment" jdbcType="VARCHAR" />
+    <result column="credit_way" property="creditWay" jdbcType="INTEGER" />
+    <result column="credit_number" property="creditNumber" jdbcType="VARCHAR" />
+    <result column="credit_status" property="creditStatus" jdbcType="INTEGER" />
+    <result column="applicant" property="applicant" jdbcType="VARCHAR" />
+    <result column="application_time" property="applicationTime" jdbcType="TIMESTAMP" />
+    <result column="approval_time" property="approvalTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, credit_grantor, credit_time, credit_amount, credit_master_contract, buyer_information_attachment, 
+    trade_information_attachment, credit_way, credit_number, credit_status, applicant, 
+    application_time, approval_time
+  </sql>
+
+
+  <!--条件查询-->
+  <sql id="where_sql">
+    <trim prefix="where" prefixOverrides="and">
+      <if test="whereMap != null &amp;&amp; whereMap.creditNumber != null and whereMap.creditNumber != ''">
+        AND credit_number  LIKE '%${whereMap.creditNumber}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.creditGrantor != null and whereMap.creditGrantor != ''">
+        AND credit_grantor  LIKE '%${whereMap.creditGrantor}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.creditStatus != null and whereMap.creditStatus != ''">
+        AND credit_status  LIKE '%${whereMap.creditStatus}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.applicant != null and whereMap.applicant != ''">
+        AND applicant  LIKE '%${whereMap.applicant}%'
+      </if>
+      <!--<if test="whereMap != null &amp;&amp; whereMap.creatTime != null and whereMap.creatTime != ''">-->
+      <!--AND creat_time &gt;= '${whereMap.creatTime}'-->
+      <!--</if>-->
+      <!--<if test="whereMap != null &amp;&amp; whereMap.endTime != null and whereMap.endTime != ''">-->
+      <!--AND end_Time &lt;= '${whereMap.endTime}'-->
+      <!--</if>-->
+    </trim>
+  </sql>
+
+  <!--查询总条数-->
+  <select id="getCrownEntityCountsByConditions"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select count(*) from gyl_credit <include refid="where_sql"/>
+  </select>
+
+  <!--分页查询-->
+  <select id="getCrownEntityListByConditions"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select
+    <include refid="Base_Column_List" />
+    from gyl_credit
+    <include refid="where_sql"/>
+    ORDER BY credit_time  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select>
+
+</mapper>

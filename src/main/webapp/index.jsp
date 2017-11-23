@@ -6,13 +6,13 @@
     cn.com.edzleft.entity.SessionInfo sessionInfo=(cn.com.edzleft.entity.SessionInfo) session.getAttribute("sessionInfo");
     if(sessionInfo!=null){//session中有值  登陆成功
         if(sessionInfo.getAdmin().getAccountType() == 0){//采购方
-            response.sendRedirect(request.getContextPath()+"/main/procurementMain.action");
+            response.sendRedirect(request.getContextPath()+"/procurementMain/procurementMain.action");
         }
         if(sessionInfo.getAdmin().getAccountType() == 1){//贸易方
-            response.sendRedirect(request.getContextPath()+"/main/tradeMain.action");
+            response.sendRedirect(request.getContextPath()+"/tradeMain/tradeMain.action");
         }
         if(sessionInfo.getAdmin().getAccountType() == 2){//资方
-            response.sendRedirect(request.getContextPath()+"/main/captialMain.action");
+            response.sendRedirect(request.getContextPath()+"/captialMain/captialMain.action");
         }
     }else{
         response.sendRedirect(request.getContextPath()+"/captialMain/login.action");

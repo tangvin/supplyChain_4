@@ -47,7 +47,7 @@ public class CreditTable {
      */
     private Integer creditStatus;
     /**
-     * 授信人
+     * 申请人
      */
     private String applicant;
     /**

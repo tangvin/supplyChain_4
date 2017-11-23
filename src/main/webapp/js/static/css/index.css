@@ -74,7 +74,6 @@
 .yzm_img img{
 
     width: 111px;
-    margin-top:3px;
 }
 .apply_for{
     font-size:18px;
@@ -148,7 +147,7 @@ body{
     overflow: hidden;
 }
 .index_right{
-    padding: 10px;
+    padding: 15px;
     box-sizing: border-box;
     float: right;
     width:100%;

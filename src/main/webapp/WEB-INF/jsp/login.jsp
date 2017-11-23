@@ -23,7 +23,7 @@
             <div> ${sessionScope.errorMessage}</div>
             <!-- 密码 -->
             <div class="input-group col-xs-12 login-input">
-                <input   id="pwd" type="text" name="userPwd" class="form-control" placeholder="密码">
+                <input   id="pwd" type="password" name="userPwd" class="form-control" placeholder="密码">
                 <img src="<%=request.getContextPath()%>/js/static/images/password@1x.png" class='img-responsive img_dw'>
             </div>
             <!-- 验证码 -->
@@ -49,28 +49,28 @@
     <%--function login(){--%>
         <%--location.href="<%=request.getContextPath()%>/account/login.action";--%>
     <%--}--%>
-    var countdown=10;
-    //随机生成验证码图片
-    function getImageCode(val){
+    $(function(){
+        var countdown=10;
+        //随机生成验证码图片
+        function getImageCode(val){
+            if (countdown == 0) {
+                var thisDate =  new Date();
+                //区分当前请求和上一次请求
+                document.getElementById("imgcoode").src="<%=request.getContextPath()%>/imageCode?sjNum="+thisDate.getTime();
 
-        if (countdown == 0) {
-            var thisDate =  new Date();
-            //区分当前请求和上一次请求
-            document.getElementById("imgcoode").src="<%=request.getContextPath()%>/imageCode?sjNum="+thisDate.getTime();
-
-            $(val).attr("disabled",false);
-            $(val).val("免费获取验证码");
-            countdown = 10;
-        } else {
-            $(val).attr("disabled", true);
-            $(val).val('重新发送('+countdown+')');
-            countdown--;
-            setTimeout(function() {
-                getImageCode(val)
-            },1)
+                $(val).attr("disabled",false);
+                $(val).val("免费获取验证码");
+                countdown = 10;
+            } else {
+                $(val).attr("disabled", true);
+                $(val).val('重新发送('+countdown+')');
+                countdown--;
+                setTimeout(function() {
+                    getImageCode(val)
+                },1)
+            }
         }
-    }
-
+    })
     //加载完页面
 //    $(function () {
         //判断用户输入的账号和密码
