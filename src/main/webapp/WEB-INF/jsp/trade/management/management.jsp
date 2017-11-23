@@ -1,23 +1,17 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        .select{
-            width: 160px!important;
-        }
-    </style>
+    <title>授用信管理</title>
 </head>
 <body>
 <div class='col-xs-12'>
     <div class='row row_zhxx'>
-        <div class="col-xs-12 zlxx_top" style="background: #f6f6f6;box-sizing: border-box">
-            <a href="../main.jsp">系统首页</a>
+        <div class="col-xs-12 zlxx_top">
+            <a href="<%=request.getContextPath()%>/tradeMain/tradeMain.action">系统首页</a>
             <span>></span>
-            <a href="#">资料维护</a>
+            <a href="#">授用信管理</a>
         </div>
         <!--bootstrap 授用信 切换 开始-->
         <div class="col-xs-12">
@@ -34,7 +28,7 @@
                         <div class="tab-pane active" id="creditExtension">
                             <!--授信编号 开始-->
                             <div class="khh">
-                                <form class="form-inline khh_form khh_form1" style="margin-left:-15px;">
+                                <form class="form-inline khh_form khh_form1">
                                     <div class="form-group form-group1">
                                         <label for="exampleInputName2">授信编号</label>
                                         <input type="text" class="form-control" id="exampleInputName2">
@@ -160,7 +154,7 @@
                         <div class="tab-pane" id="WithTheLetter">
                             <!--用信编号 开始-->
                             <div class="khh">
-                                <form class="form-inline khh_form khh_form1" style="margin-left:-15px;">
+                                <form class="form-inline khh_form khh_form1">
                                     <div class="form-group form-group1">
                                         <label>用新编号</label>
                                         <input type="text" class="form-control">
@@ -294,17 +288,10 @@
 </body>
 <script>
     $('#myTab a:first').tab('show');
-
     $('#myTab a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
     })
-
-    $(document).ready(function() {
-        $('#birthday').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
-            console.log(start.toISOString(), end.toISOString(), label);
-        });
-    });
 
 </script>
 </html>

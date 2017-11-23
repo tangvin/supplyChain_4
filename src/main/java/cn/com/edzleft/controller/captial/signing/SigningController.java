@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value="/signing")
 public class SigningController {
 
-    @Autowired
+    @Autowired(required = true)
     private SigningService signingService;
 
 

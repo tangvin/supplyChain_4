@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.trade.letter.LefferMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Letter" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="letter_name" property="letterName" jdbcType="VARCHAR" />
+    <result column="letter_credit" property="letterCredit" jdbcType="INTEGER" />
+    <result column="letter_time" property="letterTime" jdbcType="TIMESTAMP" />
+    <result column="belong_order" property="belongOrder" jdbcType="VARCHAR" />
+    <result column="belong_master_contract" property="belongMasterContract" jdbcType="VARCHAR" />
+    <result column="confirm_person" property="confirmPerson" jdbcType="VARCHAR" />
+    <result column="confirm_time" property="confirmTime" jdbcType="TIMESTAMP" />
+    <result column="letter_status" property="letterStatus" jdbcType="INTEGER" />
+    <result column="belong_credit" property="belongCredit" jdbcType="VARCHAR" />
+    <result column="letter_contract" property="letterContract" jdbcType="VARCHAR" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="applicant" property="applicant" jdbcType="VARCHAR" />
+    <result column="application_time" property="applicationTime" jdbcType="TIMESTAMP" />
+    <result column="approval_time" property="approvalTime" jdbcType="TIMESTAMP" />
+    <result column="letter_number" property="letterNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, letter_name, letter_credit, letter_time, belong_order, belong_master_contract, 
+    confirm_person, confirm_time, letter_status, belong_credit, letter_contract, order_id, 
+    applicant, application_time, approval_time,letter_number
+  </sql>
+
+  <!--条件查询-->
+  <sql id="where_sql">
+    <trim prefix="where" prefixOverrides="and">
+      <if test="whereMap != null &amp;&amp; whereMap.letterNumber != null and whereMap.letterNumber != ''">
+        AND letter_number  LIKE '%${whereMap.letterNumber}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.belongCredit != null and whereMap.belongCredit != ''">
+        AND belong_credit &gt;= '${whereMap.belongCredit}'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.letterStatus != null and whereMap.letterStatus != ''">
+        AND letter_status &lt;= '${whereMap.letterStatus}'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.applicant != null and whereMap.applicant != ''">
+        AND applicant &lt;= '${whereMap.applicant}'
+      </if>
+    </trim>
+  </sql>
+
+  <!--查询授信总条数-->
+  <select id="getLetterAllCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select count(*) from gyl_letter <include refid="where_sql"/>
+  </select>
+
+  <!--分页查询-->
+  <select id="selectAllLetterByPage"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select
+    <include refid="Base_Column_List" />
+    from gyl_letter
+    <include refid="where_sql"/>
+    ORDER BY letter_time  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select>
+
+
+</mapper>

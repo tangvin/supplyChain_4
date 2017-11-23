@@ -51,7 +51,7 @@ public class Information {
     /**
      * 注册资本  单位万元
      */
-    private Double registeredCapital;
+    private Integer registeredCapital;
     /**
      * 主要股东
      */
@@ -226,11 +226,11 @@ public class Information {
         this.representativeNum = representativeNum;
     }
 
-    public Double getRegisteredCapital() {
+    public Integer getRegisteredCapital() {
         return registeredCapital;
     }
 
-    public void setRegisteredCapital(Double registeredCapital) {
+    public void setRegisteredCapital(Integer registeredCapital) {
         this.registeredCapital = registeredCapital;
     }
 

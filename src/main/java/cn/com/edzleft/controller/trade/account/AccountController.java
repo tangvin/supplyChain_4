@@ -5,6 +5,7 @@ import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.trade.account.AccountService;
 import cn.com.edzleft.util.ConfigUtil;
 import cn.com.edzleft.util.MD5;
+import cn.com.edzleft.util.ResultBean;
 import cn.com.edzleft.util.ReturnJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -82,6 +83,7 @@ public class AccountController {
             String queryPwds=account.getUserPwd();
                 if (queryPwds.equals(userPwd)) {
                     if(imageCode.equalsIgnoreCase(code)) {
+                        //所有判断均通过，将当前用户存到session
                         sessionInfo.setAdmin(account);
                         //session.setAttribute("account", "account");
                         request.getSession().setAttribute(ConfigUtil.getSessionInfoName(),sessionInfo);
@@ -142,6 +144,20 @@ public class AccountController {
     }
 
     */
+
+
+
+    /**
+     * 修改账户密码
+      * @return
+     */
+    @RequestMapping("/updatePwd")
+    @ResponseBody
+    public String modiflyPassword(HttpSession session,String oldPwd,String newPwd,String confirmPwd){
+        ResultBean resultBean = accountService.updatePassword(session, oldPwd, newPwd, confirmPwd);
+        return resultBean.toString();
+        }
+
 
 
 }

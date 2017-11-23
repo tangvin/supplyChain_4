@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html style="overflow: auto;">
 <%@ include file="/common/include.jsp"%>
-<html>
 <head>
     <meta charset="UTF-8">
     <title>金融链供应平台</title>
 
 </head>
-<body style="margin: 0;padding: 0">
+<body style="padding: 0;margin: 0;overflow: auto;">
 <div class="container-fluid login-top">
     <div class='container container-logo'>
         <img src='<%=request.getContextPath()%>/js/static/images/logo@1x.png'>

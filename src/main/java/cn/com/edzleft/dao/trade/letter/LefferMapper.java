@@ -1,4 +1,4 @@
-package cn.com.edzleft.dao.trade.homepage;
+package cn.com.edzleft.dao.trade.letter;
 
 import cn.com.edzleft.entity.Letter;
 import cn.com.edzleft.util.page.PageUtil;
@@ -7,8 +7,9 @@ import java.util.List;
 
 /**
  * Created by ibmtech on 2017/11/20.
+ * 用信管理
  */
-public interface LetterMapper {
+public interface LefferMapper {
 
     /**
      * 根据Map<String,Object>对象查询符合条件的总数据数

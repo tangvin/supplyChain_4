@@ -128,7 +128,9 @@
     delete from gyl_account
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.com.edzleft.entity.Account" >
+
+  <!--修改账户密码-->
+  <update id="updatePassword" parameterType="cn.com.edzleft.entity.Account" >
     update gyl_account
     <set >
       <if test="userName != null" >
@@ -173,6 +175,7 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="cn.com.edzleft.entity.Account" >
     update gyl_account
     set user_name = #{userName,jdbcType=VARCHAR},

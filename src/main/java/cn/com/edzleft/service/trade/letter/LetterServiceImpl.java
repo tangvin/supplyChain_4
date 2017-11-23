@@ -1,6 +1,6 @@
 package cn.com.edzleft.service.trade.letter;
 
-import cn.com.edzleft.dao.trade.homepage.LetterMapper;
+import cn.com.edzleft.dao.trade.letter.LefferMapper;
 import cn.com.edzleft.entity.Letter;
 import cn.com.edzleft.util.page.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.List;
 public class LetterServiceImpl implements LetterService {
 
    @Autowired
-   private LetterMapper letterMapper;
+   private LefferMapper letterMapper;
 
     /**
      * 条件查询+分页显示

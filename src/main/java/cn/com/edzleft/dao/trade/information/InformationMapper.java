@@ -1,4 +1,4 @@
-package cn.com.edzleft.dao.trade.homepage;
+package cn.com.edzleft.dao.trade.information;
 
 import cn.com.edzleft.entity.Information;
 
@@ -11,10 +11,6 @@ public interface InformationMapper {
      */
     public Information selectBaseInformation();
 
-    /**
-     * 高级信息查询
-     */
-    public Information selectAdvancedInforation();
 
     /**
      * 修改基本信息

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.trade.homepage.CreditMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.CreditTable" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="credit_grantor" property="creditGrantor" jdbcType="VARCHAR" />
+    <result column="credit_time" property="creditTime" jdbcType="TIMESTAMP" />
+    <result column="credit_amount" property="creditAmount" jdbcType="DOUBLE" />
+    <result column="credit_master_contract" property="creditMasterContract" jdbcType="VARCHAR" />
+    <result column="buyer_information_attachment" property="buyerInformationAttachment" jdbcType="VARCHAR" />
+    <result column="trade_information_attachment" property="tradeInformationAttachment" jdbcType="VARCHAR" />
+    <result column="credit_way" property="creditWay" jdbcType="INTEGER" />
+    <result column="credit_number" property="creditNumber" jdbcType="VARCHAR" />
+    <result column="credit_status" property="creditStatus" jdbcType="INTEGER" />
+    <result column="applicant" property="applicant" jdbcType="VARCHAR" />
+    <result column="application_time" property="applicationTime" jdbcType="TIMESTAMP" />
+    <result column="approval_time" property="approvalTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, credit_grantor, credit_time, credit_amount, credit_master_contract, buyer_information_attachment, 
+    trade_information_attachment, credit_way, credit_number, credit_status, applicant, 
+    application_time, approval_time
+  </sql>
+
+  <!--条件查询-->
+  <sql id="where_sql">
+    <trim prefix="where" prefixOverrides="and">
+      <if test="whereMap != null &amp;&amp; whereMap.creditNumber != null and whereMap.creditNumber != ''">
+        AND credit_number  LIKE '%${whereMap.creditNumber}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.creditGrantor != null and whereMap.creditGrantor != ''">
+        AND credit_grantor &gt;= '${whereMap.creditGrantor}'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.creditStatus != null and whereMap.creditStatus != ''">
+        AND credit_status &lt;= '${whereMap.creditStatus}'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.applicant != null and whereMap.applicant != ''">
+        AND applicant &lt;= '${whereMap.applicant}'
+      </if>
+    </trim>
+  </sql>
+
+  <!--查询总条数-->
+  <select id="getCrdeitAllCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select count(*) from gyl_credit <include refid="where_sql"/>
+  </select>
+
+  <!--分页查询-->
+  <select id="selectAllCreditByPage"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select
+    <include refid="Base_Column_List" />
+    from gyl_credit
+    <include refid="where_sql"/>
+    ORDER BY credit_time  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select>
+
+  <!--根据id 查询详细授信信息-->
+  <select id="selectCreditById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gyl_credit
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gyl_credit
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+
+  <insert id="insert" parameterType="cn.com.edzleft.entity.CreditTable" >
+    insert into gyl_credit (id, credit_grantor, credit_time, 
+      credit_amount, credit_master_contract, buyer_information_attachment, 
+      trade_information_attachment, credit_way, 
+      credit_number, credit_status, applicant, 
+      application_time, approval_time)
+    values (#{id,jdbcType=INTEGER}, #{creditGrantor,jdbcType=VARCHAR}, #{creditTime,jdbcType=TIMESTAMP}, 
+      #{creditAmount,jdbcType=DOUBLE}, #{creditMasterContract,jdbcType=VARCHAR}, #{buyerInformationAttachment,jdbcType=VARCHAR}, 
+      #{tradeInformationAttachment,jdbcType=VARCHAR}, #{creditWay,jdbcType=INTEGER}, 
+      #{creditNumber,jdbcType=VARCHAR}, #{creditStatus,jdbcType=INTEGER}, #{applicant,jdbcType=VARCHAR}, 
+      #{applicationTime,jdbcType=TIMESTAMP}, #{approvalTime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="insertSelective" parameterType="cn.com.edzleft.entity.CreditTable" >
+    insert into gyl_credit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="creditGrantor != null" >
+        credit_grantor,
+      </if>
+      <if test="creditTime != null" >
+        credit_time,
+      </if>
+      <if test="creditAmount != null" >
+        credit_amount,
+      </if>
+      <if test="creditMasterContract != null" >
+        credit_master_contract,
+      </if>
+      <if test="buyerInformationAttachment != null" >
+        buyer_information_attachment,
+      </if>
+      <if test="tradeInformationAttachment != null" >
+        trade_information_attachment,
+      </if>
+      <if test="creditWay != null" >
+        credit_way,
+      </if>
+      <if test="creditNumber != null" >
+        credit_number,
+      </if>
+      <if test="creditStatus != null" >
+        credit_status,
+      </if>
+      <if test="applicant != null" >
+        applicant,
+      </if>
+      <if test="applicationTime != null" >
+        application_time,
+      </if>
+      <if test="approvalTime != null" >
+        approval_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="creditGrantor != null" >
+        #{creditGrantor,jdbcType=VARCHAR},
+      </if>
+      <if test="creditTime != null" >
+        #{creditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditAmount != null" >
+        #{creditAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="creditMasterContract != null" >
+        #{creditMasterContract,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerInformationAttachment != null" >
+        #{buyerInformationAttachment,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeInformationAttachment != null" >
+        #{tradeInformationAttachment,jdbcType=VARCHAR},
+      </if>
+      <if test="creditWay != null" >
+        #{creditWay,jdbcType=INTEGER},
+      </if>
+      <if test="creditNumber != null" >
+        #{creditNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="creditStatus != null" >
+        #{creditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="applicant != null" >
+        #{applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationTime != null" >
+        #{applicationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalTime != null" >
+        #{approvalTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.edzleft.entity.CreditTable" >
+    update gyl_credit
+    <set >
+      <if test="creditGrantor != null" >
+        credit_grantor = #{creditGrantor,jdbcType=VARCHAR},
+      </if>
+      <if test="creditTime != null" >
+        credit_time = #{creditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditAmount != null" >
+        credit_amount = #{creditAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="creditMasterContract != null" >
+        credit_master_contract = #{creditMasterContract,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerInformationAttachment != null" >
+        buyer_information_attachment = #{buyerInformationAttachment,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeInformationAttachment != null" >
+        trade_information_attachment = #{tradeInformationAttachment,jdbcType=VARCHAR},
+      </if>
+      <if test="creditWay != null" >
+        credit_way = #{creditWay,jdbcType=INTEGER},
+      </if>
+      <if test="creditNumber != null" >
+        credit_number = #{creditNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="creditStatus != null" >
+        credit_status = #{creditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="applicant != null" >
+        applicant = #{applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationTime != null" >
+        application_time = #{applicationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalTime != null" >
+        approval_time = #{approvalTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.edzleft.entity.CreditTable" >
+    update gyl_credit
+    set credit_grantor = #{creditGrantor,jdbcType=VARCHAR},
+      credit_time = #{creditTime,jdbcType=TIMESTAMP},
+      credit_amount = #{creditAmount,jdbcType=DOUBLE},
+      credit_master_contract = #{creditMasterContract,jdbcType=VARCHAR},
+      buyer_information_attachment = #{buyerInformationAttachment,jdbcType=VARCHAR},
+      trade_information_attachment = #{tradeInformationAttachment,jdbcType=VARCHAR},
+      credit_way = #{creditWay,jdbcType=INTEGER},
+      credit_number = #{creditNumber,jdbcType=VARCHAR},
+      credit_status = #{creditStatus,jdbcType=INTEGER},
+      applicant = #{applicant,jdbcType=VARCHAR},
+      application_time = #{applicationTime,jdbcType=TIMESTAMP},
+      approval_time = #{approvalTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

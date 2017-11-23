@@ -17,7 +17,7 @@ public class Letter {
     /**
      * 用信额
      */
-    private Double letterCredit;
+    private Integer letterCredit;
     /**
      * 用信时间
      */
@@ -67,6 +67,20 @@ public class Letter {
      */
     private Date approvalTime;
 
+    /**
+     * 用信编号
+     *
+     */
+    private String letterNumber;
+
+    public String getLetterNumber() {
+        return letterNumber;
+    }
+
+    public void setLetterNumber(String letterNumber) {
+        this.letterNumber = letterNumber;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -83,11 +97,11 @@ public class Letter {
         this.letterName = letterName == null ? null : letterName.trim();
     }
 
-    public Double getLetterCredit() {
+    public Integer getLetterCredit() {
         return letterCredit;
     }
 
-    public void setLetterCredit(Double letterCredit) {
+    public void setLetterCredit(Integer letterCredit) {
         this.letterCredit = letterCredit;
     }
 
@@ -205,6 +219,7 @@ public class Letter {
                 ", applicant='" + applicant + '\'' +
                 ", applicationTime=" + applicationTime +
                 ", approvalTime=" + approvalTime +
+                ", letterNumber=" + letterNumber +
                 '}';
     }
 
@@ -234,6 +249,7 @@ public class Letter {
             return false;
         if (orderId != null ? !orderId.equals(leffer.orderId) : leffer.orderId != null) return false;
         if (applicant != null ? !applicant.equals(leffer.applicant) : leffer.applicant != null) return false;
+        if (letterNumber!= null ? !letterNumber.equals(leffer.letterNumber) : leffer.letterNumber != null) return false;
         if (applicationTime != null ? !applicationTime.equals(leffer.applicationTime) : leffer.applicationTime != null)
             return false;
         return approvalTime != null ? approvalTime.equals(leffer.approvalTime) : leffer.approvalTime == null;
@@ -256,6 +272,7 @@ public class Letter {
         result = 31 * result + (applicant != null ? applicant.hashCode() : 0);
         result = 31 * result + (applicationTime != null ? applicationTime.hashCode() : 0);
         result = 31 * result + (approvalTime != null ? approvalTime.hashCode() : 0);
+        result = 31 * result + (letterNumber != null ? letterNumber.hashCode() : 0);
         return result;
     }
 }

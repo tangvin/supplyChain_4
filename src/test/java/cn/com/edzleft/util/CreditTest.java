@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 /**
  * Created by ibmtech on 2017/11/20.
  */
@@ -24,13 +26,29 @@ public class CreditTest {
      */
     @Test
     public void testCreditPage(){
-       PageUtil userpage= new PageUtil<CreditTable>();
-       userpage.setTotalCount(4);
-        System.out.println("~~~~~~~~~~~");
-        CreditTable c = creditMapper.selectCreditById(1);
-        System.out.println(c);
-        //   Integer count = creditMapper.getCrdeitAllCount(userpage);
-     //   System.out.println(count);
+        PageUtil<CreditTable> userPage = new PageUtil<CreditTable>();
+        //查询总条数
+        int totalCount = creditMapper.getCrdeitAllCount(userPage);
+        System.out.println(totalCount);
+        //查询合同集合
+        userPage.setStart(1);
+        userPage.setPageSize(2);
+        userPage.setTotalCount(totalCount);
+        List<CreditTable> creditList = creditMapper.selectAllCreditByPage(userPage);
+        userPage.setList(creditList);
+        for (CreditTable credit : creditList) {
+            System.out.println(credit);
+        }
     }
+
+    /**
+     * 根据id查询详细的授信信息
+     */
+    @Test
+    public void testDetail(){
+        CreditTable byId = creditMapper.selectCreditById(1);
+        System.out.println(byId);
+    }
+
 
 }

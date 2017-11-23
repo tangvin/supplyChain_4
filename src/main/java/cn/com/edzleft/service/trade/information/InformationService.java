@@ -11,10 +11,6 @@ public interface InformationService {
      */
     public Information queryBaseInformation();
 
-    /**
-     * 高级信息查询
-     */
-    public Information queryAdvancedInformation();
 
     /**
      * 根据id修改用户信息

@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by ibmtech on 2017/11/20.
+ * 授信管理
  */
 public interface CreditMapper {
 
@@ -25,7 +26,7 @@ public interface CreditMapper {
      * @param  pageUtil
      * @return
      */
-    public Integer getCrdeitAllCount(PageUtil<CreditTable> pageUtil);
+    public Integer getCrdeitAllCount(PageUtil<CreditTable> userPage);
 
     /**
      * 分页

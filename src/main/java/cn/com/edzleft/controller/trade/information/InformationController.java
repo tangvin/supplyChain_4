@@ -30,29 +30,9 @@ public class InformationController {
     @ResponseBody
     public Information queryBaseInformation(){
         Information queryBaseInformation = informationService.queryBaseInformation();
-
         return queryBaseInformation;
     }
 
-
-    /**
-     * 高级资料展示
-     */
-    @RequestMapping("/baseInformation")
-    @ResponseBody
-    public Information queryAnvancedInformation(){
-        Information advacncedinformation = informationService.queryAdvancedInformation();
-        return advacncedinformation;
-    }
-
-
-    /**
-     * 修改账户密码
-     */
-    public void changePassword(HttpServletRequest request){
-        //在session找出当前登录的账户
-
-    }
 
     /**
      * 修改基本信息

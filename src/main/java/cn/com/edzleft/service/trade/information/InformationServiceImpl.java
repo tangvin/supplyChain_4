@@ -1,6 +1,6 @@
 package cn.com.edzleft.service.trade.information;
 
-import cn.com.edzleft.dao.trade.homepage.InformationMapper;
+import cn.com.edzleft.dao.trade.information.InformationMapper;
 import cn.com.edzleft.entity.Information;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,15 +26,6 @@ public class InformationServiceImpl  implements InformationService{
         return baseinfo;
     }
 
-    /**
-     * 查询高级信息
-     * @return
-     */
-    @Override
-    public Information queryAdvancedInformation() {
-        Information advancedinfo = informationMapper.selectAdvancedInforation();
-        return advancedinfo;
-    }
 
     /**
      * 修改基本信息
@@ -42,9 +33,7 @@ public class InformationServiceImpl  implements InformationService{
     @Override
     public void modiflyInformation(Information f) {
         Information info = new Information();
-        /**
-         * 基本信息部分
-         */
+
         //企业身份
         info.setEntIdentity(f.getEntIdentity());
         //企业名称
@@ -94,7 +83,7 @@ public class InformationServiceImpl  implements InformationService{
         //登记机关
         info.setRegistrationAuthority(f.getRegistrationAuthority());
 
- /*        //电子图片
+         //电子图片
         //社会统一信用代码电子档
         info.setCodeFile(f.getCodeFile());
         //工商登记注册电子档
@@ -106,7 +95,7 @@ public class InformationServiceImpl  implements InformationService{
         //法人身份证电子档
         info.setPersonIdcard(f.getPersonIdcard());
         //开户许可证电子档
-        info.setOpenAccountFile(f.getOpenAccountFile());*/
+        info.setOpenAccountFile(f.getOpenAccountFile());
 
         informationMapper.updateInformation(info);
     }
