@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper	namespace="cn.com.edzleft.dao.procurement.letter.LetterMapper">
+	 <resultMap id="GreditList" type="cn.com.edzleft.entity.CreditTable" >
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="credit_grantor" property="creditGrantor" jdbcType="VARCHAR" />
+	    <result column="credit_time" property="creditTime" jdbcType="VARCHAR" />
+	    <result column="credit_amount" property="creditAmount" jdbcType="VARCHAR" />
+	    <result column="credit_master_contract" property="creditMasterContract" jdbcType="VARCHAR" />
+	    <result column="buyer_information_attachment" property="buyerInformationAttachment" jdbcType="VARCHAR" />
+	    <result column="trade_information_attachment" property="tradeInformationAttachment" jdbcType="VARCHAR" />
+	    <result column="credit_way" property="creditWay" jdbcType="INTEGER" />
+	    <result column="credit_number" property="creditNumber" jdbcType="INTEGER" />
+	    <result column="credit_status" property="creditStatus" jdbcType="INTEGER" />
+	    <result column="applicant" property="applicant" jdbcType="DATE" />
+	    <result column="application_time" property="applicationTime" jdbcType="DATE" />
+	    <result column="approval_time" property="approvalTime" jdbcType="DATE"/>
+	  </resultMap>
+	 <resultMap id="LetterList" type="cn.com.edzleft.entity.Leffer" >
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="letter_name" property="letterName" jdbcType="VARCHAR" />
+	    <result column="letter_credit" property="letterCredit" jdbcType="VARCHAR" />
+	    <result column="letter_time" property="letterTime" jdbcType="VARCHAR" />
+	    <result column="belong_order" property="belongOrder" jdbcType="VARCHAR" />
+	    <result column="belong_master_contract" property="belongMasterContract" jdbcType="VARCHAR" />
+	    <result column="confirm_person" property="confirmPerson" jdbcType="VARCHAR" />
+	    <result column="confirm_time" property="confirmTime" jdbcType="INTEGER" />
+	    <result column="letter_status" property="letterStatus" jdbcType="INTEGER" />
+	    <result column="belong_credit" property="belongCredit" jdbcType="INTEGER" />
+	    <result column="letter_contract" property="letterContract" jdbcType="DATE" />
+	    <result column="order_id" property="orderId" jdbcType="DATE" />
+	    <result column="applicant" property="applicant" jdbcType="DATE"/>
+	    <result column="application_time" property="applicationTime" jdbcType="DATE"/>
+	    <result column="approval_time" property="approvalTime" jdbcType="DATE"/>
+	  </resultMap>
+
+	<sql id="Base_Column_List" >
+	    id,credit_amount,credit_grantor,credit_time,credit_status,credit_master_contract,applicant,
+		application_time,approval_time,credit_number
+	</sql>
+
+	<!--条件查询-->
+  <sql id="where_sql">
+    <trim prefix="where" prefixOverrides="and">
+      <if test="whereMap != null &amp;&amp; whereMap.creditNumber != null and whereMap.creditNumber != ''">
+        AND credit_number  LIKE '%${whereMap.creditNumber}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.creditStatus != null and whereMap.creditStatus != ''">
+        AND credit_status LIKE '%${whereMap.creditStatus}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.applicant != null and whereMap.applicant != ''">
+        AND applicant LIKE '%${whereMap.applicant}%'
+      </if>
+    </trim>
+  </sql>
+
+
+	<select id="getCreditLetterList" resultMap="GreditList">
+		select <include refid="Base_Column_List" /> FROM gyl_credit <include refid="where_sql"/>;
+	</select>
+
+	<select id="getUseLetterList" resultMap="LetterList">
+		select * FROM gyl_letter;
+	</select>
+	
+	  <!--查询总条数-->
+  <!-- <select id="getOrderEntityCountsByConditions"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select count(*) from gyl_contract <include refid="where_sql"/>
+  </select>
+
+  分页查询
+  <select id="getOrderEntityListByConditions"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select
+    <include refid="Base_Column_List" />
+    from gyl_contract
+    <include refid="where_sql"/>
+    ORDER BY creat_time  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select> -->
+</mapper>
