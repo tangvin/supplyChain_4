@@ -28,8 +28,20 @@ public class Ukey {
      * ukey及证书名字
      */
     private String ukeyFilename;
+    /**
+     * ukey及证书的用户id
+     */
+    private Integer userId;
 
-    public Integer getUkeyId() {
+    public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public Integer getUkeyId() {
         return ukeyId;
     }
 
@@ -85,6 +97,7 @@ public class Ukey {
         Ukey ukey = (Ukey) o;
 
         if (ukeyId != null ? !ukeyId.equals(ukey.ukeyId) : ukey.ukeyId != null) return false;
+        if (userId != null ? !userId.equals(ukey.userId) : ukey.userId != null) return false;
         if (ukeyType != null ? !ukeyType.equals(ukey.ukeyType) : ukey.ukeyType != null) return false;
         if (issuedPeople != null ? !issuedPeople.equals(ukey.issuedPeople) : ukey.issuedPeople != null) return false;
         if (issuedTime != null ? !issuedTime.equals(ukey.issuedTime) : ukey.issuedTime != null) return false;
@@ -95,6 +108,7 @@ public class Ukey {
     @Override
     public int hashCode() {
         int result = ukeyId != null ? ukeyId.hashCode() : 0;
+        result = userId != null ? userId.hashCode() : 0;
         result = 31 * result + (ukeyType != null ? ukeyType.hashCode() : 0);
         result = 31 * result + (issuedPeople != null ? issuedPeople.hashCode() : 0);
         result = 31 * result + (issuedTime != null ? issuedTime.hashCode() : 0);
@@ -107,6 +121,7 @@ public class Ukey {
     public String toString() {
         return "Ukey{" +
                 "ukeyId=" + ukeyId +
+                ", userId=" + userId +
                 ", ukeyType='" + ukeyType + '\'' +
                 ", issuedPeople='" + issuedPeople + '\'' +
                 ", issuedTime=" + issuedTime +
