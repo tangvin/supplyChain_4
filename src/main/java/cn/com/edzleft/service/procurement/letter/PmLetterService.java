@@ -2,14 +2,27 @@ package cn.com.edzleft.service.procurement.letter;
 
 import cn.com.edzleft.entity.CreditTable;
 import cn.com.edzleft.entity.Letter;
+import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.util.page.PageUtil;
 
 import java.util.List;
 
-public interface LetterService {
+/**
+ * Created by ASUS on 2017/11/2.
+ */
+public interface PmLetterService {
 
-	List<CreditTable> getCreditLetterList(PageUtil<CreditTable> userPage, CreditTable ct);
+    List<Order> signingSelect();
 
-	List<Letter> getUseLetterList(PageUtil<Letter> userPage, Letter lf);
+    /**
+     *按条件查询用信分页数据
+     */
+    public PageUtil<Letter> getOrderEntityListByConditions(PageUtil<Letter> userPage);
+
+    /**
+     *按条件查询授信分页数据
+     */
+    public PageUtil<CreditTable> getCrownEntityListByConditions(PageUtil<CreditTable> userPage);
+
 
 }

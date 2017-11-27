@@ -1,11 +1,11 @@
-package cn.com.edzleft.dao.procurement.shouye;
+package cn.com.edzleft.dao.procurement.account;
 
 import cn.com.edzleft.entity.Account;
 import cn.com.edzleft.entity.SessionInfo;
 
-public interface UserMapper {
+public interface PmAccountMapper {
 
-	SessionInfo findUserById();
+	SessionInfo findUserById(Integer userId);
 
 	Account selectByPrimaryKey(Integer userId);
 

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.procurement.account.PmAccountMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Account" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_pwd" property="userPwd" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="create_time" property="creatTime" jdbcType="DATE" />
+    <result column="create_ip" property="creatIp" jdbcType="VARCHAR" />
+    <result column="login_time" property="loginTime" jdbcType="DATE" />
+    <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
+    <result column="user_eamil" property="userEamil" jdbcType="VARCHAR" />
+    <result column="account_type" property="accountType" jdbcType="INTEGER" />
+    <result column="account_state" property="accountState" jdbcType="INTEGER" />
+    <result column="certificate_state" property="certificateState" jdbcType="INTEGER" />
+    <result column="certificate_type" property="certificateType" jdbcType="INTEGER" />
+    <result column="invite_account" property="inviteAccount" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, user_name, user_pwd, user_phone, create_time, create_ip, login_time, login_ip, 
+    user_eamil, account_type, account_state, certificate_state, certificate_type, invite_account
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gyl_account
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gyl_account
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.edzleft.entity.Account" >
+    insert into gyl_account (user_id, user_name, user_pwd, 
+      user_phone, create_time, create_ip, 
+      login_time, login_ip, user_eamil, 
+      account_type, account_state, certificate_state, 
+      certificate_type, invite_account)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
+      #{userPhone,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}, #{creatIp,jdbcType=VARCHAR}, 
+      #{loginTime,jdbcType=TIMESTAMP}, #{loginIp,jdbcType=VARCHAR}, #{userEamil,jdbcType=VARCHAR}, 
+      #{accountType,jdbcType=INTEGER}, #{accountState,jdbcType=INTEGER}, #{certificateState,jdbcType=INTEGER}, 
+      #{certificateType,jdbcType=INTEGER}, #{inviteAccount,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.edzleft.entity.Account" >
+    insert into gyl_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPwd != null" >
+        user_pwd,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="creatTime != null" >
+        create_time,
+      </if>
+      <if test="creatIp != null" >
+        create_ip,
+      </if>
+      <if test="loginTime != null" >
+        login_time,
+      </if>
+      <if test="loginIp != null" >
+        login_ip,
+      </if>
+      <if test="userEamil != null" >
+        user_eamil,
+      </if>
+      <if test="accountType != null" >
+        account_type,
+      </if>
+      <if test="accountState != null" >
+        account_state,
+      </if>
+      <if test="certificateState != null" >
+        certificate_state,
+      </if>
+      <if test="certificateType != null" >
+        certificate_type,
+      </if>
+      <if test="inviteAccount != null" >
+        invite_account,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatIp != null" >
+        #{creatIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null" >
+        #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null" >
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userEamil != null" >
+        #{userEamil,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        #{accountType,jdbcType=INTEGER},
+      </if>
+      <if test="accountState != null" >
+        #{accountState,jdbcType=INTEGER},
+      </if>
+      <if test="certificateState != null" >
+        #{certificateState,jdbcType=INTEGER},
+      </if>
+      <if test="certificateType != null" >
+        #{certificateType,jdbcType=INTEGER},
+      </if>
+      <if test="inviteAccount != null" >
+        #{inviteAccount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.edzleft.entity.Account" >
+    update gyl_account
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        create_time = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatIp != null" >
+        create_ip = #{creatIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null" >
+        login_time = #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null" >
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userEamil != null" >
+        user_eamil = #{userEamil,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        account_type = #{accountType,jdbcType=INTEGER},
+      </if>
+      <if test="accountState != null" >
+        account_state = #{accountState,jdbcType=INTEGER},
+      </if>
+      <if test="certificateState != null" >
+        certificate_state = #{certificateState,jdbcType=INTEGER},
+      </if>
+      <if test="certificateType != null" >
+        certificate_type = #{certificateType,jdbcType=INTEGER},
+      </if>
+      <if test="inviteAccount != null" >
+        invite_account = #{inviteAccount,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.edzleft.entity.Account" >
+    update gyl_account
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_pwd = #{userPwd,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      create_time = #{creatTime,jdbcType=TIMESTAMP},
+      create_ip = #{creatIp,jdbcType=VARCHAR},
+      login_time = #{loginTime,jdbcType=TIMESTAMP},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      user_eamil = #{userEamil,jdbcType=VARCHAR},
+      account_type = #{accountType,jdbcType=INTEGER},
+      account_state = #{accountState,jdbcType=INTEGER},
+      certificate_state = #{certificateState,jdbcType=INTEGER},
+      certificate_type = #{certificateType,jdbcType=INTEGER},
+      invite_account = #{inviteAccount,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>
