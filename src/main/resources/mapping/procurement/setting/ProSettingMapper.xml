@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.procurement.setting.ProSettingMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Settings" >
+    <id column="setting_id" property="settingId" jdbcType="INTEGER" />
+    <result column="short_message" property="shortMessage" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="INTEGER" />
+	 <result column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <!--根据账号查询设置信息-->
+  <select id="findSettingByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+   setting_id, short_message,email,user_id
+    from gyl_setting
+    where user_id = #{userId}
+  </select>
+ <update id="update" parameterType="cn.com.edzleft.entity.Settings">
+  update gyl_setting
+  set short_message =#{shortMessage},email=#{email}
+  where user_id=#{userId}
+  </update> 
+</mapper>
