@@ -199,12 +199,12 @@
                                         <div class="form-group">
                                             <label for="lastname" class="col-xs-4 control-label">确认密码</label>
                                             <div class="col-xs-8">
-                                                <input type="text" class="form-control" id="lastname1" name="confirm">
+                                                <input type="text"  class="form-control" id="lastname1" name="confirm">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-xs-offset-4 col-xs-8">
-                                                <button type="button" class="btn  btn-danger aq_qr_but" id="upd">确认</button>
+                                                <button type="button" id="upda" class="btn  btn-danger aq_qr_but"  >确认</button>
                                             </div>
                                         </div>
 
@@ -528,8 +528,8 @@
                                     <button type="button" class="btn  btn-danger  btn-default tjhydw" data-toggle="modal" data-target="#exampleModal11">添加货运单位</button>
                                 </div>
                             </div>
-
                             <!--货运单位 蒙泰框-->
+                            <form id="h" method="post">
                             <div class="modal fade" id="exampleModal11" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -540,37 +540,39 @@
                                         <div class="modal-header sh_div">
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>货运单位名称</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="freightName"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>货运方联系人</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="freightContactPerson"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>货运方联系人手机号</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="freightContactPhone"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>设为默认</div>
                                                 <div class="col-xs-9">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="inlineRadioOptions2" checked> 是
+                                                        <input type="radio" name="freightDefaultAddress" checked> 是
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="inlineRadioOptions2"> 否
+                                                        <input type="radio" name="freightDefaultAddress"> 否
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" id="Addfreigft">确认</button>
                                             <button type="button" class="btn btn-primary">取消</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            </form>
                             <!--货运单位 蒙泰框 结束-->
+                            
                         </div>
                         <!--运货单位 结束-->
                         <!--收获地址 开始-->
@@ -619,10 +621,14 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-5">
-                                    <button type="button" class="btn btn-danger btn-default shanchu">删除</button>
+                                    <button type="button" class="btn btn-danger btn-default shanchu" id="deladdress">删除</button>
                                 </div>
                             </div>
                             <!--收获地址 蒙泰框-->
+                            
+                            
+                           <!--  添加收货地址 -->
+                           <form  action="" id="d" method="post">
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -638,50 +644,51 @@
                                                 </div>
                                                 <div class="col-xs-9">
                                                     <div class="row sjld ">
-                                                        <select class="col-xs-3 form-control" id="seachprov" name="seachprov" onChange="changeComplexProvince(this.value, sub_array, 'seachcity', 'seachdistrict');"></select>
-                                                        <select style="margin-left:20px;" class="col-xs-3 form-control" id="seachcity" name="homecity" onChange="changeCity(this.value,'seachdistrict','seachdistrict');"></select>
+                                                        <select class="col-xs-3 form-control" id="seachprov" name="rAddressArea" onChange="changeComplexProvince(this.value, sub_array, 'seachcity', 'seachdistrict');"></select>
+                                                        <select style="margin-left:20px;" class="col-xs-3 form-control" id="seachcity" name="rAddressArea" onChange="changeCity(this.value,'seachdistrict','seachdistrict');"></select>
                                                         <span class="col-xs-3"  id="seachdistrict_div">
-                                                            <select class="form-control" id="seachdistrict" name="seachdistrict"></select>
+                                                            <select class="form-control" id="seachdistrict" name="rAddressArea"></select>
                                                         </span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>收货区域</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>收货地址</div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="rAddressAddress"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>邮政编码</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="rAddressZipcode"></div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>邮政编码</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                             <div class="row">
+                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>收货人</div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="rAddressPerson"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>收货人手机号</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="rAddressPhone"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>设为默认</div>
                                                 <div class="col-xs-9">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="inlineRadioOptions" checked value="option1"> 是
+                                                        <input type="radio" name="rAddressDefault" checked value="是"> 是
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="inlineRadioOptions"  value="option2"> 否
+                                                        <input type="radio" name="rAddressDefault"  value="否"> 否
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" id="getAddress">确认</button>
                                             <button type="button" class="btn btn-primary">取消</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            </form>
                             <!--收获地址 蒙泰框 结束-->
                         </div>
                         <!--收获地址 开始-->
@@ -725,14 +732,40 @@
 <!-- 修改密码 -->
 <script type="text/javascript">
 	$(function(){
-		$("#upd").click(function(){
+		$("#upda").click(function(){
 			$.ajax({
 				url:"<%=request.getContextPath()%>/password/changePwd.action",
 				type:'post',
 				data:$("#f").serialize(),
 				dataType:"json",
 				success:function(data){
-					alert("aaa");
+					alert(data);
+				}
+			});
+		});
+		/* 添加收获地址 */
+		$("#getAddress").click(function(){
+			var ra = $("#d").serialize();
+			$.ajax({
+				url:"<%=request.getContextPath()%>/PmReceivingAddress/getaddress.action",
+				type:'post',
+				data:$("#d").serialize(),
+				dataType:"json",
+				success:function(data){
+					alert("添加完成");
+				}
+			});
+		});
+	/* 添加货运单位 */
+		$("#Addfreigft").click(function(){
+			var ra = $("#d").serialize();
+			$.ajax({
+				url:"<%=request.getContextPath()%>/Addfreigft/Addfreigft.action",
+				type:'post',
+				data:$("#d").serialize(),
+				dataType:"json",
+				success:function(data){
+					alert("好了。添加完成了");
 				}
 			});
 		});
