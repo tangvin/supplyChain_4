@@ -41,10 +41,8 @@
                                         <label for="creditStatus">状态</label>
                                         <select class="form-control select" id="creditStatus">
                                             <option value="">全部</option>
-                                            <option value="1">全部1</option>
-                                            <option value="2">全部2</option>
-                                            <option value="3">全部3</option>
-                                            <option value="4">全部4</option>
+                                            <option value="0">已审批</option>
+                                            <option value="1">待审批</option>
                                         </select>
                                     </div>
                                     <div class="form-group form-group1">
@@ -77,10 +75,8 @@
                                         <label for="letterStatus">状态</label>
                                         <select class="form-control select" id="letterStatus">
                                             <option value="">全部</option>
-                                            <option value="1">全部1</option>
-                                            <option value="2">全部2</option>
-                                            <option value="3">全部3</option>
-                                            <option value="4">全部4</option>
+                                            <option value="0">已审批</option>
+                                            <option value="1">待审批</option>
                                         </select>
                                     </div>
                                     <div class="form-group form-group1">
@@ -131,13 +127,9 @@
                 {field:'creditStatus',title:'状态',width:100,
                     formatter: function(value,row,index){
                         if(value == '0') {
-                            return "未生效";
+                            return "已审批";
                         } else if(value == '1') {
-                            return "正常";
-                        } else if(value == '2') {
-                            return "已终止";
-                        }else if(value == '3') {
-                            return "历史";
+                            return "待审批";
                         }
                     }
                 },
@@ -151,13 +143,9 @@
                     width:25,
                     formatter:function(value , row){
                         var str = '';
-                        if(row.letterStatus == 1){
                             str += '<button class="btn btn-danger bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
 //                            str += '<button class="btn btn-danger bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
 //                            str += '<button class="btn btn-danger bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
-                        }else{
-                            str +='';
-                        }
                         return str;
                     }
                 }
@@ -219,13 +207,9 @@
                 {field:'letterStatus',title:'状态',width:100,
                     formatter: function(value,row,index){
                         if(value == '0') {
-                            return "未生效";
+                            return "已审批";
                         } else if(value == '1') {
-                            return "正常";
-                        } else if(value == '2') {
-                            return "已终止";
-                        }else if(value == '3') {
-                            return "历史";
+                            return "待审批";
                         }
                     }
                 },
@@ -240,13 +224,9 @@
                     width:25,
                     formatter:function(value , row){
                         var str = '';
-                        if(row.letterStatus == 1){
                             str += '<button class="btn btn-danger bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
 //                            str += '<button class="btn btn-danger bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
 //                            str += '<button class="btn btn-danger bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
-                        }else{
-                            str +='';
-                        }
                         return str;
                     }
                 }

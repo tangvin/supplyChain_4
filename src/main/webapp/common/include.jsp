@@ -53,7 +53,8 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/uploadImg.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/bootstrap-table.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/bootstrap-table-zh-CN.js"></script>
-
+<!-- 引入my97 -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/my97/WdatePicker.js"></script>
 <!-- 引入bootstrap的js-->
 <%--<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/treeview/bootstrap-treeview.min.js"></script>--%>
 <%--<!-- 引入bootstrap的js-->--%>

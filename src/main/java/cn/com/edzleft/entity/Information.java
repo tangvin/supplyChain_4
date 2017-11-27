@@ -137,6 +137,42 @@ public class Information {
      *组织机构电子档
      */
     private String organizationElectronicFile;
+    /**
+     * 用户id account_id
+     */
+    private Integer accountId;
+    /**
+     * 企业图片
+     */
+    private String entLogo;
+    /**
+     * 认证状态
+     */
+    private Integer certificationStatus;
+
+    public Integer getCertificationStatus() {
+        return certificationStatus;
+    }
+
+    public void setCertificationStatus(Integer certificationStatus) {
+        this.certificationStatus = certificationStatus;
+    }
+
+    public String getEntLogo() {
+        return entLogo;
+    }
+
+    public void setEntLogo(String entLogo) {
+        this.entLogo = entLogo;
+    }
+
+    public Integer getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
+    }
 
     public Integer getId() {
         return id;
@@ -456,9 +492,13 @@ public class Information {
         if (taxNumber != null ? !taxNumber.equals(that.taxNumber) : that.taxNumber != null) return false;
         if (openAccountFile != null ? !openAccountFile.equals(that.openAccountFile) : that.openAccountFile != null)
             return false;
+        if (financialFile != null ? !financialFile.equals(that.financialFile) : that.financialFile != null)
+            return false;
         if (organizationElectronicFile != null ? !organizationElectronicFile.equals(that.organizationElectronicFile) : that.organizationElectronicFile != null)
             return false;
-        return financialFile != null ? financialFile.equals(that.financialFile) : that.financialFile == null;
+        if (accountId != null ? !accountId.equals(that.accountId) : that.accountId != null) return false;
+        if (entLogo != null ? !entLogo.equals(that.entLogo) : that.entLogo != null) return false;
+        return certificationStatus != null ? certificationStatus.equals(that.certificationStatus) : that.certificationStatus == null;
     }
 
     @Override
@@ -496,6 +536,9 @@ public class Information {
         result = 31 * result + (openAccountFile != null ? openAccountFile.hashCode() : 0);
         result = 31 * result + (financialFile != null ? financialFile.hashCode() : 0);
         result = 31 * result + (organizationElectronicFile != null ? organizationElectronicFile.hashCode() : 0);
+        result = 31 * result + (accountId != null ? accountId.hashCode() : 0);
+        result = 31 * result + (entLogo != null ? entLogo.hashCode() : 0);
+        result = 31 * result + (certificationStatus != null ? certificationStatus.hashCode() : 0);
         return result;
     }
 
@@ -523,7 +566,7 @@ public class Information {
                 ", county='" + county + '\'' +
                 ", address='" + address + '\'' +
                 ", businessContact='" + businessContact + '\'' +
-                ", mobilePhone=" + mobilePhone +
+                ", mobilePhone='" + mobilePhone + '\'' +
                 ", emailAddress='" + emailAddress + '\'' +
                 ", zipCode=" + zipCode +
                 ", webSite='" + webSite + '\'' +
@@ -535,6 +578,9 @@ public class Information {
                 ", openAccountFile='" + openAccountFile + '\'' +
                 ", financialFile='" + financialFile + '\'' +
                 ", organizationElectronicFile='" + organizationElectronicFile + '\'' +
+                ", accountId=" + accountId +
+                ", entLogo='" + entLogo + '\'' +
+                ", certificationStatus=" + certificationStatus +
                 '}';
     }
 }

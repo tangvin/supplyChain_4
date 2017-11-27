@@ -75,6 +75,22 @@
 	<!--</mvc:interceptors>-->
 
 
+	<mvc:interceptors>
+		<!--登录拦截器-->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="cn.com.edzleft.interceptor.LoginInterceptors">
+				<!--登录拦截器不拦截的url请求-->
+				<property name="excludeUrls">
+					<list>
+						<value>/captialMain/login.action</value>
+						<value>/account/login.action</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 
 
 
