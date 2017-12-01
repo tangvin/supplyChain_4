@@ -38,8 +38,36 @@ public class TradeFinance {
      * 账单时间
      */
     private Date billTime;
+    /**
+     * 银行卡账户类型
+     */
+    private String bankcardaccounttype;
+    
+    /**
+     * 银行卡账户
+     * @return
+     */
 
-    public Integer getFinancialId() {
+    private Integer bankcardaccount;
+    
+    
+    public String getBankcardaccounttype() {
+		return bankcardaccounttype;
+	}
+
+	public void setBankcardaccounttype(String bankcardaccounttype) {
+		this.bankcardaccounttype = bankcardaccounttype;
+	}
+
+	public Integer getBankcardaccount() {
+		return bankcardaccount;
+	}
+
+	public void setBankcardaccount(Integer bankcardaccount) {
+		this.bankcardaccount = bankcardaccount;
+	}
+
+	public Integer getFinancialId() {
         return financialId;
     }
 

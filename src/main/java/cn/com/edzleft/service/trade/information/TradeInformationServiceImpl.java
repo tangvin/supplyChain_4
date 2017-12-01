@@ -21,8 +21,8 @@ public class TradeInformationServiceImpl implements TradeInformationService {
      * @return
      */
     @Override
-    public Information queryBaseInformation() {
-        Information baseinfo = informationMapper.selectBaseInformation();
+    public Information queryBaseInformation(Integer id) {
+        Information baseinfo = informationMapper.selectBaseInformation(id);
         return baseinfo;
     }
 
@@ -31,7 +31,7 @@ public class TradeInformationServiceImpl implements TradeInformationService {
      * 修改基本信息
      */
     @Override
-    public void modiflyInformation(Information f) {
+    public void modifyInformation(Information f) {
         Information info = new Information();
 
         //企业身份

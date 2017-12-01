@@ -88,10 +88,10 @@
                         if(date.success){
                             if(date.type == 0){
                                 //采购方页面
-                                window.location.href="<%=request.getContextPath()%>/account/loginProcurement.action"
+                                window.location.href="<%=request.getContextPath()%>/procurementMain/procurementMain.action"
                             }else if(date.type==1){
                                 //贸易方页面
-                                window.location.href="<%=request.getContextPath()%>/account/loginTrade.action"
+                                window.location.href="<%=request.getContextPath()%>/tradeMain/tradeMain.action"
                             }else if(date.type==2){
                                 //资金方页面
                                 window.location.href="<%=request.getContextPath()%>/captialMain/captialMain.action"

@@ -9,12 +9,15 @@ public class SessionInfo implements Serializable {
 
     private static final long serialVersionUID = -4990366528213963606L;
     private Account account;
-
+    private Information information;
+    private Order order;
 
     @Override
     public String toString() {
         return "SessionInfo{" +
-                "admin=" + account +
+                "account=" + account +
+                ", information=" + information +
+                ", order=" + order +
                 '}';
     }
 
@@ -28,5 +31,29 @@ public class SessionInfo implements Serializable {
 
     public void setAdmin(Account admin) {
         this.account = admin;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Information getInformation() {
+        return information;
+    }
+
+    public void setInformation(Information information) {
+        this.information = information;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

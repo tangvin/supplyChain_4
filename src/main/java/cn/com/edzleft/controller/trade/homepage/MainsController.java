@@ -1,8 +1,17 @@
 package cn.com.edzleft.controller.trade.homepage;
 
+
+import cn.com.edzleft.entity.Account;
+import cn.com.edzleft.entity.Information;
+import cn.com.edzleft.entity.SessionInfo;
+import cn.com.edzleft.service.trade.account.AccountService;
+import cn.com.edzleft.service.trade.information.TradeInformationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by ASUS on 2017/11/15.
@@ -11,7 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value="tradeMain")
 public class MainsController {
 
-
+        @Autowired
+        private TradeInformationService tradeInformationService;
+        @Autowired
+        private AccountService accountService;
 
     /**
      * 认证资料
@@ -43,13 +55,20 @@ public class MainsController {
         return modelAndView;
     }
 
+
     /**
      * 基本资料
      * @return
      */
     @RequestMapping(value = "ziliao")
-    public ModelAndView ziliao(){
+    public ModelAndView ziliao(HttpSession sessionInfo){
         ModelAndView modelAndView = new ModelAndView("/trade/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        String userName=session.getAdmin().getUserName();
+        Information information = tradeInformationService.queryBaseInformation(userId);
+        Account account = accountService.queryAccountByName(userName);
+        modelAndView.addObject("information", information);
         modelAndView.addObject("messages", "home");
         return modelAndView;
     }
@@ -148,7 +167,7 @@ public class MainsController {
     }
 
     /**
-     * 采购方合同签约
+     * 贸易方合同签约
      * @return
      */
     @RequestMapping(value = "htqy")
@@ -157,7 +176,7 @@ public class MainsController {
     }
 
     /**
-     * 采购方授用信管理
+     * 贸易方授用信管理
      * @return
      */
     @RequestMapping(value = "syxgl")
@@ -166,30 +185,49 @@ public class MainsController {
     }
 
     /**
-     * 采购方系统首页
+     * 贸易方系统首页
      * @return
      */
     @RequestMapping(value="/xtsy")
-    public String mains(){
-        return "/trade/mains";
+    public  ModelAndView mains(HttpSession sessionInfo){
+        ModelAndView mv = new ModelAndView("/trade/mains");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        String userName = session.getAdmin().getUserName();
+        Information information = tradeInformationService.queryBaseInformation(userId);
+        Account account = accountService.queryAccountByName(userName);
+        mv.addObject("information",information);
+        mv.addObject("account",account);
+        return mv;
     }
 
     /**
-     * 采购方首页
+     * 贸易方首页(+企业详细信息)
      * @return
      */
-    @RequestMapping(value = "tradeMain")
-    public String procurementMain(){
-        return "trade/main";
+    @RequestMapping(value = "/tradeMain")
+    public ModelAndView tradeMain(HttpSession sessionInfo){
+        ModelAndView mv = new ModelAndView("/trade/main");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = tradeInformationService.queryBaseInformation(userId);
+        System.out.println(information);
+        mv.addObject("information",information);
+        return mv;
     }
 
     /**
-     * 采购方资料维护
+     * 贸易方资料维护
      * @return
      */
     @RequestMapping(value = "/zhxx")
-    public String information(){
-        return "/trade/information/information";
+    public ModelAndView information(HttpSession sessionInfo){
+        ModelAndView mv = new ModelAndView("/trade/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = tradeInformationService.queryBaseInformation(userId);
+        mv.addObject("information",information);
+        return mv;
     }
 
 

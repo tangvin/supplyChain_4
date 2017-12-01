@@ -9,7 +9,7 @@ public interface TradeInformationMapper {
     /**
      * 基本信息查询
      */
-    public Information selectBaseInformation();
+    public Information selectBaseInformation(Integer id);
 
 
     /**

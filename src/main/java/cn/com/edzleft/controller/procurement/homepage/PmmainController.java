@@ -1,34 +1,37 @@
 package cn.com.edzleft.controller.procurement.homepage;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.com.edzleft.entity.Account;
+import cn.com.edzleft.entity.Information;
+import cn.com.edzleft.entity.SessionInfo;
+import cn.com.edzleft.service.procurement.account.Pmaccountservice;
+import cn.com.edzleft.service.procurement.homepage.PmHomePageService;
+import cn.com.edzleft.service.trade.account.AccountService;
+
 /**
  * Created by ASUS on 2017/11/15.
  */
+@RequestMapping("/procurementMain")
 @Controller
-@RequestMapping(value="procurementMain")
-public class MainControllers {
 
-    /**
-     * 认证资料
-     * @return
-     */
-    @RequestMapping(value = "zlrz")
-    public String zlrz(){
-        return "procurement/information/attestation";
-    }
-
-    /**
-     * 资料编辑
-     * @return
-     */
-    @RequestMapping(value = "updateInformation")
-    public String updateInformation(){
-        return "procurement/information/updateInformation";
-    }
-
+public class PmmainController {
+	@Autowired
+	private PmHomePageService pmHomePageService;
+	
+	@Autowired
+    private AccountService accountService;
+	
+	@RequestMapping("insertOrder")
+	public String insertOrder(){
+		return "procurement/order/insertOrder";
+	}
+	
     /**
      * 账户安全
      * @return
@@ -45,11 +48,28 @@ public class MainControllers {
      * @return
      */
     @RequestMapping(value = "ziliao")
-    public ModelAndView ziliao(){
-        ModelAndView modelAndView = new ModelAndView("/procurement/information/information");
-        modelAndView.addObject("messages", "home");
-        return modelAndView;
+    public ModelAndView ziliao(HttpSession sessionInfo){
+        ModelAndView mv = new ModelAndView("/procurement/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = pmHomePageService.homePageSelect(userId);
+        mv.addObject("information",information);
+        mv.addObject("messages", "home");
+        return mv;
     }
+    /**
+     * main资料
+     */
+   @RequestMapping(value = "/xtsy")
+    public ModelAndView mains(HttpSession sessionInfo){
+        ModelAndView mv = new ModelAndView("/procurement/mains");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = pmHomePageService.homePageSelect(userId);
+        mv.addObject("information",information);
+        return mv;
+    }
+    
     /**
      * 资金账户
      * @return
@@ -162,22 +182,22 @@ public class MainControllers {
         return "/procurement/management/management";
     }
 
-    /**
-     * 采购方系统首页
-     * @return
-     */
-    @RequestMapping(value="/xtsy")
-    public String mains(){
-        return "/procurement/mains";
-    }
 
     /**
      * 采购方首页
      * @return
      */
-    @RequestMapping(value = "procurementMain")
-    public String procurementMain(){
-        return "procurement/main";
+    @RequestMapping(value = "/procurementMain")
+    public ModelAndView procurementMain(HttpSession sessionInfo){
+    	 ModelAndView mv = new ModelAndView("procurement/main");
+         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+         Integer userId = session.getAdmin().getUserId();
+         String userName = session.getAdmin().getUserName();
+         Information information = pmHomePageService.homePageSelect(userId);
+         Account account = accountService.queryAccountByName(userName);
+         mv.addObject("information",information);
+         mv.addObject("account",account);
+         return mv;
     }
 
     /**

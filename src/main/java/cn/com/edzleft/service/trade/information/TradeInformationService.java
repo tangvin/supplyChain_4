@@ -9,12 +9,12 @@ public interface TradeInformationService {
     /**
      * 基本信息查询
      */
-    public Information queryBaseInformation();
+    public Information queryBaseInformation(Integer id);
 
 
     /**
      * 根据id修改用户信息
      */
-    public void modiflyInformation(Information f);
+    public void modifyInformation(Information f);
 
 }

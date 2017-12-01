@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.procurement.certificate.ProCertificateMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Ukey" >
+    <id column="ukey_id" property="ukeyId" jdbcType="INTEGER" />
+    <result column="ukey_type" property="ukeyType" jdbcType="VARCHAR" />
+    <result column="issued_people" property="issuedPeople" jdbcType="VARCHAR" />
+    <result column="issued_time" property="issuedTime" jdbcType="TIMESTAMP" />
+    <result column="ukey_status" property="ukeyStatus" jdbcType="INTEGER" />
+    <result column="ukey_filename" property="ukeyFilename" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="attachment_name" property="attachmentName" jdbcType="VARCHAR" />
+    <result column="attachment_url" property="attachmentUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ukey_id, ukey_type, issued_people, issued_time, ukey_status, ukey_filename, user_id
+  </sql>
+  
+  
+  <!--条件查询-->
+  <sql id="where_sql">
+    <trim prefix="where" prefixOverrides="and">
+    	<if test="whereMap != null &amp;&amp; whereMap.userId != null and whereMap.userId != ''">
+        AND user_id =#{whereMap.userId}
+      	</if>
+      <if test="whereMap != null &amp;&amp; whereMap.issuedPeople != null and whereMap.issuedPeople != ''">
+        AND issued_people  LIKE '%${whereMap.issuedPeople}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.ukeyStatus != null and whereMap.ukeyStatus != ''">
+        AND ukey_status  LIKE '%${whereMap.ukeyStatus}%'
+      </if>
+    </trim>
+  </sql>
+	
+	<!--条件查询总条数-->
+  <select id="getUkeyEntityCountsByConditions"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select count(*) from gyl_ukey <include refid="where_sql"/>
+  </select>
+  
+  <!--查询总条数-->
+  <select id="getCounts"  resultType="Integer" parameterType="java.lang.Integer">
+    select count(*) from gyl_ukey where user_id=#{userId}
+  </select>
+  <!-- 根据userId查询所有 -->
+  <select id="getByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	select 
+  		<include refid="Base_Column_List"/>
+  	from gyl_ukey
+  	where user_id=#{userId}
+  </select>
+  
+  <select id="getUkeyEntityListByConditions"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select
+   gu.ukey_id,gu.ukey_type,gu.issued_people,gu.issued_time,gu.ukey_status,ga.attachment_name as attachmentName,ga.attachment_url as attachmentUrl
+    from 
+    	gyl_ukey gu
+    left join 
+    	gyl_attachment ga 
+    on
+       gu.ukey_filename=ga.attachment_id
+    <include refid="where_sql"/>
+    ORDER BY issued_time  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select>
+  
+  
+ <!-- 
+  <select id="getUkeyEntityListByConditions"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select
+    gu.ukey_id,gu.ukey_type,gu.issued_people,gu.issued_time,gu.ukey_status,ga.attachment_name as ukeyFilename,ga.attachment_url as url
+    from gyl_ukey gu
+    left join gyl_attachment ga on gu.ukey_filename=ga.attachment_id
+    <include refid="where_sql"/>
+    ORDER BY issued_time  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select> -->
+  
+   
+</mapper>

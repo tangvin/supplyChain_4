@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -24,18 +25,34 @@ public class CreditController {
 
 
     /**
-     * 条件查询后分页显示
+     * 授信管理
+     * @param pageNumber 开始页数
+     * @param pageSize   每页显示的条数
+     * @param creditNumber 授信编号
+     * @param creditGrantor 授信方
+     * @param creditStatus 授信状态
+     * @param applicant 申请人
+     * @return
      */
     @RequestMapping(value = "/creditByPage",method = RequestMethod.POST)
     @ResponseBody
-    public DataGridJson getCreditByPage(int page, int rows, PageUtil<CreditTable> pageUtil){
+    public DataGridJson getCreditByPage(Integer pageNumber,Integer pageSize ,String creditNumber,String creditGrantor,String creditStatus,String applicant){
+        PageUtil<CreditTable> pageUtil = new PageUtil<>();
+
+        HashMap<String,Object> whereMaps =new HashMap<>();
+        whereMaps.put("creditNumber",creditNumber);
+        whereMaps.put("creditGrantor",creditGrantor);
+        whereMaps.put("creditStatus",creditStatus);
+        whereMaps.put("applicant",applicant);
+        System.out.println(whereMaps);
         DataGridJson dgj = new DataGridJson();
-        //分页对象
-        pageUtil.setCpage(page);
-        pageUtil.setPageSize(rows);
-        PageUtil<CreditTable> pages = creditService.queryAllCredit(pageUtil);
-        dgj.setTotal(pages.getTotalCount());
-        dgj.setRows(pages.getList());
+        pageUtil.setCpage(pageNumber);
+        pageUtil.setPageSize(pageSize);
+        pageUtil.setWhereMap(whereMaps);
+        pageUtil = creditService.queryAllCredit(pageUtil);
+
+        dgj.setTotal(pageUtil.getTotalCount());
+        dgj.setRows(pageUtil.getList());
         return dgj;
     }
 

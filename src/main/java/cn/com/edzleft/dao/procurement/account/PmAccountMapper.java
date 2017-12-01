@@ -11,4 +11,5 @@ public interface PmAccountMapper {
 
 	Integer updateByPrimaryKeySelective(Account acc);
 
+
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
+import java.net.InetAddress;
+import java.util.Date;
 
 /**
  * Created by ibmtech on 2017/11/16.
@@ -22,11 +24,26 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * 根据账号(userName)查询账户信息
-     * @param account
+     * @param userName
      * @return
      */
     public Account queryAccountByName(String userName) {
         Account a = accountMapper.findAccountByName(userName);
+        InetAddress ia=null;
+        try {
+            ia=ia.getLocalHost();
+
+            String localname=ia.getHostName();
+            String localip=ia.getHostAddress();
+            System.out.println("本机名称是："+ localname);
+            System.out.println("本机的ip是 ："+localip);
+            a.setLoginIp(localip);
+            a.setLoginTime(new Date());
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         return a;
     }
 

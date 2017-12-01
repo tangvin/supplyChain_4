@@ -10,4 +10,5 @@ public interface Pmaccountservice {
 
 	String updataPwd(Integer userId,String newpwd, String confirm,String senCode,String code,Date creatDate);
 
+
 }
