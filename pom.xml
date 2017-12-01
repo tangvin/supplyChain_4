@@ -196,7 +196,11 @@
       <artifactId>commons-codec</artifactId>
       <version>1.9</version>
     </dependency>
-
+    <dependency>
+      <groupId>commons-net</groupId>
+      <artifactId>commons-net</artifactId>
+      <version>1.4.1</version>
+    </dependency>
     <!-- 验证码 -->
     <dependency>
       <groupId>com.github.axet</groupId>
@@ -295,6 +299,18 @@
       <version>${cglib.version}</version>
       <scope>runtime</scope>
     </dependency>
+    <!--阿里云短信-->
+    <dependency>
+      <groupId>com.aliyun</groupId>
+      <artifactId>aliyun-java-sdk-core</artifactId>
+      <version>3.2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.aliyun.mtgg</groupId>
+      <artifactId>aliyun-java-sdk-dysmsapi-1.0.0</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+
 
   </dependencies>
 

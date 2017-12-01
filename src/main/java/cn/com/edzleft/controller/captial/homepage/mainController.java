@@ -25,6 +25,29 @@ public class mainController {
     private AccountService accountService;
 
     /**
+     * 认证资料
+     * @return
+     */
+    @RequestMapping(value = "zlrz")
+    public String zlrz(){
+        return "capital/information/attestation";
+    }
+
+    /**
+     * 资料编辑
+     * @return
+     */
+    @RequestMapping(value = "updateInformation")
+    public ModelAndView updateInformation(HttpSession sessionInfo){
+        ModelAndView mv = new ModelAndView("capital/information/updateInformation");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = captialHomePageService.homePageSelect(userId);
+        mv.addObject("information",information);
+        return mv;
+    }
+
+    /**
      * 账户安全
      * @return
      */

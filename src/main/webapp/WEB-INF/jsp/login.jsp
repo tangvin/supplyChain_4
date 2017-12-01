@@ -30,12 +30,12 @@
             <div class="input-group col-xs-12 login-input clearfix">
                 <input id="code" type="text" name="imageCode" class="form-control yzm_con" placeholder="验证码">
                 <div class='yzm_img'>
-                    <img alt="验证码" src="<%=request.getContextPath()%>/imageCode" title="点击更换" id="imgcoode" onclick="getImageCode(this)" style="height:60px;width:128px;"/>
+                    <img alt="验证码" src="<%=request.getContextPath()%>/imageCode" title="点击更换" id="imgcoode" onclick="getImageCode(this)" style="height:40px;width:128px;"/>
                 </div>
             </div>
             <!-- 登录 -->
             <div class="input-group col-xs-12">
-                <input  id="account" type="button" onclick="login()" class="form-control btn btn-danger" value="登录"  style="height: 60px;font-size: 24px;">
+                <input  id="account" type="button" onclick="login()" class="form-control btn btn-danger" value="登录"  style="height: 45px;font-size: 18px;">
             </div>
             <!-- 申请 -->
             <p class="text-right apply_for"><a href='#'>新用户申请</a></p>

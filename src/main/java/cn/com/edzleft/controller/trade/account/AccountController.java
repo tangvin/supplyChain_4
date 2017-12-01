@@ -8,18 +8,13 @@ import cn.com.edzleft.util.MD5;
 import cn.com.edzleft.util.ResultBean;
 import cn.com.edzleft.util.ReturnJson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**
@@ -32,6 +27,12 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
+
+    @RequestMapping(value = "exitAccount")
+    public String exitAccount(HttpSession session){
+        session.invalidate();
+        return "../../index";
+    }
 
 
     /**
@@ -78,10 +79,10 @@ public class AccountController {
         String code = (String)session.getAttribute("imageCode");
         if (account != null && code!=null) {
             //加密后的密码
-           // String encrypt_pwd = MD5.sign(account.getUserPwd());
+            String encryptPwd = MD5.sign(userPwd);
             //数据库查询出来的密码
             String queryPwds=account.getUserPwd();
-                if (queryPwds.equals(userPwd)) {
+                if (queryPwds.equals(encryptPwd)) {
                     if(imageCode.equalsIgnoreCase(code)) {
                         //所有判断均通过，将当前用户存到session
                         sessionInfo.setAdmin(account);

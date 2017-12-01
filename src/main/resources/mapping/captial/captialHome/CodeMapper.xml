@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.captial.homepage.CodeMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Code" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="creat_time" property="creatTime" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, code, creat_time, user_id
+  </sql>
+
+  <select id="selectCode" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from gyl_code
+    where user_id = #{userId,jdbcType=INTEGER}
+    ORDER BY creat_time DESC LIMIT 1
+  </select>
+
+  <insert id="insertCode" parameterType="cn.com.edzleft.entity.Code" >
+    insert into gyl_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="creatTime != null" >
+        creat_time,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

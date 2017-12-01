@@ -21,30 +21,30 @@
     margin-top: 28px;
 }
 .container-logo img{
-    width: 287px;
-    height: 38px;
+    width: 373px;
+    height: 50px;
 }
 .form_div{
-    width: 600px;
-    height: 482px;
+    width: 500px;
+    height: 360px;
     background: #ffffff;
     margin-top: -76px;
     box-shadow: 1px 1px 14px 0px #C7C7C7;
     margin-bottom: 36px;
-    padding-top: 76px;
+    padding-top: 66px;
 }
 .form{
     width: 284px;
 }
 .login-input{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     position: relative;
     border-color: #979797!important;
 
 }
 .login-input input{
-    height: 60px;
-    font-size: 18px;
+    height: 40px;
+    font-size: 14px;
 }
 .img_dw{
     position: absolute;
@@ -57,7 +57,7 @@
 }
 .yzm_con{
     width: 128px!important;
-    height: 60px;
+    height: 40px;
     font-size: 18px;
     float: left;
 }
@@ -65,19 +65,23 @@
 .yzm_img{
     float: right;
     width: 128px;
-    height: 60px;
+    height: 40px;
     display: table-cell;
     vertical-align: middle;
     text-align: center;
     border:1px solid #C7C7C7;
+    cursor:pointer;
 }
 .yzm_img img{
-
     width: 111px;
+    height:38px;
+}
+.login_dl{
+    height: 40px;font-size: 16px;
 }
 .apply_for{
-    font-size:18px;
-    margin-top: 14px;
+    font-size:14px;
+    margin-top: 20px;
 }
 .apply_for a{
     color: #000000;
@@ -147,7 +151,7 @@ body{
     overflow: hidden;
 }
 .index_right{
-    padding: 15px;
+    padding: 10px;
     box-sizing: border-box;
     float: right;
     width:100%;
@@ -421,12 +425,6 @@ body{
 .jbxx_row h5{
     color: #464646;
 }
-.jbxx_row .text-right{
-    padding: 0;
-}
-.jbxx_row button{
-    margin-right:0;
-}
 
 .table_one tbody tr td{
     line-height:30px;
@@ -440,10 +438,15 @@ body{
     color:red;
     margin-left:20px;
 }
-
-.jbxx1{
-    margin-top: 15px;
+.table_one .drzs{
+    color:green;
+    margin-left:20px;
 }
+
+
+/*.jbxx1{*/
+    /*margin-top: 15px;*/
+/*}*/
 
 
 #profile h5{
@@ -775,8 +778,7 @@ body{
 .jbxx_zlbj{
     margin-bottom:20px;
 }
-
-/*!*上传图片*!*/
+/*上传图片*/
 .imgContainer{
     display: inline-block;
     /*width: 32%;*/
@@ -828,9 +830,7 @@ body{
     font-size:30px;
     line-height:50px;
 }
-.sc_btn{
-    margin-left:70px;
-}
+
 
 .glhydw{
     height:30px;
@@ -844,4 +844,38 @@ body{
 }
 .zlbj_textarea{
     width:250px;
+}
+
+.bj_img{
+    width:250px;
+    height:100px
+}
+
+.qyrz_select{
+    width: 200px !important;
+    vertical-align: middle;
+}
+.mys{
+    text-align: left!important;
+}
+.mys img{
+    width:250px;
+    height:100px;
+}
+
+#checkCode{
+    width: 150px !important;
+    margin:0 20px;
+}
+#btnSendCode{
+    width:90px!important;
+    height:30px;
+    margin-left:20px;
+    padding: 2px;
+    font-size: 12px;
+    color: #ffffff;
+    background: #D9534F;
+    border-radius: 5px;
+    outline: none;
+    border: none;
 }

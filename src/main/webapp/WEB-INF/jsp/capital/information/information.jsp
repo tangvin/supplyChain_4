@@ -40,7 +40,7 @@
                                         <h5>基本资料</h5>
                                     </div>
                                     <div class="col-xs-4 text-right">
-                                        <button type="button" class="btn btn-danger">编辑</button>
+                                        <button type="button" class="btn btn-danger" id="updateInformation">编辑</button>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -64,7 +64,15 @@
                                             </tr>
                                             <tr>
                                                 <td>企业名称:</td>
-                                                <td><span>${information.entName}</span><span class="drz">待认证</span></td>
+                                                <td>
+                                                    <span>${information.entName}</span>
+                                                    <c:if test="${information.certificationStatus == 0}">
+                                                        <a href="#"><span class="drz" id="zlrz">待认证</span></a>
+                                                    </c:if>
+                                                    <c:if test="${information.certificationStatus == 1}">
+                                                        <span class="drzs">已认证</span>
+                                                    </c:if>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>社会统一信用代码:</td>
@@ -206,29 +214,31 @@
                         <div class="tab-pane" id="profile">
                             <h5>修改密码</h5>
                             <div class="row">
-                                <div class="col-xs-6">
-                                    <form class="form-horizontal" role="form">
+                                <div class="col-xs-10">
+                                    <form class="form-horizontal" role="form" id ="f">
                                         <div class="form-group">
-                                            <label for="firstname" class="col-xs-4 control-label">原密码</label>
-                                            <div class="col-xs-8">
-                                                <input type="text" class="form-control" id="firstname">
+                                            <label class="col-xs-2 control-label">验证码</label>
+                                            <div class="col-xs-8 senCode">
+                                                <%--<input type="text" class="form-control col-xs-4" id="phone" name="phone" placeholder="输入手机号">--%>
+                                                <input type="text" id="senCode" placeholder="输入验证码" class="form-control col-xs-4" name="senCode" size="6"/>
+                                                <input id="btnSendCode" type="button" value="发送验证码" onclick="sendMessage()" />
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="lastname" class="col-xs-4 control-label">新密码</label>
+                                            <label for="newpwd" class="col-xs-2 control-label">新密码</label>
                                             <div class="col-xs-8">
-                                                <input type="text" class="form-control" id="lastname">
+                                                <input type="password" class="form-control" id="newpwd" name="newpwd">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="lastname" class="col-xs-4 control-label">确认密码</label>
+                                            <label for="confirm" class="col-xs-2 control-label">确认密码</label>
                                             <div class="col-xs-8">
-                                                <input type="text" class="form-control" id="lastname1">
+                                                <input type="password" class="form-control" id="confirm" name="confirm">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-xs-offset-4 col-xs-8">
-                                                <button type="button" class="btn  btn-danger aq_qr_but">确认</button>
+                                            <div class="col-xs-offset-3 col-xs-8">
+                                                <button type="button" class="btn  btn-danger aq_qr_but" id="upda">确认</button>
                                             </div>
                                         </div>
 
@@ -241,132 +251,23 @@
                         <div class="tab-pane" id="settings">
                             <!--三方账户 开户行开始-->
                             <div class="khh sfzh">
-                                <form class="form-inline khh_form khh_form1">
+                                <form class="form-inline khh_form khh_form1" id="informationForm">
                                     <div class="form-group form-group1">
-                                        <label for="exampleInputName2">开户行</label>
-                                        <input type="text" class="form-control" id="exampleInputName2">
+                                        <label for="tripartiteDepositBank">开户行</label>
+                                        <input type="text" class="form-control" name="tripartiteDepositBank" id="tripartiteDepositBank">
                                     </div>
                                     <div class="form-group form-group1">
-                                        <label for="exampleInputEmail2">户主</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail2">
+                                        <label for="tripartiteCreditHolderPurchaser">户主</label>
+                                        <input type="email" class="form-control" name="tripartiteCreditHolderPurchaser" id="tripartiteCreditHolderPurchaser">
                                     </div>
-                                    <button type="button" class="btn  btn-danger">查询</button>
-                                    <button type="button" class="btn  btn-default">重置</button>
+                                    <button type="button" class="btn  btn-danger" onclick="search()">查询</button>
+                                    <button type="button" class="btn  btn-default" onclick="reset()">重置</button>
                                 </form>
                             </div>
                             <!--三方账户 开户行结束-->
                             <!--三方账户 分页开始-->
-                            <div class="fy">
-                                <div class="row fy_row">
-                                    <div class="col-xs-4">
-                                        <p class="fy_con">共计3条数据，共1页</p>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination">
-                                                <li>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">首页</span>
-                                                    </a>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                                <li><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li>
-                                                    <a href="#" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">末页</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--三方账户 分页结束-->
-                            <!--三方账户 表格开始-->
-                            <div class="table-responsive text-center">
-                                <table class="table table-bordered text-center">
-                                    <tbody>
-                                    <tr class="active">
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!--三方账户 表格结束-->
-                            <!--三方账户 分页开始-->
-                            <div class="fy">
-                                <div class="row fy_row">
-                                    <div class="col-xs-4">
-                                        <p class="fy_con">共计3条数据，共1页</p>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination">
-                                                <li>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">首页</span>
-                                                    </a>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                                <li><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li>
-                                                    <a href="#" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">末页</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
+                            <div class="panel-body" style="padding-bottom:0px;">
+                                <table id="incormationTable" class="cj_table"></table>
                             </div>
                             <!--三方账户 分页结束-->
                         </div>
@@ -391,6 +292,62 @@
         $(this).tab('show');
     })
 
+    $('#updateInformation').click(function(){
+        $('#load').load('<%=request.getContextPath()%>/captialMain/updateInformation.action')
+    })
+    $('#zlrz').click(function(){
+        $('#load').load('<%=request.getContextPath()%>/captialMain/zlrz.action')
+    })
+
+    var InterValObj; //timer变量，控制时间
+    var count = 60; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+    var code = ""; //验证码
+    var codeLength = 6;//验证码长度
+    function sendMessage() {
+        curCount = count;
+        var phone=$("#phone").val();//手机号码
+        var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;
+//        if(phone == ""){
+//            alert("手机号码不能为空！");
+//        }else if(phone.length !=11){
+//            alert('请输入有效的手机号码');
+//        }else if(!myreg.test(phone)){
+//            alert('请输入有效的手机号码11');
+//        } else{
+            //产生验证码
+//            for (var i = 0; i < codeLength; i++) {
+//                code += parseInt(Math.random() * 9).toString();
+//            }
+            //设置button效果，开始计时
+            $("#btnSendCode").attr("disabled", "true");
+            $("#btnSendCode").val( + curCount + "秒");
+            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+            //向后台发送处理数据
+            $.ajax({
+                type: "POST", //用POST方式传输
+                dataType: "text", //数据格式:JSON
+                url: '<%=request.getContextPath()%>/captialHomes/sendMsg.action', //目标地址
+//                data: "phone=" + phone + "&code=" + code,
+                error: function (XMLHttpRequest, textStatus, errorThrown) { },
+                success: function (msg){ }
+            });
+//        }
+    }
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $("#btnSendCode").removeAttr("disabled");//启用按钮
+            $("#btnSendCode").val("重新发送验证码");
+            code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效
+        }
+        else {
+            curCount--;
+            $("#btnSendCode").val( curCount + "秒");
+        }
+    }
+
     console.log('${messages}')
     switch ('${messages}'){
         case 'profile':
@@ -404,10 +361,75 @@
             break;
     }
 
-//    $(function (){
-//        initComplexArea('seachprov', 'seachcity', 'seachdistrict', area_array, sub_array, '44', '0', '0');
-//    });
 
+    $(function() {
+        $("#upda").click(function () {
+            $.ajax({
+                url: "<%=request.getContextPath()%>/password/changePwd.action",
+                type: 'post',
+                data: $("#f").serialize(),
+                dataType: "json",
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        });
+    })
+
+    //授信分页查询
+    $(function(){
+        $("#incormationTable").bootstrapTable({
+            columns:[
+                { //field: 'Number',//可不加
+                    title: '序号',//标题  可不加
+                    width:100,
+                    formatter: function (value, row, index) {
+                        return index+1;
+                    }
+                },
+                {field:'tripartiteDepositBank',title:'开户行',width:100},
+                {field:'tripartiteCreditHolderPurchaser',title:'户主（采购方）',width:100},
+                {field:'tripartiteAccountNumber',title:'账号',width:100},
+                {field:'tripartiteBalance',title:'余额（元）',width:100},
+                {field:'tripartiteAvailableBalance',title:'可用余额（元）',width:100},
+                {field:'tripartiteAccountOpentime',title:'账号开通时间',width:100},
+                {field:'tripartiteAccountOpenpeople',title:'账号开通人',width:100},
+                {field:'tripartiteAmountCreateTime',title:'创建时间',width:100},
+                {field:'tripartiteAmountCreatePeople',title:'创建人',width:100}
+            ],
+            url:'<%=request.getContextPath()%>/captialTripartite/tripartiteSelect.action',
+            method:'post',
+            queryParamsType:'',
+            queryParams: queryParams,//传递参数（*）
+            //【其它设置】
+            locale:'zh-CN',//中文支持
+            pagination: true,//是否开启分页（*）
+            pageNumber:1,//初始化加载第一页，默认第一页
+            pageSize: 3,//每页的记录行数（*）
+            sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+            //发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}
+            contentType:'application/x-www-form-urlencoded;charset=UTF-8'   //数据编码纯文本  offset=0&limit=5
+        });
+    });
+    //得到查询的参数
+    function queryParams (params) {
+        var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            pageNumber: params.pageNumber,
+            pageSize: params.pageSize,
+            tripartiteDepositBank:$("#tripartiteDepositBank").val(),
+            tripartiteCreditHolderPurchaser:$("#tripartiteCreditHolderPurchaser").val()
+        };
+        return temp;
+    }
+    //搜索
+    function search(){
+        $("#incormationTable").bootstrapTable('refresh');
+    }
+    //重置查询
+    function reset(){
+        $("#informationForm").form('reset');
+        crownSearch();
+    }
 
 </script>
 

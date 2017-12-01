@@ -34,7 +34,7 @@
                             </p>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                 <li class='text-center' id="one"><a href="#">资料维护</a></li>
-                                <li class='text-center'><a href="#">退出登录</a></li>
+                                <li class='text-center'><a href="<%=request.getContextPath()%>/account/exitAccount.action">退出登录</a></li>
                             </ul>
                         </div>
                     </li>

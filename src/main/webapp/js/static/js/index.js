@@ -86,6 +86,9 @@ $(function(){
     $('#hkgl3').click(function(){
         $('#load').load(projectName+'/captialMain/hkgl.action')
     })
+    // $('#exit3').click(function(){
+    //     $('#load').load(projectName+'/account/exitAccount.action')
+    // })
 })
 
 

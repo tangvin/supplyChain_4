@@ -14,6 +14,25 @@ public class MainsController {
 
 
     /**
+     * 认证资料
+     * @return
+     */
+    @RequestMapping(value = "zlrz")
+    public String zlrz(){
+        return "trade/information/attestation";
+    }
+
+    /**
+     * 资料编辑
+     * @return
+     */
+    @RequestMapping(value = "updateInformation")
+    public String updateInformation(){
+        return "trade/information/updateInformation";
+    }
+
+
+    /**
      * 账户安全
      * @return
      */

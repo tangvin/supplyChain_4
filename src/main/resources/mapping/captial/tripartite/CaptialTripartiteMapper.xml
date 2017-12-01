@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.captial.tripartite.CaptialTripartiteMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Tripartite" >
+    <id column="tripartite_id" property="tripartiteId" jdbcType="INTEGER" />
+    <result column="tripartite_deposit_bank" property="tripartiteDepositBank" jdbcType="VARCHAR" />
+    <result column="tripartite_credit_holder_trade" property="tripartiteCreditHolderTrade" jdbcType="VARCHAR" />
+    <result column="tripartite_credit_holder_purchaser" property="tripartiteCreditHolderPurchaser" jdbcType="VARCHAR" />
+    <result column="tripartite_credit_holder_capital" property="tripartiteCreditHolderCapital" jdbcType="VARCHAR" />
+    <result column="tripartite_account_number" property="tripartiteAccountNumber" jdbcType="VARCHAR" />
+    <result column="tripartite_account_opentime" property="tripartiteAccountOpentime" jdbcType="TIMESTAMP" />
+    <result column="tripartite_account_openpeople" property="tripartiteAccountOpenpeople" jdbcType="VARCHAR" />
+    <result column="tripartite_balance" property="tripartiteBalance" jdbcType="INTEGER" />
+    <result column="tripartite_available_balance" property="tripartiteAvailableBalance" jdbcType="INTEGER" />
+    <result column="tripartite_amount_create_time" property="tripartiteAmountCreateTime" jdbcType="TIMESTAMP" />
+    <result column="tripartite_amount_create_people" property="tripartiteAmountCreatePeople" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tripartite_id, tripartite_deposit_bank, tripartite_credit_holder_trade, tripartite_credit_holder_purchaser, 
+    tripartite_credit_holder_capital, tripartite_account_number, tripartite_account_opentime, 
+    tripartite_account_openpeople, tripartite_balance, tripartite_available_balance, 
+    tripartite_amount_create_time, tripartite_amount_create_people
+  </sql>
+
+
+  <!--条件查询-->
+  <sql id="where_sql">
+    <trim prefix="where" prefixOverrides="and">
+      <if test="whereMap != null &amp;&amp; whereMap.tripartiteCreditHolderPurchaser != null and whereMap.tripartiteCreditHolderPurchaser != ''">
+        AND tripartite_credit_holder_purchaser  LIKE '%${whereMap.tripartiteCreditHolderPurchaser}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.tripartiteDepositBank != null and whereMap.tripartiteDepositBank != ''">
+        AND tripartite_deposit_bank  LIKE '%${whereMap.tripartiteDepositBank}%'
+      </if>
+      <!--<if test="whereMap != null &amp;&amp; whereMap.creatTime != null and whereMap.creatTime != ''">-->
+      <!--AND creat_time &gt;= '${whereMap.creatTime}'-->
+      <!--</if>-->
+      <!--<if test="whereMap != null &amp;&amp; whereMap.endTime != null and whereMap.endTime != ''">-->
+      <!--AND end_Time &lt;= '${whereMap.endTime}'-->
+      <!--</if>-->
+    </trim>
+  </sql>
+
+  <!--查询总条数-->
+  <select id="getTripartiteSelectCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select count(*) from gyl_tripartite <include refid="where_sql"/>
+  </select>
+
+  <!--分页查询-->
+  <select id="getTripartiteSelectList"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select
+    <include refid="Base_Column_List" />
+    from gyl_tripartite
+    <include refid="where_sql"/>
+    ORDER BY tripartite_amount_create_time  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select>
+
+</mapper>

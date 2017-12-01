@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 
 /**
@@ -36,7 +38,17 @@ public class CaptialLetterController {
      */
     @RequestMapping(value = "/letterSelect",method = RequestMethod.POST)
     @ResponseBody
-    public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String letterNumber,String belongCredit,String letterStatus,String applicant){
+    public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String letterNumber,String belongCredit,String letterStatus,String applicant,
+    HttpServletRequest request, HttpServletResponse response){
+
+        response.setContentType("text/plain");
+        response.setHeader("Pragma", "No-cache");
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        response.setHeader("Access-Control-Allow-Origin", "*");//添加跨域访问
+        String jsonpCallback = request.getParameter("jsonpCallback");
+
         PageUtil<Letter> userPage = new PageUtil<>();
         HashMap<String,Object> whereMaps =new HashMap<>();
         whereMaps.put("letterNumber",letterNumber);

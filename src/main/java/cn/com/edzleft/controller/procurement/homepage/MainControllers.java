@@ -11,7 +11,23 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value="procurementMain")
 public class MainControllers {
 
+    /**
+     * 认证资料
+     * @return
+     */
+    @RequestMapping(value = "zlrz")
+    public String zlrz(){
+        return "procurement/information/attestation";
+    }
 
+    /**
+     * 资料编辑
+     * @return
+     */
+    @RequestMapping(value = "updateInformation")
+    public String updateInformation(){
+        return "procurement/information/updateInformation";
+    }
 
     /**
      * 账户安全

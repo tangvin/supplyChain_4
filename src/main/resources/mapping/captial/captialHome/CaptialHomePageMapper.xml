@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.captial.homepage.CaptialHomePageMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Information" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ent_identity" property="entIdentity" jdbcType="INTEGER" />
+    <result column="ent_name" property="entName" jdbcType="VARCHAR" />
+    <result column="ent_document_type" property="entDocumentType" jdbcType="INTEGER" />
+    <result column="ent_credit_code" property="entCreditCode" jdbcType="VARCHAR" />
+    <result column="registration_number" property="registrationNumber" jdbcType="VARCHAR" />
+    <result column="tax_registration_number" property="taxRegistrationNumber" jdbcType="VARCHAR" />
+    <result column="institution_code" property="institutionCode" jdbcType="VARCHAR" />
+    <result column="representative" property="representative" jdbcType="VARCHAR" />
+    <result column="representative_type" property="representativeType" jdbcType="INTEGER" />
+    <result column="representative_num" property="representativeNum" jdbcType="INTEGER" />
+    <result column="registered_capital" property="registeredCapital" jdbcType="INTEGER" />
+    <result column="major_shareholder" property="majorShareholder" jdbcType="VARCHAR" />
+    <result column="business_scope" property="businessScope" jdbcType="VARCHAR" />
+    <result column="registration_authority" property="registrationAuthority" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="municipality" property="municipality" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="county" property="county" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="business_contact" property="businessContact" jdbcType="VARCHAR" />
+    <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+    <result column="email_address" property="emailAddress" jdbcType="VARCHAR" />
+    <result column="zip_code" property="zipCode" jdbcType="INTEGER" />
+    <result column="web_site" property="webSite" jdbcType="VARCHAR" />
+    <result column="code_file" property="codeFile" jdbcType="VARCHAR" />
+    <result column="business_license" property="businessLicense" jdbcType="VARCHAR" />
+    <result column="electronic_file" property="electronicFile" jdbcType="VARCHAR" />
+    <result column="person_idcard" property="personIdcard" jdbcType="VARCHAR" />
+    <result column="tax_number" property="taxNumber" jdbcType="INTEGER" />
+    <result column="open_account_file" property="openAccountFile" jdbcType="VARCHAR" />
+    <result column="financial_file" property="financialFile" jdbcType="VARCHAR" />
+    <result column="organization_electronic_file" property="organizationElectronicFile" jdbcType="VARCHAR" />
+    <result column="account_id" property="accountId" jdbcType="INTEGER" />
+    <result column="ent_logo" property="entLogo" jdbcType="VARCHAR" />
+    <result column="certification_status" property="certificationStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ent_identity, ent_name, ent_document_type, ent_credit_code, registration_number, 
+    tax_registration_number, institution_code, representative, representative_type, representative_num, 
+    registered_capital, major_shareholder, business_scope, registration_authority, telephone, 
+    municipality, city, county, address, business_contact, mobile_phone, email_address, 
+    zip_code, web_site, code_file, business_license, electronic_file, person_idcard, 
+    tax_number, open_account_file, financial_file, organization_electronic_file, account_id, 
+    ent_logo, certification_status
+  </sql>
+
+  <select id="homePageSelect" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from gyl_information
+    where account_id = #{userId,jdbcType=INTEGER}
+  </select>
+<!--修改基本资料-->
+  <update id="updateInformation" parameterType="cn.com.edzleft.entity.Information" >
+    update gyl_information
+    <set >
+      <if test="entIdentity != null" >
+        ent_identity = #{entIdentity,jdbcType=INTEGER},
+      </if>
+      <if test="entName != null" >
+        ent_name = #{entName,jdbcType=VARCHAR},
+      </if>
+      <if test="entDocumentType != null" >
+        ent_document_type = #{entDocumentType,jdbcType=INTEGER},
+      </if>
+      <if test="entCreditCode != null" >
+        ent_credit_code = #{entCreditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationNumber != null" >
+        registration_number = #{registrationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegistrationNumber != null" >
+        tax_registration_number = #{taxRegistrationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="institutionCode != null" >
+        institution_code = #{institutionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="representative != null" >
+        representative = #{representative,jdbcType=VARCHAR},
+      </if>
+      <if test="representativeType != null" >
+        representative_type = #{representativeType,jdbcType=INTEGER},
+      </if>
+      <if test="representativeNum != null" >
+        representative_num = #{representativeNum,jdbcType=INTEGER},
+      </if>
+      <if test="registeredCapital != null" >
+        registered_capital = #{registeredCapital,jdbcType=INTEGER},
+      </if>
+      <if test="majorShareholder != null" >
+        major_shareholder = #{majorShareholder,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScope != null" >
+        business_scope = #{businessScope,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationAuthority != null" >
+        registration_authority = #{registrationAuthority,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="municipality != null" >
+        municipality = #{municipality,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        county = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="businessContact != null" >
+        business_contact = #{businessContact,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="emailAddress != null" >
+        email_address = #{emailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        zip_code = #{zipCode,jdbcType=INTEGER},
+      </if>
+      <if test="webSite != null" >
+        web_site = #{webSite,jdbcType=VARCHAR},
+      </if>
+      <if test="codeFile != null" >
+        code_file = #{codeFile,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicense != null" >
+        business_license = #{businessLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="electronicFile != null" >
+        electronic_file = #{electronicFile,jdbcType=VARCHAR},
+      </if>
+      <if test="personIdcard != null" >
+        person_idcard = #{personIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNumber != null" >
+        tax_number = #{taxNumber,jdbcType=INTEGER},
+      </if>
+      <if test="openAccountFile != null" >
+        open_account_file = #{openAccountFile,jdbcType=VARCHAR},
+      </if>
+      <if test="financialFile != null" >
+        financial_file = #{financialFile,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationElectronicFile != null" >
+        organization_electronic_file = #{organizationElectronicFile,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="entLogo != null" >
+        ent_logo = #{entLogo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
