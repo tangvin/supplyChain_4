@@ -18,133 +18,131 @@
         <div class="col-xs-12">
             <!--合同签约 状态-->
             <div class="khh">
-                <form class="form-inline khh_form khh_form1">
+                <form class="form-inline khh_form khh_form1" id="ukeyForm">
                     <div class="form-group">
-                        <label>颁发人</label>
-                        <input type="text" class="form-control">
+                        <label for="issuedPeoples">颁发人</label>
+                        <input type="text" class="form-control" id="issuedPeoples">
                     </div>
                     <div class="form-group">
-                        <label>状态</label>
-                        <input type="text" class="form-control">
+                        <label for="ukeyStatuss">状态</label>
+                        <select class="form-control select" id="ukeyStatuss">
+                            <option value="">全部</option>
+                            <option value="0">正常</option>
+                            <option value="1">失效</option>
+                        </select>
                     </div>
-                    <button type="button" class="btn btn-danger btn-default">查询</button>
-                    <button type="button" class="btn btn-danger btn-default">重置</button>
+                    <button type="button" class="btn btn-danger btn-default" onclick="ukeySearch()">查询</button>
+                    <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
                 </form>
             </div>
-            <!--合同签约 状态-->
-            <!--合同分页 start-->
-            <div class="fy">
-                <div class="row fy_row">
-                    <div class="col-xs-4">
-                        <p class="fy_con">共计3条数据，共1页</p>
-                    </div>
-                    <div class="col-xs-6">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">首页</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">末页</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-xs-2 text-right sqbf_btn">
-                        <button type="button" class="btn btn-danger btn-default">申请颁发</button>
-                    </div>
-                </div>
+            <div></div>
+            <div class="col-xs-2 text-right sqbf_btn" style="float:right">
+        	<button type="button" id="apply" class="btn btn-danger btn-default">申请颁发</button>
+       		</div>
+            <!--ukey表格 开始-->
+            <div class="panel-body" style="padding-bottom:0px;">
+            	<table id="tb_ukey" class="cj_table"></table>
             </div>
-            <!--合同分页 eng-->
-            <!--合同表格 开始-->
-            <div class="table-responsive text-center">
-                <table class="table table-bordered text-center htbg fpgl">
-                    <tbody>
-                    <tr class="active">
-                        <td>序号</td>
-                        <td>类型</td>
-                        <td>颁发人</td>
-                        <td>颁发时间</td>
-                        <td>状态</td>
-                        <td>操作</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>--</td>
-                        <td>平台名称</td>
-                        <td>2017-12-28 19:20:39</td>
-                        <td>正常</td>
-                        <td>证书名一</td>
-                    </tr>
-                    <tr>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                    </tr>
-                    <tr>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!--合同表格 结束-->
-            <!--合同分页 start-->
-            <div class="fy">
-                <div class="row fy_row">
-                    <div class="col-xs-4">
-                        <p class="fy_con">共计3条数据，共1页</p>
-                    </div>
-                    <div class="col-xs-8">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">首页</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">末页</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <!--合同分页 eng-->
+            <!--ukey表格 结束-->
+            <!--分页 start-->
+            
+            <!--分页 end-->
         </div>
+        
+        
+        
     </div>
 </div>
 </body>
 <script>
+$(function(){
+	apply();
+    $("#tb_ukey").bootstrapTable({
+        columns:[
+            { //field: 'Number',//可不加
+                title: '序号',//标题  可不加
+                width:100,
+                formatter: function (value, row, index) {
+                    return index+1;
+                }
+            },
+            {field:'ukeyType',title:'类型',width:100},
+            {field:'issuedPeople',title:'颁发人',width:100},
+            {field:'issuedTime',title:'颁发时间',width:100},
+            {field:'ukeyStatus',title:'状态',width:100,
+                formatter: function(value,row,index){
+                    if(value == '0') {
+                        return "正常";
+                    } else if(value == '1') {
+                        return "失效";
+                    }
+                } 
+            },{field:'attachmentName',title:'文件名',width:100}/* ,
+            {field:'attachmentUrl',title:'操作',width:100} */
+        ],
+        url:'<%=request.getContextPath()%>/tracertificate/ukeyList.action',
+							method : 'post',
+							queryParamsType : '',
+							queryParams : queryParams,//传递参数（*）
+							//【其它设置】
+							locale : 'zh-CN',//中文支持
+							pagination : true,//是否开启分页（*）
+							pageNumber : 1,//初始化加载第一页，默认第一页
+							pageSize : 3,//每页的记录行数（*）
+							sidePagination : "server", //分页方式：client客户端分页，server服务端分页（*）
+							//发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}
+							contentType : 'application/x-www-form-urlencoded;charset=UTF-8' //数据编码纯文本  offset=0&limit=5
+						});
+    
+    
+	});
+	//得到查询的参数
+	function queryParams(params) {
+		
+		<%-- var userId=<%=((cn.com.edzleft.entity.SessionInfo) session.getAttribute("sessionInfo")).getAdmin().getUserId() %> --%>
+		var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+			pageNumber : params.pageNumber,
+			pageSize : params.pageSize,
+			//userId : userId,
+			issuedPeople : $("#issuedPeoples").val(),
+			ukeyStatus : $("#ukeyStatuss").val()
+		}
+		return temp;
+	};
+	//授信搜索
+	function ukeySearch() {
+		$("#tb_ukey").bootstrapTable('refresh');
+	}
+	//授信重置查询
+	function reset() {
+		$("#ukeyForm").form('reset');
+		ukeySearch();
+	}
+	//申请按钮加载
+	function apply() {
+		$.ajax({
+			url:'<%=request.getContextPath()%>/tracertificate/getByUserId.action',
+			type:'post',
+			success:function(data){
+				//总条数为0，显示按钮
+				 if(data.count==0){
+					$("#apply").show();
+				}else{
+					$("#apply").hide();
+				} 
+				//证书状态有正常的隐藏按钮
+				$.each(data.uList,function(index,obj){
+					if(0==obj.ukeyStatus){
+						$("#apply").hide();
+					}else {
+						$("#apply").show();
+					}
+				});
+			}
+		})
+		
+		
+		
+	}
 </script>
 </html>
