@@ -23,11 +23,25 @@ public class Ukey {
     /**
      * key及证书的状态
      */
-    private String ukeyStatus;
+    private Integer ukeyStatus;
     /**
      * ukey及证书名字
      */
-    private String ukeyFilename;
+    private Integer ukeyFilename;
+
+    /**
+     *
+     * @return
+     */
+    private Integer userId;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getUkeyId() {
         return ukeyId;
@@ -61,20 +75,20 @@ public class Ukey {
         this.issuedTime = issuedTime;
     }
 
-    public String getUkeyStatus() {
+    public Integer getUkeyStatus() {
         return ukeyStatus;
     }
 
-    public void setUkeyStatus(String ukeyStatus) {
-        this.ukeyStatus = ukeyStatus == null ? null : ukeyStatus.trim();
+    public void setUkeyStatus(Integer ukeyStatus) {
+        this.ukeyStatus = ukeyStatus == null ? null : ukeyStatus;
     }
 
-    public String getUkeyFilename() {
+    public Integer getUkeyFilename() {
         return ukeyFilename;
     }
 
-    public void setUkeyFilename(String ukeyFilename) {
-        this.ukeyFilename = ukeyFilename == null ? null : ukeyFilename.trim();
+    public void setUkeyFilename(Integer ukeyFilename) {
+        this.ukeyFilename = ukeyFilename == null ? null : ukeyFilename;
     }
 
     @Override
@@ -89,6 +103,7 @@ public class Ukey {
         if (issuedPeople != null ? !issuedPeople.equals(ukey.issuedPeople) : ukey.issuedPeople != null) return false;
         if (issuedTime != null ? !issuedTime.equals(ukey.issuedTime) : ukey.issuedTime != null) return false;
         if (ukeyStatus != null ? !ukeyStatus.equals(ukey.ukeyStatus) : ukey.ukeyStatus != null) return false;
+        if (userId != null ? !userId.equals(ukey.userId) : ukey.userId != null) return false;
         return ukeyFilename != null ? ukeyFilename.equals(ukey.ukeyFilename) : ukey.ukeyFilename == null;
     }
 
@@ -100,6 +115,7 @@ public class Ukey {
         result = 31 * result + (issuedTime != null ? issuedTime.hashCode() : 0);
         result = 31 * result + (ukeyStatus != null ? ukeyStatus.hashCode() : 0);
         result = 31 * result + (ukeyFilename != null ? ukeyFilename.hashCode() : 0);
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
         return result;
     }
 
@@ -112,6 +128,7 @@ public class Ukey {
                 ", issuedTime=" + issuedTime +
                 ", ukeyStatus='" + ukeyStatus + '\'' +
                 ", ukeyFilename='" + ukeyFilename + '\'' +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 }

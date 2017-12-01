@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+
 /**
  * Created by ibmtech on 2017/11/20.
  */
@@ -22,18 +24,34 @@ public class TradeLetterController {
 
 
     /**
-     * 条件查询+分页显示
+     *用信管理
+     * @param pageNumber 开始页数
+     * @param pageSize  每页显示条数
+     * @param letterNumber 用信编号
+     * @param belongCredit 所属授信
+     * @param letterStatus 用信状态
+     * @param applicant 申请人
+     * @return
      */
     @RequestMapping(value = "/queryByPage" ,method = RequestMethod.POST)
     @ResponseBody
-    public DataGridJson getLetterByPage(int page, int rows, PageUtil<Letter> pageUtil){
+    public DataGridJson getLetterByPage(Integer pageNumber,Integer pageSize ,String letterNumber,String belongCredit,String letterStatus,String applicant){
+        PageUtil<Letter> pageUtil = new PageUtil<Letter>();
+
+        HashMap<String,Object> whereMaps =new HashMap<>();
+        whereMaps.put("letterNumber",letterNumber);
+        whereMaps.put("belongCredit",belongCredit);
+        whereMaps.put("letterStatus",letterStatus);
+        whereMaps.put("applicant",applicant);
+
         DataGridJson dgj = new DataGridJson();
-        //分页对象
-        pageUtil.setCpage(page);
-        pageUtil.setPageSize(rows);
-        PageUtil<Letter> letters = letterService.queryAllLetterByPage(pageUtil);
-        dgj.setTotal(letters.getTotalCount());
-        dgj.setRows(letters.getList());
+        pageUtil.setCpage(pageNumber);
+        pageUtil.setPageSize(pageSize);
+        pageUtil.setWhereMap(whereMaps);
+
+        pageUtil = letterService.queryAllLetterByPage(pageUtil);
+        dgj.setTotal(pageUtil.getTotalCount());
+        dgj.setRows(pageUtil.getList());
         return dgj;
     }
 

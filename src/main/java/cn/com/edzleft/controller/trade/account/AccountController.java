@@ -1,8 +1,10 @@
 package cn.com.edzleft.controller.trade.account;
 
 import cn.com.edzleft.entity.Account;
+import cn.com.edzleft.entity.Information;
 import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.trade.account.AccountService;
+import cn.com.edzleft.service.trade.information.TradeInformationService;
 import cn.com.edzleft.util.ConfigUtil;
 import cn.com.edzleft.util.MD5;
 import cn.com.edzleft.util.ResultBean;
@@ -31,6 +33,7 @@ public class AccountController {
 
     @Autowired
     private AccountService accountService;
+    private TradeInformationService tradeInformationService;
 
 
 
@@ -73,7 +76,7 @@ public class AccountController {
         SessionInfo sessionInfo = new SessionInfo();
         ReturnJson rj = new ReturnJson();
         Account account = accountService.queryAccountByName(userName);
-        System.out.println(account);
+       // System.out.println(account);
         //从页面获取验证码
         String code = (String)session.getAttribute("imageCode");
         if (account != null && code!=null) {
@@ -92,6 +95,12 @@ public class AccountController {
                           rj.setMsg("对");
                           rj.setType(0);
                         } else if (account.getAccountType() == 1) {
+                           /*
+                            Integer userId = sessionInfo.getAccount().getUserId();
+                            Information information = tradeInformationService.queryBaseInformation(userId);
+                            sessionInfo.setInformation(information);
+                            request.getSession().setAttribute(ConfigUtil.getSessionInfoName(),sessionInfo);
+                            */
                             rj.setSuccess(true);
                             rj.setType(1);
                         } else if (account.getAccountType() == 2) {

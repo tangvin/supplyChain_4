@@ -75,12 +75,12 @@
 //    $(function () {
         //判断用户输入的账号和密码
         $("#account").click(function () {
-            var a=$("#name").val();
-            var b=$("#pwd").val();
-            var c=$("#code").val();
-            console.log(a);
-            console.log(b);
-            console.log(c);
+                var a=$("#name").val();
+                var b=$("#pwd").val();
+                var c=$("#code").val();
+                console.log(a);
+                console.log(b);
+                console.log(c);
             if(a==""||b==""){  //判断输入的账号密码是否为空
                 alert("账号和密码不能为空");
                 return false;
@@ -97,7 +97,7 @@
                                 window.location.href="<%=request.getContextPath()%>/account/loginProcurement.action"
                             }else if(date.type==1){
                                 //贸易方页面
-                                window.location.href="<%=request.getContextPath()%>/account/loginTrade.action"
+                                window.location.href="<%=request.getContextPath()%>/tradeMain/tradeMain.action"
                             }else if(date.type==2){
                                 //资金方页面
                                 window.location.href="<%=request.getContextPath()%>/account/loginCapital.action"

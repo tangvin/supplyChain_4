@@ -24,12 +24,13 @@
                         <img src="<%=request.getContextPath()%>/js/static/images/message1@1x.png" />
                     </li>
                     <li class="navbar-text">
-                        中精众和投资管理有限公司
+                        <%--中精众和投资管理有限公司--%>
+                            ${information.entName}
                     </li>
                     <li>
                         <div class="dropdown">
                             <p class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                                Dropdown
+                                Dropdown(下拉)
                                 <span class="caret"></span>
                             </p>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -112,7 +113,7 @@
                         <div class='col-xs-6'>
                             <ul class="nav zjzh_title">
                                 <li class='col-xs-8'>
-                                    <h3>中精众和投资管理有限公司</h3>
+                                    <h3><%--中精众和投资管理有限公司--%>${information.entName}</h3>
                                 </li>
                                 <li class='col-xs-1 zjzh_logo_sm'>
                                     <img src='<%=request.getContextPath()%>/js/static/images/identify1@1x.png'>
@@ -130,9 +131,9 @@
                                 <div class='col-xs-8'>
                                     <ul class='nav zjzh_list'>
                                         <li>企业信用评级:</li>
-                                        <li>地址：北京市海淀区中关村大街12号盘古大厦五层</li>
-                                        <li>固定电话：010-88668800-888</li>
-                                        <li>管理员姓名：王梦海</li>
+                                        <li>地址：${information.municipality}${information.city}${information.county}${information.address}</li>
+                                        <li>固定电话：${information.telephone}</li>
+                                        <li>管理员姓名：${information.businessContact}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -142,7 +143,7 @@
                             <div class='zjzh_button'>
                                 <a id="zhanghu" href="#"><button type="button" class="btn btn1 btn-danger">账号安全</button></a>
                                 <a id="ziliao" href="#"><button type="button" class="btn  btn-danger">基础资料</button></a>
-                                <a id="zijin" href="#"><button type="button" class="btn  btn-danger btnn">资金帐户</button>
+                                <a id="zijin" href="#"><button type="button" class="btn  btn-danger btnn">资金帐户</button></a>
                             </div>
                         </div>
                     </div>
