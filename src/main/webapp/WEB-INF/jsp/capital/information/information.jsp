@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -51,14 +51,14 @@
                                                 <td>企业身份:</td>
                                                 <td>
                                                     <%--0采购方、1贸易方、2资方--%>
-                                                <c:if test="${information.entIdentity == 0}">
-                                                    采购方
+                                                <c:if test="${information.entIdentity == 0}">采购方
+                                                    
                                                 </c:if>
-                                                <c:if test="${information.entIdentity == 1}">
-                                                    贸易方
+                                                <c:if test="${information.entIdentity == 1}">贸易方
+                                                   
                                                 </c:if>
-                                                <c:if test="${information.entIdentity == 2}">
-                                                    资方
+                                                <c:if test="${information.entIdentity == 2}">资方
+                                                  
                                                 </c:if>
                                                 </td>
                                             </tr>

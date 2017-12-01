@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.procurement.tradefinance.PmTradeFinanceMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.TradeFinance" >
+    <id column="financial_id" property="financialId" jdbcType="INTEGER" />
+    <result column="financial_numbers" property="financialNumbers" jdbcType="VARCHAR" />
+    <result column="financial_type" property="financialType" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DOUBLE" />
+    <result column="payer" property="payer" jdbcType="VARCHAR" />
+    <result column="receiving_side" property="receivingSide" jdbcType="VARCHAR" />
+    <result column="belong_order" property="belongOrder" jdbcType="VARCHAR" />
+    <result column="bill_time" property="billTime" jdbcType="TIMESTAMP" />
+    <result column="bank_card_account_type" property="bankcardaccounttype" jdbcType="VARCHAR" />
+    <result column="bank_card_account" property="bankcardaccount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    financial_id, financial_numbers, financial_type, amount, payer, receiving_side, belong_order, 
+    bill_time,bank_card_account_type,bank_card_account
+  </sql>
+  
+  <!--条件查询-->
+  <sql id="where_sql">
+    <trim prefix="where" prefixOverrides="and">
+      <if test="whereMap != null &amp;&amp; whereMap.financialType != null and whereMap.financialType != ''">
+        AND financial_type  LIKE '%${whereMap.financialType}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.billTime != null and whereMap.billTime != ''">
+        AND bill_time  LIKE '%${whereMap.billTime}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.payer != null and whereMap.payer != ''">
+        AND payer  LIKE '%${whereMap.payer}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.bankcardaccount != null and whereMap.bankcardaccount != ''">
+        AND bank_card_account  LIKE '%${whereMap.bankcardaccount}%'
+      </if>
+    </trim>
+  </sql>
+
+  <!--查询总条数-->
+  <select id="getTradeEntityCounts"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select count(*) from gyl_trade_finance <include refid="where_sql"/>
+  </select>
+
+  <!--分页查询-->
+  <select id="getTradeEntityList"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select
+    <include refid="Base_Column_List" />
+    from gyl_trade_finance
+    <include refid="where_sql"/>
+    ORDER BY financial_numbers  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select>
+</mapper>

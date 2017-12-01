@@ -23,7 +23,7 @@ public class InformationTest {
      */
     @Test
     public void selectAllInfromation(){
-        Information information = informationMapper.selectBaseInformation();
+        Information information = informationMapper.selectBaseInformation(6);
         System.out.println(information);
         }
 

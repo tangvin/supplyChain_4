@@ -22,7 +22,7 @@
     application_time, approval_time
   </sql>
 
-  <!--条件查询-->
+ <!-- &lt;!&ndash;条件查询&ndash;&gt;
   <sql id="where_sql">
     <trim prefix="where" prefixOverrides="and">
       <if test="whereMap != null &amp;&amp; whereMap.creditNumber != null and whereMap.creditNumber != ''">
@@ -36,6 +36,25 @@
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.applicant != null and whereMap.applicant != ''">
         AND applicant &lt;= '${whereMap.applicant}'
+      </if>
+    </trim>
+  </sql>
+-->
+
+  <!--条件查询-->
+  <sql id="where_sql">
+    <trim prefix="where" prefixOverrides="and">
+      <if test="whereMap != null &amp;&amp; whereMap.creditNumber != null and whereMap.creditNumber != ''">
+        AND credit_number  LIKE '%${whereMap.creditNumber}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.creditGrantor != null and whereMap.creditGrantor != ''">
+        AND credit_grantor  LIKE '%${whereMap.creditGrantor}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.creditStatus != null and whereMap.creditStatus != ''">
+        AND credit_status  LIKE '%${whereMap.creditStatus}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.applicant != null and whereMap.applicant != ''">
+        AND applicant  LIKE '%${whereMap.applicant}%'
       </if>
     </trim>
   </sql>
@@ -70,18 +89,7 @@
   </delete>
 
 
-  <insert id="insert" parameterType="cn.com.edzleft.entity.CreditTable" >
-    insert into gyl_credit (id, credit_grantor, credit_time, 
-      credit_amount, credit_master_contract, buyer_information_attachment, 
-      trade_information_attachment, credit_way, 
-      credit_number, credit_status, applicant, 
-      application_time, approval_time)
-    values (#{id,jdbcType=INTEGER}, #{creditGrantor,jdbcType=VARCHAR}, #{creditTime,jdbcType=TIMESTAMP}, 
-      #{creditAmount,jdbcType=DOUBLE}, #{creditMasterContract,jdbcType=VARCHAR}, #{buyerInformationAttachment,jdbcType=VARCHAR}, 
-      #{tradeInformationAttachment,jdbcType=VARCHAR}, #{creditWay,jdbcType=INTEGER}, 
-      #{creditNumber,jdbcType=VARCHAR}, #{creditStatus,jdbcType=INTEGER}, #{applicant,jdbcType=VARCHAR}, 
-      #{applicationTime,jdbcType=TIMESTAMP}, #{approvalTime,jdbcType=TIMESTAMP})
-  </insert>
+
 
   <insert id="insertSelective" parameterType="cn.com.edzleft.entity.CreditTable" >
     insert into gyl_credit
@@ -211,20 +219,5 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.com.edzleft.entity.CreditTable" >
-    update gyl_credit
-    set credit_grantor = #{creditGrantor,jdbcType=VARCHAR},
-      credit_time = #{creditTime,jdbcType=TIMESTAMP},
-      credit_amount = #{creditAmount,jdbcType=DOUBLE},
-      credit_master_contract = #{creditMasterContract,jdbcType=VARCHAR},
-      buyer_information_attachment = #{buyerInformationAttachment,jdbcType=VARCHAR},
-      trade_information_attachment = #{tradeInformationAttachment,jdbcType=VARCHAR},
-      credit_way = #{creditWay,jdbcType=INTEGER},
-      credit_number = #{creditNumber,jdbcType=VARCHAR},
-      credit_status = #{creditStatus,jdbcType=INTEGER},
-      applicant = #{applicant,jdbcType=VARCHAR},
-      application_time = #{applicationTime,jdbcType=TIMESTAMP},
-      approval_time = #{approvalTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>

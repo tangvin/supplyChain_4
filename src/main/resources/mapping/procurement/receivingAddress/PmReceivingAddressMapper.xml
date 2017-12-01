@@ -7,12 +7,13 @@
     <result column="r_address_address" property="rAddressAddress" jdbcType="VARCHAR" />
     <result column="r_address_zipcode" property="rAddressZipcode" jdbcType="VARCHAR" />
     <result column="r_address_person" property="rAddressPerson" jdbcType="VARCHAR" />
-    <result column="r_address_phone" property="rAddressPhone" jdbcType="VARCHAR" />
-    <result column="r_address_default" property="rAddressDefault" jdbcType="VARCHAR" />
+    <result column="r_address_phone" property="rAddressPhone" jdbcType="INTEGER" />
+    <result column="r_address_default" property="rAddressDefault" jdbcType="INTEGER" />
+    <result column="unionID" property="unionID" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     r_address_id, r_address_area, r_address_address, r_address_zipcode, r_address_person, 
-    r_address_phone, r_address_default
+    r_address_phone, r_address_default,unionID
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

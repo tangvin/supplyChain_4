@@ -28,8 +28,10 @@ public class Ukey {
      * ukey及证书名字
      */
     private Integer ukeyFilename;
+
     /**
-     * ukey及证书的用户id
+     *
+     * @return
      */
     private Integer userId;
     
@@ -56,11 +58,11 @@ public class Ukey {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public Integer getUkeyId() {
+    public Integer getUkeyId() {
         return ukeyId;
     }
 
@@ -109,6 +111,7 @@ public class Ukey {
     }
 
     @Override
+
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -165,6 +168,9 @@ public class Ukey {
 		return true;
 	}
 
+
+
+
     @Override
 	public int hashCode() {
 		final int prime = 31;
@@ -181,10 +187,16 @@ public class Ukey {
 		return result;
 	}
 
-    @Override
-	public String toString() {
-		return "Ukey [ukeyId=" + ukeyId + ", ukeyType=" + ukeyType + ", issuedPeople=" + issuedPeople + ", issuedTime="
-				+ issuedTime + ", ukeyStatus=" + ukeyStatus + ", ukeyFilename=" + ukeyFilename + ", userId=" + userId
-				+ ", attachmentName=" + attachmentName + ", attachmentUrl=" + attachmentUrl + "]";
-	}
+
+    public String toString() {
+        return "Ukey{" +
+                "ukeyId=" + ukeyId +
+                ", ukeyType='" + ukeyType + '\'' +
+                ", issuedPeople='" + issuedPeople + '\'' +
+                ", issuedTime=" + issuedTime +
+                ", ukeyStatus='" + ukeyStatus + '\'' +
+                ", ukeyFilename='" + ukeyFilename + '\'' +
+                ", userId='" + userId + '\'' +
+                '}';
+    }
 }

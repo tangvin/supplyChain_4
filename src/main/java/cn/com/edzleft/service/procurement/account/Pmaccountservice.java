@@ -8,4 +8,5 @@ public interface Pmaccountservice {
 
 	String updataPwd(Integer userId, String oldpwd, String newpwd, String confirm);
 
+
 }

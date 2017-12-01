@@ -23,16 +23,27 @@ public class ReceivingAddress {
     /**
      * 收货人
      */
-    private String rAddressPerson;
+    private Integer rAddressPerson;
     /**
      * 收货人手机
      */
-    private String rAddressPhone;
+    private Integer rAddressPhone;
     /**
      * 是否默认收货地址
      */
-    private String rAddressDefault;
+	private Integer rAddressDefault;
+	/**
+     * 用户ID
+     */
+    private Integer unionID ;
+    
+    public Integer getUnionID() {
+		return unionID;
+	}
 
+	public void setUnionID(Integer unionID) {
+		this.unionID = unionID;
+	}
     public Integer getrAddressId() {
         return rAddressId;
     }
@@ -65,31 +76,33 @@ public class ReceivingAddress {
         this.rAddressZipcode = rAddressZipcode == null ? null : rAddressZipcode.trim();
     }
 
-    public String getrAddressPerson() {
-        return rAddressPerson;
-    }
 
-    public void setrAddressPerson(String rAddressPerson) {
-        this.rAddressPerson = rAddressPerson == null ? null : rAddressPerson.trim();
-    }
+    public Integer getrAddressPerson() {
+		return rAddressPerson;
+	}
 
-    public String getrAddressPhone() {
-        return rAddressPhone;
-    }
+	public void setrAddressPerson(Integer rAddressPerson) {
+		this.rAddressPerson = rAddressPerson;
+	}
 
-    public void setrAddressPhone(String rAddressPhone) {
-        this.rAddressPhone = rAddressPhone == null ? null : rAddressPhone.trim();
-    }
 
-    public String getrAddressDefault() {
-        return rAddressDefault;
-    }
+    public Integer getrAddressPhone() {
+		return rAddressPhone;
+	}
 
-    public void setrAddressDefault(String rAddressDefault) {
-        this.rAddressDefault = rAddressDefault == null ? null : rAddressDefault.trim();
-    }
+	public void setrAddressPhone(Integer rAddressPhone) {
+		this.rAddressPhone = rAddressPhone;
+	}
 
-    @Override
+	public Integer getrAddressDefault() {
+		return rAddressDefault;
+	}
+
+	public void setrAddressDefault(Integer rAddressDefault) {
+		this.rAddressDefault = rAddressDefault;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

@@ -13,9 +13,9 @@ public class PmaccountServiceImpl implements Pmaccountservice{
 	private PmAccountMapper pmaccountMapper;
 	@Override
 	public SessionInfo findUserById(Integer userId) {
-		// TODO Auto-generated method stub
 		return pmaccountMapper.findUserById(userId);
 	}
+	
 
 	@Override
 	public String updataPwd(Integer userId, String oldpwd, String newpwd, String confirm) {
