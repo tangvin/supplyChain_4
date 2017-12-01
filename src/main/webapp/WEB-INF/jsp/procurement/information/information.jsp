@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>资料维护</title>
+    <%
+        String path = request.getContextPath();
+        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+        String name = request.getParameter("name");//用request得到
+    %>
 </head>
 <body>
-
 <div class='col-xs-12'>
     <div class='row row_zhxx'>
         <div class="col-xs-12 zlxx_top">
@@ -47,129 +52,96 @@
                                             <tbody>
                                             <tr>
                                                 <td>企业身份:</td>
-                                                <td>贸易商</td>
+                                                <td>
+                                                    <%--0采购方、1贸易方、2资方--%>
+                                                <c:if test="${information.entIdentity == 0}">   采购方
+                                                 
+                                                </c:if>
+                                                <c:if test="${information.entIdentity == 1}">贸易方
+                                                    
+                                                </c:if>
+                                                <c:if test="${information.entIdentity == 2}">资方
+                                                    
+                                                </c:if>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>企业名称:</td>
-                                                <td><span>中精众和投资管理有限公司</span><span class="drz">待认证</span></td>
+                                                <td><span>${information.entName}</span><span class="drz">待认证</span></td>
                                             </tr>
                                             <tr>
                                                 <td>社会统一信用代码:</td>
-                                                <td>MA4L16JQ9</td>
+                                                <td>${information.entCreditCode}</td>
                                             </tr>
                                             <tr>
                                                 <td>工商登记注册号：</td>
-                                                <td>91110228593850085C</td>
+                                                <td>${information.registrationNumber}</td>
                                             </tr>
                                             <tr>
                                                 <td>税务登记号：</td>
-                                                <td>91110228593850085C</td>
+                                                <td>${information.taxRegistrationNumber}</td>
                                             </tr>
                                             <tr>
                                                 <td>组织机构代码：</td>
-                                                <td>91110228593850085C</td>
+                                                <td>${information.institutionCode}</td>
                                             </tr>
                                             <tr>
                                                 <td>法定代表人</td>
-                                                <td>李明梅</td>
+                                                <td>${information.representative}</td>
                                             </tr>
                                             <tr>
                                                 <td>法定代表人证件类型：</td>
-                                                <td>身份证</td>
+                                                <%--0居民身份证、1护照、2港澳居民来往内地通行证、3台湾居民来往大陆通行证--%>
+                                                <td>
+                                                    <c:if test="${information.representativeType==1}">护照
+                                                       
+                                                    </c:if>
+                                                    <c:if test="${information.representativeType==2}">港澳居民来往内地通行证
+                                                      
+                                                    </c:if>
+                                                    <c:if test="${information.representativeType==3}">台湾居民来往大陆通行证
+                                                        
+                                                    </c:if>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>组织机构代码：</td>
-                                                <td>91110228593850085C</td>
+                                                <td>${information.institutionCode}</td>
                                             </tr>
                                             <tr>
                                                 <td>法定代表人证件号码：</td>
-                                                <td>91110228593850085C</td>
+                                                <td>${information.representativeNum}</td>
                                             </tr><tr>
                                                 <td>固定电话：</td>
-                                                <td>010-2448147-138</td>
+                                                <td>${information.telephone}</td>
                                             </tr>
                                             <tr>
                                                 <td>省市区域：</td>
-                                                <td>北京市丰台区</td>
+                                                <td>${information.municipality}${information.city}${information.county}</td>
                                             </tr>
                                             <tr>
                                                 <td>详细地址：</td>
-                                                <td>北京市丰台区汉威国际广场四区2号楼</td>
+                                                <td>${information.address}</td>
                                             </tr>
                                             <tr>
                                                 <td>企业联系人：</td>
-                                                <td>傅俊</td>
+                                                <td>${information.businessContact}</td>
                                             </tr>
                                             <tr>
                                                 <td>企业联系人手机：</td>
-                                                <td>13800138000</td>
+                                                <td>${information.mobilePhone}</td>
                                             </tr>
                                             <tr>
                                                 <td>联系人电子邮件：</td>
-                                                <td>zhongjing@hotmail.com</td>
+                                                <td>${information.emailAddress}</td>
                                             </tr>
                                             <tr>
                                                 <td>邮编：</td>
-                                                <td>100211</td>
+                                                <td>${information.zipCode}</td>
                                             </tr>
                                             <tr>
                                                 <td>网址：</td>
-                                                <td>www.zhongjingzh.com</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="jbxx jbxx1">
-                                <div class="row jbxx_row">
-                                    <div class="col-xs-8">
-                                        <h5>高级资料</h5>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-7 col-xs-offset-1">
-                                        <table class="table table_one">
-                                            <tbody>
-                                            <tr>
-                                                <td>注册资本:</td>
-                                                <td>500百万元</td>
-                                            </tr>
-                                            <tr>
-                                                <td>主要股东:</td>
-                                                <td><span>张先生 | 李先生 | 王女士</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>经营范围:</td>
-                                                <td>养老社区</td>
-                                            </tr>
-                                            <tr>
-                                                <td>登记机关：</td>
-                                                <td>丰台工商管理局</td>
-                                            </tr>
-                                            <tr>
-                                                <td>社会统一信用代码电子档：</td>
-                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>工商登记注册电子档：</td>
-                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>税务登记号电子档：</td>
-                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>组织机构代码电子档：</td>
-                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>法人身份证电子档：</td>
-                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>开户许可证电子档：</td>
-                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                                                <td>${information.webSite}</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -199,12 +171,12 @@
                                         <div class="form-group">
                                             <label for="lastname" class="col-xs-4 control-label">确认密码</label>
                                             <div class="col-xs-8">
-                                                <input type="text" class="form-control" id="lastname1" name="confirm">
+                                                <input type="text"  class="form-control" id="lastname1" name="confirm">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-xs-offset-4 col-xs-8">
-                                                <button type="button" class="btn  btn-danger aq_qr_but" id="upd">确认</button>
+                                                <button type="button" id="upda" class="btn  btn-danger aq_qr_but"  >确认</button>
                                             </div>
                                         </div>
 
@@ -307,131 +279,19 @@
                                 <form class="form-inline khh_form khh_form1">
                                     <div class="form-group form-group1">
                                         <label for="exampleInputName2">开户行</label>
-                                        <input type="text" class="form-control" id="exampleInputName2">
+                                        <input type="text" class="form-control" id="tripartiteDepositBank">
                                     </div>
                                     <div class="form-group form-group1">
                                         <label for="exampleInputEmail2">户主</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail2">
+                                        <input type="email" class="form-control" id="tripartiteCreditHolderTrade">
                                     </div>
-                                    <button type="button" class="btn  btn-danger">查询</button>
-                                    <button type="button" class="btn  btn-default">重置</button>
+                                    <button type="button" class="btn btn-danger btn-default" onclick="crownSearch()">查询</button>
+                                    <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
                                 </form>
                             </div>
-                            <!--三方账户 开户行结束-->
-                            <!--三方账户 分页开始-->
-                            <div class="fy">
-                                <div class="row fy_row">
-                                    <div class="col-xs-4">
-                                        <p class="fy_con">共计3条数据，共1页</p>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination">
-                                                <li>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">首页</span>
-                                                    </a>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                                <li><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li>
-                                                    <a href="#" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">末页</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
+                            <div class="panel-body" style="padding-bottom:0px;">
+                                <table id="tb_departments" class="cj_table"></table>
                             </div>
-                            <!--三方账户 分页结束-->
-                            <!--三方账户 表格开始-->
-                            <div class="table-responsive text-center">
-                                <table class="table table-bordered text-center">
-                                    <tbody>
-                                    <tr class="active">
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!--三方账户 表格结束-->
-                            <!--三方账户 分页开始-->
-                            <div class="fy">
-                                <div class="row fy_row">
-                                    <div class="col-xs-4">
-                                        <p class="fy_con">共计3条数据，共1页</p>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination">
-                                                <li>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">首页</span>
-                                                    </a>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                                <li><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li>
-                                                    <a href="#" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">末页</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--三方账户 分页结束-->
                         </div>
                         <!--三方账户 结束   -->
                         <!--运货单位 开始-->
@@ -465,7 +325,7 @@
                                                 <button type="button" class="btn btn-danger btn-default">设为默认</button>
                                             </div>
                                             <div class="media-body">
-                                                <button type="button" class="btn btn-danger btn-default">删除</button>
+                                                <button type="button" class="btn btn-danger btn-default" >删除</button>
                                             </div>
                                         </li>
                                     </ul>
@@ -528,8 +388,8 @@
                                     <button type="button" class="btn  btn-danger  btn-default tjhydw" data-toggle="modal" data-target="#exampleModal11">添加货运单位</button>
                                 </div>
                             </div>
-
                             <!--货运单位 蒙泰框-->
+                            <form id="h" method="post">
                             <div class="modal fade" id="exampleModal11" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -540,37 +400,39 @@
                                         <div class="modal-header sh_div">
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>货运单位名称</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="freightName"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>货运方联系人</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="freightContactPerson"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>货运方联系人手机号</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="freightContactPhone"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>设为默认</div>
                                                 <div class="col-xs-9">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="inlineRadioOptions2" checked> 是
+                                                        <input type="radio" name="freightDefaultAddress" checked> 是
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="inlineRadioOptions2"> 否
+                                                        <input type="radio" name="freightDefaultAddress"> 否
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" id="Addfreigft">确认</button>
                                             <button type="button" class="btn btn-primary">取消</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            </form>
                             <!--货运单位 蒙泰框 结束-->
+                            
                         </div>
                         <!--运货单位 结束-->
                         <!--收获地址 开始-->
@@ -619,10 +481,14 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-5">
-                                    <button type="button" class="btn btn-danger btn-default shanchu">删除</button>
+                                    <button type="button" class="btn btn-danger btn-default shanchu" id="deladdress">删除</button>
                                 </div>
                             </div>
                             <!--收获地址 蒙泰框-->
+                            
+                            
+                           <!--  添加收货地址 -->
+                           <form  action="" id="d" method="post">
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -638,50 +504,51 @@
                                                 </div>
                                                 <div class="col-xs-9">
                                                     <div class="row sjld ">
-                                                        <select class="col-xs-3 form-control" id="seachprov" name="seachprov" onChange="changeComplexProvince(this.value, sub_array, 'seachcity', 'seachdistrict');"></select>
-                                                        <select style="margin-left:20px;" class="col-xs-3 form-control" id="seachcity" name="homecity" onChange="changeCity(this.value,'seachdistrict','seachdistrict');"></select>
+                                                        <select class="col-xs-3 form-control" id="seachprov" name="rAddressArea" onChange="changeComplexProvince(this.value, sub_array, 'seachcity', 'seachdistrict');"></select>
+                                                        <select style="margin-left:20px;" class="col-xs-3 form-control" id="seachcity" name="rAddressArea" onChange="changeCity(this.value,'seachdistrict','seachdistrict');"></select>
                                                         <span class="col-xs-3"  id="seachdistrict_div">
-                                                            <select class="form-control" id="seachdistrict" name="seachdistrict"></select>
+                                                            <select class="form-control" id="seachdistrict" name="rAddressArea"></select>
                                                         </span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>收货区域</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>收货地址</div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="rAddressAddress"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>邮政编码</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="rAddressZipcode"></div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>邮政编码</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                             <div class="row">
+                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>收货人</div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="rAddressPerson"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>收货人手机号</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="rAddressPhone"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>设为默认</div>
                                                 <div class="col-xs-9">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="inlineRadioOptions" checked value="option1"> 是
+                                                        <input type="radio" name="rAddressDefault" checked value="0"> 是
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="inlineRadioOptions"  value="option2"> 否
+                                                        <input type="radio" name="rAddressDefault"  value="1"> 否
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" id="getAddress">确认</button>
                                             <button type="button" class="btn btn-primary">取消</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            </form>
                             <!--收获地址 蒙泰框 结束-->
                         </div>
                         <!--收获地址 开始-->
@@ -725,17 +592,85 @@
 <!-- 修改密码 -->
 <script type="text/javascript">
 	$(function(){
-		$("#upd").click(function(){
+		$("#upda").click(function(){
 			$.ajax({
 				url:"<%=request.getContextPath()%>/password/changePwd.action",
 				type:'post',
 				data:$("#f").serialize(),
 				dataType:"json",
 				success:function(data){
-					alert("aaa");
+					alert(data);
+				}
+			});
+		});
+		/* 添加收获地址 */
+		$("#getAddress").click(function(){
+			var ra = $("#d").serialize();
+			$.ajax({
+				url:"<%=request.getContextPath()%>/PmReceivingAddress/getaddress.action",
+				type:'post',
+				data:$("#d").serialize(),
+				dataType:"json",
+				success:function(data){
+					alert("添加完成");
 				}
 			});
 		});
 	});
+	/* 三方账户展示 */
+	 $(function(){
+	        $("#tb_departments").bootstrapTable({
+	            columns:[
+	                { //field: 'Number',//可不加
+	                    title: '序号',//标题  可不加
+	                    width:100,
+	                    formatter: function (value, row, index) {
+	                        return index+1;
+	                    }
+	                },
+	                {field:'tripartiteDepositBank',title:'开户行',width:100},
+	                {field:'tripartiteCreditHolderPurchaser',title:'户主（采购方	）',width:100},
+	                {field:'tripartiteAccountNumber',title:'账号',width:100},
+	                {field:'tripartiteBalance',title:'余额（元）',width:100},
+	                {field:'tripartiteAvailableBalance',title:'可用余额',width:100},
+	                {field:'tripartiteAmountCreateTime',title:'账号开通时间',width:100},
+	                {field:'tripartiteAccountOpenpeople',title:'账号开通人',width:100},
+	                {field:'tripartiteAmountCreateTime',title:'创建时间',width:100},
+	                {field:'tripartiteAmountCreatePeople',title:'创建人',width:100},
+	            ],
+	            url:'<%=request.getContextPath()%>/tripartite/pmtripartite.action',
+	            method:'post',
+	            queryParamsType:'',
+	            queryParams: queryParams,//传递参数（*）
+	            //【其它设置】
+	            locale:'zh-CN',//中文支持
+	            pagination: true,//是否开启分页（*）
+	            pageNumber:1,//初始化加载第一页，默认第一页
+	            pageSize: 3,//每页的记录行数（*）
+	            sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+	            //发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}
+	            contentType:'application/x-www-form-urlencoded;charset=UTF-8'   //数据编码纯文本  offset=0&limit=5
+	        });
+	    });
+	    //得到查询的参数
+	    function queryParams (params) {
+	        var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+	            pageNumber: params.pageNumber,
+	            pageSize: params.pageSize,
+	            tripartiteDepositBank:$("#tripartiteDepositBank").val(),
+	            tripartiteCreditHolderPurchaser:$("#tripartiteCreditHolderPurchaser").val(),
+	        };
+	        return temp;
+	    }
+	    //授信搜索
+	    function crownSearch(){
+	        $("#tb_departments").bootstrapTable('refresh');
+	    }
+	    //授信重置查询
+	    function reset(){
+	        $("#crownForm").form('reset');
+	        crownSearch();
+	    }
+
 </script>
 </html>

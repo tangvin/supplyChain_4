@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.procurement.oder.PmOrderMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Order" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="order_creat_time" property="orderCreatTime" jdbcType="TIMESTAMP" />
+    <result column="order_creator" property="orderCreator" jdbcType="VARCHAR" />
+    <result column="order_creator_trade" property="orderCreatorTrade" jdbcType="VARCHAR" />
+    <result column="order_confirmation_time" property="orderConfirmationTime" jdbcType="TIMESTAMP" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="logistics_unit" property="logisticsUnit" jdbcType="VARCHAR" />
+    <result column="logistics_num" property="logisticsNum" jdbcType="VARCHAR" />
+    <result column="receiving_address" property="receivingAddress" jdbcType="VARCHAR" />
+    <result column="ogistics_name" property="ogisticsName" jdbcType="VARCHAR" />
+    <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="principal_order" property="principalOrder" jdbcType="INTEGER" />
+    <result column="credit_get" property="creditGet" jdbcType="INTEGER" />
+    <result column="credit_use" property="creditUse" jdbcType="INTEGER" />
+    <result column="credit_grantor" property="creditGrantor" jdbcType="VARCHAR" />
+    <result column="order_amount" property="orderAmount" jdbcType="DOUBLE" />
+    <result column="amount_payable" property="amountPayable" jdbcType="DOUBLE" />
+    <result column="amount_actually_paid" property="amountActuallyPaid" jdbcType="INTEGER" />
+    <result column="payment_account" property="paymentAccount" jdbcType="VARCHAR" />
+    <result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
+    <result column="invoice" property="invoice" jdbcType="VARCHAR" />
+    <result column="freight_unit" property="freightUnit" jdbcType="VARCHAR" />
+    <result column="freight_number" property="freightNumber" jdbcType="VARCHAR" />
+    <result column="goods" property="goods" jdbcType="VARCHAR" />
+    <result column="applicationletter" property="applicationletter" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, order_number, order_creat_time, order_creator, order_creator_trade, order_confirmation_time, 
+    order_status, logistics_unit, logistics_num, receiving_address, ogistics_name, contact_phone, 
+    principal_order, credit_get, credit_use, credit_grantor, order_amount, amount_payable, 
+    amount_actually_paid, payment_account, payment_time, invoice, freight_unit, freight_number,goods,applicationletter
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gyl_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  
+  <!--条件查询-->
+  <sql id="where_sql">
+    <trim prefix="where" prefixOverrides="and">
+      <if test="whereMap != null &amp;&amp; whereMap.orderStatus != null and whereMap.orderStatus != ''">
+        AND order_status  LIKE '%${whereMap.orderStatus}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.orderCreator != null and whereMap.orderCreator != ''">
+        AND order_creator  LIKE '%${whereMap.orderCreator}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.orderCreatorTrade != null and whereMap.orderCreatorTrade != ''">
+        AND order_creator_trade  LIKE '%${whereMap.orderCreatorTrade}%'
+      </if>
+    </trim>
+  </sql>
+
+  <!--查询总条数-->
+  <select id="getCrownEntityCounts"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select count(*) from gyl_order <include refid="where_sql"/>
+  </select>
+  
+  <!-- 查询默认地址address -->
+ <select id="insetOrder" parameterType="Integer" resultType="String">
+  	select t.r_address_address from gyl_receiving_address t where t.r_address_default=0 and t.unionID=#{unionID}
+  </select>
+  <!-- 查询默认地址area -->
+ <select id="insetOrder2" parameterType="Integer" resultType="String">
+  	select t.r_address_area from gyl_receiving_address t where t.r_address_default=0 and t.unionID=#{unionID}
+  </select> 
+  <!-- 查询联系人 -->
+ <select id="insetOrder3" parameterType="Integer" resultType="String">
+  	select t.r_address_person from gyl_receiving_address t where t.r_address_default=0 and t.unionID=#{unionID}
+  </select> 
+  <!-- 查询联系人手机号 -->
+ <select id="insetOrder4" parameterType="Integer" resultType="String">
+  	select t.r_address_phone from gyl_receiving_address t where t.r_address_default=0 and t.unionID=#{unionID}
+  </select> 
+
+  <!--分页查询-->
+  <select id="getCrownEntityList"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select
+    <include refid="Base_Column_List" />
+    from gyl_order
+    <include refid="where_sql"/>
+    ORDER BY order_creator  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select>
+  
+   <insert id="insertSelective" parameterType="cn.com.edzleft.entity.Order">
+    insert into gyl_order (order_id, order_number, order_creat_time, 
+      order_creator, order_creator_trade, order_confirmation_time, 
+      order_status, logistics_unit, logistics_num, 
+      receiving_address, ogistics_name, contact_phone, 
+      principal_order, credit_get, credit_use, 
+      credit_grantor, order_amount, amount_payable, 
+      amount_actually_paid, payment_account, payment_time, 
+      invoice, freight_unit, freight_number,goods,applicationletter
+      )
+    values (#{orderId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{orderCreatTime,jdbcType=TIMESTAMP}, 
+      #{orderCreator,jdbcType=VARCHAR}, #{orderCreatorTrade,jdbcType=VARCHAR}, #{orderConfirmationTime,jdbcType=TIMESTAMP}, 
+      #{orderStatus,jdbcType=INTEGER}, #{logisticsUnit,jdbcType=VARCHAR}, #{logisticsNum,jdbcType=VARCHAR}, 
+      #{receivingAddress,jdbcType=VARCHAR}, #{ogisticsName,jdbcType=VARCHAR}, #{contactPhone,jdbcType=INTEGER}, 
+      #{principalOrder,jdbcType=INTEGER}, #{creditGet,jdbcType=INTEGER}, #{creditUse,jdbcType=INTEGER}, 
+      #{creditGrantor,jdbcType=VARCHAR}, #{orderAmount,jdbcType=DOUBLE}, #{amountPayable,jdbcType=DOUBLE}, 
+      #{amountActuallyPaid,jdbcType=INTEGER}, #{paymentAccount,jdbcType=VARCHAR}, #{paymentTime,jdbcType=TIMESTAMP}, 
+      #{invoice,jdbcType=VARCHAR}, #{freightUnit,jdbcType=VARCHAR}, #{freightNumber,jdbcType=VARCHAR},
+      #{goods,jdbcType=VARCHAR},#{applicationletter,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <!-- <insert id="insertSelective" parameterType="cn.com.edzleft.entity.Order" >
+    insert into gyl_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="orderCreatTime != null" >
+        order_creat_time,
+      </if>
+      <if test="orderCreator != null" >
+        order_creator,
+      </if>
+      <if test="orderCreatorTrade != null" >
+        order_creator_trade,
+      </if>
+      <if test="orderConfirmationTime != null" >
+        order_confirmation_time,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="logisticsUnit != null" >
+        logistics_unit,
+      </if>
+      <if test="logisticsNum != null" >
+        logistics_num,
+      </if>
+      <if test="receivingAddress != null" >
+        receiving_address,
+      </if>
+      <if test="ogisticsName != null" >
+        ogistics_name,
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone,
+      </if>
+      <if test="principalOrder != null" >
+        principal_order,
+      </if>
+      <if test="creditGet != null" >
+        credit_get,
+      </if>
+      <if test="creditUse != null" >
+        credit_use,
+      </if>
+      <if test="creditGrantor != null" >
+        credit_grantor,
+      </if>
+      <if test="orderAmount != null" >
+        order_amount,
+      </if>
+      <if test="amountPayable != null" >
+        amount_payable,
+      </if>
+      <if test="amountActuallyPaid != null" >
+        amount_actually_paid,
+      </if>
+      <if test="paymentAccount != null" >
+        payment_account,
+      </if>
+      <if test="paymentTime != null" >
+        payment_time,
+      </if>
+      <if test="invoice != null" >
+        invoice,
+      </if>
+      <if test="freightUnit != null" >
+        freight_unit,
+      </if>
+      <if test="freightNumber != null" >
+        freight_number,
+      </if>
+      <if test="goods != null" >
+        goods,
+      </if>
+      <if test="applicationletter != null" >
+        applicationletter,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCreatTime != null" >
+        #{orderCreatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderCreator != null" >
+        #{orderCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCreatorTrade != null" >
+        #{orderCreatorTrade,jdbcType=VARCHAR},
+      </if>
+      <if test="orderConfirmationTime != null" >
+        #{orderConfirmationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="logisticsUnit != null" >
+        #{logisticsUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsNum != null" >
+        #{logisticsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingAddress != null" >
+        #{receivingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ogisticsName != null" >
+        #{ogisticsName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=INTEGER},
+      </if>
+      <if test="principalOrder != null" >
+        #{principalOrder,jdbcType=INTEGER},
+      </if>
+      <if test="creditGet != null" >
+        #{creditGet,jdbcType=INTEGER},
+      </if>
+      <if test="creditUse != null" >
+        #{creditUse,jdbcType=INTEGER},
+      </if>
+      <if test="creditGrantor != null" >
+        #{creditGrantor,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAmount != null" >
+        #{orderAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="amountPayable != null" >
+        #{amountPayable,jdbcType=DOUBLE},
+      </if>
+      <if test="amountActuallyPaid != null" >
+        #{amountActuallyPaid,jdbcType=INTEGER},
+      </if>
+      <if test="paymentAccount != null" >
+        #{paymentAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentTime != null" >
+        #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invoice != null" >
+        #{invoice,jdbcType=VARCHAR},
+      </if>
+      <if test="freightUnit != null" >
+        #{freightUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="freightNumber != null" >
+        #{freightNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="goods != null" >
+        #{goods,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationletter != null" >
+        #{applicationletter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert> -->
+</mapper>

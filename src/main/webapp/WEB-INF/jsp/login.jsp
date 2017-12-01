@@ -46,10 +46,7 @@
 
 </div>
 <script>
-    <%--function login(){--%>
-        <%--location.href="<%=request.getContextPath()%>/account/login.action";--%>
-    <%--}--%>
-    $(function(){
+
         var countdown=10;
         //随机生成验证码图片
         function getImageCode(val){
@@ -70,17 +67,14 @@
                 },1)
             }
         }
-    })
-    //加载完页面
-//    $(function () {
-        //判断用户输入的账号和密码
-        $("#account").click(function () {
-                var a=$("#name").val();
-                var b=$("#pwd").val();
-                var c=$("#code").val();
-                console.log(a);
-                console.log(b);
-                console.log(c);
+
+        function login(){
+            var a=$("#name").val();
+            var b=$("#pwd").val();
+            var c=$("#code").val();
+            console.log(a);
+            console.log(b);
+            console.log(c);
             if(a==""||b==""){  //判断输入的账号密码是否为空
                 alert("账号和密码不能为空");
                 return false;
@@ -92,15 +86,15 @@
                     data:$("#f").serialize(),
                     success:function (date) {//服务器返回的数据
                         if(date.success){
-                                if(date.type == 0){
+                            if(date.type == 0){
                                 //采购方页面
-                                window.location.href="<%=request.getContextPath()%>/account/loginProcurement.action"
+                                window.location.href="<%=request.getContextPath()%>/procurementMain/procurementMain.action"
                             }else if(date.type==1){
                                 //贸易方页面
                                 window.location.href="<%=request.getContextPath()%>/tradeMain/tradeMain.action"
                             }else if(date.type==2){
                                 //资金方页面
-                                window.location.href="<%=request.getContextPath()%>/account/loginCapital.action"
+                                window.location.href="<%=request.getContextPath()%>/captialMain/captialMain.action"
                             }
                         }else {
                             if(a!=date.userName){
@@ -117,12 +111,14 @@
                             }
                         }
                     }
-
                 })
-
             }
-        })
-//    })
+        }
+    $(document).keydown(function(event){
+        if(event.keyCode == 13){ //绑定回车
+            login();
+        }
+    });
 </script>
 </body>
 </html>

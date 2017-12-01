@@ -16,7 +16,7 @@
                 <div class='col-xs-6'>
                     <ul class="nav zjzh_title">
                         <li class='col-xs-8'>
-                            <h3>中精众和投资管理有限公司</h3>
+                            <h3>${information.entName}</h3>
                         </li>
                         <li class='col-xs-1 zjzh_logo_sm'>
                             <img src='<%=request.getContextPath()%>/js/static/images/identify1@1x.png'>
@@ -34,9 +34,9 @@
                         <div class='col-xs-8'>
                             <ul class='nav zjzh_list'>
                                 <li>企业信用评级:</li>
-                                <li>地址：北京市海淀区中关村大街12号盘古大厦五层</li>
-                                <li>固定电话：010-88668800-888</li>
-                                <li>管理员姓名：王梦海</li>
+                                <li>地址：${information.municipality}${information.city}${information.county}${information.address}</li>
+                                <li>固定电话：${information.telephone}</li>
+                                <li>管理员姓名：${information.businessContact}</li>
                             </ul>
                         </div>
                     </div>
