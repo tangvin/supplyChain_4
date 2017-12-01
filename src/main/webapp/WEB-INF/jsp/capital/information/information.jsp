@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -48,74 +49,96 @@
                                             <tbody>
                                             <tr>
                                                 <td>企业身份:</td>
-                                                <td>贸易商</td>
+                                                <td>
+                                                    <%--0采购方、1贸易方、2资方--%>
+                                                <c:if test="${information.entIdentity == 0}">采购方
+                                                    
+                                                </c:if>
+                                                <c:if test="${information.entIdentity == 1}">贸易方
+                                                   
+                                                </c:if>
+                                                <c:if test="${information.entIdentity == 2}">资方
+                                                  
+                                                </c:if>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>企业名称:</td>
-                                                <td><span>中精众和投资管理有限公司</span><span class="drz">待认证</span></td>
+                                                <td><span>${information.entName}</span><span class="drz">待认证</span></td>
                                             </tr>
                                             <tr>
                                                 <td>社会统一信用代码:</td>
-                                                <td>MA4L16JQ9</td>
+                                                <td>${information.entCreditCode}</td>
                                             </tr>
                                             <tr>
                                                 <td>工商登记注册号：</td>
-                                                <td>91110228593850085C</td>
+                                                <td>${information.registrationNumber}</td>
                                             </tr>
                                             <tr>
                                                 <td>税务登记号：</td>
-                                                <td>91110228593850085C</td>
+                                                <td>${information.taxRegistrationNumber}</td>
                                             </tr>
                                             <tr>
                                                 <td>组织机构代码：</td>
-                                                <td>91110228593850085C</td>
+                                                <td>${information.institutionCode}</td>
                                             </tr>
                                             <tr>
                                                 <td>法定代表人</td>
-                                                <td>李明梅</td>
+                                                <td>${information.representative}</td>
                                             </tr>
                                             <tr>
                                                 <td>法定代表人证件类型：</td>
-                                                <td>身份证</td>
+                                                <%--0居民身份证、1护照、2港澳居民来往内地通行证、3台湾居民来往大陆通行证--%>
+                                                <td>
+                                                    <c:if test="${information.representativeType==1}">
+                                                        护照
+                                                    </c:if>
+                                                    <c:if test="${information.representativeType==2}">
+                                                        港澳居民来往内地通行证
+                                                    </c:if>
+                                                    <c:if test="${information.representativeType==3}">
+                                                        台湾居民来往大陆通行证
+                                                    </c:if>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>组织机构代码：</td>
-                                                <td>91110228593850085C</td>
+                                                <td>${information.institutionCode}</td>
                                             </tr>
                                             <tr>
                                                 <td>法定代表人证件号码：</td>
-                                                <td>91110228593850085C</td>
+                                                <td>${information.representativeNum}</td>
                                             </tr><tr>
                                                 <td>固定电话：</td>
-                                                <td>010-2448147-138</td>
+                                                <td>${information.telephone}</td>
                                             </tr>
                                             <tr>
                                                 <td>省市区域：</td>
-                                                <td>北京市丰台区</td>
+                                                <td>${information.municipality}${information.city}${information.county}</td>
                                             </tr>
                                             <tr>
                                                 <td>详细地址：</td>
-                                                <td>北京市丰台区汉威国际广场四区2号楼</td>
+                                                <td>${information.address}</td>
                                             </tr>
                                             <tr>
                                                 <td>企业联系人：</td>
-                                                <td>傅俊</td>
+                                                <td>${information.businessContact}</td>
                                             </tr>
                                             <tr>
                                                 <td>企业联系人手机：</td>
-                                                <td>13800138000</td>
+                                                <td>${information.mobilePhone}</td>
                                             </tr>
                                             <tr>
                                                 <td>联系人电子邮件：</td>
-                                                <td>zhongjing@hotmail.com</td>
+                                                <td>${information.emailAddress}</td>
                                             </tr>
                                             <tr>
                                                 <td>邮编：</td>
-                                                <td>100211</td>
+                                                <td>${information.zipCode}</td>
                                             </tr>
                                             <tr>
                                                 <td>网址：</td>
-                                                <td>www.zhongjingzh.com</td>
+                                                <td>${information.webSite}</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -134,19 +157,19 @@
                                             <tbody>
                                             <tr>
                                                 <td>注册资本:</td>
-                                                <td>500百万元</td>
+                                                <td>${information.webSite}</td>
                                             </tr>
                                             <tr>
                                                 <td>主要股东:</td>
-                                                <td><span>张先生 | 李先生 | 王女士</span></td>
+                                                <td><span>张先生 | 李先生 | 王女士${information.majorShareholder}</span></td>
                                             </tr>
                                             <tr>
                                                 <td>经营范围:</td>
-                                                <td>养老社区</td>
+                                                <td>${information.businessScope}</td>
                                             </tr>
                                             <tr>
                                                 <td>登记机关：</td>
-                                                <td>丰台工商管理局</td>
+                                                <td>${information.registrationAuthority}</td>
                                             </tr>
                                             <tr>
                                                 <td>社会统一信用代码电子档：</td>

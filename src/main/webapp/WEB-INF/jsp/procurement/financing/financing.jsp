@@ -21,157 +21,33 @@
                 <form class="form-inline khh_form khh_form1 cwgl_input">
                     <div class="form-group">
                         <label>财物类型</label>
-                        <select class="form-control select">
-                            <option>全部</option>
-                            <option>全部1</option>
-                            <option>全部2</option>
-                            <option>全部3</option>
-                            <option>全部4</option>
+                        <select class="form-control select" id="financialType">
+                            <option value="">请选择</option>
+                            <option value="0">转入</option>
+                            <option value="1">转出</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>发生时间</label>
-                        <input type="text" readonly="readonly"  name="birthday" id="birthday1" class="form-control" value="03/18/2013" />--
-                        <input type="text" readonly="readonly"  name="birthday" id="birthday" class="form-control" value="03/18/2013" />
+                        <input type="text" readonly="readonly"  name="birthday" id="billTime" class="form-control"  />--
+                        <input type="text" readonly="readonly"  name="birthday" id="billTime" class="form-control"  />
                     </div>
                     <div class="form-group">
-                        <label>签约方</label>
-                        <input type="text" class="form-control">
+                        <label>发生方</label>
+                        <input type="text" class="form-control" id="payer">
                     </div>
                     <div class="form-group">
                         <label>银行账户</label>
-                        <select class="form-control">
-                            <option>全部</option>
-                            <option>全部1</option>
-                            <option>全部2</option>
-                            <option>全部3</option>
-                            <option>全部4</option>
-                        </select>
+                        <input type="text" id="bankcardaccount" class="form-control">
                     </div>
-                    <button type="button" class="btn btn-danger btn-default">查询</button>
-                    <button type="button" class="btn btn-danger btn-default">重置</button>
+                    <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>
+                    <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
                 </form>
             </div>
-            <!--合同签约 状态-->
+            <div class="panel-body" style="padding-bottom:0px;">
+            <table id="tb_departments" class="cj_table"></table>
+            </div>
             <!--合同分页 start-->
-            <div class="fy">
-                <div class="row fy_row">
-                    <div class="col-xs-4">
-                        <p class="fy_con">共计3条数据，共1页</p>
-                    </div>
-                    <div class="col-xs-8">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">首页</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">末页</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <!--合同分页 eng-->
-            <!--合同表格 开始-->
-            <div class="table-responsive text-center">
-                <table class="table table-bordered text-center htbg">
-                    <tbody>
-                    <tr class="active">
-                        <td>序号</td>
-                        <td>财物编号</td>
-                        <td>金额<br>￥万元</td>
-                        <td>发生时间</td>
-                        <td>财物类型</td>
-                        <td>所属订单</td>
-                        <td>发生方</td>
-                        <td>发生银行账户类型</td>
-                        <td>发生银行账户</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>727792893232</td>
-                        <td>200</td>
-                        <td>2017/09/02<br>2017/12/21</td>
-                        <td>转入</td>
-                        <td>873428349123</td>
-                        <td>采购商名称</td>
-                        <td>三方账户</td>
-                        <td>123123134234</td>
-                    </tr>
-                    <tr>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-
-                    </tr>
-                    <tr>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!--合同表格 结束-->
-            <!--合同分页 start-->
-            <div class="fy">
-                <div class="row fy_row">
-                    <div class="col-xs-4">
-                        <p class="fy_con">共计3条数据，共1页</p>
-                    </div>
-                    <div class="col-xs-8">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">首页</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">末页</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <!--合同分页 eng-->
         </div>
     </div>
 </div>
@@ -183,5 +59,59 @@
     $('#birthday1').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
         console.log(start.toISOString(), end.toISOString(), label);
     });
+    $(function(){
+        $("#tb_departments").bootstrapTable({
+            columns:[
+                { //field: 'Number',//可不加
+                    title: '序号',//标题  可不加
+                    width:100,
+                    formatter: function (value, row, index) {
+                        return index+1;
+                    }
+                },
+                {field:'financialNumbers',title:'财务编号',width:100},
+                {field:'amount',title:'金额(￥万元)',width:100},
+                {field:'billTime',title:'发生时间',width:100},
+                {field:'financialType',title:'财务类型',width:100},
+                {field:'belongOrder',title:'所属订单',width:100},
+                {field:'payer',title:'发生方',width:100},
+                {field:'bankcardaccounttype',title:'发生银行账户类型',width:100},
+                {field:'bankcardaccount',title:'发生银行账户',width:100},
+            ],
+            url:'<%=request.getContextPath()%>/tradefinance/pmtradefinance.action',
+            method:'post',
+            queryParamsType:'',
+            queryParams: queryParams,//传递参数（*）
+            //【其它设置】
+            locale:'zh-CN',//中文支持
+            pagination: true,//是否开启分页（*）
+            pageNumber:1,//初始化加载第一页，默认第一页
+            pageSize: 3,//每页的记录行数（*）
+            sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+            //发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}
+            contentType:'application/x-www-form-urlencoded;charset=UTF-8'   //数据编码纯文本  offset=0&limit=5
+        });
+    });
+    //得到查询的参数
+    function queryParams (params) {
+        var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            pageNumber: params.pageNumber,
+            pageSize: params.pageSize,
+            financialType:$("#financialType").val(),
+            billTime:$("#billTime").val(),
+            payer:$("#payer").val(),
+            bankcardaccount:$("#bankcardaccount").val(),
+        };
+        return temp;
+    }
+    //搜索
+    function search() {
+        $("#tb_departments").bootstrapTable('refresh');
+    }
+    //重置查询
+    function reset(){
+        $("#orderform").form('reset');
+        search();
+    }
 </script>
 </html>

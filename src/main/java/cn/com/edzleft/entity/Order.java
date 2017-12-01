@@ -102,8 +102,35 @@ public class Order {
      * 货运单号
      */
     private String freightNumber;
+    /**
+     * 货物商品
+     */
+    private String goods;
+    
+    /**
+     * 申请用信
+     * @return
+     */
 
-    public Integer getOrderId() {
+    private String applicationletter;
+    
+    public String getApplicationletter() {
+		return applicationletter;
+	}
+
+	public void setApplicationletter(String applicationletter) {
+		this.applicationletter = applicationletter;
+	}
+
+	public String getGoods() {
+		return goods;
+	}
+
+	public void setGoods(String goods) {
+		this.goods = goods;
+	}
+
+	public Integer getOrderId() {
         return orderId;
     }
 

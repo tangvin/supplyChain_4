@@ -1,8 +1,16 @@
 package cn.com.edzleft.controller.captial.homepage;
 
+import cn.com.edzleft.entity.Account;
+import cn.com.edzleft.entity.Information;
+import cn.com.edzleft.entity.SessionInfo;
+import cn.com.edzleft.service.captial.homepage.CaptialHomePageService;
+import cn.com.edzleft.service.trade.account.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by ASUS on 2017/11/15.
@@ -11,6 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value="captialMain")
 public class mainController {
 
+    @Autowired
+    private CaptialHomePageService captialHomePageService;
+    @Autowired
+    private AccountService accountService;
 
     /**
      * 账户安全
@@ -27,11 +39,15 @@ public class mainController {
      * 基本资料
      * @return
      */
-    @RequestMapping(value = "ziliao")
-    public ModelAndView ziliao(){
-        ModelAndView modelAndView = new ModelAndView("/capital/information/information");
-        modelAndView.addObject("messages", "home");
-        return modelAndView;
+    @RequestMapping(value = "/ziliao")
+    public ModelAndView ziliao(HttpSession sessionInfo){
+        ModelAndView mv = new ModelAndView("/capital/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = captialHomePageService.homePageSelect(userId);
+        mv.addObject("information",information);
+        mv.addObject("messages", "home");
+        return mv;
     }
     /**
      * 资金账户
@@ -104,17 +120,29 @@ public class mainController {
      * @return
      */
     @RequestMapping(value="/xtsy")
-    public String mains(){
-        return "/capital/mains";
+    public ModelAndView mains(HttpSession sessionInfo){
+        ModelAndView mv = new ModelAndView("/capital/mains");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = captialHomePageService.homePageSelect(userId);
+        mv.addObject("information",information);
+        return mv;
     }
-
     /**
      * 采购方首页
      * @return
      */
     @RequestMapping(value = "captialMain")
-    public String procurementMain(){
-        return "capital/main";
+    public ModelAndView procurementMain(HttpSession sessionInfo){
+        ModelAndView mv = new ModelAndView("capital/main");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        String userName = session.getAdmin().getUserName();
+        Information information = captialHomePageService.homePageSelect(userId);
+        Account account = accountService.queryAccountByName(userName);
+        mv.addObject("information",information);
+        mv.addObject("account",account);
+        return mv;
     }
 
     /**
@@ -122,8 +150,13 @@ public class mainController {
      * @return
      */
     @RequestMapping(value = "/zhxx")
-    public String information(){
-        return "/capital/information/information";
+    public ModelAndView information(HttpSession sessionInfo){
+        ModelAndView mv = new ModelAndView("/capital/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = captialHomePageService.homePageSelect(userId);
+        mv.addObject("information",information);
+        return mv;
     }
 
 

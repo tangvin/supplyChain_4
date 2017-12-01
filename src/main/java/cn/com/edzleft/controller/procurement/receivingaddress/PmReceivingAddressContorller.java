@@ -23,7 +23,6 @@ public class PmReceivingAddressContorller {
 	@RequestMapping(value="getaddress")
 	public boolean getAddress(ReceivingAddress ra){
 		int i = pmreceivingAddressservice.insert(ra);
-		System.out.println(ra);
 		return i>0?true:false;
 	}
 }

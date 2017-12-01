@@ -202,7 +202,7 @@
                         return index+1;
                     }
                 },
-                {field:'letterNumber',title:'用信编号',width:100},
+                {field:'letterNumber',title:'编号',width:100},
                 {field:'letterCredit',title:'用信额（万元）',width:100},
                 {field:'belongCredit',title:'所属授信',width:100},
                 {field:'letterTime',title:'用信时间',width:100},

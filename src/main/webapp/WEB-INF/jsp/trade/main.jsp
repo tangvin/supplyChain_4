@@ -3,6 +3,7 @@
 <%@ include file="/common/include.jsp"%>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title>贸易方首页</title>
 </head>
@@ -163,6 +164,9 @@
     $('#zijin').click(function(){
         $('#load').load('<%=request.getContextPath()%>/tradeMain/zijin.action')
     })
+    <%--  $('#setting2').click(function(){
+        $('#load').load('<%=request.getContextPath()%>/setting/settingByUserId.action')
+    }) --%>
 </script>
 </body>
 </html>
