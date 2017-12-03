@@ -31,4 +31,5 @@ public interface TradeLefferMapper {
     public Letter selectLetterById(Integer id);
 
 
+
 }

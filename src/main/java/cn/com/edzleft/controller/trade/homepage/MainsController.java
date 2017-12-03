@@ -6,6 +6,7 @@ import cn.com.edzleft.entity.Information;
 import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.trade.account.AccountService;
 import cn.com.edzleft.service.trade.information.TradeInformationService;
+import cn.com.edzleft.service.trade.order.TradeOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,18 @@ public class MainsController {
         private TradeInformationService tradeInformationService;
         @Autowired
         private AccountService accountService;
+        @Autowired
+        private TradeOrderService tradeOrderService;
+
+
+    /**
+     * 订单查看
+     * @return
+     */
+    @RequestMapping(value = "ddck")
+    public String ddck(){
+        return "/trade/order/viewOrder";
+    }
 
     /**
      * 认证资料
@@ -136,6 +149,8 @@ public class MainsController {
         return "/trade/order/order";
     }
 
+
+
     /**
      * 新增合同
      * @return
@@ -191,6 +206,7 @@ public class MainsController {
     @RequestMapping(value="/xtsy")
     public  ModelAndView mains(HttpSession sessionInfo){
         ModelAndView mv = new ModelAndView("/trade/mains");
+
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer userId = session.getAdmin().getUserId();
         String userName = session.getAdmin().getUserName();

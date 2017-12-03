@@ -58,5 +58,13 @@
     <![CDATA[	limit #{start},#{pageSize}]]>
   </select>
 
+  <!--根据id查询用信详细信息-->
+  <select id="selectLetterById"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from gyl_letter
+    WHERE
+    id=#{id}
+  </select>
 
 </mapper>

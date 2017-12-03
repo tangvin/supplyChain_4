@@ -23,7 +23,7 @@ public interface CreditMapper {
 
     /**
      * 根据Map<String,Object>对象查询符合条件的总数据数
-     * @param  pageUtil
+     * @param  userPage
      * @return
      */
     public Integer getCrdeitAllCount(PageUtil<CreditTable> userPage);

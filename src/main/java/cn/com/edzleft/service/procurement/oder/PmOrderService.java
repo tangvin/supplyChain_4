@@ -17,8 +17,16 @@ public interface PmOrderService {
 
 	String insetOrder3(Integer userId);
 
-	Integer insetOrder4(Integer userId);
+	String insetOrder4(Integer userId);
 
-	void setOrderStatus(Integer id, Integer flag);
+	Order getSelectOrder(Integer id);
+
+	int updOrderStatus(Integer id, Integer flag);
+
+	int commitSqyx(Integer id, Integer flag, String applicationletter);
+
+	Integer insetOrder5(Integer userId);
+
+
 
 }

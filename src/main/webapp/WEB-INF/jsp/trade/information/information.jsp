@@ -63,7 +63,14 @@
                                             </tr>
                                             <tr>
                                                 <td>企业名称:</td>
-                                                <td><span>${information.entName}</span><span class="drz">待认证</span></td>
+                                                <td><span>${information.entName}</span>
+                                                    <c:if test="${information.certificationStatus == 0}">
+                                                        <a href="#"><span class="drz" id="zlrz">待认证</span></a>
+                                                    </c:if>
+                                                    <c:if test="${information.certificationStatus == 1}">
+                                                        <span class="drzs">已认证</span>
+                                                    </c:if>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>社会统一信用代码:</td>

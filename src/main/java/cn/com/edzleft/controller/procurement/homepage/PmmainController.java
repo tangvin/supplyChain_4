@@ -1,18 +1,16 @@
 package cn.com.edzleft.controller.procurement.homepage;
 
-import javax.servlet.http.HttpSession;
-
+import cn.com.edzleft.entity.Account;
+import cn.com.edzleft.entity.Information;
+import cn.com.edzleft.entity.SessionInfo;
+import cn.com.edzleft.service.procurement.homepage.PmHomePageService;
+import cn.com.edzleft.service.trade.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.com.edzleft.entity.Account;
-import cn.com.edzleft.entity.Information;
-import cn.com.edzleft.entity.SessionInfo;
-import cn.com.edzleft.service.procurement.account.Pmaccountservice;
-import cn.com.edzleft.service.procurement.homepage.PmHomePageService;
-import cn.com.edzleft.service.trade.account.AccountService;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by ASUS on 2017/11/15.
@@ -26,12 +24,42 @@ public class PmmainController {
 	
 	@Autowired
     private AccountService accountService;
-	
+    /**
+     * 认证资料
+     * @return
+     */
+    @RequestMapping(value = "zlrz")
+    public String zlrz(){
+        return "procurement/information/attestation";
+    }
+
+    /**
+     * 资料编辑
+     * @return
+     */
+    @RequestMapping(value = "updateInformation")
+    public String updateInformation(){
+        return "procurement/information/updateInformation";
+    }
+
+    /**
+     * 查看订单
+     * @return
+     */
 	@RequestMapping("insertOrder")
 	public String insertOrder(){
 		return "procurement/order/insertOrder";
 	}
-	
+
+    /**
+     * 订单查看
+     * @return
+     */
+	@RequestMapping(value = "ddck")
+	public String ddck(){
+	    return "/procurement/order/viewOrder";
+    }
+
     /**
      * 账户安全
      * @return

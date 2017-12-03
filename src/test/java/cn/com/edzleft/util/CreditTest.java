@@ -46,7 +46,7 @@ public class CreditTest {
      */
     @Test
     public void testDetail(){
-        CreditTable byId = creditMapper.selectCreditById(1);
+        CreditTable byId = creditMapper.selectCreditById(2);
         System.out.println(byId);
     }
 

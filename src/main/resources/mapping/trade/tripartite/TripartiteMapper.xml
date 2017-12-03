@@ -52,8 +52,8 @@
 
 
 
-
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <!--根据id查询出三分账户信息-->
+  <select id="selectTripartiteById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from gyl_tripartite

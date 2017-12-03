@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+	String w=request.getParameter("w");
+	String e=request.getParameter("e");
+%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +12,11 @@
        .xzdd{
           margin-right:40px;
        }
+        #butt{
+            cursor: pointer;
+        }
     </style>
+
 </head>
 <body>
 <div class='col-xs-12'>
@@ -23,7 +31,7 @@
         <div class="col-xs-12">
             <!--合同签约 状态-->
             <div class="khh">
-                <form class="form-inline khh_form khh_form1" id="orderform">
+                <form class="form-inline khh_form khh_form1" id="ordersform">
                     <div class="form-group">
                         <label>状态</label>
                         <select class="form-control select" id="orderStatus">
@@ -59,6 +67,81 @@
             <div class="panel-body" style="padding-bottom:0px;">
                <table id="tb_departments" class="cj_table"></table>
             </div>
+            
+           <!--领取订单 模态框-->
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="panel-body text-center">
+                            	确定执行此操作吗？
+                        </div>
+                        <div class="modal-footer">
+                            <button id="lqdd" type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!--申请融信 模态框-->
+<%-- 			<div class="modal fade bs-example-modal-sm_sq" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			    <div class="modal-dialog modal-sm" role="document">
+			        <div class="modal-content">
+			            <div class="panel-body">
+			                <div class="panel-body text-center">
+			                    <form class="form-inline khh_form">
+			                        <div class="form-group">
+			                            <label>订单编号:</label>
+			                            <span va>${order.Number}</span>
+			                            <input class="form-control" type="text"  value="${order.Number}"> 
+			                        </div>
+			                        <div class="form-group">
+			                            <label>订单金额:</label>
+			                            <span>${order.orderAmount}</span> 
+			                        </div>
+			                        <div class="form-group">
+			                            <label>申请用信:</label>
+			                            <input style="width: 100px;" type="text" class="form-control">  ￥万元
+			                        </div>
+			                    </form>
+			                </div>
+			                <div class="modal-footer">
+			                    <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+			                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+ --%>			
+ <!-- Modal -->
+                <div class="modal fade bs-example-modal-sm_sq" id="myModalLetter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabelLetter">Modal title</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="table-responsive text-center">
+                                	<form class="form-inline khh_form" id="orderForm">
+	                                    <table class="table table-bordered bj_table" >
+	                                        <tbody id="wybLetter">
+	
+	                                        </tbody>
+	                                    </table>
+                                    </form>
+                                </div>
+                            </div>
+                          
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" id="orderClike">Close</button>
+                                <button type="button" class="btn btn-primary" id="qx">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ 			<!--申请融信 模态框-->
            
         </div>
     </div>
@@ -76,6 +159,7 @@
         $('#load').load('<%=request.getContextPath()%>/procurementMain/insertOrder.action')
     })
     
+ <%--<%=request.getContextPath()%>/procurementMain/ddck.action--%>
     /* 订单展示 */
    $(function(){
         $("#tb_departments").bootstrapTable({
@@ -89,10 +173,10 @@
                         return index+1;
                     }
                 },
-                {field:'orderNumber',title:'订单编号',width:100},
+                {field:'orderNumber',title:'订单编号',width:100,formatter:operateFormatter,events:operateEvents1},
                 {field:'orderStatus',title:'订单状态',width:100,
                     formatter: function(value,row,index){
-                        if( value == '0') {
+                    	if( value == '0') {
                             return "待确认";
                         } else if(value == '1') {
                             return "待付款";
@@ -104,6 +188,10 @@
                             return "已完成";
                         } else if(value == '5') {
                             return "已关闭";
+                        }else if(value==6){
+                            return "已驳回";
+                        }else if(value==7){
+                            return "历史";
                         }
                     }
                 },
@@ -121,26 +209,36 @@
                     width:25,
                     formatter:function(value , row){
                         var str = '';
-                        if(row.orderStatus == 1){
-                            str += '<button class="btn btn-default bg_btn" href="#" value="取消" onclick="showUserAttach(\''+row.id+'\')">取消</button>';
-                            str += '<button class="btn btn-default bg_btn" href="#" value="申请用信" onclick="showUserAttach(\''+row.id+'\')">申请用信</button>';
-                        } else if(row.orderStatus == 0){
-                            str +='<button class="btn btn-warning bg_btn" href="#" value="取消" onclick="showUserAttach(\''+row.id+'\')">取消</button>';
-                            str +='<button class="btn btn-warning bg_btn" href="#" value="提醒确认" onclick="showUserAttach(\''+row.id+'\')">提醒确认</button>';
-                        } else if(row.orderStatus == 2){
-                            str +='<button class="btn btn-info bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
-                            str +='<button class="btn btn-info bg_btn" href="#" value="提醒发货" onclick="showUserAttach(\''+row.id+'\')">提醒发货</button>';
-                        } else if(row.orderStatus == 3){
-                            str +='<button class="btn btn-success bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
-                            str +='<button class="btn btn-success bg_btn" href="#" value="确认收货" onclick="showUserAttach(\''+row.id+'\')">确认收货</button>';
-                        } else if(row.orderStatus == 4){
-                            str +='<button class="btn btn-primary bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
-                        } else if (row.orderStatus == 5){
-                        	 str +='<button class="btn btn-primary bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
-                        }
+                        if(row.orderStatus == 0){//待确认
+   	                        str += '<button class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm"  href="#" value="取消" onclick="showUserAttach(\''+row.orderId+'\',1)">取消</button>';
+                            str += '<button class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm"  href="#" value="编辑" onclick="showUserAttach(\''+row.orderId+'\',2)">编辑</button>';
+                        }  else if(row.orderStatus == 1){//待付款
+                            str +='<button class="btn btn-warning bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="取消" onclick="showUserAttach(\''+row.orderId+'\',3)">取消</button>';
+                            str +='<button class="btn btn-warning bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="编辑" onclick="showUserAttach(\''+row.orderId+'\',4)">编辑</button>';
+                            str +='<button class="btn btn-warning bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_sq"   value="申请用信" onclick="sqyx(\''+row.orderId+'\',5)">申请用信</button>';
+                        } else if(row.orderStatus == 2){//待发货
+                            str +='<button class="btn btn-info bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="提醒发货" onclick="showUserAttach(\''+row.orderId+'\',6)">提醒发货</button>';
+                        } else if(row.orderStatus == 3){//待收货
+                            str +='<button class="btn btn-success bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="确认收货" onclick="showUserAttach(\''+row.orderId+'\',7)">确认收货</button>';
+                        } else if(row.orderStatus == 4){//已完成
+                        	str+='--';
+                        } else if (row.orderStatus == 5){//已关闭
+                        	 //str += '<button class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm"  href="#" value="取消" onclick="showUserAttach(\''+row.orderId+'\',8)">取消</button>';
+                            // str += '<button class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm"  href="#" value="编辑" onclick="showUserAttach(\''+row.orderId+'\',9)">编辑</button>';
+                             str+='--';
+                        } else if (row.orderStatus == 6){//已驳回
+                       	 str +='<button class="btn btn-primary bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="取消" onclick="showUserAttach(\''+row.orderId+'\',10)">取消</button>';
+                    	 str +='<button class="btn btn-primary bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="编辑" onclick="showUserAttach(\''+row.orderId+'\',11)">编辑</button>';
+                    	} else if (row.orderStatus == 7){//历史
+                    		str+='--';
+                    }
                         return str;
                     }
                 }
+                <%-- $('#asdf').click(function(){
+                	alert('111')
+                	$('#load').load('<%=request.getContextPath()%>/procurementMain/insertOrder.action')
+                }) --%>
             ],
             url:'<%=request.getContextPath()%>/pmorder/pmgetorder.action',
             method:'post',
@@ -170,7 +268,7 @@
             pageNumber: params.pageNumber,
             pageSize: params.pageSize,
             orderStatus:$("#orderStatus").val(),
-            orderCreator:$("#orderCreator").val(),
+            orderCreator:$("#orderCreator").val(), 
             orderCreatorTrade:$("#orderCreatorTrade").val(),
         };
         return temp;
@@ -181,8 +279,124 @@
     }
     //重置查询
     function reset(){
-        $("#orderform").form('reset');
+        $("#ordersform").form('reset');
         search();
     }
+
+    function operateFormatter(value,index,row) {
+        var le=''
+        le='<a id="butt">'+value+'</a>'
+        return le
+    }
+
+    window.operateEvents1={
+        'click #butt':function (e,value,index,row) {
+            $('#load').load('<%=request.getContextPath()%>/procurementMain/ddck.action')
+        }
+    }
+
+
+
+        //待确认
+<%--     function dqr(w,e){
+    		alert("aaaaaaaaaaaa");
+    		$.ajax({
+                url:'<%=request.getContextPath()%>/pmorder/cancelOrderStatus.action?id='+w+'&&flag='+e,
+                type:'post',
+                dataType:"json",
+                success:function (data) {
+                    window.location.reload();
+                }
+            })
+    	
+    } --%>
+    //待确认状态下按钮触发事件
+    function showUserAttach(w,e){
+    $("#lqdd").click(function () {
+        $.ajax({
+            url:'<%=request.getContextPath()%>/pmorder/cancelOrderStatus.action?id='+w+'&&flag='+e,
+            type:'post',
+            dataType:"json",
+           // data:$("#f").serialize(),
+            success:function (data) {
+            	if(data==1){
+                    alert("确认成功");
+                    setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/ddgl.action')",500);
+            	}
+            }
+        })
+
+    })
+    }
+    
+<%--     function sqyx(w,e){
+    	
+    	location.href='<%=request.getContextPath()%>/pmorder/sqyx.action?id='+w+'&&flag='+e;
+    	
+    	//alert(w+"++"+e);
+    	$.ajax({
+            url:'<%=request.getContextPath()%>/pmorder/sqyx.action?id='+w+'&&flag='+e,
+            type:'post',
+            dataType:"json",
+           // data:$("#f").serialize(),
+            success:function (data) {
+                console.log(data)
+            }
+        })
+    } --%>
+    
+  //授信
+    function sqyx(id,flag){
+    	 /* 提交申请用信 */
+    	  $("#orderClike").click(function(){
+    		  alert($("#orderForm").serialize())
+    		  $.ajax({
+    			  url: '<%=request.getContextPath()%>/pmorder/commitSqyx.action?id='+id+'&&flag='+flag,
+    	          data:$("#orderForm").serialize(),
+    	          type:"POST",
+    	          dataType:"json",
+    	          success: function(data){
+    	        	  alert("申请用信成功");
+                      setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/ddgl.action')",500);
+    	          }
+    		  });
+    	  });
+        $.ajax({
+            url:"<%=request.getContextPath()%>/pmorder/pmgetorder.action",
+            data:{ pageNumber:1, pageSize: 10},
+            type:"POST",
+            dataType:"json",
+            success: function(data){
+                // console.log(data.rows[0])
+                for(var i=0;i<data.rows.length;i++){
+                    $('#wybLetter').empty()
+                    if(data.rows[i].orderId==id){
+                        // console.log(data.rows[i].id)
+                        /* var a = data.rows[i].creditStatus
+                            console.log(a) */
+                        var data_con = '<tr><td class="col-xs-4">id：</td> <td class="col-xs-4">'+data.rows[i].orderId+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">用信编号：</td> <td class="col-xs-4">'+data.rows[i].orderNumber+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">申请用信：</td> <td class="col-xs-4"><input type="text" id="lcj" value="'+data.rows[i].applicationletter+'" name="applicationletter"></td></tr>';
+                    }
+                    $('#wybLetter').append(data_con);
+                   
+                 
+                }
+                
+              /*   if(a==0){
+                        $('.status').html('已审批')
+                 }else{
+                    $('.status').html('待审批')
+                } */
+
+            }
+        });
+
+    }
+  
+   
+ 
+ 	
+    
 </script>
 </html>

@@ -44,14 +44,13 @@ public class LetterTest {
     }
 
     /**
-     * 根据id查询详细的授信信息
+     * 根据id查看用信信息
      */
-   /* @Test
+    @Test
     public void testDetail(){
-        Letter byId = letterMapper.selectCreditById(1);
+        Letter byId = letterMapper.selectLetterById(1);
         System.out.println(byId);
     }
-*/
 
 
 }
