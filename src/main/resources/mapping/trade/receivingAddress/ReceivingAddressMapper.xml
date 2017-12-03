@@ -22,6 +22,14 @@
     from gyl_receiving_address
   </select>
 
+  <!--根据id查询收货地址-->
+  <select id="selectAddressById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from gyl_receiving_address
+    WHERE r_address_id=#{rAddressId}
+  </select>
+
   <!--根据id删除收货地址-->
   <delete id="deleteAddress" parameterType="java.lang.Integer" >
     delete from gyl_receiving_address

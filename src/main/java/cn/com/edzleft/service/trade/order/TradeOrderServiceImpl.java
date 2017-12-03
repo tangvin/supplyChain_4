@@ -48,105 +48,37 @@ public class TradeOrderServiceImpl  implements TradeOrderService{
      * @param id
      */
     @Override
-    public void setOrderStatus(Integer id,Integer flag,Order orders) {
+    public Order setOrderStatus(Integer id,Integer flag) {
         //根据id查询当前的订单
         Order order = orderMapper.selectOrderById(id);
-        Integer orderStatus = order.getOrderStatus();
+        //Integer orderStatus = order.getOrderStatus();
         if(flag==1) {   //待确认--领取订单
-               //领取订单（0---1）
-               order.setOrderStatus(1);
-               order.setOrderConfirmationTime(new Date());
-               SessionInfo sessionInfo = new SessionInfo();
-          //     String userName = sessionInfo.getAdmin().getUserName();
-          //     order.setOrderCreatorTrade(userName);
-           } else if (flag == 2) { //待确认--驳回
-               //驳回（0--6）
-               order.setOrderStatus(6);
-               //order.setOrderState("信息不完整");
-            }else if(flag==4){  //待付款 2 --3配置发货
-                order.setOrderStatus(3);
-            }
+           //领取订单（0---1）
+           order.setOrderId(id);
+           order.setOrderStatus(1);
+           order.setOrderConfirmationTime(new Date());
+           order.setOrderCreatorTrade("贸易方名称");
+       } else if (flag == 2) { //待确认--驳回
+           //驳回（0--6）
+            order.setOrderId(id);
+            order.setOrderStatus(6);
+           //order.setOrderState("信息不完整");
+        }else if(flag==4){  //待付款 2 --3配置发货
+            order.setOrderId(id);
+            order.setOrderStatus(3);
+        }
+        orderMapper.updateStatus(order);
+        System.out.println("状态修改完毕");
+        return order;
+    }
+    /**
+     * 添加货运订单
+     * @param order
+     */
+        public void updateOrder(Order order){
             orderMapper.updateStatus(order);
         }
 
-    /**
-     * 0.待确认状态
-     * @param id
-     */
-    @Override
-    public void setOrderStatus0(Integer id) {
-        Order order = orderMapper.selectOrderById(id);
-        Integer orderStatus = order.getOrderStatus();
-       //当前状态为0时
-        if(orderStatus==0){
-           //设置2种状态
-            if(orderStatus==1){
 
-            }
-        }
-    }
-
-    /**
-     * 1.待付款状态
-     * @param id
-     */
-    @Override
-    public void setOrderStatus1(Integer id) {
-
-    }
-
-    /**
-     *2.待发货状态
-     * @param id
-     */
-    @Override
-    public void setOrderStatus2(Integer id) {
-
-    }
-
-    /**
-     *3.待收货状态
-     * @param id
-     */
-    @Override
-    public void setOrderStatus3(Integer id) {
-
-    }
-
-    /**
-     * 4.已完成状态
-     * @param id
-     */
-    @Override
-    public void setOrderStatus4(Integer id) {
-
-    }
-
-    /**
-     * 5.已关闭状态
-     * @param id
-     */
-    @Override
-    public void setOrderStatus5(Integer id) {
-
-    }
-
-    /**
-     * 6.已驳回状态
-     * @param id
-     */
-    @Override
-    public void setOrderStatus6(Integer id) {
-
-    }
-
-    /**
-     * 7.历史状态
-     * @param id
-     */
-    @Override
-    public void setOrderStatus7(Integer id) {
-
-    }
 
 }

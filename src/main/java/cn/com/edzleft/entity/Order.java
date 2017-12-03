@@ -1,5 +1,7 @@
 package cn.com.edzleft.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 /**订单表
@@ -17,6 +19,7 @@ public class Order {
     /**
      * 订单创建时间
      */
+    @JSONField(format="yyyy-MM-dd")
     private Date orderCreatTime;
     /**
      * 订单创建者（采方）
@@ -29,6 +32,7 @@ public class Order {
     /**
      * 订单确认时间
      */
+    @JSONField(format="yyyy-MM-dd")
     private Date orderConfirmationTime;
     /**
      * 订单状态
@@ -37,7 +41,7 @@ public class Order {
     /**
      * 订单物流运货单位(关联到运货单位表)
      */
-    private String logisticsUnit;
+    private Integer logisticsUnitId;
     /**
      * 订单物流运单编号(关联到运货单位表)
      */
@@ -45,7 +49,7 @@ public class Order {
     /**
      * 收货地址(关联到收货地址表)
      */
-    private String receivingAddress;
+    private Integer receivingAddressId;
     /**
      * 收货联系人
      */
@@ -57,19 +61,19 @@ public class Order {
     /**
      * 订单所属主合同(关联到合同表)
      */
-    private Integer principalOrder;
+    private Integer principalOrderId;
     /**
      * 订单所获授信(关联到授信表)
      */
-    private Integer creditGet;
+    private Integer creditGetId;
     /**
      * 订单所用授信(关联到用信表)
      */
-    private Integer creditUse;
+    private Integer creditUseId;
     /**
      * 授信人(关联到基本资料表)
      */
-    private String creditGrantor;
+    private Integer creditGrantorId;
     /**
      * 订单金额
      */
@@ -85,10 +89,11 @@ public class Order {
     /**
      * 支付账号(关联到三方账户表)
      */
-    private String paymentAccount;
+    private Integer paymentAccountId;
     /**
      * 支付时间(关联到三方账户表)
      */
+    @JSONField(format="yyyy-MM-dd")
     private Date paymentTime;
     /**
      * 发票
@@ -101,7 +106,7 @@ public class Order {
     /**
      * 货运单号
      */
-    private String freightNumber;
+    private Integer freightNumberId;
     /**
      * 货物商品
      */
@@ -186,28 +191,28 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public String getLogisticsUnit() {
-        return logisticsUnit;
+    public Integer getLogisticsUnitId() {
+        return logisticsUnitId;
     }
 
-    public void setLogisticsUnit(String logisticsUnit) {
-        this.logisticsUnit = logisticsUnit == null ? null : logisticsUnit.trim();
+    public void setLogisticsUnitId(Integer logisticsUnitId) {
+        this.logisticsUnitId = logisticsUnitId == null ? null : logisticsUnitId;
     }
 
     public String getLogisticsNum() {
         return logisticsNum;
     }
 
-    public void setLogisticsNum(String logisticsNum) {
-        this.logisticsNum = logisticsNum == null ? null : logisticsNum.trim();
+    public void setLogisticsNum(Integer logisticsNumId) {
+        this.logisticsNum = logisticsNum == null ? null : logisticsNum;
     }
 
-    public String getReceivingAddress() {
-        return receivingAddress;
+    public Integer getReceivingAddressId() {
+        return receivingAddressId;
     }
 
-    public void setReceivingAddress(String receivingAddress) {
-        this.receivingAddress = receivingAddress == null ? null : receivingAddress.trim();
+    public void setReceivingAddress(Integer receivingAddressId) {
+        this.receivingAddressId = receivingAddressId == null ? null : receivingAddressId;
     }
 
     public String getOgisticsName() {
@@ -226,36 +231,36 @@ public class Order {
         this.contactPhone = contactPhone;
     }
 
-    public Integer getPrincipalOrder() {
-        return principalOrder;
+    public Integer getPrincipalOrderId() {
+        return principalOrderId;
     }
 
-    public void setPrincipalOrder(Integer principalOrder) {
-        this.principalOrder = principalOrder;
+    public void setPrincipalOrderId(Integer principalOrder) {
+        this.principalOrderId = principalOrderId;
     }
 
     public Integer getCreditGet() {
-        return creditGet;
+        return creditGetId;
     }
 
     public void setCreditGet(Integer creditGet) {
-        this.creditGet = creditGet;
+        this.creditGetId = creditGetId;
     }
 
-    public Integer getCreditUse() {
-        return creditUse;
+    public Integer getCreditUseId() {
+        return creditUseId;
     }
 
     public void setCreditUse(Integer creditUse) {
-        this.creditUse = creditUse;
+        this.creditUseId = creditUseId;
     }
 
-    public String getCreditGrantor() {
-        return creditGrantor;
+    public Integer getCreditGrantorId() {
+        return creditGrantorId;
     }
 
-    public void setCreditGrantor(String creditGrantor) {
-        this.creditGrantor = creditGrantor == null ? null : creditGrantor.trim();
+    public void setCreditGrantor(Integer creditGrantor) {
+        this.creditGrantorId = creditGrantorId == null ? null : creditGrantorId;
     }
 
     public Double getOrderAmount() {
@@ -282,12 +287,12 @@ public class Order {
         this.amountActuallyPaid = amountActuallyPaid;
     }
 
-    public String getPaymentAccount() {
-        return paymentAccount;
+    public Integer getPaymentAccountId() {
+        return paymentAccountId;
     }
 
     public void setPaymentAccount(String paymentAccount) {
-        this.paymentAccount = paymentAccount == null ? null : paymentAccount.trim();
+        this.paymentAccountId = paymentAccountId == null ? null : paymentAccountId;
     }
 
     public Date getPaymentTime() {
@@ -314,12 +319,12 @@ public class Order {
         this.freightUnit = freightUnit;
     }
 
-    public String getFreightNumber() {
-        return freightNumber;
+    public Integer getFreightNumber() {
+        return freightNumberId;
     }
 
-    public void setFreightNumber(String freightNumber) {
-        this.freightNumber = freightNumber;
+    public void setFreightNumberId(Integer freightNumberId) {
+        this.freightNumberId = freightNumberId;
     }
 
     @Override
@@ -339,30 +344,30 @@ public class Order {
         if (orderConfirmationTime != null ? !orderConfirmationTime.equals(order.orderConfirmationTime) : order.orderConfirmationTime != null)
             return false;
         if (orderStatus != null ? !orderStatus.equals(order.orderStatus) : order.orderStatus != null) return false;
-        if (logisticsUnit != null ? !logisticsUnit.equals(order.logisticsUnit) : order.logisticsUnit != null)
+        if (logisticsUnitId != null ? !logisticsUnitId.equals(order.logisticsUnitId) : order.logisticsUnitId != null)
             return false;
         if (logisticsNum != null ? !logisticsNum.equals(order.logisticsNum) : order.logisticsNum != null) return false;
-        if (receivingAddress != null ? !receivingAddress.equals(order.receivingAddress) : order.receivingAddress != null)
+        if (receivingAddressId != null ? !receivingAddressId.equals(order.receivingAddressId) : order.receivingAddressId != null)
             return false;
         if (ogisticsName != null ? !ogisticsName.equals(order.ogisticsName) : order.ogisticsName != null) return false;
         if (contactPhone != null ? !contactPhone.equals(order.contactPhone) : order.contactPhone != null) return false;
-        if (principalOrder != null ? !principalOrder.equals(order.principalOrder) : order.principalOrder != null)
+        if (principalOrderId != null ? !principalOrderId.equals(order.principalOrderId) : order.principalOrderId != null)
             return false;
-        if (creditGet != null ? !creditGet.equals(order.creditGet) : order.creditGet != null) return false;
-        if (creditUse != null ? !creditUse.equals(order.creditUse) : order.creditUse != null) return false;
-        if (creditGrantor != null ? !creditGrantor.equals(order.creditGrantor) : order.creditGrantor != null)
+            if (creditGetId != null ? !creditGetId.equals(order.creditGetId) : order.creditGetId != null) return false;
+        if (creditUseId != null ? !creditUseId.equals(order.creditUseId) : order.creditUseId != null) return false;
+        if (creditGrantorId != null ? !creditGrantorId.equals(order.creditGrantorId) : order.creditGrantorId != null)
             return false;
         if (orderAmount != null ? !orderAmount.equals(order.orderAmount) : order.orderAmount != null) return false;
         if (amountPayable != null ? !amountPayable.equals(order.amountPayable) : order.amountPayable != null)
             return false;
         if (amountActuallyPaid != null ? !amountActuallyPaid.equals(order.amountActuallyPaid) : order.amountActuallyPaid != null)
             return false;
-        if (paymentAccount != null ? !paymentAccount.equals(order.paymentAccount) : order.paymentAccount != null)
+        if (paymentAccountId != null ? !paymentAccountId.equals(order.paymentAccountId) : order.paymentAccountId != null)
             return false;
         if (paymentTime != null ? !paymentTime.equals(order.paymentTime) : order.paymentTime != null) return false;
         if (invoice != null ? !invoice.equals(order.invoice) : order.invoice != null) return false;
         if (freightUnit != null ? !freightUnit.equals(order.freightUnit) : order.freightUnit != null) return false;
-        return freightNumber != null ? freightNumber.equals(order.freightNumber) : order.freightNumber == null;
+        return freightNumberId != null ? freightNumberId.equals(order.freightNumberId) : order.freightNumberId == null;
     }
 
     @Override
@@ -374,23 +379,23 @@ public class Order {
         result = 31 * result + (orderCreatorTrade != null ? orderCreatorTrade.hashCode() : 0);
         result = 31 * result + (orderConfirmationTime != null ? orderConfirmationTime.hashCode() : 0);
         result = 31 * result + (orderStatus != null ? orderStatus.hashCode() : 0);
-        result = 31 * result + (logisticsUnit != null ? logisticsUnit.hashCode() : 0);
+        result = 31 * result + (logisticsUnitId != null ? logisticsUnitId.hashCode() : 0);
         result = 31 * result + (logisticsNum != null ? logisticsNum.hashCode() : 0);
-        result = 31 * result + (receivingAddress != null ? receivingAddress.hashCode() : 0);
+        result = 31 * result + (receivingAddressId != null ? receivingAddressId.hashCode() : 0);
         result = 31 * result + (ogisticsName != null ? ogisticsName.hashCode() : 0);
         result = 31 * result + (contactPhone != null ? contactPhone.hashCode() : 0);
-        result = 31 * result + (principalOrder != null ? principalOrder.hashCode() : 0);
-        result = 31 * result + (creditGet != null ? creditGet.hashCode() : 0);
-        result = 31 * result + (creditUse != null ? creditUse.hashCode() : 0);
-        result = 31 * result + (creditGrantor != null ? creditGrantor.hashCode() : 0);
+        result = 31 * result + (principalOrderId != null ? principalOrderId.hashCode() : 0);
+        result = 31 * result + (creditGetId != null ? creditGetId.hashCode() : 0);
+        result = 31 * result + (creditUseId != null ? creditUseId.hashCode() : 0);
+        result = 31 * result + (creditGrantorId != null ? creditGrantorId.hashCode() : 0);
         result = 31 * result + (orderAmount != null ? orderAmount.hashCode() : 0);
         result = 31 * result + (amountPayable != null ? amountPayable.hashCode() : 0);
         result = 31 * result + (amountActuallyPaid != null ? amountActuallyPaid.hashCode() : 0);
-        result = 31 * result + (paymentAccount != null ? paymentAccount.hashCode() : 0);
+        result = 31 * result + (paymentAccountId != null ? paymentAccountId.hashCode() : 0);
         result = 31 * result + (paymentTime != null ? paymentTime.hashCode() : 0);
         result = 31 * result + (invoice != null ? invoice.hashCode() : 0);
         result = 31 * result + (freightUnit != null ? freightUnit.hashCode() : 0);
-        result = 31 * result + (freightNumber != null ? freightNumber.hashCode() : 0);
+        result = 31 * result + (freightNumberId != null ? freightNumberId.hashCode() : 0);
         return result;
     }
 
@@ -404,24 +409,25 @@ public class Order {
                 ", orderCreatorTrade='" + orderCreatorTrade + '\'' +
                 ", orderConfirmationTime=" + orderConfirmationTime +
                 ", orderStatus=" + orderStatus +
-                ", logisticsUnit='" + logisticsUnit + '\'' +
+                ", logisticsUnitId='" + logisticsUnitId + '\'' +
                 ", logisticsNum='" + logisticsNum + '\'' +
-                ", receivingAddress='" + receivingAddress + '\'' +
+                ", receivingAddressId='" + receivingAddressId + '\'' +
                 ", ogisticsName='" + ogisticsName + '\'' +
                 ", contactPhone=" + contactPhone +
-                ", principalOrder=" + principalOrder +
-                ", creditGet=" + creditGet +
-                ", creditUse=" + creditUse +
-                ", creditGrantor='" + creditGrantor + '\'' +
+                ", principalOrderId=" + principalOrderId +
+                ", creditGetId=" + creditGetId +
+                ", creditUseId=" + creditUseId +
+                ", creditGrantorId='" + creditGrantorId + '\'' +
                 ", orderAmount=" + orderAmount +
                 ", amountPayable=" + amountPayable +
                 ", amountActuallyPaid=" + amountActuallyPaid +
-                ", paymentAccount='" + paymentAccount + '\'' +
+                ", paymentAccountId='" + paymentAccountId + '\'' +
                 ", paymentTime=" + paymentTime +
                 ", invoice='" + invoice + '\'' +
                 ", freightUnit='" + freightUnit + '\'' +
-                ", freightNumber='" + freightNumber + '\'' +
+                ", freightNumberId='" + freightNumberId + '\'' +
                 '}';
     }
+
 
 }

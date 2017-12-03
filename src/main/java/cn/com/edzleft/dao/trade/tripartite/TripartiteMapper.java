@@ -25,7 +25,12 @@ public interface TripartiteMapper {
     public List<Tripartite> selectAllTripartiteByPage(PageUtil<Tripartite> pageUtil);
 
 
-
+    /**
+     *  根据id 查询出三分账户的信息
+     * @param id
+     * @return
+     */
+    public Tripartite selectTripartiteById(Integer id);
 
 
 

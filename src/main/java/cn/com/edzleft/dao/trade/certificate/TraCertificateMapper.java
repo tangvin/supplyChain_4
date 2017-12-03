@@ -22,4 +22,6 @@ public interface TraCertificateMapper {
 	int getCounts(Integer userId);
 	//根据userId查询ukey
 	List<Ukey> getByUserId(Integer userId);
+
+
 }

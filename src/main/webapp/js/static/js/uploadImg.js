@@ -13,9 +13,8 @@ function imgUpload(obj) {
 			var imgSrcI = getObjectURL(fileList[i]);
 			imgName.push(fileList[i].name);
 			imgSrc.push(imgSrcI);
-			console.log(imgSrc)
 			imgFile.push(fileList[i]);
-			//console.log(imgFile)
+			console.log(imgFile)
 		}
 		addNewContent(imgBox);
 	})

@@ -73,28 +73,26 @@
             <!--配置发货 模态框-->
             <div class="modal fade bs-example-modal-pzfh" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
-                    <form   id="hygl"    method="post">
+                    <form  id="formId" method="post" >
                     <div class="modal-content">
                         <div class="modal-header">
                             <button   type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">配置发货</h4>
                         </div>
                         <div class="modal-body">
+                            <div class="table-responsive text-center">
+                                <table class="table table-bordered bj_table">
+                                    <tbody id="wyb">
+
+                                    </tbody>
+                                </table>
+                            </div>
+
                             <div class="table-responsive">
-                                <table class="table htbg pzfh">
-                                    <tbody>
-                                    <tr>
-                                        <div class="row">
-                                            <td class="col-xs-3">订单编号：</td>
-                                            <td class="col-xs-9"></td>
-                                        </div>
-                                    </tr>
-                                    <tr>
-                                        <div class="row">
-                                            <td class="col-xs-3">订单金额：</td>
-                                            <td class="col-xs-9"></td>
-                                        </div>
-                                    </tr>
+                            <%--<form id="pzfh"  action="<%=request.getContextPath()%>/tradeOrder/pzfh.action"  method="post" enctype="multipart/form-data">--%>
+
+                            <table class="table htbg pzfh">
+                                <tbody>
                                     <tr>
                                         <div class="row">
                                             <td class="col-xs-3"><span class="xingxing">*</span>货运单位：</td>
@@ -102,83 +100,54 @@
                                                 <div class="row pzfh_row">
                                                     <div class="col-xs-5 pzfh_row_div">
                                                         <select class="form-control" name="freightUnit">
-                                                            <option>123123123</option>
-                                                            <option>全部1</option>
-                                                            <option>全部2</option>
-                                                            <option>全部3</option>
-                                                            <option>全部4</option>
+                                                            <option>韵达</option>
+                                                            <option>申通</option>
+                                                            <option>圆通</option>
+                                                            <option>顺丰</option>
+                                                            <option>菜鸟</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-xs-5">
-                                                        <button type="button" class="btn btn-danger btn-default">管理货运单位</button>
+                                                    <button type="button" class="btn btn-danger btn-default">管理货运单位</button>
                                                     </div>
                                                 </div>
                                             </td>
                                         </div>
                                     </tr>
-                                    <tr>
-                                        <div class="row">
-                                            <td class="col-xs-3">订单金额:</td>
-                                            <td class="col-xs-8">
-                                                <div class="row row_ddje">
-                                                    <div class="col-xs-5 row_ddje_div">
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                    <div class="col-xs-6 row_ddje_con">
-                                                        暂未查询到货运单位，请检查
-                                                    </div>
+                                <tr>
+                                    <div class="row">
+                                        <td class="col-xs-3">货运编号:</td>
+                                        <td class="col-xs-8">
+                                            <div class="row row_ddje">
+                                                <div class="col-xs-5 row_ddje_div">
+                                                    <input type="text" name="freightNumber" class="form-control">
                                                 </div>
-                                            </td>
-                                        </div>
-                                    </tr>
+                                            <div class="col-xs-6 row_ddje_con">
+                                            暂未查询到货运单位，请检查
+                                            </div>
+                                            </div>
+                                        </td>
+                                    </div>
+                                </tr>
 
-                                    </tbody>
-                                </table>
+                                </tbody>
+                            </table>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-default" data-dismiss="modal" id="pzfh"   >确认</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                                </div>
+                            </form>
                             </div>
+
+
                         </div>
-                        <div class="modal-footer">
-                            <button id="pzfh" type="button" class="btn btn-default" data-dismiss="modal">确认</button>
-                            <button type="button" class="btn btn-primary">取消</button>
-                        </div>
+
                     </div><!-- /.modal-content -->
-                    </form>
+
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
             <!--配置发货 模态框-->
             <!--合同表格 结束-->
-            <!--合同分页 start-->
-            <!-- <div class="fy">
-                <div class="row fy_row">
-                    <div class="col-xs-4">
-                        <p class="fy_con">共计3条数据，共1页</p>
-                    </div>
-                    <div class="col-xs-8">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">首页</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">末页</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div> -->
-            <!--合同分页 eng-->
         </div>
     </div>
 </div>
@@ -191,7 +160,15 @@
         console.log(start.toISOString(), end.toISOString(), label);
     });
 
-    /* 订单展示 */
+    imgUpload({
+        inputId:'file', //input框id
+        imgBox:'imgBox', //图片容器id
+        buttonId:'btn', //提交按钮id
+        upUrl:'',  //提交地址
+        data:'file1',//参数名
+    })
+
+    /* 订单列表展示 */
     $(function(){
         $("#tb_departments").bootstrapTable({
             //隔行变色
@@ -246,7 +223,7 @@
                         } else if(row.orderStatus ==1){//待付款
                             str+='--';
                         } else if(row.orderStatus ==2){//待发货
-                            str +='<button   class="btn-warning btn-sm" data-toggle="modal" data-target=".bs-example-modal-pzfh" href="#" value="待发货" onclick="showUserAttachs(\''+row.orderId+'\',4)">配置发货</button>';
+                            str +='<button  id="pz" class="btn-warning btn-sm" data-toggle="modal" data-target=".bs-example-modal-pzfh" href="#" value="待发货" onclick="showUserAttachs(\''+row.orderId+'\',4)">配置发货</button>';
                         } else if(row.orderStatus ==3){//待收货
                             str+='--';
                         } else if(row.orderStatus ==4){//已完成
@@ -307,37 +284,63 @@
     }
 
 
-   //待确认状态下按钮触发事件
+   //待确认按钮  +  驳回按钮
     function showUserAttach(w,e){
-    $("#lqdd").click(function () {
-        $.ajax({
-            url:'<%=request.getContextPath()%>/tradeOrder/takeOrder.action?id='+w+'&&flag='+e,
-            type:'post',
-            dataType:"json",
-           // data:$("#f").serialize(),
-            success:function (data) {
-                window.location.reload();
-            }
-        })
-
-    })
-    }
-
-    //待发货状态下按钮
-    function showUserAttachs(w,e){
-        $("#pzfh").click(function () {
+        $("#lqdd").click(function () {
             $.ajax({
-                url:'<%=request.getContextPath()%>/tradeOrder/takeOrder.action?id='+w+'&&flag='+e,
+                url:'<%=request.getContextPath()%>/tradeOrder/lqdd.action?id='+w+'&&flag='+e,
                 type:'post',
                 dataType:"json",
-                data:$("#hygl").serialize(),
+               // data:$("#f").serialize(),
                 success:function (data) {
-                    window.location.reload();
+//                    window.location.reload();
                 }
             })
 
         })
     }
+
+
+
+    //配置发货数据回显
+        function showUserAttachs(w,e){
+            /**
+             * 配置发货表单提交
+             */
+            $("#pzfh").click(function () {
+                $.ajax({
+                    url:'<%=request.getContextPath()%>/tradeOrder/pzfh.action?id='+w+'&&flag='+e,
+                    type:'post',
+                    dataType:'json',
+                    data:$('#formId').serialize(),
+                    success:function(data) {
+
+                    }
+                })
+            })
+            $.ajax({
+            url:"<%=request.getContextPath()%>/tradeOrder/orderSelect.action",
+            data:{ pageNumber:1, pageSize: 10},
+            type:"POST",
+            dataType:"json",
+            success: function(data){
+                for(var i=0;i<data.rows.length;i++){
+                    $('#wyb').empty()
+                    if(data.rows[i].orderId==w){
+                        var data_con = '<tr><td class="col-xs-4">订单编号：</td> <td class="col-xs-4">'+data.rows[i].orderNumber+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">订单金额：</td> <td class="col-xs-4">'+data.rows[i].orderAmount+'</td></tr>';
+                    }
+                }
+                $('#wyb').append(data_con);
+            }
+        });
+
+    }
+
+
+
+
+
 
 
 

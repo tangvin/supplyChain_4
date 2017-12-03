@@ -67,7 +67,7 @@
                     </tr>
                     <tr>
                         <div class="row">
-                            <td class="col-xs-3 text-right"><spain class="xingxing">*</span>订单金额：</td>
+                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单金额：</td>
                             <td class="col-xs-8 text-left"><input type="text" id="orderAmount" class="form-control" placeholder="￥万元"></td>
                         </div>
                     </tr>
@@ -98,7 +98,7 @@
                         <div class="row">
                             <td class="col-xs-3 text-right"></td>
                             <td class="col-xs-8 text-left">
-                            	<div class="col-xs-8 text-left">收货人:<span id="rAddressPerson"></div>
+                                <div class="col-xs-8 text-left">收货人:<span id="rAddressPerson"></span></div>
                             </td>
                         </div>
                     </tr>
@@ -112,7 +112,9 @@
                     </tr>
                     </tbody>
                 </table>
+            </form>
             </div>
+
             
             <button id="bbb" type="button" class="btn btn-primary btn-lg col-xs-offset-4 next" data-toggle="modal" data-target="#myModal">
                下一步

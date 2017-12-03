@@ -37,5 +37,11 @@ public interface OrderMapper {
      */
     public void updateStatus(Order order);
 
+    /**
+     * 添加订单
+     */
+    public void insertOrder(Order order);
+
+
 
 }

@@ -14,6 +14,12 @@ public interface ReceivingAddressMapper {
      */
     public List<ReceivingAddress> selectAllAddress();
 
+    /**
+     * 根据id查询收货地址信息
+     * @param id
+     * @return
+     */
+   public ReceivingAddress selectAddressById(Integer id);
 
     /**
      * 添加收货地址

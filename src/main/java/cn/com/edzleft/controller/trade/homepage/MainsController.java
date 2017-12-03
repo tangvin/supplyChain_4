@@ -3,14 +3,18 @@ package cn.com.edzleft.controller.trade.homepage;
 
 import cn.com.edzleft.entity.Account;
 import cn.com.edzleft.entity.Information;
+import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.trade.account.AccountService;
 import cn.com.edzleft.service.trade.information.TradeInformationService;
+import cn.com.edzleft.service.trade.order.TradeOrderService;
+import cn.com.edzleft.util.ConfigUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -24,6 +28,8 @@ public class MainsController {
         private TradeInformationService tradeInformationService;
         @Autowired
         private AccountService accountService;
+        @Autowired
+        private TradeOrderService tradeOrderService;
 
     /**
      * 认证资料
@@ -136,6 +142,8 @@ public class MainsController {
         return "/trade/order/order";
     }
 
+
+
     /**
      * 新增合同
      * @return
@@ -191,6 +199,7 @@ public class MainsController {
     @RequestMapping(value="/xtsy")
     public  ModelAndView mains(HttpSession sessionInfo){
         ModelAndView mv = new ModelAndView("/trade/mains");
+
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer userId = session.getAdmin().getUserId();
         String userName = session.getAdmin().getUserName();

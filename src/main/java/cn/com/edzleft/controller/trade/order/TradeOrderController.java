@@ -2,28 +2,37 @@ package cn.com.edzleft.controller.trade.order;
 
 import cn.com.edzleft.entity.Freight;
 import cn.com.edzleft.entity.Order;
+import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.trade.freight.FreightService;
 import cn.com.edzleft.service.trade.order.TradeOrderService;
+import cn.com.edzleft.util.ConfigUtil;
 import cn.com.edzleft.util.page.DataGridJson;
 import cn.com.edzleft.util.page.PageUtil;
+import com.sun.tools.corba.se.idl.constExpr.Or;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by ibmtech on 2017/11/28.
  */
 @Controller
 @RequestMapping("/tradeOrder")
-@SessionAttributes(value={"order"})
 public class TradeOrderController {
 
     @Autowired
@@ -67,34 +76,63 @@ public class TradeOrderController {
      *
      */
     @RequestMapping("/getOrderById")
-    public Order orderDetail(Integer id, ModelMap modelMap){
+    public Order orderDetail(Integer id){
         Order order = tradeOrderService.queryOrderById(id);
-        //利用@sessionAttribute注解将order存到session中
-        modelMap.addAttribute("order", order);
         return order;
     }
 
-    /**
-     * （修改订单状态）
-     */
-    @RequestMapping("/takeOrder")
-    public void takeOrder(Integer id,Integer flag,Order order){
-        System.out.println("订单状态查询开始");
-        System.out.println(id+"   "+flag);
-        //根据页面返回的id查询出当前订单
-        Order orderById = tradeOrderService.queryOrderById(id);
-        //获取当前订单的状态
-        Integer status = orderById.getOrderStatus();
-        System.out.println(status);
-        //调用业务层设置订单状态
-        tradeOrderService.setOrderStatus(id,flag,order);
-    }
+
+
+
 
     /**
-     * 配置发货
+     * 领取订单
+     * 驳回
      */
-    @RequestMapping("/shipping")
-    public void shipping(Freight freight){
-        freightService.addFreight(freight);
+    @RequestMapping("/lqdd")
+    @ResponseBody
+    public Order pzfh(Integer id,Integer flag){
+        System.out.println("~~~~~~~~~~~");
+        Order order = tradeOrderService.setOrderStatus(id,flag);
+        System.out.println(order);
+        return order;
     }
+
+
+    /**
+     *
+     * 配置发货表单提交 成功后（修改订单状态）
+     */
+    @RequestMapping("/pzfh")
+    @ResponseBody
+    public Order takeOrder(Integer id, Integer flag,Integer freightNumber,String freightUnit) {
+//
+//        //获取图片名字
+//        String originalFilename=file.getOriginalFilename();
+//        //将图片名字唯一
+//       String uniqueFilename=UUID.randomUUID()+"."+ FilenameUtils.getExtension(originalFilename);
+//       //动态获取服务器路径
+//        String realPath=session.getServletContext().getRealPath("/d");
+//        //获得文件文件后缀
+//        String subfix = FilenameUtils.getExtension(uniqueFilename);
+//        //采用时间戳的方式将图片文件名唯一化
+//        String prefix = new SimpleDateFormat("yyyyMMddhhssSSS").format(new Date());
+//        //拼接图片文件全名
+//        String fullName=prefix+"."+subfix;
+//        file.transferTo(new File(realPath+File.separator+uniqueFilename));
+//
+        //根据id获取当前的订单对象
+        Order order = tradeOrderService.queryOrderById(id);
+        //设置货运编号
+        order.setFreightNumberId(freightNumber);
+        //设置货运单位
+        order.setFreightUnit(freightUnit);
+        //调用业务配置发货
+        tradeOrderService.updateOrder(order);
+        //设置订单状态
+        tradeOrderService.setOrderStatus(id,flag);
+        System.out.println("设置订单状态结束");
+        return order;
+    }
+
 }

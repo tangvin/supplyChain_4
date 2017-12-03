@@ -23,7 +23,7 @@ public class ReceivingAddress {
     /**
      * 收货人
      */
-    private Integer rAddressPerson;
+    private String rAddressPerson;
     /**
      * 收货人手机
      */
@@ -77,11 +77,11 @@ public class ReceivingAddress {
     }
 
 
-    public Integer getrAddressPerson() {
+    public String getrAddressPerson() {
 		return rAddressPerson;
 	}
 
-	public void setrAddressPerson(Integer rAddressPerson) {
+	public void setrAddressPerson(String rAddressPerson) {
 		this.rAddressPerson = rAddressPerson;
 	}
 
