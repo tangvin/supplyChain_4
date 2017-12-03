@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="/common/include.jsp"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <html lang="en">
 <head>
@@ -56,7 +57,7 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
-                            <td class="col-xs-9 text-left"><input type="text" id="principalOrder" class="form-control" placeholder="模糊检索匹配"></td>
+                            <td class="col-xs-9 text-left"><input type="text" id="principalOrderId" class="form-control" placeholder="模糊检索匹配"></td>
                         </div>
                     </tr>
                     <tr>
@@ -91,7 +92,7 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息：</td>
-                            <td class="col-xs-8 text-left">收货地址:<span id="address"></span><button class="btn glshxx">管理收货信息</button></td>
+                            <td class="col-xs-8 text-left">收货地址:<span id="address"></span><input id="receivingAddressId" type="hidden"><button class="btn glshxx">管理收货信息</button></td>
                         </div>
                     </tr>
                     <tr>
@@ -140,7 +141,7 @@
                                     <tr>
                                         <div class="row">
                                             <td class="col-xs-3 text-right">关联到合同：</td>
-                                            <td class="col-xs-9 text-left"><input id="fff" name="principalOrder"><span>编号：2636464774376    名称：xxxx合同</span></td>
+                                            <td class="col-xs-9 text-left"><input id="fff" name="principalOrderId"><span>编号：2636464774376    名称：xxxx合同</span></td>
                                         </div>
                                     </tr>
                                     <tr>
@@ -172,7 +173,7 @@
                                     <tr>
                                         <div class="row">
                                             <td class="col-xs-3 text-right">收货信息：</td>
-                                            <td class="col-xs-8 text-left"><input id="sss" name="receivingAddress"></td>
+                                            <td class="col-xs-8 text-left"><input id="sss" name="receivingAddress"><input id="zzz" type="hidden" name="receivingAddressId"></td>
                                         </div>
                                     </tr>
                                     <tr>
@@ -187,21 +188,20 @@
                                         <div class="row">
                                             <td class="col-xs-3 text-right"></td>
                                             <td class="col-xs-8 text-left">
-                                                <span>联系人手机号:<input id="ppp"></span>
+                                                <span>联系人手机号:<input id="ppp" name="contactPhone"></span>
                                             </td>
                                         </div>
                                     </tr>
                                     </tbody>
                                 </table>
-                                
+                                 <input type="hidden" value="0" name="orderStatus">
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal" id="confirm">确定</button>
                             <button type="button" class="btn btn-primary">取消</button>
                         </div>
-                        
-                        <input type="hidden" value="0" name="orderStatus">
+                       
                     </div>
                 </div>
                 </form>
@@ -216,19 +216,10 @@
 		$.post(
 			"<%=request.getContextPath()%>/pmorder/insetOrder.action",
 			function(obj){
-				$("#address").append("'"+obj.address+"''");
-			},"json"
-		);
-		$.post(
-			"<%=request.getContextPath()%>/pmorder/insetOrder.action",
-			function(obj){
-				$("#rAddressPerson").append("'"+obj.rAddressPerson+"'");
-			},"json"
-		);
-		$.post(
-			"<%=request.getContextPath()%>/pmorder/insetOrder.action",
-			function(obj){
-				$("#rAddressPhone").append("'"+obj.rAddressPhone+"'");
+				$("#address").append(obj.address);
+				$("#rAddressPerson").append(obj.rAddressPerson);
+				$("#rAddressPhone").append(obj.rAddressPhone);
+				$("#receivingAddressId").val(obj.receivingAddressId);
 			},"json"
 		);
 	});
@@ -237,7 +228,7 @@
 	$("#bbb").click(function(){
 		var a=$("#orderCreatorTrade").val();
 		$("#aaa").val(a);
-		var b=$("#principalOrder").val();
+		var b=$("#principalOrderId").val();
 		$("#fff").val(b);
 		var c=$("#goods").val();
 		$("#ccc").val(c);
@@ -247,6 +238,7 @@
 		$("#eee").val(e);
 		//var s=$("#address").append("收货地址：'"+obj.address+"'（默认收货信息）").val();
 		$("#sss").val($("#address").html());
+		$("#zzz").val($("#receivingAddressId").val());
 		$("#mmm").val($("#rAddressPerson").html());
 		$("#ppp").val($("#rAddressPhone").html());
 	});
@@ -266,12 +258,29 @@
 	
 	/*确认新增订单*/
 	$("#confirm").click(function(){
-		alert("aaaaaa");
-		var o = $("#order").serialize();
+		var telephone=$("#ppp").val();
+		var orderCreatorTrade=$("#aaa").val();
+		var goods=$("#ccc").val();
+		var orderAmount=$("#ddd").val();
+		var applicationletter=$("#eee").val();
+		var principalOrderId=$("#fff").val();
+		var receiver=$("#mmm").val();
+		//var address=$("#sss").val();
+		var receivingAddressId=$("#zzz").val();
 		$.ajax({
 			url:"<%=request.getContextPath()%>/pmorder/confirmOder.action",
 			type:'post',
-			data:$("#order").serialize(),
+			data:{
+				receiver:receiver,
+				telephone:telephone,
+				orderCreatorTrade:orderCreatorTrade,
+				goods:goods,
+				orderAmount:orderAmount,
+				applicationletter:applicationletter,
+				principalOrderId:principalOrderId,
+				//address:address,
+				receivingAddressId:receivingAddressId,
+				},
 			dataType:"json",
 			success:function(data){
 				alert("添加完成");
