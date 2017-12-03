@@ -27,7 +27,7 @@ public class ReceivingAddress {
     /**
      * 收货人手机
      */
-    private Integer rAddressPhone;
+    private String rAddressPhone;
     /**
      * 是否默认收货地址
      */
@@ -86,11 +86,12 @@ public class ReceivingAddress {
 	}
 
 
-    public Integer getrAddressPhone() {
+
+	public String getrAddressPhone() {
 		return rAddressPhone;
 	}
 
-	public void setrAddressPhone(Integer rAddressPhone) {
+	public void setrAddressPhone(String rAddressPhone) {
 		this.rAddressPhone = rAddressPhone;
 	}
 

@@ -7,7 +7,7 @@
     <result column="r_address_address" property="rAddressAddress" jdbcType="VARCHAR" />
     <result column="r_address_zipcode" property="rAddressZipcode" jdbcType="VARCHAR" />
     <result column="r_address_person" property="rAddressPerson" jdbcType="VARCHAR" />
-    <result column="r_address_phone" property="rAddressPhone" jdbcType="INTEGER" />
+    <result column="r_address_phone" property="rAddressPhone" jdbcType="VARCHAR" />
     <result column="r_address_default" property="rAddressDefault" jdbcType="INTEGER" />
     <result column="unionID" property="unionID" jdbcType="INTEGER" />
   </resultMap>
@@ -28,10 +28,10 @@
   <insert id="insert" parameterType="cn.com.edzleft.entity.ReceivingAddress" >
     insert into gyl_receiving_address ( r_address_area, r_address_address, 
       r_address_zipcode, r_address_person, r_address_phone, 
-      r_address_default)
+      r_address_default,unionID)
     values ( #{rAddressArea,jdbcType=VARCHAR}, #{rAddressAddress,jdbcType=VARCHAR}, 
       #{rAddressZipcode,jdbcType=VARCHAR}, #{rAddressPerson,jdbcType=VARCHAR}, #{rAddressPhone,jdbcType=VARCHAR}, 
-      #{rAddressDefault,jdbcType=VARCHAR})
+      #{rAddressDefault,jdbcType=VARCHAR},#{unionI,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.edzleft.entity.ReceivingAddress" >
     insert into gyl_receiving_address

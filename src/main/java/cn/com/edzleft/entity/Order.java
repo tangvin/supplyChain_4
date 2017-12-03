@@ -19,7 +19,6 @@ public class Order {
     /**
      * 订单创建时间
      */
-    @JSONField(format="yyyy-MM-dd")
     private Date orderCreatTime;
     /**
      * 订单创建者（采方）
@@ -215,7 +214,7 @@ public class Order {
         this.receivingAddressId = receivingAddressId == null ? null : receivingAddressId;
     }
 
-    public String getOgisticsName() {
+	public String getOgisticsName() {
         return ogisticsName;
     }
 

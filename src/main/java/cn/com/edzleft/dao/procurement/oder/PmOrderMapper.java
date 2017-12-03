@@ -25,9 +25,15 @@ public interface PmOrderMapper {
 	String insetOrder3(Integer userId);
 
 
-	Integer insetOrder4(Integer userId);
+	String insetOrder4(Integer userId);
 
 	Order selectByPrimaryKey(Integer id);
+
+
+	void updOrderStatus(Order order);
+
+
+	Integer insetOrder5(Integer userId);
 
 	
 }
