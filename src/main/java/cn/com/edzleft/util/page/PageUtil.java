@@ -124,19 +124,19 @@ public class PageUtil<T> implements Serializable{
 	public void setList(List<T> list) {
 		this.list = list;
 	}
-	
-	
-	
-	
-		
-	 
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

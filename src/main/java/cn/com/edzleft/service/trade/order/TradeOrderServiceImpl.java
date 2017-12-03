@@ -48,25 +48,29 @@ public class TradeOrderServiceImpl  implements TradeOrderService{
      * @param id
      */
     @Override
-    public void setOrderStatus(Integer id,Integer flag,Order orders) {
+    public boolean setOrderStatus(Integer id,Integer flag,Order orders) {
         //根据id查询当前的订单
         Order order = orderMapper.selectOrderById(id);
         Integer orderStatus = order.getOrderStatus();
         if(flag==1) {   //待确认--领取订单
                //领取订单（0---1）
                order.setOrderStatus(1);
+               order.setOrderId(id);
                order.setOrderConfirmationTime(new Date());
                SessionInfo sessionInfo = new SessionInfo();
           //     String userName = sessionInfo.getAdmin().getUserName();
           //     order.setOrderCreatorTrade(userName);
            } else if (flag == 2) { //待确认--驳回
                //驳回（0--6）
+                order.setOrderId(id);
                order.setOrderStatus(6);
                //order.setOrderState("信息不完整");
             }else if(flag==4){  //待付款 2 --3配置发货
+                order.setOrderId(id);
                 order.setOrderStatus(3);
             }
             orderMapper.updateStatus(order);
+            return true;
         }
 
     /**

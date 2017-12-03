@@ -6,6 +6,7 @@
     <title>订单管理</title>
 </head>
 <body>
+<%--src="<%=request.getContextPath()%>/tradeMain/ddgl.action"--%>
 <div class='col-xs-12'>
     <div class='row'>
         <!--订单管理 头部-->
@@ -56,14 +57,14 @@
             </div>
 
             <!--领取订单 模态框-->
-            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <div class="modal fade bs-example-modal-sm lqdd_fh" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
                 <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
                         <div class="panel-body text-center">
                             确定领取订单吗？
                         </div>
                         <div class="modal-footer">
-                            <button id="lqdd" type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="queding">确定</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
                         </div>
                     </div>
@@ -241,7 +242,7 @@
                     formatter:function(value , row){
                         var str = '';
                         if(row.orderStatus ==0){//待确认
-                            str += '<button  id="f" class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm" id="a" href="#" value="待确认" onclick="showUserAttach(\''+row.orderId+'\',1)">领取订单</button>';
+                            str += '<button  class="btn btn-default bg_btn qran" data-toggle="modal" data-target=".bs-example-modal-sm" href="#" value="待确认" onclick="showUserAttach(\''+row.orderId+'\',1)">领取订单</button>';
                             str += '<button  class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm" href="#" value="待确认" onclick="showUserAttach(\''+row.orderId+'\',2)">驳回</button>';
                         } else if(row.orderStatus ==1){//待付款
                             str+='--';
@@ -283,6 +284,7 @@
             //发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}
             contentType:'application/x-www-form-urlencoded;charset=UTF-8'   //数据编码纯文本  offset=0&limit=5
         });
+
     });
     //得到查询的参数
     function queryParamss (params) {
@@ -306,33 +308,19 @@
         search();
     }
 
-
-   //待确认状态下按钮触发事件
-    function showUserAttach(w,e){
-    $("#lqdd").click(function () {
-        $.ajax({
-            url:'<%=request.getContextPath()%>/tradeOrder/takeOrder.action?id='+w+'&&flag='+e,
-            type:'post',
-            dataType:"json",
-           // data:$("#f").serialize(),
-            success:function (data) {
-                window.location.reload();
-            }
-        })
-
-    })
-    }
-
     //待发货状态下按钮
-    function showUserAttachs(w,e){
-        $("#pzfh").click(function () {
+    //待确认状态下按钮触发事件
+    function showUserAttach(w,e){
+        $('#queding').bind('click',function () {
             $.ajax({
                 url:'<%=request.getContextPath()%>/tradeOrder/takeOrder.action?id='+w+'&&flag='+e,
                 type:'post',
                 dataType:"json",
-                data:$("#hygl").serialize(),
                 success:function (data) {
-                    window.location.reload();
+                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')",1000);
+                },
+                error: function(data){
+                    alert("del");
                 }
             })
 

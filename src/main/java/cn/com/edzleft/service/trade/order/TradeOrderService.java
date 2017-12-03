@@ -3,8 +3,6 @@ package cn.com.edzleft.service.trade.order;
 import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.util.page.PageUtil;
 
-import java.util.List;
-
 /**
  * Created by ibmtech on 2017/11/28.
  */
@@ -25,7 +23,7 @@ public interface TradeOrderService {
      * 设置订单状态
      * @param order
      */
-    public void setOrderStatus(Integer id,Integer flag,Order order);
+    public boolean setOrderStatus(Integer id,Integer flag,Order order);
 
     /**
      * 0.待确认状态

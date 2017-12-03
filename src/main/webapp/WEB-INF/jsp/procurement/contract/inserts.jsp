@@ -12,7 +12,7 @@
         <div class="col-xs-12 zlxx_top">
             <a href="<%=request.getContextPath()%>/procurementMain/procurementMain.action">系统首页</a>
             <span>></span>
-            <a href="<%=request.getContextPath()%>/procurementMain/htqy.action">合同签约</a>
+            <a href="#" id="htqy1">合同签约</a>
             <span>></span>
             <a href="#">新增合同1</a>
         </div>
@@ -124,6 +124,10 @@
         }else{
             $('#id1').attr("disabled","disabled");
         }
+    });
+    $('#htqy1').click(function(){
+        $('#load').load(
+            '<%=request.getContextPath()%>/procurementMain/htqy.action')
     })
 
 

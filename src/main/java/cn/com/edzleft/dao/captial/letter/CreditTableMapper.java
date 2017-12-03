@@ -1,6 +1,7 @@
 package cn.com.edzleft.dao.captial.letter;
 
 import cn.com.edzleft.entity.CreditTable;
+import cn.com.edzleft.entity.Letter;
 import cn.com.edzleft.util.page.PageUtil;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface CreditTableMapper {
      * @return
      */
     List<CreditTable> getCrownEntityListByConditions(PageUtil<CreditTable> userPage);
+
+    List<Letter> getCrownEntityListByConditionss(PageUtil<Letter> userPage);
 }

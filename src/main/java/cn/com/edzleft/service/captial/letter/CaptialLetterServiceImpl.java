@@ -1,7 +1,7 @@
 package cn.com.edzleft.service.captial.letter;
 
-import cn.com.edzleft.dao.captial.letter.CreditTableMapper;
 import cn.com.edzleft.dao.captial.letter.CaptoalLetterMapper;
+import cn.com.edzleft.dao.captial.letter.CreditTableMapper;
 import cn.com.edzleft.entity.CreditTable;
 import cn.com.edzleft.entity.Letter;
 import cn.com.edzleft.entity.Order;
@@ -39,6 +39,11 @@ public class CaptialLetterServiceImpl implements CaptialLetterService {
         int totalCount = letterMapper.getOrderEntityCountsByConditions(userPage);
         //查询集合
         List<Letter> userList = letterMapper.getOrderEntityListByConditions(userPage);
+        List<Letter> lists = creditTableMapper.getCrownEntityListByConditionss(userPage);
+        for (Letter letter : userList){
+            letter.setListContract(lists);
+            letter.setIdList(1);
+        }
         userPage.setTotalCount(totalCount);
         userPage.setList(userList);
         return userPage;

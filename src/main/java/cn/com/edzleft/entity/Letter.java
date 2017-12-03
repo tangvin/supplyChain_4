@@ -1,6 +1,7 @@
 package cn.com.edzleft.entity;
 
 import java.util.Date;
+import java.util.List;
 
 /**用信表
  * gyl_letter
@@ -70,6 +71,26 @@ public class Letter {
      * 用信编号
      */
     private String letterNumber;
+
+    private List<Letter> listContract;
+
+    private Integer idList;
+
+    public Integer getIdList() {
+        return idList;
+    }
+
+    public void setIdList(Integer idList) {
+        this.idList = idList;
+    }
+
+    public List<Letter> getListContract() {
+        return listContract;
+    }
+
+    public void setListContract(List<Letter> listContract) {
+        this.listContract = listContract;
+    }
 
     public Integer getId() {
         return id;

@@ -4,17 +4,16 @@ import cn.com.edzleft.entity.Freight;
 import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.service.trade.freight.FreightService;
 import cn.com.edzleft.service.trade.order.TradeOrderService;
+import cn.com.edzleft.util.ReturnJson;
 import cn.com.edzleft.util.page.DataGridJson;
 import cn.com.edzleft.util.page.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 
@@ -77,8 +76,10 @@ public class TradeOrderController {
     /**
      * （修改订单状态）
      */
-    @RequestMapping("/takeOrder")
-    public void takeOrder(Integer id,Integer flag,Order order){
+    @RequestMapping(value = "/takeOrder",method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnJson takeOrder(Integer id, Integer flag, Order order){
+        ReturnJson rj = new ReturnJson();
         System.out.println("订单状态查询开始");
         System.out.println(id+"   "+flag);
         //根据页面返回的id查询出当前订单
@@ -87,7 +88,12 @@ public class TradeOrderController {
         Integer status = orderById.getOrderStatus();
         System.out.println(status);
         //调用业务层设置订单状态
-        tradeOrderService.setOrderStatus(id,flag,order);
+        boolean a = tradeOrderService.setOrderStatus(id,flag,order);
+        if(a){
+            rj.setMsg("修改成功");
+            rj.setSuccess(true);
+        }
+        return rj;
     }
 
     /**

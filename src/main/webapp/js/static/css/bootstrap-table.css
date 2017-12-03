@@ -215,7 +215,6 @@
 .table th, .table td {
     vertical-align: middle;
     box-sizing: border-box;
-    text-align: center;
 }
 .table th{
     background: #ccc;

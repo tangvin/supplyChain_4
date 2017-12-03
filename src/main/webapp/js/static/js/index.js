@@ -3,6 +3,7 @@ var pathName=window.document.location.pathname;
 var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
 
 $(function(){
+    $.ajax({cache: false});
     //采购方
     $('#one').click(function(){
         $('#load').load(projectName+'/procurementMain/zhxx.action')
@@ -12,10 +13,13 @@ $(function(){
     })
     $('#syxgl').click(function(){
         $('#load').load(projectName+'/procurementMain/syxgl.action')
-    })
-    $('#htqy').click(function(){
-        $('#load').load(projectName+'/procurementMain/htqy.action')
-    })
+    });
+    $(document).on('click','#htqy',function(e){
+        $('#load').load(projectName+'/procurementMain/htqy.action?rd='+new Date().getTime());
+    });
+    // $('#htqy').click(function(){
+    //     $('#load').load(projectName+'/procurementMain/htqy.action?rd='+time());
+    // })
     $('#ddgl').click(function(){
         $('#load').load(projectName+'/procurementMain/ddgl.action')
     })

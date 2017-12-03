@@ -62,4 +62,14 @@
     <![CDATA[	limit #{start},#{pageSize}]]>
   </select>
 
+  <!--分页查询-->
+  <select id="getCrownEntityListByConditionss"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select
+    <include refid="Base_Column_List" />
+    from gyl_credit
+    <include refid="where_sql"/>
+    ORDER BY credit_time  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select>
+
 </mapper>
