@@ -42,6 +42,15 @@ public class ReceivingAddressTest {
     }
 
 
+    /**
+     * 根据id查询收货地址信息
+     * @return
+     */
+    @Test
+    public void  selectByid(){
+        ReceivingAddress receivingAddress = receivingAddressMapper.selectAddressById(1);
+        System.out.println(receivingAddress);
+    }
 
 
 

@@ -43,5 +43,11 @@ public class TripartiteTest {
         }
     }
 
+    @Test
+    public void selectTripartite(){
+        Tripartite tripartite = tripartiteMapper.selectTripartiteById(1);
+        System.out.println(tripartite);
+
+    }
 
 }

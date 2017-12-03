@@ -25,8 +25,9 @@ public class OrderTest {
 
     @Test
     public void orderSelect(){
-        Order order = orderMapper.selectOrderById(1);
+        Order order = orderMapper.selectOrderById(2);
         System.out.println(order);
+        System.out.println("修改成功");
     }
 
     /**
@@ -48,8 +49,8 @@ public class OrderTest {
         PageUtil<Order> util = new PageUtil<Order>();
         Integer totalCount = orderMapper.selectTotalOrderCount(util);
         System.out.println(totalCount);
-        util.setStart(1);
-        util.setPageSize(3);
+        util.setStart(2);
+        util.setPageSize(4);
         util.setTotalCount(totalCount);
         List<Order> list = orderMapper.selectOrderByPage(util);
         util.setList(list);
@@ -57,5 +58,19 @@ public class OrderTest {
             System.out.println(order);
         }
     }
+
+    /**
+     * 测试添加发货信息
+     */
+    @Test
+    public void testFreight(){
+        Order order = new Order();
+        order.setOrderId(7);
+        order.setFreightUnit("班的");
+        order.setFreightNumberId(10101001);
+        orderMapper.updateStatus(order);
+        System.out.println("添加成");
+    }
+
 
 }

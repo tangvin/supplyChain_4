@@ -98,15 +98,43 @@ public class TradeOrderController {
         return order;
     }
 
+    /**
+     * public void addImages(MultipartFile file,Images images) throws IllegalStateException, IOException{
+     //1.接受上传图片 ,保存到服务器上(使用uuid处理文件名)
+     File f=new File("E:\\apache-tomcat-7.0.70\\webapps\\newFile");
+     file.transferTo(f);
+     String str=file.getOriginalFilename();
+     String images_name=UUID.randomUUID().toString()+FilenameUtils.getExtension(str);
+     //2.将上传的图片信息保存到数据库
+     Images image=new Images();
+     image.setImage_name(images_name);
+     image.setImage_site(str);
+     images.setUpload_time(new Date());
+     imageService.addImage(images);
+     System.out.println(images);
+     }
+     */
+
 
     /**
-     *
      * 配置发货表单提交 成功后（修改订单状态）
      */
     @RequestMapping("/pzfh")
     @ResponseBody
-    public Order takeOrder(Integer id, Integer flag,Integer freightNumber,String freightUnit) {
-//
+    public Order takeOrder(Integer id, Integer flag,Integer freightNumber,String freightUnit,MultipartFile file) throws IOException {
+
+        //1.接受上传图片 ,保存到服务器上(使用uuid处理文件名)
+        File f=new File("D:\\tomcat_7.0.75\\apache-tomcat-7.0.75\\webapps\\newFile");
+        file.transferTo(f);
+        //获取文件原始名字
+        String str=file.getOriginalFilename();
+        //文件名字唯一
+        String imageName=UUID.randomUUID().toString()+FilenameUtils.getExtension(str);
+        //2.将上传的图片信息保存到数据库
+
+
+//        //1.接受上传图片 ,保存到服务器上(使用uuid处理文件名)
+//        File f=new File("D:\\tomcat_7.0.75\\apache-tomcat-7.0.75\\webapps\\newFile");
 //        //获取图片名字
 //        String originalFilename=file.getOriginalFilename();
 //        //将图片名字唯一
@@ -120,13 +148,15 @@ public class TradeOrderController {
 //        //拼接图片文件全名
 //        String fullName=prefix+"."+subfix;
 //        file.transferTo(new File(realPath+File.separator+uniqueFilename));
-//
+
+
         //根据id获取当前的订单对象
         Order order = tradeOrderService.queryOrderById(id);
         //设置货运编号
         order.setFreightNumberId(freightNumber);
         //设置货运单位
         order.setFreightUnit(freightUnit);
+        order.setInvoice(imageName);
         //调用业务配置发货
         tradeOrderService.updateOrder(order);
         //设置订单状态
