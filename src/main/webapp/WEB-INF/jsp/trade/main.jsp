@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="/common/include.jsp"%>
 <html lang="en">
 <head>
-
+    <%@ include file="/common/include.jsp"%>
     <meta charset="UTF-8">
     <title>贸易方首页</title>
 </head>
@@ -30,7 +29,7 @@
                     </li>
                     <li>
                         <div class="dropdown">
-                            <p class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                            <p class="dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown">
                                 Dropdown(下拉)
                                 <span class="caret"></span>
                             </p>
@@ -169,5 +168,6 @@
         $('#load').load('<%=request.getContextPath()%>/setting/settingByUserId.action')
     }) --%>
 </script>
+
 </body>
 </html>

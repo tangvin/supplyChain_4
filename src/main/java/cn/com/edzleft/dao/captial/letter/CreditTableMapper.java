@@ -24,4 +24,9 @@ public interface CreditTableMapper {
     List<CreditTable> getCrownEntityListByConditions(PageUtil<CreditTable> userPage);
 
     List<Letter> getCrownEntityListByConditionss(PageUtil<Letter> userPage);
+    /**
+     * 接口查询授信
+     * @return
+     */
+    List<CreditTable> creditSelect();
 }

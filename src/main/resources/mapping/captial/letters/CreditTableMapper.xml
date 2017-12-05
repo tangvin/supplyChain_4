@@ -72,4 +72,11 @@
     <![CDATA[	limit #{start},#{pageSize}]]>
   </select>
 
+  <select id="creditSelect"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+
+    from gyl_credit
+  </select>
+
 </mapper>

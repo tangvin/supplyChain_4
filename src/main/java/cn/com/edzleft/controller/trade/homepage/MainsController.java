@@ -3,15 +3,18 @@ package cn.com.edzleft.controller.trade.homepage;
 
 import cn.com.edzleft.entity.Account;
 import cn.com.edzleft.entity.Information;
+import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.trade.account.AccountService;
 import cn.com.edzleft.service.trade.information.TradeInformationService;
 import cn.com.edzleft.service.trade.order.TradeOrderService;
+import cn.com.edzleft.util.ConfigUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -27,16 +30,6 @@ public class MainsController {
         private AccountService accountService;
         @Autowired
         private TradeOrderService tradeOrderService;
-
-
-    /**
-     * 订单查看
-     * @return
-     */
-    @RequestMapping(value = "ddck")
-    public String ddck(){
-        return "/trade/order/viewOrder";
-    }
 
     /**
      * 认证资料

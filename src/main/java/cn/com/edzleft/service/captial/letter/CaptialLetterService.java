@@ -24,5 +24,9 @@ public interface CaptialLetterService {
      */
     public PageUtil<CreditTable> getCrownEntityListByConditions(PageUtil<CreditTable> userPage);
 
-
+    /**
+     * 接口查询授信
+     * @return
+     */
+    List<CreditTable> creditSelect();
 }
