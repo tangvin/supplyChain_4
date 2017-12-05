@@ -1,6 +1,7 @@
 package cn.com.edzleft.util.page;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -18,6 +19,8 @@ public class DataGridJson implements Serializable {
 	private List rows;
 	
 	private List footer;
+
+	private HashMap hashMap;
 	
 	public DataGridJson() {
 		// TODO Auto-generated constructor stub
@@ -37,6 +40,7 @@ public class DataGridJson implements Serializable {
 		this.total = total;
 		this.rows = rows;
 		this.footer = footer;
+
 	}
 
 
@@ -68,12 +72,13 @@ public class DataGridJson implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
-	
-	
-	
-	
-	
 
+
+	public HashMap getHashMap() {
+		return hashMap;
+	}
+
+	public void setHashMap(HashMap hashMap) {
+		this.hashMap = hashMap;
+	}
 }

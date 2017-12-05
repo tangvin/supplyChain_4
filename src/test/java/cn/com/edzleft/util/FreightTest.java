@@ -1,7 +1,9 @@
 package cn.com.edzleft.util;
 
 import cn.com.edzleft.dao.trade.freight.FreightMapper;
+import cn.com.edzleft.dao.trade.receivingAddress.ReceivingAddressMapper;
 import cn.com.edzleft.entity.Freight;
+import cn.com.edzleft.entity.ReceivingAddress;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class FreightTest {
 
     @Autowired
     private FreightMapper freightMapper;
+
+    @Autowired
+    private ReceivingAddressMapper receivingAddressMapper;
 
     /**
      * 查询所有的货运单位
@@ -79,5 +84,19 @@ public class FreightTest {
         }
     }
 
+    @Test
+    public void test2(){
+        System.out.println("!!!!!!!!!!!");
+        Freight freight = freightMapper.selectFreightById(1);
+        System.out.println(freight);
+    }
+
+
+    @Test
+    public void selectReceivingAddress(){
+        System.out.println("~~~~~~~~~~~~");
+        ReceivingAddress address = receivingAddressMapper.selectAddressById(1);
+        System.out.println(address);
+    }
 
 }

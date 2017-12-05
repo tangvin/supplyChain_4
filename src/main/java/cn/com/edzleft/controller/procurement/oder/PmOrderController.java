@@ -83,7 +83,7 @@ public class PmOrderController {
 		String goods = req.getParameter("goods");
 		Order o=new Order();
 		o.setContactPhone(Integer.parseInt(telephone));
-		o.setOgisticsName(receiver);
+		o.setLogisticsName(receiver);
 		//o.setReceivingAddress(address);
 		o.setReceivingAddressId(Integer.parseInt(receivingAddressId));
 		o.setOrderAmount(Double.parseDouble(orderAmount));

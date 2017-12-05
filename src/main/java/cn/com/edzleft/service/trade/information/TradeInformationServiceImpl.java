@@ -31,9 +31,11 @@ public class TradeInformationServiceImpl implements TradeInformationService {
      * 修改基本信息
      */
     @Override
-    public void modifyInformation(Information f) {
+    public int modifyInformation(Information f) {
         Information info = new Information();
 
+        //获取id
+        info.setId(f.getId());
         //企业身份
         info.setEntIdentity(f.getEntIdentity());
         //企业名称
@@ -96,8 +98,15 @@ public class TradeInformationServiceImpl implements TradeInformationService {
         info.setPersonIdcard(f.getPersonIdcard());
         //开户许可证电子档
         info.setOpenAccountFile(f.getOpenAccountFile());
+        //用户账号id
+        info.setAccountId(f.getAccountId());
+        //企业图片
+        info.setEntLogo(f.getEntLogo());
+        //认证状态
+        info.setCertificationStatus(f.getCertificationStatus());
 
-        informationMapper.updateInformation(info);
+        int flag = informationMapper.updateInformation(info);
+        return flag;
     }
 
 }

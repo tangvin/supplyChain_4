@@ -34,7 +34,7 @@ public class TripartiteTest {
         System.out.println(totalCount);
         //查询合同集合
         userPage.setStart(1);
-        userPage.setPageSize(2);
+        userPage.setPageSize(3);
         userPage.setTotalCount(totalCount);
         List<Tripartite> creditList = tripartiteMapper.selectAllTripartiteByPage(userPage);
         userPage.setList(creditList);

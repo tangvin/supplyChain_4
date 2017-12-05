@@ -25,7 +25,7 @@
                     <li><a href="#messages">银行账户</a></li>
                     <li><a href="#settings">三方账户</a></li>
                     <li><a href="#settings1">货运管理</a></li>
-                    <li><a href="#recieverAddress">收获地址</a></li>
+                    <%--<li><a href="#recieverAddress">收获地址</a></li>--%>
                 </ul>
                 <!--tab 导航 结束-->
                 <!--tab 内容 开始-->
@@ -94,15 +94,15 @@
                                             </tr>
                                             <tr>
                                                 <td>法定代表人证件类型：</td>
-                                                <%--0居民身份证、1护照、2港澳居民来往内地通行证、3台湾居民来往大陆通行证--%>
                                                 <td>
-                                                    <c:if test="${information.representativeType==1}">
+                                                    <%--0居民身份证、1护照、2港澳居民来往内地通行证、3台湾居民来往大陆通行证--%>
+                                                    <c:if test="${information.representativeType==0}">
                                                         护照
                                                     </c:if>
-                                                    <c:if test="${information.representativeType==2}">
+                                                    <c:if test="${information.representativeType==1}">
                                                         港澳居民来往内地通行证
                                                     </c:if>
-                                                    <c:if test="${information.representativeType==3}">
+                                                    <c:if test="${information.representativeType==2}">
                                                         台湾居民来往大陆通行证
                                                     </c:if>
                                                 </td>
@@ -163,11 +163,11 @@
                                             <tbody>
                                             <tr>
                                                 <td>注册资本:</td>
-                                                <td>${information.webSite}</td>
+                                                <td>${information.registeredCapital}</td>
                                             </tr>
                                             <tr>
                                                 <td>主要股东:</td>
-                                                <td><span>张先生 | 李先生 | 王女士${information.majorShareholder}</span></td>
+                                                <td><span>${information.majorShareholder}</span></td>
                                             </tr>
                                             <tr>
                                                 <td>经营范围:</td>
@@ -332,140 +332,33 @@
                             </div>
                         </div>
                         <!--银行账户 结束-->
+
                         <!--三方账户 开始   -->
                         <div class="tab-pane" id="settings">
                             <!--三方账户 开户行开始-->
                             <div class="khh sfzh">
-                                <form class="form-inline khh_form khh_form1">
+                                <form class="form-inline khh_form khh_form1" id="informationForm">
                                     <div class="form-group form-group1">
-                                        <label for="exampleInputName2">开户行</label>
-                                        <input type="text" class="form-control" id="exampleInputName2">
+                                        <label for="tripartiteDepositBank">开户行</label>
+                                        <input type="text" class="form-control" name="tripartiteDepositBank" id="tripartiteDepositBank">
                                     </div>
                                     <div class="form-group form-group1">
-                                        <label for="exampleInputEmail2">户主</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail2">
+                                        <label for="tripartiteCreditHolderPurchaser">户主</label>
+                                        <input type="email" class="form-control" name="tripartiteCreditHolderPurchaser" id="tripartiteCreditHolderPurchaser">
                                     </div>
-                                    <button type="button" class="btn  btn-danger">查询</button>
-                                    <button type="button" class="btn  btn-default">重置</button>
+                                    <button type="button" class="btn  btn-danger" onclick="search()">查询</button>
+                                    <button type="button" class="btn  btn-default" onclick="reset()">重置</button>
                                 </form>
                             </div>
                             <!--三方账户 开户行结束-->
                             <!--三方账户 分页开始-->
-                            <div class="fy">
-                                <div class="row fy_row">
-                                    <div class="col-xs-4">
-                                        <p class="fy_con">共计3条数据，共1页</p>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination">
-                                                <li>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">首页</span>
-                                                    </a>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                                <li><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li>
-                                                    <a href="#" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">末页</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--三方账户 分页结束-->
-                            <!--三方账户 表格开始-->
-                            <div class="table-responsive text-center">
-                                <table class="table table-bordered text-center">
-                                    <tbody>
-                                    <tr class="active">
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!--三方账户 表格结束-->
-                            <!--三方账户 分页开始-->
-                            <div class="fy">
-                                <div class="row fy_row">
-                                    <div class="col-xs-4">
-                                        <p class="fy_con">共计3条数据，共1页</p>
-                                    </div>
-                                    <div class="col-xs-8">
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination">
-                                                <li>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">首页</span>
-                                                    </a>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                                <li><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li>
-                                                    <a href="#" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                    <a href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">末页</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
+                            <div class="panel-body" style="padding-bottom:0px;">
+                                <table id="incormationTable" class="cj_table"></table>
                             </div>
                             <!--三方账户 分页结束-->
                         </div>
                         <!--三方账户 结束   -->
+
                         <!--运货单位 开始-->
                         <div class="tab-pane" id="settings1">
                             <h5>运货单位</h5>
@@ -822,6 +715,107 @@
             });
         });
     })
+
+    //三方账户
+    $(function(){
+        $("#incormationTable").bootstrapTable({
+            columns:[
+                { //field: 'Number',//可不加
+                    title: '序号',//标题  可不加
+                    width:100,
+                    formatter: function (value, row, index) {
+                        return index+1;
+                    }
+                },
+                {field:'tripartiteDepositBank',title:'开户行',width:100},
+                {field:'tripartiteCreditHolderPurchaser',title:'户主（采购方）',width:100},
+                {field:'tripartiteAccountNumber',title:'账号',width:100},
+                {field:'tripartiteAccountOpentime',title:'账号开通时间',width:100,
+                    formatter:function(value,row,index){
+                        return ConvertToDate(value)
+                    }
+                },
+                {field:'tripartiteAccountOpenpeople',title:'账号开通人',width:100},
+                {field:'tripartiteAmountCreateTime',title:'创建时间',width:100,
+                    formatter:function(value,row,index){
+                        return ConvertToDate(value)
+                    }
+                },
+                {field:'tripartiteAmountCreatePeople',title:'创建人',width:100}
+            ],
+            url:'<%=request.getContextPath()%>/tripartite/tripartitePage.action',
+            method:'post',
+            queryParamsType:'',
+            queryParams: queryParams,//传递参数（*）
+            //【其它设置】
+            locale:'zh-CN',//中文支持
+            pagination: true,//是否开启分页（*）
+            pageNumber:1,//初始化加载第一页，默认第一页
+            pageSize: 3,//每页的记录行数（*）
+            sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+            //发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}
+            contentType:'application/x-www-form-urlencoded;charset=UTF-8'   //数据编码纯文本  offset=0&limit=5
+        });
+    });
+    //得到查询的参数
+    function queryParams (params) {
+        var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            pageNumber: params.pageNumber,
+            pageSize: params.pageSize,
+            tripartiteDepositBank:$("#tripartiteDepositBank").val(),
+            tripartiteCreditHolderPurchaser:$("#tripartiteCreditHolderPurchaser").val()
+        };
+        return temp;
+    }
+    //搜索
+    function search(){
+        $("#incormationTable").bootstrapTable('refresh');
+    }
+    //重置查询
+    function reset(){
+        $("#informationForm").form('reset');
+        crownSearch();
+    }
+
+
+    function ConvertToDate(datestr) {
+        var date=new Date(datestr);
+        var year=date.getFullYear();
+        var month=date.getMonth()+1;
+        if(month < 10){
+            month = "0"+month
+        }else{
+            month = ''+month
+        }
+        var day=date.getDate();
+        if(day < 10){
+            day = "0"+day
+        }else{
+            day = ''+day
+        }
+        var hours = date.getHours()
+        if(hours < 10){
+            hours = "0"+hours
+        }else{
+            hours = ''+hours
+        }
+        var minutes = date.getMinutes(); //获取当前分钟数(0-59)
+        if(minutes < 10){
+            minutes = "0"+minutes
+        }else{
+            minutes = ''+minutes
+        }
+        var seconds = date.getSeconds();
+        if(seconds < 10){
+            seconds = "0"+seconds
+        }else{
+            seconds = ''+seconds
+        }
+        return year+"-"+month+"-"+day+"-"+hours+":"+minutes+":"+seconds;
+    }
+
+
+
 
 </script>
 

@@ -150,6 +150,7 @@ public class Information {
      */
     private Integer certificationStatus;
 
+
     public Integer getCertificationStatus() {
         return certificationStatus;
     }
@@ -437,6 +438,7 @@ public class Information {
     public void setOrganizationElectronicFile(String organizationElectronicFile) {
         this.organizationElectronicFile = organizationElectronicFile;
     }
+
 
     @Override
     public boolean equals(Object o) {
