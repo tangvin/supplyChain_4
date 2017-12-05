@@ -29,4 +29,5 @@ public interface FreightService {
      */
     public void setDefaultAddress(Freight freight);
 
+
 }

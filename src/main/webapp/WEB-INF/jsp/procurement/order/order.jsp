@@ -48,11 +48,11 @@
                         <label>开户行</label>
                         <input type="text" class="form-control" id="creditGrantor">
                     </div>
-                    <div class="form-group form-group1">
+                    <!-- <div class="form-group form-group1">
                         <label>合同执行期</label>
                         <input type="text" readonly="readonly"  name="birthday" id="birthday1" class="form-control" value="03/18/2013" />--
                         <input type="text" readonly="readonly"  name="birthday" id="birthday" class="form-control" value="03/18/2013" />
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label>签约方</label>
                         <input type="text" class="form-control" id="orderCreatorTrade">
@@ -148,17 +148,19 @@
 </div>
 </body>
 <script>
-    $('#birthday').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+    /* $('#birthday').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
         console.log(start.toISOString(), end.toISOString(), label);
     });
     $('#birthday1').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
         console.log(start.toISOString(), end.toISOString(), label);
-    });
+    }); */
     
     $('#insertOrder').click(function(){
         $('#load').load('<%=request.getContextPath()%>/procurementMain/insertOrder.action')
     })
-    
+     $('#ddbj_aa').click(function(){
+        $('#load').load('<%=request.getContextPath()%>/procurementMain/ddbjaa.action')
+    })
  <%--<%=request.getContextPath()%>/procurementMain/ddck.action--%>
     /* 订单展示 */
    $(function(){
@@ -196,7 +198,7 @@
                     }
                 },
                 {field:'orderAmount',title:'订单金额（￥万元）',width:100},
-                {field:'orderConfirmationTime',title:'订单确认时间',width:100},
+                {field:'orderConfirmationTime',title:'订单相关时间',width:100},
                 {field:'orderCreatTime',title:'订单创建时间',width:100},
                 
                 {field:'principalOrder',title:'合同',width:100},
@@ -211,10 +213,10 @@
                         var str = '';
                         if(row.orderStatus == 0){//待确认
    	                        str += '<button class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm"  href="#" value="取消" onclick="showUserAttach(\''+row.orderId+'\',1)">取消</button>';
-                            str += '<button class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm"  href="#" value="编辑" onclick="showUserAttach(\''+row.orderId+'\',2)">编辑</button>';
+                            str += '<button class="btn btn-default bg_btn" href="#" value="编辑" onclick="updorder(\''+row.orderId+'\',2)">编 辑</button>';
                         }  else if(row.orderStatus == 1){//待付款
                             str +='<button class="btn btn-warning bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="取消" onclick="showUserAttach(\''+row.orderId+'\',3)">取消</button>';
-                            str +='<button class="btn btn-warning bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="编辑" onclick="showUserAttach(\''+row.orderId+'\',4)">编辑</button>';
+                            str +='<button class="btn btn-warning bg_btn"  href="#" value="编辑" onclick="updorder(\''+row.orderId+'\',4)">编辑</button>';
                             str +='<button class="btn btn-warning bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_sq"   value="申请用信" onclick="sqyx(\''+row.orderId+'\',5)">申请用信</button>';
                         } else if(row.orderStatus == 2){//待发货
                             str +='<button class="btn btn-info bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="提醒发货" onclick="showUserAttach(\''+row.orderId+'\',6)">提醒发货</button>';
@@ -228,7 +230,7 @@
                              str+='--';
                         } else if (row.orderStatus == 6){//已驳回
                        	 str +='<button class="btn btn-primary bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="取消" onclick="showUserAttach(\''+row.orderId+'\',10)">取消</button>';
-                    	 str +='<button class="btn btn-primary bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="编辑" onclick="showUserAttach(\''+row.orderId+'\',11)">编辑</button>';
+                    	 str +='<button class="btn btn-primary bg_btn" href="#" value="编辑" onclick="updorder(\''+row.orderId+'\',11)" id="ddbj_aa">编辑</button>';
                     	} else if (row.orderStatus == 7){//历史
                     		str+='--';
                     }
@@ -291,7 +293,7 @@
 
     window.operateEvents1={
         'click #butt':function (e,value,index,row) {
-            $('#load').load('<%=request.getContextPath()%>/procurementMain/ddck.action')
+        	$('#load').load('<%=request.getContextPath()%>/procurementMain/ddck.action?value='+value)
         }
     }
 
@@ -328,7 +330,14 @@
 
     })
     }
-    
+    /* 订单编辑 */
+     function updorder(id,flag){
+    	alert(id);
+    	<%--  setTimeout("$('#load').load('<%=request.getContextPath()%>/pmorder/ddbj.action?orderId='+id)",500); --%>
+    	$('#load').load('<%=request.getContextPath()%>/pmorder/ddbj.action?orderId='+id);
+    	<%-- location.href="<%=request.getContextPath()%>/pmorder/ddbj.action?orderId="+w; --%>
+    } 
+  
 <%--     function sqyx(w,e){
     	
     	location.href='<%=request.getContextPath()%>/pmorder/sqyx.action?id='+w+'&&flag='+e;
@@ -345,7 +354,6 @@
         })
     } --%>
     
-  //授信
     function sqyx(id,flag){
     	 /* 提交申请用信 */
     	  $("#orderClike").click(function(){

@@ -1,14 +1,22 @@
 package cn.com.edzleft.service.procurement.oder;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.com.edzleft.dao.procurement.oder.PmOrderMapper;
 import cn.com.edzleft.entity.Order;
+import cn.com.edzleft.entity.ReceivingAddress;
+import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.util.page.PageUtil;
 
 @Service
@@ -40,7 +48,27 @@ public class PmOrderServiceImpl implements PmOrderService{
 
 	/*添加订单*/
 	@Override
-	public int insertSelective(Order o) {
+	public int insertSelective(Order o,HttpSession sessionInfo) {
+		SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+		String in=String.valueOf(userId);
+        List<String> list=Arrays.asList(in.split(""));
+        Collections.shuffle(list);
+        /*获取随机数*/
+        String out=new String();
+        Random r=new Random();
+        int i = r.nextInt(10);
+        System.out.println(i);
+        /*获取当前时间戳*/
+        long currentTimeMillis = System.currentTimeMillis();
+        String orderNumber= "";
+        orderNumber = "O"+i+currentTimeMillis;
+        o.setOrderNumber(orderNumber);
+        for(String s:list){
+            out+=s;
+        }
+        
+        System.out.println("================="+out);
 		return pmOrderMapper.insertSelective(o);
 	}
 
@@ -129,6 +157,23 @@ public class PmOrderServiceImpl implements PmOrderService{
 	public Integer insetOrder5(Integer userId) {
 		// TODO Auto-generated method stub
 		return pmOrderMapper.insetOrder5(userId);
+	}
+
+	/**
+	 * 编辑时回写订单
+	 */
+	@Override
+	public Order ddbj(Integer orderId) {
+		return pmOrderMapper.ddbj(orderId);
+	}
+
+	/***
+	 * 编辑订单
+	 */
+	@Override
+	public int updataOreder(Order order) {
+		int i = pmOrderMapper.updataOreder(order);
+		return i;
 	}
 
 }

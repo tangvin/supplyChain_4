@@ -65,4 +65,5 @@ public class FreightServiceImpl implements FreightService {
     }
 
 
+
 }

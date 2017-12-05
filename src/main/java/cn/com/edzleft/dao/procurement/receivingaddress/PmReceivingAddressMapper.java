@@ -17,5 +17,7 @@ public interface PmReceivingAddressMapper {
 
     int updateByPrimaryKey(ReceivingAddress record);
 
+	ReceivingAddress queryReceivingAddress(Integer addressId);
+
 
 }
