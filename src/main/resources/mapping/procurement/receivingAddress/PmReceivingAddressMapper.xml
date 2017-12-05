@@ -15,7 +15,7 @@
     r_address_id, r_address_area, r_address_address, r_address_zipcode, r_address_person, 
     r_address_phone, r_address_default,unionID
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="queryReceivingAddress" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from gyl_receiving_address
@@ -31,7 +31,7 @@
       r_address_default,unionID)
     values ( #{rAddressArea,jdbcType=VARCHAR}, #{rAddressAddress,jdbcType=VARCHAR}, 
       #{rAddressZipcode,jdbcType=VARCHAR}, #{rAddressPerson,jdbcType=VARCHAR}, #{rAddressPhone,jdbcType=VARCHAR}, 
-      #{rAddressDefault,jdbcType=VARCHAR},#{unionI,jdbcType=INTEGER})
+      #{rAddressDefault,jdbcType=VARCHAR},#{unionID,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.com.edzleft.entity.ReceivingAddress" >
     insert into gyl_receiving_address

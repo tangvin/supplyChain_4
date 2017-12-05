@@ -14,4 +14,6 @@ public interface PmFreightMapper {
     int updateByPrimaryKeySelective(Freight record);
 
     int updateByPrimaryKey(Freight record);
+
+	Freight queryFreightById(Integer logisticsUnitId);
 }

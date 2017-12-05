@@ -1,10 +1,17 @@
 package cn.com.edzleft.controller.procurement.homepage;
 
 import cn.com.edzleft.entity.Account;
+import cn.com.edzleft.entity.Freight;
 import cn.com.edzleft.entity.Information;
+import cn.com.edzleft.entity.Order;
+import cn.com.edzleft.entity.ReceivingAddress;
 import cn.com.edzleft.entity.SessionInfo;
+import cn.com.edzleft.service.procurement.freight.PmFreightService;
 import cn.com.edzleft.service.procurement.homepage.PmHomePageService;
+import cn.com.edzleft.service.procurement.receivingaddress.PmReceivingAddressService;
 import cn.com.edzleft.service.trade.account.AccountService;
+import cn.com.edzleft.service.trade.freight.FreightService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +31,14 @@ public class PmmainController {
 	
 	@Autowired
     private AccountService accountService;
+
+	@Autowired
+	private PmFreightService pmfreightservice;
+	
+	@Autowired
+	private PmReceivingAddressService pmreceivingAddressservice;
+	
+	
     /**
      * 认证资料
      * @return
@@ -56,8 +71,20 @@ public class PmmainController {
      * @return
      */
 	@RequestMapping(value = "ddck")
-	public String ddck(){
-	    return "/procurement/order/viewOrder";
+	public ModelAndView ddck(String value){
+		ModelAndView mv = new ModelAndView("/procurement/order/viewOrder");
+		Order order  = pmHomePageService.selectByPrimaryKey(value);
+		//获取运货单位
+		Integer logisticsUnitId = order.getLogisticsUnitId();
+		Integer addressId = order.getReceivingAddressId();
+		
+        Freight freight = pmfreightservice.queryFreightById(logisticsUnitId);
+        ReceivingAddress receivingAddress = pmreceivingAddressservice.queryReceivingAddress(addressId);
+		
+        mv.addObject("order", order);
+		mv.addObject("freight", freight);
+		mv.addObject("receivingAddress",receivingAddress);
+        return mv;
     }
 
     /**

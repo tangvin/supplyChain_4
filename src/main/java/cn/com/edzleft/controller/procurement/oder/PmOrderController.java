@@ -1,11 +1,17 @@
 package cn.com.edzleft.controller.procurement.oder;
 
 import cn.com.edzleft.entity.Order;
+import cn.com.edzleft.entity.ReceivingAddress;
 import cn.com.edzleft.entity.SessionInfo;
+import cn.com.edzleft.service.procurement.homepage.PmHomePageService;
 import cn.com.edzleft.service.procurement.oder.PmOrderService;
+import cn.com.edzleft.service.procurement.receivingaddress.PmReceivingAddressService;
 import cn.com.edzleft.util.page.DataGridJson;
 import cn.com.edzleft.util.page.PageUtil;
-import com.alibaba.fastjson.JSONObject;
+
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -27,6 +38,13 @@ public class PmOrderController {
 	 */
 	@Autowired
 	private PmOrderService pmOrderService;
+	
+	@Autowired
+	private PmReceivingAddressService pmreceivingAddressservice;
+	
+	@Autowired
+	private PmHomePageService pmHomePageService;
+	
 	@RequestMapping(value="/pmgetorder")
 	@ResponseBody
 	public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String orderCreatorTrade,String orderStatus,String creditGrantor){
@@ -71,7 +89,7 @@ public class PmOrderController {
 	 */
 	@RequestMapping(value="confirmOder")
 	@ResponseBody
-	public boolean confirmOder(HttpServletRequest req){
+	public boolean confirmOder(HttpServletRequest req,HttpSession sessionInfo){
 		String telephone = req.getParameter("telephone");
 		String receiver = req.getParameter("receiver");
 		//String address = req.getParameter("address");
@@ -93,7 +111,7 @@ public class PmOrderController {
 		o.setOrderCreatorTrade(orderCreatorTrade);
 		o.setOrderStatus(0);
 		o.setOrderCreatTime(new Date());
-		int i = pmOrderService.insertSelective(o);
+		int i = pmOrderService.insertSelective(o, sessionInfo);
 		return i>0?true:false;
 	}
 	
@@ -129,4 +147,43 @@ public class PmOrderController {
 		return i>0?true:false;
 	}
 	
+	/**
+	 * 回显订单
+	 */
+	@RequestMapping(value="ddbj")
+	public ModelAndView ddbj(Integer orderId){
+		ModelAndView mv = new ModelAndView("/procurement/order/updOrder");
+		Order order  = pmOrderService.ddbj(orderId);
+		Integer receivingAddressId = order.getReceivingAddressId();
+		ReceivingAddress ra = pmreceivingAddressservice.queryReceivingAddress(receivingAddressId);
+		mv.addObject("order", order);
+		mv.addObject("ra",ra);
+		return mv;
+	}
+	
+	/**
+	 * 修改订单
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
+	 */
+	@RequestMapping(value="updateOrder")
+	@ResponseBody
+	public boolean updataOreder(Order order){
+		System.out.println(order);
+		/*String orderString = request.getParameter("order");
+		net.sf.json.JSONObject object = net.sf.json.JSONObject.fromObject(orderString);
+		ObjectMapper mapper = new ObjectMapper();
+		Order readValue = mapper.readValue(object.toString(), Order.class);
+		String addressString = request.getParameter("ra");
+		ra.getrAddressPerson();*/
+		int i = pmOrderService.updataOreder(order);
+		return i>0?true:false;
+	}
+	
+	@RequestMapping(value="ddbjaa")
+	public String ddbjaa(){
+		
+		return "proucrement/updOrder";
+	}
 }

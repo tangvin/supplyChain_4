@@ -6,5 +6,7 @@ public interface PmFreightService {
 
 	int insert(Freight fr);
 
+	Freight queryFreightById(Integer logisticsUnitId);
+
 	
 }

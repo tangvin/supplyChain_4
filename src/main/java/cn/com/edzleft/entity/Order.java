@@ -124,9 +124,7 @@ public class Order {
      */
     private String invoiceNum;
 
-    public void setLogisticsNum(String logisticsNum) {
-        this.logisticsNum = logisticsNum;
-    }
+
 
     public Integer getCreditGetId() {
         return creditGetId;
@@ -244,7 +242,7 @@ public class Order {
         return logisticsNum;
     }
 
-    public void setLogisticsNum(Integer logisticsNumId) {
+    public void setLogisticsNum(String logisticsNum) {
         this.logisticsNum = logisticsNum == null ? null : logisticsNum;
     }
 
