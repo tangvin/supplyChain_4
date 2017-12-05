@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+
 /**
  * Created by ibmtech on 2017/11/22.
  */
@@ -20,15 +22,20 @@ public class TripartiteController {
     @Autowired
     private TripartiteService tripartiteService;
 
-    @RequestMapping("/byPage")
+    @RequestMapping("/tripartitePage")
     @ResponseBody
-    public DataGridJson getTripartiteByPage(int page, int rows, PageUtil<Tripartite> pageUtil){
+    public DataGridJson getTripartiteByPage(Integer pageNumber, Integer pageSize , String tripartiteDepositBank, String tripartiteCreditHolderPurchaser){
+        PageUtil<Tripartite> userPage = new PageUtil<>();
+        HashMap<String,Object> whereMaps =new HashMap<>();
+        whereMaps.put("tripartiteDepositBank",tripartiteDepositBank);
+        whereMaps.put("tripartiteCreditHolderPurchaser",tripartiteCreditHolderPurchaser);
         DataGridJson dgj = new DataGridJson();
-        pageUtil.setCpage(page);
-        pageUtil.setPageSize(rows);
-        PageUtil<Tripartite> pages = tripartiteService.queryAllTripartite(pageUtil);
-        dgj.setTotal(pages.getTotalCount());
-        dgj.setRows(pages.getList());
+        userPage.setCpage(pageNumber);
+        userPage.setPageSize(pageSize);
+        userPage.setWhereMap(whereMaps);
+        userPage = tripartiteService.queryAllTripartite(userPage);
+        dgj.setTotal(userPage.getTotalCount());
+        dgj.setRows(userPage.getList());
         return dgj;
     }
 }

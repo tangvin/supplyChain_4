@@ -15,6 +15,13 @@ public class PmFreightServiceImpl implements PmFreightService{
 	public int insert(Freight fr) {
 		return this.pmfreightMapper.insert(fr);
 	}
+	
+	
+	@Override
+	public Freight queryFreightById(Integer logisticsUnitId) {
+		// TODO Auto-generated method stub
+		return pmfreightMapper.queryFreightById(logisticsUnitId);
+	}
 
 	
 }

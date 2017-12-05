@@ -15,10 +15,15 @@ public interface TradeOrderService {
 
 
     /**
-     * 根据合同id查询订单详情
+     * orderNumber
+     */
+    public Order queryOrderByNumber(String orderNumber);
+
+
+    /**
+     * 根据id查询出订单
      */
     public Order queryOrderById(Integer id);
-
     /**
      * 设置订单状态
      * @param id

@@ -23,6 +23,14 @@ public class PmReceivingAddressServiceImpl implements PmReceivingAddressService{
 		return this.pmReceivingAddressMapper.insert(ra);
 	}
 
+	/**
+	 * 回显收货地址
+	 */
+	@Override
+	public ReceivingAddress queryReceivingAddress(Integer addressId) {
+		return pmReceivingAddressMapper.queryReceivingAddress(addressId);
+	}
+
 	@Override
 	public ReceivingAddress selectByPrimaryKey(String cId) {
 		// TODO Auto-generated method stub

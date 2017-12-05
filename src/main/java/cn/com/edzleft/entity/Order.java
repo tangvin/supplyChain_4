@@ -52,7 +52,7 @@ public class Order {
     /**
      * 收货联系人
      */
-    private String ogisticsName;
+    private String logisticsName;
     /**
      * 收货联系人手机
      */
@@ -117,7 +117,47 @@ public class Order {
      */
 
     private String applicationletter;
-    
+
+    /**
+     * 发票编号
+     * @return
+     */
+    private String invoiceNum;
+
+
+
+    public Integer getCreditGetId() {
+        return creditGetId;
+    }
+
+    public void setCreditGetId(Integer creditGetId) {
+        this.creditGetId = creditGetId;
+    }
+
+    public void setCreditUseId(Integer creditUseId) {
+        this.creditUseId = creditUseId;
+    }
+
+    public void setCreditGrantorId(Integer creditGrantorId) {
+        this.creditGrantorId = creditGrantorId;
+    }
+
+    public void setPaymentAccountId(Integer paymentAccountId) {
+        this.paymentAccountId = paymentAccountId;
+    }
+
+    public Integer getFreightNumberId() {
+        return freightNumberId;
+    }
+
+    public String getInvoiceNum() {
+        return invoiceNum;
+    }
+
+    public void setInvoiceNum(String invoiceNum) {
+        this.invoiceNum = invoiceNum;
+    }
+
     public String getApplicationletter() {
 		return applicationletter;
 	}
@@ -202,7 +242,7 @@ public class Order {
         return logisticsNum;
     }
 
-    public void setLogisticsNum(Integer logisticsNumId) {
+    public void setLogisticsNum(String logisticsNum) {
         this.logisticsNum = logisticsNum == null ? null : logisticsNum;
     }
 
@@ -214,12 +254,12 @@ public class Order {
         this.receivingAddressId = receivingAddressId == null ? null : receivingAddressId;
     }
 
-	public String getOgisticsName() {
-        return ogisticsName;
+	public String getLogisticsName() {
+        return logisticsName;
     }
 
-    public void setOgisticsName(String ogisticsName) {
-        this.ogisticsName = ogisticsName == null ? null : ogisticsName.trim();
+    public void setLogisticsName(String logisticsName) {
+        this.logisticsName = logisticsName == null ? null : logisticsName;
     }
 
     public Integer getContactPhone() {
@@ -326,6 +366,7 @@ public class Order {
         this.freightNumberId = freightNumberId;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -348,7 +389,7 @@ public class Order {
         if (logisticsNum != null ? !logisticsNum.equals(order.logisticsNum) : order.logisticsNum != null) return false;
         if (receivingAddressId != null ? !receivingAddressId.equals(order.receivingAddressId) : order.receivingAddressId != null)
             return false;
-        if (ogisticsName != null ? !ogisticsName.equals(order.ogisticsName) : order.ogisticsName != null) return false;
+        if (logisticsName != null ? !logisticsName.equals(order.logisticsName) : order.logisticsName != null) return false;
         if (contactPhone != null ? !contactPhone.equals(order.contactPhone) : order.contactPhone != null) return false;
         if (principalOrderId != null ? !principalOrderId.equals(order.principalOrderId) : order.principalOrderId != null)
             return false;
@@ -381,7 +422,7 @@ public class Order {
         result = 31 * result + (logisticsUnitId != null ? logisticsUnitId.hashCode() : 0);
         result = 31 * result + (logisticsNum != null ? logisticsNum.hashCode() : 0);
         result = 31 * result + (receivingAddressId != null ? receivingAddressId.hashCode() : 0);
-        result = 31 * result + (ogisticsName != null ? ogisticsName.hashCode() : 0);
+        result = 31 * result + (logisticsName != null ? logisticsName.hashCode() : 0);
         result = 31 * result + (contactPhone != null ? contactPhone.hashCode() : 0);
         result = 31 * result + (principalOrderId != null ? principalOrderId.hashCode() : 0);
         result = 31 * result + (creditGetId != null ? creditGetId.hashCode() : 0);
@@ -398,6 +439,7 @@ public class Order {
         return result;
     }
 
+
     @Override
     public String toString() {
         return "Order{" +
@@ -408,25 +450,26 @@ public class Order {
                 ", orderCreatorTrade='" + orderCreatorTrade + '\'' +
                 ", orderConfirmationTime=" + orderConfirmationTime +
                 ", orderStatus=" + orderStatus +
-                ", logisticsUnitId='" + logisticsUnitId + '\'' +
+                ", logisticsUnitId=" + logisticsUnitId +
                 ", logisticsNum='" + logisticsNum + '\'' +
-                ", receivingAddressId='" + receivingAddressId + '\'' +
-                ", ogisticsName='" + ogisticsName + '\'' +
+                ", receivingAddressId=" + receivingAddressId +
+                ", logisticsName='" + logisticsName + '\'' +
                 ", contactPhone=" + contactPhone +
                 ", principalOrderId=" + principalOrderId +
                 ", creditGetId=" + creditGetId +
                 ", creditUseId=" + creditUseId +
-                ", creditGrantorId='" + creditGrantorId + '\'' +
+                ", creditGrantorId=" + creditGrantorId +
                 ", orderAmount=" + orderAmount +
                 ", amountPayable=" + amountPayable +
                 ", amountActuallyPaid=" + amountActuallyPaid +
-                ", paymentAccountId='" + paymentAccountId + '\'' +
+                ", paymentAccountId=" + paymentAccountId +
                 ", paymentTime=" + paymentTime +
                 ", invoice='" + invoice + '\'' +
                 ", freightUnit='" + freightUnit + '\'' +
-                ", freightNumberId='" + freightNumberId + '\'' +
+                ", freightNumberId=" + freightNumberId +
+                ", goods='" + goods + '\'' +
+                ", applicationletter='" + applicationletter + '\'' +
+                ", invoiceNum='" + invoiceNum + '\'' +
                 '}';
     }
-
-
 }

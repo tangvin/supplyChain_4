@@ -34,4 +34,10 @@ public interface FreightMapper {
      */
     public List<Freight> selectFreightByAddress();
 
+    /**
+     * 根据货运id查看货运信息
+     */
+    public Freight selectFreightById(Integer id);
+
+
 }

@@ -31,4 +31,8 @@ public class PmReceivingAddressContorller {
 		int i = pmreceivingAddressservice.insert(ra);
 		return i>0?true:false;
 	}
+	/**
+	 * 根据用户unionID查询收货地址
+	 */
+	
 }

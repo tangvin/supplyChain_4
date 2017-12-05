@@ -15,6 +15,8 @@ public interface PmReceivingAddressService {
 
 	int insert(ReceivingAddress ra);
 
+	ReceivingAddress queryReceivingAddress(Integer addressId);
+
 
 
 

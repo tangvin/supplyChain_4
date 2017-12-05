@@ -27,10 +27,10 @@ public interface OrderMapper {
 
     /**
      * 根据id查询出订单详细信息
-     * @param id
+     * @param orderNumber
      * @return
      */
-    public Order selectOrderById(Integer id);
+    public Order selectOrderByNumber(String orderNumber);
 
     /**
      * 设置订单状态
@@ -42,6 +42,9 @@ public interface OrderMapper {
      */
     public void insertOrder(Order order);
 
-
+    /**
+     * 根据id 查看详细信息
+     */
+    public Order selectOrderById(Integer id);
 
 }

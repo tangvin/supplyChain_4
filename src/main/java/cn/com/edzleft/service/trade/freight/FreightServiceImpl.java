@@ -65,4 +65,14 @@ public class FreightServiceImpl implements FreightService {
     }
 
 
+    /**
+     * 根据id查询出当前的货运信息
+     * @param id
+     * @return
+     */
+    public Freight queryFreightById(Integer id){
+        Freight freight = freightMapper.selectFreightById(id);
+        return freight;
+    }
+
 }

@@ -12,7 +12,7 @@
     <result column="logistics_unit_id" property="logisticsUnitId" jdbcType="INTEGER" />
     <result column="logistics_num" property="logisticsNum" jdbcType="VARCHAR" />
     <result column="receiving_address_id" property="receivingAddressId" jdbcType="INTEGER" />
-    <result column="ogistics_name" property="ogisticsName" jdbcType="VARCHAR" />
+    <result column="logistics_name" property="logisticsName" jdbcType="VARCHAR" />
     <result column="contact_phone" property="contactPhone" jdbcType="INTEGER" />
     <result column="principal_order_id" property="principalOrderId" jdbcType="INTEGER" />
     <result column="credit_get_id" property="creditGetId" jdbcType="INTEGER" />
@@ -26,6 +26,8 @@
     <result column="invoice" property="invoice" jdbcType="VARCHAR" />
     <result column="freight_unit" property="freightUnit" jdbcType="VARCHAR" />
     <result column="freight_number_id" property="freightNumberId" jdbcType="INTEGER" />
+    <result column="invoiceNum" property="invoice_num" jdbcType="VARCHAR" />
+    <result column="goods" property="goods" jdbcType="VARCHAR" />
   </resultMap>
 
   <!--条件查询-->
@@ -48,9 +50,9 @@
 
   <sql id="Base_Column_List" >
     order_id, order_number, order_creat_time, order_creator, order_creator_trade, order_confirmation_time,
-    order_status, logistics_unit_id, logistics_num, receiving_address_id, ogistics_name, contact_phone,
-    principal_order_id, credit_get_id, credit_use_id, credit_grantor_id, order_amount, amount_payable,
-    amount_actually_paid, payment_account_id, payment_time, invoice, freight_unit, freight_number_id
+    order_status, logistics_unit_id, logistics_num, receiving_address_id,logistics_name, contact_phone,
+    principal_order_id, credit_get_id, credit_use_id, credit_grantor_id, order_amount, amount_payable,goods,
+    amount_actually_paid, payment_account_id, payment_time, invoice, freight_unit, freight_number_id,invoice_num
   </sql>
 
   <!--查询总条数-->
@@ -69,12 +71,20 @@
   </select>
 
 
-  <!--根据id查询到订单表-->
-  <select id="selectOrderById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <!--根据订单编号orderNumber查询到订单表-->
+  <select id="selectOrderByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from gyl_order
-    where order_id = #{orderId,jdbcType=INTEGER}
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </select>
+
+  <!--根据订单编号orderNumber查询到订单表-->
+  <select id="selectOrderById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from gyl_order
+    where order_id = #{order_id,jdbcType=INTEGER}
   </select>
 
 
@@ -117,8 +127,8 @@
       <if test="receivingAddressId != null" >
         receiving_address_id,
       </if>
-      <if test="ogisticsName != null" >
-        ogistics_name,
+      <if test="logisticsName != null" >
+        logistics_name,
       </if>
       <if test="contactPhone != null" >
         contact_phone,
@@ -159,6 +169,12 @@
       <if test="freightNumberId != null" >
         freight_number_id,
       </if>
+      <if test="invoiceNum != null" >
+        invoice_num,
+      </if>
+      <if test="goods != null" >
+        goods,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
@@ -191,8 +207,8 @@
       <if test="receivingAddressId != null" >
         #{receivingAddressId,jdbcType=VARCHAR},
       </if>
-      <if test="ogisticsName != null" >
-        #{ogisticsName,jdbcType=VARCHAR},
+      <if test="logisticsName != null" >
+        #{logisticsName,jdbcType=VARCHAR},
       </if>
       <if test="contactPhone != null" >
         #{contactPhone,jdbcType=INTEGER},
@@ -233,6 +249,12 @@
       <if test="freightNumberId != null" >
         #{freightNumberId,jdbcType=VARCHAR},
       </if>
+      <if test="invoiceNum != null" >
+        #{invoiceNum,jdbcType=VARCHAR},
+      </if>
+      <if test="goods != null" >
+        #{goods,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
 
@@ -268,8 +290,8 @@
       <if test="receivingAddressId != null" >
         receiving_address_id = #{receivingAddressId,jdbcType=INTEGER},
       </if>
-      <if test="ogisticsName != null" >
-        ogistics_name = #{ogisticsName,jdbcType=VARCHAR},
+      <if test="logisticsName != null" >
+        logistics_name = #{logisticsName,jdbcType=VARCHAR},
       </if>
       <if test="contactPhone != null" >
         contact_phone = #{contactPhone,jdbcType=INTEGER},
@@ -310,34 +332,12 @@
       <if test="freightNumberId != null" >
         freight_number_id = #{freightNumberId,jdbcType=INTEGER},
       </if>
+      <if test="invoiceNum != null" >
+        invoice_num = #{invoiceNum,jdbcType=VARCHAR},
+      </if>
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.com.edzleft.entity.Order" >
-    update gyl_order
-    set order_number = #{orderNumber,jdbcType=VARCHAR},
-      order_creat_time = #{orderCreatTime,jdbcType=TIMESTAMP},
-      order_creator = #{orderCreator,jdbcType=VARCHAR},
-      order_creator_trade = #{orderCreatorTrade,jdbcType=VARCHAR},
-      order_confirmation_time = #{orderConfirmationTime,jdbcType=TIMESTAMP},
-      order_status = #{orderStatus,jdbcType=INTEGER},
-      logistics_unit = #{logisticsUnit,jdbcType=VARCHAR},
-      logistics_num = #{logisticsNum,jdbcType=VARCHAR},
-      receiving_address = #{receivingAddress,jdbcType=VARCHAR},
-      ogistics_name = #{ogisticsName,jdbcType=VARCHAR},
-      contact_phone = #{contactPhone,jdbcType=INTEGER},
-      principal_order = #{principalOrder,jdbcType=INTEGER},
-      credit_get = #{creditGet,jdbcType=INTEGER},
-      credit_use = #{creditUse,jdbcType=INTEGER},
-      credit_grantor = #{creditGrantor,jdbcType=VARCHAR},
-      order_amount = #{orderAmount,jdbcType=DOUBLE},
-      amount_payable = #{amountPayable,jdbcType=DOUBLE},
-      amount_actually_paid = #{amountActuallyPaid,jdbcType=INTEGER},
-      payment_account = #{paymentAccount,jdbcType=VARCHAR},
-      payment_time = #{paymentTime,jdbcType=TIMESTAMP},
-      invoice = #{invoice,jdbcType=VARCHAR},
-      freight_unit = #{freightUnit,jdbcType=VARCHAR},
-      freight_number = #{freightNumber,jdbcType=VARCHAR}
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </update>
+
+
 </mapper>

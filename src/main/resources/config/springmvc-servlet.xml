@@ -86,7 +86,7 @@
 						<value>/captialMain/login.action</value>
 						<value>/account/login.action</value>
 						<value>/letter/letterSelect.action</value>
-						<value>/letter/creditSelect.action</value>
+						<value>/freight/getAllFreight.action</value>
 					</list>
 				</property>
 			</bean>

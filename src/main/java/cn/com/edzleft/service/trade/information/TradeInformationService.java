@@ -15,6 +15,6 @@ public interface TradeInformationService {
     /**
      * 根据id修改用户信息
      */
-    public void modifyInformation(Information f);
+    public int modifyInformation(Information f);
 
 }

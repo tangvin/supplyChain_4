@@ -75,4 +75,15 @@ public class ReceivingAddressServiceImpl implements ReceivingAddressService {
         address.setrAddressDefault(r.getrAddressDefault());
         receivingAddressMapper.updateAddress(address);
     }
+
+
+    /**
+     * 根据id 查看收货地址信息
+     */
+    public ReceivingAddress queryReceivingAddress(Integer id){
+        ReceivingAddress address = receivingAddressMapper.selectAddressById(id);
+        return address;
+    }
+
+
 }

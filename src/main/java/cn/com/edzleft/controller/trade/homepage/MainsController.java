@@ -1,20 +1,17 @@
 package cn.com.edzleft.controller.trade.homepage;
 
 
-import cn.com.edzleft.entity.Account;
-import cn.com.edzleft.entity.Information;
-import cn.com.edzleft.entity.Order;
-import cn.com.edzleft.entity.SessionInfo;
+import cn.com.edzleft.entity.*;
 import cn.com.edzleft.service.trade.account.AccountService;
+import cn.com.edzleft.service.trade.freight.FreightService;
 import cn.com.edzleft.service.trade.information.TradeInformationService;
 import cn.com.edzleft.service.trade.order.TradeOrderService;
-import cn.com.edzleft.util.ConfigUtil;
+import cn.com.edzleft.service.trade.receivingAddress.ReceivingAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -30,6 +27,32 @@ public class MainsController {
         private AccountService accountService;
         @Autowired
         private TradeOrderService tradeOrderService;
+        @Autowired
+        private FreightService freightService;
+        @Autowired
+        private ReceivingAddressService receivingAddressService;
+
+
+
+    /**
+     * 订单查看
+     * @return
+     */
+    @RequestMapping(value = "ddck")
+    public ModelAndView ddck(String value){
+        Order order = tradeOrderService.queryOrderByNumber(value);
+        Integer logisticsUnitId = order.getLogisticsUnitId();
+        Freight freight = freightService.queryFreightById(logisticsUnitId);
+        //获取收货地址的id
+        Integer addressId = order.getReceivingAddressId();
+        ReceivingAddress receivingAddress = receivingAddressService.queryReceivingAddress(addressId);
+
+        ModelAndView modelAndView = new ModelAndView("/trade/order/viewOrder");
+        modelAndView.addObject("order",order);
+        modelAndView.addObject("freight",freight);
+        modelAndView.addObject("receivingAddress",receivingAddress);
+        return modelAndView;
+    }
 
     /**
      * 认证资料
@@ -45,8 +68,15 @@ public class MainsController {
      * @return
      */
     @RequestMapping(value = "updateInformation")
-    public String updateInformation(){
-        return "trade/information/updateInformation";
+    public ModelAndView updateInformation(HttpSession sessionInfo){
+        ModelAndView modelAndView = new ModelAndView("trade/information/updateInformation");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        String userName=session.getAdmin().getUserName();
+        Information information = tradeInformationService.queryBaseInformation(userId);
+        Account account = accountService.queryAccountByName(userName);
+        modelAndView.addObject("information", information);
+        return modelAndView;
     }
 
 
@@ -72,7 +102,9 @@ public class MainsController {
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer userId = session.getAdmin().getUserId();
         String userName=session.getAdmin().getUserName();
+        //根据用户id查询出当前的企业信息
         Information information = tradeInformationService.queryBaseInformation(userId);
+        //根据用户名查询出当前用户
         Account account = accountService.queryAccountByName(userName);
         modelAndView.addObject("information", information);
         modelAndView.addObject("messages", "home");

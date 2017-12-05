@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -25,7 +27,15 @@ public class FreightController {
      */
     @RequestMapping("/getAllFreight")
     @ResponseBody
-    public List<Freight> getAllFreight(){
+    public List<Freight> getAllFreight(HttpServletRequest request,HttpServletResponse response){
+        response.setContentType("text/plain");
+        response.setHeader("Pragma", "No-cache");
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        response.setHeader("Access-Control-Allow-Origin", "*");//添加跨域访问
+        String jsonpCallback = request.getParameter("jsonpCallback");
+
         List<Freight> freights = freightService.queryAllFreight();
         return freights;
     }

@@ -7,7 +7,7 @@ import cn.com.edzleft.entity.Information;
  */
 public interface TradeInformationMapper {
     /**
-     * 基本信息查询
+     * 基本信息查询+用户账号信息
      */
     public Information selectBaseInformation(Integer id);
 
@@ -16,6 +16,6 @@ public interface TradeInformationMapper {
      * 修改基本信息
      * param :id
      */
-    public void updateInformation(Information info);
+    public int updateInformation(Information info);
 
 }

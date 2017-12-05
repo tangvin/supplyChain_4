@@ -35,5 +35,11 @@ public interface PmOrderMapper {
 
 	Integer insetOrder5(Integer userId);
 
-	
+	Order selectOrder(String orderNumber);
+
+
+	Order ddbj(Integer orderId);
+
+
+	int updataOreder(Order order);
 }

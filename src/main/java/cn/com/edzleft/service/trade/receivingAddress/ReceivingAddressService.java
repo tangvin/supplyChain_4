@@ -31,4 +31,10 @@ public interface ReceivingAddressService{
      * 修改收货地址信息
      */
     public void modiflyAddress(ReceivingAddress r);
+
+
+    /**
+     *
+     */
+    public ReceivingAddress queryReceivingAddress(Integer id);
 }

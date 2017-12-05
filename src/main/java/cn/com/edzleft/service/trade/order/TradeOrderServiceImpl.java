@@ -33,13 +33,21 @@ public class TradeOrderServiceImpl  implements TradeOrderService{
 
     /**
      * 根据id查询订单详细信息
-     * @param id
+     * @param orderNumber
      * @return
      */
     @Override
-    public Order queryOrderById(Integer id) {
-        Order order = orderMapper.selectOrderById(id);
+    public Order queryOrderByNumber(String orderNumber) {
+        Order order = orderMapper.selectOrderByNumber(orderNumber);
         return order;
+    }
+
+    /**
+     * 根据订单编号查询
+     */
+    public Order queryOrderById(Integer id){
+        Order order = orderMapper.selectOrderById(id);
+        return  order;
     }
 
     /**

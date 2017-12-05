@@ -26,9 +26,11 @@ public class TradeInformationController {
     /**
      * 修改基本信息
      */
-    @RequestMapping("/update")
-    public void updateInformation(Information info){
-        tradeinformationService.modifyInformation(info);
+    @RequestMapping("/modifyInformation")
+    @ResponseBody
+    public String updateInformation(Information info){
+        int flag = tradeinformationService.modifyInformation(info);
+        return "1";
     }
 
 

@@ -29,22 +29,20 @@
                             <option value="3">待收货</option>
                             <option value="4">已完成</option>
                             <option value="5">已关闭</option>
-                            <option value="6">已关闭</option>
-                            <option value="6">历史</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label>开户行</label>
-                        <input type="text" class="form-control" id="creditGrantor">
                     </div>
                     <div class="form-group form-group1">
                         <label>合同执行期</label>
-                        <input type="text" readonly="readonly"  name="birthday" id="birthday1" class="form-control" value="03/18/2013" />--
-                        <input type="text" readonly="readonly"  name="birthday" id="birthday" class="form-control" value="03/18/2013" />
+                        <input type="text" readonly="readonly"  name="birthday" id="birthday1" class="form-control" value="" />--
+                        <input type="text" readonly="readonly"  name="birthday" id="birthday" class="form-control" value="" />
                     </div>
                     <div class="form-group">
                         <label>签约方</label>
                         <input type="text" class="form-control" id="orderCreatorTrade">
+                    </div>
+                    <div class="form-group">
+                        <label>合同</label>
+                        <input type="text" class="form-control" id="orderContract">
                     </div>
                     <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>
                     <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
@@ -70,6 +68,27 @@
                 </div>
             </div>
             <!--领取订单 模态框-->
+
+            <!--领取订单 模态框-->
+            <div class="modal fade bs-example-modal-sm_bh lqdd_fh" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button   type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">请输入驳回理由：</h4>
+                        </div>
+                        <div class="panel-body text-center">
+                            <textarea class="form-control" rows="3" width="200px"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--领取订单 模态框-->
+
             <!--配置发货 模态框-->
             <div class="modal fade bs-example-modal-pzfh" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -116,19 +135,52 @@
                                     </tr>
                                 <tr>
                                     <div class="row">
-                                        <td class="col-xs-3">货运编号:</td>
+                                        <td class="col-xs-3"><span class="xingxing">*</span>货运编号:</td>
                                         <td class="col-xs-8">
                                             <div class="row row_ddje">
                                                 <div class="col-xs-5 row_ddje_div">
                                                     <input type="text" name="freightNumber" class="form-control">
                                                 </div>
                                             <div class="col-xs-6 row_ddje_con">
-                                            暂未查询到货运单位，请检查
+                                                暂未查询到货运单位，请检查
                                             </div>
                                             </div>
                                         </td>
                                     </div>
                                 </tr>
+                                    <tr>
+                                        <div class="row">
+                                            <td class="col-xs-3"><span class="xingxing">*</span>发票编号:</td>
+                                            <td class="col-xs-8">
+                                                <div class="row row_ddje">
+                                                    <div class="col-xs-5 row_ddje_div">
+                                                        <input type="text" name="invoiceNum" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div class="row">
+                                            <td class="col-xs-3"><span class="xingxing">*</span>上传发票：</td>
+                                            <td class="col-xs-9 text-left">
+                                                <div class="row" style="margin-right:0;">
+                                                    <div class="col-xs-2">
+                                                        <div id="inputBox" class="inputBox1 inputBox2">
+                                                            <input type="file" title="请选择图片" id="file" multiple accept="image/png,image/jpg,image/gif,image/JPEG"/>
+                                                            <span class="jiahao jaihao1">+</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-8">
+                                                        <div id="imgBox"></div>
+                                                    </div>
+                                                    <div class="col-xs-1">
+                                                        <button type="button" class="btn btn-danger" id="btn">上传</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </div>
+                                    </tr>
 
                                 </tbody>
                             </table>
@@ -138,7 +190,6 @@
                                 </div>
                             </form>
                             </div>
-
 
                         </div>
 
@@ -204,8 +255,16 @@
                     }
                 },
                 {field:'orderAmount',title:'订单金额（￥万元）',width:100},
-                {field:'orderConfirmationTime',title:'订单确认时间',width:100},
-                {field:'orderCreatTime',title:'订单创建时间',width:100},
+                {field:'orderConfirmationTime',title:'订单确认时间',width:100,
+                    formatter:function(value,row,index){
+                        return ConvertToDate(value)
+                    }
+                },
+                {field:'orderCreatTime',title:'订单创建时间',width:100,
+                    formatter:function(value,row,index){
+                        return ConvertToDate(value)
+                    }
+                },
 
                 {field:'principalOrder',title:'合同',width:100},
                 {field:'creditUse',title:'用信情况&nbsp;￥万元',width:100},
@@ -219,7 +278,7 @@
                         var str = '';
                         if(row.orderStatus ==0){//待确认
                             str += '<button  class="btn btn-default bg_btn qran" data-toggle="modal" data-target=".bs-example-modal-sm" href="#" value="待确认" onclick="showUserAttach(\''+row.orderId+'\',1)">领取订单</button>';
-                            str += '<button  class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm" href="#" value="待确认" onclick="showUserAttach(\''+row.orderId+'\',2)">驳回</button>';
+                            str += '<button  class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_bh" href="#" value="待确认" onclick="showUserAttach(\''+row.orderId+'\',2)">驳回</button>';
                         } else if(row.orderStatus ==1){//待付款
                             str+='--';
                         } else if(row.orderStatus ==2){//待发货
@@ -291,7 +350,8 @@
 
     window.operateEvents1={
         'click #butt':function (e,value,index,row) {
-            $('#load').load('<%=request.getContextPath()%>/tradeMain/ddck.action')
+            $('#load').load('<%=request.getContextPath()%>/tradeMain/ddck.action?value='+value)
+            console.log('<%=request.getContextPath()%>/tradeMain/ddck.action?value='+value)
         }
     }
 
@@ -313,7 +373,6 @@
     }
 
 
-
     //配置发货数据回显
         function showUserAttachs(w,e){
             /**
@@ -327,7 +386,7 @@
                     data:$('#formId').serialize(),
                     success:function(data) {
                         setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')",500);
-                    }
+            }
                 })
             })
             $.ajax({
@@ -350,12 +409,41 @@
     }
 
 
-
-
-
-
-
-
+    function ConvertToDate(datestr) {
+        var date=new Date(datestr);
+        var year=date.getFullYear();
+        var month=date.getMonth()+1;
+        if(month < 10){
+            month = "0"+month
+        }else{
+            month = ''+month
+        }
+        var day=date.getDate();
+        if(day < 10){
+            day = "0"+day
+        }else{
+            day = ''+day
+        }
+        var hours = date.getHours()
+        if(hours < 10){
+            hours = "0"+hours
+        }else{
+            hours = ''+hours
+        }
+        var minutes = date.getMinutes(); //获取当前分钟数(0-59)
+        if(minutes < 10){
+            minutes = "0"+minutes
+        }else{
+            minutes = ''+minutes
+        }
+        var seconds = date.getSeconds();
+        if(seconds < 10){
+            seconds = "0"+seconds
+        }else{
+            seconds = ''+seconds
+        }
+        return year+"-"+month+"-"+day+"-"+hours+":"+minutes+":"+seconds;
+    }
 
 </script>
 </html>

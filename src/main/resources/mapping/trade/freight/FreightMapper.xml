@@ -14,6 +14,14 @@
     freight_number
   </sql>
 
+  <!--根据ID查看货运详细信息-->
+  <select id="selectFreightById" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from gyl_freight
+    WHERE freight_id=#{freightId}
+  </select>
+
   <select id="selectAllFreight" resultMap="BaseResultMap"  >
     select 
     <include refid="Base_Column_List" />
@@ -28,21 +36,13 @@
     WHERE freight_default_address=1
   </select>
 
-  <!--删除货运单位-->
+  <!--根据id删除货运单位-->
   <delete id="deleteFreight" parameterType="java.lang.Integer" >
     delete from gyl_freight
     where freight_id = #{freightId,jdbcType=INTEGER}
   </delete>
 
- <!--
-  <insert id="insertFreight" parameterType="cn.com.edzleft.entity.Freight" >
-    insert into gyl_freight ( freight_name, freight_contact_person,
-      freight_contact_phone, freight_default_address, 
-      freight_number)
-    values (#{freightName,jdbcType=VARCHAR}, #{freightContactPerson,jdbcType=VARCHAR},
-      #{freightContactPhone,jdbcType=VARCHAR}, #{freightDefaultAddress,jdbcType=INTEGER}, 
-      #{freightNumber,jdbcType=VARCHAR})
-  </insert>-->
+
 
   <!--添加货运单位-->
   <insert id="insertFreight" parameterType="cn.com.edzleft.entity.Freight" >

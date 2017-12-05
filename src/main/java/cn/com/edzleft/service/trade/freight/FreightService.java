@@ -29,4 +29,8 @@ public interface FreightService {
      */
     public void setDefaultAddress(Freight freight);
 
+    /**
+     * 根据id查询货运单位信息
+     */
+    public Freight queryFreightById(Integer id);
 }
