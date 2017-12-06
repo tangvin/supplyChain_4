@@ -21,26 +21,23 @@
                 <div class="khh">
                     <form class="form-inline khh_form khh_form1" id="loansForm">
                         <div class="form-group form-group1">
-                            <label for="creditNumber">贷款方</label>
-                            <input type="text" class="form-control" id="creditNumber">
+                            <label for="lender">贷款方</label>
+                            <input type="text" class="form-control" id="lender" name="lender">
                         </div>
                         <div class="form-group form-group1">
-                            <label for="creditGrantor">贷款金额</label>
-                            <input type="email" class="form-control" id="creditGrantor">
+                            <label for="loanAmount">贷款金额</label>
+                            <input type="email" class="form-control" id="loanAmount" name="loanAmount">
                         </div>
                         <div class="form-group form-group1">
-                            <label for="creatTime">申请人</label>
-                            <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/>至
-                            <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
+                            <label for="occurrenceTime">到期时间</label>
+                            <input class="form-control"  readonly="readonly"  id="occurrenceTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'expirationTime\')}'})" placeholder="开始日期"/>至
+                            <input  class="form-control"  readonly="readonly"  id="expirationTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'occurrenceTime\')}'})" placeholder="结束日期"/>
                         </div>
                         <div class="form-group form-group1">
-                            <label for="creditStatus">贷款状态</label>
-                            <select class="form-control select" id="creditStatus">
+                            <label for="loanStatus">贷款状态</label>
+                            <select class="form-control select" id="loanStatus">
                                 <option value="">全部</option>
-                                <option value="1">全部1</option>
-                                <option value="2">全部2</option>
-                                <option value="3">全部3</option>
-                                <option value="4">全部4</option>
+                                <option value="0">使用中</option>
                             </select>
                         </div>
                         <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>
@@ -76,27 +73,27 @@
                         return index+1;
                     }
                 },
-                {field:'creditNumber',title:'贷款编号',width:100},
-                {field:'creditGrantor',title:'贷款方',width:100},
-                {field:'creditTime',title:'授信合同',width:100},
-                {field:'creditMasterContract',title:'用信订单',width:100},
-                {field:'creditAmount',title:'授信/用信 ￥万元',width:100},
-                {field:'applicationTime',title:'到期时间',width:100},
-                {field:'approvalTime',title:'贷款状态',width:100,
+                {field:'loanNumber',title:'贷款编号',width:100},
+                {field:'lender',title:'贷款方',width:100},
+                {field:'creditMasterContractNum',title:'授信合同',width:100},
+                {field:'letterOrderNum',title:'用信订单',width:100},
+                {field:'loanAmount',title:'授信/用信 ￥万元',width:100},
+                {field:'expirationTime',title:'到期时间',width:100,
+                    formatter:function(value,row,index){
+                        return ConvertToDate(value)
+                    }
+                },
+                {field:'accountType',title:'贷款状态',width:100,
                     formatter: function(value,row,index){
                         if(value == '0') {
-                            return "未生效";
-                        } else if(value == '1') {
-                            return "正常";
-                        } else if(value == '2') {
-                            return "已终止";
-                        }else if(value == '3') {
-                            return "历史";
+                            return "全部还款";
+                        }else if(value == '1'){
+                            return "部分还款";
                         }
                     }},
-                {field:'approvalTime',title:'发生账户',width:100}
+                {field:'account',title:'发生账户',width:100}
             ],
-            url:'<%=request.getContextPath()%>/loans/loansSelect.action',
+            url:'<%=request.getContextPath()%>/captialLoan/loansSelect.action',
             method:'post',
             queryParamsType:'',
             queryParams: queryParams,//传递参数（*）
@@ -115,10 +112,11 @@
         var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             pageNumber: params.pageNumber,
             pageSize: params.pageSize,
-            creditNumber:$("#creditNumber").val(),
-            creditGrantor:$("#creditGrantor").val(),
-            creditStatus:$("#creditStatus").val(),
-            applicant:$("#creditApplicant").val()
+            lender:$("#lender").val(),
+            loanAmount:$("#loanAmount").val(),
+            occurrenceTime:$("#occurrenceTime").val(),
+            expirationTime:$("#expirationTime").val(),
+            loanStatus:$("#loanStatus").val()
         };
         return temp;
     }
@@ -131,5 +129,42 @@
         $("#loansForm").form('reset');
         crownSearch();
     }
+
+    function ConvertToDate(datestr) {
+        var date=new Date(datestr);
+        var year=date.getFullYear();
+        var month=date.getMonth()+1;
+        if(month < 10){
+            month = "0"+month
+        }else{
+            month = ''+month
+        }
+        var day=date.getDate();
+        if(day < 10){
+            day = "0"+day
+        }else{
+            day = ''+day
+        }
+        var hours = date.getHours()
+        if(hours < 10){
+            hours = "0"+hours
+        }else{
+            hours = ''+hours
+        }
+        var minutes = date.getMinutes(); //获取当前分钟数(0-59)
+        if(minutes < 10){
+            minutes = "0"+minutes
+        }else{
+            minutes = ''+minutes
+        }
+        var seconds = date.getSeconds();
+        if(seconds < 10){
+            seconds = "0"+seconds
+        }else{
+            seconds = ''+seconds
+        }
+        return year+"-"+month+"-"+day+"-"+hours+":"+minutes+":"+seconds;
+    }
+
 </script>
 </html>

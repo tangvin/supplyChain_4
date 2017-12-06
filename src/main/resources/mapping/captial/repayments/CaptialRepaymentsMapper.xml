@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.captial.repayments.CaptialRepaymentsMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Repayments" >
+    <id column="repayments_id" property="repaymentsId" jdbcType="INTEGER" />
+    <result column="repayments_num" property="repaymentsNum" jdbcType="VARCHAR" />
+    <result column="repayments_person" property="repaymentsPerson" jdbcType="VARCHAR" />
+    <result column="repayments_amount" property="repaymentsAmount" jdbcType="INTEGER" />
+    <result column="loan_amount" property="loanAmount" jdbcType="INTEGER" />
+    <result column="repayments_status" property="repaymentsStatus" jdbcType="INTEGER" />
+    <result column="account_type" property="accountType" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="repayments_time" property="repaymentsTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    repayments_id, repayments_num, repayments_person, repayments_amount, loan_amount,
+    repayments_status, account_type, account, repayments_time
+  </sql>
+
+  <!--条件查询-->
+  <sql id="where_sql">
+    <trim prefix="where" prefixOverrides="and">
+      <if test="whereMap != null &amp;&amp; whereMap.repaymentsPerson != null and whereMap.repaymentsPerson != ''">
+        AND repayments_person  LIKE '%${whereMap.repaymentsPerson}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.repaymentsAmount != null and whereMap.repaymentsAmount != ''">
+        AND repayments_amount  LIKE '%${whereMap.repaymentsAmount}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.repaymentsStatus != null and whereMap.repaymentsStatus != ''">
+        AND repayments_status  LIKE '%${whereMap.repaymentsStatus}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.endTime != null and whereMap.endTime != ''">
+        AND repayments_time &lt;= '${whereMap.endTime}'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.creatTime != null and whereMap.creatTime != ''">
+        AND repayments_time &gt;= '${whereMap.creatTime}'
+      </if>
+    </trim>
+  </sql>
+
+  <!--查询总条数-->
+  <select id="repaymentSelectCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select count(*) from gyl_repayments <include refid="where_sql"/>
+  </select>
+
+  <!--分页查询-->
+  <select id="repaymentSelect"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select
+    <include refid="Base_Column_List" />
+    from gyl_repayments
+    <include refid="where_sql"/>
+    ORDER BY repayments_time  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select>
+
+</mapper>

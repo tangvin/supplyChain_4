@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.captial.loan.CaptialLoanMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Loan" >
+    <id column="loan_id" property="loanId" jdbcType="INTEGER" />
+    <result column="loan_number" property="loanNumber" jdbcType="INTEGER" />
+    <result column="lender" property="lender" jdbcType="VARCHAR" />
+    <result column="credit_master_contract_num" property="creditMasterContractNum" jdbcType="VARCHAR" />
+    <result column="letter_order_num" property="letterOrderNum" jdbcType="VARCHAR" />
+    <result column="loan_amount" property="loanAmount" jdbcType="INTEGER" />
+    <result column="expiration_time" property="expirationTime" jdbcType="TIMESTAMP" />
+    <result column="occurrence_time" property="occurrenceTime" jdbcType="TIMESTAMP" />
+    <result column="loan_status" property="loanStatus" jdbcType="INTEGER" />
+    <result column="account_type" property="accountType" jdbcType="INTEGER" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    loan_id, loan_number, lender, credit_master_contract_num, letter_order_num, loan_amount,
+    expiration_time, occurrence_time, loan_status, account_type, account
+  </sql>
+
+  <!--条件查询-->
+  <sql id="where_sql">
+    <trim prefix="where" prefixOverrides="and">
+      <if test="whereMap != null &amp;&amp; whereMap.lender != null and whereMap.lender != ''">
+        AND lender  LIKE '%${whereMap.lender}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.loanAmount != null and whereMap.loanAmount != ''">
+        AND loan_amount  LIKE '%${whereMap.loanAmount}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.loanStatus != null and whereMap.loanStatus != ''">
+        AND loan_status  LIKE '%${whereMap.loanStatus}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.occurrenceTime != null and whereMap.occurrenceTime != ''">
+        AND occurrence_time &gt;= '${whereMap.occurrenceTime}'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.expirationTime != null and whereMap.expirationTime != ''">
+        AND expiration_time &lt;= '${whereMap.expirationTime}'
+      </if>
+    </trim>
+  </sql>
+
+  <!--查询总条数-->
+  <select id="loansSelectCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select count(*) from gyl_loan <include refid="where_sql"/>
+  </select>
+
+  <!--分页查询-->
+  <select id="loansSelect"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select
+    <include refid="Base_Column_List" />
+    from gyl_loan
+    <include refid="where_sql"/>
+    ORDER BY occurrence_time  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select>
+
+</mapper>

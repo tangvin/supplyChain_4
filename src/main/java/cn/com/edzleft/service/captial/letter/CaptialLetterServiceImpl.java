@@ -24,6 +24,15 @@ public class CaptialLetterServiceImpl implements CaptialLetterService {
     private CreditTableMapper creditTableMapper;
 
     /**
+     * 接口查询授信
+     * @return
+     */
+    @Override
+    public List<CreditTable> creditSelect() {
+        return creditTableMapper.creditSelect();
+    }
+
+    /**
      * 查询订单签约
      * @return
      */

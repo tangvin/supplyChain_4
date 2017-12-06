@@ -16,7 +16,7 @@ public class Letter {
      */
     private String letterName;
     /**
-     * 用信额
+     * 审批用信额
      */
     private Integer letterCredit;
     /**
