@@ -210,7 +210,6 @@
                         <!--基本资料 结束-->
                         <!--账户安全 开始-->
                         <div class="tab-pane" id="profile">
-                            <h5>修改密码</h5>
                             <div class="row">
                                 <div class="col-xs-10">
                                     <form class="form-horizontal" role="form" id ="f">
@@ -361,98 +360,13 @@
 
                         <!--运货单位 开始-->
                         <div class="tab-pane" id="settings1">
-                            <h5>运货单位</h5>
+                            <button type="button"   class="btn  btn-danger  btn-default tjhydw" data-toggle="modal" data-target="#exampleModal11">添加货运单位</button>
                             <div class="row">
-                                <div class="col-xs-9 col-xs-offset-1">
-                                    <ul class="media-list">
-                                        <li class="media hy_hygl1">
-                                            <div class="media-left hygl clearfix">
-                                                <div class="hygl_left">
-                                                    <div class="panel-body">
-                                                        <p>货运单位名称：德邦物流</p>
-                                                        <p>货运方联系人：王二</p>
-                                                        <p>联系人手机：13914319412</p>
-                                                    </div>
-                                                </div>
-                                                <div class="hygl_right">
-                                                    <div class="panel-body">
-                                                        <div class="mored hy_moren">
-                                                            <img src="<%=request.getContextPath()%>/js/static/images/default_blue@1x.png"><span>默认</span>
-                                                        </div>
-                                                        <div class="hy_logo">
-                                                            <img src="<%=request.getContextPath()%>/js/static/images/logo_debang@1x.png">
-                                                        </div>
-                                                    </div>
+                                <div class="col-xs-9 col-xs-offset-1" id="wyb">
 
-                                                </div>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn btn-danger btn-default">设为默认</button>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn btn-danger btn-default">删除</button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <ul class="media-list">
-                                        <li class="media hy_hygl1">
-                                            <div class="media-left hygl clearfix">
-                                                <div class="hygl_left">
-                                                    <div class="panel-body">
-                                                        <p>货运单位名称：德邦物流</p>
-                                                        <p>货运方联系人：王二</p>
-                                                        <p>联系人手机：13914319412</p>
-                                                    </div>
-                                                </div>
-                                                <div class="hygl_right">
-                                                    <div class="panel-body">
-                                                        <!--<div class="mored hy_moren">-->
-                                                        <!--<img src="<%=request.getContextPath()%>/js/static/images/default_blue@1x.png"><span>默认</span>-->
-                                                        <!--</div>-->
-                                                        <div class="hy_logo">
-                                                            <img src="<%=request.getContextPath()%>/js/static/images/logo_shentong@1x.png">
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn btn-danger btn-default">设为默认</button>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn btn-danger btn-default">删除</button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <ul class="media-list">
-                                        <li class="media hy_hygl1">
-                                            <div class="media-left hygl clearfix">
-                                                <div class="hygl_left">
-                                                    <div class="panel-body">
-                                                        <p>货运单位名称：德邦物流</p>
-                                                        <p>货运方联系人：王二</p>
-                                                        <p>联系人手机：13914319412</p>
-                                                    </div>
-                                                </div>
-                                                <div class="hygl_right">
-                                                    <div class="panel-body">
-                                                        <div class="hy_logo">
-                                                            <img src="<%=request.getContextPath()%>/js/static/images/logo_yuantong@1x.png">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn btn-danger btn-default">设为默认</button>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn btn-danger btn-default">删除</button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <button type="button" class="btn  btn-danger  btn-default tjhydw" data-toggle="modal" data-target="#exampleModal11">添加货运单位</button>
                                 </div>
                             </div>
+
 
                             <!--货运单位 蒙泰框-->
                             <div class="modal fade" id="exampleModal11" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -460,38 +374,40 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title">选择收获地址11</h4>
+                                            <h4 class="modal-title">添加货运单位</h4>
                                         </div>
+                                        <form id="freightForm">
                                         <div class="modal-header sh_div">
+
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>货运单位名称</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-9"><input name="freightName" type="text" class="form-control sh_input"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>货运方联系人</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-9"><input name="freightContactPerson" type="text" class="form-control sh_input"></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>货运方联系人手机号</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input"></div>
+                                                <div class="col-xs-9"><input name="freightContactPhone" type="text" class="form-control sh_input"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>设为默认</div>
+                                                <div class="col-xs-3" ><span class="xingxing xx1">*</span>设为默认</div>
                                                 <div class="col-xs-9">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="inlineRadioOptions2" checked> 是
+                                                        <input type="radio" name="freightDefaultAddress" value="1"> 是
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="inlineRadioOptions2"> 否
+                                                        <input type="radio" name="freightDefaultAddress" value="0" checked> 否
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
-                                            <button type="button" class="btn btn-primary">取消</button>
+                                            <button id="addhydw" type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -777,6 +693,113 @@
         crownSearch();
     }
 
+    $.ajax({
+        url:"<%=request.getContextPath()%>/freight/getAllFreight.action",
+        type:"post",
+        dataType:"json",
+        success: function(data){
+            console.log(data)
+            var wyb=document.getElementById('wyb')
+            function setDiv(item){
+                var wyb_ul='<ul class="media-list">' +
+                    '<li class="media hy_hygl1">' +
+                    '<div class="media-left hygl clearfix" style="width:350px;">' +
+                    '<div class="hygl_left">' +
+                    '<div class="panel-body"><p><span>货运单位名称：</span>'+item.freightName+'</p><p><span>货运联系人：</span>'+item.freightContactPerson+'</p><p><span>货运联系人手机号：</span>'+item.freightContactPhone+'</p></div>' +
+                    '</div>' +
+                    '<div class="hygl_right">' +
+                    '<div class="panel-body"><div class="mored hy_moren"><input type="radio" value='+item.freightDefaultAddress+' name="mran" onclick="radioAddress('+item.freightId+',1)"><span>默认</span></div><div class="hy_logo"><img src="images/logo_debang@1x.png" class="imgimg"></div></div>'+
+                    '</div>' +
+                    '</div>' +
+                    '<div class="media-body"><button type="button" class="btn btn-danger btn-default" onclick="deleteFreight('+item.freightId+')">删除</button></div>' +
+                    '</li>' +
+                    '</ul>'
+
+                return wyb_ul
+            }
+
+            function getnoApplicationData111(){
+                var html = ''
+                for(var i = 0;i<data.length;i++){
+                    html += setDiv(data[i])
+                }
+                wyb.innerHTML = html;
+            }
+            window.onload = getnoApplicationData111()
+            var aaa=document.querySelectorAll('.imgimg')
+            for(var i=0;i<data.length;i++){
+                if(data[i].freightName=='中通'){
+                    $(aaa[i]).attr('src','<%=request.getContextPath()%>/js/static/images/logo_debang@1x.png')
+                }else if(data[i].freightName=='申通'){
+                    $(aaa[i]).attr('src','<%=request.getContextPath()%>/js/static/images/logo_shentong@1x.png')
+                }else if(data[i].freightName=='德邦'){
+                    $(aaa[i]).attr('src','<%=request.getContextPath()%>/js/static/images/logo_yuantong@1x.png')
+                }
+            }
+            var input=document.querySelectorAll('.hy_moren>input')
+            console.log(input)
+            for(var i=0;i<input.length;i++){
+                if(data[i].freightDefaultAddress=='1'){
+                    $(input[i]).attr('checked',true)
+                }
+            }
+        }
+    })
+
+
+
+    $("#addhydw").click(function () {
+        alert("确认添加！");
+        $.ajax({
+            url:"<%=request.getContextPath()%>/freight/addFreight.action",
+            dataType:'json',
+            type:'POST',
+            data:$("#freightForm").serialize(),
+            success:function (data) {
+                alert("添加成功！！")
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')",500);
+            }
+        })
+    })
+
+    /**
+     * 设为默认
+     * @param id
+     */
+    function radioAddress(id,value){
+        $.ajax({
+            url:'<%=request.getContextPath()%>/freight/setDefault.action?id='+id+'&&value='+value,
+            type:'post',
+            success:function(){
+                alert("设置成功")
+                <%--setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')",500);--%>
+            }
+        })
+    }
+
+    /**
+     * 删除信息
+     * @param datestr
+     * @returns {string}
+     * @constructor
+     */
+    function deleteFreight(id){
+        $.ajax({
+            url:'<%=request.getContextPath()%>/freight/deleteFreight.action?id='+id,
+            type:'post',
+            success:function(){
+                alert('删除成功')
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')",500);
+            }
+        })
+    }
+
+
+
+
+
+
+
 
     function ConvertToDate(datestr) {
         var date=new Date(datestr);
@@ -813,6 +836,11 @@
         }
         return year+"-"+month+"-"+day+"-"+hours+":"+minutes+":"+seconds;
     }
+
+
+
+
+
 
 
 

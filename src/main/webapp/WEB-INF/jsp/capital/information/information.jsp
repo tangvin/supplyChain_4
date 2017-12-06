@@ -16,7 +16,7 @@
     <div class='row row_zhxx'>
         <div class="col-xs-12 zlxx_top">
             <a href="<%=request.getContextPath()%>/captialMain/captialMain.action">系统首页</a>
-            <span>></span>
+            <span></span>
             <a href="#">资料维护</a>
         </div>
         <!--bootstrap tab 切换 开始-->

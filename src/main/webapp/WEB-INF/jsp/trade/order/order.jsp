@@ -33,8 +33,8 @@
                     </div>
                     <div class="form-group form-group1">
                         <label>合同执行期</label>
-                        <input type="text" readonly="readonly"  name="birthday" id="birthday1" class="form-control" value="" />--
-                        <input type="text" readonly="readonly"  name="birthday" id="birthday" class="form-control" value="" />
+                        <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/>至
+                        <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
                     </div>
                     <div class="form-group">
                         <label>签约方</label>
@@ -408,7 +408,7 @@
 
     }
 
-
+// 定义时间格式
     function ConvertToDate(datestr) {
         var date=new Date(datestr);
         var year=date.getFullYear();

@@ -32,7 +32,21 @@ public class PmReceivingAddressContorller {
 		return i>0?true:false;
 	}
 	/**
-	 * 根据用户unionID查询收货地址
+	 * 收货地址设为默认
 	 */
-	
+	@ResponseBody
+	@RequestMapping(value="setDefault")
+	public int setDefaultAddress(Integer id,Integer value,HttpSession session){
+		int flag = pmreceivingAddressservice.setDefaultAddress(id,session,value);
+		return flag;
+	}
+	/**
+	 * 删除收货地址
+	 */
+	@ResponseBody
+	@RequestMapping(value="deleteAddress")
+	public boolean setDefaultAddress(Integer id){
+		int i = pmreceivingAddressservice.deleteAddress(id);
+		return i>0?true:false;
+	}
 }

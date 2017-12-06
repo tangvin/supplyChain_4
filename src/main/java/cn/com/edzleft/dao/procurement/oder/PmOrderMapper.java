@@ -1,5 +1,7 @@
 package cn.com.edzleft.dao.procurement.oder;
 
+
+import cn.com.edzleft.entity.Information;
 import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.util.page.PageUtil;
 
@@ -47,4 +49,7 @@ public interface PmOrderMapper {
 	 * @return
 	 */
     List<Map<String, Object>> selectOrderLetter();
+
+
+	void updateInformation(Information information);
 }

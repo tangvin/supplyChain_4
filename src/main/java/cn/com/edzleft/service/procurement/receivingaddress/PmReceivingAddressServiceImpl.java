@@ -1,10 +1,15 @@
 package cn.com.edzleft.service.procurement.receivingaddress;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.com.edzleft.dao.procurement.receivingaddress.PmReceivingAddressMapper;
 import cn.com.edzleft.entity.ReceivingAddress;
+import cn.com.edzleft.entity.SessionInfo;
 @Service
 public class PmReceivingAddressServiceImpl implements PmReceivingAddressService{
 	@Autowired
@@ -53,6 +58,45 @@ public class PmReceivingAddressServiceImpl implements PmReceivingAddressService{
 	public int updateByPrimaryKey(ReceivingAddress record) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	/*根据用户ID查询地址*/
+	@Override
+	public List<ReceivingAddress> selectByPrimaryKey(Integer userId) {
+		// TODO Auto-generated method stub
+		return pmReceivingAddressMapper.selectByPrimaryKey(userId);
+	}
+
+	/**
+	 * 设为默认地址
+	 */
+	@Override
+	public int setDefaultAddress(Integer id, HttpSession session, Integer value) {
+		 SessionInfo sessions = (SessionInfo) session.getAttribute("sessionInfo");
+	     Integer userId = sessions.getAdmin().getUserId();
+	     List<ReceivingAddress> list = pmReceivingAddressMapper.selectByPrimaryKey(userId);
+	     if(value==1){
+	    	 for(ReceivingAddress r : list){
+	    		 if(r.getrAddressDefault()==1){
+	    			 r.setrAddressDefault(0);
+	    			 pmReceivingAddressMapper.updAddress(r);
+	    		 }
+	    	 }
+	     }
+	     ReceivingAddress ra = new ReceivingAddress();
+	     ra.setrAddressId(id);
+	     ra.setrAddressDefault(value);
+	     pmReceivingAddressMapper.updAddress(ra);
+		return 1;
+		 
+	}
+
+	/**
+	 * 删除收货地址
+	 */
+	@Override
+	public int deleteAddress(Integer id) {
+		return pmReceivingAddressMapper.deleteByPrimaryKey(id);
 	}
 
 }

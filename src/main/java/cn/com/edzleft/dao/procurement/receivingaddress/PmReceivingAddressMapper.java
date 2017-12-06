@@ -1,5 +1,7 @@
 package cn.com.edzleft.dao.procurement.receivingaddress;
 
+import java.util.List;
+
 import cn.com.edzleft.entity.ReceivingAddress;
 
 public interface PmReceivingAddressMapper {
@@ -18,6 +20,10 @@ public interface PmReceivingAddressMapper {
     int updateByPrimaryKey(ReceivingAddress record);
 
 	ReceivingAddress queryReceivingAddress(Integer addressId);
+
+	List<ReceivingAddress> selectByPrimaryKey(Integer userId);
+
+	void updAddress(ReceivingAddress ra);
 
 
 }

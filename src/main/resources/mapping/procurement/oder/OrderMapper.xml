@@ -32,10 +32,10 @@
     <result column="letter_status" property="letterStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    order_id, order_number, order_creat_time, order_creator, order_creator_trade, order_confirmation_time, 
-    order_status, logistics_unit_id, logistics_num, logistics_name, contact_phone, principal_order_id, 
-    credit_get_id, credit_use_id, credit_grantor_id, order_amount, amount_payable, amount_actually_paid, 
-    payment_account_id, payment_time, invoice, freight_unit, freight_number_id, goods, 
+    order_id, order_number, order_creat_time, order_creator, order_creator_trade, order_confirmation_time,
+    order_status, logistics_unit_id, logistics_num, logistics_name, contact_phone, principal_order_id,
+    credit_get_id, credit_use_id, credit_grantor_id, order_amount, amount_payable, amount_actually_paid,
+    payment_account_id, payment_time, invoice, freight_unit, freight_number_id, goods,
     applicationletter, receiving_address_id, invoice_num, letter_status
   </sql>
 

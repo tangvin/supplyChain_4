@@ -14,7 +14,10 @@ import cn.com.edzleft.service.trade.freight.FreightService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -38,6 +41,12 @@ public class PmmainController {
 	@Autowired
 	private PmReceivingAddressService pmreceivingAddressservice;
 	
+	@RequestMapping(value = "glshxx")
+	public ModelAndView glshxx(){
+        ModelAndView modelAndView = new ModelAndView("/procurement/information/information");
+        modelAndView.addObject("messages", "recieverAddress");
+        return modelAndView;
+	}
 	
     /**
      * 认证资料
@@ -53,8 +62,23 @@ public class PmmainController {
      * @return
      */
     @RequestMapping(value = "updateInformation")
-    public String updateInformation(){
-        return "procurement/information/updateInformation";
+    public ModelAndView updateInformation(HttpSession sessionInfo){
+    	ModelAndView mv = new ModelAndView("procurement/information/updateInformation");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = pmHomePageService.homePageSelect(userId);
+        mv.addObject("information",information);
+        return mv;
+    }
+    /**
+     * 确认修改资料
+     */
+    
+    @RequestMapping(value = "cupdateInformation")
+    @ResponseBody
+    public int updateInformation(Information information){
+    	int i = pmHomePageService.updateInformation(information);
+        return i;
     }
 
     /**
@@ -260,8 +284,13 @@ public class PmmainController {
      * @return
      */
     @RequestMapping(value = "/zhxx")
-    public String information(){
-        return "/procurement/information/information";
+    public ModelAndView information(HttpSession sessionInfo){
+    	ModelAndView mv = new ModelAndView("/procurement/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = pmHomePageService.homePageSelect(userId);
+        mv.addObject("information",information);
+        return mv;
     }
 
 

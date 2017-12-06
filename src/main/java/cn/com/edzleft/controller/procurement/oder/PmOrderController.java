@@ -15,14 +15,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/pmorder")
@@ -33,7 +37,6 @@ public class PmOrderController {
 	 */
 	@Autowired
 	private PmOrderService pmOrderService;
-	
 	@Autowired
 	private PmReceivingAddressService pmreceivingAddressservice;
 	
@@ -90,7 +93,6 @@ public class PmOrderController {
 	public boolean confirmOder(HttpServletRequest req,HttpSession sessionInfo){
 		String telephone = req.getParameter("telephone");
 		String receiver = req.getParameter("receiver");
-		//String address = req.getParameter("address");
 		String receivingAddressId = req.getParameter("receivingAddressId");
 		String orderAmount = req.getParameter("orderAmount");
 		String principalOrderId = req.getParameter("principalOrderId");
@@ -98,9 +100,8 @@ public class PmOrderController {
 		String orderCreatorTrade = req.getParameter("orderCreatorTrade");
 		String goods = req.getParameter("goods");
 		Order o=new Order();
-		o.setContactPhone(Integer.parseInt(telephone));
+		o.setContactPhone(telephone);
 		o.setLogisticsName(receiver);
-		//o.setReceivingAddress(address);
 		o.setReceivingAddressId(Integer.parseInt(receivingAddressId));
 		o.setOrderAmount(Double.parseDouble(orderAmount));
 		o.setPrincipalOrderId(Integer.parseInt(principalOrderId));
@@ -159,6 +160,29 @@ public class PmOrderController {
 		return mv;
 	}
 	
+
+	/**
+	 * 返回地址集合
+	 */
+	@RequestMapping(value="addresshx",method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> hxbj(HttpServletResponse response,HttpServletRequest request){
+		/*跨域访问*/
+		response.setContentType("text/plain");
+		response.setHeader("Pragma", "No-cache");
+		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Cache-Control", "no-cache");
+		response.setDateHeader("Expires", 0);
+		response.setHeader("Access-Control-Allow-Origin", "*");//添加跨域访问
+		Map<String,Object> map = new HashMap<>();
+		List<ReceivingAddress> rs = pmreceivingAddressservice.selectByPrimaryKey(5);
+		System.err.println("");
+		map.put("data", rs);
+		return map;
+	}
+
+
+
 	/**
 	 * 修改订单
 	 * @throws IOException 
@@ -167,14 +191,13 @@ public class PmOrderController {
 	 */
 	@RequestMapping(value="updateOrder")
 	@ResponseBody
-	public boolean updataOreder(Order order){
+	public boolean updataOreder(Order order,Integer rAddressId){
+		rAddressId=2;
 		System.out.println(order);
-		/*String orderString = request.getParameter("order");
-		net.sf.json.JSONObject object = net.sf.json.JSONObject.fromObject(orderString);
-		ObjectMapper mapper = new ObjectMapper();
-		Order readValue = mapper.readValue(object.toString(), Order.class);
-		String addressString = request.getParameter("ra");
-		ra.getrAddressPerson();*/
+		System.out.println(rAddressId);
+		Integer receivingAddressId = order.getReceivingAddressId();
+		order.setReceivingAddressId(rAddressId);
+		System.out.println(rAddressId+"======"+receivingAddressId);
 		int i = pmOrderService.updataOreder(order);
 		return i>0?true:false;
 	}

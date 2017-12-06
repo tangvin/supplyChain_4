@@ -9,5 +9,7 @@ public interface PmHomePageService {
 
 	Order selectByPrimaryKey(String value);
 
+	int updateInformation(Information information);
+
 
 }

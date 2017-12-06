@@ -3,6 +3,7 @@ package cn.com.edzleft.controller.trade.homepage;
 
 import cn.com.edzleft.entity.*;
 import cn.com.edzleft.service.trade.account.AccountService;
+import cn.com.edzleft.service.trade.contractSigning.ContractSigningService;
 import cn.com.edzleft.service.trade.freight.FreightService;
 import cn.com.edzleft.service.trade.information.TradeInformationService;
 import cn.com.edzleft.service.trade.order.TradeOrderService;
@@ -31,7 +32,8 @@ public class MainsController {
         private FreightService freightService;
         @Autowired
         private ReceivingAddressService receivingAddressService;
-
+        @Autowired
+        private ContractSigningService contractSigningService;
 
 
     /**
@@ -41,16 +43,24 @@ public class MainsController {
     @RequestMapping(value = "ddck")
     public ModelAndView ddck(String value){
         Order order = tradeOrderService.queryOrderByNumber(value);
+        //获取货运管理表id
         Integer logisticsUnitId = order.getLogisticsUnitId();
+        //查询出货运单位信息
         Freight freight = freightService.queryFreightById(logisticsUnitId);
         //获取收货地址的id
         Integer addressId = order.getReceivingAddressId();
+        //查询出地址信息
         ReceivingAddress receivingAddress = receivingAddressService.queryReceivingAddress(addressId);
+        //获取合同id
+        Integer principalOrderId = order.getPrincipalOrderId();
+        //查询出合同信息
+        Contract contract = contractSigningService.queryContractById(principalOrderId);
 
         ModelAndView modelAndView = new ModelAndView("/trade/order/viewOrder");
         modelAndView.addObject("order",order);
         modelAndView.addObject("freight",freight);
         modelAndView.addObject("receivingAddress",receivingAddress);
+        modelAndView.addObject("contract",contract);
         return modelAndView;
     }
 
@@ -170,8 +180,12 @@ public class MainsController {
      * @return
      */
     @RequestMapping(value = "ddgl")
-    public String ddgl(){
-        return "/trade/order/order";
+    public ModelAndView ddgl(HttpSession sessionInfo){
+        ModelAndView modelAndView = new ModelAndView("/trade/order/order");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+
+        return modelAndView;
     }
 
 
@@ -231,7 +245,6 @@ public class MainsController {
     @RequestMapping(value="/xtsy")
     public  ModelAndView mains(HttpSession sessionInfo){
         ModelAndView mv = new ModelAndView("/trade/mains");
-
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer userId = session.getAdmin().getUserId();
         String userName = session.getAdmin().getUserName();

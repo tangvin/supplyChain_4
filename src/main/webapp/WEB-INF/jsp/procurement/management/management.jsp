@@ -9,7 +9,7 @@
 <div class='col-xs-12'>
     <div class='row row_zhxx'>
         <div class="col-xs-12 zlxx_top">
-            <a href="<%=request.getContextPath()%>/captialMain/captialMain.action">系统首页</a>
+            <a href="<%=request.getContextPath()%>/procurementMain/procurementMain.action">系统首页</a>
             <span>></span>
             <a href="#">授用信管理</a>
         </div>
@@ -53,9 +53,37 @@
                                     <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
                                 </form>
                             </div>
+                            <!--测试 开始-->
                             <div class="panel-body" style="padding-bottom:0px;">
                                 <table id="tb_departments" class="cj_table"></table>
                             </div>
+                            <!--测试 结束-->
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="table-responsive text-center">
+                                                <table class="table table-bordered bj_table">
+                                                    <tbody id="wyb">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary" id="qx">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="tab-pane" id="WithTheLetter">
                             <!--用信编号 开始-->
@@ -74,7 +102,7 @@
                                         <select class="form-control select" id="letterStatus">
                                             <option value="">全部</option>
                                             <option value="0">已审批</option>
-                                            <option value="1">待审批2</option>
+                                            <option value="1">待审批</option>
                                         </select>
                                     </div>
                                     <div class="form-group form-group1">
@@ -91,6 +119,32 @@
                                 <table id="letter" class="cj_table"></table>
                             </div>
                             <!--用信分页 结束-->
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModalLetter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabelLetter">Modal title</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="table-responsive text-center">
+                                                <table class="table table-bordered bj_table">
+                                                    <tbody id="wybLetter">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary" id="qx">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -98,7 +152,7 @@
             </div>
         </div>
         <!--bootstrap 授用信 切换 开始-->
-    </div>
+</div>
 </div>
 </body>
 <script>
@@ -121,38 +175,46 @@
                 {field:'creditNumber',title:'授信编号',width:100},
                 {field:'creditAmount',title:'授信额（万元）',width:100},
                 {field:'creditGrantor',title:'授信方',width:100},
-                {field:'creditTime',title:'授信时间',width:100},
+                {field:'creditTime',title:'授信时间',width:100,
+                	formatter:function(value,row,index){
+                        return ConvertToDate(value)
+                   }
+                },
                 {field:'creditStatus',title:'状态',width:100,
                     formatter: function(value,row,index){
                         if(value == '0') {
                             return "已审批";
                         } else if(value == '1') {
                             return "待审批";
-                        } 
+                        }
                     }
                 },
                 {field:'creditMasterContract',title:'合同',width:100},
                 {field:'applicant',title:'申请人',width:100},
-                {field:'applicationTime',title:'申请时间',width:100},
-                {field:'approvalTime',title:'批准时间',width:100},
+                {field:'applicationTime',title:'申请时间',width:100,
+                    formatter:function(value,row,index){
+                         return ConvertToDate(value)
+                    }
+                },
+                {field:'approvalTime',title:'批准时间',width:100,
+                    formatter:function(value,row,index){
+                        return ConvertToDate(value)
+                    }
+                },
                 {
                     title:'操作',
                     field:'action',
                     width:25,
                     formatter:function(value , row){
                         var str = '';
-                        if(row.letterStatus == 1){
-                            str += '<button class="btn btn-danger bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
+                            str += '<button class="btn btn-danger bg_btn" href="#" value="查看" data-toggle="modal" data-target="#myModal" onclick="show(\''+row.id+'\')">查看</button>';
 //                            str += '<button class="btn btn-danger bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
 //                            str += '<button class="btn btn-danger bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
-                        }else{
-                            str +='';
-                        }
                         return str;
                     }
                 }
             ],
-            url:'<%=request.getContextPath()%>/Pmletter/pmUseLetter.action',
+            url:'<%=request.getContextPath()%>/Pmletter/pmcreditLetter.action',
             method:'post',
             queryParamsType:'',
             queryParams: queryParams,//传递参数（*）
@@ -202,10 +264,14 @@
                         return index+1;
                     }
                 },
-                {field:'letterNumber',title:'编号',width:100},
+                {field:'letterNumber',title:'用信编号',width:100},
                 {field:'letterCredit',title:'用信额（万元）',width:100},
                 {field:'belongCredit',title:'所属授信',width:100},
-                {field:'letterTime',title:'用信时间',width:100},
+                {field:'letterTime',title:'用信时间',width:100,
+                    formatter:function(value,row,index){
+                        return ConvertToDate(value)
+                    }
+                },
                 {field:'letterStatus',title:'状态',width:100,
                     formatter: function(value,row,index){
                         if(value == '0') {
@@ -218,26 +284,30 @@
                 {field:'letterContract',title:'合同',width:100},
                 {field:'belongOrder',title:'订单',width:100},
                 {field:'applicant',title:'申请人',width:100},
-                {field:'applicationTime',title:'申请时间',width:100},
-                {field:'approvalTime',title:'批准时间',width:100},
+                {field:'applicationTime',title:'申请时间',width:100,
+                    formatter:function(value,row,index){
+                        return ConvertToDate(value)
+                    }
+                },
+                {field:'approvalTime',title:'批准时间',width:100,
+                    formatter:function(value,row,index){
+                        return ConvertToDate(value)
+                    }
+                },
                 {
                     title:'操作',
                     field:'action',
                     width:25,
                     formatter:function(value , row){
                         var str = '';
-                        if(row.letterStatus == 1){
-                            str += '<button class="btn btn-danger bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
+                            str += '<button class="btn btn-danger bg_btn" href="#" data-toggle="modal" data-target="#myModalLetter" value="查看" onclick="shows(\''+row.id+'\')">查看</button>';
 //                            str += '<button class="btn btn-danger bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
 //                            str += '<button class="btn btn-danger bg_btn" href="#" value="查看" onclick="showUserAttach(\''+row.id+'\')">查看</button>';
-                        }else{
-                            str +='';
-                        }
                         return str;
                     }
                 }
             ],
-            url:'<%=request.getContextPath()%>/Pmletter/pmcreditLetter.action',
+            url:'<%=request.getContextPath()%>/Pmletter/pmUseLetter.action',
             method:'post',
             queryParamsType:'',
             queryParams: queryParamss,//传递参数（*）
@@ -279,6 +349,118 @@
     function reset(){
         $("#lefferForm").form('reset');
         search();
+    }
+    //授信
+    function show(w){
+
+        $.ajax({
+            url:"<%=request.getContextPath()%>/Pmletter/pmcreditLetter.action",
+            data:{ pageNumber:1, pageSize: 10},
+            type:"POST",
+            dataType:"json",
+            success: function(data){
+                // console.log(data.rows[0])
+                for(var i=0;i<data.rows.length;i++){
+                    $('#wyb').empty()
+                    if(data.rows[i].id==w){
+                        // console.log(data.rows[i].id)
+                        var a = data.rows[i].creditStatus
+                            console.log(a)
+                        var data_con = '<tr><td class="col-xs-4">id：</td> <td class="col-xs-4">'+data.rows[i].id+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">用信编号：</td> <td class="col-xs-4">'+data.rows[i].letterNumber+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">授信额（万元）：</td> <td class="col-xs-4">'+data.rows[i].creditAmount+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">授信方：</td> <td class="col-xs-4">'+data.rows[i].creditGrantor+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">授信时间：</td> <td class="col-xs-4">'+data.rows[i].creditTime+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">状态：</td> <td class="col-xs-4 status">'+data.rows[i].creditStatus+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">合同：</td> <td class="col-xs-4">'+data.rows[i].creditMasterContract+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">申请人：</td> <td class="col-xs-4">'+data.rows[i].creditApplicant+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">申请时间：</td> <td class="col-xs-4">'+ConvertToDate(data.rows[i].applicationTime)+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">批准时间：</td> <td class="col-xs-4">'+ConvertToDate(data.rows[i].approvalTime)+'</td></tr>';
+                    }
+                }
+                $('#wyb').append(data_con);
+                if(a==0){
+                        $('.status').html('已审批')
+                 }else{
+                    $('.status').html('待审批')
+                }
+
+            }
+        });
+
+    }
+    //用信
+    function shows(w){
+        $.ajax({
+            url:"<%=request.getContextPath()%>/Pmletter/pmUseLetter.action",
+            data:{ pageNumber:1, pageSize: 1000000},
+            type:"POST",
+            dataType:"json",
+            success: function(data){
+                // console.log(data.rows[0])
+                for(var i=0;i<data.rows.length;i++){
+                    $('#wybLetter').empty()
+                    if(data.rows[i].id==w){
+                        // console.log(data.rows[i].id)
+                        var a = data.rows[i].creditStatus
+                        console.log(a)
+                        var data_con = '<tr><td class="col-xs-4">id：</td> <td class="col-xs-4">'+data.rows[i].id+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">授信编号：</td> <td class="col-xs-4">'+data.rows[i].creditNumber+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">用信额（万元）：</td> <td class="col-xs-4">'+data.rows[i].letterCredit+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">所属授信：</td> <td class="col-xs-4">'+data.rows[i].belongCredit+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">用信时间：</td> <td class="col-xs-4">'+ConvertToDate(data.rows[i].letterTime)+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">状态：</td> <td class="col-xs-4 status">'+data.rows[i].letterStatus+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">合同：</td> <td class="col-xs-4">'+data.rows[i].letterContract+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">订单：</td> <td class="col-xs-4">'+data.rows[i].belongOrder+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">申请人：</td> <td class="col-xs-4">'+data.rows[i].applicant+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">申请时间：</td> <td class="col-xs-4">'+ConvertToDate(data.rows[i].applicationTime)+'</td></tr>';
+                        data_con += '<tr><td class="col-xs-4">批准时间：</td> <td class="col-xs-4">'+ConvertToDate(data.rows[i].approvalTime)+'</td></tr>';
+                    }
+                }
+                $('#wybLetter').append(data_con);
+                if(a==0){
+                    $('.status').html('已审批')
+                }else{
+                    $('.status').html('待审批')
+                }
+            }
+        });
+    }
+
+    function ConvertToDate(datestr) {
+        var date=new Date(datestr);
+        var year=date.getFullYear();
+        var month=date.getMonth()+1;
+        if(month < 10){
+            month = "0"+month
+        }else{
+            month = ''+month
+        }
+        var day=date.getDate();
+        if(day < 10){
+            day = "0"+day
+        }else{
+            day = ''+day
+        }
+        var hours = date.getHours()
+        if(hours < 10){
+            hours = "0"+hours
+        }else{
+            hours = ''+hours
+        }
+        var minutes = date.getMinutes(); //获取当前分钟数(0-59)
+        if(minutes < 10){
+            minutes = "0"+minutes
+        }else{
+            minutes = ''+minutes
+        }
+        var seconds = date.getSeconds();
+        if(seconds < 10){
+            seconds = "0"+seconds
+        }else{
+            seconds = ''+seconds
+        }
+        return year+"-"+month+"-"+day+"-"+hours+":"+minutes+":"+seconds;
     }
 </script>
 </html>
