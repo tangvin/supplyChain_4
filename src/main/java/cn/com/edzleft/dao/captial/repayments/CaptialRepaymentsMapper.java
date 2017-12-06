@@ -4,6 +4,7 @@ import cn.com.edzleft.entity.Repayments;
 import cn.com.edzleft.util.page.PageUtil;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CaptialRepaymentsMapper {
     /**还款
@@ -20,4 +21,10 @@ public interface CaptialRepaymentsMapper {
      * @return
      */
     List<Repayments> repaymentSelect(PageUtil<Repayments> userPage);
+
+    /**
+     * 用信接口
+     * @return
+     */
+    List<Map<String,Object>> selectRepayment();
 }

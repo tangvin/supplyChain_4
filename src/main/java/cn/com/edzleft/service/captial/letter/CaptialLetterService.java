@@ -6,6 +6,7 @@ import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.util.page.PageUtil;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ASUS on 2017/11/2.
@@ -28,5 +29,7 @@ public interface CaptialLetterService {
      * 接口查询授信
      * @return
      */
-    List<CreditTable> creditSelect();
+    List<Map<String,Object>> creditSelect();
+
+
 }

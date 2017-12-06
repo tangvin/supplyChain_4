@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.com.edzleft.dao.AttachmentMapper" >
+<mapper namespace="cn.com.edzleft.dao.captial.attachment.CaptialAttachmentMapper" >
   <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Attachment" >
     <id column="attachment_id" property="attachmentId" jdbcType="INTEGER" />
     <result column="attachment_url" property="attachmentUrl" jdbcType="VARCHAR" />
@@ -11,6 +11,14 @@
   <sql id="Base_Column_List" >
     attachment_id, attachment_url, attachment_source, attachment_name, attachment_credit_id
   </sql>
+
+  <select id="attachmentUrl" resultType="java.util.Map" parameterType="java.lang.Integer" >
+    select
+    attachment_url
+    from gyl_attachment
+    where attachment_credit_id = #{attachmentId,jdbcType=INTEGER}
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

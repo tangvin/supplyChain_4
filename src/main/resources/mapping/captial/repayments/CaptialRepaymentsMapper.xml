@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.com.edzleft.dao.RepaymentsMapper" >
+<mapper namespace="cn.com.edzleft.dao.captial.repayments.CaptialRepaymentsMapper" >
   <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Repayments" >
     <id column="repayments_id" property="repaymentsId" jdbcType="INTEGER" />
     <result column="repayments_num" property="repaymentsNum" jdbcType="VARCHAR" />
@@ -39,6 +39,20 @@
       </if>
     </trim>
   </sql>
+
+  <!--用信接口-->
+  <select id="selectRepayment"  resultType="java.util.Map">
+    SELECT
+    c.credit_number as creditNumber,
+    o.order_number as orderNumber,
+    l.letter_credit as letterCredit,
+    o.order_amount as orderAmount,
+    r.repayments_amount as repaymentsAmount
+    FROM gyl_repayments  r
+    INNER JOIN gyl_credit c ON r.credit_id = c.id
+    INNER JOIN gyl_order o ON r.order_id = o.order_id
+    INNER JOIN gyl_letter l ON r.letter_id = l.id
+  </select>
 
   <!--查询总条数-->
   <select id="repaymentSelectCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">

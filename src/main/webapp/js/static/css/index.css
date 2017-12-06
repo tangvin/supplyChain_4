@@ -13,16 +13,20 @@
 }
 
 .login-top{
-    height:460px;
+    height:400px;
     background:rgba(225,0,0,1);
     background: #e75352;
 }
 .container-logo{
     margin-top: 28px;
 }
-.container-logo img{
-    width: 373px;
-    height: 50px;
+.img-responsive1{
+    width:300px;
+    height:220px;
+}
+.container-logo img {
+    width: 518px;
+    height: 58px;
 }
 .form_div{
     width: 500px;
@@ -88,8 +92,8 @@
     text-decoration: none;
 }
 .copy{
-    font-size: 14px;
-    margin-bottom: 190px;
+    font-size: 12px;
+    color: #888;
 }
 
 /*登录页面样式 结束*/
@@ -133,6 +137,10 @@ body{
     width:100%;
     background: red;
     box-sizing: border-box;
+}
+.sy_logo{
+   height: 40px;
+    margin-left: -20px;
 }
 .con{
     width:100%;

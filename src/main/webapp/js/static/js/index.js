@@ -1,94 +1,97 @@
 
 var pathName=window.document.location.pathname;
 var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
-
+var a = '+<%=request.getContextPath()%>+';
+// alert(a)
+// alert(projectName)
+// alert(pathName)
 $(function(){
     $.ajax({cache: false});
     //采购方
     $('#one').click(function(){
-        $('#load').load(projectName+'/procurementMain/zhxx.action')
+        $('#load').load('/procurementMain/zhxx.action')
     })
     $('#xtsy').click(function(){
-        $('#load').load(projectName+'/procurementMain/xtsy.action')
+        $('#load').load('/procurementMain/xtsy.action')
     })
     $('#syxgl').click(function(){
-        $('#load').load(projectName+'/procurementMain/syxgl.action')
+        $('#load').load('/procurementMain/syxgl.action')
     });
     $(document).on('click','#htqy',function(e){
-        $('#load').load(projectName+'/procurementMain/htqy.action?rd='+new Date().getTime());
+        $('#load').load('/procurementMain/htqy.action?rd='+new Date().getTime());
     });
     // $('#htqy').click(function(){
     //     $('#load').load(projectName+'/procurementMain/htqy.action?rd='+time());
     // })
     $('#ddgl').click(function(){
-        $('#load').load(projectName+'/procurementMain/ddgl.action')
+        $('#load').load('/procurementMain/ddgl.action')
     })
     $('#cwgl').click(function(){
-        $('#load').load(projectName+'/procurementMain/cwgl.action')
+        $('#load').load('/procurementMain/cwgl.action')
     })
     $('#fpgl').click(function(){
-        $('#load').load(projectName+'/procurementMain/fpgl.action')
+        $('#load').load('/procurementMain/fpgl.action')
     })
     $('#setting').click(function(){
-        $('#load').load(projectName+'/procurementMain/setting.action')
+        $('#load').load('/procurementMain/setting.action')
     })
     $('#ukeyZs').click(function(){
-        $('#load').load(projectName+'/procurementMain/ukeyZs.action')
+        $('#load').load('/procurementMain/ukeyZs.action')
     })
 
     //贸易方
     $('#one2').click(function(){
-        $('#load').load(projectName+'/tradeMain/zhxx.action')
+        $('#load').load('/captialMain/zhxx.action')
     })
     $('#xtsy2').click(function(){
-        $('#load').load(projectName+'/tradeMain/xtsy.action')
+        $('#load').load('/tradeMain/xtsy.action')
     })
     $('#syxgl2').click(function(){
-        $('#load').load(projectName+'/tradeMain/syxgl.action')
+        $('#load').load('/tradeMain/syxgl.action')
     })
     $('#htqy2').click(function(){
-        $('#load').load(projectName+'/tradeMain/htqy.action')
+        $('#load').load('/tradeMain/htqy.action')
     })
     $('#ddgl2').click(function(){
-        $('#load').load(projectName+'/tradeMain/ddgl.action')
+        $('#load').load('/tradeMain/ddgl.action')
     })
     $('#cwgl2').click(function(){
-        $('#load').load(projectName+'/tradeMain/cwgl.action')
+        $('#load').load('/tradeMain/cwgl.action')
     })
     $('#fpgl2').click(function(){
-        $('#load').load(projectName+'/tradeMain/fpgl.action')
+        $('#load').load('/tradeMain/fpgl.action')
     })
     $('#setting2').click(function(){
-        $('#load').load(projectName+'/tradeMain/setting.action')
+        $('#load').load('/tradeMain/setting.action')
     })
     $('#ukeyZs2').click(function(){
-        $('#load').load(projectName+'/tradeMain/ukeyZs.action')
+        $('#load').load('/tradeMain/ukeyZs.action')
     })
 
     //资方
     $('#one3').click(function(){
-        $('#load').load(projectName+'/captialMain/zhxx.action')
+        $('#load').load('/captialMain/zhxx.action')
     })
     $('#xtsy3').click(function(){
-        $('#load').load(projectName+'/captialMain/xtsy.action')
+        $('#load').load('/captialMain/xtsy.action')
     })
     $('#syxgl3').click(function(){
-        $('#load').load(projectName+'/captialMain/syxgl.action')
+        $('#load').load('/captialMain/syxgl.action')
     })
     $('#cwgl3').click(function(){
-        $('#load').load(projectName+'/captialMain/cwgl.action')
+        $('#load').load('/captialMain/cwgl.action')
     })
     $('#setting3').click(function(){
-        $('#load').load(projectName+'/captialMain/setting.action')
+        $('#load').load('/captialMain/setting.action')
     })
     $('#ukeyZs3').click(function(){
-        $('#load').load(projectName+'/captialMain/ukeyZs.action')
+        $('#load').load('/captialMain/ukeyZs.action')
     })
     $('#dkgl3').click(function(){
-        $('#load').load(projectName+'/captialMain/dkgl.action')
+        $('#load').load('/captialMain/dkgl.action')
     })
     $('#hkgl3').click(function(){
-        $('#load').load(projectName+'/captialMain/hkgl.action')
+        $('#load').load('/captialMain/hkgl.action')
     })
     // $('#exit3').click(function(){
     //     $('#load').load(projectName+'/account/exitAccount.action')

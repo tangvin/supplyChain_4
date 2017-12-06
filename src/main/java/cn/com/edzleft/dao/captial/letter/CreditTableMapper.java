@@ -5,6 +5,7 @@ import cn.com.edzleft.entity.Letter;
 import cn.com.edzleft.util.page.PageUtil;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CreditTableMapper {
 
@@ -28,5 +29,5 @@ public interface CreditTableMapper {
      * 接口查询授信
      * @return
      */
-    List<CreditTable> creditSelect();
+    List<Map<String,Object>> creditSelect();
 }

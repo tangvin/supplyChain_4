@@ -82,38 +82,7 @@
                     </div>
                 </div>
             </div>
-            
-            <!--申请融信 模态框-->
-<%-- 			<div class="modal fade bs-example-modal-sm_sq" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-			    <div class="modal-dialog modal-sm" role="document">
-			        <div class="modal-content">
-			            <div class="panel-body">
-			                <div class="panel-body text-center">
-			                    <form class="form-inline khh_form">
-			                        <div class="form-group">
-			                            <label>订单编号:</label>
-			                            <span va>${order.Number}</span>
-			                            <input class="form-control" type="text"  value="${order.Number}"> 
-			                        </div>
-			                        <div class="form-group">
-			                            <label>订单金额:</label>
-			                            <span>${order.orderAmount}</span> 
-			                        </div>
-			                        <div class="form-group">
-			                            <label>申请用信:</label>
-			                            <input style="width: 100px;" type="text" class="form-control">  ￥万元
-			                        </div>
-			                    </form>
-			                </div>
-			                <div class="modal-footer">
-			                    <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
-			                    <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-			</div>
- --%>			
+
  <!-- Modal -->
                 <div class="modal fade bs-example-modal-sm_sq" id="myModalLetter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
@@ -148,12 +117,6 @@
 </div>
 </body>
 <script>
-    /* $('#birthday').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
-        console.log(start.toISOString(), end.toISOString(), label);
-    });
-    $('#birthday1').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
-        console.log(start.toISOString(), end.toISOString(), label);
-    }); */
     
     $('#insertOrder').click(function(){
         $('#load').load('<%=request.getContextPath()%>/procurementMain/insertOrder.action')
@@ -161,14 +124,11 @@
      $('#ddbj_aa').click(function(){
         $('#load').load('<%=request.getContextPath()%>/procurementMain/ddbjaa.action')
     })
- <%--<%=request.getContextPath()%>/procurementMain/ddck.action--%>
     /* 订单展示 */
    $(function(){
         $("#tb_departments").bootstrapTable({
-            //隔行变色
-//            striped:true,
             columns:[
-                { //field: 'Number',//可不加
+                {
                     title: '序号',//标题  可不加
                     width:100,
                     formatter: function (value, row, index) {
@@ -217,7 +177,11 @@
                         }  else if(row.orderStatus == 1){//待付款
                             str +='<button class="btn btn-warning bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="取消" onclick="showUserAttach(\''+row.orderId+'\',3)">取消</button>';
                             str +='<button class="btn btn-warning bg_btn"  href="#" value="编辑" onclick="updorder(\''+row.orderId+'\',4)">编辑</button>';
-                            str +='<button class="btn btn-warning bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_sq"   value="申请用信" onclick="sqyx(\''+row.orderId+'\',5)">申请用信</button>';
+                           if(row.letterStatus == null){
+                               str +='<button class="btn btn-warning bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_sq"   value="申请用信" onclick="sqyx(\''+row.orderId+'\',5)">申请用信</button>';
+                           }else if(row.letterStatus == 0){
+                               str +='';
+                           }
                         } else if(row.orderStatus == 2){//待发货
                             str +='<button class="btn btn-info bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="提醒发货" onclick="showUserAttach(\''+row.orderId+'\',6)">提醒发货</button>';
                         } else if(row.orderStatus == 3){//待收货
@@ -225,8 +189,6 @@
                         } else if(row.orderStatus == 4){//已完成
                         	str+='--';
                         } else if (row.orderStatus == 5){//已关闭
-                        	 //str += '<button class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm"  href="#" value="取消" onclick="showUserAttach(\''+row.orderId+'\',8)">取消</button>';
-                            // str += '<button class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm"  href="#" value="编辑" onclick="showUserAttach(\''+row.orderId+'\',9)">编辑</button>';
                              str+='--';
                         } else if (row.orderStatus == 6){//已驳回
                        	 str +='<button class="btn btn-primary bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="取消" onclick="showUserAttach(\''+row.orderId+'\',10)">取消</button>';
@@ -237,28 +199,16 @@
                         return str;
                     }
                 }
-                <%-- $('#asdf').click(function(){
-                	alert('111')
-                	$('#load').load('<%=request.getContextPath()%>/procurementMain/insertOrder.action')
-                }) --%>
             ],
             url:'<%=request.getContextPath()%>/pmorder/pmgetorder.action',
             method:'post',
             queryParamsType:'',
             queryParams: queryParamss,//传递参数（*）
-//            queryParams: function queryParams(params) {
-//                var param = {
-//                    pageNumber: params.pageNumber,
-//                    pageSize: params.pageSize
-//                };
-//                return param;
-//            },
             //【其它设置】
             locale:'zh-CN',//中文支持
             pagination: true,//是否开启分页（*）
             pageNumber:1,//初始化加载第一页，默认第一页
             pageSize: 3,//每页的记录行数（*）
-//            pageList: [2,3,4],//可供选择的每页的行数（*）
             sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
             //发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}
             contentType:'application/x-www-form-urlencoded;charset=UTF-8'   //数据编码纯文本  offset=0&limit=5
@@ -297,21 +247,6 @@
         }
     }
 
-
-
-        //待确认
-<%--     function dqr(w,e){
-    		alert("aaaaaaaaaaaa");
-    		$.ajax({
-                url:'<%=request.getContextPath()%>/pmorder/cancelOrderStatus.action?id='+w+'&&flag='+e,
-                type:'post',
-                dataType:"json",
-                success:function (data) {
-                    window.location.reload();
-                }
-            })
-    	
-    } --%>
     //待确认状态下按钮触发事件
     function showUserAttach(w,e){
     $("#lqdd").click(function () {
@@ -319,7 +254,6 @@
             url:'<%=request.getContextPath()%>/pmorder/cancelOrderStatus.action?id='+w+'&&flag='+e,
             type:'post',
             dataType:"json",
-           // data:$("#f").serialize(),
             success:function (data) {
             	if(data==1){
                     alert("确认成功");
@@ -327,32 +261,12 @@
             	}
             }
         })
-
     })
     }
     /* 订单编辑 */
      function updorder(id,flag){
-    	alert(id);
-    	<%--  setTimeout("$('#load').load('<%=request.getContextPath()%>/pmorder/ddbj.action?orderId='+id)",500); --%>
     	$('#load').load('<%=request.getContextPath()%>/pmorder/ddbj.action?orderId='+id);
-    	<%-- location.href="<%=request.getContextPath()%>/pmorder/ddbj.action?orderId="+w; --%>
-    } 
-  
-<%--     function sqyx(w,e){
-    	
-    	location.href='<%=request.getContextPath()%>/pmorder/sqyx.action?id='+w+'&&flag='+e;
-    	
-    	//alert(w+"++"+e);
-    	$.ajax({
-            url:'<%=request.getContextPath()%>/pmorder/sqyx.action?id='+w+'&&flag='+e,
-            type:'post',
-            dataType:"json",
-           // data:$("#f").serialize(),
-            success:function (data) {
-                console.log(data)
-            }
-        })
-    } --%>
+    }
     
     function sqyx(id,flag){
     	 /* 提交申请用信 */
@@ -375,28 +289,15 @@
             type:"POST",
             dataType:"json",
             success: function(data){
-                // console.log(data.rows[0])
                 for(var i=0;i<data.rows.length;i++){
                     $('#wybLetter').empty()
                     if(data.rows[i].orderId==id){
-                        // console.log(data.rows[i].id)
-                        /* var a = data.rows[i].creditStatus
-                            console.log(a) */
                         var data_con = '<tr><td class="col-xs-4">id：</td> <td class="col-xs-4">'+data.rows[i].orderId+'</td></tr>';
                         data_con += '<tr><td class="col-xs-4">用信编号：</td> <td class="col-xs-4">'+data.rows[i].orderNumber+'</td></tr>';
                         data_con += '<tr><td class="col-xs-4">申请用信：</td> <td class="col-xs-4"><input type="text" id="lcj" value="'+data.rows[i].applicationletter+'" name="applicationletter"></td></tr>';
                     }
                     $('#wybLetter').append(data_con);
-                   
-                 
                 }
-                
-              /*   if(a==0){
-                        $('.status').html('已审批')
-                 }else{
-                    $('.status').html('待审批')
-                } */
-
             }
         });
 

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -28,14 +27,6 @@ public class CaptialLetterController {
     @Autowired
     private CaptialLetterService letterService;
 
-    @RequestMapping(value = "creditSelect",method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String,Object> creditSelect (){
-        Map<String,Object> map = new HashMap<>();
-        List<CreditTable> creditTableList = letterService.creditSelect();
-        map.put("data",creditTableList);
-        return map;
-    }
 
     /**
      * 用信管理

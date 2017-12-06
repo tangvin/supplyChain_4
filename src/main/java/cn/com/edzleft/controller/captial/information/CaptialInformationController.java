@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by ASUS on 2017/11/29.
@@ -22,20 +23,26 @@ public class CaptialInformationController {
 
     @Autowired
     private CaptialInformationService captialInformationService;
-    @Autowired
-    private Linux linux;
 
 
     @RequestMapping(value = "updateInformation",method = RequestMethod.POST)
-    public String updateInformation(Information information){
-        captialInformationService.updateInformation(information);
-        return "";
+    @ResponseBody
+    public int updateInformation(Information information){
+        int i = captialInformationService.updateInformation(information);
+        return i;
     }
 
     @RequestMapping(value = "upLoInsert",method = RequestMethod.POST)
     @ResponseBody
-        public String upLoInsert(HttpServletRequest request, @RequestParam("userImg")MultipartFile file){
+    public String upLoInsert(HttpServletRequest request, @RequestParam("file1")MultipartFile file1,HttpServletResponse response){
 
+        response.setContentType("text/plain");
+        response.setHeader("Pragma", "No-cache");
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        response.setHeader("Access-Control-Allow-Origin", "*");//添加跨域访问
+        String jsonpCallback = request.getParameter("jsonpCallback");
 //        String imgData = file.getOriginalFilename();// Base64的字符串
 //
 //        BASE64Decoder decoder = new BASE64Decoder();
@@ -51,10 +58,9 @@ public class CaptialInformationController {
 //            }
 //        }
 //        String endFile = FileUtiles.endFileDir();
-        String imgSavePath = linux.host+linux.fileDir; // 文件完整保存路径
 //        String imgName = file.getOriginalFilename();//图片名
         //相册uuid名称
-        String imgUuidName = UploadFileUtil.uploadFile(request, file, "uploadImgPath");
+        String imgUuidName = UploadFileUtil.uploadFile(request, file1, "uploadImgPath");
 
 
 

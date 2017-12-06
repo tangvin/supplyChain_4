@@ -7,6 +7,6 @@ import cn.com.edzleft.entity.Information;
  */
 public interface CaptialInformationService {
 
-    void updateInformation(Information information);
+    int updateInformation(Information information);
 
 }

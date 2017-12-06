@@ -225,6 +225,8 @@
             dataType:'json',
             success:function(data){
 //                $.messager.alert('消息',data.msg,'info');
+                alert("修改成功")
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/captialMain/ziliao.action')",500);
             },
             error:function(){
 //                $.messager.alert('消息','ajax请求失败！','warning');

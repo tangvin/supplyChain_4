@@ -3,6 +3,8 @@
 
 <html lang="en">
 <head>
+    <link type="image/x-icon" rel="icon" href="<%=request.getContextPath()%>/js/static/images/favicon.ico" />
+    <link type="image/x-icon" rel="shortcut icon" href="<%=request.getContextPath()%>/js/static/images/favicon.ico" />
     <meta charset="UTF-8">
     <title>采购方首页</title>
 </head>

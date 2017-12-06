@@ -16,7 +16,8 @@ public class CaptialInformationServiceImpl implements CaptialInformationService{
 
 
     @Override
-    public void updateInformation(Information information) {
-        captialHomePageMapper.updateInformation(information);
+    public int updateInformation(Information information) {
+        int i = captialHomePageMapper.updateInformation(information);
+        return i;
     }
 }

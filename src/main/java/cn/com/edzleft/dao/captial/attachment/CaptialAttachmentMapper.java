@@ -1,8 +1,11 @@
-package cn.com.edzleft.dao;
+package cn.com.edzleft.dao.captial.attachment;
 
 import cn.com.edzleft.entity.Attachment;
 
-public interface AttachmentMapper {
+import java.util.List;
+import java.util.Map;
+
+public interface CaptialAttachmentMapper {
     int deleteByPrimaryKey(Integer attachmentId);
 
     int insert(Attachment record);
@@ -14,4 +17,11 @@ public interface AttachmentMapper {
     int updateByPrimaryKeySelective(Attachment record);
 
     int updateByPrimaryKey(Attachment record);
+
+    /**
+     * 接口查询
+     * @param attachmentId
+     * @return
+     */
+    List<Map<String,Object>> attachmentUrl(Integer attachmentCreditId);
 }

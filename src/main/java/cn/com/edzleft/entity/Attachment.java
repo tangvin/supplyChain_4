@@ -20,6 +20,18 @@ public class Attachment {
      * 附件名称
      */
     private String attachmentName;
+    /**
+     * 关联合同id
+     */
+    private Integer attachmentCreditId;
+
+    public Integer getAttachmentCreditId() {
+        return attachmentCreditId;
+    }
+
+    public void setAttachmentCreditId(Integer attachmentCreditId) {
+        this.attachmentCreditId = attachmentCreditId;
+    }
 
     public Integer getAttachmentId() {
         return attachmentId;

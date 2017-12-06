@@ -1,10 +1,11 @@
 package cn.com.edzleft.service.procurement.oder;
 
-import javax.servlet.http.HttpSession;
-
 import cn.com.edzleft.entity.Order;
-import cn.com.edzleft.entity.ReceivingAddress;
 import cn.com.edzleft.util.page.PageUtil;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 public interface PmOrderService {
 
@@ -34,6 +35,9 @@ public interface PmOrderService {
 
 	int updataOreder(Order order);
 
-
-
+	/**
+	 * 接口用信查询
+	 * @return
+	 */
+    List<Map<String, Object>> selectOrderLetter();
 }
