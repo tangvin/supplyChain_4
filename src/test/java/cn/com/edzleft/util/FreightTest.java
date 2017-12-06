@@ -25,6 +25,19 @@ public class FreightTest {
     @Autowired
     private ReceivingAddressMapper receivingAddressMapper;
 
+
+    /**
+     * 根据用户id查询出对应的货运单位
+     */
+    @Test
+    public void selectFreightByAccountId(){
+        List<Freight> list = freightMapper.selectFreightByAccountId(1);
+        for (Freight freight : list) {
+            System.out.println(freight);
+        }
+
+    }
+
     /**
      * 查询所有的货运单位
      */
@@ -41,11 +54,20 @@ public class FreightTest {
     @Test
     public void addFreight(){
         Freight f = new Freight();
-        f.setFreightName("中通");
-        f.setFreightContactPerson("lisi");
-        f.setFreightContactPhone("15901249401");
+        System.out.println("准备添加");
+//        f.setFreightId(11);
+        //货运单位名称
+        f.setFreightName("007");
+        //货运方联系人
+        f.setFreightContactPerson("张三");
+        //货运方联系人手机
+        f.setFreightContactPhone("1234556");
+        //货运是否默认地址
         f.setFreightDefaultAddress(1);
-        freightMapper.insertFreight(f);
+        f.setFreightNumber("et1234");
+        f.setAccountId(2);
+        int i = freightMapper.insertFreight(f);
+        System.out.println(i);
         System.out.println("添加成功");
     }
 

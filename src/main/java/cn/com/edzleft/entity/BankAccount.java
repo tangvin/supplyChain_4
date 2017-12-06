@@ -21,7 +21,7 @@ public class BankAccount {
     /**
      * 银行账户表之账号
      */
-    private Integer bankAccountNumber;
+    private String bankAccountNumber;
     /**
      * 银行账户表之创建时间
      */
@@ -30,6 +30,34 @@ public class BankAccount {
      * 银行账户表之创建人
      */
     private String bankAccountCreatePeople;
+
+    /**
+     * 用户id
+     * @return
+     */
+    private  Integer userId;
+
+    /**
+     * 是否设置默认
+     * @return
+     */
+    private  Integer defaultId;
+
+    public Integer getDefaultId() {
+        return defaultId;
+    }
+
+    public void setDefaultId(Integer defaultId) {
+        this.defaultId = defaultId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getBankAccountId() {
         return bankAccountId;
@@ -55,11 +83,11 @@ public class BankAccount {
         this.bankAccountCreditHolder = bankAccountCreditHolder == null ? null : bankAccountCreditHolder.trim();
     }
 
-    public Integer getBankAccountNumber() {
+    public String getBankAccountNumber() {
         return bankAccountNumber;
     }
 
-    public void setBankAccountNumber(Integer bankAccountNumber) {
+    public void setBankAccountNumber(String bankAccountNumber) {
         this.bankAccountNumber = bankAccountNumber;
     }
 
@@ -96,6 +124,10 @@ public class BankAccount {
             return false;
         if (bankAccountCreateTime != null ? !bankAccountCreateTime.equals(that.bankAccountCreateTime) : that.bankAccountCreateTime != null)
             return false;
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null)
+            return false;
+        if (defaultId != null ? !defaultId.equals(that.defaultId) : that.defaultId != null)
+            return false;
         return bankAccountCreatePeople != null ? bankAccountCreatePeople.equals(that.bankAccountCreatePeople) : that.bankAccountCreatePeople == null;
     }
 
@@ -107,6 +139,8 @@ public class BankAccount {
         result = 31 * result + (bankAccountNumber != null ? bankAccountNumber.hashCode() : 0);
         result = 31 * result + (bankAccountCreateTime != null ? bankAccountCreateTime.hashCode() : 0);
         result = 31 * result + (bankAccountCreatePeople != null ? bankAccountCreatePeople.hashCode() : 0);
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + (defaultId != null ? defaultId.hashCode() : 0);
         return result;
     }
 
@@ -119,6 +153,8 @@ public class BankAccount {
                 ", bankAccountNumber=" + bankAccountNumber +
                 ", bankAccountCreateTime=" + bankAccountCreateTime +
                 ", bankAccountCreatePeople='" + bankAccountCreatePeople + '\'' +
+                ", userId='" + userId + '\'' +
+                ", defaultId='" + defaultId + '\'' +
                 '}';
     }
 }

@@ -31,8 +31,8 @@
                     </div>
                     <div class="form-group">
                         <label>合同执行期</label>
-                        <input type="text" readonly="readonly" name="birthday" id="birthday1" class="form-control" value="03/18/2013" />--
-                        <input type="text" readonly="readonly" name="birthday" id="birthday" class="form-control" value="03/18/2013" />
+                        <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/>至
+                        <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
                     </div>
                     <div class="form-group">
                         <label>签约方</label>

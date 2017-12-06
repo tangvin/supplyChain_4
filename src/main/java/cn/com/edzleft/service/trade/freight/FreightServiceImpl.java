@@ -2,10 +2,12 @@ package cn.com.edzleft.service.trade.freight;
 
 import cn.com.edzleft.dao.trade.freight.FreightMapper;
 import cn.com.edzleft.entity.Freight;
+import cn.com.edzleft.entity.SessionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -17,6 +19,12 @@ public class FreightServiceImpl implements FreightService {
 
     @Autowired
     private FreightMapper freightMapper;
+
+    @Override
+    public List<Freight> queryFreightByAccountId(Integer id) {
+        List<Freight> freights = freightMapper.selectFreightByAccountId(id);
+        return freights;
+    }
 
     /**
      * 查询所有的货运单位
@@ -33,8 +41,22 @@ public class FreightServiceImpl implements FreightService {
      * @param freight
      */
     @Override
-    public void addFreight(Freight freight) {
-        freightMapper.insertFreight(freight);
+    public int addFreight(Freight freight, HttpSession session) {
+        SessionInfo sessions = (SessionInfo) session.getAttribute("sessionInfo");
+        Integer userId = sessions.getAdmin().getUserId();
+        //查询出所有的默认地址
+        List<Freight> list = freightMapper.selectFreightByAccountId(userId);
+        if(freight.getFreightDefaultAddress()==1){
+            for (Freight f : list) {
+                if(f.getFreightDefaultAddress() == 1){
+                    f.setFreightDefaultAddress(0);
+                    freightMapper.updateFreight(f);
+                }
+            }
+        }
+        freight.setAccountId(userId);
+        int i = freightMapper.insertFreight(freight);
+        return  i;
     }
 
     /**
@@ -42,26 +64,33 @@ public class FreightServiceImpl implements FreightService {
      * @param id
      */
     @Override
-    public void deleteFreight(Integer id) {
-        freightMapper.deleteFreight(id);
+    public int deleteFreight(Integer id) {
+        int flag = freightMapper.deleteFreight(id);
+        return flag;
     }
 
     /**
      * 设置默认货运单位
      */
     @Override
-    public void setDefaultAddress(Freight freight) {
+    public int setDefaultAddress(Integer id,HttpSession session,Integer value) {
+        SessionInfo sessions = (SessionInfo) session.getAttribute("sessionInfo");
+        Integer userId = sessions.getAdmin().getUserId();
         //查询出为默认地址的货运单位
-        List<Freight> list = freightMapper.selectFreightByAddress();
-        for (Freight f : list) {
-            f.setFreightDefaultAddress(0);
+        List<Freight> list = freightMapper.selectFreightByAccountId(userId);
+        if(value == 1){
+            for (Freight f : list) {
+                if(f.getFreightDefaultAddress() == 1){
+                    f.setFreightDefaultAddress(0);
+                    freightMapper.updateFreight(f);
+                }
+            }
         }
-        if(freight.getFreightDefaultAddress()==0){
-            freight.setFreightDefaultAddress(1);
-        }else {
-            freight.setFreightDefaultAddress(0);
-        }
-        freightMapper.updateFreight(freight);
+        Freight freight = new Freight();
+        freight.setFreightId(id);
+        freight.setFreightDefaultAddress(value);
+        int i = freightMapper.updateFreight(freight);
+        return i;
     }
 
 

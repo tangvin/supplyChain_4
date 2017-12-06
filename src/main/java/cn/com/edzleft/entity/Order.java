@@ -56,7 +56,7 @@ public class Order {
     /**
      * 收货联系人手机
      */
-    private Integer contactPhone;
+    private String contactPhone;
     /**
      * 订单所属主合同(关联到合同表)
      */
@@ -262,11 +262,11 @@ public class Order {
         this.logisticsName = logisticsName == null ? null : logisticsName;
     }
 
-    public Integer getContactPhone() {
+    public String getContactPhone() {
         return contactPhone;
     }
 
-    public void setContactPhone(Integer contactPhone) {
+    public void setContactPhone(String contactPhone) {
         this.contactPhone = contactPhone;
     }
 
@@ -274,7 +274,7 @@ public class Order {
         return principalOrderId;
     }
 
-    public void setPrincipalOrderId(Integer principalOrder) {
+    public void setPrincipalOrderId(Integer principalOrderId) {
         this.principalOrderId = principalOrderId;
     }
 

@@ -100,7 +100,7 @@ public class PmOrderController {
 		String orderCreatorTrade = req.getParameter("orderCreatorTrade");
 		String goods = req.getParameter("goods");
 		Order o=new Order();
-		o.setContactPhone(Integer.parseInt(telephone));
+		o.setContactPhone(telephone);
 		o.setLogisticsName(receiver);
 		//o.setReceivingAddress(address);
 		o.setReceivingAddressId(Integer.parseInt(receivingAddressId));

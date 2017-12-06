@@ -2,6 +2,7 @@ package cn.com.edzleft.service.trade.freight;
 
 import cn.com.edzleft.entity.Freight;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -10,24 +11,29 @@ import java.util.List;
 public interface FreightService {
 
     /**
+     * 根据用户id查询出所有的货运单位
+     * @return
+     */
+    public List<Freight> queryFreightByAccountId(Integer id);
+    /**
      * 查询所有的货运单位
      */
     public List<Freight> queryAllFreight();
 
     /**
-     * 添加货源单位
+     * 添加货运单位
      */
-    public void addFreight(Freight freight);
+    public int addFreight(Freight freight, HttpSession session);
 
     /**
      * 根据货运id 删除货运单位
      */
-    public void deleteFreight(Integer id);
+    public int deleteFreight(Integer id);
 
     /**
      * 设置货运单位为默认单位
      */
-    public void setDefaultAddress(Freight freight);
+    public int setDefaultAddress(Integer id,HttpSession session,Integer value);
 
     /**
      * 根据id查询货运单位信息

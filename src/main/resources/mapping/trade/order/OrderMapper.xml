@@ -13,7 +13,7 @@
     <result column="logistics_num" property="logisticsNum" jdbcType="VARCHAR" />
     <result column="receiving_address_id" property="receivingAddressId" jdbcType="INTEGER" />
     <result column="logistics_name" property="logisticsName" jdbcType="VARCHAR" />
-    <result column="contact_phone" property="contactPhone" jdbcType="INTEGER" />
+    <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
     <result column="principal_order_id" property="principalOrderId" jdbcType="INTEGER" />
     <result column="credit_get_id" property="creditGetId" jdbcType="INTEGER" />
     <result column="credit_use_id" property="creditUseId" jdbcType="INTEGER" />
@@ -199,7 +199,7 @@
         #{orderStatus,jdbcType=INTEGER},
       </if>
       <if test="logisticsUnitId != null" >
-        #{logisticsUnitId,jdbcType=VARCHAR},
+        #{logisticsUnitId,jdbcType=INTEGER},
       </if>
       <if test="logisticsNum != null" >
         #{logisticsNum,jdbcType=VARCHAR},
@@ -211,10 +211,10 @@
         #{logisticsName,jdbcType=VARCHAR},
       </if>
       <if test="contactPhone != null" >
-        #{contactPhone,jdbcType=INTEGER},
+        #{contactPhone,jdbcType=VARCHAR},
       </if>
       <if test="principalOrderId != null" >
-        #{principalOrder,jdbcType=INTEGER},
+        #{principalOrderId,jdbcType=INTEGER},
       </if>
       <if test="creditGetId != null" >
         #{creditGetId,jdbcType=INTEGER},
@@ -294,7 +294,7 @@
         logistics_name = #{logisticsName,jdbcType=VARCHAR},
       </if>
       <if test="contactPhone != null" >
-        contact_phone = #{contactPhone,jdbcType=INTEGER},
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
       </if>
       <if test="principalOrderId != null" >
         principal_order_id = #{principalOrderId,jdbcType=INTEGER},

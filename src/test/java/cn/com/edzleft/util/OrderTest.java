@@ -72,5 +72,13 @@ public class OrderTest {
         System.out.println("添加成");
     }
 
+    /**
+     * 根据id 查询订单详细信息
+     */
+    @Test
+    public void selectOne(){
+        Order order = orderMapper.selectOrderById(1);
+        System.out.println(order);
+    }
 
 }

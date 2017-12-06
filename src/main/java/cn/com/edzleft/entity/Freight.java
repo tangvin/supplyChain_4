@@ -29,6 +29,20 @@ public class Freight {
      */
     private String freightNumber;
 
+    /**
+     * 用户id
+     */
+    public Integer accountId;
+
+
+    public Integer getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
+    }
+
     public Integer getFreightId() {
         return freightId;
     }
@@ -86,6 +100,7 @@ public class Freight {
                 ", freightContactPhone='" + freightContactPhone + '\'' +
                 ", freightDefaultAddress=" + freightDefaultAddress +
                 ", freightNumber='" + freightNumber + '\'' +
+                ", accountId='" + accountId + '\'' +
                 '}';
     }
 
@@ -98,6 +113,7 @@ public class Freight {
 
         if (freightId != null ? !freightId.equals(freight.freightId) : freight.freightId != null) return false;
         if (freightName != null ? !freightName.equals(freight.freightName) : freight.freightName != null) return false;
+        if (accountId != null ? !accountId.equals(freight.accountId) : freight.accountId != null) return false;
         if (freightContactPerson != null ? !freightContactPerson.equals(freight.freightContactPerson) : freight.freightContactPerson != null)
             return false;
         if (freightContactPhone != null ? !freightContactPhone.equals(freight.freightContactPhone) : freight.freightContactPhone != null)
@@ -115,6 +131,7 @@ public class Freight {
         result = 31 * result + (freightContactPhone != null ? freightContactPhone.hashCode() : 0);
         result = 31 * result + (freightDefaultAddress != null ? freightDefaultAddress.hashCode() : 0);
         result = 31 * result + (freightNumber != null ? freightNumber.hashCode() : 0);
+        result = 31 * result + (accountId != null ? accountId.hashCode() : 0);
         return result;
     }
 }

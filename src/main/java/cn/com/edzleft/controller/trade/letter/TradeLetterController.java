@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 
 /**
+ * 用信管理
  * Created by ibmtech on 2017/11/20.
  */
 @Controller
@@ -33,7 +34,7 @@ public class TradeLetterController {
      * @param applicant 申请人
      * @return
      */
-    @RequestMapping(value = "/queryByPage" ,method = RequestMethod.POST)
+    @RequestMapping(value = "/queryAllLetter" ,method = RequestMethod.POST)
     @ResponseBody
     public DataGridJson getLetterByPage(Integer pageNumber,Integer pageSize ,String letterNumber,String belongCredit,String letterStatus,String applicant){
         PageUtil<Letter> pageUtil = new PageUtil<Letter>();

@@ -33,7 +33,7 @@ public class Financial {
     /**
      * 所属订单
      */
-    private String belongOrder;
+    private Integer  belongOrderId;
     /**
      * 账单时间
      */
@@ -53,7 +53,21 @@ public class Financial {
     /**
      * 发生的银行账户
      */
-    private String bankAccount;
+    private Integer bankAccountId;
+
+    /**
+     * 发生方账号
+     * @return
+     */
+    private String bankCard;
+
+    public String getBankCard() {
+        return bankCard;
+    }
+
+    public void setBankCard(String bankCard) {
+        this.bankCard = bankCard;
+    }
 
     public Integer getId() {
         return id;
@@ -103,12 +117,12 @@ public class Financial {
         this.receivingSide = receivingSide == null ? null : receivingSide.trim();
     }
 
-    public String getBelongOrder() {
-        return belongOrder;
+    public Integer getBelongOrderId() {
+        return belongOrderId;
     }
 
-    public void setBelongOrder(String belongOrder) {
-        this.belongOrder = belongOrder == null ? null : belongOrder.trim();
+    public void setBelongOrderId(Integer belongOrderId) {
+        this.belongOrderId = belongOrderId == null ? null : belongOrderId;
     }
 
     public Date getBillTime() {
@@ -143,12 +157,12 @@ public class Financial {
         this.bankAcountType = bankAcountType;
     }
 
-    public String getBankAccount() {
-        return bankAccount;
+    public Integer getBankAccountId() {
+        return bankAccountId;
     }
 
-    public void setBankAccount(String bankAccount) {
-        this.bankAccount = bankAccount;
+    public void setBankAccount(Integer bankAccountId) {
+        this.bankAccountId = bankAccountId;
     }
 
     @Override
@@ -167,7 +181,7 @@ public class Financial {
         if (payer != null ? !payer.equals(financial.payer) : financial.payer != null) return false;
         if (receivingSide != null ? !receivingSide.equals(financial.receivingSide) : financial.receivingSide != null)
             return false;
-        if (belongOrder != null ? !belongOrder.equals(financial.belongOrder) : financial.belongOrder != null)
+        if (belongOrderId != null ? !belongOrderId.equals(financial.belongOrderId) : financial.belongOrderId != null)
             return false;
         if (billTime != null ? !billTime.equals(financial.billTime) : financial.billTime != null) return false;
         if (tradeName != null ? !tradeName.equals(financial.tradeName) : financial.tradeName != null) return false;
@@ -175,7 +189,8 @@ public class Financial {
             return false;
         if (bankAcountType != null ? !bankAcountType.equals(financial.bankAcountType) : financial.bankAcountType != null)
             return false;
-        return bankAccount != null ? bankAccount.equals(financial.bankAccount) : financial.bankAccount == null;
+        if (bankCard != null ? !bankCard.equals(financial.bankCard) : financial.bankCard != null) return false;
+        return bankAccountId != null ? bankAccountId.equals(financial.bankAccountId) : financial.bankAccountId == null;
     }
 
     @Override
@@ -186,12 +201,13 @@ public class Financial {
         result = 31 * result + (amount != null ? amount.hashCode() : 0);
         result = 31 * result + (payer != null ? payer.hashCode() : 0);
         result = 31 * result + (receivingSide != null ? receivingSide.hashCode() : 0);
-        result = 31 * result + (belongOrder != null ? belongOrder.hashCode() : 0);
+        result = 31 * result + (belongOrderId != null ? belongOrderId.hashCode() : 0);
         result = 31 * result + (billTime != null ? billTime.hashCode() : 0);
         result = 31 * result + (tradeName != null ? tradeName.hashCode() : 0);
         result = 31 * result + (capitalName != null ? capitalName.hashCode() : 0);
         result = 31 * result + (bankAcountType != null ? bankAcountType.hashCode() : 0);
-        result = 31 * result + (bankAccount != null ? bankAccount.hashCode() : 0);
+        result = 31 * result + (bankCard != null ? bankCard.hashCode() : 0);
+        result = 31 * result + (bankAccountId != null ? bankAccountId.hashCode() : 0);
         return result;
     }
 
@@ -204,12 +220,13 @@ public class Financial {
                 ", amount=" + amount +
                 ", payer='" + payer + '\'' +
                 ", receivingSide='" + receivingSide + '\'' +
-                ", belongOrder='" + belongOrder + '\'' +
+                ", belongOrderId='" + belongOrderId + '\'' +
                 ", billTime=" + billTime +
                 ", tradeName='" + tradeName + '\'' +
                 ", capitalName='" + capitalName + '\'' +
                 ", bankAcountType=" + bankAcountType +
-                ", bankAccount='" + bankAccount + '\'' +
+                ", bankCard=" + bankCard +
+                ", bankAccountId='" + bankAccountId + '\'' +
                 '}';
     }
 }
