@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.com.edzleft.dao.captial.repayments.CaptialRepaymentsMapper" >
+<mapper namespace="cn.com.edzleft.dao.RepaymentsMapper" >
   <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Repayments" >
     <id column="repayments_id" property="repaymentsId" jdbcType="INTEGER" />
     <result column="repayments_num" property="repaymentsNum" jdbcType="VARCHAR" />
@@ -11,12 +11,14 @@
     <result column="account_type" property="accountType" jdbcType="VARCHAR" />
     <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="repayments_time" property="repaymentsTime" jdbcType="TIMESTAMP" />
+    <result column="credit_id" property="creditId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="letter_id" property="letterId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    repayments_id, repayments_num, repayments_person, repayments_amount, loan_amount,
-    repayments_status, account_type, account, repayments_time
+    repayments_id, repayments_num, repayments_person, repayments_amount, loan_amount, 
+    repayments_status, account_type, account, repayments_time, credit_id, order_id, letter_id
   </sql>
-
   <!--条件查询-->
   <sql id="where_sql">
     <trim prefix="where" prefixOverrides="and">
@@ -52,5 +54,4 @@
     ORDER BY repayments_time  DESC
     <![CDATA[	limit #{start},#{pageSize}]]>
   </select>
-
 </mapper>
