@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>新增合同1</title>
+    <title>订单详情</title>
     <style>
         .xzdd{
             margin-top:40px;
@@ -33,11 +34,11 @@
 <body>
 <div class='col-xs-12'>
     <div class='row'>
-        <!--合同签约 头部-->
+        <!--新增订单 头部-->
         <div class="col-xs-12 zlxx_top">
-            <a href="gyl_index.html">系统首页</a>
+            <a href="<%=request.getContextPath()%>/tradeMain/tradeMain.action">系统首页</a>
             <span>></span>
-            <a href="gyl_index.html?t=ddgl">订单管理</a>
+            <a href="#" id="ddgl">订单管理</a>
             <span>></span>
             <a href="#">新增订单</a>
         </div>
@@ -61,7 +62,7 @@
                         <tr>
                             <div class="row">
                                 <td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
-                                <td class="col-xs-9 text-left"><span>编号：${contract.contractNumber}    名称：${contract.contractName} </span></td>
+                                <td class="col-xs-9 text-left"><span>合同编号：${contract.contractNumber}       合同名称：${contract.contractName}</span></td>
                             </div>
                         </tr>
                         <tr>
@@ -85,13 +86,37 @@
                         <tr>
                             <div class="row">
                                 <td class="col-xs-3 text-right"><span class="xingxing">*</span>发票：</td>
-                                <td class="col-xs-8 text-left">${order.invoiceNum}<img src="images/card_minsheng@1x.png"></td>
+                                <td class="col-xs-8 text-left">${order.invoiceNum}<img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
                             </div>
                         </tr>
                         <tr>
                             <div class="row">
                                 <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单状态：</td>
-                                <td class="col-xs-8 text-left"><span>${order.orderStatus}</span></td>
+                                <td class="col-xs-8 text-left">
+                                    <span>
+                                        <c:if test=" ${order.orderStatus==0}">
+                                            待确认
+                                        </c:if>
+                                        <c:if test=" ${order.orderStatus==1}">
+                                           待付款
+                                        </c:if>
+                                        <c:if test=" ${order.orderStatus==2}">
+                                            待发货
+                                        </c:if>
+                                        <c:if test=" ${order.orderStatus==3}">
+                                            待收货
+                                        </c:if>
+                                        <c:if test=" ${order.orderStatus==4}">
+                                            已完成
+                                        </c:if>
+                                        <c:if test=" ${order.orderStatus==5}">
+                                            已关闭
+                                        </c:if>
+                                        <c:if test=" ${order.orderStatus==6}">
+                                            已驳回
+                                        </c:if>
+                                    </span>
+                                </td>
                             </div>
                         </tr>
                         <tr>
@@ -213,6 +238,9 @@
 </body>
 <script>
 
+    $('#ddgl').click(function(){
+        $('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')
+    })
 
     $('#id').click(function(){
         if($('#id').is(':checked')){
@@ -221,9 +249,7 @@
             $('#id1').attr("disabled","disabled");
         }
     })
-    //    $('#qd').click(function(){
-    //
-    //    })
+
 $(function(){
     if(${order.orderStatus}==3||${order.orderStatus}==4){
         $('#open').css('display','block')

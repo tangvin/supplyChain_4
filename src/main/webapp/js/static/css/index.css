@@ -560,7 +560,7 @@ body{
 
 /*货运管理 开始*/
 .hygl{
-    width:300px;
+    width:350px;
     height:140px;
     border:1px solid #eeeeee;
     border-radius:5px;
@@ -591,7 +591,6 @@ body{
     height:30px;
 }
 .tjhydw{
-    margin-top: 20px;
     margin-bottom: 30px;
 }
 /*货运管理 结束*/

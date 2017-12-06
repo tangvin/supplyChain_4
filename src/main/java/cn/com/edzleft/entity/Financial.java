@@ -33,7 +33,7 @@ public class Financial {
     /**
      * 所属订单(有改动)
      */
-    private String belongOrderId;
+    private Integer  belongOrderId;
     /**
      * 账单时间
      */
@@ -53,7 +53,21 @@ public class Financial {
     /**
      * 发生的银行账户(有改动)
      */
-    private String bankAccountId;
+    private Integer bankAccountId;
+
+    /**
+     * 发生方账号
+     * @return
+     */
+    private String bankCard;
+
+    public String getBankCard() {
+        return bankCard;
+    }
+
+    public void setBankCard(String bankCard) {
+        this.bankCard = bankCard;
+    }
 
     public Integer getId() {
         return id;
@@ -103,6 +117,13 @@ public class Financial {
         this.receivingSide = receivingSide == null ? null : receivingSide.trim();
     }
 
+    public Integer getBelongOrderId() {
+        return belongOrderId;
+    }
+
+    public void setBelongOrderId(Integer belongOrderId) {
+        this.belongOrderId = belongOrderId == null ? null : belongOrderId;
+    }
 
     public Date getBillTime() {
         return billTime;
@@ -132,26 +153,19 @@ public class Financial {
         return bankAcountType;
     }
 
-    public String getBelongOrderId() {
-		return belongOrderId;
-	}
 
-	public void setBelongOrderId(String belongOrderId) {
-		this.belongOrderId = belongOrderId;
-	}
-
-	public String getBankAccountId() {
-		return bankAccountId;
-	}
-
-	public void setBankAccountId(String bankAccountId) {
-		this.bankAccountId = bankAccountId;
-	}
 
 	public void setBankAcountType(Integer bankAcountType) {
         this.bankAcountType = bankAcountType;
     }
 
+    public Integer getBankAccountId() {
+        return bankAccountId;
+    }
+
+    public void setBankAccount(Integer bankAccountId) {
+        this.bankAccountId = bankAccountId;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -177,6 +191,7 @@ public class Financial {
             return false;
         if (bankAcountType != null ? !bankAcountType.equals(financial.bankAcountType) : financial.bankAcountType != null)
             return false;
+        if (bankCard != null ? !bankCard.equals(financial.bankCard) : financial.bankCard != null) return false;
         return bankAccountId != null ? bankAccountId.equals(financial.bankAccountId) : financial.bankAccountId == null;
     }
 
@@ -193,6 +208,7 @@ public class Financial {
         result = 31 * result + (tradeName != null ? tradeName.hashCode() : 0);
         result = 31 * result + (capitalName != null ? capitalName.hashCode() : 0);
         result = 31 * result + (bankAcountType != null ? bankAcountType.hashCode() : 0);
+        result = 31 * result + (bankCard != null ? bankCard.hashCode() : 0);
         result = 31 * result + (bankAccountId != null ? bankAccountId.hashCode() : 0);
         return result;
     }
@@ -207,11 +223,14 @@ public class Financial {
                 ", payer='" + payer + '\'' +
                 ", receivingSide='" + receivingSide + '\'' +
                 ", belongOrder='" + belongOrderId + '\'' +
+                ", belongOrderId='" + belongOrderId + '\'' +
                 ", billTime=" + billTime +
                 ", tradeName='" + tradeName + '\'' +
                 ", capitalName='" + capitalName + '\'' +
                 ", bankAcountType=" + bankAcountType +
                 ", bankAccount='" + bankAccountId + '\'' +
+                ", bankCard=" + bankCard +
+                ", bankAccountId='" + bankAccountId + '\'' +
                 '}';
     }
 }

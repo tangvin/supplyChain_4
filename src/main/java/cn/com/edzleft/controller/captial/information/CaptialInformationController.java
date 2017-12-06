@@ -23,6 +23,7 @@ public class CaptialInformationController {
     @Autowired
     private CaptialInformationService captialInformationService;
 
+
     @RequestMapping(value = "updateInformation",method = RequestMethod.POST)
     public String updateInformation(Information information){
         captialInformationService.updateInformation(information);

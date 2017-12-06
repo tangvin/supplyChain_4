@@ -34,7 +34,7 @@ public class CreditController {
      * @param applicant 申请人
      * @return
      */
-    @RequestMapping(value = "/creditByPage",method = RequestMethod.POST)
+    @RequestMapping(value = "/queryAllCredit",method = RequestMethod.POST)
     @ResponseBody
     public DataGridJson getCreditByPage(Integer pageNumber,Integer pageSize ,String creditNumber,String creditGrantor,String creditStatus,String applicant){
         PageUtil<CreditTable> pageUtil = new PageUtil<>();

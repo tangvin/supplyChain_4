@@ -31,8 +31,8 @@
                     </div>
                     <div class="form-group">
                         <label>合同执行期</label>
-                        <input type="text" readonly="readonly" name="birthday" id="birthday1" class="form-control" value="03/18/2013" />--
-                        <input type="text" readonly="readonly" name="birthday" id="birthday" class="form-control" value="03/18/2013" />
+                        <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/>至
+                        <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
                     </div>
                     <div class="form-group">
                         <label>签约方</label>
@@ -166,39 +166,7 @@
             </div>
             <!--合同认领 模态框-->
             <!--合同表格 结束-->
-            <!--合同分页 start-->
-            <div class="fy">
-                <div class="row fy_row">
-                    <div class="col-xs-4">
-                        <p class="fy_con">共计3条数据，共1页</p>
-                    </div>
-                    <div class="col-xs-8">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">首页</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">末页</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <!--合同分页 eng-->
+            
         </div>
     </div>
 </div>

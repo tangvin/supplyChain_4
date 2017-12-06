@@ -173,27 +173,27 @@
                             </tr>
                             <tr>
                                 <td>社会统一信用代码电子档：</td>
-                                <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/card_minsheng@1x.png"></td>
+                                <td class="mys"> <img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
                             </tr>
                             <tr>
                                 <td>工商登记注册电子档：</td>
-                                <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/card_minsheng@1x.png"></td>
+                                <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
                             </tr>
                             <tr>
                                 <td>税务登记号电子档：</td>
-                                <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/card_minsheng@1x.png"></td>
+                                <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
                             </tr>
                             <tr>
                                 <td>组织机构代码电子档：</td>
-                                <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/card_minsheng@1x.png"></td>
+                                <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
                             </tr>
                             <tr>
                                 <td>法人身份证电子档：</td>
-                                <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/card_minsheng@1x.png"></td>
+                                <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
                             </tr>
                             <tr>
                                 <td>开户许可证电子档：</td>
-                                <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/card_minsheng@1x.png"></td>
+                                <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
                             </tr>
 
                             </tbody>
@@ -226,7 +226,7 @@
             success:function (data) {
                 alert("修改成功！！")
                 setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ziliao.action')",500);
-            }
+    }
         })
     })
 

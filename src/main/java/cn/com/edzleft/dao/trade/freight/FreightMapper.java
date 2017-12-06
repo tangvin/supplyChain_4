@@ -10,6 +10,11 @@ import java.util.List;
 public interface FreightMapper {
 
     /**
+     * 根据用户id查询出对应的货运管理
+     */
+    public List<Freight> selectFreightByAccountId(Integer id);
+
+    /**
      * 查询所有的货运单位
      */
     public List<Freight> selectAllFreight();
@@ -17,12 +22,12 @@ public interface FreightMapper {
     /**
      * 添加货运单位
      */
-    public void insertFreight(Freight freight);
+    public int insertFreight(Freight freight);
 
     /**
      * 根据货运单位id 删除货运单位
      */
-    public void deleteFreight(Integer id);
+    public int deleteFreight(Integer id);
 
     /**
      * 设置为默认货运单位

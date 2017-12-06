@@ -283,7 +283,7 @@ public class Order {
         return principalOrderId;
     }
 
-    public void setPrincipalOrderId(Integer principalOrder) {
+    public void setPrincipalOrderId(Integer principalOrderId) {
         this.principalOrderId = principalOrderId;
     }
 
