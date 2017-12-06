@@ -10,7 +10,7 @@
 <div class='col-xs-12'>
     <div class='row'>
         <div class="col-xs-12 zlxx_top">
-            <a href="<%=request.getContextPath()%>/captialMain/captialMain.action">系统首页</a>
+            <a href="<%=request.getContextPath()%>/procurementMain/captialMain.action">系统首页</a>
             <span>></span>
             <a href="#" id="zhxx">资料维护</a>
             <span>></span>
@@ -219,7 +219,7 @@
     function updateInformation(){
 //        alert($("#updateForm").serialize())
         $.ajax({
-            url:'<%=request.getContextPath()%>/captialInformation/updateInformation.action',
+            url:'<%=request.getContextPath()%>/procurementMain/cupdateInformation.action',
             data:$("#updateForm").serialize(),
             type:'post',
             dataType:'json',

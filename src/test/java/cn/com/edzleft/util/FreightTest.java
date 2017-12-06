@@ -1,5 +1,6 @@
 package cn.com.edzleft.util;
 
+import cn.com.edzleft.dao.procurement.receivingaddress.PmReceivingAddressMapper;
 import cn.com.edzleft.dao.trade.freight.FreightMapper;
 import cn.com.edzleft.dao.trade.receivingAddress.ReceivingAddressMapper;
 import cn.com.edzleft.entity.Freight;
@@ -25,6 +26,8 @@ public class FreightTest {
     @Autowired
     private ReceivingAddressMapper receivingAddressMapper;
 
+    @Autowired
+    private PmReceivingAddressMapper re;
     /**
      * 查询所有的货运单位
      */
@@ -97,6 +100,12 @@ public class FreightTest {
         System.out.println("~~~~~~~~~~~~");
         ReceivingAddress address = receivingAddressMapper.selectAddressById(1);
         System.out.println(address);
+    }
+    
+    @Test
+    public void selectPM(){
+    	List<ReceivingAddress> list = re.selectByPrimaryKey(5);
+    	System.out.println(list);
     }
 
 }

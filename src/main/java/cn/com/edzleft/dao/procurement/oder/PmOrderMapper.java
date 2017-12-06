@@ -2,6 +2,7 @@ package cn.com.edzleft.dao.procurement.oder;
 
 import java.util.List;
 
+import cn.com.edzleft.entity.Information;
 import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.entity.ReceivingAddress;
 import cn.com.edzleft.util.page.PageUtil;
@@ -42,4 +43,7 @@ public interface PmOrderMapper {
 
 
 	int updataOreder(Order order);
+
+
+	void updateInformation(Information information);
 }

@@ -198,8 +198,18 @@
                     }
                 },
                 {field:'orderAmount',title:'订单金额（￥万元）',width:100},
-                {field:'orderConfirmationTime',title:'订单相关时间',width:100},
-                {field:'orderCreatTime',title:'订单创建时间',width:100},
+                {field:'orderConfirmationTime',title:'订单相关时间',width:100,
+                	formatter:function(value,row,index){
+                        return ConvertToDate(value)
+                   }
+                },
+                
+                
+                {field:'orderCreatTime',title:'订单创建时间',width:100,
+                	formatter:function(value,row,index){
+                        return ConvertToDate(value)
+                   }
+                },
                 
                 {field:'principalOrder',title:'合同',width:100},
                 {field:'creditUse',title:'用信情况&nbsp;￥万元',width:100},
@@ -402,7 +412,41 @@
 
     }
   
-   
+    function ConvertToDate(datestr) {
+        var date=new Date(datestr);
+        var year=date.getFullYear();
+        var month=date.getMonth()+1;
+        if(month < 10){
+            month = "0"+month
+        }else{
+            month = ''+month
+        }
+        var day=date.getDate();
+        if(day < 10){
+            day = "0"+day
+        }else{
+            day = ''+day
+        }
+        var hours = date.getHours()
+        if(hours < 10){
+            hours = "0"+hours
+        }else{
+            hours = ''+hours
+        }
+        var minutes = date.getMinutes(); //获取当前分钟数(0-59)
+        if(minutes < 10){
+            minutes = "0"+minutes
+        }else{
+            minutes = ''+minutes
+        }
+        var seconds = date.getSeconds();
+        if(seconds < 10){
+            seconds = "0"+seconds
+        }else{
+            seconds = ''+seconds
+        }
+        return year+"-"+month+"-"+day+"-"+hours+":"+minutes+":"+seconds;
+    }
  
  	
     

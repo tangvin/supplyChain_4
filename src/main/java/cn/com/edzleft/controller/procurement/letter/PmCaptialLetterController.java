@@ -26,8 +26,8 @@ public class PmCaptialLetterController {
      * @param applicant 申请人
      * @return
      */
-    @RequestMapping(value = "/pmcreditLetter")
-    @ResponseBody
+	 @RequestMapping(value = "/pmUseLetter")
+	 @ResponseBody
     public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String letterNumber,String belongCredit,String letterStatus,String applicant){
         PageUtil<Letter> userPage = new PageUtil<>();
         HashMap<String,Object> whereMaps =new HashMap<>();
@@ -55,7 +55,8 @@ public class PmCaptialLetterController {
      * @param applicant 申请人
      * @return
      */
-    @RequestMapping(value = "/pmUseLetter")
+   
+    @RequestMapping(value = "/pmcreditLetter")
     @ResponseBody
     public DataGridJson crownSelect(Integer pageNumber,Integer pageSize ,String creditNumber,String creditGrantor,String creditStatus,String applicant){
         PageUtil<CreditTable> userPage = new PageUtil<>();

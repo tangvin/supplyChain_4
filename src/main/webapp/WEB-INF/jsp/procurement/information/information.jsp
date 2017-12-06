@@ -28,7 +28,6 @@
                     <li><a href="#profile">账户安全</a></li>
                     <li><a href="#messages">银行账户</a></li>
                     <li><a href="#settings">三方账户</a></li>
-                    <li><a href="#settings1">货运管理</a></li>
                     <li><a href="#recieverAddress">收获地址</a></li>
                 </ul>
                 <!--tab 导航 结束-->
@@ -67,14 +66,7 @@
                                             </tr>
                                             <tr>
                                                 <td>企业名称:</td>
-                                                <td><span>${information.entName}</span>
-                                                    <c:if test="${information.certificationStatus == 0}">
-                                                        <a href="#"><span class="drz" id="zlrz">待认证</span></a>
-                                                    </c:if>
-                                                    <c:if test="${information.certificationStatus == 1}">
-                                                        <span class="drzs">已认证</span>
-                                                    </c:if>
-                                                </td>
+                                                <td><span>${information.entName}</span><span class="drz">待认证</span></td>
                                             </tr>
                                             <tr>
                                                 <td>社会统一信用代码:</td>
@@ -161,31 +153,29 @@
                         <div class="tab-pane" id="profile">
                             <h5>修改密码</h5>
                             <div class="row">
-                                <div class="col-xs-10">
-                                    <form class="form-horizontal" role="form" id ="f">
+                                <div class="col-xs-6">
+                                    <form class="form-horizontal" role="form" id="f">
                                         <div class="form-group">
-                                            <label class="col-xs-2 control-label">验证码</label>
-                                            <div class="senCode col-xs-8">
-                                                <%--<input type="text" class="form-control col-xs-4" id="phone" name="phone" placeholder="输入手机号">--%>
-                                                <input type="text" id="senCode" placeholder="输入验证码" class="form-control col-xs-4" name="senCode" size="6"/>
-                                                <input id="btnSendCode" type="button" value="发送验证码" onclick="sendMessage()" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="newpwd" class="col-xs-2 control-label">新密码</label>
+                                            <label for="firstname" class="col-xs-4 control-label" >原密码</label>
                                             <div class="col-xs-8">
-                                                <input type="password" class="form-control" id="newpwd" name="newpwd">
+                                                <input type="text" class="form-control" id="firstname" name="oldpwd">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="confirm" class="col-xs-2 control-label">确认密码</label>
+                                            <label for="lastname" class="col-xs-4 control-label">新密码</label>
                                             <div class="col-xs-8">
-                                                <input type="password" class="form-control" id="confirm" name="confirm">
+                                                <input type="text" class="form-control" id="lastname" name="newpwd">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-xs-offset-3 col-xs-8">
-                                                <button type="button" class="btn  btn-danger aq_qr_but" id="upda">确认</button>
+                                            <label for="lastname" class="col-xs-4 control-label">确认密码</label>
+                                            <div class="col-xs-8">
+                                                <input type="text"  class="form-control" id="lastname1" name="confirm">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-offset-4 col-xs-8">
+                                                <button type="button" id="upda" class="btn  btn-danger aq_qr_but"  >确认</button>
                                             </div>
                                         </div>
 
@@ -197,88 +187,7 @@
                         <!--银行账户 开始-->
                         <div class="tab-pane" id="messages">
                             <button type="button" class="btn   btn-danger btn-default tjyhk">添加银行卡</button>
-                            <div class="row">
-                                <div class="col-xs-8 col-xs-offset-1">
-                                    <ul class="media-list">
-                                        <li class="media media_btn">
-                                            <div class="media-left">
-                                                <div class="yhzh_yhk yhzh_yhk1">
-                                                    <div class="panel-body">
-                                                        <div class="yhk_logo clearfix">
-                                                            <img src="<%=request.getContextPath()%>/js/static/images/logo_minsheng@1x.png" class="img-responsive">
-                                                            <p>中国民生银行<br>储蓄卡</p>
-                                                            <div class="moren">
-                                                                <img src="<%=request.getContextPath()%>/js/static/images/default_white@1x.png">
-                                                                <span>默认</span>
-                                                            </div>
-                                                        </div>
-                                                        <p class="yhkh">**** &nbsp **** &nbsp **** &nbsp 5719</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn  btn-danger btn-default">设为默认</button>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn  btn-danger btn-default">删除</button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <ul class="media-list">
-                                        <li class="media media_btn">
-                                            <div class="media-left">
-                                                <div class="yhzh_yhk yhzh_yhk2">
-                                                    <div class="panel-body">
-                                                        <div class="yhk_logo clearfix">
-                                                            <img src="<%=request.getContextPath()%>/js/static/images/logo_nongye@1x.png" class="img-responsive">
-                                                            <p>中国民生银行<br>储蓄卡</p>
-                                                            <!--<div class="moren">-->
-                                                            <!--<img src="<%=request.getContextPath()%>/js/static/images/default_white@1x.png">-->
-                                                            <!--<span>默认</span>-->
-                                                            <!--</div>-->
-                                                        </div>
-
-                                                        <p class="yhkh">**** &nbsp **** &nbsp **** &nbsp 5719</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn   btn-danger btn-default">设为默认</button>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn   btn-danger btn-default">删除</button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <ul class="media-list">
-                                        <li class="media media_btn">
-                                            <div class="media-left">
-                                                <div class="yhzh_yhk yhzh_yhk3">
-                                                    <div class="panel-body">
-                                                        <div class="yhk_logo clearfix">
-                                                            <img src="<%=request.getContextPath()%>/js/static/images/logo_zhaoshang@1x.png" class="img-responsive">
-                                                            <p>中国民生银行<br>储蓄卡</p>
-                                                            <!--<div class="moren">-->
-                                                            <!--<img src="<%=request.getContextPath()%>/js/static/images/default_white@1x.png">-->
-                                                            <!--<span>默认</span>-->
-                                                            <!--</div>-->
-                                                        </div>
-
-                                                        <p class="yhkh">**** &nbsp **** &nbsp **** &nbsp 5719</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn   btn-danger btn-default">设为默认</button>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn   btn-danger btn-default">删除</button>
-                                            </div>
-                                        </li>
-                                    </ul>
-
-                                </div>
-                            </div>
+                             
                         </div>
                         <!--银行账户 结束-->
                         <!--三方账户 开始   -->
@@ -303,195 +212,16 @@
                             </div>
                         </div>
                         <!--三方账户 结束   -->
-                        <!--运货单位 开始-->
-                        <div class="tab-pane" id="settings1">
-                            <h5>运货单位</h5>
-                            <div class="row">
-                                <div class="col-xs-9 col-xs-offset-1">
-                                    <ul class="media-list">
-                                        <li class="media hy_hygl1">
-                                            <div class="media-left hygl clearfix">
-                                                <div class="hygl_left">
-                                                    <div class="panel-body">
-                                                        <p>货运单位名称：德邦物流</p>
-                                                        <p>货运方联系人：王二</p>
-                                                        <p>联系人手机：13914319412</p>
-                                                    </div>
-                                                </div>
-                                                <div class="hygl_right">
-                                                    <div class="panel-body">
-                                                        <div class="mored hy_moren">
-                                                            <img src="<%=request.getContextPath()%>/js/static/images/default_blue@1x.png"><span>默认</span>
-                                                        </div>
-                                                        <div class="hy_logo">
-                                                            <img src="<%=request.getContextPath()%>/js/static/images/logo_debang@1x.png">
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn btn-danger btn-default">设为默认</button>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn btn-danger btn-default" >删除</button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <ul class="media-list">
-                                        <li class="media hy_hygl1">
-                                            <div class="media-left hygl clearfix">
-                                                <div class="hygl_left">
-                                                    <div class="panel-body">
-                                                        <p>货运单位名称：德邦物流</p>
-                                                        <p>货运方联系人：王二</p>
-                                                        <p>联系人手机：13914319412</p>
-                                                    </div>
-                                                </div>
-                                                <div class="hygl_right">
-                                                    <div class="panel-body">
-                                                        <!--<div class="mored hy_moren">-->
-                                                        <!--<img src="<%=request.getContextPath()%>/js/static/images/default_blue@1x.png"><span>默认</span>-->
-                                                        <!--</div>-->
-                                                        <div class="hy_logo">
-                                                            <img src="<%=request.getContextPath()%>/js/static/images/logo_shentong@1x.png">
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn btn-danger btn-default">设为默认</button>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn btn-danger btn-default">删除</button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <ul class="media-list">
-                                        <li class="media hy_hygl1">
-                                            <div class="media-left hygl clearfix">
-                                                <div class="hygl_left">
-                                                    <div class="panel-body">
-                                                        <p>货运单位名称：德邦物流</p>
-                                                        <p>货运方联系人：王二</p>
-                                                        <p>联系人手机：13914319412</p>
-                                                    </div>
-                                                </div>
-                                                <div class="hygl_right">
-                                                    <div class="panel-body">
-                                                        <div class="hy_logo">
-                                                            <img src="<%=request.getContextPath()%>/js/static/images/logo_yuantong@1x.png">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn btn-danger btn-default">设为默认</button>
-                                            </div>
-                                            <div class="media-body">
-                                                <button type="button" class="btn btn-danger btn-default">删除</button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <button type="button" class="btn  btn-danger  btn-default tjhydw" data-toggle="modal" data-target="#exampleModal11">添加货运单位</button>
-                                </div>
-                            </div>
-                            <!--货运单位 蒙泰框-->
-                            <form id="h" method="post">
-                            <div class="modal fade" id="exampleModal11" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title">选择收获地址11</h4>
-                                        </div>
-                                        <div class="modal-header sh_div">
-                                            <div class="row">
-                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>货运单位名称</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="freightName"></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>货运方联系人</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="freightContactPerson"></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>货运方联系人手机号</div>
-                                                <div class="col-xs-9"><input type="text" class="form-control sh_input" name="freightContactPhone"></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>设为默认</div>
-                                                <div class="col-xs-9">
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="freightDefaultAddress" checked> 是
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="freightDefaultAddress"> 否
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal" id="Addfreigft">确认</button>
-                                            <button type="button" class="btn btn-primary">取消</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </form>
-                            <!--货运单位 蒙泰框 结束-->
-                            
-                        </div>
                         <!--运货单位 结束-->
                         <!--收获地址 开始-->
                         <div class="tab-pane" id="recieverAddress">
                             <button type="button" class="btn btn-danger btn-default tjyhk" data-toggle="modal" data-target="#exampleModal">添加收获地址</button>
-                            <div class="row row_shdz">
-                                <div class="col-xs-7 shdz">
-                                    <div class="panel-body">
-                                        <div class="col-xs-9">
-                                            <p>收获地址: nbsp 北京市大兴区亦庄</p>
-                                            <p>收货地: nbsp 亦庄文化园国际企业文化园西园</p>
-                                            <p>邮政编码: nbsp 100176</p>
-                                            <p>收货人: &nbsp 王二</p>
-                                            <p>收货人手机号: &nbsp 13914319412</p>
-                                        </div>
-                                        <div class="col-xs-3">
-                                            <div class="radio center-block">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" checked value="option1">设为默认
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-5">
-                                    <button type="button" class="btn btn-danger btn-default shanchu">删除</button>
+                            <div class="row">
+                                <div class="col-xs-9 col-xs-offset-1" id="wyb">
+
                                 </div>
                             </div>
-                            <div class="row row_shdz">
-                                <div class="col-xs-7 shdz">
-                                    <div class="panel-body">
-                                        <div class="col-xs-9">
-                                            <p>收获地址: nbsp 北京市大兴区亦庄</p>
-                                            <p>收货地: nbsp 亦庄文化园国际企业文化园西园</p>
-                                            <p>邮政编码: nbsp 100176</p>
-                                            <p>收货人: &nbsp 王二</p>
-                                            <p>收货人手机号: &nbsp 13914319412</p>
-                                        </div>
-                                        <div class="col-xs-3">
-                                            <div class="radio center-block">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" value="option1">设为默认
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-5">
-                                    <button type="button" class="btn btn-danger btn-default shanchu" id="deladdress">删除</button>
-                                </div>
+         
                             </div>
                             <!--收获地址 蒙泰框-->
                             
@@ -581,16 +311,13 @@
         $(this).tab('show');
     })
 
-    $('#updateInformation').click(function(){
-        $('#load').load('<%=request.getContextPath()%>/procurementMain/updateInformation.action')
-    })
-    $('#zlrz').click(function(){
-        $('#load').load('<%=request.getContextPath()%>/procurementMain/zlrz.action')
-    })
-
     $(function (){
         initComplexArea('seachprov', 'seachcity', 'seachdistrict', area_array, sub_array, '44', '0', '0');
     });
+    
+    $('#updateInformation').click(function(){
+        $('#load').load('<%=request.getContextPath()%>/procurementMain/updateInformation.action')
+    })
     console.log('${messages}')
     switch ('${messages}'){
         case 'profile':
@@ -602,57 +329,14 @@
         case 'settings':
             $('#myTab a[href="#settings"]').tab('show')
             break;
+        case 'recieverAddress':
+            $('#myTab a[href="#recieverAddress"]').tab('show')
+            break;
     }
 
-    var InterValObj; //timer变量，控制时间
-    var count = 3; //间隔函数，1秒执行
-    var curCount;//当前剩余秒数
-    var code = ""; //验证码
-    var codeLength = 6;//验证码长度
-    function sendMessage() {
-        curCount = count;
-        var phone=$("#phone").val();//手机号码
-        var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;
-//        if(phone == ""){
-//            alert("手机号码不能为空！");
-//        }else if(phone.length !=11){
-//            alert('请输入有效的手机号码');
-//        }else if(!myreg.test(phone)){
-//            alert('请输入有效的手机号码11');
-//        } else{
-        //产生验证码
-//            for (var i = 0; i < codeLength; i++) {
-//                code += parseInt(Math.random() * 9).toString();
-//            }
-        //设置button效果，开始计时
-        $("#btnSendCode").attr("disabled", "true");
-        $("#btnSendCode").val("请在" + curCount + "秒内输入验证码");
-        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
-        //向后台发送处理数据
-        $.ajax({
-            type: "POST", //用POST方式传输
-            dataType: "text", //数据格式:JSON
-            url: '<%=request.getContextPath()%>/captialHomes/sendMsg.action', //目标地址
-//                data: "phone=" + phone + "&code=" + code,
-            error: function (XMLHttpRequest, textStatus, errorThrown) { },
-            success: function (msg){ }
-        });
-//        }
-    }
-    //timer处理函数
-    function SetRemainTime() {
-        if (curCount == 0) {
-            window.clearInterval(InterValObj);//停止计时器
-            $("#btnSendCode").removeAttr("disabled");//启用按钮
-            $("#btnSendCode").val("重新发送验证码");
-            code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效
-        }
-        else {
-            curCount--;
-            $("#btnSendCode").val( curCount + "秒内输入验证码");
-        }
-    }
-
+</script>
+<!-- 修改密码 -->
+<script type="text/javascript">
 	$(function(){
 		$("#upda").click(function(){
 			$.ajax({
@@ -734,5 +418,82 @@
 	        crownSearch();
 	    }
 
+	    //设为默认
+	    function radioAddress(id,value){
+       	/* alert(id); */
+       	/* debugger */
+	    	$.ajax({
+            url:'<%=request.getContextPath()%>/PmReceivingAddress/setDefault.action?id='+id+'&&value='+value,
+            type:'post',
+            success:function(){
+                alert("设置成功")
+                <%--setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')",500);--%>
+            }
+        })
+    }
+	    /**
+	     * 删除信息
+	     * @param datestr
+	     * @returns {string}
+	     * @constructor
+	     */
+	    function deleteAddress(id){
+	    	 alert("111")
+	        $.ajax({
+	            url:'<%=request.getContextPath()%>/PmReceivingAddress/deleteAddress.action?id='+id,
+	            type:'post',
+	            success:function(){
+	                alert('删除成功')
+	                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);
+	            }
+	        })
+	    }
+	     
+	     
+	     $.ajax({
+	         url:"<%=request.getContextPath()%>/pmorder/addresshx.action",
+	         type:"post",
+	         dataType:"json",
+	         success: function(data){
+	             console.log(data.data)
+	             var data=data.data
+	             var wyb=document.getElementById('wyb')
+	             function setDiv(item){
+	                 var wyb_ul='<ul class="media-list">' +
+	                     '<li class="media hy_hygl1">' +
+	                     '<div class="media-left hygl clearfix" style="width:350px;">' +
+	                     '<div class="hygl_left">' +
+	                     '<div class="panel-body"><p><span>收货地址：</span>'+item.rAddressArea+'</p><p><span>货运联系人：</span>'+item.rAddressPerson+'</p><p><span>货运联系人手机号：</span>'+item.freightContactPhone+'</p></div>' +
+	                     '</div>' +
+	                     '<div class="hygl_right">' +
+	                     '<div class="panel-body"><div class="mored hy_moren"><input type="radio" value='+item.rAddressDefault+' name="mran" onclick="radioAddress('+item.rAddressId+',1)"><span>默认</span></div><div class="hy_logo"><img src="images/logo_debang@1x.png" class="imgimg"></div></div>'+
+	                     '</div>' +
+	                     '</div>' +
+	                     '<div class="media-body"><button type="button" class="btn btn-danger btn-default" onclick="deleteAddress('+item.rAddressId+')">删除</button></div>' +
+	                     '</li>' +
+	                     '</ul>'
+
+	                 return wyb_ul
+	             }
+
+	             function getnoApplicationData111(){
+	                 var html = ''
+	                 for(var i = 0;i<data.length;i++){
+	                     html += setDiv(data[i])
+	                 }
+	                 wyb.innerHTML = html;
+	             }
+	             window.onload = getnoApplicationData111()
+	             var aaa=document.querySelectorAll('.imgimg')
+	          
+	             var input=document.querySelectorAll('.hy_moren>input')
+	             for(var i=0;i<input.length;i++){
+	                 if(data[i].rAddressDefault=='1'){
+	                     $(input[i]).attr('checked',true)
+	                 }
+	             }
+	         }
+	     })
+	    
 </script>
 </html>

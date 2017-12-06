@@ -22,9 +22,6 @@ public class CaptialInformationController {
 
     @Autowired
     private CaptialInformationService captialInformationService;
-    @Autowired
-    private Linux linux;
-
 
     @RequestMapping(value = "updateInformation",method = RequestMethod.POST)
     public String updateInformation(Information information){
@@ -51,7 +48,7 @@ public class CaptialInformationController {
 //            }
 //        }
 //        String endFile = FileUtiles.endFileDir();
-        String imgSavePath = linux.host+linux.fileDir; // 文件完整保存路径
+
 //        String imgName = file.getOriginalFilename();//图片名
         //相册uuid名称
         String imgUuidName = UploadFileUtil.uploadFile(request, file, "uploadImgPath");

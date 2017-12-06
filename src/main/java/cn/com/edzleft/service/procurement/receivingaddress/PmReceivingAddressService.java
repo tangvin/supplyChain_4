@@ -1,5 +1,9 @@
 package cn.com.edzleft.service.procurement.receivingaddress;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import cn.com.edzleft.entity.ReceivingAddress;
 
 public interface PmReceivingAddressService {
@@ -16,6 +20,13 @@ public interface PmReceivingAddressService {
 	int insert(ReceivingAddress ra);
 
 	ReceivingAddress queryReceivingAddress(Integer addressId);
+
+	List<ReceivingAddress> selectByPrimaryKey(Integer userId);
+
+	int setDefaultAddress(Integer id, HttpSession session, Integer value);
+
+	int deleteAddress(Integer id);
+
 
 
 
