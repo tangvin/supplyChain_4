@@ -86,7 +86,14 @@
                 {field:'financialType',title:'财务类型',width:100},
                 {field:'belongOrderId',title:'所属订单',width:100},
                 {field:'payer',title:'发生方',width:100},
-                {field:'bankAcountId',title:'发生银行账户及类型',width:100},
+                {field:'bankAcountId',title:'发生银行账户及类型',width:100,
+                    formatter:function(value,row,index){
+                        console.log(row)
+                        var str=''
+                        str += '<p>'+row.financialType+'</p><p>'+row.bankCard+'</p>'
+                        return str
+                    }
+                },
                 {field:'bankCard',title:'发生方账户(采方)',width:100},
             ],
             url:'<%=request.getContextPath()%>/financial/getAllFinancial.action',
@@ -123,6 +130,7 @@
         $("#financingForm").form('reset');
         crownSearch();
     }
+
 
     function ConvertToDate(datestr) {
         var date=new Date(datestr);

@@ -28,48 +28,60 @@
         AND invoice_number  LIKE '%${whereMap.invoiceNumber}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.drawer != null and whereMap.drawer != ''">
-        AND gi2.ent_name LIKE '%${whereMap.drawer}%'<!-- LIKE '%${whereMap.drawer}%' -->
+        AND c.ent_name LIKE '%${whereMap.drawer}%'<!-- LIKE '%${whereMap.drawer}%' -->
       </if>
     </trim>
   </sql>
 	
 	<!--条件查询总条数-->
   <select id="getInvoiceRecordEntityCountsByConditions"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
-    select count(*) from gyl_invoice gi
-    left join gyl_attachment ga on gi.invoice_file_attachment=ga.attachment_id
-    left join gyl_information gi2 on gi.user_id=gi2.account_id
-    left join gyl_information gi3 on gi.invoice_user_id=gi3.account_id
-    left join gyl_order go on gi.order_id=go.order_id   
+    select count(*) gyl_invoice i 
+	inner join gyl_account a on i.user_id = a.user_id
+	inner join gyl_account a2 on i.invoice_user_id = a2.user_id
+	inner join gyl_information c on a.information_id = c.id
+	inner join gyl_information c2 on a2.information_id = c2.id
+	inner join gyl_order o on i.order_id = o.order_id
+	inner join gyl_attachment ga on i.invoice_file_attachment = ga.attachment_id 
 	<include refid="where_sql"/>
   </select>
   
   
   <select id="getInvoiceRecordEntityListByConditions"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
-    select
-   	gi.id,gi.invoice_number,gi.invoice_no,gi2.ent_name as drawer,
-    ga.attachment_url as attachmentUrl,go.order_number as orderNumber,
-    gi.create_time,gi3.ent_name as checkTaker
-    from gyl_invoice gi
-    left join gyl_attachment ga on gi.invoice_file_attachment=ga.attachment_id
-    left join gyl_information gi2 on gi.user_id=gi2.account_id
-    left join gyl_information gi3 on gi.invoice_user_id=gi3.account_id
-    left join gyl_order go on gi.order_id=go.order_id
+    select i.invoice_number,i.id,
+	i.invoice_no,
+	c.ent_name as drawer,
+	c2.ent_name as checkTaker,
+	o.order_number as orderNumber,
+	ga.attachment_url as attachmentUrl,
+	i.create_time
+	from  gyl_invoice i 
+	inner join gyl_account a on i.user_id = a.user_id
+	inner join gyl_account a2 on i.invoice_user_id = a2.user_id
+	inner join gyl_information c on a.information_id = c.id
+	inner join gyl_information c2 on a2.information_id = c2.id
+	inner join gyl_order o on i.order_id = o.order_id
+	inner join gyl_attachment ga on i.invoice_file_attachment = ga.attachment_id
     <include refid="where_sql"/> 
     ORDER BY create_time  DESC
     <![CDATA[	limit #{start},#{pageSize}]]>
   </select>
   
  <select id="getById" resultMap="BaseResultMap" parameterType="Integer">
- 	 select
-   	gi.id,gi.invoice_number,gi.invoice_no,gi2.ent_name as drawer,
-    ga.attachment_url as attachmentUrl,go.order_number as orderNumber,
-    gi.create_time,gi3.ent_name as checkTaker
-    from gyl_invoice gi
-    left join gyl_attachment ga on gi.invoice_file_attachment=ga.attachment_id
-    left join gyl_information gi2 on gi.user_id=gi2.account_id
-    left join gyl_information gi3 on gi.invoice_user_id=gi3.account_id
-    left join gyl_order go on gi.order_id=go.order_id
-    where gi.id=#{id}
+ 	 select i.invoice_number,i.id,
+	i.invoice_no,
+	c.ent_name as drawer,
+	c2.ent_name as checkTaker,
+	o.order_number as orderNumber,
+	ga.attachment_url as attachmentUrl,
+	i.create_time
+	from  gyl_invoice i 
+	inner join gyl_account a on i.user_id = a.user_id
+	inner join gyl_account a2 on i.invoice_user_id = a2.user_id
+	inner join gyl_information c on a.information_id = c.id
+	inner join gyl_information c2 on a2.information_id = c2.id
+	inner join gyl_order o on i.order_id = o.order_id
+	inner join gyl_attachment ga on i.invoice_file_attachment = ga.attachment_id
+    where i.id=#{id}
  </select>
    
 </mapper>

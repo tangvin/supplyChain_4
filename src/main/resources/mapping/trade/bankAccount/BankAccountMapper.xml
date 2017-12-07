@@ -47,19 +47,6 @@
   </delete>
 
 
-  <insert id="insert" parameterType="cn.com.edzleft.entity.BankAccount" >
-    insert into gyl_bank_account (bank_account_id, bank_account_deposit_bank, 
-      bank_account_credit_holder, bank_account_number, 
-      bank_account_create_time, bank_account_create_people,
-      user_id,default_id
-      )
-    values (#{bankAccountId,jdbcType=INTEGER}, #{bankAccountDepositBank,jdbcType=VARCHAR}, 
-      #{bankAccountCreditHolder,jdbcType=VARCHAR}, #{bankAccountNumber,jdbcType=INTEGER}, 
-      #{bankAccountCreateTime,jdbcType=TIMESTAMP}, #{bankAccountCreatePeople,jdbcType=VARCHAR}
-      #{userId,jdbcType=INTEGER},#{defaultId,jdbcType=INTEGER}
-      )
-  </insert>
-
   <!--增加银行卡-->
   <insert id="insertBankAcount" parameterType="cn.com.edzleft.entity.BankAccount" >
     insert into gyl_bank_account

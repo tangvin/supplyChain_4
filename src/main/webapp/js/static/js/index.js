@@ -43,7 +43,7 @@ $(function(){
 
     //贸易方
     $('#one2').click(function(){
-        $('#load').load(projectName+'/captialMain/zhxx.action')
+        $('#load').load(projectName+'/tradeMain/zhxx.action')
     })
     $('#xtsy2').click(function(){
         $('#load').load(projectName+'/tradeMain/xtsy.action')

@@ -151,7 +151,7 @@
     			pageSize : params.pageSize,
     			//userId : userId,
     			invoiceNumber : $("#invoiceNumber").val(),
-    			drawer : $("#drawer").val()
+    			checkTaker : $("#checkTaker").val()
     		}
     		return temp;
     	};
@@ -170,7 +170,8 @@
     		//toAction('${webPath}/advert/toUpdate?id=${wz.id}');
     		//toAction("${webPath}/proInvoice/edit?id=" + id);
     		//toAction("${webPath}/proInvoice/edit.action");
-    		$('#load').load('${webPath}/traInvoice/edit.action?id='+id)
+    		//alert("1242");
+    		$('#load').load('${webPath}/traInvoice/edit.action?id='+id);
     		//return id;
     	}
     	<%--  $('#editBtn').click(function(){

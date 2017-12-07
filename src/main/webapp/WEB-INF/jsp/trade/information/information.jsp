@@ -246,7 +246,7 @@
                         <!--账户安全 结束-->
                         <!--银行账户 开始-->
                         <div class="tab-pane" id="messages">
-                            <button type="button" class="btn   btn-danger btn-default tjyhk">添加银行卡</button>
+                            <button type="button" class="btn btn-danger btn-default tjyhk" id="addBankAccount">添加银行卡</button>
                             <div class="row">
                                 <div class="col-xs-9 col-xs-offset-1" id="yh_bank">
 
@@ -638,19 +638,22 @@
 /*银行卡页面*/
 
     //添加银行卡
-    $("#addBankAccount").click(function () {
-        $.ajax({
-            url:"<%=request.getContextPath()%>/bankAccount/addBankAccount.action",
-            dataType:'json',
-            type:'POST',
-            data:$("#freightForm").serialize(),
-            success:function (data) {
-                alert("添加成功！！")
-                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')",500);
-            }
-        })
-    })
+    <%--$("#addBank").click(function () {--%>
+        <%--$.ajax({--%>
+            <%--url:"<%=request.getContextPath()%>/bankAccount/addBankAccount.action",--%>
+            <%--dataType:'json',--%>
+            <%--type:'POST',--%>
+            <%--data:$("#freightForm").serialize(),--%>
+            <%--success:function (data) {--%>
+                <%--alert("添加成功！！")--%>
+                <%--setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')",500);--%>
+            <%--}--%>
+        <%--})--%>
+    <%--})--%>
 
+    $('#addBankAccount').click(function(){
+        $('#load').load('<%=request.getContextPath()%>/tradeMain/bankOne.action')
+    })
 
     /**
      * 设置默认银行账户

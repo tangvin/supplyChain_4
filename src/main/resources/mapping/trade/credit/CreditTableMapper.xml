@@ -22,25 +22,6 @@
     application_time, approval_time
   </sql>
 
- <!-- &lt;!&ndash;条件查询&ndash;&gt;
-  <sql id="where_sql">
-    <trim prefix="where" prefixOverrides="and">
-      <if test="whereMap != null &amp;&amp; whereMap.creditNumber != null and whereMap.creditNumber != ''">
-        AND credit_number  LIKE '%${whereMap.creditNumber}%'
-      </if>
-      <if test="whereMap != null &amp;&amp; whereMap.creditGrantor != null and whereMap.creditGrantor != ''">
-        AND credit_grantor &gt;= '${whereMap.creditGrantor}'
-      </if>
-      <if test="whereMap != null &amp;&amp; whereMap.creditStatus != null and whereMap.creditStatus != ''">
-        AND credit_status &lt;= '${whereMap.creditStatus}'
-      </if>
-      <if test="whereMap != null &amp;&amp; whereMap.applicant != null and whereMap.applicant != ''">
-        AND applicant &lt;= '${whereMap.applicant}'
-      </if>
-    </trim>
-  </sql>
--->
-
   <!--条件查询-->
   <sql id="where_sql">
     <trim prefix="where" prefixOverrides="and">
