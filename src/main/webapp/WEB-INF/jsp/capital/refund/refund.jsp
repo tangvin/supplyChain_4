@@ -85,9 +85,12 @@
                 {field:'repaymentsStatus',title:'还款状态',width:100,
                     formatter: function(value,row,index){
                         if(value == '0') {
-                            return "使用中";
+                            return "全部还款";
+                        }else if(value == '1'){
+                            return "部分还款";
                         }
-                    }},
+                    }
+                },
                 {field:'account',title:'发生账户',width:100}
             ],
             url:'<%=request.getContextPath()%>/repayment/repaymentSelect.action',
@@ -113,7 +116,7 @@
             repaymentsAmount:$("#repaymentsAmount").val(),
             repaymentsStatus:$("#repaymentsStatus").val(),
             creatTime:$("#creatTime").val(),
-            endTime:$("#endTime").val()
+            endTime:$("#loanStatus").val()
         };
         return temp;
     }

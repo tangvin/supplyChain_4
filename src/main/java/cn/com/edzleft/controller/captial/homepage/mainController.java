@@ -52,8 +52,12 @@ public class mainController {
      * @return
      */
     @RequestMapping(value = "messages")
-    public ModelAndView messages(){
+    public ModelAndView messages(HttpSession sessionInfo){
         ModelAndView modelAndView = new ModelAndView("/capital/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = captialHomePageService.homePageSelect(userId);
+        modelAndView.addObject("information",information);
         modelAndView.addObject("messages", "profile");
         return modelAndView;
     }
@@ -77,8 +81,12 @@ public class mainController {
      * @return
      */
     @RequestMapping(value = "zijin")
-    public ModelAndView zijin(){
+    public ModelAndView zijin(HttpSession sessionInfo){
         ModelAndView modelAndView = new ModelAndView("/capital/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = captialHomePageService.homePageSelect(userId);
+        modelAndView.addObject("information",information);
         modelAndView.addObject("messages", "settings");
         return modelAndView;
     }

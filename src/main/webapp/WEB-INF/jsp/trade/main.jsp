@@ -2,6 +2,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
+    <link type="image/x-icon" rel="icon" href="<%=request.getContextPath()%>/js/static/images/favicon.ico" />
+    <link type="image/x-icon" rel="shortcut icon" href="<%=request.getContextPath()%>/js/static/images/favicon.ico" />
     <%@ include file="/common/include.jsp"%>
     <meta charset="UTF-8">
     <title>贸易方首页</title>
@@ -14,7 +16,7 @@
             <div class='col-xs-7'>
                 <ul class="nav navbar-nav navbar-left">
                     <li>
-                        <a class="navbar-brand"><img src="<%=request.getContextPath()%>/js/static/images/logo@1x.png" alt="Brand" class='img-responsive' /></a>
+                        <a class="navbar-brand"><img src="<%=request.getContextPath()%>/js/static/images/logo1.3@1x.png" alt="Brand" class='img-responsive sy_logo' /></a>
                     </li>
                 </ul>
             </div>

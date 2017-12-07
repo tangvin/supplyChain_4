@@ -310,7 +310,12 @@
       <artifactId>aliyun-java-sdk-dysmsapi-1.0.0</artifactId>
       <version>1.0.0</version>
     </dependency>
-
+    <!-- 伪静态url -->
+    <dependency>
+      <groupId>org.tuckey</groupId>
+      <artifactId>urlrewritefilter</artifactId>
+      <version>4.0.3</version>
+    </dependency>
 
   </dependencies>
 

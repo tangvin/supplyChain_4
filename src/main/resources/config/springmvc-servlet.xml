@@ -87,6 +87,12 @@
 						<value>/account/login.action</value>
 						<value>/letter/letterSelect.action</value>
 						<value>/freight/getAllFreight.action</value>
+						<value>/pmorder/addresshx.action</value>
+						<value>/captialInformation/upLoInsert.action</value>
+						<!--api接口-->
+						<value>/api/letter.action</value>
+						<value>/api/credit.action</value>
+						<value>/api/repayment.action</value>
 					</list>
 				</property>
 			</bean>

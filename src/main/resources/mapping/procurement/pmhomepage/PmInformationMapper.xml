@@ -316,7 +316,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.com.edzleft.entity.Information" >
+  <update id="updateInformation" parameterType="cn.com.edzleft.entity.Information" >
     update gyl_information
     <set >
       <if test="entIdentity != null" >

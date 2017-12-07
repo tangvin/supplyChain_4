@@ -41,6 +41,18 @@ public class Repayments implements Serializable{
      * 还款时间
      */
     private Date repaymentsTime;
+    /**
+     * 授信表外键
+     */
+    private Integer creditId;
+    /**
+     * 订单外键
+     */
+    private Integer orderId;
+    /**
+     * 用信表外键
+     */
+    private Integer letterId;
 
     /**
      * 开始时间
@@ -50,6 +62,14 @@ public class Repayments implements Serializable{
      * 结束时间
      */
     private Date endTime;
+
+    public Integer getCreditId() {
+        return creditId;
+    }
+
+    public void setCreditId(Integer creditId) {
+        this.creditId = creditId;
+    }
 
     public Date getCreatTime() {
         return creatTime;

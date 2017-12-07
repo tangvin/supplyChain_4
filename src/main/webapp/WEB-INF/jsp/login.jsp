@@ -3,16 +3,17 @@
 <html style="overflow: auto;">
 <%@ include file="/common/include.jsp"%>
 <head>
+    <link type="image/x-icon" rel="icon" href="<%=request.getContextPath()%>/js/static/images/favicon.ico" />
+    <link type="image/x-icon" rel="shortcut icon" href="<%=request.getContextPath()%>/js/static/images/favicon.ico" />
     <meta charset="UTF-8">
-    <title>金融链供应平台</title>
-
+    <title>飞讯金服</title>
 </head>
-<body style="padding: 0;margin: 0;overflow: auto;">
+<body style="padding:0;margin:0;overflow:hidden;">
 <div class="container-fluid login-top">
     <div class='container container-logo'>
-        <img src='<%=request.getContextPath()%>/js/static/images/logo@1x.png'>
+        <img src='<%=request.getContextPath()%>/js/static/images/logo1.5@1x.png'>
     </div>
-    <img src='<%=request.getContextPath()%>/js/static/images/img@1x.png' class='img-responsive center-block' >
+    <img src='<%=request.getContextPath()%>/js/static/images/img@1x.png' class='img-responsive center-block img-responsive1' >
     <div class='form_div center-block' id="div" >
         <form class='form-inline form center-block' id="f">
             <!-- 账号 -->
@@ -42,8 +43,8 @@
         </form>
 
     </div>
-    <p class='text-center copy'>Copyright © 2017 美创互联科技有限公司版权所有</p>
-
+    <p class='text-center copy'>Copyright © 2017 版权所有</p>
+    <p class='text-center copy'><a target="_blank" href="http://www.miitbeian.gov.cn/">京ICP备17069390号-1</a></p>
 </div>
 <script>
 

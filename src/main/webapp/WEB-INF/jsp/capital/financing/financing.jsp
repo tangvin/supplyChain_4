@@ -22,34 +22,29 @@
                     <div class="form-group">
                         <label>财物类型</label>
                         <select class="form-control select">
-                            <option>全部</option>
-                            <option>全部1</option>
-                            <option>全部2</option>
-                            <option>全部3</option>
-                            <option>全部4</option>
+                            <option value="">请选择</option>
+                            <option value="0">转入</option>
+                            <option value="1">转出</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>发生时间</label>
-                        <input type="text" readonly="readonly"  name="birthday" id="birthday1" class="form-control" value="03/18/2013" />--
-                        <input type="text" readonly="readonly"  name="birthday" id="birthday" class="form-control" value="03/18/2013" />
+                        <input class="form-control"  readonly="readonly"  id="occurrenceTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'expirationTime\')}'})" placeholder="开始日期"/>至
+                        <input  class="form-control"  readonly="readonly"  id="expirationTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'occurrenceTime\')}'})" placeholder="结束日期"/>
                     </div>
                     <div class="form-group">
-                        <label>签约方</label>
+                        <label>发生方</label>
                         <input type="text" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>银行账户</label>
-                        <select class="form-control">
-                            <option>全部</option>
-                            <option>全部1</option>
-                            <option>全部2</option>
-                            <option>全部3</option>
-                            <option>全部4</option>
+                        <select class="form-control select">
+                            <option value="">请选择</option>
+                            <option value="0">三方账户</option>
                         </select>
                     </div>
-                    <button type="button" class="btn btn-danger btn-default">查询</button>
-                    <button type="button" class="btn btn-danger btn-default">重置</button>
+                    <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>
+                    <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
                 </form>
             </div>
             <!--合同签约 状态-->
@@ -81,15 +76,28 @@
                         return index+1;
                     }
                 },
-                {field:'tripartiteDepositBank',title:'开户行',width:100},
-                {field:'tripartiteCreditHolderPurchaser',title:'户主（采购方）',width:100},
-                {field:'tripartiteAccountNumber',title:'账号',width:100},
-                {field:'tripartiteBalance',title:'余额（元）',width:100},
-                {field:'tripartiteAvailableBalance',title:'可用余额（元）',width:100},
-                {field:'tripartiteAccountOpentime',title:'账号开通时间',width:100},
-                {field:'tripartiteAccountOpenpeople',title:'账号开通人',width:100},
-                {field:'tripartiteAmountCreateTime',title:'创建时间',width:100},
-                {field:'tripartiteAmountCreatePeople',title:'创建人',width:100}
+                {field:'financialNumbers',title:'财务编号',width:100},
+                {field:'amount',title:'金额 （¥万元）',width:100},
+                {field:'billTime',title:'发生时间',width:100},
+                {field:'financialType',title:'财务类型',width:100,
+                    formatter: function(value,row,index){
+                        if(value == '0') {
+                            return "贷款";
+                        }else{
+                            return "还款";
+                        }
+                    }
+                },
+                {field:'belongOrder',title:'所属订单',width:100},
+                {field:'tripartiteAmountCreateTime',title:'发生方',width:100},
+                {field:'bankAcountType',title:'发生银行账户类型',width:100,
+                    formatter: function(value,row,index){
+                        if(value == '0') {
+                            return "三方账户";
+                        }
+                    }
+                },
+                {field:'bankAccount',title:'发生银行账户',width:100}
             ],
             url:'<%=request.getContextPath()%>/captialTripartite/tripartiteSelect.action',
             method:'post',

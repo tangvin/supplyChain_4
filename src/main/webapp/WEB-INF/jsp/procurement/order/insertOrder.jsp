@@ -21,12 +21,24 @@
         }
         .glshxx{
             margin-left:20px;
+           
         }
         .next{
           width: 120px;
             height: 40px;
             font-size: 16px;
         }
+        .gl{
+	        width:150px;
+           background:#dddddd;
+           color:#000000;
+           padding:6px 12px;
+           border-radius: 4px;
+        }
+        #glshxx{
+            text-decoration: none;
+        }
+       
     </style>
 </head>
 <body>
@@ -45,7 +57,7 @@
              <!--合同编辑表格 start-->
              
             <div class="table-responsive text-center">
-            <form action="pmgetorder/insertOrder" method="post">
+            <form method="post">
                 <table class="table table-bordered bj_table">
                     <tbody>
                     <tr>
@@ -92,10 +104,10 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息：</td>
-                            <td class="col-xs-8 text-left">收货地址:<span id="address"></span><input id="receivingAddressId" type="hidden"><button class="btn glshxx">管理收货信息</button></td>
+                            <td class="col-xs-8 text-left"><p class="qwer">收货地址:<span id="address"></span></p><input id="receivingAddressId" type="hidden"><a class="glshxx" id="glshxx"  href="#"><div class="gl">管理收货信息</div></a></td>
                         </div>
                     </tr>
-                    <tr>
+                    <tr class="qwer">
                         <div class="row">
                             <td class="col-xs-3 text-right"></td>
                             <td class="col-xs-8 text-left">
@@ -103,7 +115,7 @@
                             </td>
                         </div>
                     </tr>
-                    <tr>
+                    <tr class="qwer">
                         <div class="row">
                             <td class="col-xs-3 text-right"></td>
                             <td class="col-xs-8 text-left">
@@ -214,10 +226,23 @@
 </div>
 </body>
 <script>
+	$("#glshxx").click(function(){
+		$('#load').load('<%=request.getContextPath()%>/procurementMain/glshxx.action')
+	});
 	$(function(){
 		$.post(
 			"<%=request.getContextPath()%>/pmorder/insetOrder.action",
 			function(obj){
+				/* //2有数据 */
+				console.log(obj)
+				if(obj.receivingAddressId==null){
+					$('#glshxx').show()
+					$('.qwer').hide()
+					$('#address').val('')
+				}else if(obj.receivingAddressId!=null){
+					$('#glshxx').hide()
+					$('.qwer').show()
+				}
 				$("#address").append(obj.address);
 				$("#rAddressPerson").append(obj.rAddressPerson);
 				$("#rAddressPhone").append(obj.rAddressPhone);
@@ -290,6 +315,7 @@
 			}
 		}); 
 	});
-
+    
+    
 </script>
 </html>

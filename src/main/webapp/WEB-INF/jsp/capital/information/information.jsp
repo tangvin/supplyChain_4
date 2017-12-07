@@ -16,7 +16,7 @@
     <div class='row row_zhxx'>
         <div class="col-xs-12 zlxx_top">
             <a href="<%=request.getContextPath()%>/captialMain/captialMain.action">系统首页</a>
-            <span>></span>
+            <span></span>
             <a href="#">资料维护</a>
         </div>
         <!--bootstrap tab 切换 开始-->
@@ -212,7 +212,8 @@
                         <!--基本资料 结束-->
                         <!--账户安全 开始-->
                         <div class="tab-pane" id="profile">
-                            <h5>修改密码</h5>
+                            <%--<h5>修改密码</h5>--%>
+                            <h5></h5>
                             <div class="row">
                                 <div class="col-xs-10">
                                     <form class="form-horizontal" role="form" id ="f">
@@ -371,6 +372,7 @@
                 dataType: "json",
                 success: function (data) {
                     alert(data);
+                    setTimeout("$('#load').load('<%=request.getContextPath()%>/captialMain/messages.action')",500);
                 }
             });
         });

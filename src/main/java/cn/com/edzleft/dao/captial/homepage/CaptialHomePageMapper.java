@@ -9,5 +9,5 @@ public interface CaptialHomePageMapper {
 
     Information homePageSelect(Integer userId);
 
-    void updateInformation(Information information);
+    int updateInformation(Information information);
 }

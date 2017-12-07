@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -91,7 +92,30 @@
                         <tr>
                             <div class="row">
                                 <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单状态：</td>
-                                <td class="col-xs-8 text-left"><span>${order.orderStatus}</span></td>
+                                <td class="col-xs-8 text-left">
+                                		<c:if test="${order.orderStatus == 0}">
+                                            待确认
+                                        </c:if>
+                                        <c:if test="${order.orderStatus == 1}">
+                                           待付款
+                                        </c:if>
+                                        <c:if test="${order.orderStatus == 2}">
+                                          待发货
+                                        </c:if>
+                                        <c:if test="${order.orderStatus == 3}">
+                                          待收货
+                                        </c:if>
+                                        <c:if test="${order.orderStatus == 4}">
+                                          已完成
+                                        </c:if>
+                                        <c:if test="${order.orderStatus == 5}">
+                                          已关闭
+                                        </c:if>
+                                        <c:if test="${order.orderStatus == 6}">
+                                         已驳回
+                                        </c:if>
+                                
+                                </td>
                             </div>
                         </tr>
                         <tr>
@@ -185,14 +209,14 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息：</td>
-                            <td class="col-xs-8 text-left"><span>收货地址：${receivingAddress.rAddressArea}${receivingAddress.rAddressAddress} ${receivingAddress.rAddressAddress}（默认收货信息）</span></td>
+                            <td class="col-xs-8 text-left"><span>${ra.rAddressArea}${ra.rAddressAddress}</span></td>
                         </div>
                     </tr>
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right">收货人：</td>
                             <td class="col-xs-8 text-left">
-                                <span style="float: left;margin-top: 5px;">${receivingAddress.rAddressPerson}</span>
+                                <span style="float: left;margin-top: 5px;">${ra.rAddressPerson}</span>
                             </td>
                         </div>
                     </tr>
@@ -200,7 +224,8 @@
                         <div class="row">
                             <td class="col-xs-3 text-right">联系人手机号：</td>
                             <td class="col-xs-8 text-left">
-                                <span>${receivingAddress.rAddressPhone}</span>
+                               <%--  <span>${receivingAddress.rAddressPhone}</span> --%>
+                            	<input type="text" value="${ra.rAddressPhone}">
                             </td>
                         </div>
                     </tr>

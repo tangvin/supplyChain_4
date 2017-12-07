@@ -1,5 +1,6 @@
 package cn.com.edzleft.service.captial.letter;
 
+import cn.com.edzleft.dao.captial.attachment.CaptialAttachmentMapper;
 import cn.com.edzleft.dao.captial.letter.CaptoalLetterMapper;
 import cn.com.edzleft.dao.captial.letter.CreditTableMapper;
 import cn.com.edzleft.entity.CreditTable;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ASUS on 2017/11/2.
@@ -23,13 +25,22 @@ public class CaptialLetterServiceImpl implements CaptialLetterService {
     @Autowired
     private CreditTableMapper creditTableMapper;
 
+    @Autowired
+    private CaptialAttachmentMapper captialAttachmentMapper;
+
     /**
      * 接口查询授信
      * @return
      */
     @Override
-    public List<CreditTable> creditSelect() {
-        return creditTableMapper.creditSelect();
+    public List<Map<String,Object>> creditSelect() {
+        List<Map<String,Object>> list = creditTableMapper.creditSelect();
+        for (Map<String, Object> map : list){
+            Integer attachmentCreditId = (Integer) map.get("attachmentUrlr");
+            List<Map<String,Object>> lists = captialAttachmentMapper.attachmentUrl(attachmentCreditId);
+            map.put("attachmentUrlr",lists);
+        }
+        return list;
     }
 
     /**

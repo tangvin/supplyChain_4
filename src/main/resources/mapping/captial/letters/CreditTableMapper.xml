@@ -72,11 +72,18 @@
     <![CDATA[	limit #{start},#{pageSize}]]>
   </select>
 
-  <select id="creditSelect"  resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-
-    from gyl_credit
+  <select id="creditSelect"  resultType="java.util.Map">
+    SELECT
+    c.contract_number as contractNumber,
+    c.contract_name as contractName,
+    c.trade_signatories as contractTrader,
+    c.buyer_signatory as contractBuyer,
+    c.creat_time as creatTime,
+    c.end_time as endTime,
+    c.contract_electronics_id as attachmentUrlr,
+    s.apply_amount as applyAmount
+    FROM gyl_credit s
+    INNER JOIN gyl_contract c ON s.credit_master_contract = c.contract_id
   </select>
 
 </mapper>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ASUS on 2017/12/4.
@@ -26,5 +27,14 @@ public class CaptialRepaymentsServceImpl implements CaptialRepaymentsServce{
         userPage.setTotalCount(totalCount);
         userPage.setList(userList);
         return userPage;
+    }
+
+    /**
+     * 还款接口
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> selectRepayment() {
+        return captialRepaymentsMapper.selectRepayment();
     }
 }

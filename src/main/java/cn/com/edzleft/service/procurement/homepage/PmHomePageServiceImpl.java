@@ -30,5 +30,13 @@ public class PmHomePageServiceImpl implements PmHomePageService{
 		// TODO Auto-generated method stub
 		return pmOrderMapper.selectOrder(value);
 	}
+	/**
+	 * 确认修改基础资料
+	 */
+	@Override
+	public int updateInformation(Information information) {
+		int i =pmHomePageMapper.updateInformation(information);
+		return i;
+	}
 
 }

@@ -123,8 +123,18 @@ public class Order {
      * @return
      */
     private String invoiceNum;
+    /**
+     * 申请用信状态 0已提交 1拒绝 2同意
+     */
+    private Integer letterStatus;
 
+    public Integer getLetterStatus() {
+        return letterStatus;
+    }
 
+    public void setLetterStatus(Integer letterStatus) {
+        this.letterStatus = letterStatus;
+    }
 
     public Integer getCreditGetId() {
         return creditGetId;
@@ -366,7 +376,6 @@ public class Order {
         this.freightNumberId = freightNumberId;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -389,11 +398,12 @@ public class Order {
         if (logisticsNum != null ? !logisticsNum.equals(order.logisticsNum) : order.logisticsNum != null) return false;
         if (receivingAddressId != null ? !receivingAddressId.equals(order.receivingAddressId) : order.receivingAddressId != null)
             return false;
-        if (logisticsName != null ? !logisticsName.equals(order.logisticsName) : order.logisticsName != null) return false;
+        if (logisticsName != null ? !logisticsName.equals(order.logisticsName) : order.logisticsName != null)
+            return false;
         if (contactPhone != null ? !contactPhone.equals(order.contactPhone) : order.contactPhone != null) return false;
         if (principalOrderId != null ? !principalOrderId.equals(order.principalOrderId) : order.principalOrderId != null)
             return false;
-            if (creditGetId != null ? !creditGetId.equals(order.creditGetId) : order.creditGetId != null) return false;
+        if (creditGetId != null ? !creditGetId.equals(order.creditGetId) : order.creditGetId != null) return false;
         if (creditUseId != null ? !creditUseId.equals(order.creditUseId) : order.creditUseId != null) return false;
         if (creditGrantorId != null ? !creditGrantorId.equals(order.creditGrantorId) : order.creditGrantorId != null)
             return false;
@@ -407,7 +417,13 @@ public class Order {
         if (paymentTime != null ? !paymentTime.equals(order.paymentTime) : order.paymentTime != null) return false;
         if (invoice != null ? !invoice.equals(order.invoice) : order.invoice != null) return false;
         if (freightUnit != null ? !freightUnit.equals(order.freightUnit) : order.freightUnit != null) return false;
-        return freightNumberId != null ? freightNumberId.equals(order.freightNumberId) : order.freightNumberId == null;
+        if (freightNumberId != null ? !freightNumberId.equals(order.freightNumberId) : order.freightNumberId != null)
+            return false;
+        if (goods != null ? !goods.equals(order.goods) : order.goods != null) return false;
+        if (applicationletter != null ? !applicationletter.equals(order.applicationletter) : order.applicationletter != null)
+            return false;
+        if (invoiceNum != null ? !invoiceNum.equals(order.invoiceNum) : order.invoiceNum != null) return false;
+        return letterStatus != null ? letterStatus.equals(order.letterStatus) : order.letterStatus == null;
     }
 
     @Override
@@ -436,9 +452,12 @@ public class Order {
         result = 31 * result + (invoice != null ? invoice.hashCode() : 0);
         result = 31 * result + (freightUnit != null ? freightUnit.hashCode() : 0);
         result = 31 * result + (freightNumberId != null ? freightNumberId.hashCode() : 0);
+        result = 31 * result + (goods != null ? goods.hashCode() : 0);
+        result = 31 * result + (applicationletter != null ? applicationletter.hashCode() : 0);
+        result = 31 * result + (invoiceNum != null ? invoiceNum.hashCode() : 0);
+        result = 31 * result + (letterStatus != null ? letterStatus.hashCode() : 0);
         return result;
     }
-
 
     @Override
     public String toString() {

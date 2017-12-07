@@ -11,12 +11,14 @@
     <result column="account_type" property="accountType" jdbcType="VARCHAR" />
     <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="repayments_time" property="repaymentsTime" jdbcType="TIMESTAMP" />
+    <result column="credit_id" property="creditId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="letter_id" property="letterId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    repayments_id, repayments_num, repayments_person, repayments_amount, loan_amount,
-    repayments_status, account_type, account, repayments_time
+    repayments_id, repayments_num, repayments_person, repayments_amount, loan_amount, 
+    repayments_status, account_type, account, repayments_time, credit_id, order_id, letter_id
   </sql>
-
   <!--条件查询-->
   <sql id="where_sql">
     <trim prefix="where" prefixOverrides="and">
@@ -38,6 +40,20 @@
     </trim>
   </sql>
 
+  <!--用信接口-->
+  <select id="selectRepayment"  resultType="java.util.Map">
+    SELECT
+    c.credit_number as creditNumber,
+    o.order_number as orderNumber,
+    l.letter_credit as letterCredit,
+    o.order_amount as orderAmount,
+    r.repayments_amount as repaymentsAmount
+    FROM gyl_repayments  r
+    INNER JOIN gyl_credit c ON r.credit_id = c.id
+    INNER JOIN gyl_order o ON r.order_id = o.order_id
+    INNER JOIN gyl_letter l ON r.letter_id = l.id
+  </select>
+
   <!--查询总条数-->
   <select id="repaymentSelectCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
     select count(*) from gyl_repayments <include refid="where_sql"/>
@@ -52,5 +68,4 @@
     ORDER BY repayments_time  DESC
     <![CDATA[	limit #{start},#{pageSize}]]>
   </select>
-
 </mapper>

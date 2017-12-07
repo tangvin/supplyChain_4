@@ -9,6 +9,6 @@ import javax.servlet.http.HttpSession;
  */
 public interface CaptialInformationService {
 
-    void updateInformation(Information information, HttpSession session);
+    int updateInformation(Information information);
 
 }

@@ -39,7 +39,7 @@ public class Financial {
      */
     private Integer bankAcountType;
     /**
-     * 发生的银行账户
+     * 发生的银行账户(有改动)
      */
     private Integer bankAccountId;
 
@@ -118,7 +118,9 @@ public class Financial {
         return bankAcountType;
     }
 
-    public void setBankAcountType(Integer bankAcountType) {
+
+
+	public void setBankAcountType(Integer bankAcountType) {
         this.bankAcountType = bankAcountType;
     }
 

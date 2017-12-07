@@ -1,10 +1,12 @@
 package cn.com.edzleft.dao.procurement.oder;
 
-import java.util.List;
 
+import cn.com.edzleft.entity.Information;
 import cn.com.edzleft.entity.Order;
-import cn.com.edzleft.entity.ReceivingAddress;
 import cn.com.edzleft.util.page.PageUtil;
+
+import java.util.List;
+import java.util.Map;
 
 public interface PmOrderMapper {
 
@@ -42,4 +44,12 @@ public interface PmOrderMapper {
 
 
 	int updataOreder(Order order);
+	/**
+	 * 接口用信查询
+	 * @return
+	 */
+    List<Map<String, Object>> selectOrderLetter();
+
+
+	void updateInformation(Information information);
 }

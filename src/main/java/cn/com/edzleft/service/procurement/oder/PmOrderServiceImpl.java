@@ -1,7 +1,4 @@
 package cn.com.edzleft.service.procurement.oder;
-
-
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -13,11 +10,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+
 import cn.com.edzleft.dao.procurement.oder.PmOrderMapper;
+import cn.com.edzleft.entity.Letter;
 import cn.com.edzleft.entity.Order;
-import cn.com.edzleft.entity.ReceivingAddress;
 import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.util.page.PageUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpSession;
+import java.util.*;
 
 @Service
 public class PmOrderServiceImpl implements PmOrderService{
@@ -145,7 +149,7 @@ public class PmOrderServiceImpl implements PmOrderService{
 	@Override
 	public int commitSqyx(Integer id, Integer flag,String applicationletter) {
 		Order order = new Order();
-		order.setOrderStatus(1);
+		order.setLetterStatus(0);
 		order.setOrderId(id);
 		order.setApplicationletter(applicationletter);
 		pmOrderMapper.updOrderStatus(order);
@@ -175,5 +179,12 @@ public class PmOrderServiceImpl implements PmOrderService{
 		int i = pmOrderMapper.updataOreder(order);
 		return i;
 	}
-
+	/**
+	 * 接口用信查询
+	 * @return
+	 */
+	@Override
+	public List<Map<String, Object>> selectOrderLetter() {
+		return pmOrderMapper.selectOrderLetter();
+	}
 }
