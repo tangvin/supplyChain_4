@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.trade.invoice.TraAttMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Attachment" >
+    <id column="attachment_id" property="attachmentId" jdbcType="INTEGER" />
+    <result column="attachment_url" property="attachmentUrl" jdbcType="VARCHAR" />
+    <result column="attachment_source" property="attachmentSource" jdbcType="VARCHAR" />
+    <result column="attachment_name" property="attachmentName" jdbcType="VARCHAR" />
+  </resultMap>
+  <update id="updateImg" parameterType="cn.com.edzleft.entity.Attachment">
+  	update gyl_attachment set attachment_url=#{attachmentUrl} where attachment_id =#{attachmentId}
+  </update>
+   
+</mapper>

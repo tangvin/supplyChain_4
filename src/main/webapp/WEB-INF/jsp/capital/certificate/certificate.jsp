@@ -62,7 +62,7 @@ $(function(){
         columns:[
             { //field: 'Number',//可不加
                 title: '序号',//标题  可不加
-                width:100,
+                width:30,
                 formatter: function (value, row, index) {
                     return index+1;
                 	//var options = $("#tb_ukey").bootstrapTable('getOptions');  
@@ -71,7 +71,12 @@ $(function(){
             },
             {field:'ukeyType',title:'类型',width:100},
             {field:'issuedPeople',title:'颁发人',width:100},
-            {field:'issuedTime',title:'颁发时间',width:100},
+            {field:'issuedTime',title:'颁发时间',width:100,
+            	formatter: function (value, row, index) {
+                    return changeDateFormat(value)
+                }
+            	
+            },
             {field:'ukeyStatus',title:'状态',width:100,
                 formatter: function(value,row,index){
                     if(value == '0') {
@@ -80,8 +85,16 @@ $(function(){
                         return "失效";
                     }
                 } 
-            },{field:'attachmentName',title:'文件名',width:100}/* ,
-            {field:'attachmentUrl',title:'操作',width:100} */
+            },{field:'attachmentName',title:'文件名',width:100} ,
+            {field:'attachmentUrl',title:'操作',width:25,
+            	 formatter:function(value){
+            		 //alert(value);
+                     var str = '';
+                         str += '<a href=\"'+value+'\">下载</a>';
+//                        'window.location.href=\"crm/activity/detail.do?id="+obj.id+"\";' 
+                     return str;
+                 }
+            }
         ],
         url:'<%=request.getContextPath()%>/certificate/ukeyList.action',
 							method : 'post',
@@ -99,6 +112,22 @@ $(function(){
     
     
 	});
+	
+function changeDateFormat(cellval) {
+    var dateVal = cellval + "";
+    if (cellval != null) {
+        var date = new Date(parseInt(dateVal.replace("/Date(", "").replace(")/", ""), 10));
+        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+        var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+        
+        var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+        
+        return date.getFullYear() + "-" + month + "-" + currentDate + " " + hours + ":" + minutes + ":" + seconds;
+    }
+}
+	
 	//得到查询的参数
 	function queryParams(params) {
 		

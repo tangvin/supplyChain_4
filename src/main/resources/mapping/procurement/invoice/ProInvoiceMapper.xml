@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.procurement.invoice.ProInvoiceMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.InvoiceRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="invoice_number" property="invoiceNumber" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="invoice_file_attachment" property="invoiceFileAttachment" jdbcType="INTEGER" />
+    <result column="invoice_no" property="invoiceNo" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="invoice_user_id" property="invoiceUserId" jdbcType="INTEGER" />
+    <result column="drawer" property="drawer" jdbcType="VARCHAR" />
+    <result column="check-taker" property="checkTaker" jdbcType="VARCHAR" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="attachment_url" property="attachmentUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  
+  <!--条件查询-->
+  <sql id="where_sql">
+    <trim prefix="where" prefixOverrides="and">
+    	<if test="whereMap != null &amp;&amp; whereMap.invoiceUserId != null and whereMap.invoiceUserId != ''">
+        AND invoice_user_id =#{whereMap.invoiceUserId}
+      	</if>
+      <if test="whereMap != null &amp;&amp; whereMap.invoiceNumber != null and whereMap.invoiceNumber != ''">
+        AND invoice_number  LIKE '%${whereMap.invoiceNumber}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.drawer != null and whereMap.drawer != ''">
+        AND gi2.ent_name LIKE '%${whereMap.drawer}%'<!-- LIKE '%${whereMap.drawer}%' -->
+      </if>
+    </trim>
+  </sql>
+	
+	<!--条件查询总条数-->
+  <select id="getInvoiceRecordEntityCountsByConditions"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select count(*) from gyl_invoice gi
+    left join gyl_attachment ga on gi.invoice_file_attachment=ga.attachment_id
+    left join gyl_information gi2 on gi.user_id=gi2.account_id
+    left join gyl_information gi3 on gi.invoice_user_id=gi3.account_id
+    left join gyl_order go on gi.order_id=go.order_id   
+	<include refid="where_sql"/>
+  </select>
+  
+  
+  <select id="getInvoiceRecordEntityListByConditions"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select
+   	gi.id,gi.invoice_number,gi.invoice_no,gi2.ent_name as drawer,
+    ga.attachment_url as attachmentUrl,go.order_number as orderNumber,
+    gi.create_time,gi3.ent_name as checkTaker
+    from gyl_invoice gi
+    left join gyl_attachment ga on gi.invoice_file_attachment=ga.attachment_id
+    left join gyl_information gi2 on gi.user_id=gi2.account_id
+    left join gyl_information gi3 on gi.invoice_user_id=gi3.account_id
+    left join gyl_order go on gi.order_id=go.order_id
+    <include refid="where_sql"/> 
+    ORDER BY create_time  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select>
+  
+ <select id="getById" resultMap="BaseResultMap" parameterType="Integer">
+ 	 select
+   	gi.id,gi.invoice_number,gi.invoice_no,gi2.ent_name as drawer,
+    ga.attachment_url as attachmentUrl,go.order_number as orderNumber,
+    gi.create_time,gi3.ent_name as checkTaker
+    from gyl_invoice gi
+    left join gyl_attachment ga on gi.invoice_file_attachment=ga.attachment_id
+    left join gyl_information gi2 on gi.user_id=gi2.account_id
+    left join gyl_information gi3 on gi.invoice_user_id=gi3.account_id
+    left join gyl_order go on gi.order_id=go.order_id
+    where gi.id=#{id}
+ </select>
+   
+</mapper>

@@ -11,128 +11,209 @@ public class InvoiceRecord {
      */
     private Integer id;
     /**
-     * 发票编号
+     * 发票编号(自动生成)
      */
     private String invoiceNumber;
     /**
-     * 发票开票人（贸方）
+     * 发票开票人（贸方）id
      */
-    private String invoiceDrawer;
-    /**
-     * 发票上传时间
+    private Integer userId;
+   
+	/**
+     * 发票创建时间
      */
-    private Date invoiceUploadTime;
+    private Date createTime;
     /**
      * 发票电子档附件
      */
-    private String invoiceFileAttachment;
+    private Integer invoiceFileAttachment;
     /**
-     * 发票抬头（采方名称）
+     * 发票号码
      */
-    private String invoiceTitle;
+    private String invoiceNo;
     /**
-     * 税号（采方）
+     * 所属订单id
      */
-    private String taxNumber;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getInvoiceNumber() {
-        return invoiceNumber;
-    }
-
-    public void setInvoiceNumber(String invoiceNumber) {
-        this.invoiceNumber = invoiceNumber == null ? null : invoiceNumber.trim();
-    }
-
-    public String getInvoiceDrawer() {
-        return invoiceDrawer;
-    }
-
-    public void setInvoiceDrawer(String invoiceDrawer) {
-        this.invoiceDrawer = invoiceDrawer == null ? null : invoiceDrawer.trim();
-    }
-
-    public Date getInvoiceUploadTime() {
-        return invoiceUploadTime;
-    }
-
-    public void setInvoiceUploadTime(Date invoiceUploadTime) {
-        this.invoiceUploadTime = invoiceUploadTime;
-    }
-
-    public String getInvoiceFileAttachment() {
-        return invoiceFileAttachment;
-    }
-
-    public void setInvoiceFileAttachment(String invoiceFileAttachment) {
-        this.invoiceFileAttachment = invoiceFileAttachment == null ? null : invoiceFileAttachment.trim();
-    }
-
-    public String getInvoiceTitle() {
-        return invoiceTitle;
-    }
-
-    public void setInvoiceTitle(String invoiceTitle) {
-        this.invoiceTitle = invoiceTitle == null ? null : invoiceTitle.trim();
-    }
-
-    public String getTaxNumber() {
-        return taxNumber;
-    }
-
-    public void setTaxNumber(String taxNumber) {
-        this.taxNumber = taxNumber == null ? null : taxNumber.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "InvoiceRecord{" +
-                "id=" + id +
-                ", invoiceNumber='" + invoiceNumber + '\'' +
-                ", invoiceDrawer='" + invoiceDrawer + '\'' +
-                ", invoiceUploadTime=" + invoiceUploadTime +
-                ", invoiceFileAttachment='" + invoiceFileAttachment + '\'' +
-                ", invoiceTitle='" + invoiceTitle + '\'' +
-                ", taxNumber='" + taxNumber + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        InvoiceRecord that = (InvoiceRecord) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (invoiceNumber != null ? !invoiceNumber.equals(that.invoiceNumber) : that.invoiceNumber != null)
-            return false;
-        if (invoiceDrawer != null ? !invoiceDrawer.equals(that.invoiceDrawer) : that.invoiceDrawer != null)
-            return false;
-        if (invoiceUploadTime != null ? !invoiceUploadTime.equals(that.invoiceUploadTime) : that.invoiceUploadTime != null)
-            return false;
-        if (invoiceFileAttachment != null ? !invoiceFileAttachment.equals(that.invoiceFileAttachment) : that.invoiceFileAttachment != null)
-            return false;
-        if (invoiceTitle != null ? !invoiceTitle.equals(that.invoiceTitle) : that.invoiceTitle != null) return false;
-        return taxNumber != null ? taxNumber.equals(that.taxNumber) : that.taxNumber == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (invoiceNumber != null ? invoiceNumber.hashCode() : 0);
-        result = 31 * result + (invoiceDrawer != null ? invoiceDrawer.hashCode() : 0);
-        result = 31 * result + (invoiceUploadTime != null ? invoiceUploadTime.hashCode() : 0);
-        result = 31 * result + (invoiceFileAttachment != null ? invoiceFileAttachment.hashCode() : 0);
-        result = 31 * result + (invoiceTitle != null ? invoiceTitle.hashCode() : 0);
-        result = 31 * result + (taxNumber != null ? taxNumber.hashCode() : 0);
-        return result;
-    }
+    private Integer orderId;
+    /**
+     * 收票人(采方)
+     */
+    private Integer invoiceUserId;
+    
+    private String drawer;
+    private String checkTaker;
+    private String orderNumber;
+    private String attachmentUrl;
+    
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getInvoiceNumber() {
+		return invoiceNumber;
+	}
+	public void setInvoiceNumber(String invoiceNumber) {
+		this.invoiceNumber = invoiceNumber;
+	}
+	public Integer getUserId() {
+			return userId;
+		}
+	public void setUserId(Integer userId) {
+			this.userId = userId;
+		}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public Integer getInvoiceFileAttachment() {
+		return invoiceFileAttachment;
+	}
+	public void setInvoiceFileAttachment(Integer invoiceFileAttachment) {
+		this.invoiceFileAttachment = invoiceFileAttachment;
+	}
+	public String getInvoiceNo() {
+		return invoiceNo;
+	}
+	public void setInvoiceNo(String invoiceNo) {
+		this.invoiceNo = invoiceNo;
+	}
+	public Integer getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
+	
+	public Integer getInvoiceUserId() {
+		return invoiceUserId;
+	}
+	public void setInvoiceUserId(Integer invoiceUserId) {
+		this.invoiceUserId = invoiceUserId;
+	}
+	
+	public String getDrawer() {
+		return drawer;
+	}
+	public void setDrawer(String drawer) {
+		this.drawer = drawer;
+	}
+	public String getCheckTaker() {
+		return checkTaker;
+	}
+	public void setCheckTaker(String checkTaker) {
+		this.checkTaker = checkTaker;
+	}
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+	public String getAttachmentUrl() {
+		return attachmentUrl;
+	}
+	public void setAttachmentUrl(String attachmentUrl) {
+		this.attachmentUrl = attachmentUrl;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((attachmentUrl == null) ? 0 : attachmentUrl.hashCode());
+		result = prime * result + ((checkTaker == null) ? 0 : checkTaker.hashCode());
+		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result + ((drawer == null) ? 0 : drawer.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((invoiceFileAttachment == null) ? 0 : invoiceFileAttachment.hashCode());
+		result = prime * result + ((invoiceNo == null) ? 0 : invoiceNo.hashCode());
+		result = prime * result + ((invoiceNumber == null) ? 0 : invoiceNumber.hashCode());
+		result = prime * result + ((invoiceUserId == null) ? 0 : invoiceUserId.hashCode());
+		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
+		result = prime * result + ((orderNumber == null) ? 0 : orderNumber.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InvoiceRecord other = (InvoiceRecord) obj;
+		if (attachmentUrl == null) {
+			if (other.attachmentUrl != null)
+				return false;
+		} else if (!attachmentUrl.equals(other.attachmentUrl))
+			return false;
+		if (checkTaker == null) {
+			if (other.checkTaker != null)
+				return false;
+		} else if (!checkTaker.equals(other.checkTaker))
+			return false;
+		if (createTime == null) {
+			if (other.createTime != null)
+				return false;
+		} else if (!createTime.equals(other.createTime))
+			return false;
+		if (drawer == null) {
+			if (other.drawer != null)
+				return false;
+		} else if (!drawer.equals(other.drawer))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (invoiceFileAttachment == null) {
+			if (other.invoiceFileAttachment != null)
+				return false;
+		} else if (!invoiceFileAttachment.equals(other.invoiceFileAttachment))
+			return false;
+		if (invoiceNo == null) {
+			if (other.invoiceNo != null)
+				return false;
+		} else if (!invoiceNo.equals(other.invoiceNo))
+			return false;
+		if (invoiceNumber == null) {
+			if (other.invoiceNumber != null)
+				return false;
+		} else if (!invoiceNumber.equals(other.invoiceNumber))
+			return false;
+		if (invoiceUserId == null) {
+			if (other.invoiceUserId != null)
+				return false;
+		} else if (!invoiceUserId.equals(other.invoiceUserId))
+			return false;
+		if (orderId == null) {
+			if (other.orderId != null)
+				return false;
+		} else if (!orderId.equals(other.orderId))
+			return false;
+		if (orderNumber == null) {
+			if (other.orderNumber != null)
+				return false;
+		} else if (!orderNumber.equals(other.orderNumber))
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return "InvoiceRecord [id=" + id + ", invoiceNumber=" + invoiceNumber + ", userId=" + userId + ", createTime="
+				+ createTime + ", invoiceFileAttachment=" + invoiceFileAttachment + ", invoiceNo=" + invoiceNo
+				+ ", orderId=" + orderId + ", invoiceUserId=" + invoiceUserId + ", drawer=" + drawer + ", checkTaker="
+				+ checkTaker + ", orderNumber=" + orderNumber + ", attachmentUrl=" + attachmentUrl + "]";
+	}
+   
 }
