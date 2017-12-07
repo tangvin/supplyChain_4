@@ -10,7 +10,7 @@
 <div class='col-xs-12'>
     <div class='row'>
         <div class="col-xs-12 zlxx_top">
-            <a href="<%=request.getContextPath()%>/procurementMain/captialMain.action">系统首页</a>
+            <a href="<%=request.getContextPath()%>/procurementMain/procurementMain.action">系统首页</a>
             <span>></span>
             <a href="#" id="zhxx">资料维护</a>
             <span>></span>
@@ -213,7 +213,7 @@
         initComplexArea('seachprov', 'seachcity', 'seachdistrict', area_array, sub_array, '44', '0', '0');
     });
     $('#zhxx').click(function(){
-        $('#load').load('<%=request.getContextPath()%>/captialMain/zhxx.action')
+        $('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')
     })
 
     function updateInformation(){

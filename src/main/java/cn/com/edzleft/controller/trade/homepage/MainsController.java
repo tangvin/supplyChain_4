@@ -22,19 +22,45 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value="tradeMain")
 public class MainsController {
 
-        @Autowired
-        private TradeInformationService tradeInformationService;
-        @Autowired
-        private AccountService accountService;
-        @Autowired
-        private TradeOrderService tradeOrderService;
-        @Autowired
-        private FreightService freightService;
-        @Autowired
-        private ReceivingAddressService receivingAddressService;
-        @Autowired
-        private ContractSigningService contractSigningService;
+    @Autowired
+    private TradeInformationService tradeInformationService;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private TradeOrderService tradeOrderService;
+    @Autowired
+    private FreightService freightService;
+    @Autowired
+    private ReceivingAddressService receivingAddressService;
+    @Autowired
+    private ContractSigningService contractSigningService;
 
+    /**
+     * 添加银行卡第三步
+     * @return
+     */
+    @RequestMapping("bankThree")
+    public String bankThree(){
+        return "/trade/information/bankThree";
+    }
+
+    /**
+     * 添加银行卡第二部
+     * @return
+     */
+    @RequestMapping("bankTwo")
+    public String bankTwo(){
+        return "/trade/information/bankTwo";
+    }
+
+    /**
+     * 添加银行卡第一步
+     * @return
+     */
+    @RequestMapping("bankOne")
+    public String bankOne(){
+        return "/trade/information/bankOne";
+    }
 
     /**
      * 订单查看

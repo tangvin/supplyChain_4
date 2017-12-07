@@ -69,9 +69,9 @@ public class TraInvoiceController {
 	}
 	
 	@RequestMapping("/update")
-	public Map<String,Object> update(InvoiceRecord invoiceRecord,@RequestParam MultipartFile uploadFile,HttpSession session,RedirectAttributes attr){
+	public Map update(InvoiceRecord invoiceRecord,@RequestParam MultipartFile uploadFile,HttpSession session,RedirectAttributes attr){
 		//Map<String,Object> jsonMap = new HashMap<String,Object>();
-		Map<String,Object> resultMap = new HashMap<>();  
+		Map resultMap = new HashMap<>();  
 		Attachment attachment = new Attachment();
 		String newName="";
 		String imagePath="";

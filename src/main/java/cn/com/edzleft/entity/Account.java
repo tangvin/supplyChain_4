@@ -69,9 +69,21 @@ public class Account implements Serializable{
      * 关联资料表
      */
     private Integer informationId;
+    /**
+     * 用戶聯繫人
+     */
+    private String userLinkman;
 
 
-    public Integer getInformationId() {
+    public String getUserLinkman() {
+		return userLinkman;
+	}
+
+	public void setUserLinkman(String userLinkman) {
+		this.userLinkman = userLinkman;
+	}
+
+	public Integer getInformationId() {
         return informationId;
     }
 
@@ -196,67 +208,127 @@ public class Account implements Serializable{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Account account = (Account) o;
-
-        if (userId != null ? !userId.equals(account.userId) : account.userId != null) return false;
-        if (userName != null ? !userName.equals(account.userName) : account.userName != null) return false;
-        if (userPwd != null ? !userPwd.equals(account.userPwd) : account.userPwd != null) return false;
-        if (userPhone != null ? !userPhone.equals(account.userPhone) : account.userPhone != null) return false;
-        if (creatTime != null ? !creatTime.equals(account.creatTime) : account.creatTime != null) return false;
-        if (creatIp != null ? !creatIp.equals(account.creatIp) : account.creatIp != null) return false;
-        if (loginTime != null ? !loginTime.equals(account.loginTime) : account.loginTime != null) return false;
-        if (loginIp != null ? !loginIp.equals(account.loginIp) : account.loginIp != null) return false;
-        if (userEamil != null ? !userEamil.equals(account.userEamil) : account.userEamil != null) return false;
-        if (accountType != null ? !accountType.equals(account.accountType) : account.accountType != null) return false;
-        if (accountState != null ? !accountState.equals(account.accountState) : account.accountState != null)
-            return false;
-        if (certificateState != null ? !certificateState.equals(account.certificateState) : account.certificateState != null)
-            return false;
-        if (certificateType != null ? !certificateType.equals(account.certificateType) : account.certificateType != null)
-            return false;
-        return inviteAccount != null ? inviteAccount.equals(account.inviteAccount) : account.inviteAccount == null;
-    }
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Account other = (Account) obj;
+		if (accountState == null) {
+			if (other.accountState != null)
+				return false;
+		} else if (!accountState.equals(other.accountState))
+			return false;
+		if (accountType == null) {
+			if (other.accountType != null)
+				return false;
+		} else if (!accountType.equals(other.accountType))
+			return false;
+		if (certificateState == null) {
+			if (other.certificateState != null)
+				return false;
+		} else if (!certificateState.equals(other.certificateState))
+			return false;
+		if (certificateType == null) {
+			if (other.certificateType != null)
+				return false;
+		} else if (!certificateType.equals(other.certificateType))
+			return false;
+		if (creatIp == null) {
+			if (other.creatIp != null)
+				return false;
+		} else if (!creatIp.equals(other.creatIp))
+			return false;
+		if (creatTime == null) {
+			if (other.creatTime != null)
+				return false;
+		} else if (!creatTime.equals(other.creatTime))
+			return false;
+		if (informationId == null) {
+			if (other.informationId != null)
+				return false;
+		} else if (!informationId.equals(other.informationId))
+			return false;
+		if (inviteAccount == null) {
+			if (other.inviteAccount != null)
+				return false;
+		} else if (!inviteAccount.equals(other.inviteAccount))
+			return false;
+		if (loginIp == null) {
+			if (other.loginIp != null)
+				return false;
+		} else if (!loginIp.equals(other.loginIp))
+			return false;
+		if (loginTime == null) {
+			if (other.loginTime != null)
+				return false;
+		} else if (!loginTime.equals(other.loginTime))
+			return false;
+		if (userEamil == null) {
+			if (other.userEamil != null)
+				return false;
+		} else if (!userEamil.equals(other.userEamil))
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		if (userLinkman == null) {
+			if (other.userLinkman != null)
+				return false;
+		} else if (!userLinkman.equals(other.userLinkman))
+			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
+		if (userPhone == null) {
+			if (other.userPhone != null)
+				return false;
+		} else if (!userPhone.equals(other.userPhone))
+			return false;
+		if (userPwd == null) {
+			if (other.userPwd != null)
+				return false;
+		} else if (!userPwd.equals(other.userPwd))
+			return false;
+		return true;
+	}
 
     @Override
-    public int hashCode() {
-        int result = userId != null ? userId.hashCode() : 0;
-        result = 31 * result + (userName != null ? userName.hashCode() : 0);
-        result = 31 * result + (userPwd != null ? userPwd.hashCode() : 0);
-        result = 31 * result + (userPhone != null ? userPhone.hashCode() : 0);
-        result = 31 * result + (creatTime != null ? creatTime.hashCode() : 0);
-        result = 31 * result + (creatIp != null ? creatIp.hashCode() : 0);
-        result = 31 * result + (loginTime != null ? loginTime.hashCode() : 0);
-        result = 31 * result + (loginIp != null ? loginIp.hashCode() : 0);
-        result = 31 * result + (userEamil != null ? userEamil.hashCode() : 0);
-        result = 31 * result + (accountType != null ? accountType.hashCode() : 0);
-        result = 31 * result + (accountState != null ? accountState.hashCode() : 0);
-        result = 31 * result + (certificateState != null ? certificateState.hashCode() : 0);
-        result = 31 * result + (certificateType != null ? certificateType.hashCode() : 0);
-        result = 31 * result + (inviteAccount != null ? inviteAccount.hashCode() : 0);
-        return result;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((accountState == null) ? 0 : accountState.hashCode());
+		result = prime * result + ((accountType == null) ? 0 : accountType.hashCode());
+		result = prime * result + ((certificateState == null) ? 0 : certificateState.hashCode());
+		result = prime * result + ((certificateType == null) ? 0 : certificateType.hashCode());
+		result = prime * result + ((creatIp == null) ? 0 : creatIp.hashCode());
+		result = prime * result + ((creatTime == null) ? 0 : creatTime.hashCode());
+		result = prime * result + ((informationId == null) ? 0 : informationId.hashCode());
+		result = prime * result + ((inviteAccount == null) ? 0 : inviteAccount.hashCode());
+		result = prime * result + ((loginIp == null) ? 0 : loginIp.hashCode());
+		result = prime * result + ((loginTime == null) ? 0 : loginTime.hashCode());
+		result = prime * result + ((userEamil == null) ? 0 : userEamil.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((userLinkman == null) ? 0 : userLinkman.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result + ((userPhone == null) ? 0 : userPhone.hashCode());
+		result = prime * result + ((userPwd == null) ? 0 : userPwd.hashCode());
+		return result;
+	}
 
     @Override
-    public String toString() {
-        return "Account{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", userPwd='" + userPwd + '\'' +
-                ", userPhone='" + userPhone + '\'' +
-                ", creatTime=" + creatTime +
-                ", creatIp='" + creatIp + '\'' +
-                ", loginTime=" + loginTime +
-                ", loginIp='" + loginIp + '\'' +
-                ", userEamil='" + userEamil + '\'' +
-                ", accountType=" + accountType +
-                ", accountState=" + accountState +
-                ", certificateState=" + certificateState +
-                ", certificateType=" + certificateType +
-                ", inviteAccount='" + inviteAccount + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "Account [userId=" + userId + ", userName=" + userName + ", userPwd=" + userPwd + ", userPhone="
+				+ userPhone + ", creatTime=" + creatTime + ", creatIp=" + creatIp + ", loginTime=" + loginTime
+				+ ", loginIp=" + loginIp + ", userEamil=" + userEamil + ", accountType=" + accountType
+				+ ", accountState=" + accountState + ", certificateState=" + certificateState + ", certificateType="
+				+ certificateType + ", inviteAccount=" + inviteAccount + ", informationId=" + informationId
+				+ ", userLinkman=" + userLinkman + "]";
+	}
 }

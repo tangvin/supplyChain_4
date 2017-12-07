@@ -27,6 +27,7 @@
                 
                     <div class="col-xs-6">
                     <form id="invoiceForm" onsubmit="return checkInvoiceForm();" action="<%=request.getContextPath()%>/traInvoice/update.action" method="post" enctype="multipart/form-data" class="form-horizontal" role="form" >
+                   
                            <input type="hidden" class="form-control" name="id" id="id" value="${invoiceRecord.id }">
                             <div class="form-group">
                                 <label for="firstname" class="col-xs-4 control-label"><span class="xingxing">*</span>发票号</label>
@@ -101,79 +102,9 @@ $(function(){
 		}
 	});
 })
-	<%-- $("#invoiceForm").ajaxForm({
-			beforeSubmit:function(){
-				var flag = true;
-				//表单验证
-				//触发事件
-				$("#invoiceForm input[type='text']").blur();
-				checkImages();
-				//获取span标签对象
-				$.each($(".requireSpan"),function(i,n){
-					if($(n).text() != ""){
-						flag = false;
-						return false;
-					}
-				});
-				return flag;
-			},
-			url:'<%=request.getContextPath()%>/traInvoice/update.action',
-			type:post,
-			processData:false,
-            contentType:false,
-            data:$("#invoiceForm").serialize(),
-			success:function(jsonObject){
-				if(jsonObject.success){
-					alert("更新成功！");
-				}else{
-					alert("更新失败！");
-				}
-			}
-		}); --%>
-		function checkInvoiceForm(){
-			var flag = true;
-			//表单验证
-			//触发事件
-			$("#invoiceForm input[type='text']").blur();
-			checkImages();
-			//获取span标签对象
-			$.each($(".requireSpan"),function(i,n){
-				if($(n).text() != ""){
-					flag = false;
-					return false;
-				}
-			});
-			return flag;
-		} 
-<%-- $("#upBtn").click(function () {
-	var id=$("#id").val();
-	var invoiceNo=$("#invoiceNo").val();
-	var attachmentId=$("#attId").val();
-	//alert(12324);
-	$.ajax({
-		url:'<%=request.getContextPath()%>/traInvoice/update.action',
-		data:{
-			id:id,
-			invoiceNo:invoiceNo,
-			attachmentId:attachmentId
-			},
-		type:'post',
-		success:function(data){
-			
-			if(data.success){
-				alert("保存成功");
-			}else{
-				alert("保存失败");					
-			}
-		}
-	})
-}) --%>
-
-
- 
-function checkImages(){
+	function checkImages(){
 	//获取图片控件
-	var imageElts = $("input[name='photos']");
+	var imageElts = $("input[name='uploadFile']");
 	//验证图片后缀名称
 	var regExp = /(.*).(jpg|bmp|gif|jpeg|png)$/;
 	//遍历图片控件
@@ -187,10 +118,12 @@ function checkImages(){
 				$("#checkImages").text("");
 			}
 		}
-	});
+	})
 }
+
+
     $('#fpgl1').click(function(){
         $('#load').load('<%=request.getContextPath()%>/tradeMain/fpgl.action')
-    })
+	})
 </script>
 </html>
