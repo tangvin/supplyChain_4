@@ -5,20 +5,16 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="financial_numbers" property="financialNumbers" jdbcType="VARCHAR" />
     <result column="financial_type" property="financialType" jdbcType="INTEGER" />
-    <result column="amount" property="amount" jdbcType="DOUBLE" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
     <result column="payer" property="payer" jdbcType="VARCHAR" />
-    <result column="receiving_side" property="receivingSide" jdbcType="VARCHAR" />
     <result column="belong_order_id" property="belongOrderId" jdbcType="INTEGER" />
     <result column="bill_time" property="billTime" jdbcType="TIMESTAMP" />
-    <result column="trade_name" property="tradeName" jdbcType="VARCHAR" />
-    <result column="capital_name" property="capitalName" jdbcType="VARCHAR" />
-    <result column="bank_acount_type" property="bankAcountType" jdbcType="INTEGER" />
     <result column="bank_account_id" property="bankAccountId" jdbcType="INTEGER" />
     <result column="bank_card" property="bankCard" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, financial_numbers, financial_type, amount, payer, receiving_side, belong_order_id,
-    bill_time, bank_acount_type, bank_account_id,bank_card
+    id, financial_numbers, financial_type, amount, payer, belong_order_id,
+    bill_time, bank_account_id,bank_card
   </sql>
 
   <!--条件查询-->
@@ -74,19 +70,6 @@
   </delete>
 
 
-  <insert id="insert" parameterType="cn.com.edzleft.entity.Financial" >
-    insert into gyl_financial (id, financial_numbers, financial_type, 
-      amount, payer, receiving_side, 
-      belong_order_id, bill_time, trade_name,
-      capital_name, bank_acount_type, bank_account_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{financialNumbers,jdbcType=VARCHAR}, #{financialType,jdbcType=INTEGER}, 
-      #{amount,jdbcType=DOUBLE}, #{payer,jdbcType=VARCHAR}, #{receivingSide,jdbcType=VARCHAR}, 
-      #{belongOrderId,jdbcType=INTEGER}, #{billTime,jdbcType=TIMESTAMP}, #{tradeName,jdbcType=VARCHAR},
-      #{capitalName,jdbcType=VARCHAR}, #{bankAcountType,jdbcType=INTEGER}, #{bankAccountId,jdbcType=INTEGER}
-      )
-  </insert>
-
   <!--添加财务信息-->
   <insert id="insertFinancial" parameterType="cn.com.edzleft.entity.Financial" >
     insert into gyl_financial
@@ -106,26 +89,17 @@
       <if test="payer != null" >
         payer,
       </if>
-      <if test="receivingSide != null" >
-        receiving_side,
-      </if>
       <if test="belongOrderId != null" >
         belong_order_id,
       </if>
       <if test="billTime != null" >
         bill_time,
       </if>
-      <if test="tradeName != null" >
-        trade_name,
-      </if>
-      <if test="capitalName != null" >
-        capital_name,
-      </if>
-      <if test="bankAcountType != null" >
-        bank_acount_type,
-      </if>
       <if test="bankAccountId != null" >
         bank_account_id,
+      </if>
+      <if test="bankCard != null" >
+        bank_card,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -139,13 +113,10 @@
         #{financialType,jdbcType=INTEGER},
       </if>
       <if test="amount != null" >
-        #{amount,jdbcType=DOUBLE},
+        #{amount,jdbcType=INTEGER},
       </if>
       <if test="payer != null" >
         #{payer,jdbcType=VARCHAR},
-      </if>
-      <if test="receivingSide != null" >
-        #{receivingSide,jdbcType=VARCHAR},
       </if>
       <if test="belongOrderId != null" >
         #{belongOrderId,jdbcType=INTEGER},
@@ -153,17 +124,11 @@
       <if test="billTime != null" >
         #{billTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="tradeName != null" >
-        #{tradeName,jdbcType=VARCHAR},
-      </if>
-      <if test="capitalName != null" >
-        #{capitalName,jdbcType=VARCHAR},
-      </if>
-      <if test="bankAcountType != null" >
-        #{bankAcountType,jdbcType=INTEGER},
-      </if>
       <if test="bankAccountId != null" >
         #{bankAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="bankCard != null" >
+        #{bankCard,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -179,13 +144,10 @@
         financial_type = #{financialType,jdbcType=INTEGER},
       </if>
       <if test="amount != null" >
-        amount = #{amount,jdbcType=DOUBLE},
+        amount = #{amount,jdbcType=INTEGER},
       </if>
       <if test="payer != null" >
         payer = #{payer,jdbcType=VARCHAR},
-      </if>
-      <if test="receivingSide != null" >
-        receiving_side = #{receivingSide,jdbcType=VARCHAR},
       </if>
       <if test="belongOrder != null" >
         belong_order_id = #{belongOrderId,jdbcType=INTEGER},
@@ -193,34 +155,14 @@
       <if test="billTime != null" >
         bill_time = #{billTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="tradeName != null" >
-        trade_name = #{tradeName,jdbcType=VARCHAR},
-      </if>
-      <if test="capitalName != null" >
-        capital_name = #{capitalName,jdbcType=VARCHAR},
-      </if>
-      <if test="bankAcountType != null" >
-        bank_acount_type = #{bankAcountType,jdbcType=INTEGER},
-      </if>
       <if test="bankAccount != null" >
         bank_account_id = #{bankAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="bankCard != null" >
+        bank_card= #{bankCard,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.com.edzleft.entity.Financial" >
-    update gyl_financial
-    set financial_numbers = #{financialNumbers,jdbcType=VARCHAR},
-      financial_type = #{financialType,jdbcType=INTEGER},
-      amount = #{amount,jdbcType=DOUBLE},
-      payer = #{payer,jdbcType=VARCHAR},
-      receiving_side = #{receivingSide,jdbcType=VARCHAR},
-      belong_order = #{belongOrder,jdbcType=VARCHAR},
-      bill_time = #{billTime,jdbcType=TIMESTAMP},
-      trade_name = #{tradeName,jdbcType=VARCHAR},
-      capital_name = #{capitalName,jdbcType=VARCHAR},
-      bank_acount_type = #{bankAcountType,jdbcType=INTEGER},
-      bank_account = #{bankAccount,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>

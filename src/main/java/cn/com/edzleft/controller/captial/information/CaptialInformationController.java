@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by ASUS on 2017/11/29.
@@ -26,8 +27,8 @@ public class CaptialInformationController {
 
 
     @RequestMapping(value = "updateInformation",method = RequestMethod.POST)
-    public String updateInformation(Information information){
-        captialInformationService.updateInformation(information);
+    public String updateInformation(Information information, HttpSession session){
+        captialInformationService.updateInformation(information,session);
         return "";
     }
 

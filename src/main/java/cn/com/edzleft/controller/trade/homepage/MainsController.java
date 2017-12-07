@@ -55,7 +55,6 @@ public class MainsController {
         Integer principalOrderId = order.getPrincipalOrderId();
         //查询出合同信息
         Contract contract = contractSigningService.queryContractById(principalOrderId);
-
         ModelAndView modelAndView = new ModelAndView("/trade/order/viewOrder");
         modelAndView.addObject("order",order);
         modelAndView.addObject("freight",freight);
@@ -95,8 +94,12 @@ public class MainsController {
      * @return
      */
     @RequestMapping(value = "messages")
-    public ModelAndView messages(){
+    public ModelAndView messages(HttpSession sessionInfo){
         ModelAndView modelAndView = new ModelAndView("/trade/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = tradeInformationService.queryBaseInformation(userId);
+        modelAndView.addObject("information",information);
         modelAndView.addObject("messages", "profile");
         return modelAndView;
     }
@@ -125,8 +128,12 @@ public class MainsController {
      * @return
      */
     @RequestMapping(value = "zijin")
-    public ModelAndView zijin(){
+    public ModelAndView zijin(HttpSession sessionInfo){
         ModelAndView modelAndView = new ModelAndView("/trade/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = tradeInformationService.queryBaseInformation(userId);
+        modelAndView.addObject("information",information);
         modelAndView.addObject("messages", "settings");
         return modelAndView;
     }

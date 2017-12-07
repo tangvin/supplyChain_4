@@ -35,7 +35,6 @@
     <result column="open_account_file" property="openAccountFile" jdbcType="VARCHAR" />
     <result column="financial_file" property="financialFile" jdbcType="VARCHAR" />
     <result column="organization_electronic_file" property="organizationElectronicFile" jdbcType="VARCHAR" />
-    <result column="account_id" property="accountId" jdbcType="INTEGER" />
     <result column="ent_logo" property="entLogo" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -44,15 +43,22 @@
     registered_capital, major_shareholder, business_scope, registration_authority, telephone, 
     municipality, city, county, address, business_contact, mobile_phone, email_address, 
     zip_code, web_site, code_file, business_license, electronic_file, person_idcard, 
-    tax_number, open_account_file, financial_file, organization_electronic_file, account_id, 
+    tax_number, open_account_file, financial_file, organization_electronic_file,
     ent_logo
   </sql>
 
   <select id="homePageSelect" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from gyl_information
-    where account_id = #{userId,jdbcType=INTEGER}
+    SELECT
+    t1.*,
+    t2.*
+    FROM
+    gyl_information t1
+    INNER JOIN
+    gyl_account t2
+    ON
+    t1.id=t2.information_id
+    WHERE
+    t2.user_id=#{userId}
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -409,51 +415,11 @@
       <if test="organizationElectronicFile != null" >
         organization_electronic_file = #{organizationElectronicFile,jdbcType=VARCHAR},
       </if>
-      <if test="accountId != null" >
-        account_id = #{accountId,jdbcType=INTEGER},
-      </if>
       <if test="entLogo != null" >
         ent_logo = #{entLogo,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.com.edzleft.entity.Information" >
-    update gyl_information
-    set ent_identity = #{entIdentity,jdbcType=INTEGER},
-      ent_name = #{entName,jdbcType=VARCHAR},
-      ent_document_type = #{entDocumentType,jdbcType=INTEGER},
-      ent_credit_code = #{entCreditCode,jdbcType=VARCHAR},
-      registration_number = #{registrationNumber,jdbcType=VARCHAR},
-      tax_registration_number = #{taxRegistrationNumber,jdbcType=VARCHAR},
-      institution_code = #{institutionCode,jdbcType=VARCHAR},
-      representative = #{representative,jdbcType=VARCHAR},
-      representative_type = #{representativeType,jdbcType=INTEGER},
-      representative_num = #{representativeNum,jdbcType=INTEGER},
-      registered_capital = #{registeredCapital,jdbcType=INTEGER},
-      major_shareholder = #{majorShareholder,jdbcType=VARCHAR},
-      business_scope = #{businessScope,jdbcType=VARCHAR},
-      registration_authority = #{registrationAuthority,jdbcType=VARCHAR},
-      telephone = #{telephone,jdbcType=VARCHAR},
-      municipality = #{municipality,jdbcType=VARCHAR},
-      city = #{city,jdbcType=VARCHAR},
-      county = #{county,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      business_contact = #{businessContact,jdbcType=VARCHAR},
-      mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
-      email_address = #{emailAddress,jdbcType=VARCHAR},
-      zip_code = #{zipCode,jdbcType=INTEGER},
-      web_site = #{webSite,jdbcType=VARCHAR},
-      code_file = #{codeFile,jdbcType=VARCHAR},
-      business_license = #{businessLicense,jdbcType=VARCHAR},
-      electronic_file = #{electronicFile,jdbcType=VARCHAR},
-      person_idcard = #{personIdcard,jdbcType=VARCHAR},
-      tax_number = #{taxNumber,jdbcType=INTEGER},
-      open_account_file = #{openAccountFile,jdbcType=VARCHAR},
-      financial_file = #{financialFile,jdbcType=VARCHAR},
-      organization_electronic_file = #{organizationElectronicFile,jdbcType=VARCHAR},
-      account_id = #{accountId,jdbcType=INTEGER},
-      ent_logo = #{entLogo,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>

@@ -23,10 +23,8 @@
                         <label>财务类型</label>
                         <select class="form-control select" name="financialType">
                             <option value="">全部</option>
-                            <option value="0">0贷款</option>
-                            <option value="1">1还款</option>
-                            <option value="2">2转入</option>
-                            <option value="3">3转出</option>
+                            <option value="0">转出</option>
+                            <option value="1">转出</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -41,8 +39,8 @@
                         <label>银行账户</label>
                         <select class="form-control" name="bankAccount">
                             <option value="">全部</option>
-                            <option value="0">银行账户</option>
-                            <option value="1">银行账户</option>
+                            <option value="0">账户1</option>
+                            <option value="1">账户2</option>
                         </select>
                     </div>
                     <button type="button" class="btn btn-danger btn-default">查询</button>
@@ -67,7 +65,7 @@
         console.log(start.toISOString(), end.toISOString(), label);
     });
 
-    //授信分页查询
+    //财务管理分页查询
     $(function(){
         $("#financingTable").bootstrapTable({
             columns:[
@@ -86,12 +84,12 @@
                     }
                 },
                 {field:'financialType',title:'财务类型',width:100},
-                {field:'belongOrder',title:'所属订单',width:100},
+                {field:'belongOrderId',title:'所属订单',width:100},
                 {field:'payer',title:'发生方',width:100},
-                {field:'bankAcountType',title:'发生银行账户及类型',width:100},
+                {field:'bankAcountId',title:'发生银行账户及类型',width:100},
                 {field:'bankCard',title:'发生方账户(采方)',width:100},
             ],
-            url:'<%=request.getContextPath()%>/financial/queryAllFinancial.action',
+            url:'<%=request.getContextPath()%>/financial/getAllFinancial.action',
             method:'post',
             queryParamsType:'',
             queryParams: queryParams,//传递参数（*）
@@ -110,8 +108,9 @@
         var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             pageNumber: params.pageNumber,
             pageSize: params.pageSize,
-            tripartiteDepositBank:$("#tripartiteDepositBank").val(),
-            tripartiteCreditHolderPurchaser:$("#tripartiteCreditHolderPurchaser").val()
+            financialType:$("#financialType").val(),
+            payer:$("#payer").val(),
+            bankCard:$("#bankCard").val()
         };
         return temp;
     }

@@ -112,7 +112,7 @@ public class TradeOrderController {
      * 领取订单
      * 驳回
      */
-    @RequestMapping("/lqdd")
+    @RequestMapping(value = "/lqdd",method = RequestMethod.POST)
     @ResponseBody
     public Order lqdd(Integer id,Integer flag){
         System.out.println("~~~~~~~~~~~");

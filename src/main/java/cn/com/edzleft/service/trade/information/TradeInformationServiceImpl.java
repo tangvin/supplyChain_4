@@ -98,8 +98,6 @@ public class TradeInformationServiceImpl implements TradeInformationService {
         info.setPersonIdcard(f.getPersonIdcard());
         //开户许可证电子档
         info.setOpenAccountFile(f.getOpenAccountFile());
-        //用户账号id
-        info.setAccountId(f.getAccountId());
         //企业图片
         info.setEntLogo(f.getEntLogo());
         //认证状态
