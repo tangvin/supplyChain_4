@@ -6,8 +6,8 @@
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_pwd" property="userPwd" jdbcType="VARCHAR" />
     <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
-    <result column="create_time" property="creatTime" jdbcType="TIMESTAMP" />
-    <result column="create_ip" property="creatIp" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_ip" property="createIp" jdbcType="VARCHAR" />
     <result column="login_time" property="loginTime" jdbcType="TIMESTAMP" />
     <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
     <result column="user_eamil" property="userEamil" jdbcType="VARCHAR" />
@@ -16,19 +16,21 @@
     <result column="certificate_state" property="certificateState" jdbcType="INTEGER" />
     <result column="certificate_type" property="certificateType" jdbcType="INTEGER" />
     <result column="invite_account" property="inviteAccount" jdbcType="VARCHAR" />
+    <result column="information_id" property="informationId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    user_id, user_name, user_pwd, user_phone, create_time, create_ip, login_time, login_ip,
-    user_eamil, account_type, account_state, certificate_state, certificate_type, invite_account
+    user_id, user_name, user_pwd, user_phone, create_time, create_ip, login_time, login_ip, 
+    user_eamil, account_type, account_state, certificate_state, certificate_type, invite_account,information_id
   </sql>
 
   <!--根据账号查询账号信息-->
   <select id="findAccountByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
-    <include refid="Base_Column_List" />
+    user_id,user_name,user_pwd,account_type,user_phone
     from gyl_account
     where user_name = #{userName}
   </select>
+
 
   <!--新增一个账号-->
   <insert id="insertAccount" parameterType="cn.com.edzleft.entity.Account" >
@@ -46,10 +48,10 @@
       <if test="userPhone != null" >
         user_phone,
       </if>
-      <if test="creatTime != null" >
+      <if test="createTime != null" >
         create_time,
       </if>
-      <if test="creatIp != null" >
+      <if test="createIp != null" >
         create_ip,
       </if>
       <if test="loginTime != null" >
@@ -76,6 +78,9 @@
       <if test="inviteAccount != null" >
         invite_account,
       </if>
+      <if test="informationId != null" >
+        information_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -90,10 +95,10 @@
       <if test="userPhone != null" >
         #{userPhone,jdbcType=VARCHAR},
       </if>
-      <if test="creatTime != null" >
+      <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="creatIp != null" >
+      <if test="createIp != null" >
         #{createIp,jdbcType=VARCHAR},
       </if>
       <if test="loginTime != null" >
@@ -120,15 +125,11 @@
       <if test="inviteAccount != null" >
         #{inviteAccount,jdbcType=VARCHAR},
       </if>
+      <if test="informationId != null" >
+        #{informationId,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
-
-
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from gyl_account
-    where user_id = #{userId,jdbcType=INTEGER}
-  </delete>
-
   <!--修改账户密码-->
   <update id="updatePassword" parameterType="cn.com.edzleft.entity.Account" >
     update gyl_account
@@ -172,25 +173,11 @@
       <if test="inviteAccount != null" >
         invite_account = #{inviteAccount,jdbcType=VARCHAR},
       </if>
+      <if test="informationId != null" >
+        information_id = #{informationId,jdbcType=INTEGER},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="cn.com.edzleft.entity.Account" >
-    update gyl_account
-    set user_name = #{userName,jdbcType=VARCHAR},
-      user_pwd = #{userPwd,jdbcType=VARCHAR},
-      user_phone = #{userPhone,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_ip = #{createIp,jdbcType=VARCHAR},
-      login_time = #{loginTime,jdbcType=TIMESTAMP},
-      login_ip = #{loginIp,jdbcType=VARCHAR},
-      user_eamil = #{userEamil,jdbcType=VARCHAR},
-      account_type = #{accountType,jdbcType=INTEGER},
-      account_state = #{accountState,jdbcType=INTEGER},
-      certificate_state = #{certificateState,jdbcType=INTEGER},
-      certificate_type = #{certificateType,jdbcType=INTEGER},
-      invite_account = #{inviteAccount,jdbcType=VARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
 </mapper>

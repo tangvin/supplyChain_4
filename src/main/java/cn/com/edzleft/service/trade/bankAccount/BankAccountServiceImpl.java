@@ -78,7 +78,7 @@ public class BankAccountServiceImpl implements BankAccountService {
      * @return
      */
     @Override
-    public int setbankAccount(Integer id,HttpSession session,Integer value) {
+    public int setbankAccount(Integer id,Integer value,HttpSession session) {
         SessionInfo sessions = (SessionInfo) session.getAttribute("sessionInfo");
         Integer userId = sessions.getAdmin().getUserId();
         //查询出为默认地址的所有货运单位
@@ -95,7 +95,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         }
         //设置当前操作的银行卡为默认卡
         BankAccount bankAcc = new BankAccount();
-        bankAcc.setUserId(id);
+        bankAcc.setBankAccountId(id);
         bankAcc.setDefaultId(value);
         int i = bankAccountMapper.updatebankAccount(bankAcc);
         return i;

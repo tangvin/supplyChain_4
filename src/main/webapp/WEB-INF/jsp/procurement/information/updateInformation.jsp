@@ -217,7 +217,6 @@
     })
 
     function updateInformation(){
-//        alert($("#updateForm").serialize())
         $.ajax({
             url:'<%=request.getContextPath()%>/procurementMain/cupdateInformation.action',
             data:$("#updateForm").serialize(),

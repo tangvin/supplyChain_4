@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.procurement.bankAccount.PmBankAccountMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.BankAccount" >
+    <id column="bank_account_id" property="bankAccountId" jdbcType="INTEGER" />
+    <result column="bank_account_deposit_bank" property="bankAccountDepositBank" jdbcType="VARCHAR" />
+    <result column="bank_account_credit_holder" property="bankAccountCreditHolder" jdbcType="VARCHAR" />
+    <result column="bank_account_number" property="bankAccountNumber" jdbcType="INTEGER" />
+    <result column="bank_account_create_time" property="bankAccountCreateTime" jdbcType="TIMESTAMP" />
+    <result column="bank_account_create_people" property="bankAccountCreatePeople" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="default_id" property="defaultId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bank_account_id, bank_account_deposit_bank, bank_account_credit_holder, bank_account_number, 
+    bank_account_create_time, bank_account_create_people,user_id,default_id
+  </sql>
+
+
+  <!--查询所有的银行卡-->
+  <select id="selectBankAccountByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    t1.*,
+    t2.*
+    FROM
+    gyl_bank_account t1
+    LEFT JOIN
+    gyl_account t2
+    ON
+    t1.user_id=t2.user_id
+    WHERE
+    t2.user_id=#{userId}
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gyl_bank_account
+    where bank_account_id = #{bankAccountId,jdbcType=INTEGER}
+  </select>
+
+  <!--根据id删除银行卡-->
+  <delete id="deleteBankAccountById" parameterType="java.lang.Integer" >
+    delete from gyl_bank_account
+    where bank_account_id = #{bankAccountId,jdbcType=INTEGER}
+  </delete>
+
+
+  <insert id="insert" parameterType="cn.com.edzleft.entity.BankAccount" >
+    insert into gyl_bank_account (bank_account_id, bank_account_deposit_bank, 
+      bank_account_credit_holder, bank_account_number, 
+      bank_account_create_time, bank_account_create_people,
+      user_id,default_id
+      )
+    values (#{bankAccountId,jdbcType=INTEGER}, #{bankAccountDepositBank,jdbcType=VARCHAR}, 
+      #{bankAccountCreditHolder,jdbcType=VARCHAR}, #{bankAccountNumber,jdbcType=INTEGER}, 
+      #{bankAccountCreateTime,jdbcType=TIMESTAMP}, #{bankAccountCreatePeople,jdbcType=VARCHAR}
+      #{userId,jdbcType=INTEGER},#{defaultId,jdbcType=INTEGER}
+      )
+  </insert>
+
+  <!--增加银行卡-->
+  <insert id="insertBankAcount" parameterType="cn.com.edzleft.entity.BankAccount" >
+    insert into gyl_bank_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bankAccountId != null" >
+        bank_account_id,
+      </if>
+      <if test="bankAccountDepositBank != null" >
+        bank_account_deposit_bank,
+      </if>
+      <if test="bankAccountCreditHolder != null" >
+        bank_account_credit_holder,
+      </if>
+      <if test="bankAccountNumber != null" >
+        bank_account_number,
+      </if>
+      <if test="bankAccountCreateTime != null" >
+        bank_account_create_time,
+      </if>
+      <if test="bankAccountCreatePeople != null" >
+        bank_account_create_people,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="defaultId != null" >
+        default_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bankAccountId != null" >
+        #{bankAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="bankAccountDepositBank != null" >
+        #{bankAccountDepositBank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccountCreditHolder != null" >
+        #{bankAccountCreditHolder,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccountNumber != null" >
+        #{bankAccountNumber,jdbcType=INTEGER},
+      </if>
+      <if test="bankAccountCreateTime != null" >
+        #{bankAccountCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bankAccountCreatePeople != null" >
+        #{bankAccountCreatePeople,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="defaultId != null" >
+        #{defaultId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <!--修改银行卡信息-->
+  <update id="updatebankAccount" parameterType="cn.com.edzleft.entity.BankAccount" >
+    update gyl_bank_account
+    <set >
+      <if test="bankAccountDepositBank != null" >
+        bank_account_deposit_bank = #{bankAccountDepositBank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccountCreditHolder != null" >
+        bank_account_credit_holder = #{bankAccountCreditHolder,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccountNumber != null" >
+        bank_account_number = #{bankAccountNumber,jdbcType=INTEGER},
+      </if>
+      <if test="bankAccountCreateTime != null" >
+        bank_account_create_time = #{bankAccountCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bankAccountCreatePeople != null" >
+        bank_account_create_people = #{bankAccountCreatePeople,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="defaultId != null" >
+        default_id = #{defaultId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where bank_account_id = #{bankAccountId,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateByPrimaryKey" parameterType="cn.com.edzleft.entity.BankAccount" >
+    update gyl_bank_account
+    set bank_account_deposit_bank = #{bankAccountDepositBank,jdbcType=VARCHAR},
+      bank_account_credit_holder = #{bankAccountCreditHolder,jdbcType=VARCHAR},
+      bank_account_number = #{bankAccountNumber,jdbcType=INTEGER},
+      bank_account_create_time = #{bankAccountCreateTime,jdbcType=TIMESTAMP},
+      bank_account_create_people = #{bankAccountCreatePeople,jdbcType=VARCHAR}
+    where bank_account_id = #{bankAccountId,jdbcType=INTEGER}
+  </update>
+</mapper>

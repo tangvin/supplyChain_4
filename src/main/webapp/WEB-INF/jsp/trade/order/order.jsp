@@ -81,7 +81,7 @@
                             <textarea class="form-control" rows="3" width="200px"></textarea>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+                            <button type="button" id="ddbh" class="btn btn-default" data-dismiss="modal">确定</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
                         </div>
                     </div>
@@ -278,7 +278,7 @@
                         var str = '';
                         if(row.orderStatus ==0){//待确认
                             str += '<button  class="btn btn-default bg_btn qran" data-toggle="modal" data-target=".bs-example-modal-sm" href="#" value="待确认" onclick="showUserAttach(\''+row.orderId+'\',1)">领取订单</button>';
-                            str += '<button  class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_bh" href="#" value="待确认" onclick="showUserAttach(\''+row.orderId+'\',2)">驳回</button>';
+                            str += '<button  class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_bh" href="#" value="待确认" onclick="showUserAttache(\''+row.orderId+'\',2)">驳回</button>';
                         } else if(row.orderStatus ==1){//待付款
                             str+='--';
                         } else if(row.orderStatus ==2){//待发货
@@ -356,9 +356,25 @@
     }
 
 
-   //待确认按钮  +  驳回按钮
+    //驳回按钮
+    function showUserAttache(w,e){
+        $("#ddbh").click(function () {
+            $.ajax({
+                url:'<%=request.getContextPath()%>/tradeOrder/lqdd.action?id='+w+'&&flag='+e,
+                type:'post',
+                dataType:"json",
+                // data:$("#f").serialize(),
+                success:function (data) {
+                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')",500);
+                }
+            })
+
+        })
+    }
+   //待确认按钮
     function showUserAttach(w,e){
         $("#lqdd").click(function () {
+
             $.ajax({
                 url:'<%=request.getContextPath()%>/tradeOrder/lqdd.action?id='+w+'&&flag='+e,
                 type:'post',

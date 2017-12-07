@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.trade.reject.RejectMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Reject" >
+    <id column="reject_id" property="rejectId" jdbcType="INTEGER" />
+    <result column="reject_reason" property="rejectReason" jdbcType="VARCHAR" />
+    <result column="bussiness_type" property="bussinessType" jdbcType="INTEGER" />
+    <result column="contract_id" property="contractId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+    reject_id, reject_reason, bussiness_type, contract_id,order_id
+  </sql>
+
+  <!--查询驳回记录-->
+  <select id="selectRejectReason" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gyl_reject
+    where reject_id = #{rejectId,jdbcType=INTEGER}
+  </select>
+
+  <!--删除驳回记录-->
+  <delete id="deleteRejectReason" parameterType="java.lang.Integer" >
+    delete from gyl_reject
+    where setting_id = #{settingId,jdbcType=INTEGER}
+  </delete>
+
+
+  <!--添加驳回记录-->
+  <insert id="insertRejectReason" parameterType="cn.com.edzleft.entity.Reject" >
+    insert into gyl_reject
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rejectId != null" >
+        reject_id,
+      </if>
+      <if test="rejectReason != null" >
+        reject_reason,
+      </if>
+      <if test="bussinessType != null" >
+        bussiness_type,
+      </if>
+      <if test="contractId != null" >
+        contract_id,
+      </if>
+      <if test="C != null" >
+        order_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rejectId != null" >
+        #{rejectId,jdbcType=INTEGER},
+      </if>
+      <if test="rejectReason != null" >
+        #{rejectReason,jdbcType=VARCHAR},
+      </if>
+      <if test="bussinessType != null" >
+        #{bussinessType,jdbcType=INTEGER},
+      </if>
+      <if test="contractId != null" >
+        #{contractId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <!--修改记录-->
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.edzleft.entity.Reject" >
+    update gyl_reject
+    <set >
+      <if test="shortMessage != null" >
+        short_message = #{shortMessage,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where setting_id = #{settingId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.edzleft.entity.Settings" >
+    update gyl_reject
+    set short_message = #{shortMessage,jdbcType=INTEGER},
+      email = #{email,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER}
+    where setting_id = #{settingId,jdbcType=INTEGER}
+  </update>
+</mapper>

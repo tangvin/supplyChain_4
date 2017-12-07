@@ -77,8 +77,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                                         </div>
                                     </div>
                                 </div>
@@ -138,8 +137,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="qx">Save</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="qx">取消</button>
                                         </div>
                                     </div>
                                 </div>

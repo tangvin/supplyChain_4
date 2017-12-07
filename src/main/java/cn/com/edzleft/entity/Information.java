@@ -137,10 +137,7 @@ public class Information {
      *组织机构电子档
      */
     private String organizationElectronicFile;
-    /**
-     * 用户id account_id
-     */
-    private Integer accountId;
+
     /**
      * 企业图片
      */
@@ -165,14 +162,6 @@ public class Information {
 
     public void setEntLogo(String entLogo) {
         this.entLogo = entLogo;
-    }
-
-    public Integer getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
     }
 
     public Integer getId() {
@@ -498,7 +487,6 @@ public class Information {
             return false;
         if (organizationElectronicFile != null ? !organizationElectronicFile.equals(that.organizationElectronicFile) : that.organizationElectronicFile != null)
             return false;
-        if (accountId != null ? !accountId.equals(that.accountId) : that.accountId != null) return false;
         if (entLogo != null ? !entLogo.equals(that.entLogo) : that.entLogo != null) return false;
         return certificationStatus != null ? certificationStatus.equals(that.certificationStatus) : that.certificationStatus == null;
     }
@@ -538,7 +526,6 @@ public class Information {
         result = 31 * result + (openAccountFile != null ? openAccountFile.hashCode() : 0);
         result = 31 * result + (financialFile != null ? financialFile.hashCode() : 0);
         result = 31 * result + (organizationElectronicFile != null ? organizationElectronicFile.hashCode() : 0);
-        result = 31 * result + (accountId != null ? accountId.hashCode() : 0);
         result = 31 * result + (entLogo != null ? entLogo.hashCode() : 0);
         result = 31 * result + (certificationStatus != null ? certificationStatus.hashCode() : 0);
         return result;
@@ -580,7 +567,6 @@ public class Information {
                 ", openAccountFile='" + openAccountFile + '\'' +
                 ", financialFile='" + financialFile + '\'' +
                 ", organizationElectronicFile='" + organizationElectronicFile + '\'' +
-                ", accountId=" + accountId +
                 ", entLogo='" + entLogo + '\'' +
                 ", certificationStatus=" + certificationStatus +
                 '}';

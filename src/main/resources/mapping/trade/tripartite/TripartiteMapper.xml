@@ -29,7 +29,7 @@
         AND tripartite_deposit_bank  LIKE '%${whereMap.tripartiteDepositBank}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.tripartiteCreditHolderPurchaser != null and whereMap.tripartiteCreditHolderPurchaser != ''">
-        AND tripartite_credit_holder_purchaser &gt;= '${whereMap.tripartiteCreditHolderPurchaser}'
+        AND tripartite_credit_holder_purchaser LIKE '%${whereMap.tripartiteCreditHolderPurchaser}%'
       </if>
     </trim>
   </sql>

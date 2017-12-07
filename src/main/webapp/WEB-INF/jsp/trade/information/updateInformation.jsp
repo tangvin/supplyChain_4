@@ -217,7 +217,6 @@
         $('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')
     });
     $("#update").click(function () {
-        alert("确认修改！");
         $.ajax({
             url:'<%=request.getContextPath()%>/information/modifyInformation.action',
             dataType:'json',
