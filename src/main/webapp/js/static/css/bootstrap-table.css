@@ -217,7 +217,7 @@
     box-sizing: border-box;
 }
 .table th{
-    background: #ccc;
+    background: #f6f6f6;
 }
 
 .fixed-table-toolbar .dropdown-menu {
@@ -254,6 +254,7 @@
 .bootstrap-table .table thead > tr > th {
     padding: 0;
     margin: 0;
+    text-align: center;
 }
 
 .bootstrap-table .fixed-table-footer tbody > tr > td {
@@ -298,6 +299,7 @@ div.fixed-table-scroll-outer {
 }
 .cj_table  tbody tr td{
     vertical-align: middle;
+    text-align: center;
 }
 .cj_table .bg_btn{
     padding: 4px 8px;

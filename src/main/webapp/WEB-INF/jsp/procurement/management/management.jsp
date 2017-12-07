@@ -180,10 +180,13 @@
                 },
                 {field:'creditStatus',title:'状态',width:100,
                     formatter: function(value,row,index){
+                        var status=''
                         if(value == '0') {
-                            return "已审批";
+                            status = '<span style="color: #090;">已审批</span>';
+                            return status;
                         } else if(value == '1') {
-                            return "待审批";
+                            status = '<span style="color: #f90;">待审批</span>';
+                            return status;
                         }
                     }
                 },
@@ -272,10 +275,13 @@
                 },
                 {field:'letterStatus',title:'状态',width:100,
                     formatter: function(value,row,index){
+                        var status=''
                         if(value == '0') {
-                            return "已审批";
+                            status = '<span style="color: #090;">已审批</span>';
+                            return status;
                         } else if(value == '1') {
-                            return "待审批";
+                            status = '<span style="color: #f90;">待审批</span>';
+                            return status;
                         }
                     }
                 },
