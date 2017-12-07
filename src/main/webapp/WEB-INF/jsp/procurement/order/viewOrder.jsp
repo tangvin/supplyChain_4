@@ -140,8 +140,8 @@
                 </div>
                 <!--合同编辑表格 end-->
         </div>
-
-        <div class="col-xs-12">
+		
+        <div class="col-xs-12" id="open">
             <div class="row jbxx_row ckdd">
                 <div class="col-xs-8">
                     <h5>货运信息</h5>
@@ -209,14 +209,14 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息：</td>
-                            <td class="col-xs-8 text-left"><span>${ra.rAddressArea}${ra.rAddressAddress}</span></td>
+                            <td class="col-xs-8 text-left"><span>${receivingAddress.rAddressArea}${receivingAddress.rAddressAddress}</span></td>
                         </div>
                     </tr>
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right">收货人：</td>
                             <td class="col-xs-8 text-left">
-                                <span style="float: left;margin-top: 5px;">${ra.rAddressPerson}</span>
+                                <span style="float: left;margin-top: 5px;">${receivingAddress.rAddressPerson}</span>
                             </td>
                         </div>
                     </tr>
@@ -225,7 +225,7 @@
                             <td class="col-xs-3 text-right">联系人手机号：</td>
                             <td class="col-xs-8 text-left">
                                <%--  <span>${receivingAddress.rAddressPhone}</span> --%>
-                            	<input type="text" value="${ra.rAddressPhone}">
+                            	<input type="text" value="${receivingAddress.rAddressPhone}">
                             </td>
                         </div>
                     </tr>
@@ -251,7 +251,13 @@
     //
     //    })
 
-
+$(function(){
+    if(${order.orderStatus}==3||${order.orderStatus}==4){
+        $('#open').css('display','block')
+    }else{
+        $('#open').css('display','none')
+    }
+})
 
 
 

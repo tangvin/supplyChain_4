@@ -167,13 +167,10 @@
 	                    </tr>
 	                    <tr>
 	                        <div class="row">
-	                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息：</td>
-	                            <td class="col-xs-8 text-left"> <input type="text" value="" class="xxdz" name="rAddressArea">
+	                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息1：</td>
+	                            <td class="col-xs-8 text-left"> <input type="text" value="" disabled class="xxdz" name="rAddressArea">
 	                            	<select class="ss">
-	                            		<%-- <option>----请选择----</option>
-	                            		<c:forEach items="${rs }" var="entry">
-	                            			<option>${entry.rAddressArea }${entry.rAddressAddress }</option>
-	                            		</c:forEach> --%>
+	                            		
 	                            	</select>
 	                            </td>
 	                            
@@ -181,17 +178,17 @@
 	                    </tr>
 	                    <tr>
 	                        <div class="row">
-	                            <td class="col-xs-3 text-right">收货人：</td>
+	                            <td class="col-xs-3 text-right">收货人1：</td>
 	                            <td class="col-xs-8 text-left">
-	                            <input type="text" value="" name="rAddressPerson" class="shr">
+	                            <input type="text" value="" disabled name="rAddressPerson" class="shr">
 	                            </td>
 	                        </div>
 	                    </tr>
 	                    <tr>
 	                        <div class="row">
-	                            <td class="col-xs-3 text-right">联系人手机号：</td>
+	                            <td class="col-xs-3 text-right">联系人手机号1：</td>
 	                            <td class="col-xs-8 text-left">
-	                            <input type="text" value="" name="rAddressPhone" class="sjh">
+	                            <input type="text" value="" disabled name="rAddressPhone" class="sjh">
 	                            </td>
 	                        </div>
 	                    </tr>
@@ -295,31 +292,29 @@
 					</tr>
 					<tr>
 					<div class="row">
-					<td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息：</td>
-					<td class="col-xs-8 text-left"> <input type="text" value="${ra.rAddressAddress}" class="xxdz" name="rAddressArea">
+					<td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息2：</td>
+					<td class="col-xs-8 text-left"> <input type="text" value="${ra.rAddressAddress}" disabled class="xxdz" name="rAddressArea">
 					<select class="ss" id="dd">
-					<%-- <option>----请选择----</option>
-					<c:forEach items="${rs }" var="entry">
-						<option>${entry.rAddressArea }${entry.rAddressAddress }</option>
-					</c:forEach> --%>
+					
 					</select>
+					<input type="hidden" name="sh_id" id="sh_id" />
 					</td>
 
 					</div>
 					</tr>
 					<tr>
 					<div class="row">
-					<td class="col-xs-3 text-right">收货人：</td>
+					<td class="col-xs-3 text-right">收货人2：</td>
 					<td class="col-xs-8 text-left">
-					<input type="text" value="${ra.rAddressPerson}" name="rAddressPerson" class="shr">
+					<input type="text" value="${ra.rAddressPerson}" disabled name="rAddressPerson" class="shr">
 					</td>
 					</div>
 					</tr>
 					<tr>
 					<div class="row">
-					<td class="col-xs-3 text-right">联系人手机号：</td>
+					<td class="col-xs-3 text-right">联系人手机号2：</td>
 					<td class="col-xs-8 text-left">
-					<input type="text" value="${ra.rAddressPhone}" name="rAddressPhone" class="sjh">
+					<input type="text" value="${ra.rAddressPhone}" disabled name="rAddressPhone" class="sjh">
 					</td>
 					</div>
 					</tr>
@@ -342,6 +337,7 @@ $.ajax({
     url:'<%=request.getContextPath()%>/pmorder/addresshx.action',
     type:'post',
     success:function(data){
+    	console.log(data);
         function setDiv(item){
             var option='<select>' +
                        '<option value='+item.rAddressId+'>'+item.rAddressArea+''+item.rAddressAddress+'</option>' +
@@ -357,6 +353,7 @@ $.ajax({
         }
         getnoApplicationData111()
         $('.ss').change(function(){
+        $('#sh_id').attr('value',$(this).children('option:selected').val());
 	    for(var i=0;i<data.data.length;i++){
 	        if($(this).children('option:selected').val()==data.data[i].rAddressId){
 	            //console.log(data.data[i])
@@ -366,6 +363,8 @@ $.ajax({
 	        }
 	    }
       })
+       
+     
 	    var addressId='${order.receivingAddressId}';
 	    for(var i=0;i<data.data.length;i++){
         	if(data.data[i].rAddressId==addressId){
@@ -383,8 +382,28 @@ $.ajax({
              	}
         	}  	
         })
+        
     }
 })
+
+$("#sureUpdate2").click(function(){
+	var a = 
+	/* console.log($("#form2").serialize());
+	return false;  */
+		 $.ajax({
+	         url:'<%=request.getContextPath()%>/pmorder/updateOrder.action?rAddressId'+sh_id,
+	         data:$("#form2").serialize(),
+	         type:'post',
+	         dataType:'json',
+	         success:function(data){
+	         	alert("编辑完成");
+	         }
+	     });
+		 	   
+ });
+
+
+
 $(function(){
 	$('#id').click(function(){
         if($('#id').is(':checked')){
@@ -398,7 +417,7 @@ $(function(){
   $("#sureUpdate1").click(function(){
 	   alert("修改");
 	   	 $.ajax({
-	            url:'<%=request.getContextPath()%>/pmorder/updateOrder.action',
+	            url:'<%=request.getContextPath()%>/pmorder/updateOrder.action?rAddressId'+sh_id,
 	            data:$("#form1").serialize(),
 	            type:'post',
 	            dataType:'json',
@@ -408,18 +427,7 @@ $(function(){
 	        });
    }); 
 	
-	$("#sureUpdate2").click(function(){
-		 $.ajax({
-	         url:'<%=request.getContextPath()%>/pmorder/updateOrder.action',
-	         data:$("#form2").serialize(),
-	         type:'post',
-	         dataType:'json',
-	         success:function(data){
-	         	alert("编辑完成");
-	         }
-	     });
-		 	   
-	 });	
+		
 	
 	
 	if(${order.orderStatus}==0 || ${order.orderStatus}==6){

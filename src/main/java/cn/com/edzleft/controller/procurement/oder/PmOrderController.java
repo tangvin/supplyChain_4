@@ -192,7 +192,6 @@ public class PmOrderController {
 	@RequestMapping(value="updateOrder")
 	@ResponseBody
 	public boolean updataOreder(Order order,Integer rAddressId){
-		rAddressId=2;
 		System.out.println(order);
 		System.out.println(rAddressId);
 		Integer receivingAddressId = order.getReceivingAddressId();
@@ -207,4 +206,16 @@ public class PmOrderController {
 		
 		return "proucrement/updOrder";
 	}
+	/**
+	 * 模糊检索
+	 */
+	/*@RequestMapping(value = "/get") 
+	@ResponseBody
+	public Object getJson(String value) {
+			List<E>
+	       Map<String, Object> map = new HashMap<String,Object>();
+	       map.put("name", "dhweicheng");
+	       return map;
+	}
+	*/
 }

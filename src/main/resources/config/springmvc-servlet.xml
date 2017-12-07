@@ -89,6 +89,7 @@
 						<value>/freight/getAllFreight.action</value>
 						<value>/pmorder/addresshx.action</value>
 						<value>/captialInformation/upLoInsert.action</value>
+						<value>/pmbankAccount/getAllBankAccoun.action</value>
 						<!--api接口-->
 						<value>/api/letter.action</value>
 						<value>/api/credit.action</value>

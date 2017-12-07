@@ -66,7 +66,15 @@
                                             </tr>
                                             <tr>
                                                 <td>企业名称:</td>
-                                                <td><span>${information.entName}</span><span class="drz">待认证</span></td>
+                                                <td>
+                                                    <span>${information.entName}</span>
+                                                    <c:if test="${information.certificationStatus == 0}">
+                                                        <a href="#"><span class="drz" id="zlrz">待认证</span></a>
+                                                    </c:if>
+                                                    <c:if test="${information.certificationStatus == 1}">
+                                                        <span class="drzs">已认证</span>
+                                                    </c:if>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>社会统一信用代码:</td>
@@ -147,6 +155,62 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <div class="jbxx jbxx1">
+                                <div class="row jbxx_row">
+                                    <div class="col-xs-8">
+                                        <h5>高级资料</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-7 col-xs-offset-1">
+                                        <table class="table table_one">
+                                            <tbody>
+                                            <tr>
+                                                <td>注册资本:</td>
+                                                <td>${information.registeredCapital}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>主要股东:</td>
+                                                <td><span>${information.majorShareholder}</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>经营范围:</td>
+                                                <td>${information.businessScope}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>登记机关：</td>
+                                                <td>${information.registrationAuthority}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>社会统一信用代码电子档：</td>
+                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>工商登记注册电子档：</td>
+                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>税务登记号电子档：</td>
+                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>组织机构代码电子档：</td>
+                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>法人身份证电子档：</td>
+                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>开户许可证电子档：</td>
+                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!--基本资料 结束-->
                         <!--账户安全 开始-->
@@ -190,7 +254,11 @@
                         <!--银行账户 开始-->
                         <div class="tab-pane" id="messages">
                             <button type="button" class="btn   btn-danger btn-default tjyhk">添加银行卡</button>
-                             
+                             <div class="row">
+                                <div class="col-xs-9 col-xs-offset-1" id="yh_bank">
+
+                                </div> 
+                            </div>
                         </div>
                         <!--银行账户 结束-->
                         <!--三方账户 开始   -->
@@ -321,6 +389,9 @@
     $('#updateInformation').click(function(){
         $('#load').load('<%=request.getContextPath()%>/procurementMain/updateInformation.action')
     })
+     $('#zlrz').click(function(){
+        $('#load').load('<%=request.getContextPath()%>/procurementMain/zlrz.action')
+    })
     console.log('${messages}')
     switch ('${messages}'){
         case 'profile':
@@ -404,6 +475,7 @@
 		});
 		/* 添加收获地址 */
 		$("#getAddress").click(function(){
+			alert("111111111");
 			var ra = $("#d").serialize();
 			$.ajax({
 				url:"<%=request.getContextPath()%>/PmReceivingAddress/getaddress.action",
@@ -471,7 +543,7 @@
 	        crownSearch();
 	    }
 
-	    //设为默认
+	    //地址设为默认
 	    function radioAddress(id,value){
        	/* alert(id); */
        	/* debugger */
@@ -485,7 +557,7 @@
         })
     }
 	    /**
-	     * 删除信息
+	     * 删除地址信息
 	     * @param datestr
 	     * @returns {string}
 	     * @constructor
@@ -502,7 +574,7 @@
 	        })
 	    }
 	     
-	     
+	     /* 收货地址 ajax 开始 */
 	     $.ajax({
 	         url:"<%=request.getContextPath()%>/pmorder/addresshx.action",
 	         type:"post",
@@ -516,10 +588,10 @@
 	                     '<li class="media hy_hygl1">' +
 	                     '<div class="media-left hygl clearfix" style="width:350px;">' +
 	                     '<div class="hygl_left">' +
-	                     '<div class="panel-body"><p><span>收货地址：</span>'+item.rAddressArea+'</p><p><span>货运联系人：</span>'+item.rAddressPerson+'</p><p><span>货运联系人手机号：</span>'+item.freightContactPhone+'</p></div>' +
+	                     '<div class="panel-body"><p><span>收货区域：</span>'+item.rAddressArea+'</p><p><span>收货地址：</span>'+item.rAddressAddress+'</p><p><span>收货人：</span>'+item.rAddressPerson+'</p><p><span>邮政编码：</span>'+item.rAddressZipcode+'</p><p><span>收货人手机号：</span>'+item.rAddressPhone+'</p></div>' +
 	                     '</div>' +
 	                     '<div class="hygl_right">' +
-	                     '<div class="panel-body"><div class="mored hy_moren"><input type="radio" value='+item.rAddressDefault+' name="mran" onclick="radioAddress('+item.rAddressId+',1)"><span>默认</span></div><div class="hy_logo"><img src="images/logo_debang@1x.png" class="imgimg"></div></div>'+
+	                     '<div class="panel-body"><div class="mored hy_moren"><input type="radio" value='+item.rAddressDefault+' onclick="radioAddress('+item.rAddressId+',1)"><span>默认</span></div><div class="hy_logo"><img src="images/logo_debang@1x.png" class="imgimg"></div></div>'+
 	                     '</div>' +
 	                     '</div>' +
 	                     '<div class="media-body"><button type="button" class="btn btn-danger btn-default" onclick="deleteAddress('+item.rAddressId+')">删除</button></div>' +
@@ -539,7 +611,7 @@
 	             window.onload = getnoApplicationData111()
 	             var aaa=document.querySelectorAll('.imgimg')
 	          
-	             var input=document.querySelectorAll('.hy_moren>input')
+	             var input=$('.hy_moren input[type=radio]')
 	             for(var i=0;i<input.length;i++){
 	                 if(data[i].rAddressDefault=='1'){
 	                     $(input[i]).attr('checked',true)
@@ -547,6 +619,108 @@
 	             }
 	         }
 	     })
+	 /* 收货地址 ajax 开始 */
 	    
+	/*银行账户 ajax 开始*/
+    $.ajax({
+        url:"<%=request.getContextPath()%>/pmbankAccount/getAllBankAccoun.action",
+        type:"post",
+        dataType:"json",
+        success: function(data){
+            console.log(data)
+            var yhBank=document.getElementById('yh_bank');
+            console.log(yhBank)
+            function setDiv(item){
+                var yh_bank='<ul class="media-list">' +
+                    '<li class="media hy_hygl1">' +
+                    '<div class="media-left hygl clearfix" style="width:350px;">' +
+                    '<div class="hygl_left">' +
+                    '<div class="panel-body"><p>'+item.bankAccountDepositBank+'</p><p>'+item.bankAccountNumber+'</p></div>' +
+                    '</div>' +
+                    '<div class="hygl_right">' +
+                    '<div class="panel-body"><div class="mored yh_bank_moren"><input type="radio" value='+item.defaultId+' onclick="setDefaultBankAccount('+item.bankAccountId+',1)"><span>默认</span></div><div class="hy_logo"><img src="images/logo_debang@1x.png" class="imgimg"></div></div>'+
+                    '</div>' +
+                    '</div>' +
+                    '<div class="media-body"><button type="button" class="btn btn-danger btn-default" onclick=if(confirm("确定删除？")){deleteBankAccount('+item.bankAccountId+')}>删除</button></div>' +
+                    '</li>' +
+                    '</ul>'
+
+                return yh_bank
+            }
+
+            function getnoApplicationDatayh_bank(){
+                var html = ''
+                for(var i = 0;i<data.length;i++){
+                    html += setDiv(data[i])
+                }
+                yhBank.innerHTML = html;
+            }
+            window.onload = getnoApplicationDatayh_bank()
+      
+            var input1=$('.yh_bank_moren input[type=radio]')
+            console.log(input1.length)
+            for(var i=0;i<input1.length;i++){ 
+                if(data[i].defaultId=='1'){
+                	console.log(data[i])
+                	console.log(input1[i])
+                    $(input1[i]).attr('checked',true)
+                }
+            }
+
+
+
+        }
+    })
+
+    //添加银行卡
+    $("#addBankAccount").click(function () {
+        alert("确认添加！");
+        $.ajax({
+            url:"<%=request.getContextPath()%>/bankAccount/addBankAccount.action",
+            dataType:'json',
+            type:'POST',
+            data:$("#freightForm").serialize(),
+            success:function (data) {
+                alert("添加成功！！")
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')",500);
+            }
+        })
+    })
+
+
+    /**
+     * 设置默认银行账户
+     * @param id
+     */
+    function setDefaultBankAccount(id,value){
+        $.ajax({
+            url:'<%=request.getContextPath()%>/bankAccount/setDefaultBank.action?id='+id+'&&value='+value,
+            type:'post',
+            success:function(){
+                alert("设置成功")
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);--%>
+            }
+        })
+    }
+
+
+    /**
+     * 删除银行卡
+     * @param datestr
+     * @returns {string}
+     * @constructor
+     */
+    function deleteBankAccount(id){
+        $.ajax({
+            url:'<%=request.getContextPath()%>/bankAccount/deleteBankAccount.action?id='+id,
+            type:'post',
+            success:function(){
+                alert('删除成功')
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);
+            }
+        })
+    } 
+	     
+	     
 </script>
 </html>

@@ -63,7 +63,7 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-                            <td class="col-xs-9 text-left"><input type="text" id="orderCreatorTrade" class="form-control" placeholder="模糊检索匹配"></td>
+                            <td class="col-xs-9 text-left"><input type="text" id="orderCreatorTrade"  class="form-control" placeholder="模糊检索匹配"></td>
                         </div>
                     </tr>
                     <tr>
