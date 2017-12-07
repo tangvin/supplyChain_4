@@ -83,16 +83,21 @@
 				<!--登录拦截器不拦截的url请求-->
 				<property name="excludeUrls">
 					<list>
+						<!--登录-->
 						<value>/captialMain/login.action</value>
 						<value>/account/login.action</value>
-						<value>/letter/letterSelect.action</value>
-						<value>/freight/getAllFreight.action</value>
-						<value>/pmorder/addresshx.action</value>
-						<value>/captialInformation/upLoInsert.action</value>
+						<!--注册-->
+						<value>/captialMain/register.action</value>
+						<value>/captialMain/registerTwo.action</value>
 						<!--api接口-->
 						<value>/api/letter.action</value>
 						<value>/api/credit.action</value>
 						<value>/api/repayment.action</value>
+						<!--结束-->
+						<value>/letter/letterSelect.action</value>
+						<value>/freight/getAllFreight.action</value>
+						<value>/pmorder/addresshx.action</value>
+						<value>/captialInformation/upLoInsert.action</value>
 					</list>
 				</property>
 			</bean>

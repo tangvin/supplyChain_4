@@ -39,7 +39,7 @@
                 <input  id="account" type="button" onclick="login()" class="form-control btn btn-danger" value="登录"  style="height: 45px;font-size: 18px;">
             </div>
             <!-- 申请 -->
-            <p class="text-right apply_for"><a href='#'>新用户申请</a></p>
+            <p class="text-right apply_for"><a href='<%=request.getContextPath()%>/captialMain/register.action'>新用户申请</a></p>
         </form>
 
     </div>
