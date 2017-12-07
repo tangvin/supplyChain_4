@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
+<% request.setAttribute("webPath", request.getContextPath());%>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -19,6 +20,14 @@
         .fpgl{
             margin-right:0;
         }
+        .table-responsive1{
+          overflow-y:hidden; 
+          margin-top:30px;
+        }
+        .bootstrap-table{
+           margin-left: 0;
+           
+        }
     </style>
 </head>
 <body>
@@ -34,156 +43,142 @@
         <div class="col-xs-12">
             <!--合同签约 状态-->
             <div class="khh" style="margin-top: 10px;">
-                <form class="form-inline khh_form khh_form1" style="margin-left:-15px;">
+                <form id="invoiceForm" class="form-inline khh_form khh_form1" style="margin-left:-15px;">
                     <div class="form-group">
                         <label>发票编号</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" id="invoiceNumber">
                     </div>
                     <div class="form-group">
-                        <label>开票人</label>
-                        <input type="text" class="form-control">
+                        <label>收票人</label>
+                        <input type="text" class="form-control" id="checkTaker">
                     </div>
-                    <div class="form-group">
+                   <!--  <div class="form-group form-group1">
                         <label>创建时间</label>
                         <input type="text" class="form-control">
-                    </div>
-                    <button type="button" class="btn btn-danger btn-default">查询</button>
-                    <button type="button" class="btn btn-danger btn-default">重置</button>
+                       <input type="text" readonly="readonly"  name="createTime" id="createTime" class="form-control" value="" />
+                    </div> -->
+                    
+                    
+                    <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>
+                    <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
                 </form>
             </div>
             <!--合同签约 状态-->
-            <!--合同分页 start-->
-            <div class="fy">
-                <div class="row fy_row">
-                    <div class="col-xs-4">
-                        <p class="fy_con">共计3条数据，共1页</p>
-                    </div>
-                    <div class="col-xs-6">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">首页</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">末页</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-xs-2 text-right sqbf_btn">
-                        <a  href="#"><button type="button" class="btn btn-danger btn-default" id="tjfp">添加发票</button></a>
-                    </div>
-                </div>
-            </div>
-            <!--合同分页 eng-->
+  
             <!--合同表格 开始-->
-            <div class="table-responsive text-center">
-                <table class="table table-bordered text-center htbg fpgl">
-                    <tbody>
-                    <tr class="active">
-                        <td>序号</td>
-                        <td>发票编号</td>
-                        <td>发票号</td>
-                        <td>开票人</td>
-                        <td>所属订单</td>
-                        <td>创建时间</td>
-                        <td>操作</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>727792893232</td>
-                        <td>342342354325</td>
-                        <td>张光云</td>
-                        <td>12312314</td>
-                        <td>2017-12-28 19:20:39</td>
-                        <td>
-                            <div class="row" style="margin-right:0;">
-                                <div class="col-xs-6 col-xs-offset-1">
-                                    <img src="<%=request.getContextPath()%>/js/static/images/invoice.png">
-                                </div>
-                                <div class="col-xs-4">
-                                    <button type="button" class="btn btn-danger btn-default bj_btn">编辑</button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                    </tr>
-                    <tr>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+           <div class="table-responsive table-responsive1 text-center">
+			    <table class="table table-bordered text-center htbg" id="tb_invoice">
+			       
+			    </table>
+             </div>
             <!--合同表格 结束-->
-            <!--合同分页 start-->
-            <div class="fy">
-                <div class="row fy_row">
-                    <div class="col-xs-4">
-                        <p class="fy_con">共计3条数据，共1页</p>
-                    </div>
-                    <div class="col-xs-8">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">首页</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">末页</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <!--合同分页 eng-->
+           
         </div>
     </div>
 </div>
 </body>
 <script>
-    //    $('#tjfp').click(function(){
-    //        $('#load').load('tjfp.html')
-    //    })
-    $('#tjfp').click(function(){
-        $('#load').load('<%=request.getContextPath()%>/tradeMain/tjfp.action')
-    })
+    
+    $(function(){
+    	
+    	$("#tb_invoice").bootstrapTable({
+            columns:[
+                { //field: 'Number',//可不加
+                    title: '序号',//标题  可不加
+        
+                    formatter: function (value, row, index) {
+                        return index+1;
+                    }
+                },
+                {field:'invoiceNumber',title:'发票编号'},
+                {field:'invoiceNo',title:'发票号'},
+                {field:'drawer',title:'开票人'},
+                {field:'checkTaker',title:'收票人'},
+                {field:'orderNumber',title:'所属订单'} ,
+                {field:'createTime',title:'创建时间',
+                	formatter: function (value, row, index) {
+                        return changeDateFormat(value)
+                    }
+                },
+                {field:'attachmentUrl',title:'操作',
+                	formatter:function(value,row){
+                    var str = '';
+                        str += '<img style="width:100px;height:60px" src=\"'+value+'\">';
+                        str += '<button id="editBtn" class="btn btn-danger bg_btn" href="#" value="编辑" onclick="edit(\''+row.id+'\')" >编辑</button>';
+                        <%--  onclick="'$("#load").load("<%=request.getContextPath()%>/proInvoice/edit.action)'" --%>
+     
+                    return str;
+                }
+                	
+                },
+            ],
+            url:'<%=request.getContextPath()%>/traInvoice/invoiceList.action',
+    							method : 'post',
+    							queryParamsType : '',
+    							queryParams : queryParams,//传递参数（*）
+    							//【其它设置】
+    							locale : 'zh-CN',//中文支持
+    							pagination : true,//是否开启分页（*）
+    							pageNumber : 1,//初始化加载第一页，默认第一页
+    							pageSize : 3,//每页的记录行数（*）
+    							sidePagination : "server", //分页方式：client客户端分页，server服务端分页（*）
+    							//发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}
+    							contentType : 'application/x-www-form-urlencoded;charset=UTF-8' //数据编码纯文本  offset=0&limit=5
+    						});
+        
+        
+    	});
+    	function changeDateFormat(cellval) {
+            var dateVal = cellval + "";
+            if (cellval != null) {
+                var date = new Date(parseInt(dateVal.replace("/Date(", "").replace(")/", ""), 10));
+                var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                
+                var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+                
+                return date.getFullYear() + "-" + month + "-" + currentDate + " " + hours + ":" + minutes + ":" + seconds;
+            }
+        }
+    
+    	//得到查询的参数
+    	function queryParams(params) {
+    		
+    		var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+    			pageNumber : params.pageNumber,
+    			pageSize : params.pageSize,
+    			//userId : userId,
+    			invoiceNumber : $("#invoiceNumber").val(),
+    			drawer : $("#drawer").val()
+    		}
+    		return temp;
+    	};
+    	//授信搜索
+    	function search() {
+    		$("#tb_invoice").bootstrapTable('refresh');
+    	}
+    	//授信重置查询
+    	function reset() {
+    		$("#invoiceForm").form('reset');
+    		search();
+    	}
+    	function edit(id) {
+    		<%-- var a = ("<%=request.getContextPath()%>"); --%>
+    		//alert(a);
+    		//toAction('${webPath}/advert/toUpdate?id=${wz.id}');
+    		//toAction("${webPath}/proInvoice/edit?id=" + id);
+    		//toAction("${webPath}/proInvoice/edit.action");
+    		$('#load').load('${webPath}/traInvoice/edit.action?id='+id)
+    		//return id;
+    	}
+    	<%--  $('#editBtn').click(function(){
+    		//var id = $("#edit").val();
+    		alert(123);
+    		$('#load').load('<%=request.getContextPath()%>/proInvoice/edit.action?id=id')
+    	})  --%>
+    	 
+    
 </script>
 </html>
