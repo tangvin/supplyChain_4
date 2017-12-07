@@ -82,7 +82,15 @@ $(function(){
                         return "失效";
                     }
                 } 
-            },{field:'attachmentName',title:'文件名',width:100}/* ,
+            },
+            {field:'attachmentName',title:'下载证书',width:100,
+                formatter:function(value,row,index){
+                    var attchment='';
+                    attchment = '<a href="#">'+value+'</a>';
+                    return attchment;
+                }
+            }
+            /* ,
             {field:'attachmentUrl',title:'操作',width:100} */
         ],
         url:'<%=request.getContextPath()%>/procertificate/ukeyList.action',

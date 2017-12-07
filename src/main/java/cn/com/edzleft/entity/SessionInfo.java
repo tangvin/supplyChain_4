@@ -11,6 +11,7 @@ public class SessionInfo implements Serializable {
     private Account account;
     private Information information;
     private Order order;
+    private BankAccount bankAccount;
 
     @Override
     public String toString() {
@@ -18,6 +19,7 @@ public class SessionInfo implements Serializable {
                 "account=" + account +
                 ", information=" + information +
                 ", order=" + order +
+                ", bankAccount=" + bankAccount +
                 '}';
     }
 
@@ -55,5 +57,13 @@ public class SessionInfo implements Serializable {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public BankAccount getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(BankAccount bankAccount) {
+        this.bankAccount = bankAccount;
     }
 }

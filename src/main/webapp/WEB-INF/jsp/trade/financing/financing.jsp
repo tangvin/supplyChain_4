@@ -69,13 +69,6 @@
     $(function(){
         $("#financingTable").bootstrapTable({
             columns:[
-                { //field: 'Number',//可不加
-                    title: '序号',//标题  可不加
-                    width:100,
-                    formatter: function (value, row, index) {
-                        return index+1;
-                    }
-                },
                 {field:'financialNumbers',title:'财务编号',width:100},
                 {field:'amount',title:'金额',width:100},
                 {field:'billTime',title:'发生时间',width:100,

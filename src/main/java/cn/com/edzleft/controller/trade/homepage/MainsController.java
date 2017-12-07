@@ -49,8 +49,13 @@ public class MainsController {
      * @return
      */
     @RequestMapping("bankTwo")
-    public String bankTwo(){
-        return "/trade/information/bankTwo";
+    public ModelAndView bankTwo(HttpSession session,BankAccount bankAccount){
+        Integer userId = bankAccount.getUserId();
+        Account account = accountService.queryAcountById(userId);
+        ModelAndView modelAndView = new ModelAndView("/trade/information/bankTwo");
+        modelAndView.addObject("bankAccount",bankAccount);
+        modelAndView.addObject("account",account);
+        return modelAndView;
     }
 
     /**
@@ -297,9 +302,11 @@ public class MainsController {
         ModelAndView mv = new ModelAndView("/trade/main");
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer userId = session.getAdmin().getUserId();
+        String userName = session.getAdmin().getUserName();
         Information information = tradeInformationService.queryBaseInformation(userId);
-        System.out.println(information);
+        Account account = accountService.queryAccountByName(userName);
         mv.addObject("information",information);
+        mv.addObject("account",account);
         return mv;
     }
 

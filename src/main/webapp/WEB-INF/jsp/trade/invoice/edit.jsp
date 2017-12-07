@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-   <script type="text/javascript" src="<%=request.getContextPath()%>/js/static/js/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/static/js/jquery.form.js"></script> 
 </head>
 
 <body>
@@ -30,32 +28,32 @@
                    
                            <input type="hidden" class="form-control" name="id" id="id" value="${invoiceRecord.id }">
                             <div class="form-group">
-                                <label for="firstname" class="col-xs-4 control-label"><span class="xingxing">*</span>发票号</label>
+                                <label  class="col-xs-4 control-label"><span class="xingxing">*</span>发票号</label>
                                 <div class="col-xs-8">
                                     <input type="text" class="form-control" name="invoiceNo" id="invoiceNo" value="${invoiceRecord.invoiceNo }"><span id="checkInvoiceNo" class="requireSpan" style="color:red;"></span></input>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="lastname" class="col-xs-4 control-label"><span class="xingxing">*</span>开票人</label>
+                                <label  class="col-xs-4 control-label"><span class="xingxing">*</span>开票人</label>
                                 <div class="col-xs-8">
                                     <input type="text" class="form-control" id="drawer" name="drawer" value="${invoiceRecord.drawer }" readonly="readonly">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="lastname" class="col-xs-4 control-label"><span class="xingxing">*</span>收票人</label>
+                                <label  class="col-xs-4 control-label"><span class="xingxing">*</span>收票人</label>
                                 <div class="col-xs-8">
                                     <input type="text" class="form-control" id="checkTaker" name="checkTaker"  value="${invoiceRecord.checkTaker }" readonly="readonly">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="lastname" class="col-xs-4 control-label"><span class="xingxing">*</span>所属订单</label>
+                                <label  class="col-xs-4 control-label"><span class="xingxing">*</span>所属订单</label>
                                 <div class="col-xs-8">
                                     <input type="text" class="form-control" id="orderNumber" name="orderNumber" value="${invoiceRecord.orderNumber }" readonly="readonly">
                                 </div>
                             </div>
                             
                             <div class="from-group">
-                                    <label for="lastname" class="col-xs-4 control-label"><span class="xingxing">*</span>上传发票</label>
+                                    <label  class="col-xs-4 control-label"><span class="xingxing">*</span>上传发票</label>
 									<div class="col-xs-8">
 										<input type="file" name="uploadFile" onchange="checkImages();" /> 
 										<input type="hidden" name="attachmentUrl" value="${invoiceRecord.attachmentUrl }" /> 
@@ -88,9 +86,9 @@ $(function(){
 	$("#upBtn").click(function(){
 		$("#invoiceForm").submit();
 	});
-	
+
 	$("#invoiceNo").blur(function(){
-		
+
 		var invoiceNo = $("#invoiceNo").val();
 		//不能为空且长度不能超过25
 		if(invoiceNo == ""){
@@ -120,7 +118,6 @@ $(function(){
 		}
 	})
 }
-
 
     $('#fpgl1').click(function(){
         $('#load').load('<%=request.getContextPath()%>/tradeMain/fpgl.action')
