@@ -1,16 +1,13 @@
 package cn.com.edzleft.controller.procurement.receivingaddress;
 
-import javax.servlet.http.HttpSession;
-
+import cn.com.edzleft.entity.ReceivingAddress;
+import cn.com.edzleft.service.procurement.receivingaddress.PmReceivingAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.com.edzleft.entity.ReceivingAddress;
-import cn.com.edzleft.entity.SessionInfo;
-import cn.com.edzleft.service.procurement.receivingaddress.PmReceivingAddressService;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/PmReceivingAddress")
