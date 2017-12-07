@@ -26,7 +26,7 @@
   <!--根据账号查询账号信息-->
   <select id="findAccountByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
-    user_id,user_name,user_pwd,account_type
+    user_id,user_name,user_pwd,account_type,user_phone
     from gyl_account
     where user_name = #{userName}
   </select>
