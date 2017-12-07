@@ -34,5 +34,5 @@ public interface BankAccountService {
      * @param
      * @return
      */
-    public int setbankAccount(Integer id,HttpSession session,Integer value);
+    public int setbankAccount(Integer id,Integer value,HttpSession session);
 }

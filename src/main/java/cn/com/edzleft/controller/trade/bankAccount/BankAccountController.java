@@ -76,10 +76,10 @@ public class BankAccountController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "/setDefault" ,method = RequestMethod.POST)
+    @RequestMapping(value = "/setDefaultBank" ,method = RequestMethod.POST)
     @ResponseBody
     public int setDefaultAccount(Integer id,Integer value,HttpSession session){
-        int i = bankAccountService.setbankAccount(id, session, value);
+        int i = bankAccountService.setbankAccount(id, value, session);
         return i;
     }
 }

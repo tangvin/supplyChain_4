@@ -65,6 +65,23 @@ public class Account implements Serializable{
      * 邀请账号
      */
     private String inviteAccount;
+    /**
+     * 关联资料表
+     */
+    private Integer informationId;
+
+
+    public Integer getInformationId() {
+        return informationId;
+    }
+
+    public void setInformationId(Integer informationId) {
+        this.informationId = informationId;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public Integer getUserId() {
         return userId;
