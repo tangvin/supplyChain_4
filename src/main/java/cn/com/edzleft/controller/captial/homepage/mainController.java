@@ -25,6 +25,24 @@ public class mainController {
     private AccountService accountService;
 
     /**
+     * 注册页面下一步
+     * @return
+     */
+    @RequestMapping(value = "registerTwo")
+    public String registerTwo(){
+        return "/registerTwo";
+    }
+
+    /**
+     * 注册页面
+     * @return
+     */
+    @RequestMapping(value = "register")
+    public String register(){
+        return "/register";
+    }
+    
+    /**
      * 认证资料
      * @return
      */
