@@ -53,7 +53,7 @@
                                                 <td>企业身份:</td>
                                                 <td>
                                                     <%--0采购方、1贸易方、2资方--%>
-                                                <c:if test="${information.entIdentity == 0}">   采购方
+                                                <c:if test="${information.entIdentity == 0}">采购方
                                                  
                                                 </c:if>
                                                 <c:if test="${information.entIdentity == 1}">贸易方
@@ -253,7 +253,7 @@
                         <!--账户安全 结束-->
                         <!--银行账户 开始-->
                         <div class="tab-pane" id="messages">
-                            <button type="button" class="btn   btn-danger btn-default tjyhk">添加银行卡</button>
+                            <button type="button" class="btn btn-danger btn-default tjyhk" id="bankOne">添加银行卡</button>
                              <div class="row">
                                 <div class="col-xs-9 col-xs-offset-1" id="yh_bank">
 
@@ -265,17 +265,17 @@
                         <div class="tab-pane" id="settings">
                             <!--三方账户 开户行开始-->
                             <div class="khh sfzh">
-                                <form class="form-inline khh_form khh_form1">
+                                <form class="form-inline khh_form khh_form1" id="informationForm">
                                     <div class="form-group form-group1">
-                                        <label for="exampleInputName2">开户行</label>
-                                        <input type="text" class="form-control" id="tripartiteDepositBank">
+                                        <label for="tripartiteDepositBank">开户行</label>
+                                        <input type="text" class="form-control" name="tripartiteDepositBank" id="tripartiteDepositBank">
                                     </div>
                                     <div class="form-group form-group1">
-                                        <label for="exampleInputEmail2">户主</label>
-                                        <input type="email" class="form-control" id="tripartiteCreditHolderTrade">
+                                        <label for="tripartiteCreditHolderPurchaser">户主</label>
+                                        <input type="email" class="form-control" name="tripartiteCreditHolderPurchaser" id="tripartiteCreditHolderPurchaser">
                                     </div>
-                                    <button type="button" class="btn btn-danger btn-default" onclick="crownSearch()">查询</button>
-                                    <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
+                                    <button type="button" class="btn  btn-danger" onclick="search()">查询</button>
+                                    <button type="button" class="btn  btn-default" onclick="reset()">重置</button>
                                 </form>
                             </div>
                             <div class="panel-body" style="padding-bottom:0px;">
@@ -460,7 +460,7 @@
             $("#btnSendCode").val( curCount + "秒");
         }
     }
-
+	//修改密码
 	$(function(){
 		$("#upda").click(function(){
 			$.ajax({
@@ -470,20 +470,6 @@
 				dataType:"json",
 				success:function(data){
 					alert(data);
-				}
-			});
-		});
-		/* 添加收获地址 */
-		$("#getAddress").click(function(){
-			alert("111111111");
-			var ra = $("#d").serialize();
-			$.ajax({
-				url:"<%=request.getContextPath()%>/PmReceivingAddress/getaddress.action",
-				type:'post',
-				data:$("#d").serialize(),
-				dataType:"json",
-				success:function(data){
-					alert("添加完成");
 				}
 			});
 		});
@@ -504,9 +490,17 @@
 	                {field:'tripartiteAccountNumber',title:'账号',width:100},
 	                {field:'tripartiteBalance',title:'余额（元）',width:100},
 	                {field:'tripartiteAvailableBalance',title:'可用余额',width:100},
-	                {field:'tripartiteAmountCreateTime',title:'账号开通时间',width:100},
+	                {field:'tripartiteAmountCreateTime',title:'账号开通时间',width:100,
+	                	formatter:function(value,row,index){
+	                        return ConvertToDate(value)
+	                   }
+	                },
 	                {field:'tripartiteAccountOpenpeople',title:'账号开通人',width:100},
-	                {field:'tripartiteAmountCreateTime',title:'创建时间',width:100},
+	                {field:'tripartiteAmountCreateTime',title:'创建时间',width:100,
+	                	formatter:function(value,row,index){
+	                        return ConvertToDate(value)
+	                   }
+	                },
 	                {field:'tripartiteAmountCreatePeople',title:'创建人',width:100},
 	            ],
 	            url:'<%=request.getContextPath()%>/tripartite/pmtripartite.action',
@@ -534,7 +528,7 @@
 	        return temp;
 	    }
 	    //授信搜索
-	    function crownSearch(){
+	    function search(){
 	        $("#tb_departments").bootstrapTable('refresh');
 	    }
 	    //授信重置查询
@@ -552,7 +546,7 @@
             type:'post',
             success:function(){
                 alert("设置成功")
-                <%--setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')",500);--%>
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);
             }
         })
     }
@@ -662,7 +656,6 @@
             for(var i=0;i<input1.length;i++){ 
                 if(data[i].defaultId=='1'){
                 	console.log(data[i])
-                	console.log(input1[i])
                     $(input1[i]).attr('checked',true)
                 }
             }
@@ -673,8 +666,7 @@
     })
 
     //添加银行卡
-    $("#addBankAccount").click(function () {
-        alert("确认添加！");
+<%--     $("#addBankAccount").click(function () {
         $.ajax({
             url:"<%=request.getContextPath()%>/bankAccount/addBankAccount.action",
             dataType:'json',
@@ -682,11 +674,14 @@
             data:$("#freightForm").serialize(),
             success:function (data) {
                 alert("添加成功！！")
-                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')",500);
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);
             }
         })
-    })
-
+    }) --%>
+	   //添加银行卡 
+     $('#bankOne').click(function(){
+         $('#load').load('<%=request.getContextPath()%>/procurementMain/bankOne.action')
+     })
 
     /**
      * 设置默认银行账户
@@ -698,7 +693,7 @@
             type:'post',
             success:function(){
                 alert("设置成功")
-                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);--%>
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);
             }
         })
     }
@@ -720,7 +715,57 @@
             }
         })
     } 
-	     
+     
+     /* 添加收获地址 */
+		$("#getAddress").click(function(){
+			alert("111111111");
+			var ra = $("#d").serialize();
+			$.ajax({
+				url:"<%=request.getContextPath()%>/PmReceivingAddress/getaddress.action",
+				type:'post',
+				data:$("#d").serialize(),
+				dataType:"json",
+				success:function(data){
+					alert("添加完成");
+					setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);
+				}
+			});
+		});
+     function ConvertToDate(datestr) {
+         var date=new Date(datestr);
+         var year=date.getFullYear();
+         var month=date.getMonth()+1;
+         if(month < 10){
+             month = "0"+month
+         }else{
+             month = ''+month
+         }
+         var day=date.getDate();
+         if(day < 10){
+             day = "0"+day
+         }else{
+             day = ''+day
+         }
+         var hours = date.getHours()
+         if(hours < 10){
+             hours = "0"+hours
+         }else{
+             hours = ''+hours
+         }
+         var minutes = date.getMinutes(); //获取当前分钟数(0-59)
+         if(minutes < 10){
+             minutes = "0"+minutes
+         }else{
+             minutes = ''+minutes
+         }
+         var seconds = date.getSeconds();
+         if(seconds < 10){
+             seconds = "0"+seconds
+         }else{
+             seconds = ''+seconds
+         }
+         return year+"-"+month+"-"+day+"-"+hours+":"+minutes+":"+seconds;
+     }     
 	     
 </script>
 </html>

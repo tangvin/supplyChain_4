@@ -1,4 +1,4 @@
-/*登录页面样式 开始*/
+/*鐧诲綍椤甸潰鏍峰紡 寮�濮�*/
 *{
     margin: 0;
     padding: 0;
@@ -96,7 +96,7 @@
     color: #888;
 }
 
-/*登录页面样式 结束*/
+/*鐧诲綍椤甸潰鏍峰紡 缁撴潫*/
 
 .row_top{
     margin-right:0;
@@ -118,7 +118,7 @@
 }
 
 
-/*整体布局 开始*/
+/*鏁翠綋甯冨眬 寮�濮�*/
 body,html{
     width:100%;
     height:100%;
@@ -167,10 +167,10 @@ body{
     background: #fff;
     overflow: auto;
 }
-/*整体布局 结束*/
+/*鏁翠綋甯冨眬 缁撴潫*/
 
 
-/*导航样式 开始*/
+/*瀵艰埅鏍峰紡 寮�濮�*/
 .navbar-default {
     border: none!important;
     padding: 5px 30px;
@@ -204,12 +204,12 @@ body{
 #one{
    margin-bottom: 10px;
 }
-/*导航样式 结束*/
+/*瀵艰埅鏍峰紡 缁撴潫*/
 
 
 
 
-/*列表导航 开始*/
+/*鍒楄〃瀵艰埅 寮�濮�*/
 .page-sidebar{
     width:100%;
     display: block;
@@ -264,9 +264,9 @@ body{
 .panel-group {
     margin-bottom: -20px;
 }
-/*列表导航结束*/
+/*鍒楄〃瀵艰埅缁撴潫*/
 
-/*系统首页 开始*/
+/*绯荤粺棣栭〉 寮�濮�*/
 .zjzh_wrap{
     background: #f9f9f9;
     /*border-radius: 5px;*/
@@ -405,10 +405,10 @@ body{
     margin-right: 0;
     margin-top: -7px;
 }
-/*系统首页 结束*/
+/*绯荤粺棣栭〉 缁撴潫*/
 
 
-/*资料信息*/
+/*璧勬枡淇℃伅*/
 
 .zlxx_top{
     line-height: 38px;
@@ -475,7 +475,7 @@ body{
     margin-bottom: 20px;
 }
 
-/*银行账户 开始*/
+/*閾惰璐︽埛 寮�濮�*/
 
 .yhzh_yhk{
     width:300px;
@@ -531,9 +531,9 @@ body{
     margin-right: 20px
 }
 
-/*银行账户 结束*/
+/*閾惰璐︽埛 缁撴潫*/
 
-/*三方账户 开始*/
+/*涓夋柟璐︽埛 寮�濮�*/
 
 .fy_row{
     margin-left: -15px;
@@ -564,9 +564,9 @@ body{
 .form-group_red_btn button{
     height:30px;
 }
-/*三方账户 结束*/
+/*涓夋柟璐︽埛 缁撴潫*/
 
-/*货运管理 开始*/
+/*璐ц繍绠＄悊 寮�濮�*/
 .hygl{
     width:350px;
     height:140px;
@@ -601,7 +601,7 @@ body{
 .tjhydw{
     margin-bottom: 30px;
 }
-/*货运管理 结束*/
+/*璐ц繍绠＄悊 缁撴潫*/
 
 
 
@@ -635,14 +635,14 @@ body{
 
 .table tbody tr td{
     /*border:none!important;*/
-    font-size: 14px;
+    font-size: 12px;
 }
 .media-body {
     width:0;
 }
-/*资料维护*/
+/*璧勬枡缁存姢*/
 
-/*合同签约 开始*/
+/*鍚堝悓绛剧害 寮�濮�*/
 .select{
     width: 140px !important;
     height:30px;
@@ -660,8 +660,8 @@ body{
 .xingxing{
     color: red;
 }
-/*合同签约 结束*/
-/*配置发货蒙泰框*/
+/*鍚堝悓绛剧害 缁撴潫*/
+/*閰嶇疆鍙戣揣钂欐嘲妗�*/
 .pzfh_row{
     padding: 0;
     margin: 0;
@@ -701,7 +701,7 @@ body{
     margin-left:-10px;
 }
 
-/*编辑合同*/
+/*缂栬緫鍚堝悓*/
 .htxx{
     margin-left:15px;
 }
@@ -782,7 +782,7 @@ body{
 .jbxx_zlbj{
     margin-bottom:20px;
 }
-/*上传图片*/
+/*涓婁紶鍥剧墖*/
 .imgContainer{
     display: inline-block;
     /*width: 32%;*/

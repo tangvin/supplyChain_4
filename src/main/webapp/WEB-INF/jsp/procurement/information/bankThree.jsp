@@ -15,9 +15,9 @@
 <div class='col-xs-12'>
     <div class='row row_zhxx'>
         <div class="col-xs-12 zlxx_top">
-            <a href="<%=request.getContextPath()%>/tradeMain/tradeMain.action">系统首页</a>
+            <a href="<%=request.getContextPath()%>/procurementMain/procurementMain.action">系统首页</a>
             <span>></span>
-            <a id="zhxx">资料维护</a>
+            <a href="#" id="zhxx">资料维护</a>
             <span>></span>
             <a href="#">添加银行卡</a>
         </div>
@@ -33,14 +33,14 @@
         </div>
     </form>
     <div class="col-xs-12">
-        <button style="margin-top: 40px;width: 120px;" class="btn col-xs-offset-2" id="yhk_next_two_bu">完成</button>
+         <button style="margin-top: 40px;width: 120px;" class="btn col-xs-offset-2" id="yhk_next_two_bu">下一步</button>
     </div>
 </div>
 </body>
 <script>
-    $('#zhxx').click(function(){
-        $('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')
-    });
+$('#zhxx').click(function(){
+    $('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')
+})
     var InterValObj; //timer变量，控制时间
     var count = 3; //间隔函数，1秒执行
     var curCount;//当前剩余秒数
@@ -48,14 +48,14 @@
     var codeLength = 6;//验证码长度
     function sendMessage() {
         curCount = count;
-        //产生验证码
-        for (var i = 0; i < codeLength; i++) {
-            code += parseInt(Math.random() * 9).toString();
-        }
-        //设置button效果，开始计时
-        $("#btnSendCode").attr("disabled", "true");
-        $("#btnSendCode").val( + curCount + "秒");
-        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+            //产生验证码
+            for (var i = 0; i < codeLength; i++) {
+                code += parseInt(Math.random() * 9).toString();
+            }
+            //设置button效果，开始计时
+            $("#btnSendCode").attr("disabled", "true");
+            $("#btnSendCode").val( + curCount + "秒");
+            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
 
     }
     //timer处理函数

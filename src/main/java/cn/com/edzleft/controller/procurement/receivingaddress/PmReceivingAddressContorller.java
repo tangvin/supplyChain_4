@@ -25,10 +25,7 @@ public class PmReceivingAddressContorller {
 	@ResponseBody
 	@RequestMapping(value="getaddress")
 	public boolean getAddress(ReceivingAddress ra,HttpSession sessionInfo){
-		SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
-        Integer userId = session.getAdmin().getUserId();
-        ra.setUnionID(userId);
-		int i = pmreceivingAddressservice.insert(ra);
+		int i = pmreceivingAddressservice.insert(ra,sessionInfo);
 		return i>0?true:false;
 	}
 	/**
