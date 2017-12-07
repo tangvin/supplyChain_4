@@ -36,21 +36,15 @@
     <result column="financial_file" property="financialFile" jdbcType="VARCHAR" />
     <result column="organization_electronic_file" property="organizationElectronicFile" jdbcType="VARCHAR" />
     <result column="ent_logo" property="entLogo" jdbcType="VARCHAR" />
-    <result column="certification_status" property="certificationStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, ent_identity, ent_name, ent_document_type, ent_credit_code, registration_number, 
-    tax_registration_number, institution_code, representative, representative_type, representative_num, 
-    registered_capital, major_shareholder, business_scope, registration_authority, telephone, 
-    municipality, city, county, address, business_contact, mobile_phone, email_address, 
-    zip_code, web_site, code_file, business_license, electronic_file, person_idcard, 
-<<<<<<< HEAD
-    tax_number, open_account_file, financial_file, organization_electronic_file, account_id, 
-    ent_logo, certification_status
-=======
+    id, ent_identity, ent_name, ent_document_type, ent_credit_code, registration_number,
+    tax_registration_number, institution_code, representative, representative_type, representative_num,
+    registered_capital, major_shareholder, business_scope, registration_authority, telephone,
+    municipality, city, county, address, business_contact, mobile_phone, email_address,
+    zip_code, web_site, code_file, business_license, electronic_file, person_idcard,
     tax_number, open_account_file, financial_file, organization_electronic_file,
     ent_logo
->>>>>>> branch 'master' of git@code.aliyun.com:13701071207/supplyChain.git
   </sql>
 
   <select id="homePageSelect" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -179,10 +173,5 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-<<<<<<< HEAD
-  
-  
-=======
 
->>>>>>> branch 'master' of git@code.aliyun.com:13701071207/supplyChain.git
 </mapper>

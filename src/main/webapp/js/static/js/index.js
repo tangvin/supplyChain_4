@@ -4,11 +4,7 @@ var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
 
 if(projectName == '/captialMain' || projectName == '/tradeMain' || projectName == '/procurementMain'){
     projectName = '';
-<<<<<<< HEAD
-}else {
-=======
 }else{
->>>>>>> branch 'master' of git@code.aliyun.com:13701071207/supplyChain.git
     projectName = projectName;
 }
 $(function(){
