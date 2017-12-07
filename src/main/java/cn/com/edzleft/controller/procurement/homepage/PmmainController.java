@@ -41,9 +41,45 @@ public class PmmainController {
 	@Autowired
 	private PmReceivingAddressService pmreceivingAddressservice;
 	
+	
+	/**
+	 * 添加银行卡第三步
+	 * @return
+	 */
+	@RequestMapping(value="bankThree")
+	public String bankThree(){
+		return "/procurement/information/bankThree";
+	}
+	
+	/**
+	 * 添加银行卡第二步
+	 * @return
+	 */
+	@RequestMapping(value="bankTwo")
+	public String bankTwo(){
+		return "/procurement/information/bankTwo";
+	}
+	
+	/**
+	 * 添加银行卡第一步
+	 * @return
+	 */
+	@RequestMapping(value="bankOne")
+	public String bankOne(){
+		return "/procurement/information/bankOne";
+	}
+	
+	/**
+	 * 管理收货信息
+	 * @return
+	 */
 	@RequestMapping(value = "glshxx")
-	public ModelAndView glshxx(){
+	public ModelAndView glshxx(HttpSession sessionInfo){
         ModelAndView modelAndView = new ModelAndView("/procurement/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = pmHomePageService.homePageSelect(userId);
+        modelAndView.addObject("information",information);
         modelAndView.addObject("messages", "recieverAddress");
         return modelAndView;
 	}
@@ -116,8 +152,12 @@ public class PmmainController {
      * @return
      */
     @RequestMapping(value = "messages")
-    public ModelAndView messages(){
+    public ModelAndView messages(HttpSession sessionInfo){
         ModelAndView modelAndView = new ModelAndView("/procurement/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = pmHomePageService.homePageSelect(userId);
+        modelAndView.addObject("information",information);
         modelAndView.addObject("messages", "profile");
         return modelAndView;
     }
@@ -154,8 +194,12 @@ public class PmmainController {
      * @return
      */
     @RequestMapping(value = "zijin")
-    public ModelAndView zijin(){
+    public ModelAndView zijin(HttpSession sessionInfo){
         ModelAndView modelAndView = new ModelAndView("/procurement/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = pmHomePageService.homePageSelect(userId);
+        modelAndView.addObject("information",information);
         modelAndView.addObject("messages", "settings");
         return modelAndView;
     }

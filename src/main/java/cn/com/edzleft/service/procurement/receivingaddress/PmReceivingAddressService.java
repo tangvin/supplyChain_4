@@ -16,7 +16,6 @@ public interface PmReceivingAddressService {
 
     int updateByPrimaryKey(ReceivingAddress record);
 
-	int insert(ReceivingAddress ra);
 
 	ReceivingAddress queryReceivingAddress(Integer addressId);
 
@@ -25,6 +24,10 @@ public interface PmReceivingAddressService {
 	int setDefaultAddress(Integer id, HttpSession session, Integer value);
 
 	int deleteAddress(Integer id);
+
+	int insert(ReceivingAddress ra);
+
+	int insert(ReceivingAddress ra, HttpSession session);
 
 
 
