@@ -44,11 +44,13 @@ public class BankAccountServiceImpl implements BankAccountService {
         Integer userId = sessions.getAdmin().getUserId();
         //查询出当前用户的手机号
         String userPhone = sessions.getAdmin().getUserPhone();
+        //获取当前用户名字
+        String userName = sessions.getAdmin().getUserName();
         //获取当前用户增加的银行卡类型
         String bankAccountDepositBank = bankAccount.getBankAccountDepositBank();
         session.setAttribute("bankAccountDepositBank","bankAccountDepositBank");
         session.setAttribute("userPhone","userPhone");
-        //根据id查询出所有的银行卡
+    //根据id查询出所有的银行卡
 //        List<BankAccount> bankAccounts = bankAccountMapper.selectBankAccountByUserId(userId);
 //        //判断当前的银行卡是否设置了默认
 //        if(bankAccount.getDefaultId()==1){
@@ -62,6 +64,9 @@ public class BankAccountServiceImpl implements BankAccountService {
 //        }
 //        bankAccount.setUserId(userId);
       //  bankAccount.setBankAccountCreateTime(new Date());
+        bankAccount.setUserId(userId);
+        bankAccount.setBankAccountCreatePeople(userName);
+        bankAccount.setBankAccountCreateTime(new Date());
         int i = bankAccountMapper.insertBankAcount(bankAccount);
         return i;
     }

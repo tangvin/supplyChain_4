@@ -21,12 +21,12 @@
             margin-right:0;
         }
         .table-responsive1{
-          overflow-y:hidden; 
+          overflow-y:hidden;
           margin-top:30px;
         }
         .bootstrap-table{
            margin-left: 0;
-           
+
         }
     </style>
 </head>
@@ -57,8 +57,8 @@
                         <input type="text" class="form-control">
                        <input type="text" readonly="readonly"  name="createTime" id="createTime" class="form-control" value="" />
                     </div> -->
-                    
-                    
+
+
                     <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>
                     <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
                 </form>
@@ -68,28 +68,22 @@
             <!--合同表格 开始-->
            <div class="table-responsive table-responsive1 text-center">
 			    <table class="table table-bordered text-center htbg" id="tb_invoice">
-			       
+
 			    </table>
              </div>
             <!--合同表格 结束-->
-           
+
         </div>
     </div>
 </div>
 </body>
 <script>
-    
+
     $(function(){
-    	
+
     	$("#tb_invoice").bootstrapTable({
             columns:[
-                { //field: 'Number',//可不加
-                    title: '序号',//标题  可不加
-        
-                    formatter: function (value, row, index) {
-                        return index+1;
-                    }
-                },
+
                 {field:'invoiceNumber',title:'发票编号'},
                 {field:'invoiceNo',title:'发票号'},
                 {field:'drawer',title:'开票人'},
@@ -125,8 +119,8 @@
     							//发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}
     							contentType : 'application/x-www-form-urlencoded;charset=UTF-8' //数据编码纯文本  offset=0&limit=5
     						});
-        
-        
+
+
     	});
     	function changeDateFormat(cellval) {
             var dateVal = cellval + "";
@@ -134,18 +128,18 @@
                 var date = new Date(parseInt(dateVal.replace("/Date(", "").replace(")/", ""), 10));
                 var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
                 var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-                
+
                 var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
                 var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
                 var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-                
+
                 return date.getFullYear() + "-" + month + "-" + currentDate + " " + hours + ":" + minutes + ":" + seconds;
             }
         }
-    
+
     	//得到查询的参数
     	function queryParams(params) {
-    		
+
     		var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
     			pageNumber : params.pageNumber,
     			pageSize : params.pageSize,

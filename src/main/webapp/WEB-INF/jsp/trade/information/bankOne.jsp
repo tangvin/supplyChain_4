@@ -53,9 +53,9 @@
                 <!--<input type="text" id="kh" class="form-control" placeholder="请输入卡号">-->
                 <input type="text" class="form-control" onkeyup="www_zzjs_net(this)" onkeydown="www_zzjs_net(this)" name="bankAccountNumber" id="account">
             </div>
-
-        <button class="btn col-xs-offset-3" id="yhk_next_bu">下一步</button>
         </form>
+        <button class="btn col-xs-offset-3" id="yhk_next_bu">下一步</button>
+
     </div>
 </div>
 </body>
@@ -139,18 +139,21 @@
         $('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')
     });
 
-   $("#yhk_next_bu").click(function () {
-       $.ajax({
-           url:'<%=request.getContextPath()%>/bankAccount/addBankAccount.action',
-           type:'POST',
-           dataType:'json',
-           data:$("#bankCardId").serialize(),
-           success:function (data) {
-              alert("请求下一步")
-           }
-       })
+    /**
+     * 将当前输入的数据存到session作用域
+     */
+     <%--$("#yhk_next_bu").click(function () {--%>
+       <%--$.ajax({--%>
+           <%--url:'<%=request.getContextPath()%>/bankAccount/save.action',--%>
+           <%--type:'POST',--%>
+           <%--dataType:'json',--%>
+           <%--data:$("#bankCardId").serialize(),--%>
+           <%--success:function (data) {--%>
+              <%--alert("请求下一步")--%>
+           <%--}--%>
+       <%--})--%>
 
-   })
+   <%--})--%>
 
 </script>
 </html>

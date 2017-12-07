@@ -30,4 +30,9 @@ public interface AccountMapper {
      * 更新用户信息
      */
 
+    /**
+     * 根据id查询用户信息
+     */
+    public Account selectAccountById(Integer id);
+
 }

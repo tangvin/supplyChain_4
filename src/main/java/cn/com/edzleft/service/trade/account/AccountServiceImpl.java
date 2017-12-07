@@ -84,4 +84,10 @@ public class AccountServiceImpl implements AccountService {
             }
                      return new ResultBean(-1,"请重新登录");
     }
+
+
+    public Account queryAcountById(Integer id){
+        Account a = accountMapper.selectAccountById(id);
+        return a;
+    }
 }

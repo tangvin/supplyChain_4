@@ -32,7 +32,7 @@
                     <li>
                         <div class="dropdown">
                             <p class="dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown">
-                                Dropdown(下拉)
+                                ${account.userName}
                                 <span class="caret"></span>
                             </p>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -70,12 +70,12 @@
                         <span class="menu-text">订单管理</span>
                     </a>
                 </li>
-                <li class="panel" id="syxgl2">
-                    <a href="#">
-                        <img class='img_con' src='<%=request.getContextPath()%>/js/static/images/leftbar_credit_selected@1x.png'>
-                        <span class="menu-text">授用信管理</span>
-                    </a>
-                </li>
+                <%--<li class="panel" id="syxgl2">--%>
+                    <%--<a href="#">--%>
+                        <%--<img class='img_con' src='<%=request.getContextPath()%>/js/static/images/leftbar_credit_selected@1x.png'>--%>
+                        <%--<span class="menu-text">授用信管理</span>--%>
+                    <%--</a>--%>
+                <%--</li>--%>
                 <li class="panel" id="cwgl2">
                     <a href="#">
                         <img class='img_con' src='<%=request.getContextPath()%>/js/static/images/leftbar_finance_selected@1x.png'>

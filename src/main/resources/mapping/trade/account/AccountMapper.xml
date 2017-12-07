@@ -23,7 +23,7 @@
     user_eamil, account_type, account_state, certificate_state, certificate_type, invite_account,information_id
   </sql>
 
-  <!--根据账号查询账号信息-->
+  <!--根据名字查询账号信息-->
   <select id="findAccountByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     user_id,user_name,user_pwd,account_type,user_phone
@@ -31,6 +31,14 @@
     where user_name = #{userName}
   </select>
 
+
+  <!--根据账号id查询账号信息-->
+  <select id="selectAccountById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    user_id,user_name,user_pwd,account_type,user_phone
+    from gyl_account
+    where user_id = #{userId}
+  </select>
 
   <!--新增一个账号-->
   <insert id="insertAccount" parameterType="cn.com.edzleft.entity.Account" >

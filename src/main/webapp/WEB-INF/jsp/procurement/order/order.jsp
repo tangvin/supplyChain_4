@@ -128,13 +128,6 @@
    $(function(){
         $("#tb_departments").bootstrapTable({
             columns:[
-                {
-                    title: '序号',//标题  可不加
-                    width:100,
-                    formatter: function (value, row, index) {
-                        return index+1;
-                    }
-                },
                 {field:'orderNumber',title:'订单编号',width:100,formatter:operateFormatter,events:operateEvents1},
                 {field:'orderStatus',title:'订单状态',width:100,
                     formatter: function(value,row,index){

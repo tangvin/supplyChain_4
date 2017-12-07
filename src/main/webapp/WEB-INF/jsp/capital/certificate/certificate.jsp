@@ -76,16 +76,15 @@ $(function(){
                         return "失效";
                     }
                 } 
-            },{field:'attachmentName',title:'文件名',width:100} ,
-            {field:'attachmentUrl',title:'操作',width:25,
-            	 formatter:function(value){
-            		 //alert(value);
-                     var str = '';
-                         str += '<a href=\"'+value+'\">下载</a>';
-//                        'window.location.href=\"crm/activity/detail.do?id="+obj.id+"\";' 
-                     return str;
-                 }
+            },
+            {field:'attachmentName',title:'下载证书',width:100,
+                formatter:function(value,row,index){
+                    var attchment='';
+                    attchment = '<a href="#">'+value+'</a>';
+                    return attchment;
+                }
             }
+
         ],
         url:'<%=request.getContextPath()%>/certificate/ukeyList.action',
 							method : 'post',

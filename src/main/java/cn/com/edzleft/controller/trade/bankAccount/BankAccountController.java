@@ -48,6 +48,17 @@ public class BankAccountController {
     }
 
     /**
+     * 数据存到session
+     */
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    @ResponseBody
+    public int saveInformation(BankAccount bankAccount){
+        SessionInfo sessionInfo = new SessionInfo();
+        sessionInfo.setBankAccount(bankAccount);
+        return 1;
+    }
+
+    /**
      * 添加银行卡
      * @return
      */
