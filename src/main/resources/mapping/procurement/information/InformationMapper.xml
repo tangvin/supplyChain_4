@@ -35,9 +35,13 @@
     <result column="open_account_file" property="openAccountFile" jdbcType="VARCHAR" />
     <result column="financial_file" property="financialFile" jdbcType="VARCHAR" />
     <result column="organization_electronic_file" property="organizationElectronicFile" jdbcType="VARCHAR" />
+<<<<<<< HEAD
     <result column="account_id" property="accountId" jdbcType="INTEGER" />
     <result column="ent_logo" property="entLogo" jdbcType="VARCHAR" />
     <result column="certification_status" property="certificationStatus" jdbcType="INTEGER" />
+=======
+    <result column="ent_logo" property="entLogo" jdbcType="VARCHAR" />
+>>>>>>> branch 'master' of git@code.aliyun.com:13701071207/supplyChain.git
   </resultMap>
   <sql id="Base_Column_List" >
     id, ent_identity, ent_name, ent_document_type, ent_credit_code, registration_number, 
@@ -45,8 +49,13 @@
     registered_capital, major_shareholder, business_scope, registration_authority, telephone, 
     municipality, city, county, address, business_contact, mobile_phone, email_address, 
     zip_code, web_site, code_file, business_license, electronic_file, person_idcard, 
+<<<<<<< HEAD
     tax_number, open_account_file, financial_file, organization_electronic_file, account_id, 
     ent_logo, certification_status
+=======
+    tax_number, open_account_file, financial_file, organization_electronic_file,
+    ent_logo
+>>>>>>> branch 'master' of git@code.aliyun.com:13701071207/supplyChain.git
   </sql>
 
   <select id="getInformationList" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -55,26 +64,29 @@
     from gyl_information
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from gyl_information
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+
   <!--企业信息表和用户表相关联-->
 <select id="selectBaseInformation" resultMap="BaseResultMap" parameterType="Integer">
-  SELECT
-        t1.*,
-        t2.*
+    SELECT
+    t1.*,
+    t2.*
     FROM
-        gyl_information t1
-    RIGHT JOIN
-        gyl_account t2
+    gyl_information t1
+    INNER JOIN
+    gyl_account t2
     ON
-        t1.account_id=t2.user_id
+    t1.id=t2.information_id
     WHERE
-        t2.user_id=#{id}
+    t2.user_id=#{id}
 </select>
+<<<<<<< HEAD
 <!--修改基本资料-->
   <update id="updateInformation" parameterType="cn.com.edzleft.entity.Information" >
+=======
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.edzleft.entity.Information" >
+>>>>>>> branch 'master' of git@code.aliyun.com:13701071207/supplyChain.git
     update gyl_information
     <set >
       <if test="entIdentity != null" >
@@ -173,13 +185,20 @@
       <if test="organizationElectronicFile != null" >
         organization_electronic_file = #{organizationElectronicFile,jdbcType=VARCHAR},
       </if>
+<<<<<<< HEAD
       <if test="accountId != null" >
         account_id = #{accountId,jdbcType=INTEGER},
       </if>
+=======
+>>>>>>> branch 'master' of git@code.aliyun.com:13701071207/supplyChain.git
       <if test="entLogo != null" >
         ent_logo = #{entLogo,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of git@code.aliyun.com:13701071207/supplyChain.git
 </mapper>

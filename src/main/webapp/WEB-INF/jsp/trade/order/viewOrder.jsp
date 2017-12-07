@@ -94,25 +94,25 @@
                                 <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单状态：</td>
                                 <td class="col-xs-8 text-left">
                                     <span>
-                                        <c:if test=" ${order.orderStatus==0}">
+                                        <c:if test="${order.orderStatus==0}">
                                             待确认
                                         </c:if>
-                                        <c:if test=" ${order.orderStatus==1}">
+                                        <c:if test="${order.orderStatus==1}">
                                            待付款
                                         </c:if>
-                                        <c:if test=" ${order.orderStatus==2}">
+                                        <c:if test="${order.orderStatus==2}">
                                             待发货
                                         </c:if>
-                                        <c:if test=" ${order.orderStatus==3}">
+                                        <c:if test="${order.orderStatus==3}">
                                             待收货
                                         </c:if>
-                                        <c:if test=" ${order.orderStatus==4}">
+                                        <c:if test="${order.orderStatus==4}">
                                             已完成
                                         </c:if>
-                                        <c:if test=" ${order.orderStatus==5}">
+                                        <c:if test="${order.orderStatus==5}">
                                             已关闭
                                         </c:if>
-                                        <c:if test=" ${order.orderStatus==6}">
+                                        <c:if test="${order.orderStatus==6}">
                                             已驳回
                                         </c:if>
                                     </span>
@@ -251,12 +251,12 @@
     })
 
 $(function(){
-    if(${order.orderStatus}==3||${order.orderStatus}==4){
-        $('#open').css('display','block')
-    }else{
-        $('#open').css('display','none')
-    }
-})
+        if(${order.orderStatus}==3||${order.orderStatus}==4){
+            $('#open').css('display','block')
+        }else{
+            $('#open').css('display','none')
+        }
+    })
 
 
 

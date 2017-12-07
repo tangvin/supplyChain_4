@@ -30,19 +30,20 @@
 	</bean> 
 	
 	
-	<!--  上传设置 CommonsMultipartResolver 通用组件解析器    -->
-	<!-- 上传文件配置bean，配置上传文件编码，大小，类型等 -->
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="defaultEncoding">
-			<value>UTF-8</value>
-		</property>
-		<property name="maxUploadSize">
-			<value>32505856</value><!-- 上传文件大小限制为31M，31*1024*1024 -->
-		</property>
-		<property name="maxInMemorySize">
-			<value>4096</value>
-		</property>
-	</bean>
+		<!--  上传设置 CommonsMultipartResolver 通用组件解析器    -->
+		<!-- 上传文件配置bean，配置上传文件编码，大小，类型等 -->
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			<property name="defaultEncoding">
+				<value>UTF-8</value>
+			</property>
+			<property name="maxUploadSize">
+				<value>32505856</value><!-- 上传文件大小限制为31M，31*1024*1024 -->
+			</property>
+			<property name="maxInMemorySize">
+				<value>32505856</value>
+			</property>
+		</bean>
+
 	
 
 	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
@@ -55,6 +56,8 @@
 			</list>
 		</property>
 	</bean>
+
+
 
 
 	<!-- 系统拦截器定义 -->

@@ -16,10 +16,11 @@
     <result column="certificate_state" property="certificateState" jdbcType="INTEGER" />
     <result column="certificate_type" property="certificateType" jdbcType="INTEGER" />
     <result column="invite_account" property="inviteAccount" jdbcType="VARCHAR" />
+    <result column="information_id" property="informationId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     user_id, user_name, user_pwd, user_phone, create_time, create_ip, login_time, login_ip, 
-    user_eamil, account_type, account_state, certificate_state, certificate_type, invite_account
+    user_eamil, account_type, account_state, certificate_state, certificate_type, invite_account,information_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -31,18 +32,7 @@
     delete from gyl_account
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.com.edzleft.entity.Account" >
-    insert into gyl_account (user_id, user_name, user_pwd, 
-      user_phone, create_time, create_ip, 
-      login_time, login_ip, user_eamil, 
-      account_type, account_state, certificate_state, 
-      certificate_type, invite_account)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
-      #{userPhone,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}, #{creatIp,jdbcType=VARCHAR}, 
-      #{loginTime,jdbcType=TIMESTAMP}, #{loginIp,jdbcType=VARCHAR}, #{userEamil,jdbcType=VARCHAR}, 
-      #{accountType,jdbcType=INTEGER}, #{accountState,jdbcType=INTEGER}, #{certificateState,jdbcType=INTEGER}, 
-      #{certificateType,jdbcType=INTEGER}, #{inviteAccount,jdbcType=VARCHAR})
-  </insert>
+
   <insert id="insertSelective" parameterType="cn.com.edzleft.entity.Account" >
     insert into gyl_account
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -88,6 +78,9 @@
       <if test="inviteAccount != null" >
         invite_account,
       </if>
+      <if test="informationId != null" >
+        information_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -131,6 +124,9 @@
       </if>
       <if test="inviteAccount != null" >
         #{inviteAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="informationId != null" >
+        #{informationId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -176,24 +172,11 @@
       <if test="inviteAccount != null" >
         invite_account = #{inviteAccount,jdbcType=VARCHAR},
       </if>
+      <if test="informationId != null" >
+        information_id = #{inviteAccount,jdbcType=INTEGER},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.com.edzleft.entity.Account" >
-    update gyl_account
-    set user_name = #{userName,jdbcType=VARCHAR},
-      user_pwd = #{userPwd,jdbcType=VARCHAR},
-      user_phone = #{userPhone,jdbcType=VARCHAR},
-      create_time = #{creatTime,jdbcType=TIMESTAMP},
-      create_ip = #{creatIp,jdbcType=VARCHAR},
-      login_time = #{loginTime,jdbcType=TIMESTAMP},
-      login_ip = #{loginIp,jdbcType=VARCHAR},
-      user_eamil = #{userEamil,jdbcType=VARCHAR},
-      account_type = #{accountType,jdbcType=INTEGER},
-      account_state = #{accountState,jdbcType=INTEGER},
-      certificate_state = #{certificateState,jdbcType=INTEGER},
-      certificate_type = #{certificateType,jdbcType=INTEGER},
-      invite_account = #{inviteAccount,jdbcType=VARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
+
 </mapper>

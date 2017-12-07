@@ -16,7 +16,7 @@ import java.util.HashMap;
  * Created by ibmtech on 2017/12/5.
  */
 @Controller
-@RequestMapping("financial")
+@RequestMapping("/financial")
 public class FinancialController {
 
     @Autowired
@@ -29,20 +29,18 @@ public class FinancialController {
      * @param pageSize
      * @param financialType
      * @param billTime
-     * @param tripartiteAccountOpenpeople
-     * @param bankAccount
      * @return
      */
-    @RequestMapping(value = "queryAllFinancial",method = RequestMethod.POST)
+    @RequestMapping(value = "/getAllFinancial",method = RequestMethod.POST)
     @ResponseBody
-    public DataGridJson getLetterByPage(Integer pageNumber, Integer pageSize , String financialType, String billTime, String tripartiteAccountOpenpeople, String bankAccount){
+    public DataGridJson getLetterByPage(Integer pageNumber, Integer pageSize , String financialType, String billTime, String payer, String bankCard){
         PageUtil<Financial> pageUtil = new PageUtil<>();
 
         HashMap<String,Object> whereMaps =new HashMap<>();
         whereMaps.put("financialType",financialType);
         whereMaps.put("billTime",billTime);
-        whereMaps.put("payer",tripartiteAccountOpenpeople);
-        whereMaps.put("bankAccount",bankAccount);
+        whereMaps.put("payer",payer);
+        whereMaps.put("bankAccount",bankCard);
 
         DataGridJson dgj = new DataGridJson();
         pageUtil.setCpage(pageNumber);
