@@ -20,7 +20,7 @@
             <div class="khh">
                 <form class="form-inline khh_form khh_form1 cwgl_input">
                     <div class="form-group">
-                        <label>财物类型</label>
+                        <label>财务类型</label>
                         <select class="form-control select" id="financialType">
                             <option value="">请选择</option>
                             <option value="0">转入</option>
@@ -62,13 +62,6 @@
     $(function(){
         $("#tb_departments").bootstrapTable({
             columns:[
-                { //field: 'Number',//可不加
-                    title: '序号',//标题  可不加
-                    width:100,
-                    formatter: function (value, row, index) {
-                        return index+1;
-                    }
-                },
                 {field:'financialNumbers',title:'财务编号',width:100},
                 {field:'amount',title:'金额(￥万元)',width:100},
                 {field:'billTime',title:'发生时间',width:100,

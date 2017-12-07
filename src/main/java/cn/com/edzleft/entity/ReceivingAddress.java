@@ -33,11 +33,24 @@ public class ReceivingAddress {
      */
 	private Integer rAddressDefault;
 	/**
-     * 用户ID
+     * 关联ID
      */
     private Integer unionID ;
     
-    public Integer getUnionID() {
+    /**
+     * 用户id
+     */
+    public Integer accountId;
+    
+    public Integer getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(Integer accountId) {
+		this.accountId = accountId;
+	}
+
+	public Integer getUnionID() {
 		return unionID;
 	}
 

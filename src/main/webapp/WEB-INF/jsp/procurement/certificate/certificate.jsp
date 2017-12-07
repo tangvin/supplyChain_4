@@ -59,13 +59,6 @@ $(function(){
 	apply();
     $("#tb_ukey").bootstrapTable({
         columns:[
-            { //field: 'Number',//可不加
-                title: '序号',//标题  可不加
-                width:100,
-                formatter: function (value, row, index) {
-                    return index+1;
-                }
-            },
             {field:'ukeyType',title:'类型',width:100},
             {field:'issuedPeople',title:'颁发人',width:100},
             {field:'issuedTime',title:'颁发时间',width:100,
