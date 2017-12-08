@@ -67,22 +67,15 @@
     $(function(){
         $("#refundTable").bootstrapTable({
             columns:[
-                { //field: 'Number',//可不加
-                    title: '序号',//标题  可不加
-                    width:100,
-                    formatter: function (value, row, index) {
-                        return index+1;
-                    }
-                },
-                {field:'repaymentsNum',title:'还款编号',width:100},
-                {field:'repaymentsPerson',title:'还款方',width:100},
-                {field:'repaymentsAmount',title:'还款金额￥万元',width:100},
-                {field:'repaymentsTime',title:'还款时间',width:100,
+                {field:'repaymentsNum',title:'还款编号'},
+                {field:'repaymentsPerson',title:'还款方'},
+                {field:'repaymentsAmount',title:'还款金额￥万元'},
+                {field:'repaymentsTime',title:'还款时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }
                 },
-                {field:'repaymentsStatus',title:'还款状态',width:100,
+                {field:'repaymentsStatus',title:'还款状态',
                     formatter: function(value,row,index){
                         if(value == '0') {
                             return "全部还款";
@@ -91,7 +84,7 @@
                         }
                     }
                 },
-                {field:'account',title:'发生账户',width:100}
+                {field:'account',title:'发生账户'}
             ],
             url:'<%=request.getContextPath()%>/repayment/repaymentSelect.action',
             method:'post',
@@ -163,7 +156,7 @@
         }else{
             seconds = ''+seconds
         }
-        return year+"-"+month+"-"+day+"-"+hours+":"+minutes+":"+seconds;
+        return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
     }
 
 

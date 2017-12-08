@@ -26,11 +26,14 @@
   <!--条件查询-->
   <sql id="where_sql">
     <trim prefix="where" prefixOverrides="and">
-      <if test="whereMap != null &amp;&amp; whereMap.tripartiteCreditHolderPurchaser != null and whereMap.tripartiteCreditHolderPurchaser != ''">
-        AND tripartite_credit_holder_purchaser  LIKE '%${whereMap.tripartiteCreditHolderPurchaser}%'
+      <if test="whereMap != null &amp;&amp; whereMap.entName != null and whereMap.entName != ''">
+        AND i2.ent_name  LIKE '%${whereMap.entName}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.tripartiteDepositBank != null and whereMap.tripartiteDepositBank != ''">
-        AND tripartite_deposit_bank  LIKE '%${whereMap.tripartiteDepositBank}%'
+        AND t.tripartite_deposit_bank  LIKE '%${whereMap.tripartiteDepositBank}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.tripartiteCreditHolderCapital != null and whereMap.tripartiteCreditHolderCapital != ''">
+        AND t.tripartite_credit_holder_capital  LIKE '%${whereMap.tripartiteCreditHolderCapital}%'
       </if>
       <!--<if test="whereMap != null &amp;&amp; whereMap.creatTime != null and whereMap.creatTime != ''">-->
       <!--AND creat_time &gt;= '${whereMap.creatTime}'-->
@@ -43,16 +46,34 @@
 
   <!--查询总条数-->
   <select id="getTripartiteSelectCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
-    select count(*) from gyl_tripartite <include refid="where_sql"/>
+    select count(*)
+    FROM gyl_tripartite t
+    INNER JOIN gyl_account a ON t.tripartite_credit_holder_capital = a.user_id
+    INNER JOIN gyl_account a2 ON t.tripartite_credit_holder_purchaser = a2.user_id
+    INNER JOIN gyl_information i ON a.information_id = i.id
+    INNER JOIN gyl_information i2 ON a2.information_id = i2.id
+    <include refid="where_sql"/>
   </select>
 
   <!--分页查询-->
   <select id="getTripartiteSelectList"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
-    select
-    <include refid="Base_Column_List" />
-    from gyl_tripartite
+    SELECT
+    t.tripartite_deposit_bank as tripartiteDepositBank,
+    i2.ent_name as entName,
+    t.tripartite_account_number as tripartiteAccountNumber,
+    t.tripartite_balance as tripartiteBalance,
+    t.tripartite_available_balance as tripartiteAvailableBalance,
+    t.tripartite_account_opentime as tripartiteAccountOpentime,
+    t.tripartite_account_openpeople as tripartiteAccountOpenpeople,
+    t.tripartite_amount_create_time as tripartiteAmountCreateTime,
+    t.tripartite_amount_create_people as tripartiteAmountCreatePeople
+    FROM gyl_tripartite t
+    INNER JOIN gyl_account a ON t.tripartite_credit_holder_capital = a.user_id
+    INNER JOIN gyl_account a2 ON t.tripartite_credit_holder_purchaser = a2.user_id
+    INNER JOIN gyl_information i ON a.information_id = i.id
+    INNER JOIN gyl_information i2 ON a2.information_id = i2.id
     <include refid="where_sql"/>
-    ORDER BY tripartite_amount_create_time  DESC
+    ORDER BY t.tripartite_amount_create_time  DESC
     <![CDATA[	limit #{start},#{pageSize}]]>
   </select>
 

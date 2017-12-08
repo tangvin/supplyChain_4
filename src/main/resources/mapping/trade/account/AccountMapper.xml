@@ -6,8 +6,8 @@
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_pwd" property="userPwd" jdbcType="VARCHAR" />
     <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="create_ip" property="createIp" jdbcType="VARCHAR" />
+    <result column="create_time" property="creatTime" jdbcType="TIMESTAMP" />
+    <result column="create_ip" property="creatIp" jdbcType="VARCHAR" />
     <result column="login_time" property="loginTime" jdbcType="TIMESTAMP" />
     <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
     <result column="user_eamil" property="userEamil" jdbcType="VARCHAR" />
@@ -26,7 +26,7 @@
   <!--根据名字查询账号信息-->
   <select id="findAccountByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
-    user_id,user_name,user_pwd,account_type,user_phone
+    <include refid="Base_Column_List"/>
     from gyl_account
     where user_name = #{userName}
   </select>
@@ -56,10 +56,10 @@
       <if test="userPhone != null" >
         user_phone,
       </if>
-      <if test="createTime != null" >
+      <if test="creatTime != null" >
         create_time,
       </if>
-      <if test="createIp != null" >
+      <if test="creatIp != null" >
         create_ip,
       </if>
       <if test="loginTime != null" >
@@ -103,11 +103,11 @@
       <if test="userPhone != null" >
         #{userPhone,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createIp != null" >
-        #{createIp,jdbcType=VARCHAR},
+      <if test="creatIp != null" >
+        #{creatIp,jdbcType=VARCHAR},
       </if>
       <if test="loginTime != null" >
         #{loginTime,jdbcType=TIMESTAMP},
@@ -151,11 +151,11 @@
       <if test="userPhone != null" >
         user_phone = #{userPhone,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="creatTime != null" >
+        create_time = #{creatTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createIp != null" >
-        create_ip = #{createIp,jdbcType=VARCHAR},
+      <if test="creatIp != null" >
+        create_ip = #{creatIp,jdbcType=VARCHAR},
       </if>
       <if test="loginTime != null" >
         login_time = #{loginTime,jdbcType=TIMESTAMP},

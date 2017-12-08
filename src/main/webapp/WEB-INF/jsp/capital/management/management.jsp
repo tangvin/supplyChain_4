@@ -186,7 +186,7 @@
                     }
                 },
                 {field:'creditMasterContract',title:'合同'},
-                {field:'applicant',title:'申请人',width:100},
+                {field:'applicant',title:'申请人'},
                 {field:'applicationTime',title:'申请时间',
                     formatter:function(value,row,index){
                          return ConvertToDate(value)
@@ -450,7 +450,7 @@
         }else{
             seconds = ''+seconds
         }
-        return year+"-"+month+"-"+day+"-"+hours+":"+minutes+":"+seconds;
+        return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
     }
 </script>
 </html>

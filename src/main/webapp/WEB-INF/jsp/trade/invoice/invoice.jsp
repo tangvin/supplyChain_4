@@ -20,10 +20,6 @@
         .fpgl{
             margin-right:0;
         }
-        .table-responsive1{
-          overflow-y:hidden;
-          margin-top:30px;
-        }
         .bootstrap-table{
            margin-left: 0;
 
@@ -64,9 +60,9 @@
                 </form>
             </div>
             <!--合同签约 状态-->
-  
+
             <!--合同表格 开始-->
-           <div class="table-responsive table-responsive1 text-center">
+           <div class="table-responsive text-center" style="overflow-y: hidden;margin-top: 40px;">
 			    <table class="table table-bordered text-center htbg" id="tb_invoice">
 
 			    </table>
@@ -94,16 +90,22 @@
                         return changeDateFormat(value)
                     }
                 },
+                {field:'orderNumber',title:'发票预览',
+                  formatter:function (value) {
+                      var str_img = '';
+                      str_img += '<img style="width:40px;height:30px" src=\"'+value+'\">';
+                      return str_img
+                  }
+                } ,
                 {field:'attachmentUrl',title:'操作',
                 	formatter:function(value,row){
                     var str = '';
-                        str += '<img style="width:100px;height:60px" src=\"'+value+'\">';
-                        str += '<button id="editBtn" class="btn btn-danger bg_btn" href="#" value="编辑" onclick="edit(\''+row.id+'\')" >编辑</button>';
+                        str += '<button id="editBtn" class="btn btn-danger bg_btn" href="#" style="height: 30px;font-size: 12px" value="编辑" onclick="edit(\''+row.id+'\')" >编辑</button>';
                         <%--  onclick="'$("#load").load("<%=request.getContextPath()%>/proInvoice/edit.action)'" --%>
-     
+
                     return str;
                 }
-                	
+
                 },
             ],
             url:'<%=request.getContextPath()%>/traInvoice/invoiceList.action',
@@ -173,7 +175,7 @@
     		alert(123);
     		$('#load').load('<%=request.getContextPath()%>/proInvoice/edit.action?id=id')
     	})  --%>
-    	 
-    
+
+
 </script>
 </html>

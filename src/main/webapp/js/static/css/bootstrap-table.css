@@ -9,6 +9,7 @@
     border-bottom: 1px solid #dddddd;
     border-collapse: collapse !important;
     border-radius: 1px;
+    margin-top:15px;
 }
 
 .bootstrap-table .table:not(.table-condensed),
@@ -52,7 +53,7 @@
 
 .fixed-table-body {
     overflow-x: auto;
-    overflow-y: auto;
+    overflow-y: hidden;
     height: 100%;
 }
 

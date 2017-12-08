@@ -66,31 +66,24 @@
     $(function(){
         $("#loansTable").bootstrapTable({
             columns:[
-                { //field: 'Number',//可不加
-                    title: '序号',//标题  可不加
-                    width:100,
-                    formatter: function (value, row, index) {
-                        return index+1;
-                    }
-                },
-                {field:'loanNumber',title:'贷款编号',width:100},
-                {field:'lender',title:'贷款方',width:100},
-                {field:'creditMasterContractNum',title:'授信合同',width:100},
-                {field:'letterOrderNum',title:'用信订单',width:100},
-                {field:'loanAmount',title:'授信/用信 ￥万元',width:100},
-                {field:'expirationTime',title:'到期时间',width:100,
+                {field:'loanNumber',title:'贷款编号'},
+                {field:'lender',title:'贷款方'},
+                {field:'creditMasterContractNum',title:'授信合同'},
+                {field:'letterOrderNum',title:'用信订单'},
+                {field:'loanAmount',title:'授信/用信 ￥万元'},
+                {field:'expirationTime',title:'到期时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }
                 },
-                {field:'accountType',title:'贷款状态',width:100,
+                {field:'accountType',title:'贷款状态',
                     formatter: function(value,row,index){
                         if(value == '0') {
                             return "使用中";
                         }
                     }
                 },
-                {field:'account',title:'发生账户',width:100}
+                {field:'account',title:'发生账户'}
             ],
             url:'<%=request.getContextPath()%>/captialLoan/loansSelect.action',
             method:'post',
@@ -162,7 +155,7 @@
         }else{
             seconds = ''+seconds
         }
-        return year+"-"+month+"-"+day+"-"+hours+":"+minutes+":"+seconds;
+        return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
     }
 
 </script>

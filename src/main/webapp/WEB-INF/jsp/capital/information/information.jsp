@@ -258,8 +258,8 @@
                                         <input type="text" class="form-control" name="tripartiteDepositBank" id="tripartiteDepositBank">
                                     </div>
                                     <div class="form-group form-group1">
-                                        <label for="tripartiteCreditHolderPurchaser">户主</label>
-                                        <input type="email" class="form-control" name="tripartiteCreditHolderPurchaser" id="tripartiteCreditHolderPurchaser">
+                                        <label for="entName">户主</label>
+                                        <input type="email" class="form-control" name="entName" id="entName">
                                     </div>
                                     <button type="button" class="btn  btn-danger" onclick="search()">查询</button>
                                     <button type="button" class="btn  btn-default" onclick="reset()">重置</button>
@@ -382,22 +382,23 @@
     $(function(){
         $("#incormationTable").bootstrapTable({
             columns:[
-                { //field: 'Number',//可不加
-                    title: '序号',//标题  可不加
-                    width:100,
-                    formatter: function (value, row, index) {
-                        return index+1;
+                {field:'tripartiteDepositBank',title:'开户行'},
+                {field:'entName',title:'户主（采购方）'},
+                {field:'tripartiteAccountNumber',title:'账号'},
+                {field:'tripartiteBalance',title:'余额（元）'},
+                {field:'tripartiteAvailableBalance',title:'可用余额（元）'},
+                {field:'tripartiteAccountOpentime',title:'账号开通时间',
+                    formatter:function(value,row,index){
+                        return ConvertToDate(value)
                     }
                 },
-                {field:'tripartiteDepositBank',title:'开户行',width:100},
-                {field:'tripartiteCreditHolderPurchaser',title:'户主（采购方）',width:100},
-                {field:'tripartiteAccountNumber',title:'账号',width:100},
-                {field:'tripartiteBalance',title:'余额（元）',width:100},
-                {field:'tripartiteAvailableBalance',title:'可用余额（元）',width:100},
-                {field:'tripartiteAccountOpentime',title:'账号开通时间',width:100},
-                {field:'tripartiteAccountOpenpeople',title:'账号开通人',width:100},
-                {field:'tripartiteAmountCreateTime',title:'创建时间',width:100},
-                {field:'tripartiteAmountCreatePeople',title:'创建人',width:100}
+                {field:'tripartiteAccountOpenpeople',title:'账号开通人'},
+                {field:'tripartiteAmountCreateTime',title:'创建时间',
+                    formatter:function(value,row,index){
+                        return ConvertToDate(value)
+                    }
+                },
+                {field:'tripartiteAmountCreatePeople',title:'创建人'}
             ],
             url:'<%=request.getContextPath()%>/captialTripartite/tripartiteSelect.action',
             method:'post',
@@ -419,7 +420,7 @@
             pageNumber: params.pageNumber,
             pageSize: params.pageSize,
             tripartiteDepositBank:$("#tripartiteDepositBank").val(),
-            tripartiteCreditHolderPurchaser:$("#tripartiteCreditHolderPurchaser").val()
+            entName:$("#entName").val()
         };
         return temp;
     }
@@ -431,6 +432,42 @@
     function reset(){
         $("#informationForm").form('reset');
         crownSearch();
+    }
+
+    function ConvertToDate(datestr) {
+        var date=new Date(datestr);
+        var year=date.getFullYear();
+        var month=date.getMonth()+1;
+        if(month < 10){
+            month = "0"+month
+        }else{
+            month = ''+month
+        }
+        var day=date.getDate();
+        if(day < 10){
+            day = "0"+day
+        }else{
+            day = ''+day
+        }
+        var hours = date.getHours()
+        if(hours < 10){
+            hours = "0"+hours
+        }else{
+            hours = ''+hours
+        }
+        var minutes = date.getMinutes(); //获取当前分钟数(0-59)
+        if(minutes < 10){
+            minutes = "0"+minutes
+        }else{
+            minutes = ''+minutes
+        }
+        var seconds = date.getSeconds();
+        if(seconds < 10){
+            seconds = "0"+seconds
+        }else{
+            seconds = ''+seconds
+        }
+        return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
     }
 
 </script>

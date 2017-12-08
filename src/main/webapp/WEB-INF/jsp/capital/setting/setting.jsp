@@ -71,6 +71,7 @@
 			//alert(email);
 				if($("#shortMessage").prop("checked") == false && $("#email").prop("checked") == false){
 					alert("请至少选择一项");
+                    setTimeout("$('#load').load('<%=request.getContextPath()%>/captialMain/setting.action')",500);
 					return;
 				}
 			$.ajax({
@@ -83,7 +84,9 @@
 				success:function(data){
 					if(data.success){
 						alert("保存成功");
-					}else{
+                        setTimeout("$('#load').load('<%=request.getContextPath()%>/captialMain/setting.action')",500);
+                    }else{
+                        setTimeout("$('#load').load('<%=request.getContextPath()%>/captialMain/setting.action')",500);
 						alert("保存失败");					
 					}
 				}

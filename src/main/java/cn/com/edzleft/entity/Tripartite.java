@@ -55,6 +55,21 @@ public class Tripartite {
      */
     private String tripartiteAmountCreatePeople;
 
+    //业务字段
+    /**
+     * 户主（采购方）
+     */
+    private String entName;
+
+
+    public String getEntName() {
+        return entName;
+    }
+
+    public void setEntName(String entName) {
+        this.entName = entName;
+    }
+
     public Integer getTripartiteId() {
         return tripartiteId;
     }

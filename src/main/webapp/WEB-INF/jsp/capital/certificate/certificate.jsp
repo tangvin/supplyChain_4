@@ -60,15 +60,15 @@ $(function(){
 	apply();
     $("#tb_ukey").bootstrapTable({
         columns:[
-            {field:'ukeyType',title:'类型',width:100},
-            {field:'issuedPeople',title:'颁发人',width:100},
-            {field:'issuedTime',title:'颁发时间',width:100,
+            {field:'ukeyType',title:'类型'},
+            {field:'issuedPeople',title:'颁发人'},
+            {field:'issuedTime',title:'颁发时间',
             	formatter: function (value, row, index) {
                     return changeDateFormat(value)
                 }
             	
             },
-            {field:'ukeyStatus',title:'状态',width:100,
+            {field:'ukeyStatus',title:'状态',
                 formatter: function(value,row,index){
                     if(value == '0') {
                         return "正常";
@@ -77,7 +77,7 @@ $(function(){
                     }
                 } 
             },
-            {field:'attachmentName',title:'下载证书',width:100,
+            {field:'attachmentName',title:'下载证书',
                 formatter:function(value,row,index){
                     var attchment='';
                     attchment = '<a href="#">'+value+'</a>';

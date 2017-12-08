@@ -52,7 +52,7 @@
             <div class="panel-body" style="padding-bottom:0px;">
                 <table id="financingTable" class="cj_table"></table>
             </div>
-            <!--合同分页 eng-->
+            <!--合 同分页 eng-->
         </div>
     </div>
 </div>
@@ -69,17 +69,10 @@
     $(function(){
         $("#financingTable").bootstrapTable({
             columns:[
-                { //field: 'Number',//可不加
-                    title: '序号',//标题  可不加
-                    width:100,
-                    formatter: function (value, row, index) {
-                        return index+1;
-                    }
-                },
-                {field:'financialNumbers',title:'财务编号',width:100},
-                {field:'amount',title:'金额 （¥万元）',width:100},
-                {field:'billTime',title:'发生时间',width:100},
-                {field:'financialType',title:'财务类型',width:100,
+                {field:'financialNumbers',title:'财务编号'},
+                {field:'amount',title:'金额 （¥万元）'},
+                {field:'billTime',title:'发生时间'},
+                {field:'financialType',title:'财务类型',
                     formatter: function(value,row,index){
                         if(value == '0') {
                             return "贷款";
@@ -88,16 +81,16 @@
                         }
                     }
                 },
-                {field:'belongOrder',title:'所属订单',width:100},
-                {field:'tripartiteAmountCreateTime',title:'发生方',width:100},
-                {field:'bankAcountType',title:'发生银行账户类型',width:100,
+                {field:'belongOrder',title:'所属订单'},
+                {field:'tripartiteAmountCreateTime',title:'发生方'},
+                {field:'bankAcountType',title:'发生银行账户类型',
                     formatter: function(value,row,index){
                         if(value == '0') {
                             return "三方账户";
                         }
                     }
                 },
-                {field:'bankAccount',title:'发生银行账户',width:100}
+                {field:'bankAccount',title:'发生银行账户'}
             ],
             url:'<%=request.getContextPath()%>/captialTripartite/tripartiteSelect.action',
             method:'post',

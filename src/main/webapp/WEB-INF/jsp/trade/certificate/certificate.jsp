@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+    </style>
 </head>
 <body>
 <div class='col-xs-12'>
@@ -36,8 +38,8 @@
                 </form>
             </div>
             <div></div>
-            <div class="col-xs-2 text-right sqbf_btn" style="float:right">
-        	<button type="button" id="apply" class="btn btn-danger btn-default">申请颁发</button>
+            <div class="col-xs-2 text-right sqbf_btn">
+        	    <button type="button" id="apply" class="btn sqbf_btn btn-danger btn-default">申请颁发</button>
        		</div>
             <!--ukey表格 开始-->
             <div class="panel-body" style="padding-bottom:0px;">
