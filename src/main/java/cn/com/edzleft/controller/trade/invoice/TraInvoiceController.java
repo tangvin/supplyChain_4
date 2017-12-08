@@ -1,6 +1,8 @@
 package cn.com.edzleft.controller.trade.invoice;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -8,6 +10,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +25,7 @@ import cn.com.edzleft.entity.InvoiceRecord;
 import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.trade.invoice.TraAttService;
 import cn.com.edzleft.service.trade.invoice.TraInvoiceService;
+import cn.com.edzleft.util.CommUtils;
 import cn.com.edzleft.util.FtpUtil;
 import cn.com.edzleft.util.page.DataGridJson;
 import cn.com.edzleft.util.page.PageUtil;
@@ -69,9 +73,60 @@ public class TraInvoiceController {
 	}
 	
 	@RequestMapping("/update")
+	@ResponseBody
 	public Map update(InvoiceRecord invoiceRecord,@RequestParam MultipartFile uploadFile,HttpSession session,RedirectAttributes attr){
 		//Map<String,Object> jsonMap = new HashMap<String,Object>();
+		
 		Map resultMap = new HashMap<>();  
+		Attachment attachment = new Attachment();
+		String newName="";
+		String imagePath="";
+		boolean result =true;
+        try {  
+        	if (!uploadFile.isEmpty()) {
+        		 // 生成一个文件名  
+                // 获取旧的名字  
+                String oldName = uploadFile.getOriginalFilename();  
+              //获取文件名后缀.的位置
+    			int nodePosition = oldName.lastIndexOf(".");
+    			
+               newName = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase() + oldName.substring(nodePosition);
+                //新名字  
+               // newName = newName + oldName.substring(oldName.lastIndexOf("."));  
+                //上传的路径  
+              //  Date date = new Date();
+                imagePath = "/ukey";
+                //端口号  
+                int port = Integer.parseInt("21");  
+               // System.out.println(FTP_BASEPATH);  
+                //调用方法，上传文件  
+                result = FtpUtil.uploadFile("47.104.103.141", port,  
+                        "gylftpuser", "gylftppwd", "/home/gylftpuser", imagePath,  
+                        newName, uploadFile.getInputStream());  
+			}
+           
+            //判断是否上传成功  
+            if (!result) {  
+                resultMap.put("error", 1);  
+                resultMap.put("message", "上传失败");  
+                return resultMap;  
+            }  
+            resultMap.put("error", 0);  
+            resultMap.put("url", "47.104.103.141" + imagePath + newName); 
+            attachment.setAttachmentName(newName);
+            attachment.setAttachmentId(invoiceRecord.getInvoiceFileAttachment());
+            traAttService.updateImg(attachment);
+            traInvoiceService.update(invoiceRecord);
+            return resultMap;  
+  
+        } catch (IOException e) {  
+            resultMap.put("error", 1);  
+            resultMap.put("message", "上传发生异常");  
+            return resultMap;  
+        }  
+		
+		
+		/*Map resultMap = new HashMap<>();  
 		Attachment attachment = new Attachment();
 		String newName="";
 		String imagePath="";
@@ -109,7 +164,11 @@ public class TraInvoiceController {
             resultMap.put("url", "http://47.104.103.141/uploadfile" + imagePath + newName); 
             attachment.setAttachmentName(newName);
             attachment.setAttachmentId(invoiceRecord.getInvoiceFileAttachment());
-            traAttService.updateImg(attachment);
+            attachment.setAttachmentUrl((String)resultMap.get("url"));
+            if (result) {
+            	traAttService.updateImg(attachment);
+			}
+            
             traInvoiceService.update(invoiceRecord);
             return resultMap;  
   
@@ -117,7 +176,7 @@ public class TraInvoiceController {
             resultMap.put("error", 1);  
             resultMap.put("message", "上传发生异常");  
             return resultMap;  
-        }  
+        }  */
 		
 		
 		
