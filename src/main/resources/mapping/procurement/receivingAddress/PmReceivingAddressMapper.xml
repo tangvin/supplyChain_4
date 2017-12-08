@@ -29,10 +29,27 @@
     where unionID = #{unionID,jdbcType=INTEGER}
   </select>
   
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from gyl_receiving_address
-    where r_address_id = #{rAddressId,jdbcType=INTEGER}
-  </delete>
+   <!-- 查询默认地址address -->
+  <select id="insetOrder" parameterType="Integer" resultType="String">
+    select t.r_address_address from gyl_receiving_address t where t.r_address_default=0 and t.unionID=#{unionID}
+  </select>
+  <!-- 查询默认地址area -->
+  <select id="insetOrder2" parameterType="Integer" resultType="String">
+    select t.r_address_area from gyl_receiving_address t where t.r_address_default=0 and t.unionID=#{unionID}
+  </select>
+  <!-- 查询联系人 -->
+  <select id="insetOrder3" parameterType="Integer" resultType="String">
+    select t.r_address_person from gyl_receiving_address t where t.r_address_default=0 and t.unionID=#{unionID}
+  </select>
+  <!-- 查询联系人手机号 -->
+  <select id="insetOrder4" parameterType="Integer" resultType="String">
+    select t.r_address_phone from gyl_receiving_address t where t.r_address_default=0 and t.unionID=#{unionID}
+  </select>
+  <!-- 查询收货ID -->
+  <select id="insetOrder5" parameterType="Integer" resultType="Integer">
+    select t.r_address_id from gyl_receiving_address t where t.r_address_default=0 and t.unionID=#{unionID}
+  </select>
+  
   <insert id="insert" parameterType="cn.com.edzleft.entity.ReceivingAddress" >
     insert into gyl_receiving_address ( r_address_area, r_address_address, 
       r_address_zipcode, r_address_person, r_address_phone, 

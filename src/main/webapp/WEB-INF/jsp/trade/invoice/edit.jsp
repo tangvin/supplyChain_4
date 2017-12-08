@@ -24,7 +24,7 @@
                 <div class="row">
                 
                     <div class="col-xs-6">
-                    <form id="invoiceForm" onsubmit="return checkInvoiceForm();" action="<%=request.getContextPath()%>/traInvoice/update.action" method="post" enctype="multipart/form-data" class="form-horizontal" role="form" >
+                    <form id="invoiceForm"  action="<%=request.getContextPath()%>/traInvoice/update.action" method="post" enctype="multipart/form-data" class="form-horizontal" role="form" >
                    
                            <input type="hidden" class="form-control" name="id" id="id" value="${invoiceRecord.id }">
                             <div class="form-group">

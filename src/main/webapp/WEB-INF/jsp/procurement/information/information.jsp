@@ -262,7 +262,7 @@
                         </div>
                         <!--银行账户 结束-->
                         <!--三方账户 开始   -->
-                        <div class="tab-pane" id="settings">
+                        <div class="tab-pane"  id="settings">
                             <!--三方账户 开户行开始-->
                             <div class="khh sfzh">
                                 <form class="form-inline khh_form khh_form1" id="informationForm">
@@ -353,7 +353,7 @@
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal" id="getAddress">确认</button>
-                                            <button type="button" class="btn btn-primary">取消</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
                                         </div>
                                     </div>
                                 </div>
@@ -585,7 +585,7 @@
 	                     '<div class="panel-body"><p><span>收货区域：</span>'+item.rAddressArea+'</p><p><span>收货地址：</span>'+item.rAddressAddress+'</p><p><span>收货人：</span>'+item.rAddressPerson+'</p><p><span>邮政编码：</span>'+item.rAddressZipcode+'</p><p><span>收货人手机号：</span>'+item.rAddressPhone+'</p></div>' +
 	                     '</div>' +
 	                     '<div class="hygl_right">' +
-	                     '<div class="panel-body"><div class="mored hy_moren"><input type="radio" value='+item.rAddressDefault+' onclick="radioAddress('+item.rAddressId+',1)"><span>默认</span></div><div class="hy_logo"><img src="images/logo_debang@1x.png" class="imgimg"></div></div>'+
+	                     '<div class="panel-body"><div class="mored hy_moren"><input type="radio" value='+item.rAddressDefault+' onclick="radioAddress('+item.rAddressId+',0)"><span>默认</span></div><div class="hy_logo"><img src="images/logo_debang@1x.png" class="imgimg"></div></div>'+
 	                     '</div>' +
 	                     '</div>' +
 	                     '<div class="media-body"><button type="button" class="btn btn-danger btn-default" onclick="deleteAddress('+item.rAddressId+')">删除</button></div>' +
@@ -607,7 +607,7 @@
 	          
 	             var input=$('.hy_moren input[type=radio]')
 	             for(var i=0;i<input.length;i++){
-	                 if(data[i].rAddressDefault=='1'){
+	                 if(data[i].rAddressDefault=='0'){
 	                     $(input[i]).attr('checked',true)
 	                 }
 	             }

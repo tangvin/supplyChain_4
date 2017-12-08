@@ -38,9 +38,9 @@
         <div class="col-xs-12 zlxx_top">
             <a href="gyl_index.html">系统首页</a>
             <span>></span>
-            <a href="gyl_index.html?t=ddgl">订单管理</a>
+            <a id="ddgla"">订单管理</a>
             <span>></span>
-            <a href="#">新增订单</a>
+            <a href="#">查看订单</a>
         </div>
         <!--合同签约 头部 end-->
         <div class="col-xs-12">
@@ -225,7 +225,7 @@
                             <td class="col-xs-3 text-right">联系人手机号：</td>
                             <td class="col-xs-8 text-left">
                                <%--  <span>${receivingAddress.rAddressPhone}</span> --%>
-                            	<input type="text" value="${receivingAddress.rAddressPhone}">
+                            	 <span style="float: left;margin-top: 5px;">${receivingAddress.rAddressPhone}</span>
                             </td>
                         </div>
                     </tr>
@@ -238,6 +238,9 @@
 </div>
 </body>
 <script>
+$('#ddgla').click(function(){
+    $('#load').load('<%=request.getContextPath()%>/procurementMain/ddgl.action')
+})
 
 
     $('#id').click(function(){

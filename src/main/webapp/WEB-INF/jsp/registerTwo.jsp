@@ -30,6 +30,15 @@
             width:120px;
             height:40px;
         }
+         .rsg_one{
+            position: relative;
+         }
+        .return{
+           position: absolute;
+            right:10px;
+            top:-20px;
+            cursor: pointer;
+        }
         .rsg_one_xx{
             width:80%;
             box-sizing: border-box;
@@ -62,6 +71,7 @@
     <div class='rsg rsg1 center-block'>
         <div class="rsg_one">
             <h3 class="text-center">新用户申请</h3>
+            <a href="#" id="colseRegister"><img src='<%=request.getContextPath()%>/js/static/images/return.png' class="return"></a>
             <form class='form-inline center-block rsg_one_xx'>
                 <div class="row">
                     <label class="col-xs-4 text-center">账号</label>
@@ -84,6 +94,9 @@
 </div>
 </body>
 <script>
+$("#colseRegister").click(function(){
+	window.location="<%=request.getContextPath()%>/captialMain/login.action";
+})
     var rsg_mm=$('#rsg_mm').val()
     var rsg_qrmm=$('#rsg_qrmm').val()
     $(document).on('click','#next_bu',function(){
@@ -94,4 +107,5 @@
         }
     })
 </script>
+
 </html>

@@ -32,20 +32,15 @@ import java.util.Map;
 @RequestMapping("/pmorder")
 public class PmOrderController {
 
-	/**
-	 * 查询订单列表
-	 */
 	@Autowired
 	private PmOrderService pmOrderService;
 	@Autowired
 	private PmReceivingAddressService pmreceivingAddressservice;
 	
-	@Autowired
-	private PmHomePageService pmHomePageService;
-
-	@Autowired
-	private  HttpSession session;
-
+	
+	/**
+	 * 查询订单列表
+	 */
 	@RequestMapping(value="/pmgetorder")
 	@ResponseBody
 	public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String orderCreatorTrade,String orderStatus,String creditGrantor){
