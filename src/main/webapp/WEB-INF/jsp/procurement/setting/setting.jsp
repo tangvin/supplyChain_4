@@ -83,6 +83,7 @@
 				success:function(data){
 					if(data.success){
 						alert("保存成功");
+						setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/setting.action')",500);
 					}else{
 						alert("保存失败");					
 					}

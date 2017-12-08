@@ -33,7 +33,7 @@
 
 
   <!--根据账号id查询账号信息-->
-  <select id="selectAccountById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectAccountById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     user_id,user_name,user_pwd,account_type,user_phone
     from gyl_account
@@ -138,8 +138,9 @@
       </if>
     </trim>
   </insert>
-  <!--修改账户密码-->
-  <update id="updatePassword" parameterType="cn.com.edzleft.entity.Account" >
+
+  <!--修改账信息-->
+  <update id="updateMessage" parameterType="cn.com.edzleft.entity.Account" >
     update gyl_account
     <set >
       <if test="userName != null" >

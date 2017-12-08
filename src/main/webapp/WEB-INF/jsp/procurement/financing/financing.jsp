@@ -157,7 +157,7 @@
         }else{
             seconds = ''+seconds
         }
-        return year+"-"+month+"-"+day+"-"+hours+":"+minutes+":"+seconds;
+        return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
     }
 </script>
 </html>

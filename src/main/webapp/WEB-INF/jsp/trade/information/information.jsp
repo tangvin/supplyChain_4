@@ -441,21 +441,21 @@
                         return index+1;
                     }
                 },
-                {field:'tripartiteDepositBank',title:'开户行',width:100},
-                {field:'tripartiteCreditHolderPurchaser',title:'户主（采购方）',width:100},
-                {field:'tripartiteAccountNumber',title:'账号',width:100},
-                {field:'tripartiteAccountOpentime',title:'账号开通时间',width:100,
+                {field:'tripartiteDepositBank',title:'开户行'},
+                {field:'tripartiteCreditHolderPurchaser',title:'户主（采购方）'},
+                {field:'tripartiteAccountNumber',title:'账号'},
+                {field:'tripartiteAccountOpentime',title:'账号开通时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }
                 },
-                {field:'tripartiteAccountOpenpeople',title:'账号开通人',width:100},
-                {field:'tripartiteAmountCreateTime',title:'创建时间',width:100,
+                {field:'tripartiteAccountOpenpeople',title:'账号开通人'},
+                {field:'tripartiteAmountCreateTime',title:'创建时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }
                 },
-                {field:'tripartiteAmountCreatePeople',title:'创建人',width:100}
+                {field:'tripartiteAmountCreatePeople',title:'创建人'}
             ],
             url:'<%=request.getContextPath()%>/tripartite/tripartitePage.action',
             method:'post',

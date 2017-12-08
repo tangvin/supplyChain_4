@@ -69,17 +69,17 @@
     $(function(){
         $("#financingTable").bootstrapTable({
             columns:[
-                {field:'financialNumbers',title:'财务编号',width:100},
-                {field:'amount',title:'金额',width:100},
-                {field:'billTime',title:'发生时间',width:100,
+                {field:'financialNumbers',title:'财务编号'},
+                {field:'amount',title:'金额'},
+                {field:'billTime',title:'发生时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }
                 },
-                {field:'financialType',title:'财务类型',width:100},
-                {field:'belongOrderId',title:'所属订单',width:100},
-                {field:'payer',title:'发生方',width:100},
-                {field:'bankAcountId',title:'发生银行账户及类型',width:100,
+                {field:'financialType',title:'财务类型'},
+                {field:'belongOrderId',title:'所属订单'},
+                {field:'payer',title:'发生方'},
+                {field:'bankAcountId',title:'发生银行账户及类型',
                     formatter:function(value,row,index){
                         console.log(row)
                         var str=''
@@ -87,7 +87,7 @@
                         return str
                     }
                 },
-                {field:'bankCard',title:'发生方账户(采方)',width:100},
+                {field:'bankCard',title:'发生方账户(采方)'},
             ],
             url:'<%=request.getContextPath()%>/financial/getAllFinancial.action',
             method:'post',

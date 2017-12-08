@@ -86,10 +86,10 @@ public class PmReceivingAddressServiceImpl implements PmReceivingAddressService{
 		 SessionInfo sessions = (SessionInfo) session.getAttribute("sessionInfo");
 	     Integer userId = sessions.getAdmin().getUserId();
 	     List<ReceivingAddress> list = pmReceivingAddressMapper.selectByPrimaryKey(userId);
-	     if(value==1){
+	     if(value==0){
 	    	 for(ReceivingAddress r : list){
-	    		 if(r.getrAddressDefault()==1){
-	    			 r.setrAddressDefault(0);
+	    		 if(r.getrAddressDefault()==0){
+	    			 r.setrAddressDefault(1);
 	    			 pmReceivingAddressMapper.updAddress(r);
 	    		 }
 	    	 }

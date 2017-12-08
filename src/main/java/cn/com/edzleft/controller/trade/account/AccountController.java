@@ -130,33 +130,6 @@ public class AccountController {
 
 
 
-
-
-/*
-    //注册
-    public String register(Account a,ModelMap modelMap) {
-
-        if (a.getUserName() == "" || a.getUserPwd() == "") {
-            String str = "输入有误!";
-            modelMap.addAttribute("error", str);
-            return "forward:/regist.jsp";
-        } else {
-            accountService.addAccount(a);
-            if (a.getAccountType() == 0) {
-                return "/procurement/main";
-            } else if (a.getAccountType() == 1) {
-                return "/trade/main";
-            } else if (a.getAccountType() == 2) {
-                return "/capital/main";
-            }
-            return "login";
-        }
-    }
-
-    */
-
-
-
     /**
      * 修改账户密码
       * @return

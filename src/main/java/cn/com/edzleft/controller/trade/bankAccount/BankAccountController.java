@@ -52,10 +52,11 @@ public class BankAccountController {
      */
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     @ResponseBody
-    public int saveInformation(BankAccount bankAccount){
+    public String saveInformation(BankAccount bankAccount){
         SessionInfo sessionInfo = new SessionInfo();
         sessionInfo.setBankAccount(bankAccount);
-        return 1;
+        System.out.println("1111");
+        return "/trade/information/bankTwo";
     }
 
     /**

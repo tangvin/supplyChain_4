@@ -39,6 +39,8 @@ public class AccountServiceImpl implements AccountService {
             System.out.println("本机的ip是 ："+localip);
             a.setLoginIp(localip);
             a.setLoginTime(new Date());
+
+            accountMapper.updateMessage(a);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -74,7 +76,7 @@ public class AccountServiceImpl implements AccountService {
                 if(queryPwd.equals(oldPwd) && newPwd.equals(confirmPwd)) {
                     Account account = new Account();
                     account.setUserPwd(newPwd);
-                    int t = accountMapper.updatePassword(account);
+                    int t = accountMapper.updateMessage(account);
                     if(t==1){
                         return new ResultBean(1,"修改成功");
                     }

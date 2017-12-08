@@ -2,8 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en">
-<%-- <script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/jquery.min.js"></script>
- --%><head>
+<head>
     <meta charset="UTF-8">
     <title>编辑</title>
     <style>
@@ -30,9 +29,7 @@
         .ckdd{
             margin-bottom:15px;
         }
-        #eid1,#eid2{
-          display:none;
-        }
+      
     </style>
 </head>
 <body>
@@ -40,11 +37,11 @@
 	    <div class='row'>
         <!--合同签约 头部-->
         <div class="col-xs-12 zlxx_top">
-            <a href="gyl_index.html">系统首页</a>
+            <a href="<%=request.getContextPath()%>/procurementMain/procurementMain.action">系统首页</a>
             <span>></span>
-            <a href="gyl_index.html?t=ddgl">订单管理</a>
+            <a href="#" id="ddgls">订单管理</a>
             <span>></span>
-            <a href="#">新增订单</a>
+            <a href="#">订单编辑</a>
         </div>
      </div>
         <!--合同签约 头部 end-->
@@ -68,7 +65,7 @@
 									<tr>
 										<div class="row">
 											<td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-											<td><input type="text" value="${order.orderCreator}" name="orderCreator"></td>
+											<td class="col-xs-9 text-left"><input type="text" value="${order.orderCreator}" name="orderCreator"></td>
 										</div>
 									</tr>
 									<tr>
@@ -173,7 +170,7 @@
 	                            		
 	                            	</select>
 	                            </td>
-	                            
+	                            <input type="hidden" name="rAddressId" id="rAddressId" />
 	                        </div>
 	                    </tr>
 	                    <tr>
@@ -200,6 +197,8 @@
 	            </form>
 	<%--eid1 from 表单 结束--%>
 		    </div>
+		    
+		    
 	<%--eid1 结束--%>
 	<%--eid 2 开始--%>
 		    <div id="eid2">
@@ -207,7 +206,7 @@
 					<div class="col-xs-12">
 						<div class="row jbxx_row ckdd">
 						<div class="col-xs-8">
-						<h5>订单信息1212312</h5>
+						<h5>订单信息76656454</h5>
 						</div>
 						</div>
 						<div class="table-responsive text-center col-xs-12">
@@ -217,19 +216,19 @@
 					<tr>
 					<div class="row">
 					<td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-					<td><input type="text" value="${order.orderCreator}" name="orderCreator"></td>
+					<td class="col-xs-9 text-left"><input type="text" disabled="disabled" value="${order.orderCreator}" name="orderCreator"></td>
 					</div>
 					</tr>
 					<tr>
 					<div class="row">
 					<td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
-					<td class="col-xs-9 text-left"><input type="text" value="${contract.contractNumber}  name="contractName"></td>
+					<td class="col-xs-9 text-left"><input type="text" disabled="disabled" value="${contract.contractNumber}  name="contractName"></td>
 					</div>
 					</tr>
 					<tr>
 					<div class="row">
 					<td class="col-xs-3 text-right"><span class="xingxing">*</span>货物商品：</td>
-					<td class="col-xs-9 text-left"><input type="text" value="${order.goods}" name="goods"></td>
+					<td class="col-xs-9 text-left"><input type="text" disabled="disabled" value="${order.goods}" name="goods"></td>
 					</div>
 					</tr>
 					<tr>
@@ -241,7 +240,7 @@
 					<tr>
 					<div class="row">
 					<td class="col-xs-3 text-right"><span class="xingxing">*</span>订单金额：</td>
-					<td class="col-xs-8 text-left"><input type="text" value="${order.orderAmount}" name="orderAmount"></td>
+					<td class="col-xs-8 text-left"><input type="text" disabled="disabled" value="${order.orderAmount}" name="orderAmount"></td>
 					</div>
 					</tr>
 					<tr>
@@ -287,7 +286,7 @@
 					<tr>
 					<div class="row">
 					<td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-					<td class="col-xs-9 text-left"> <input type="text"  value="${order.orderCreator}"></td>
+					<td class="col-xs-9 text-left"> <input type="text" disabled value="${order.orderCreator}"></td>
 					</div>
 					</tr>
 					<tr>
@@ -331,13 +330,16 @@
 	<%--eid 2 结束--%>
 	</div>
 </body>
-<script type="text/javascript">
+<script>
+$('#ddgls').click(function(){
+    $('#load').load('<%=request.getContextPath()%>/procurementMain/ddgl.action')
+})
+
 /* 获取下拉框的值 */
 $.ajax({
     url:'<%=request.getContextPath()%>/pmorder/addresshx.action',
     type:'post',
     success:function(data){
-    	console.log(data);
         function setDiv(item){
             var option='<select>' +
                        '<option value='+item.rAddressId+'>'+item.rAddressArea+''+item.rAddressAddress+'</option>' +
@@ -390,20 +392,6 @@ $.ajax({
     }
 })
 
-$("#sureUpdate2").click(function(){
-  /* console.log($("#form2").serialize());
-	return false; */
-		 $.ajax({
-	         url:'<%=request.getContextPath()%>/pmorder/updateOrder.action',
-	         data:$("#form2").serialize(),
-	         type:'post',
-	         dataType:'json',
-	         success:function(data){
-	         	alert("编辑完成");
-	         }
-	     });
- });
-
 
 $(function(){
 	$('#id').click(function(){
@@ -414,26 +402,38 @@ $(function(){
         }
     })
     
-
-  $("#sureUpdate1").click(function(){
+  /*   编辑待确认和已驳回 */
+    
+     $("#sureUpdate1").click(function(){
 	   	 $.ajax({
-	            url:'<%=request.getContextPath()%>/pmorder/updateOrder.action?rAddressId'+sh_id,
+	            url:'<%=request.getContextPath()%>/pmorder/updateOrder.action',
 	            data:$("#form1").serialize(),
 	            type:'post',
 	            dataType:'json',
 	            success:function(data){
 	            	alert("编辑完成");
+	            	setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/ddgl.action')",500);
 	            }
 	        });
-   }); 
-	
-		
-	
-	
+   });
+	/*编辑daifukua*/
+    $("#sureUpdate2").click(function(){
+		 $.ajax({
+	         url:'<%=request.getContextPath()%>/pmorder/updateOrder.action',
+	         data:$("#form2").serialize(),
+	         type:'post',
+	         dataType:'json',
+	         success:function(data){
+	         	alert("编辑完成");
+	         	setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/ddgls.action')",500);
+	         }
+	     });
+ });
+
 	if(${order.orderStatus}==0 || ${order.orderStatus}==6){
-		$('#eid1').css('display','block')
+		$('#eid2').html('')
 	}else{
-		$('#eid2').css('display','block')
+		$('#eid1').html('')
 	}
 	
 	

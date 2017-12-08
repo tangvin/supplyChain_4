@@ -35,4 +35,8 @@ public interface BankAccountService {
      * @return
      */
     public int setbankAccount(Integer id,Integer value,HttpSession session);
+
+
+    //根据银行卡查询出当前绑定的手机号
+     public  BankAccount queryBankAccountByNumber(String num);
 }

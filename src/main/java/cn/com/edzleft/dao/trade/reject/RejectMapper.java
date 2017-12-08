@@ -24,4 +24,9 @@ public interface RejectMapper {
      */
     public int selectRejectReason(Integer id);
 
+    /**
+     * 修改驳回记录
+     */
+    public int updateReject(Integer id);
+
 }
