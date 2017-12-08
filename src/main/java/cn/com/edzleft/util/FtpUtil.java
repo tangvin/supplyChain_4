@@ -27,8 +27,9 @@ public class FtpUtil {
      */    
     public static boolean uploadFile(String host, int port, String username, String password, String basePath,  
             String filePath, String filename, InputStream input) {  
-        boolean result = false;  
-        FTPClient ftp = new FTPClient();  
+    	boolean result = false;  
+        FTPClient ftp = new FTPClient(); 
+       // ftp.setControlEncoding("UTF-8");
         try {  
             int reply;  
             ftp.connect(host, port);// 连接FTP服务器  
@@ -59,7 +60,7 @@ public class FtpUtil {
             //设置上传文件的类型为二进制类型  
             ftp.setFileType(FTP.BINARY_FILE_TYPE);  
             //上传文件  
-            if (!ftp.storeFile(filename, input)) {  
+            if (!ftp.storeFile(filename,input)) {  
                 return result;  
             }  
             input.close();  

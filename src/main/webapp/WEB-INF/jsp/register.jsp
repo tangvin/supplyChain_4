@@ -35,6 +35,16 @@
             box-sizing: border-box;
             margin-top:40px;
             padding-left: 30px;
+            
+        }
+        .rsg_one{
+            position: relative;
+         }
+        .return{
+           position: absolute;
+            right:10px;
+            top:-20px;
+            cursor: pointer;
         }
         .rsg_one_xx div{
             margin-bottom:10px !important;
@@ -69,16 +79,18 @@
     </div>
     <div class='rsg center-block'>
         <div class="rsg_one">
-            <h3 class="text-center">新用户申请</h3>
+            <a href="#" id="colseRegister"><img src='<%=request.getContextPath()%>/js/static/images/return.png' class="return"></a>
+            <h3 class="text-center">新用户申请</h3>  
             <div class="registeredIdentity center-block row">
-                <div class="col-xs-4"><button class="btn center-block">资方</button></div>
-                <div class="col-xs-4"><button class="btn center-block">贸易商</button></div>
-                <div class="col-xs-4"><button class="btn center-block">采购商</button></div>
+                <div class="col-xs-4"><button name="button" value="0" class="btn center-block">采购商</button></div>
+                <div class="col-xs-4"><button name="button" value="1" class="btn center-block">供应商</button></div>
+                <div class="col-xs-4"><button name="button" value="2" class="btn center-block">资方</button></div>
             </div>
-            <form class='form-inline center-block rsg_one_xx'>
+            <!-- method="post" action="customer/register.do" id="J_phone" -->
+            <form  class='form-inline center-block rsg_one_xx'>
                 <div class="row">
                     <label class="col-xs-4 text-center">联系人</label>
-                    <input id="reg_sjh" type="text" class="form-control" placeholder="姓名">
+                    <input id="reg_sjh" type="text" class="form-control" placeholder="姓名" value="">
                 </div>
                 <div class="row">
                     <label class="col-xs-4 text-center">手机号</label>
@@ -90,16 +102,23 @@
                     <input id="btnSendCode" class="btn" type="button" value="获取验证码" onclick="sendMessage()" />
                 </div>
             </form>
-            <a id="tz"><button class="btn center-block btn-primary" id="next_bu" onclick="next_bu()">下一步</button></a>
+            <a class="btn center-block btn-primary" id="next_bu" >下一步</a>
         </div>
 
     </div>
-    <p class='text-center rsg_copy'>Copyright © 2017 美创互联科技有限公司版权所有 &nbsp; 京ICP备17069390号-1</p>
+    <p class='text-center rsg_copy'>Copyright © 2017 版权所有 </p>
+    <p class='text-center'><a target="_blank" href="http://www.miitbeian.gov.cn/">京ICP备17069390号-1</a></p>
 </div>
 </body>
 <script>
+
+$("#colseRegister").click(function(){
+	window.location="<%=request.getContextPath()%>/captialMain/login.action";
+})
+
     //    alert($('.registeredIdentity div button[class$=btn-danger]').text())
     $(".registeredIdentity>div").click(function(){
+    	
         $(this).children('button').addClass('btn-danger');
         $(this).siblings().children('button').removeClass('btn-danger');
 //        alert( $(this).children('button').text())
@@ -110,10 +129,46 @@
     var curCount;//当前剩余秒数
     var code = ""; //验证码
     var codeLength = 6;//验证码长度
-    var phone=$("#phone").val();//手机号码
+    
+    
+	/* $(function(){
+		var arr = document.getElementsByTagName('button');
+		var accountType;
+		for(var i = 0;i<arr.length;i++){
+			arr[i].onclick = function(){
+				accountType=this.value;	
+			}
+			
+		}
+	}) */
+	
+     $("#next_bu").click(function(){
+    	 if($('#reg_sjh').val()==''){
+             alert('请输入姓名')
+         }else if($('#phone').val()==''||!myreg.test($('#phone').val())){
+             alert('请输入正确手机号')
+         }else if($('#checkCode').val()==''){
+             alert('请输入验证码')
+         }else if(!$('.registeredIdentity div button').hasClass('btn-danger')){
+             alert('请选择注册身份')
+         }else{
+        	 $(this).attr('href','<%=request.getContextPath()%>/captialMain/registerTwo.action')
+         }
+    	<%-- alert("111") 
+    	 $(this).attr('href','<%=request.getContextPath()%>/captialMain/registerTwo.action')
+    	$.ajax({
+    		url:'<%=request.getContextPath()%>/register2/first.action',
+    		type:'post',
+    		success:function(data) {
+    			$('#tz').attr('href','<%=request.getContextPath()%>/captialMain/registerTwo.action')
+    			alert(data)
+    		}
+    	}) --%>
+    }) 
+    
     var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;
-    function next_bu(){
-        if($('#reg_sjh').val()==''){
+    function next_bus(){
+      if($('#reg_sjh').val()==''){
             alert('请输入姓名')
         }else if($('#phone').val()==''||!myreg.test($('#phone').val())){
             alert('请输入正确手机号')
@@ -121,9 +176,39 @@
             alert('请输入验证码')
         }else if(!$('.registeredIdentity div button').hasClass('btn-danger')){
             alert('请选择注册身份')
-        }else{
-            $('#tz').attr('href','<%=request.getContextPath()%>/captialMain/registerTwo.action')
-        }
+        }else{ 
+        	$(this).attr('href','<%=request.getContextPath()%>/captialMain/registerTwo.action')
+        	<%-- $.ajax({
+        		url : '<%=request.getContextPath()%>/register/first.action',
+        		type:'post',
+        		success:function(data) {
+        			$('#tz').attr('href','<%=request.getContextPath()%>/captialMain/registerTwo.action')
+        		}
+        	})
+        	var userPhone=$("#phone").val();//手机号码
+            var userLinkman=$('#reg_sjh').val();//联系人
+            var checkCode=$('#checkCode').val();//验证码
+            var accountType = $('.registeredIdentity div button[class$=btn-danger]').val();
+            
+        	$.ajax({
+				
+				url : '<%=request.getContextPath()%>/register/first.action', 
+				data : {
+					accountType:accountType,
+					userLinkman:userLinkman,
+					userPhone:userPhone,
+					checkCode:checkCode
+				},
+				type:'post',
+				success : function(data) {
+					if (data.success) {
+						$('#tz').attr('href','<%=request.getContextPath()%>/captialMain/registerTwo.action')
+					}else{
+						alert("验证码错误");
+					}
+				}
+			}); --%>
+        } 
     }
     function sendMessage() {
         curCount = count;
@@ -145,15 +230,7 @@
             $("#btnSendCode").attr("disabled", "true");
             $("#btnSendCode").val( + curCount + "秒");
             InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
-            //向后台发送处理数据
-//            $.ajax({
-//                type: "POST", //用POST方式传输
-//                dataType: "text", //数据格式:JSON
-//                url: '', //目标地址
-//                data: "phone=" + phone + "&code=" + code,
-//                error: function (XMLHttpRequest, textStatus, errorThrown) { },
-//                success: function (msg){ }
-//            });
+            
         }
     }
     //timer处理函数

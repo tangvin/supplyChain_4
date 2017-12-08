@@ -35,7 +35,7 @@
 	
 	<!--条件查询总条数-->
   <select id="getInvoiceRecordEntityCountsByConditions"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
-    select count(*) gyl_invoice i 
+    select count(*) from gyl_invoice i 
 	inner join gyl_account a on i.user_id = a.user_id
 	inner join gyl_account a2 on i.invoice_user_id = a2.user_id
 	inner join gyl_information c on a.information_id = c.id
