@@ -3,7 +3,6 @@ package cn.com.edzleft.controller.procurement.bankAccount;
 import cn.com.edzleft.entity.BankAccount;
 import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.procurement.bankAccount.PmBankAccountService;
-import cn.com.edzleft.service.trade.bankAccount.BankAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>飞讯金服</title>
 </head>
-<body style="padding:0;margin:0;overflow:hidden;">
+<body style="padding:0;margin:0;overflow:auto;">
 <div class="container-fluid login-top">
     <div class='container container-logo'>
         <img src='<%=request.getContextPath()%>/js/static/images/logo1.5@1x.png'>

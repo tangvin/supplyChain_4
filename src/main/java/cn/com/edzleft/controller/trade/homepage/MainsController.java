@@ -22,19 +22,50 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value="tradeMain")
 public class MainsController {
 
-        @Autowired
-        private TradeInformationService tradeInformationService;
-        @Autowired
-        private AccountService accountService;
-        @Autowired
-        private TradeOrderService tradeOrderService;
-        @Autowired
-        private FreightService freightService;
-        @Autowired
-        private ReceivingAddressService receivingAddressService;
-        @Autowired
-        private ContractSigningService contractSigningService;
+    @Autowired
+    private TradeInformationService tradeInformationService;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private TradeOrderService tradeOrderService;
+    @Autowired
+    private FreightService freightService;
+    @Autowired
+    private ReceivingAddressService receivingAddressService;
+    @Autowired
+    private ContractSigningService contractSigningService;
 
+    /**
+     * 添加银行卡第三步
+     * @return
+     */
+    @RequestMapping("bankThree")
+    public String bankThree(){
+        return "/trade/information/bankThree";
+    }
+
+    /**
+     * 添加银行卡第二部
+     * @return
+     */
+    @RequestMapping("bankTwo")
+    public ModelAndView bankTwo(HttpSession session,BankAccount bankAccount){
+        Integer userId = bankAccount.getUserId();
+        Account account = accountService.queryAcountById(userId);
+        ModelAndView modelAndView = new ModelAndView("/trade/information/bankTwo");
+        modelAndView.addObject("bankAccount",bankAccount);
+        modelAndView.addObject("account",account);
+        return modelAndView;
+    }
+
+    /**
+     * 添加银行卡第一步
+     * @return
+     */
+    @RequestMapping("bankOne")
+    public String bankOne(){
+        return "/trade/information/bankOne";
+    }
 
     /**
      * 订单查看
@@ -271,9 +302,11 @@ public class MainsController {
         ModelAndView mv = new ModelAndView("/trade/main");
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer userId = session.getAdmin().getUserId();
+        String userName = session.getAdmin().getUserName();
         Information information = tradeInformationService.queryBaseInformation(userId);
-        System.out.println(information);
+        Account account = accountService.queryAccountByName(userName);
         mv.addObject("information",information);
+        mv.addObject("account",account);
         return mv;
     }
 

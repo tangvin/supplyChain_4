@@ -15,8 +15,14 @@ public interface PmReceivingAddressService {
     int updateByPrimaryKeyWithBLOBs(ReceivingAddress record);
 
     int updateByPrimaryKey(ReceivingAddress record);
+    /**
+     * 添加收货地址
+     * @param ra
+     * @param sessionInfo
+     * @return
+     */
 
-	int insert(ReceivingAddress ra);
+	int insert(ReceivingAddress ra, HttpSession sessionInfo);
 
 	ReceivingAddress queryReceivingAddress(Integer addressId);
 

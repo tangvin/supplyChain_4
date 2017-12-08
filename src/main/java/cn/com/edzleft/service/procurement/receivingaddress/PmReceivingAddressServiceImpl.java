@@ -24,8 +24,19 @@ public class PmReceivingAddressServiceImpl implements PmReceivingAddressService{
 	 *添加收货地址
 	 */
 	@Override
-	public int insert(ReceivingAddress ra) {
-		return this.pmReceivingAddressMapper.insert(ra);
+	public int insert(ReceivingAddress ra,HttpSession session) {
+		SessionInfo sessions = (SessionInfo) session.getAttribute("sessionInfo");
+		Integer userId = sessions.getAdmin().getUserId();
+		List<ReceivingAddress> list = pmReceivingAddressMapper.selectByPrimaryKey(userId);
+        if(ra.getrAddressDefault()==0){
+        	for(ReceivingAddress r : list){
+        		ra.setrAddressDefault(1);
+        		pmReceivingAddressMapper.updAddress(r);
+        	}
+        }
+		ra.setUnionID(userId);;
+		int i = pmReceivingAddressMapper.insert(ra);
+		return i;
 	}
 
 	/**

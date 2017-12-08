@@ -41,7 +41,7 @@ public class mainController {
     public String register(){
         return "/register";
     }
-    
+
     /**
      * 认证资料
      * @return

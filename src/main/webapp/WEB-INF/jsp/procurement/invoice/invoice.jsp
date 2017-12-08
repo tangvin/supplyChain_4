@@ -20,6 +20,7 @@
         .fpgl{
             margin-right:0;
         }
+     
     </style>
 </head>
 <body>
@@ -44,12 +45,6 @@
                         <label>开票人</label>
                         <input type="text" class="form-control" id="drawer">
                     </div>
-                   <!--  <div class="form-group form-group1">
-                        <label>创建时间</label>
-                        <input type="text" class="form-control">
-                       <input type="text" readonly="readonly"  name="createTime" id="createTime" class="form-control" value="" />
-                    </div> -->
-                    
                     
                     <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>
                     <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
@@ -60,7 +55,7 @@
            
             <!--合同分页 eng-->
             <!--合同表格 开始-->
-            <div class="table-responsive text-center" style="height:200px;margin-top:30px">
+            <div class="table-responsive text-center" style="overflow-y:hidden;margin-top:40px">
                 <table class="table table-bordered text-center htbg fpgl" id="tb_invoice">
                     
                 </table>
@@ -81,13 +76,7 @@
     	
     	$("#tb_invoice").bootstrapTable({
             columns:[
-                { //field: 'Number',//可不加
-                    title: '序号',//标题  可不加
-                    width:100,
-                    formatter: function (value, row, index) {
-                        return index+1;
-                    }
-                },
+            	
                 {field:'invoiceNumber',title:'发票编号',width:100},
                 {field:'invoiceNo',title:'发票号',width:100},
                 {field:'drawer',title:'开票人',width:100},

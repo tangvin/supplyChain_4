@@ -26,4 +26,13 @@ public interface AccountMapper {
      */
     public int updatePassword(Account loginer);
 
+    /**
+     * 更新用户信息
+     */
+
+    /**
+     * 根据id查询用户信息
+     */
+    public Account selectAccountById(Integer id);
+
 }

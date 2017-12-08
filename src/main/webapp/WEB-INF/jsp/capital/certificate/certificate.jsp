@@ -60,15 +60,6 @@ $(function(){
 	apply();
     $("#tb_ukey").bootstrapTable({
         columns:[
-            { //field: 'Number',//可不加
-                title: '序号',//标题  可不加
-                width:30,
-                formatter: function (value, row, index) {
-                    return index+1;
-                	//var options = $("#tb_ukey").bootstrapTable('getOptions');  
-                   // return options.pageSize * (options.pageNumber - 1) + index + 1;
-                }
-            },
             {field:'ukeyType',title:'类型',width:100},
             {field:'issuedPeople',title:'颁发人',width:100},
             {field:'issuedTime',title:'颁发时间',width:100,
@@ -85,16 +76,15 @@ $(function(){
                         return "失效";
                     }
                 } 
-            },{field:'attachmentName',title:'文件名',width:100} ,
-            {field:'attachmentUrl',title:'操作',width:25,
-            	 formatter:function(value){
-            		 //alert(value);
-                     var str = '';
-                         str += '<a href=\"'+value+'\">下载</a>';
-//                        'window.location.href=\"crm/activity/detail.do?id="+obj.id+"\";' 
-                     return str;
-                 }
+            },
+            {field:'attachmentName',title:'下载证书',width:100,
+                formatter:function(value,row,index){
+                    var attchment='';
+                    attchment = '<a href="#">'+value+'</a>';
+                    return attchment;
+                }
             }
+
         ],
         url:'<%=request.getContextPath()%>/certificate/ukeyList.action',
 							method : 'post',

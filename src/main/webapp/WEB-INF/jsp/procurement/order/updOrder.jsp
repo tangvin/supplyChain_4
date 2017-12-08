@@ -297,7 +297,7 @@
 					<select class="ss" id="dd">
 					
 					</select>
-					<input type="hidden" name="sh_id" id="sh_id" />
+					<input type="hidden" name="rAddressId" id="rAddressId" />
 					</td>
 
 					</div>
@@ -347,13 +347,17 @@ $.ajax({
         function getnoApplicationData111(){
             var html = ''
             for(var i = 0;i<data.data.length;i++){
-                html += setDiv(data.data[i])
+                html += setDiv(data.data[i]);
             }
-            $('.ss').html(html)
+            $('.ss').html(html);
         }
-        getnoApplicationData111()
+        getnoApplicationData111();
+        
+        var adid = $('.ss').children('option:selected').val();
+        $('#rAddressId').attr('value',adid);
+
         $('.ss').change(function(){
-        $('#sh_id').attr('value',$(this).children('option:selected').val());
+        $('#rAddressId').attr('value',$(this).children('option:selected').val());
 	    for(var i=0;i<data.data.length;i++){
 	        if($(this).children('option:selected').val()==data.data[i].rAddressId){
 	            //console.log(data.data[i])
@@ -387,11 +391,10 @@ $.ajax({
 })
 
 $("#sureUpdate2").click(function(){
-	var a = 
-	/* console.log($("#form2").serialize());
-	return false;  */
+  /* console.log($("#form2").serialize());
+	return false; */
 		 $.ajax({
-	         url:'<%=request.getContextPath()%>/pmorder/updateOrder.action?rAddressId'+sh_id,
+	         url:'<%=request.getContextPath()%>/pmorder/updateOrder.action',
 	         data:$("#form2").serialize(),
 	         type:'post',
 	         dataType:'json',
@@ -399,9 +402,7 @@ $("#sureUpdate2").click(function(){
 	         	alert("编辑完成");
 	         }
 	     });
-		 	   
  });
-
 
 
 $(function(){
@@ -415,7 +416,6 @@ $(function(){
     
 
   $("#sureUpdate1").click(function(){
-	   alert("修改");
 	   	 $.ajax({
 	            url:'<%=request.getContextPath()%>/pmorder/updateOrder.action?rAddressId'+sh_id,
 	            data:$("#form1").serialize(),

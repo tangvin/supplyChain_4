@@ -24,13 +24,13 @@
         AND financial_type  LIKE '%${whereMap.financialType}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.billTime != null and whereMap.billTime != ''">
-        AND bill_time &gt;= '${whereMap.billTime}'
+        AND bill_time &gt;= '%${whereMap.billTime}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.payer != null and whereMap.payer != ''">
-        AND payer &lt;= '${whereMap.payer}'
+        AND payer LIKE '${whereMap.payer}'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.bankAccountId != null and whereMap.bankAccountId != ''">
-        AND bank_account_id &lt;= '${whereMap.bankAccountId}'
+        AND bank_account_id LIKE '%${whereMap.bankAccountId}%'
       </if>
     </trim>
   </sql>

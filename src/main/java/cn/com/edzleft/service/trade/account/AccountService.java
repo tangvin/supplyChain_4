@@ -19,4 +19,7 @@ public interface AccountService {
     //修改账户密码
     public ResultBean updatePassword(HttpSession session, String oldPwd, String newPwd,String confirmPwd);
 
+
+    //根据id 查看账户信息
+    public Account queryAcountById(Integer id);
 }

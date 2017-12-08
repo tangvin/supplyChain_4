@@ -65,7 +65,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">详细信息</h4>
+                                            <h4 class="modal-title" id="myModalLabel">详情</h4>
                                         </div>
                                         <div class="modal-body">
                                             <div class="table-responsive text-center">
@@ -77,7 +77,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                                         </div>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabelLetter">用信详情</h4>
+                                            <h4 class="modal-title" id="myModalLabelLetter">详情</h4>
                                         </div>
                                         <div class="modal-body">
                                             <div class="table-responsive text-center">
@@ -137,7 +137,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="qx">取消</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="qx">关闭</button>
                                         </div>
                                     </div>
                                 </div>
@@ -163,13 +163,6 @@
     $(function(){
         $("#tb_departments").bootstrapTable({
             columns:[
-                { //field: 'Number',//可不加
-                    title: '序号',//标题  可不加
-                    width:100,
-                    formatter: function (value, row, index) {
-                        return index+1;
-                    }
-                },
                 {field:'creditNumber',title:'授信编号',width:100},
                 {field:'creditAmount',title:'授信额（万元）',width:100},
                 {field:'creditGrantor',title:'授信方',width:100},
@@ -180,10 +173,13 @@
                 },
                 {field:'creditStatus',title:'状态',width:100,
                     formatter: function(value,row,index){
+                        var status=''
                         if(value == '0') {
-                            return "已审批";
+                            status = '<span style="color: #090;">已审批</span>';
+                            return status;
                         } else if(value == '1') {
-                            return "待审批";
+                            status = '<span style="color: #f90;">待审批</span>';
+                            return status;
                         }
                     }
                 },
@@ -255,13 +251,6 @@
             //隔行变色
 //            striped:true,
             columns:[
-                { //field: 'Number',//可不加
-                    title: '序号',//标题  可不加
-                    width:100,
-                    formatter: function (value, row, index) {
-                        return index+1;
-                    }
-                },
                 {field:'letterNumber',title:'用信编号',width:100},
                 {field:'letterCredit',title:'用信额（万元）',width:100},
                 {field:'belongCredit',title:'所属授信',width:100},
@@ -272,10 +261,13 @@
                 },
                 {field:'letterStatus',title:'状态',width:100,
                     formatter: function(value,row,index){
+                        var status=''
                         if(value == '0') {
-                            return "已审批";
+                            status = '<span style="color: #090;">已审批</span>';
+                            return status;
                         } else if(value == '1') {
-                            return "待审批";
+                            status = '<span style="color: #f90;">待审批</span>';
+                            return status;
                         }
                     }
                 },

@@ -5,20 +5,25 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.com.edzleft.entity.Tripartite;
 import cn.com.edzleft.service.procurement.tripartite.PmtripartiteService;
 import cn.com.edzleft.util.page.DataGridJson;
 import cn.com.edzleft.util.page.PageUtil;
-
+/**
+ * 三方账户列表查询
+ * @author Administrator
+ *
+ */
 @Controller
 @RequestMapping("/tripartite")
 public class PmtripartiteController {
 
 	@Autowired
 	private PmtripartiteService pmtripartiteService;
-	@RequestMapping(value="pmtripartite")
+	@RequestMapping(value="pmtripartite" ,method=RequestMethod.POST)
 	@ResponseBody
     public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String tripartiteDepositBank,String tripartiteCreditHolderPurchaser){
         PageUtil<Tripartite> userPage = new PageUtil<>();

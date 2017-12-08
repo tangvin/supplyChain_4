@@ -107,4 +107,5 @@ $("#colseRegister").click(function(){
         }
     })
 </script>
+
 </html>

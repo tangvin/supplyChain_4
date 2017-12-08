@@ -32,13 +32,13 @@
         AND letter_number  LIKE '%${whereMap.letterNumber}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.belongCredit != null and whereMap.belongCredit != ''">
-        AND belong_credit &gt;= '${whereMap.belongCredit}'
+        AND belong_credit LIKE '%${whereMap.belongCredit}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.letterStatus != null and whereMap.letterStatus != ''">
-        AND letter_status &lt;= '${whereMap.letterStatus}'
+        AND letter_status LIKE '%${whereMap.letterStatus}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.applicant != null and whereMap.applicant != ''">
-        AND applicant &lt;= '${whereMap.applicant}'
+        AND applicant LIKE '%${whereMap.applicant}%'
       </if>
     </trim>
   </sql>
