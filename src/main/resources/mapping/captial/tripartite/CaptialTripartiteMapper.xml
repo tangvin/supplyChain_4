@@ -4,9 +4,9 @@
   <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Tripartite" >
     <id column="tripartite_id" property="tripartiteId" jdbcType="INTEGER" />
     <result column="tripartite_deposit_bank" property="tripartiteDepositBank" jdbcType="VARCHAR" />
-    <result column="tripartite_credit_holder_trade" property="tripartiteCreditHolderTrade" jdbcType="VARCHAR" />
-    <result column="tripartite_credit_holder_purchaser" property="tripartiteCreditHolderPurchaser" jdbcType="VARCHAR" />
-    <result column="tripartite_credit_holder_capital" property="tripartiteCreditHolderCapital" jdbcType="VARCHAR" />
+    <result column="tripartite_credit_holder_trade_id" property="tripartiteCreditHolderTradeId" jdbcType="INTEGER" />
+    <result column="tripartite_credit_holder_purchaser_id" property="tripartiteCreditHolderPurchaserId" jdbcType="VARCHAR" />
+    <result column="tripartite_credit_holder_capital_id" property="tripartiteCreditHolderCapitalId" jdbcType="VARCHAR" />
     <result column="tripartite_account_number" property="tripartiteAccountNumber" jdbcType="VARCHAR" />
     <result column="tripartite_account_opentime" property="tripartiteAccountOpentime" jdbcType="TIMESTAMP" />
     <result column="tripartite_account_openpeople" property="tripartiteAccountOpenpeople" jdbcType="VARCHAR" />
@@ -16,8 +16,8 @@
     <result column="tripartite_amount_create_people" property="tripartiteAmountCreatePeople" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    tripartite_id, tripartite_deposit_bank, tripartite_credit_holder_trade, tripartite_credit_holder_purchaser, 
-    tripartite_credit_holder_capital, tripartite_account_number, tripartite_account_opentime, 
+    tripartite_id, tripartite_deposit_bank, tripartite_credit_holder_trade_id, tripartite_credit_holder_purchaser_id,
+    tripartite_credit_holder_capital_id, tripartite_account_number, tripartite_account_opentime,
     tripartite_account_openpeople, tripartite_balance, tripartite_available_balance, 
     tripartite_amount_create_time, tripartite_amount_create_people
   </sql>
@@ -33,7 +33,7 @@
         AND t.tripartite_deposit_bank  LIKE '%${whereMap.tripartiteDepositBank}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.tripartiteCreditHolderCapital != null and whereMap.tripartiteCreditHolderCapital != ''">
-        AND t.tripartite_credit_holder_capital  LIKE '%${whereMap.tripartiteCreditHolderCapital}%'
+        AND t.tripartite_credit_holder_capital_id  LIKE '%${whereMap.tripartiteCreditHolderCapital}%'
       </if>
       <!--<if test="whereMap != null &amp;&amp; whereMap.creatTime != null and whereMap.creatTime != ''">-->
       <!--AND creat_time &gt;= '${whereMap.creatTime}'-->
@@ -48,8 +48,8 @@
   <select id="getTripartiteSelectCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
     select count(*)
     FROM gyl_tripartite t
-    INNER JOIN gyl_account a ON t.tripartite_credit_holder_capital = a.user_id
-    INNER JOIN gyl_account a2 ON t.tripartite_credit_holder_purchaser = a2.user_id
+    INNER JOIN gyl_account a ON t.tripartite_credit_holder_capital_id = a.user_id
+    INNER JOIN gyl_account a2 ON t.tripartite_credit_holder_purchaser_id = a2.user_id
     INNER JOIN gyl_information i ON a.information_id = i.id
     INNER JOIN gyl_information i2 ON a2.information_id = i2.id
     <include refid="where_sql"/>
@@ -68,8 +68,8 @@
     t.tripartite_amount_create_time as tripartiteAmountCreateTime,
     t.tripartite_amount_create_people as tripartiteAmountCreatePeople
     FROM gyl_tripartite t
-    INNER JOIN gyl_account a ON t.tripartite_credit_holder_capital = a.user_id
-    INNER JOIN gyl_account a2 ON t.tripartite_credit_holder_purchaser = a2.user_id
+    INNER JOIN gyl_account a ON t.tripartite_credit_holder_capital_id = a.user_id
+    INNER JOIN gyl_account a2 ON t.tripartite_credit_holder_purchaser_id = a2.user_id
     INNER JOIN gyl_information i ON a.information_id = i.id
     INNER JOIN gyl_information i2 ON a2.information_id = i2.id
     <include refid="where_sql"/>

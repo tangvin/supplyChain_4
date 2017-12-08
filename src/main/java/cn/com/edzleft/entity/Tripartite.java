@@ -17,15 +17,15 @@ public class Tripartite {
     /**
      * 户主（贸方）
      */
-    private String tripartiteCreditHolderTrade;
+    private String tripartiteCreditHolderTradeId;
     /**
      * 户主（采方）
      */
-    private String tripartiteCreditHolderPurchaser;
+    private String tripartiteCreditHolderPurchaserId;
     /**
      * 户主(资方）
      */
-    private String tripartiteCreditHolderCapital;
+    private String tripartiteCreditHolderCapitalId;
     /**
      * 三方银行账户之账号
      */
@@ -61,6 +61,29 @@ public class Tripartite {
      */
     private String entName;
 
+    public String getTripartiteCreditHolderTradeId() {
+        return tripartiteCreditHolderTradeId;
+    }
+
+    public void setTripartiteCreditHolderTradeId(String tripartiteCreditHolderTradeId) {
+        this.tripartiteCreditHolderTradeId = tripartiteCreditHolderTradeId;
+    }
+
+    public String getTripartiteCreditHolderPurchaserId() {
+        return tripartiteCreditHolderPurchaserId;
+    }
+
+    public void setTripartiteCreditHolderPurchaserId(String tripartiteCreditHolderPurchaserId) {
+        this.tripartiteCreditHolderPurchaserId = tripartiteCreditHolderPurchaserId;
+    }
+
+    public String getTripartiteCreditHolderCapitalId() {
+        return tripartiteCreditHolderCapitalId;
+    }
+
+    public void setTripartiteCreditHolderCapitalId(String tripartiteCreditHolderCapitalId) {
+        this.tripartiteCreditHolderCapitalId = tripartiteCreditHolderCapitalId;
+    }
 
     public String getEntName() {
         return entName;
@@ -86,29 +109,6 @@ public class Tripartite {
         this.tripartiteDepositBank = tripartiteDepositBank == null ? null : tripartiteDepositBank.trim();
     }
 
-    public String getTripartiteCreditHolderTrade() {
-        return tripartiteCreditHolderTrade;
-    }
-
-    public void setTripartiteCreditHolderTrade(String tripartiteCreditHolderTrade) {
-        this.tripartiteCreditHolderTrade = tripartiteCreditHolderTrade == null ? null : tripartiteCreditHolderTrade.trim();
-    }
-
-    public String getTripartiteCreditHolderPurchaser() {
-        return tripartiteCreditHolderPurchaser;
-    }
-
-    public void setTripartiteCreditHolderPurchaser(String tripartiteCreditHolderPurchaser) {
-        this.tripartiteCreditHolderPurchaser = tripartiteCreditHolderPurchaser == null ? null : tripartiteCreditHolderPurchaser.trim();
-    }
-
-    public String getTripartiteCreditHolderCapital() {
-        return tripartiteCreditHolderCapital;
-    }
-
-    public void setTripartiteCreditHolderCapital(String tripartiteCreditHolderCapital) {
-        this.tripartiteCreditHolderCapital = tripartiteCreditHolderCapital == null ? null : tripartiteCreditHolderCapital.trim();
-    }
 
     public String getTripartiteAccountNumber() {
         return tripartiteAccountNumber;
@@ -171,9 +171,9 @@ public class Tripartite {
         return "Tripartite{" +
                 "tripartiteId=" + tripartiteId +
                 ", tripartiteDepositBank='" + tripartiteDepositBank + '\'' +
-                ", tripartiteCreditHolderTrade='" + tripartiteCreditHolderTrade + '\'' +
-                ", tripartiteCreditHolderPurchaser='" + tripartiteCreditHolderPurchaser + '\'' +
-                ", tripartiteCreditHolderCapital='" + tripartiteCreditHolderCapital + '\'' +
+                ", tripartiteCreditHolderTradeId='" + tripartiteCreditHolderTradeId + '\'' +
+                ", tripartiteCreditHolderPurchaserId='" + tripartiteCreditHolderPurchaserId + '\'' +
+                ", tripartiteCreditHolderCapitalId='" + tripartiteCreditHolderCapitalId + '\'' +
                 ", tripartiteAccountNumber=" + tripartiteAccountNumber +
                 ", tripartiteAccountOpentime=" + tripartiteAccountOpentime +
                 ", tripartiteAccountOpenpeople='" + tripartiteAccountOpenpeople + '\'' +
@@ -194,11 +194,11 @@ public class Tripartite {
         if (tripartiteId != null ? !tripartiteId.equals(that.tripartiteId) : that.tripartiteId != null) return false;
         if (tripartiteDepositBank != null ? !tripartiteDepositBank.equals(that.tripartiteDepositBank) : that.tripartiteDepositBank != null)
             return false;
-        if (tripartiteCreditHolderTrade != null ? !tripartiteCreditHolderTrade.equals(that.tripartiteCreditHolderTrade) : that.tripartiteCreditHolderTrade != null)
+        if (tripartiteCreditHolderTradeId != null ? !tripartiteCreditHolderTradeId.equals(that.tripartiteCreditHolderTradeId) : that.tripartiteCreditHolderTradeId != null)
             return false;
-        if (tripartiteCreditHolderPurchaser != null ? !tripartiteCreditHolderPurchaser.equals(that.tripartiteCreditHolderPurchaser) : that.tripartiteCreditHolderPurchaser != null)
+        if (tripartiteCreditHolderPurchaserId != null ? !tripartiteCreditHolderPurchaserId.equals(that.tripartiteCreditHolderPurchaserId) : that.tripartiteCreditHolderPurchaserId != null)
             return false;
-        if (tripartiteCreditHolderCapital != null ? !tripartiteCreditHolderCapital.equals(that.tripartiteCreditHolderCapital) : that.tripartiteCreditHolderCapital != null)
+        if (tripartiteCreditHolderCapitalId != null ? !tripartiteCreditHolderCapitalId.equals(that.tripartiteCreditHolderCapitalId) : that.tripartiteCreditHolderCapitalId != null)
             return false;
         if (tripartiteAccountNumber != null ? !tripartiteAccountNumber.equals(that.tripartiteAccountNumber) : that.tripartiteAccountNumber != null)
             return false;
@@ -219,9 +219,9 @@ public class Tripartite {
     public int hashCode() {
         int result = tripartiteId != null ? tripartiteId.hashCode() : 0;
         result = 31 * result + (tripartiteDepositBank != null ? tripartiteDepositBank.hashCode() : 0);
-        result = 31 * result + (tripartiteCreditHolderTrade != null ? tripartiteCreditHolderTrade.hashCode() : 0);
-        result = 31 * result + (tripartiteCreditHolderPurchaser != null ? tripartiteCreditHolderPurchaser.hashCode() : 0);
-        result = 31 * result + (tripartiteCreditHolderCapital != null ? tripartiteCreditHolderCapital.hashCode() : 0);
+        result = 31 * result + (tripartiteCreditHolderTradeId != null ? tripartiteCreditHolderTradeId.hashCode() : 0);
+        result = 31 * result + (tripartiteCreditHolderPurchaserId != null ? tripartiteCreditHolderPurchaserId.hashCode() : 0);
+        result = 31 * result + (tripartiteCreditHolderCapitalId != null ? tripartiteCreditHolderCapitalId.hashCode() : 0);
         result = 31 * result + (tripartiteAccountNumber != null ? tripartiteAccountNumber.hashCode() : 0);
         result = 31 * result + (tripartiteAccountOpentime != null ? tripartiteAccountOpentime.hashCode() : 0);
         result = 31 * result + (tripartiteAccountOpenpeople != null ? tripartiteAccountOpenpeople.hashCode() : 0);

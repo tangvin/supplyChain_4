@@ -87,22 +87,25 @@
                 <div class="col-xs-4"><button name="button" value="2" class="btn center-block">资方</button></div>
             </div>
             <!-- method="post" action="customer/register.do" id="J_phone" -->
-            <form  class='form-inline center-block rsg_one_xx'>
+            <form  class='form-inline center-block rsg_one_xx' id="formRegist">
                 <div class="row">
                     <label class="col-xs-4 text-center">联系人</label>
-                    <input id="reg_sjh" type="text" class="form-control" placeholder="姓名" value="">
+                    <input id="reg_sjh" type="text" class="form-control" placeholder="姓名" value="" name="userLinkman">
                 </div>
                 <div class="row">
                     <label class="col-xs-4 text-center">手机号</label>
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="输入手机号">
+                    <input type="text" class="form-control" id="phone" name="userPhone" placeholder="输入手机号">
                 </div>
                 <div class="row">
                     <label class="col-xs-4 text-center">验证码</label>
                     <input type="text" id="checkCode" placeholder="输入验证码" class="form-control col-xs-4" name="checkCode"/>
                     <input id="btnSendCode" class="btn" type="button" value="获取验证码" onclick="sendMessage()" />
                 </div>
+                <%--<button value="下一步" onclick="nextBu()">下一步</button>--%>
+                <input type="button" onclick="nextBu()" value="下一步"/>
             </form>
-            <a class="btn center-block btn-primary" id="next_bu" >下一步</a>
+            <%--<a class="btn center-block btn-primary" id="next_bu" >下一步</a>--%>
+
         </div>
 
     </div>
@@ -141,30 +144,60 @@ $("#colseRegister").click(function(){
 			
 		}
 	}) */
+
+	function nextBu(){
+        $.ajax({
+            url : '<%=request.getContextPath()%>/register/registerOne.action',
+            data:$("#formRegist").serialize(),
+            type:'post',
+            success : function(data) {
+                alert(data.success);
+                if (data.success) {
+                    <%--$(this).attr('href','<%=request.getContextPath()%>/captialMain/registerTwo.action')--%>
+                }else{
+                    alert("验证码错误");
+                }
+            }
+        });
+    }
 	
-     $("#next_bu").click(function(){
-    	 if($('#reg_sjh').val()==''){
-             alert('请输入姓名')
-         }else if($('#phone').val()==''||!myreg.test($('#phone').val())){
-             alert('请输入正确手机号')
-         }else if($('#checkCode').val()==''){
-             alert('请输入验证码')
-         }else if(!$('.registeredIdentity div button').hasClass('btn-danger')){
-             alert('请选择注册身份')
-         }else{
-        	 $(this).attr('href','<%=request.getContextPath()%>/captialMain/registerTwo.action')
-         }
-    	<%-- alert("111") 
-    	 $(this).attr('href','<%=request.getContextPath()%>/captialMain/registerTwo.action')
-    	$.ajax({
-    		url:'<%=request.getContextPath()%>/register2/first.action',
-    		type:'post',
-    		success:function(data) {
-    			$('#tz').attr('href','<%=request.getContextPath()%>/captialMain/registerTwo.action')
-    			alert(data)
-    		}
-    	}) --%>
-    }) 
+     <%--$("#next_bu").click(function(){--%>
+    	 <%--&lt;%&ndash;if($('#reg_sjh').val()==''){&ndash;%&gt;--%>
+             <%--&lt;%&ndash;alert('请输入姓名')&ndash;%&gt;--%>
+         <%--&lt;%&ndash;}else if($('#phone').val()==''||!myreg.test($('#phone').val())){&ndash;%&gt;--%>
+             <%--&lt;%&ndash;alert('请输入正确手机号')&ndash;%&gt;--%>
+         <%--&lt;%&ndash;}else if($('#checkCode').val()==''){&ndash;%&gt;--%>
+             <%--&lt;%&ndash;alert('请输入验证码')&ndash;%&gt;--%>
+         <%--&lt;%&ndash;}else if(!$('.registeredIdentity div button').hasClass('btn-danger')){&ndash;%&gt;--%>
+             <%--&lt;%&ndash;alert('请选择注册身份')&ndash;%&gt;--%>
+         <%--&lt;%&ndash;}else{&ndash;%&gt;--%>
+        	 <%--&lt;%&ndash;$(this).attr('href','<%=request.getContextPath()%>/captialMain/registerTwo.action')&ndash;%&gt;--%>
+         <%--&lt;%&ndash;}&ndash;%&gt;--%>
+    	<%--&lt;%&ndash;  $(this).attr('href','<%=request.getContextPath()%>/captialMain/registerTwo.action')&ndash;%&gt;--%>
+         <%--var userPhone=$("#phone").val();//手机号码--%>
+         <%--var userLinkman=$('#reg_sjh').val();//联系人--%>
+         <%--var checkCode=$('#checkCode').val();//验证码--%>
+         <%--var accountType = $('.registeredIdentity div button[class$=btn-danger]').val();--%>
+         <%--$.ajax({--%>
+             <%--url : '<%=request.getContextPath()%>/register/registerOne.action',--%>
+<%--//             data : {--%>
+<%--//                 accountType:accountType,--%>
+<%--//                 userLinkman:userLinkman,--%>
+<%--//                 userPhone:userPhone,--%>
+<%--//                 checkCode:checkCode--%>
+<%--//             },--%>
+             <%--data:$("#formRegist").serialize(),--%>
+             <%--type:'post',--%>
+             <%--success : function(data) {--%>
+                 <%--alert(data.success)--%>
+                 <%--if (data.success) {--%>
+                     <%--&lt;%&ndash;$(this).attr('href','<%=request.getContextPath()%>/captialMain/registerTwo.action')&ndash;%&gt;--%>
+                 <%--}else{--%>
+                     <%--alert("验证码错误");--%>
+                 <%--}--%>
+             <%--}--%>
+         <%--});--%>
+    <%--});--%>
     
     var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;
     function next_bus(){
