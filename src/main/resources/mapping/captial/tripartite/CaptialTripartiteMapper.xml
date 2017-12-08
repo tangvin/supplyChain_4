@@ -5,8 +5,8 @@
     <id column="tripartite_id" property="tripartiteId" jdbcType="INTEGER" />
     <result column="tripartite_deposit_bank" property="tripartiteDepositBank" jdbcType="VARCHAR" />
     <result column="tripartite_credit_holder_trade_id" property="tripartiteCreditHolderTradeId" jdbcType="INTEGER" />
-    <result column="tripartite_credit_holder_purchaser_id" property="tripartiteCreditHolderPurchaserId" jdbcType="VARCHAR" />
-    <result column="tripartite_credit_holder_capital_id" property="tripartiteCreditHolderCapitalId" jdbcType="VARCHAR" />
+    <result column="tripartite_credit_holder_purchaser_id" property="tripartiteCreditHolderPurchaserId" jdbcType="INTEGER" />
+    <result column="tripartite_credit_holder_capital_id" property="tripartiteCreditHolderCapitalId" jdbcType="INTEGER" />
     <result column="tripartite_account_number" property="tripartiteAccountNumber" jdbcType="VARCHAR" />
     <result column="tripartite_account_opentime" property="tripartiteAccountOpentime" jdbcType="TIMESTAMP" />
     <result column="tripartite_account_openpeople" property="tripartiteAccountOpenpeople" jdbcType="VARCHAR" />

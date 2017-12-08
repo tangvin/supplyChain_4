@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <html lang="en">
 <head>
@@ -60,7 +60,7 @@
 <div class='col-xs-12'>
     <div class='row row_zhxx'>
         <div class="col-xs-12 zlxx_top">
-            <a href="<%=request.getContextPath()%>/tradeMain/tradeMain.action">">系统首页</a>
+            <a href="<%=request.getContextPath()%>/tradeMain/tradeMain.action">系统首页</a>
             <span>></span>
             <a id="zlwh2" href="#">资料维护</a>
             <span>></span>
@@ -71,20 +71,20 @@
         <form   id="bankformId"  class='form-inline yhk_form col-xs-10 col-xs-offset-1'>
             <div class="row">
                 <label class="col-xs-2 text-center">银行卡类型</label>
-                <select class="selectpicker form-control" id="yhklx">
-                    <option>中国邮政银行</option>
-                    <option>中国建设银行</option>
-                    <option>中国光大银行</option>
+                <select class="selectpicker form-control" id="yhklx" name="bankAccountDepositBank">
+                    <option value="0">中国邮政银行</option>
+                    <option value="1">中国建设银行</option>
+                    <option value="2">中国光大银行</option>
                 </select>
             </div>
             <div class="row">
                 <label class="col-xs-2 text-center">持卡人</label>
-                <input type="text" id="ckr" class="form-control col-xs-6" placeholder="输入持卡人">
+                <input type="text" id="ckr" name="bankAccountCreditHolder" class="form-control col-xs-6" placeholder="输入持卡人">
             </div>
             <div class="row">
                 <label class="col-xs-2 text-center">卡号</label>
                 <!--<input type="text" id="kh" class="form-control" placeholder="请输入卡号">-->
-                <input type="text" class="form-control" onkeyup="www_zzjs_net(this)" onkeydown="www_zzjs_net(this)" name="account" id="account">
+                <input type="text" class="form-control" onkeyup="www_zzjs_net(this)" onkeydown="www_zzjs_net(this)" name="bankAccountNumber" id="account">
             </div>
         </form>
         <a><button class="btn col-xs-offset-3" id="yhk_one">下一步</button></a>
@@ -93,11 +93,11 @@
         <form class='form-inline yhk_two_form col-xs-10 col-xs-offset-1'>
             <div class="row">
                 <label class="col-xs-2 text-center">卡类型：</label>
-                <span class="col-xs-4"> 中国民生银行储蓄卡</span>
+                <span class="col-xs-4" id="klx"></span>
             </div>
             <div class="row">
                 <label class="col-xs-2 text-center">手机号：</label>
-                <span class="col-xs-4">18211083457</span>
+                <span class="col-xs-4" id="phone"></span>
             </div>
             <div class="row">
                 <label class="col-xs-2 text-center">同意<span style="color: blue;margin-left: 5px">服务协议</span></label>
@@ -107,7 +107,7 @@
     </div>
     <div class="col-xs-12 tjyhk_three">
         <div class="col-xs-3 col-xs-offset-2 yhk_three">
-            <p>本次操作需要短信确认，请输入189****7365收到的短信校验码</p>
+            <p>本次操作需要短信确认，请输入<span id="sjyzh"></span>收到的短信校验码</p>
         </div>
         <form class='form-inline col-xs-9 col-xs-offset-1'>
             <div class="row">
@@ -117,7 +117,7 @@
             </div>
         </form>
         <div class="col-xs-12">
-            <button style="margin-top: 40px;width: 120px;" class="btn col-xs-offset-2" id="yhk_next_two_bu">下一步</button>
+            <button style="margin-top: 40px;width: 120px;" class="btn col-xs-offset-2" id="yhk_next_two_bu">完成</button>
         </div>
     </div>
 </div>
@@ -135,26 +135,51 @@
         }else {
             $.ajax({
             url:"<%=request.getContextPath()%>/tradeMain/bankTwo.action",
-            dataType:'json',
+//            dataType:'json',
             type:'POST',
             data:$("#bankformId").serialize(),
             success:function (data) {
-            alert("请求下一步！")
+
+                if(data.bankAccountDepositBank==1){
+                    $('#klx').text('中国建设银行')
+                }
+                $('#phone').text(data.userPhone)
+                $('#sjyzh').text(data.userPhone)
+
             }
-            })
+            });
             $('.tjyhk_one').css('display','none')
             $('.tjyhk_two').css('display','block')
         }
-    })
+    });
 
 
     $('#yhk_two').click(function(){
+
         $('.tjyhk_one').css('display','none')
         $('.tjyhk_two').css('display','none')
         $('.tjyhk_three').css('display','block')
     })
 
+    $('#yhk_next_two_bu').on('click',function () {
+        if($('#checkCode').val()==''){
+            alert('输入验证码')
+        }else{
+            $(this).text('完成添加')
+            console.log($('#yhklx option:selected').text())
+            console.log($('#ckr').val())
+            console.log($('#account').val())
+            console.log($('#phone').text())
+            $.ajax({
+                url:'<%=request.getContextPath()%>/bankAccount/addBankAccount.action',
+                type:'post',
+                data:{bankAccountDepositBank:$('#yhklx option:selected').text(),bankAccountCreditHolder:$('#ckr').val(),bankAccountNumber:$('#account').val(),userPhone:$('#phone').text()},
+                success:function (data) {
 
+                }
+            })
+        }
+    })
 
 
 
@@ -180,16 +205,16 @@
                 account = "";
                 for (i=0;i<accountNumeric.length;i++)
                 { /* 可将以下空格改为-,效果也不错 */
-                    if (i == 4) account = account + ""; /* 帐号第四位数后加空格 */
-                    if (i == 8) account = account + ""; /* 帐号第八位数后加空格 */
-                    if (i == 12) account = account + "";/* 帐号第十二位后数后加空格 */
+                    if (i == 4) account = account + "-"; /* 帐号第四位数后加空格 */
+                    if (i == 8) account = account + "-"; /* 帐号第八位数后加空格 */
+                    if (i == 12) account = account + "-";/* 帐号第十二位后数后加空格 */
                     account = account + accountNumeric.substr (i,1)
                 }
             }
         }
         else
         {
-            account = " " + account.substring (1,5) + " " + account.substring (6,10) + " " + account.substring (14,18) + "-" + account.substring(18,25);
+            account = "-" + account.substring (1,5) + "-" + account.substring (6,10) + "-" + account.substring (14,18) + "-" + account.substring(18,25);
         }
         if (account != BankNo.value) BankNo.value = account;
     }
@@ -233,6 +258,15 @@
         $("#btnSendCode").attr("disabled", "true");
         $("#btnSendCode").val( + curCount + "秒");
         InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+        $.ajax({
+            type: "POST", //用POST方式传输
+            dataType: "text", //数据格式:JSON
+            data:{userPhone:$('#phone').text()},
+            url: '<%=request.getContextPath()%>/captialHomes/sendMsgBank.action', //目标地址
+//                data: "phone=" + phone + "&code=" + code,
+            error: function (XMLHttpRequest, textStatus, errorThrown) { },
+            success: function (msg){ }
+        });
 
     }
     //timer处理函数

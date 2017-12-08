@@ -549,7 +549,7 @@ body{
     margin-right:-15px;
 }
 .khh_form .form-group{
-    margin-right:10px;
+    /*margin-right:10px;*/
 }
 .khh_form .form-group label{
     font-weight: normal;
