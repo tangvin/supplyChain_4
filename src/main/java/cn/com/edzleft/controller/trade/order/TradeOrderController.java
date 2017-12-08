@@ -4,6 +4,7 @@ import cn.com.edzleft.entity.Freight;
 import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.entity.ReceivingAddress;
 import cn.com.edzleft.entity.SessionInfo;
+import cn.com.edzleft.service.trade.RejectService;
 import cn.com.edzleft.service.trade.freight.FreightService;
 import cn.com.edzleft.service.trade.order.TradeOrderService;
 import cn.com.edzleft.service.trade.receivingAddress.ReceivingAddressService;
@@ -45,6 +46,9 @@ public class TradeOrderController {
 
     @Autowired
     private ReceivingAddressService receivingAddressService;
+
+    @Autowired
+    private RejectService rejectService;
     /**
      * 订单查询
      * @param pageNumber
@@ -110,7 +114,7 @@ public class TradeOrderController {
 
     /**
      * 领取订单
-     * 驳回
+     *
      */
     @RequestMapping(value = "/lqdd",method = RequestMethod.POST)
     @ResponseBody
@@ -120,6 +124,21 @@ public class TradeOrderController {
         System.out.println(order);
         return order;
     }
+
+
+    /**
+     *
+     * 驳回
+     */
+    @RequestMapping(value = "/bohui",method = RequestMethod.POST)
+    @ResponseBody
+    public Order rejectReason(Integer id,Integer flag){
+        System.out.println("~~~~~~~~~~~");
+        Order order = tradeOrderService.setOrderStatus(id,flag);
+        System.out.println(order);
+        return order;
+    }
+
 
 
 

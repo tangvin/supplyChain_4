@@ -35,4 +35,10 @@ public interface BankAccountMapper {
      */
     public int updatebankAccount(BankAccount bankAccount);
 
+
+    /**
+     * 根据银行卡号查询出银行卡信息
+     */
+    public BankAccount selectBankAccountByNumber(String number);
+
 }

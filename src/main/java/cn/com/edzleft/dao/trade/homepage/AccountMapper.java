@@ -24,7 +24,7 @@ public interface AccountMapper {
     /**
      * 修改账号密码
      */
-    public int updatePassword(Account loginer);
+    public int updateMessage(Account loginer);
 
     /**
      * 更新用户信息

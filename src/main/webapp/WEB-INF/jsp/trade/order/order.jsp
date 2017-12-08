@@ -77,9 +77,11 @@
                             <button   type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">请输入驳回理由：</h4>
                         </div>
+                        <form id="bohuireason">
                         <div class="panel-body text-center">
-                            <textarea class="form-control" rows="3" width="200px"></textarea>
+                            <textarea  name="rejectReason" class="form-control" rows="3" width="200px"></textarea>
                         </div>
+                        </form>
                         <div class="modal-footer">
                             <button type="button" id="ddbh" class="btn btn-default" data-dismiss="modal">确定</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
@@ -185,7 +187,7 @@
                                 </tbody>
                             </table>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-default" data-dismiss="modal" id="pzfh"   >确认</button>
+                                    <button type="submit" class="btn btn-default" data-dismiss="modal" id="pzfh">确认</button>
                                     <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
                                 </div>
                             </form>
@@ -225,8 +227,8 @@
             //隔行变色
 //            striped:true,
             columns:[
-                {field:'orderNumber',title:'订单编号',width:100,formatter:operateFormatter,events:operateEvents1},
-                {field:'orderStatus',title:'订单状态',width:100,
+                {field:'orderNumber',title:'订单编号',formatter:operateFormatter,events:operateEvents1},
+                {field:'orderStatus',title:'订单状态',
                     formatter: function(value,row,index){
                         if( value == '0') {
                             return "待确认";
@@ -247,22 +249,22 @@
                         }
                     }
                 },
-                {field:'orderAmount',title:'订单金额（￥万元）',width:100},
-                {field:'orderConfirmationTime',title:'订单确认时间',width:100,
+                {field:'orderAmount',title:'订单金额（￥万元）'},
+                {field:'orderConfirmationTime',title:'订单确认时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }
                 },
-                {field:'orderCreatTime',title:'订单创建时间',width:100,
+                {field:'orderCreatTime',title:'订单创建时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }
                 },
 
-                {field:'principalOrder',title:'合同',width:100},
-                {field:'creditUse',title:'用信情况&nbsp;￥万元',width:100},
-                {field:'invoice',title:'发票',width:100},
-                {field:'freightNumber',title:'货运及单号',width:100},
+                {field:'principalOrder',title:'合同'},
+                {field:'creditUse',title:'用信情况&nbsp;￥万元'},
+                {field:'invoice',title:'发票'},
+                {field:'freightNumber',title:'货运及单号'},
                 {
                     title:'操作',
                     field:'action',
@@ -372,7 +374,7 @@
                 url:'<%=request.getContextPath()%>/tradeOrder/lqdd.action?id='+w+'&&flag='+e,
                 type:'post',
                 dataType:"json",
-               // data:$("#f").serialize(),
+                data:$("#bohuireason").serialize(),
                 success:function (data) {
                     setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')",500);
                 }

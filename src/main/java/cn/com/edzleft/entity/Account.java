@@ -28,11 +28,11 @@ public class Account implements Serializable{
     /**
      * 创建时间
      */
-    private Date creatTime;
+    private Date createTime;
     /**
      * 创建ip  25位以内的字符
      */
-    private String creatIp;
+    private String createIp;
     /**
      * 登陆时间   格式：2017-08-02 12:13:15
      */
@@ -70,7 +70,7 @@ public class Account implements Serializable{
      */
     private Integer informationId;
     /**
-     * 用戶聯繫人
+     * 用戶联系人
      */
     private String userLinkman;
 
@@ -127,20 +127,20 @@ public class Account implements Serializable{
         this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 
-    public Date getCreatTime() {
-        return creatTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatTime(Date creatTime) {
-        this.creatTime = creatTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public String getCreatIp() {
-        return creatIp;
+    public String getCreateIp() {
+        return createIp;
     }
 
-    public void setCreatIp(String creatIp) {
-        this.creatIp = creatIp == null ? null : creatIp.trim();
+    public void setCreatIp(String createIp) {
+        this.createIp = createIp == null ? null : createIp.trim();
     }
 
     public Date getLoginTime() {
@@ -236,15 +236,15 @@ public class Account implements Serializable{
 				return false;
 		} else if (!certificateType.equals(other.certificateType))
 			return false;
-		if (creatIp == null) {
-			if (other.creatIp != null)
+		if (createIp == null) {
+			if (other.createIp != null)
 				return false;
-		} else if (!creatIp.equals(other.creatIp))
+		} else if (!createIp.equals(other.createIp))
 			return false;
-		if (creatTime == null) {
-			if (other.creatTime != null)
+		if (createTime == null) {
+			if (other.createTime != null)
 				return false;
-		} else if (!creatTime.equals(other.creatTime))
+		} else if (!createTime.equals(other.createTime))
 			return false;
 		if (informationId == null) {
 			if (other.informationId != null)
@@ -307,8 +307,8 @@ public class Account implements Serializable{
 		result = prime * result + ((accountType == null) ? 0 : accountType.hashCode());
 		result = prime * result + ((certificateState == null) ? 0 : certificateState.hashCode());
 		result = prime * result + ((certificateType == null) ? 0 : certificateType.hashCode());
-		result = prime * result + ((creatIp == null) ? 0 : creatIp.hashCode());
-		result = prime * result + ((creatTime == null) ? 0 : creatTime.hashCode());
+		result = prime * result + ((createIp == null) ? 0 : createIp.hashCode());
+		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
 		result = prime * result + ((informationId == null) ? 0 : informationId.hashCode());
 		result = prime * result + ((inviteAccount == null) ? 0 : inviteAccount.hashCode());
 		result = prime * result + ((loginIp == null) ? 0 : loginIp.hashCode());
@@ -325,7 +325,7 @@ public class Account implements Serializable{
     @Override
 	public String toString() {
 		return "Account [userId=" + userId + ", userName=" + userName + ", userPwd=" + userPwd + ", userPhone="
-				+ userPhone + ", creatTime=" + creatTime + ", creatIp=" + creatIp + ", loginTime=" + loginTime
+				+ userPhone + ", createTime=" + createTime + ", createIp=" + createIp + ", loginTime=" + loginTime
 				+ ", loginIp=" + loginIp + ", userEamil=" + userEamil + ", accountType=" + accountType
 				+ ", accountState=" + accountState + ", certificateState=" + certificateState + ", certificateType="
 				+ certificateType + ", inviteAccount=" + inviteAccount + ", informationId=" + informationId

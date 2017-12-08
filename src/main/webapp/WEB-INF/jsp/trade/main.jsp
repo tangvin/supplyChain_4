@@ -32,8 +32,7 @@
                     <li>
                         <div class="dropdown">
                             <p class="dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown">
-                                ${account.userName}
-                                <span class="caret"></span>
+                                ${account.userName}<span class="caret"></span>
                             </p>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                 <li class='text-center' id="one2"><a href="#">资料维护</a></li>

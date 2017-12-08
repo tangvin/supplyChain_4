@@ -163,15 +163,15 @@
     $(function(){
         $("#tb_departments").bootstrapTable({
             columns:[
-                {field:'creditNumber',title:'授信编号',width:100},
-                {field:'creditAmount',title:'授信额（万元）',width:100},
-                {field:'creditGrantor',title:'授信方',width:100},
-                {field:'creditTime',title:'授信时间',width:100,
+                {field:'creditNumber',title:'授信编号'},
+                {field:'creditAmount',title:'授信额（万元）'},
+                {field:'creditGrantor',title:'授信方'},
+                {field:'creditTime',title:'授信时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }
                 },
-                {field:'creditStatus',title:'状态',width:100,
+                {field:'creditStatus',title:'状态',
                     formatter: function(value,row,index){
                         var status=''
                         if(value == '0') {
@@ -183,14 +183,14 @@
                         }
                     }
                 },
-                {field:'creditMasterContract',title:'合同',width:100},
-                {field:'applicant',title:'申请人',width:100},
-                {field:'applicationTime',title:'申请时间',width:100,
+                {field:'creditMasterContract',title:'合同'},
+                {field:'applicant',title:'申请人'},
+                {field:'applicationTime',title:'申请时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }
                 },
-                {field:'approvalTime',title:'批准时间',width:100,
+                {field:'approvalTime',title:'批准时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }
@@ -251,15 +251,15 @@
             //隔行变色
 //            striped:true,
             columns:[
-                {field:'letterNumber',title:'用信编号',width:100},
-                {field:'letterCredit',title:'用信额（万元）',width:100},
-                {field:'belongCredit',title:'所属授信',width:100},
-                {field:'letterTime',title:'用信时间',width:100,
+                {field:'letterNumber',title:'用信编号'},
+                {field:'letterCredit',title:'用信额（万元）'},
+                {field:'belongCredit',title:'所属授信'},
+                {field:'letterTime',title:'用信时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }
                 },
-                {field:'letterStatus',title:'状态',width:100,
+                {field:'letterStatus',title:'状态',
                     formatter: function(value,row,index){
                         var status=''
                         if(value == '0') {
@@ -271,15 +271,15 @@
                         }
                     }
                 },
-                {field:'letterContract',title:'合同',width:100},
-                {field:'belongOrder',title:'订单',width:100},
-                {field:'applicant',title:'申请人',width:100},
-                {field:'applicationTime',title:'申请时间',width:100,
+                {field:'letterContract',title:'合同'},
+                {field:'belongOrder',title:'订单'},
+                {field:'applicant',title:'申请人'},
+                {field:'applicationTime',title:'申请时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }
                 },
-                {field:'approvalTime',title:'批准时间',width:100,
+                {field:'approvalTime',title:'批准时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }

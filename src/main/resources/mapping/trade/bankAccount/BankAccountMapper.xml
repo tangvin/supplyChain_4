@@ -33,12 +33,14 @@
   </select>
 
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+  <!--根据银行卡查询相关信息-->
+  <select id="selectBankAccountByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
     <include refid="Base_Column_List" />
     from gyl_bank_account
-    where bank_account_id = #{bankAccountId,jdbcType=INTEGER}
+    where bank_account_number = #{bankAccountNumber,jdbcType=VARCHAR}
   </select>
+
 
   <!--根据id删除银行卡-->
   <delete id="deleteBankAccountById" parameterType="java.lang.Integer" >

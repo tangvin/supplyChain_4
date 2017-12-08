@@ -39,6 +39,7 @@
     select count(*) from gyl_tripartite <include refid="where_sql"/>
   </select>
 
+
   <!--分页查询-->
   <select id="selectAllTripartiteByPage"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
     select
