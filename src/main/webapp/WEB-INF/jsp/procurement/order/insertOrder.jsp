@@ -104,7 +104,7 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息：</td>
-                            <td class="col-xs-8 text-left"><p class="qwer">收货地址:<span id="address"></span></p><input id="receivingAddressId" type="hidden"><a class="glshxx" id="glshxx"  href="#"><div class="gl">管理收货信息</div></a></td>
+                            <td class="col-xs-8 text-left"><p class="qwer"><span id="address"></span></p><input id="receivingAddressId" type="hidden"><a class="glshxx" id="glshxx"  href="#"><div class="gl">管理收货信息</div></a></td>
                         </div>
                     </tr>
                     <tr class="qwer">
@@ -155,7 +155,7 @@
                                     <tr>
                                         <div class="row">
                                             <td class="col-xs-3 text-right">关联到合同：</td>
-                                            <td class="col-xs-9 text-left"><input id="fff" name="principalOrderId"><span>编号：2636464774376    名称：xxxx合同</span></td>
+                                            <td class="col-xs-9 text-left"><input id="fff" name="principalOrderId"><!-- <span>编号：2636464774376    名称：xxxx合同</span> --></td>
                                         </div>
                                     </tr>
                                     <tr>
@@ -213,7 +213,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal" id="confirm">确定</button>
-                            <button type="button" class="btn btn-primary">取消</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
                         </div>
                        
                     </div>

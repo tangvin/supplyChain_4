@@ -25,7 +25,7 @@
         <div class="col-xs-12 zlxx_top">
             <a href="<%=request.getContextPath()%>/procurementMain/procurementMain.action">系统首页</a>
             <span>></span>
-            <a href="#">订单管理</a>
+            <a id="ddglyy">订单管理</a>
         </div>
         <!--订单管理 头部 end-->
         <div class="col-xs-12">
@@ -122,6 +122,9 @@
         $('#load').load('<%=request.getContextPath()%>/procurementMain/insertOrder.action')
     })
      $('#ddbj_aa').click(function(){
+        $('#load').load('<%=request.getContextPath()%>/procurementMain/ddbjaa.action')
+    })
+     $('#ddglyy').click(function(){
         $('#load').load('<%=request.getContextPath()%>/procurementMain/ddbjaa.action')
     })
     /* 订单展示 */
@@ -339,7 +342,7 @@
         }else{
             seconds = ''+seconds
         }
-        return year+"-"+month+"-"+day+"-"+hours+":"+minutes+":"+seconds;
+        return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
     }
  
  	

@@ -66,6 +66,7 @@ public class PmmainController {
 	 */
 	@RequestMapping(value="bankOne")
 	public String bankOne(){
+		
 		return "/procurement/information/bankOne";
 	}
 	
@@ -336,6 +337,12 @@ public class PmmainController {
         mv.addObject("information",information);
         return mv;
     }
-
+    
+    
+    /**
+     * 根据用户ID查询默认地址
+     */
+    
+    
 
 }

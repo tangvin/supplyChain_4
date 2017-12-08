@@ -15,6 +15,13 @@ import cn.com.edzleft.util.page.PageUtil;
 
 @Controller
 @RequestMapping("/tradefinance")
+
+
+/**
+ * 财务管理列表展示
+ * @author Administrator
+ *
+ */
 public class PmTradeFinanceController {
 	
 	@Autowired
@@ -36,7 +43,6 @@ public class PmTradeFinanceController {
 		userPage = tradeFinanceService.getTradeEntityList(userPage);
         dgj.setTotal(userPage.getTotalCount());
         dgj.setRows(userPage.getList());
-        System.out.println("++++++++++++++++"+userPage.getList());
         return dgj;
 	}
 }
