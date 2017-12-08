@@ -2,12 +2,16 @@ package cn.com.edzleft.controller.procurement.homepage;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.com.edzleft.entity.Account;
+import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.entity.Tripartite;
 import cn.com.edzleft.service.procurement.tripartite.PmtripartiteService;
 import cn.com.edzleft.util.page.DataGridJson;
@@ -25,12 +29,16 @@ public class PmtripartiteController {
 	private PmtripartiteService pmtripartiteService;
 	@RequestMapping(value="pmtripartite" ,method=RequestMethod.POST)
 	@ResponseBody
-    public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String tripartiteDepositBank,String tripartiteCreditHolderPurchaser){
-        PageUtil<Tripartite> userPage = new PageUtil<>();
+    public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String caEntName,HttpSession session){
+		DataGridJson dgj = new DataGridJson();
+		PageUtil<Tripartite> userPage = new PageUtil<>();
         HashMap<String,Object> whereMaps =new HashMap<>();
-        whereMaps.put("tripartiteDepositBank",tripartiteDepositBank);
-        whereMaps.put("tripartiteCreditHolderPurchaser",tripartiteCreditHolderPurchaser);
-        DataGridJson dgj = new DataGridJson();
+        /*从session获取当前用户的信息*/
+        SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
+        Account sessionAccount=sessionInfo.getAdmin();
+        System.out.println(sessionAccount);
+        whereMaps.put("caEntName",caEntName);
+       System.out.println("=========="+caEntName);
         userPage.setCpage(pageNumber);
         userPage.setPageSize(pageSize);
         userPage.setWhereMap(whereMaps);

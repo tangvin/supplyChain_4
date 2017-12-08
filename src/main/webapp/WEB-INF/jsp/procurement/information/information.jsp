@@ -268,7 +268,7 @@
                                 <form class="form-inline khh_form khh_form1" id="informationForm">
                                     <div class="form-group form-group1">
                                         <label for="tripartiteDepositBank">开户行</label>
-                                        <input type="text" class="form-control" name="tripartiteDepositBank" id="tripartiteDepositBank">
+                                        <input type="text" class="form-control" name="caEntName" id="caEntName">
                                     </div>
                                     <div class="form-group form-group1">
                                         <label for="tripartiteCreditHolderPurchaser">户主</label>
@@ -485,11 +485,9 @@
 	                        return index+1;
 	                    }
 	                },
-	                {field:'tripartiteDepositBank',title:'开户行',width:100},
-	                {field:'tripartiteCreditHolderPurchaser',title:'户主（采购方	）',width:100},
+	                {field:'caEntName',title:'开户行',width:100},
+	                {field:'pmEntName',title:'户主（采购方	）',width:100},
 	                {field:'tripartiteAccountNumber',title:'账号',width:100},
-	                {field:'tripartiteBalance',title:'余额（元）',width:100},
-	                {field:'tripartiteAvailableBalance',title:'可用余额',width:100},
 	                {field:'tripartiteAmountCreateTime',title:'账号开通时间',width:100,
 	                	formatter:function(value,row,index){
 	                        return ConvertToDate(value)
@@ -522,8 +520,7 @@
 	        var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
 	            pageNumber: params.pageNumber,
 	            pageSize: params.pageSize,
-	            tripartiteDepositBank:$("#tripartiteDepositBank").val(),
-	            tripartiteCreditHolderPurchaser:$("#tripartiteCreditHolderPurchaser").val(),
+	            caEntName:$("#caEntName").val(),
 	        };
 	        return temp;
 	    }
@@ -731,6 +728,13 @@
 				}
 			});
 		});
+     /*三方账户模糊查询*/
+     $("#informationForm").click(function(){
+    	 $.ajax({
+    		 
+    	 });
+     });
+     
      function ConvertToDate(datestr) {
          var date=new Date(datestr);
          var year=date.getFullYear();
