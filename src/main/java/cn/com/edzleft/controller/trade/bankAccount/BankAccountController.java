@@ -1,7 +1,9 @@
 package cn.com.edzleft.controller.trade.bankAccount;
 
+import cn.com.edzleft.entity.Account;
 import cn.com.edzleft.entity.BankAccount;
 import cn.com.edzleft.entity.SessionInfo;
+import cn.com.edzleft.service.trade.account.AccountService;
 import cn.com.edzleft.service.trade.bankAccount.BankAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +26,8 @@ public class BankAccountController {
 
     @Autowired
     private BankAccountService bankAccountService;
-
+    @Autowired
+    private AccountService accountService;
     /**
      * 查询所有银行卡
      * @return
@@ -65,7 +69,25 @@ public class BankAccountController {
      */
     @RequestMapping(value = "addBankAccount",method = RequestMethod.POST)
     @ResponseBody
-    public  int addBankAccount(BankAccount bankAccount,HttpSession session){
+    public  int addBankAccount(BankAccount bankAccount,HttpSession session,String userPhone,String bankAccountDepositBank,String bankAccountCreditHolder,String bankAccountNumber){
+        //获取当前登录的用户id，根据id查询出账号基本信息
+        SessionInfo sessions = (SessionInfo) session.getAttribute("sessionInfo");
+        Integer userId = sessions.getAdmin().getUserId();
+        Account account = accountService.queryAcountById(userId);
+        //第一步添加银行卡信息
+        BankAccount bank = new BankAccount();
+        //账号
+        bank.setBankAccountNumber(bankAccountNumber);
+        //持卡人
+        bank.setBankAccountCreditHolder(bankAccountCreditHolder);
+        //开户行
+        bank.setBankAccountDepositBank(bankAccountDepositBank);
+        //创建时间
+        bank.setBankAccountCreateTime(new Date());
+        //创建人
+        bank.setBankAccountCreatePeople(account.getUserName());
+        //用户id
+        bank.setBankAccountId(account.getUserId());
         int i = bankAccountService.addBankAcount(bankAccount, session);
         return i;
     }

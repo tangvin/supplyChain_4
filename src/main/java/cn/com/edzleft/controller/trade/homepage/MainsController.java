@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by ASUS on 2017/11/15.
@@ -42,48 +42,28 @@ public class MainsController {
     @Autowired
     private BankAccountService bankAccountService;
 
-    /**
-     * 添加银行卡第三步
-     * @return
-     */
-    @RequestMapping("bankThree")
-    public String bankThree(){
-        return "/trade/information/bankThree";
-    }
 
     /**
-     * 添加银行卡第二步
-     * @return
-     */
-    @RequestMapping("bankTwo")
-    public String bankTwos(){
-        return "/trade/information/bankTwo";
-    }
-
-    /**
-     * 添加银行卡第二部
+     * 添加银行卡三步走
      * @return
      */
     @RequestMapping(value = "/bankTwo",method = RequestMethod.POST)
     @ResponseBody
-    public ModelAndView bankTwo(HttpSession session,BankAccount bankAccount){
-        ModelAndView modelAndView = new ModelAndView();
-        //获取当前用户增加的银行卡类型(开户行)
+    public Map<String,Object> bankTwo(HttpSession session, BankAccount bankAccount){
+        //获取当前用户填写的银行卡类型(开户行)
         String bankAccountDepositBank = bankAccount.getBankAccountDepositBank();
-        //根据银行卡获取与其绑定的手机号
+        //获取输入的账号查询银行卡信息（获取手机号）
         String bankAccountNumber = bankAccount.getBankAccountNumber();
         BankAccount ba = bankAccountService.queryBankAccountByNumber(bankAccountNumber);
         if(ba!=null){
             Integer userId = ba.getUserId();
             Account account = accountService.queryAcountById(userId);
             String userPhone = account.getUserPhone();
-            //将前台输入的数据存到缓存
-            session.setAttribute("bankAccountDepositBank",bankAccountDepositBank);
-            session.setAttribute("userPhone",userPhone);
-            session.setAttribute("bankAccount",bankAccount);
-            return modelAndView;
+            Map<String,Object> map = new HashMap<>();
+            map.put("userPhone",userPhone);
+            map.put("bankAccountDepositBank",bankAccountDepositBank);
+            return map;
         }else {
-           // session.setAttribute("message","银行卡不存在");
             return null;
         }
     }
