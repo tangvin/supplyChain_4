@@ -1,22 +1,13 @@
 package cn.com.edzleft.controller.procurement.homepage;
 
-import cn.com.edzleft.entity.Account;
-import cn.com.edzleft.entity.Freight;
-import cn.com.edzleft.entity.Information;
-import cn.com.edzleft.entity.Order;
-import cn.com.edzleft.entity.ReceivingAddress;
-import cn.com.edzleft.entity.SessionInfo;
+import cn.com.edzleft.entity.*;
 import cn.com.edzleft.service.procurement.freight.PmFreightService;
 import cn.com.edzleft.service.procurement.homepage.PmHomePageService;
 import cn.com.edzleft.service.procurement.receivingaddress.PmReceivingAddressService;
 import cn.com.edzleft.service.trade.account.AccountService;
-import cn.com.edzleft.service.trade.freight.FreightService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
