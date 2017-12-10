@@ -17,12 +17,24 @@
     <result column="certificate_type" property="certificateType" jdbcType="INTEGER" />
     <result column="invite_account" property="inviteAccount" jdbcType="VARCHAR" />
     <result column="information_id" property="informationId" jdbcType="INTEGER" />
+    <result column="user_linkman" property="userLinkman" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     user_id, user_name, user_pwd, user_phone, create_time, create_ip, login_time, login_ip, 
-    user_eamil, account_type, account_state, certificate_state, certificate_type, invite_account,information_id
+    user_eamil, account_type, account_state, certificate_state, certificate_type, invite_account,information_id,user_linkman
   </sql>
-
+	
+	<!--根据名字查询账号是否存在-->
+  <select id="findByName" resultType="java.lang.Integer" parameterType="java.lang.String" >
+    select count(*)
+    from gyl_account
+    where user_name = #{userName}
+  </select>
+  <!-- 创建账号 -->
+  <insert id="insert" parameterType="cn.com.edzleft.entity.Account">
+  	INSERT INTO gyl_account (account_type, user_linkman,user_phone,user_name,user_pwd,create_time,create_ip) VALUES (#{accountType},#{userLinkman},#{userPhone},#{userName},#{userPwd},#{createTime},#{createIp} )
+  </insert>
+	
   <!--根据名字查询账号信息-->
   <select id="findAccountByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select

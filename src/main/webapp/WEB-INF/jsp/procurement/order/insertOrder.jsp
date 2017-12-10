@@ -21,20 +21,19 @@
         }
         .glshxx{
             margin-left:20px;
-           
+            display:block;
+            background:#ddd;
+            padding: 10px 10px;
+            width:100px;
+           color:#000000;
+           border-radius: 4px;
         }
         .next{
           width: 120px;
             height: 40px;
             font-size: 16px;
         }
-        .gl{
-	        width:150px;
-           background:#dddddd;
-           color:#000000;
-           padding:6px 12px;
-           border-radius: 4px;
-        }
+       
         #glshxx{
             text-decoration: none;
         }
@@ -104,7 +103,15 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息：</td>
-                            <td class="col-xs-8 text-left"><p class="qwer"><span id="address"></span></p><input id="receivingAddressId" type="hidden"><a class="glshxx" id="glshxx"  href="#"><div class="gl">管理收货信息</div></a></td>
+                            <td class="col-xs-8 text-left">
+	                            <p class="qwer">
+	                                <span id="address"></span>
+	                            </p>
+	                            <input id="receivingAddressId" type="hidden">
+	                            <a class="glshxx" id="glshxx"  href="#">
+	                                <div class="gl">管理收货信息</div>
+	                            </a>
+                            </td>
                         </div>
                     </tr>
                     <tr class="qwer">
@@ -177,7 +184,8 @@
                                                 <form class="form-inline">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" class="redio"><input id="eee" name="applicationletter"><span>￥200万元</span>
+                                                            <input type="checkbox" class="redio">
+                                                            <input id="eee" name="applicationletter"><span>￥200万元</span>
                                                         </label>
                                                     </div>
                                                 </form>

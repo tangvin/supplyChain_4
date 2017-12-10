@@ -131,14 +131,16 @@
 										<div class="row">
 											<td class="col-xs-3 text-right"><span class="xingxing">*</span>申请用信：</td>
 											<td class="col-xs-9 text-left">
-												<div class="checkbox">
+												<div class="row">
+													<div class="checkbox">
 														<label>
 															<input type="checkbox" id="id" checked="checked"> 是
 														</label>
 													</div>
-												<div class="form-group">
-													   <input type="text" value="${order.applicationletter}" name="applicationletter">￥万元
+													<div class="form-group">
+														  <input type="text" id="id1" value="${order.applicationletter}" name="applicationletter">￥万元
 													</div>
+												</div>
 											</td>
 										</div>
 									</tr>
@@ -265,7 +267,7 @@
 					</label>
 					</div>
 					<div class="form-group">
-					<input type="text" value="${order.applicationletter}" name="applicationletter">￥万元
+					<input type="text"  value="${order.applicationletter}" name="applicationletter">￥万元
 					</div>
 					</td>
 					</div>
@@ -401,7 +403,7 @@ $(function(){
             $('#id1').attr("disabled","disabled");
         }
     })
-    
+});  
   /*   编辑待确认和已驳回 */
     
      $("#sureUpdate1").click(function(){
@@ -438,7 +440,7 @@ $(function(){
 	
 	
 	
-});
+
 
 </script>
 </html>
