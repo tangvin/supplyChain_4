@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.edzleft.dao.procurement.bankAccount.PmBankAccountMapper;
+import cn.com.edzleft.entity.Account;
 import cn.com.edzleft.entity.BankAccount;
 import cn.com.edzleft.entity.SessionInfo;
 
@@ -36,22 +37,6 @@ public class PmBankAccountServiceImpl implements PmBankAccountService {
      */
     @Override
     public int addBankAcount(BankAccount bankAccount,HttpSession session) {
-        //获取当前登录的用户id
-        SessionInfo sessions = (SessionInfo) session.getAttribute("sessionInfo");
-        Integer userId = sessions.getAdmin().getUserId();
-        //根据id查询出所有的银行卡
-        List<BankAccount> bankAccounts = pmpmbankAccountMapper.selectBankAccountByUserId(userId);
-        //判断当前的银行卡是否设置了默认
-        if(bankAccount.getDefaultId()==1){
-            //将设置为默认的银行卡取消默认
-            for (BankAccount account : bankAccounts) {
-                if(account.getDefaultId() == 1){
-                    account.setDefaultId(0);
-                    pmpmbankAccountMapper.updatebankAccount(account);
-                }
-            }
-        }
-        bankAccount.setUserId(userId);
         int i = pmpmbankAccountMapper.insertBankAcount(bankAccount);
         return i;
     }
@@ -97,6 +82,23 @@ public class PmBankAccountServiceImpl implements PmBankAccountService {
         bankAcc.setDefaultId(value);
         int i = pmpmbankAccountMapper.updatebankAccount(bankAcc);
         return i;
+    }
+
+    /**
+     * 添加
+     */
+	@Override
+	public Account queryAcountById(Integer id){
+        Account a = pmpmbankAccountMapper.selectAccountById(id);
+        return a;
+	}
+
+	/**
+     *  根据银行卡查询出当前输入银行账号信息
+     */
+	public  BankAccount queryBankAccountByNumber(String number){
+        BankAccount bankAccount = pmpmbankAccountMapper.selectBankAccountByNumber(number);
+        return bankAccount;
     }
 }
 

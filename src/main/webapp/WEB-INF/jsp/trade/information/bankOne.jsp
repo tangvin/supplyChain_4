@@ -134,7 +134,7 @@
             alert('请输入卡号')
         }else {
             $.ajax({
-            url:"<%=request.getContextPath()%>/tradeMain/bankTwo.action",
+            url:"<%=request.getContextPath()%>/pmbankAccount/bankTwo.action",
 //            dataType:'json',
             type:'POST',
             data:$("#bankformId").serialize(),

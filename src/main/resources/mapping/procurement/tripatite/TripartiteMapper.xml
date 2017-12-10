@@ -28,14 +28,14 @@
   <!--条件查询-->
   <sql id="where_sql">
     <trim prefix="where" prefixOverrides="and">
-      <if test="whereMap != null &amp;&amp; whereMap.tripartiteCreditHolderPurchaserId != null and whereMap.tripartiteCreditHolderPurchaserId != ''">
-        AND i.tripartite_credit_holder_purchaser_id  LIKE '%${whereMap.tripartiteCreditHolderPurchaserId}%'
+      <if test="whereMap != null &amp;&amp; whereMap.userId != null and whereMap.userId != ''">
+        AND i.tripartite_credit_holder_purchaser_id  LIKE '%${whereMap.userId}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.caEntName != null and whereMap.caEntName != ''">
         AND c2.ent_name  LIKE '%${whereMap.caEntName}%'
       </if>
-      <if test="whereMap != null &amp;&amp; whereMap.tripartiteCreditHolderPurchaser != null and whereMap.tripartiteCreditHolderPurchaser != ''">
-        AND tripartite_credit_holder_purchaser  LIKE '%${whereMap.tripartiteCreditHolderPurchaser}%'
+      <if test="whereMap != null &amp;&amp; whereMap.trEntName != null and whereMap.trEntName != ''">
+        AND c.ent_name  LIKE '%${whereMap.trEntName}%'
       </if>
     </trim>
   </sql>

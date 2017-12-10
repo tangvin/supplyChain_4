@@ -13,7 +13,6 @@
             <a href="<%=request.getContextPath()%>/procurementMain/procurementMain.action">系统首页</a>
             <span>></span>
             <a href="#" id="zhxx">资料维护</a>
-            <span>></span>
             <a href="#">资料编辑</a>
         </div>
         <div class="col-xs-12">
@@ -148,55 +147,55 @@
                 <div class="jbxx">
                     <div class="row jbxx_row jbxx_zlbj">
                         <div class="col-xs-8">
-                            <h5>基本资料</h5>
+                            <h5>高级资料</h5>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-7 col-xs-offset-1">
                             <table class="table table_one">
-                                <tbody>
-                                <tr>
-                                    <td>注册资本:</td>
-                                    <td><input type="text" class="form-control" name="registeredCapital" value="${information.registeredCapital}"></td>
-                                </tr>
-                                <tr>
-                                    <td>主要股东:</td>
-                                    <td><input type="text" class="form-control" name="majorShareholder" value="${information.majorShareholder}"></td>
-                                </tr>
-                                <tr>
-                                    <td>经营范围:</td>
-                                    <td><input type="text" class="form-control" name="businessScope" value="${information.businessScope}"></td>
-                                </tr>
-                                <tr>
-                                    <td>登记机关:</td>
-                                    <td><input class="form-control" name="registrationAuthority"  value="${information.registrationAuthority}" type="text"></td>
-                                </tr>
-                                <tr>
-                                    <td>社会统一信用代码电子档：</td>
-                                    <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/card_minsheng@1x.png"></td>
-                                </tr>
-                                <tr>
-                                    <td>工商登记注册号电子档：</td>
-                                    <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/card_minsheng@1x.png"></td>
-                                </tr>
-                                <tr>
-                                    <td>税务登记号电子档：</td>
-                                    <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/card_minsheng@1x.png"></td>
-                                </tr>
-                                <tr>
-                                    <td>组织机构代码电子档：</td>
-                                    <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/card_minsheng@1x.png"></td>
-                                </tr>
-                                <tr>
-                                    <td>法人身份证电子档：</td>
-                                    <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/card_minsheng@1x.png"></td>
-                                </tr>
-                                <tr>
-                                    <td>开户许可证电子档：</td>
-                                    <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/card_minsheng@1x.png"></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                            <tbody>
+                                            <tr>
+                                                <td>注册资本:</td>
+                                                <td>${information.registeredCapital}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>主要股东:</td>
+                                                <td><span>${information.majorShareholder}</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>经营范围:</td>
+                                                <td>${information.businessScope}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>登记机关：</td>
+                                                <td>${information.registrationAuthority}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>社会统一信用代码电子档：</td>
+                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>工商登记注册电子档：</td>
+                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>税务登记号电子档：</td>
+                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>组织机构代码电子档：</td>
+                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>法人身份证电子档：</td>
+                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>开户许可证电子档：</td>
+                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                         </div>
                     </div>
                 </div>
@@ -219,15 +218,18 @@
     function updateInformation(){
         $.ajax({
             url:'<%=request.getContextPath()%>/procurementMain/cupdateInformation.action',
-            data:$("#updateForm").serialize(),
             type:'post',
             dataType:'json',
+            data:$("#updateForm").serialize(),
             success:function(data){
-//                $.messager.alert('消息',data.msg,'info');
+            	if(data.success){
+            		alert(data.data)
+            		setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);
+            	}else{
+            		alert(data.data)
+            	}
+            	
             },
-            error:function(){
-//                $.messager.alert('消息','ajax请求失败！','warning');
-            }
         });
     }
 </script>

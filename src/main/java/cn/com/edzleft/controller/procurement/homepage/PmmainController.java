@@ -8,8 +8,12 @@ import cn.com.edzleft.service.trade.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -102,11 +106,19 @@ public class PmmainController {
      * 确认修改资料
      */
     
-    @RequestMapping(value = "cupdateInformation")
+    @RequestMapping(value = "cupdateInformation",method = RequestMethod.POST)
     @ResponseBody
-    public int updateInformation(Information information){
+    public Map<String,Object> updateInformation(Information information){
+    	Map<String,Object> map = new HashMap<>();
     	int i = pmHomePageService.updateInformation(information);
-        return i;
+    	if(i == 1){
+    		map.put("data", "修改成功");
+    		map.put("success", true);
+    	}else{
+    		map.put("data", "修改失败");
+    		map.put("success", true);
+    	}
+        return map; 
     }
 
     /**
@@ -326,14 +338,69 @@ public class PmmainController {
         Integer userId = session.getAdmin().getUserId();
         Information information = pmHomePageService.homePageSelect(userId);
         mv.addObject("information",information);
+        mv.addObject("messages","recieverAddress");
         return mv;
     }
     
-    
     /**
-     * 根据用户ID查询默认地址
+     * 收货地址局部刷新
+     * @param sessionInfo
+     * @return
      */
-    
-    
+    @RequestMapping(value = "/shdz")
+    public ModelAndView shdz(HttpSession sessionInfo){
+    	ModelAndView mv = new ModelAndView("/procurement/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = pmHomePageService.homePageSelect(userId);
+        mv.addObject("information",information);
+        mv.addObject("messages","recieverAddress");
+        return mv;
+    }
+    /**
+     * 银行卡局部刷新
+     * @param sessionInfo
+     * @return
+     */
+    @RequestMapping(value = "/yhk")
+    public ModelAndView yhk(HttpSession sessionInfo){
+    	ModelAndView mv = new ModelAndView("/procurement/information/information");
+    	SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+    	Integer userId = session.getAdmin().getUserId();
+    	Information information = pmHomePageService.homePageSelect(userId);
+    	mv.addObject("information",information);
+    	mv.addObject("messages","messages");
+    	return mv;
+    }
+    /**
+     * 修改密码局部刷新
+     * @param sessionInfo
+     * @return
+     */
+    @RequestMapping(value = "/xgmm")
+    public ModelAndView xgmm(HttpSession sessionInfo){
+    	ModelAndView mv = new ModelAndView("/procurement/information/information");
+    	SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+    	Integer userId = session.getAdmin().getUserId();
+    	Information information = pmHomePageService.homePageSelect(userId);
+    	mv.addObject("information",information);
+    	mv.addObject("messages","profile");
+    	return mv;
+    }
+//    /**
+//     * 修改资料局部刷新
+//     * @param sessionInfo
+//     * @return
+//     */
+//    @RequestMapping(value = "/jbzl")
+//    public ModelAndView jbzl(HttpSession sessionInfo){
+//    	ModelAndView mv = new ModelAndView("/procurement/information/information");
+//    	SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+//    	Integer userId = session.getAdmin().getUserId();
+//    	Information information = pmHomePageService.homePageSelect(userId);
+//    	mv.addObject("information",information);
+//    	mv.addObject("messages","profile");
+//    	return mv;
+//    }
 
 }
