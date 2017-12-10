@@ -49,6 +49,12 @@
   <select id="insetOrder5" parameterType="Integer" resultType="Integer">
     select t.r_address_id from gyl_receiving_address t where t.r_address_default=0 and t.unionID=#{unionID}
   </select>
+  <!-- 删除收货地址 -->
+  <!--根据id删除收货地址-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gyl_receiving_address
+    where r_address_id = #{rAddressId,jdbcType=INTEGER}
+  </delete>
   
   <insert id="insert" parameterType="cn.com.edzleft.entity.ReceivingAddress" >
     insert into gyl_receiving_address ( r_address_area, r_address_address, 
@@ -141,4 +147,5 @@
       r_address_default = #{rAddressDefault,jdbcType=VARCHAR}
     where r_address_id = #{rAddressId,jdbcType=INTEGER}
   </update>
+  
 </mapper>

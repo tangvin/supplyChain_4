@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -141,7 +144,48 @@ public class AccountController {
         return resultBean.toString();
         }
 
-
+    @RequestMapping(value="loginSession")
+    @ResponseBody    
+    public ReturnJson loginSession(HttpSession session) {
+    	ReturnJson rj = new ReturnJson();
+    	SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
+    	Integer accountType = sessionInfo.getAdmin().getAccountType();
+    	if(sessionInfo!=null){//session中有值  登陆成功
+	    	if(accountType == 0){//采购方
+	    		 rj.setSuccess(true);
+	             rj.setType(0);
+	        }
+	        if(accountType == 1){//贸易方
+	        	 rj.setSuccess(true);
+	             rj.setType(1);
+	        }
+	        if(accountType == 2){//资方
+	        	 rj.setSuccess(true);
+	             rj.setType(2);
+	        }
+    	}else {//session等于空的时候 , 进入session
+    		rj.setSuccess(true);
+            rj.setType(3);
+    	}
+    	return rj;
+    }
+    
+    /**
+     * 查询当前账号是否存在
+     */
+    @RequestMapping(value="findByName")
+    @ResponseBody
+    public Map<String, Object> findByName(String userName){
+    	Map<String, Object> map = new HashMap<>();
+    	int count = accountService.findByName(userName);
+    	if (count > 0) {
+			map.put("success", true);
+		}else {
+			map.put("success", false);
+		}
+    	return map;
+    }
+    
 
 }
 

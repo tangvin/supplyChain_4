@@ -14,13 +14,24 @@ public interface AccountMapper {
      */
 
     public Account findAccountByName(String  userName);
-
-
+    /**
+     * 根据账号查询用户是否存在
+     * @param userName
+     * @return
+     */
+    public Integer findByName(String  userName);
+    
+    
     /**
      *  添加一个用户账号信息
      */
     public void insertAccount(Account account);
-
+    
+    /**
+     * 创建账号
+     * @param account
+     */
+    public Integer insert(Account account);
     /**
      * 修改账号密码
      */

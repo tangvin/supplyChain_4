@@ -29,16 +29,21 @@ public class PmtripartiteController {
 	private PmtripartiteService pmtripartiteService;
 	@RequestMapping(value="pmtripartite" ,method=RequestMethod.POST)
 	@ResponseBody
-    public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String caEntName,HttpSession session){
+    public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String caEntName,String trEntName,HttpSession session){
 		DataGridJson dgj = new DataGridJson();
 		PageUtil<Tripartite> userPage = new PageUtil<>();
         HashMap<String,Object> whereMaps =new HashMap<>();
         /*从session获取当前用户的信息*/
         SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
         Account sessionAccount=sessionInfo.getAdmin();
+        Integer userId = sessionAccount.getUserId();
         System.out.println(sessionAccount);
         whereMaps.put("caEntName",caEntName);
+        whereMaps.put("trEntName",trEntName);
+        whereMaps.put("userId",userId);
        System.out.println("=========="+caEntName);
+       System.out.println("=========="+trEntName);
+       
         userPage.setCpage(pageNumber);
         userPage.setPageSize(pageSize);
         userPage.setWhereMap(whereMaps);

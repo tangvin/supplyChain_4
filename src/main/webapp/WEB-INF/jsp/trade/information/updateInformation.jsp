@@ -82,11 +82,13 @@
                             <tr>
                                 <td  class="text-right">法定代表人证件类型：</td>
                                 <td>
+                                    <%--0居民身份证、1护照、2港澳居民来往内地通行证、3台湾居民来往大陆通行证--%>
                                     <select class="form-control zlbj_select" name="representativeType">
-                                        <option value="0">0居民身份证</option>
-                                        <option value="1">1护照</option>
-                                        <option value="2">2港澳居民来往内地通行证</option>
-                                        <option value="3">3台湾居民来往大陆通行证</option>
+                                        <option>全部</option>
+                                        <option value="0" <c:if test="${'0' eq information.representativeType}">selected</c:if> >居民身份证</option>
+                                        <option value="1" <c:if test="${'1' eq information.representativeType}">selected</c:if> >护照</option>
+                                        <option value="2" <c:if test="${'2' eq information.representativeType}">selected</c:if> >港澳居民来往内地通行证</option>
+                                        <option value="3" <c:if test="${'3' eq information.representativeType}">selected</c:if> >台湾居民来往大陆通行证</option>
                                     </select>
                                 </td>
                             </tr>
@@ -162,11 +164,11 @@
 
                             <tr>
                                 <td  class="text-right">经营范围：</td>
-                                <td><textarea style="width: 250px;" class="form-control" rows="3">${information.registrationAuthority}</textarea></td>
+                                <td><textarea style="width: 250px;" name="businessScope" class="form-control" rows="3">${information.businessScope}</textarea></td>
                             </tr>
                             <tr>
                                 <td  class="text-right">登记机关：</td>
-                                <td><input type="text" name="businessScope" class="form-control" value="${information.businessScope}"></td>
+                                <td><input type="text" name="registrationAuthority" class="form-control" value="${information.registrationAuthority}"></td>
                             </tr>
                             <tr>
                                 <td  class="text-right">社会统一信用代码电子档：</td>

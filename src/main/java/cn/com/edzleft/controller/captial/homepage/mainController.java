@@ -5,11 +5,19 @@ import cn.com.edzleft.entity.Information;
 import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.captial.homepage.CaptialHomePageService;
 import cn.com.edzleft.service.trade.account.AccountService;
+import cn.com.edzleft.util.ConfigUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -24,14 +32,14 @@ public class mainController {
     @Autowired
     private AccountService accountService;
 
-    /**
+   /* *//**
      * 注册页面下一步
      * @return
-     */
+     *//*
     @RequestMapping(value = "registerTwo")
     public String registerTwo(){
         return "/registerTwo";
-    }
+    }*/
 
     /**
      * 注册页面
@@ -41,6 +49,29 @@ public class mainController {
     public String register(){
         return "/register";
     }
+    
+    
+    /*@RequestMapping(value = "/registerOne",method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> first(Account account,String checkCode, HttpSession session, HttpServletRequest request) {
+		Map<String,Object> map=new HashMap<>();
+		//Account account=new Account();
+		SessionInfo sessionInfo = new SessionInfo();
+//		account.setAccountType(Integer.parseInt(accountType));
+//		account.setUserLinkman(userLinkman);
+//		account.setUserPhone(userPhone);
+		sessionInfo.setAdmin(account);
+		request.getSession().setAttribute(ConfigUtil.getSessionInfoName(),sessionInfo);
+		String sendCode=(String) session.getAttribute("sendCodes");
+		map.put("success", true);
+		if (sendCode.equals(checkCode)) {
+			map.put("success", true);
+		}else {
+			map.put("success", false);
+		}
+
+		return map;
+	}*/
 
     /**
      * 认证资料

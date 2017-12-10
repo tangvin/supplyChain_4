@@ -2,6 +2,7 @@ package cn.com.edzleft.service.trade.account;
 
 import cn.com.edzleft.dao.trade.homepage.AccountMapper;
 import cn.com.edzleft.entity.Account;
+import cn.com.edzleft.entity.BankAccount;
 import cn.com.edzleft.util.ResultBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,9 +88,19 @@ public class AccountServiceImpl implements AccountService {
                      return new ResultBean(-1,"请重新登录");
     }
 
-
+    /*根据id查询账号信息*/
     public Account queryAcountById(Integer id){
         Account a = accountMapper.selectAccountById(id);
         return a;
     }
+
+	@Override
+	public Integer findByName(String userName) {
+		return accountMapper.findByName(userName);
+	}
+
+	@Override
+	public Integer insert(Account account) {
+		return accountMapper.insert(account);
+	}
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,9 +23,12 @@ public class PmReceivingAddressContorller {
 	@ResponseBody
 	@RequestMapping(value="getaddress")
 	public boolean getAddress(ReceivingAddress ra,HttpSession sessionInfo){
+		
 		int i = pmreceivingAddressservice.insert(ra,sessionInfo);
 		return i>0?true:false;
 	}
+	
+	
 	/**
 	 * 收货地址设为默认
 	 */

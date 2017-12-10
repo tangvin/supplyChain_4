@@ -120,12 +120,12 @@
                                             <td class="col-xs-8">
                                                 <div class="row pzfh_row">
                                                     <div class="col-xs-5 pzfh_row_div">
-                                                        <select class="form-control" name="freightUnit">
-                                                            <option>韵达</option>
-                                                            <option>申通</option>
-                                                            <option>圆通</option>
-                                                            <option>顺丰</option>
-                                                            <option>菜鸟</option>
+                                                        <select class="form-control" id="pzfh_select" name="freightUnit">
+                                                            <%--<option>韵达</option>--%>
+                                                            <%--<option>申通</option>--%>
+                                                            <%--<option>圆通</option>--%>
+                                                            <%--<option>顺丰</option>--%>
+                                                            <%--<option>菜鸟</option>--%>
                                                         </select>
                                                     </div>
                                                     <div class="col-xs-5">
@@ -152,7 +152,7 @@
                                 </tr>
                                     <tr>
                                         <div class="row">
-                                            <td class="col-xs-3"><span class="xingxing">*</span>发票编号:</td>
+                                            <td class="col-xs-3"><span class="xingxing">*</span>发票号:</td>
                                             <td class="col-xs-8">
                                                 <div class="row row_ddje">
                                                     <div class="col-xs-5 row_ddje_div">
@@ -212,6 +212,8 @@
     $('#birthday1').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
         console.log(start.toISOString(), end.toISOString(), label);
     });
+
+
 
     imgUpload({
         inputId:'file', //input框id
@@ -399,6 +401,11 @@
             }
                 })
             })
+
+
+
+
+
             $.ajax({
             url:"<%=request.getContextPath()%>/tradeOrder/orderSelect.action",
             data:{ pageNumber:1, pageSize: 10},
@@ -413,8 +420,20 @@
                     }
                 }
                 $('#wyb').append(data_con);
+
+                $.ajax({
+                    url:'<%=request.getContextPath()%>/tradeOrder/pzfh.action?id='+w+'&&flag='+e,
+                    type:'post',
+                    dataType:'json',
+                    success:function (data) {
+                        console.log(data)
+                    }
+                })
             }
+
         });
+
+
 
     }
 

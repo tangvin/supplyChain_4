@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import cn.com.edzleft.entity.Account;
 import cn.com.edzleft.entity.BankAccount;
 
 public interface PmBankAccountService {
@@ -15,5 +16,11 @@ public interface PmBankAccountService {
 	int cutBankAccountById(Integer id);
 
 	int setbankAccount(Integer id, Integer value, HttpSession session);
+
+	/*根据id查询账户信息*/
+	Account queryAcountById(Integer userId);
+	
+	 //根据银行卡查询出当前绑定的手机号
+    public  BankAccount queryBankAccountByNumber(String num);
 
 }

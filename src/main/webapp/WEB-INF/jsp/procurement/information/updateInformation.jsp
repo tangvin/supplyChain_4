@@ -146,7 +146,7 @@
                 <div class="jbxx">
                     <div class="row jbxx_row jbxx_zlbj">
                         <div class="col-xs-8">
-                            <h5>基本资料</h5>
+                            <h5>高级资料</h5>
                         </div>
                     </div>
                     <div class="row">
@@ -217,15 +217,18 @@
     function updateInformation(){
         $.ajax({
             url:'<%=request.getContextPath()%>/procurementMain/cupdateInformation.action',
-            data:$("#updateForm").serialize(),
             type:'post',
             dataType:'json',
+            data:$("#updateForm").serialize(),
             success:function(data){
-//                $.messager.alert('消息',data.msg,'info');
+            	if(data.success){
+            		alert(data.data)
+            		setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);
+            	}else{
+            		alert(data.data)
+            	}
+
             },
-            error:function(){
-//                $.messager.alert('消息','ajax请求失败！','warning');
-            }
         });
     }
     $(function () {
