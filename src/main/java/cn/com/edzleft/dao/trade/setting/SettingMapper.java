@@ -19,4 +19,8 @@ public interface SettingMapper {
 	 * @return
 	 */
 	public Integer update(Settings setting);
+	/**
+	 * 创建
+	 */
+	public Integer insert(Settings setting);
 }
