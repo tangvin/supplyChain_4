@@ -17,15 +17,15 @@ public class Tripartite {
     /**
      * 户主（贸方）
      */
-    private String tripartiteCreditHolderTrade;
+    private Integer tripartiteCreditHolderTradeId;
     /**
      * 户主（采方）
      */
-    private String tripartiteCreditHolderPurchaser;
+    private Integer tripartiteCreditHolderPurchaserId;
     /**
      * 户主(资方）
      */
-    private String tripartiteCreditHolderCapital;
+    private Integer tripartiteCreditHolderCapitalId;
     /**
      * 三方银行账户之账号
      */
@@ -59,18 +59,67 @@ public class Tripartite {
     /**
      * 户主（采购方）
      */
-    private String entName;
+    private String pmEntName;
+    /**
+     * （贸易商）
+     */
+    private String trEntName;
+    /**
+     * （资方）
+     */
+    private String caEntName;
 
 
-    public String getEntName() {
-        return entName;
-    }
 
-    public void setEntName(String entName) {
-        this.entName = entName;
-    }
+    public Integer getTripartiteCreditHolderTradeId() {
+		return tripartiteCreditHolderTradeId;
+	}
 
-    public Integer getTripartiteId() {
+	public void setTripartiteCreditHolderTradeId(Integer tripartiteCreditHolderTradeId) {
+		this.tripartiteCreditHolderTradeId = tripartiteCreditHolderTradeId;
+	}
+
+	public Integer getTripartiteCreditHolderPurchaserId() {
+		return tripartiteCreditHolderPurchaserId;
+	}
+
+	public void setTripartiteCreditHolderPurchaserId(Integer tripartiteCreditHolderPurchaserId) {
+		this.tripartiteCreditHolderPurchaserId = tripartiteCreditHolderPurchaserId;
+	}
+
+	public Integer getTripartiteCreditHolderCapitalId() {
+		return tripartiteCreditHolderCapitalId;
+	}
+
+	public void setTripartiteCreditHolderCapitalId(Integer tripartiteCreditHolderCapitalId) {
+		this.tripartiteCreditHolderCapitalId = tripartiteCreditHolderCapitalId;
+	}
+
+	public String getPmEntName() {
+		return pmEntName;
+	}
+
+	public void setPmEntName(String pmEntName) {
+		this.pmEntName = pmEntName;
+	}
+
+	public String getTrEntName() {
+		return trEntName;
+	}
+
+	public void setTrEntName(String trEntName) {
+		this.trEntName = trEntName;
+	}
+
+	public String getCaEntName() {
+		return caEntName;
+	}
+
+	public void setCaEntName(String caEntName) {
+		this.caEntName = caEntName;
+	}
+
+	public Integer getTripartiteId() {
         return tripartiteId;
     }
 
@@ -86,29 +135,6 @@ public class Tripartite {
         this.tripartiteDepositBank = tripartiteDepositBank == null ? null : tripartiteDepositBank.trim();
     }
 
-    public String getTripartiteCreditHolderTrade() {
-        return tripartiteCreditHolderTrade;
-    }
-
-    public void setTripartiteCreditHolderTrade(String tripartiteCreditHolderTrade) {
-        this.tripartiteCreditHolderTrade = tripartiteCreditHolderTrade == null ? null : tripartiteCreditHolderTrade.trim();
-    }
-
-    public String getTripartiteCreditHolderPurchaser() {
-        return tripartiteCreditHolderPurchaser;
-    }
-
-    public void setTripartiteCreditHolderPurchaser(String tripartiteCreditHolderPurchaser) {
-        this.tripartiteCreditHolderPurchaser = tripartiteCreditHolderPurchaser == null ? null : tripartiteCreditHolderPurchaser.trim();
-    }
-
-    public String getTripartiteCreditHolderCapital() {
-        return tripartiteCreditHolderCapital;
-    }
-
-    public void setTripartiteCreditHolderCapital(String tripartiteCreditHolderCapital) {
-        this.tripartiteCreditHolderCapital = tripartiteCreditHolderCapital == null ? null : tripartiteCreditHolderCapital.trim();
-    }
 
     public String getTripartiteAccountNumber() {
         return tripartiteAccountNumber;
@@ -167,68 +193,43 @@ public class Tripartite {
     }
 
     @Override
-    public String toString() {
-        return "Tripartite{" +
-                "tripartiteId=" + tripartiteId +
-                ", tripartiteDepositBank='" + tripartiteDepositBank + '\'' +
-                ", tripartiteCreditHolderTrade='" + tripartiteCreditHolderTrade + '\'' +
-                ", tripartiteCreditHolderPurchaser='" + tripartiteCreditHolderPurchaser + '\'' +
-                ", tripartiteCreditHolderCapital='" + tripartiteCreditHolderCapital + '\'' +
-                ", tripartiteAccountNumber=" + tripartiteAccountNumber +
-                ", tripartiteAccountOpentime=" + tripartiteAccountOpentime +
-                ", tripartiteAccountOpenpeople='" + tripartiteAccountOpenpeople + '\'' +
-                ", tripartiteBalance=" + tripartiteBalance +
-                ", tripartiteAvailableBalance=" + tripartiteAvailableBalance +
-                ", tripartiteAmountCreateTime=" + tripartiteAmountCreateTime +
-                ", tripartiteAmountCreatePeople='" + tripartiteAmountCreatePeople + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "Tripartite [tripartiteId=" + tripartiteId + ", tripartiteDepositBank=" + tripartiteDepositBank
+				+ ", tripartiteCreditHolderTradeId=" + tripartiteCreditHolderTradeId
+				+ ", tripartiteCreditHolderPurchaserId=" + tripartiteCreditHolderPurchaserId
+				+ ", tripartiteCreditHolderCapitalId=" + tripartiteCreditHolderCapitalId + ", tripartiteAccountNumber="
+				+ tripartiteAccountNumber + ", tripartiteAccountOpentime=" + tripartiteAccountOpentime
+				+ ", tripartiteAccountOpenpeople=" + tripartiteAccountOpenpeople + ", tripartiteBalance="
+				+ tripartiteBalance + ", tripartiteAvailableBalance=" + tripartiteAvailableBalance
+				+ ", tripartiteAmountCreateTime=" + tripartiteAmountCreateTime + ", tripartiteAmountCreatePeople="
+				+ tripartiteAmountCreatePeople + ", pmEntName=" + pmEntName + ", trEntName=" + trEntName
+				+ ", caEntName=" + caEntName + "]";
+	}
+
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Tripartite that = (Tripartite) o;
-
-        if (tripartiteId != null ? !tripartiteId.equals(that.tripartiteId) : that.tripartiteId != null) return false;
-        if (tripartiteDepositBank != null ? !tripartiteDepositBank.equals(that.tripartiteDepositBank) : that.tripartiteDepositBank != null)
-            return false;
-        if (tripartiteCreditHolderTrade != null ? !tripartiteCreditHolderTrade.equals(that.tripartiteCreditHolderTrade) : that.tripartiteCreditHolderTrade != null)
-            return false;
-        if (tripartiteCreditHolderPurchaser != null ? !tripartiteCreditHolderPurchaser.equals(that.tripartiteCreditHolderPurchaser) : that.tripartiteCreditHolderPurchaser != null)
-            return false;
-        if (tripartiteCreditHolderCapital != null ? !tripartiteCreditHolderCapital.equals(that.tripartiteCreditHolderCapital) : that.tripartiteCreditHolderCapital != null)
-            return false;
-        if (tripartiteAccountNumber != null ? !tripartiteAccountNumber.equals(that.tripartiteAccountNumber) : that.tripartiteAccountNumber != null)
-            return false;
-        if (tripartiteAccountOpentime != null ? !tripartiteAccountOpentime.equals(that.tripartiteAccountOpentime) : that.tripartiteAccountOpentime != null)
-            return false;
-        if (tripartiteAccountOpenpeople != null ? !tripartiteAccountOpenpeople.equals(that.tripartiteAccountOpenpeople) : that.tripartiteAccountOpenpeople != null)
-            return false;
-        if (tripartiteBalance != null ? !tripartiteBalance.equals(that.tripartiteBalance) : that.tripartiteBalance != null)
-            return false;
-        if (tripartiteAvailableBalance != null ? !tripartiteAvailableBalance.equals(that.tripartiteAvailableBalance) : that.tripartiteAvailableBalance != null)
-            return false;
-        if (tripartiteAmountCreateTime != null ? !tripartiteAmountCreateTime.equals(that.tripartiteAmountCreateTime) : that.tripartiteAmountCreateTime != null)
-            return false;
-        return tripartiteAmountCreatePeople != null ? tripartiteAmountCreatePeople.equals(that.tripartiteAmountCreatePeople) : that.tripartiteAmountCreatePeople == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = tripartiteId != null ? tripartiteId.hashCode() : 0;
-        result = 31 * result + (tripartiteDepositBank != null ? tripartiteDepositBank.hashCode() : 0);
-        result = 31 * result + (tripartiteCreditHolderTrade != null ? tripartiteCreditHolderTrade.hashCode() : 0);
-        result = 31 * result + (tripartiteCreditHolderPurchaser != null ? tripartiteCreditHolderPurchaser.hashCode() : 0);
-        result = 31 * result + (tripartiteCreditHolderCapital != null ? tripartiteCreditHolderCapital.hashCode() : 0);
-        result = 31 * result + (tripartiteAccountNumber != null ? tripartiteAccountNumber.hashCode() : 0);
-        result = 31 * result + (tripartiteAccountOpentime != null ? tripartiteAccountOpentime.hashCode() : 0);
-        result = 31 * result + (tripartiteAccountOpenpeople != null ? tripartiteAccountOpenpeople.hashCode() : 0);
-        result = 31 * result + (tripartiteBalance != null ? tripartiteBalance.hashCode() : 0);
-        result = 31 * result + (tripartiteAvailableBalance != null ? tripartiteAvailableBalance.hashCode() : 0);
-        result = 31 * result + (tripartiteAmountCreateTime != null ? tripartiteAmountCreateTime.hashCode() : 0);
-        result = 31 * result + (tripartiteAmountCreatePeople != null ? tripartiteAmountCreatePeople.hashCode() : 0);
-        return result;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((caEntName == null) ? 0 : caEntName.hashCode());
+		result = prime * result + ((pmEntName == null) ? 0 : pmEntName.hashCode());
+		result = prime * result + ((trEntName == null) ? 0 : trEntName.hashCode());
+		result = prime * result + ((tripartiteAccountNumber == null) ? 0 : tripartiteAccountNumber.hashCode());
+		result = prime * result + ((tripartiteAccountOpenpeople == null) ? 0 : tripartiteAccountOpenpeople.hashCode());
+		result = prime * result + ((tripartiteAccountOpentime == null) ? 0 : tripartiteAccountOpentime.hashCode());
+		result = prime * result
+				+ ((tripartiteAmountCreatePeople == null) ? 0 : tripartiteAmountCreatePeople.hashCode());
+		result = prime * result + ((tripartiteAmountCreateTime == null) ? 0 : tripartiteAmountCreateTime.hashCode());
+		result = prime * result + ((tripartiteAvailableBalance == null) ? 0 : tripartiteAvailableBalance.hashCode());
+		result = prime * result + ((tripartiteBalance == null) ? 0 : tripartiteBalance.hashCode());
+		result = prime * result
+				+ ((tripartiteCreditHolderCapitalId == null) ? 0 : tripartiteCreditHolderCapitalId.hashCode());
+		result = prime * result
+				+ ((tripartiteCreditHolderPurchaserId == null) ? 0 : tripartiteCreditHolderPurchaserId.hashCode());
+		result = prime * result
+				+ ((tripartiteCreditHolderTradeId == null) ? 0 : tripartiteCreditHolderTradeId.hashCode());
+		result = prime * result + ((tripartiteDepositBank == null) ? 0 : tripartiteDepositBank.hashCode());
+		result = prime * result + ((tripartiteId == null) ? 0 : tripartiteId.hashCode());
+		return result;
+	}
 }

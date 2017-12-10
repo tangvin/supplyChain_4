@@ -100,9 +100,12 @@
                                                         护照
                                                     </c:if>
                                                     <c:if test="${information.representativeType==1}">
-                                                        港澳居民来往内地通行证
+                                                        护照
                                                     </c:if>
                                                     <c:if test="${information.representativeType==2}">
+                                                        港澳居民来往内地通行证
+                                                    </c:if>
+                                                    <c:if test="${information.representativeType==3}">
                                                         台湾居民来往大陆通行证
                                                     </c:if>
                                                 </td>
@@ -261,12 +264,12 @@
                             <div class="khh sfzh">
                                 <form class="form-inline khh_form khh_form1" id="informationForm">
                                     <div class="form-group form-group1">
-                                        <label for="tripartiteDepositBank">开户行</label>
-                                        <input type="text" class="form-control" id="tripartiteDepositBank">
+                                        <label>开户行</label>
+                                        <input type="text" class="form-control"  name="caEntName" id="caEntName">
                                     </div>
                                     <div class="form-group form-group1">
-                                        <label for="tripartiteCreditHolderPurchaser">户主</label>
-                                        <input type="email" class="form-control"  id="tripartiteCreditHolderPurchaser">
+                                        <label>户主</label>
+                                        <input type="email" class="form-control" name="pmEntName" id="pmEntName">
                                     </div>
                                     <button type="button" class="btn  btn-danger" onclick="search()">查询</button>
                                     <button type="button" class="btn  btn-default" onclick="reset()">重置</button>
@@ -377,6 +380,12 @@
         case 'settings':
             $('#myTab a[href="#settings"]').tab('show')
             break;
+        case 'settings1':
+            $('#myTab a[href="#settings1"]').tab('show')
+            break;
+        case 'messages':
+            $('#myTab a[href="#messages"]').tab('show')
+            break;
     }
 
     var InterValObj; //timer变量，控制时间
@@ -425,6 +434,7 @@
                 dataType: "json",
                 success: function (data) {
                     alert(data);
+                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/messages.action')",500);
                 }
             });
         });
@@ -434,15 +444,8 @@
     $(function(){
         $("#incormationTable").bootstrapTable({
             columns:[
-                { //field: 'Number',//可不加
-                    title: '序号',//标题  可不加
-                    width:100,
-                    formatter: function (value, row, index) {
-                        return index+1;
-                    }
-                },
-                {field:'tripartiteDepositBank',title:'开户行'},
-                {field:'tripartiteCreditHolderPurchaser',title:'户主（采购方）'},
+                {field:'caEntName',title:'开户行'},
+                {field:'pmEntName',title:'户主（采购方）'},
                 {field:'tripartiteAccountNumber',title:'账号'},
                 {field:'tripartiteAccountOpentime',title:'账号开通时间',
                     formatter:function(value,row,index){
@@ -476,8 +479,8 @@
         var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             pageNumber: params.pageNumber,
             pageSize: params.pageSize,
-            tripartiteDepositBank:$("#tripartiteDepositBank").val(),
-            tripartiteCreditHolderPurchaser:$("#tripartiteCreditHolderPurchaser").val()
+            caEntName:$("#caEntName").val(),
+            pmEntName:$("#pmEntName").val()
         };
         return temp;
     }
@@ -522,16 +525,16 @@
                 wyb.innerHTML = html;
             }
             window.onload = getnoApplicationData111()
-            var aaa=document.querySelectorAll('.imgimg')
-            for(var i=0;i<data.length;i++){
-                if(data[i].freightName=='中通'){
-                    $(aaa[i]).attr('src','<%=request.getContextPath()%>/js/static/images/logo_debang@1x.png')
-                }else if(data[i].freightName=='申通'){
-                    $(aaa[i]).attr('src','<%=request.getContextPath()%>/js/static/images/logo_shentong@1x.png')
-                }else if(data[i].freightName=='德邦'){
-                    $(aaa[i]).attr('src','<%=request.getContextPath()%>/js/static/images/logo_yuantong@1x.png')
-                }
-            }
+            <%--var aaa=document.querySelectorAll('.imgimg')--%>
+            <%--for(var i=0;i<data.length;i++){--%>
+                <%--if(data[i].freightName=='中通'){--%>
+                    <%--$(aaa[i]).attr('src','<%=request.getContextPath()%>/js/static/images/logo_debang@1x.png')--%>
+                <%--}else if(data[i].freightName=='申通'){--%>
+                    <%--$(aaa[i]).attr('src','<%=request.getContextPath()%>/js/static/images/logo_shentong@1x.png')--%>
+                <%--}else if(data[i].freightName=='德邦'){--%>
+                    <%--$(aaa[i]).attr('src','<%=request.getContextPath()%>/js/static/images/logo_yuantong@1x.png')--%>
+                <%--}--%>
+            <%--}--%>
             var input=$('.hy_moren input[type=radio]')
             console.log(input.length)
             for(var i=0;i<input.length;i++){
@@ -596,7 +599,7 @@
             data:$("#freightForm").serialize(),
             success:function (data) {
                 alert("添加成功！！")
-                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')",500);
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/hygl.action')",500);
             }
         })
     })
@@ -611,7 +614,7 @@
             type:'post',
             success:function(){
                 alert("设置成功")
-                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')",500);
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/hygl.action')",500);
             }
         })
     }
@@ -629,7 +632,7 @@
             type:'post',
             success:function(){
                 alert('删除成功')
-                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')",500);
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/hygl.action')",500);
             }
         })
     }
@@ -665,7 +668,7 @@
             type:'post',
             success:function(){
                 alert("设置成功")
-                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')",500);
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/yhzh.action')",500);
             }
         })
     }
@@ -683,7 +686,7 @@
             type:'post',
             success:function(){
                 alert('删除成功')
-                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')",500);
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/yhzh.action')",500);
             }
         })
     }

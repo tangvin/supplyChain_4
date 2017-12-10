@@ -44,6 +44,34 @@ public class MainsController {
 
 
     /**
+     * 货运管理
+     */
+    @RequestMapping(value ="/hygl")
+    public ModelAndView hygl(HttpSession sessionInfo){
+        ModelAndView modelAndView = new ModelAndView("/trade/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = tradeInformationService.queryBaseInformation(userId);
+        modelAndView.addObject("information", information);
+        modelAndView.addObject("messages", "settings1");
+        return modelAndView;
+    }
+
+    /**
+     * 银行账户
+     */
+    @RequestMapping(value = "/yhzh")
+    public ModelAndView yhzh(HttpSession sessionInfo){
+        ModelAndView modelAndView = new ModelAndView("/trade/information/information");
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        Information information = tradeInformationService.queryBaseInformation(userId);
+        modelAndView.addObject("information", information);
+        modelAndView.addObject("messages", "messages");
+        return modelAndView;
+    }
+
+    /**
      * 添加银行卡三步走
      * @return
      */
@@ -122,9 +150,7 @@ public class MainsController {
         ModelAndView modelAndView = new ModelAndView("trade/information/updateInformation");
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer userId = session.getAdmin().getUserId();
-        String userName=session.getAdmin().getUserName();
         Information information = tradeInformationService.queryBaseInformation(userId);
-        Account account = accountService.queryAccountByName(userName);
         modelAndView.addObject("information", information);
         return modelAndView;
     }
@@ -164,6 +190,7 @@ public class MainsController {
         modelAndView.addObject("messages", "home");
         return modelAndView;
     }
+
     /**
      * 资金账户
      * @return

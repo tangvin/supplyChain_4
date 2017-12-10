@@ -42,6 +42,7 @@ public class BankAccountServiceImpl implements BankAccountService {
      */
     @Override
     public int addBankAcount(BankAccount bankAccount,HttpSession session) {
+      //  BankAccount bankAcc = new BankAccount();
         int i = bankAccountMapper.insertBankAcount(bankAccount);
         return i;
     }
