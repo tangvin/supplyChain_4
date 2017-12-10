@@ -55,7 +55,7 @@
                             <div class="from-group">
                                     <label  class="col-xs-4 control-label"><span class="xingxing">*</span>上传发票</label>
 									<div class="col-xs-8">
-										<input type="file" name="uploadFile" onchange="checkImages();" /> 
+										<input type="file" name="uploadFile" onchange="checkImages();" />
 										<input type="hidden" name="attachmentUrl" value="${invoiceRecord.attachmentUrl }" /> 
 										<input type="hidden" id="invoiceFileAttachment" name="invoiceFileAttachment" value="${invoiceRecord.invoiceFileAttachment }" />
 										<img src="${invoiceRecord.attachmentUrl }" style="width: 200px; height: 100px;" /><br>

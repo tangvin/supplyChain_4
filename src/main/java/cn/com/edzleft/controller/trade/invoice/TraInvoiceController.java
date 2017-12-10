@@ -1,16 +1,15 @@
 package cn.com.edzleft.controller.trade.invoice;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.servlet.http.HttpSession;
-
+import cn.com.edzleft.entity.Account;
+import cn.com.edzleft.entity.Attachment;
+import cn.com.edzleft.entity.InvoiceRecord;
+import cn.com.edzleft.entity.SessionInfo;
+import cn.com.edzleft.service.trade.invoice.TraAttService;
+import cn.com.edzleft.service.trade.invoice.TraInvoiceService;
+import cn.com.edzleft.util.FtpUtil;
+import cn.com.edzleft.util.page.DataGridJson;
+import cn.com.edzleft.util.page.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,16 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import cn.com.edzleft.entity.Account;
-import cn.com.edzleft.entity.Attachment;
-import cn.com.edzleft.entity.InvoiceRecord;
-import cn.com.edzleft.entity.SessionInfo;
-import cn.com.edzleft.service.trade.invoice.TraAttService;
-import cn.com.edzleft.service.trade.invoice.TraInvoiceService;
-import cn.com.edzleft.util.CommUtils;
-import cn.com.edzleft.util.FtpUtil;
-import cn.com.edzleft.util.page.DataGridJson;
-import cn.com.edzleft.util.page.PageUtil;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/traInvoice")
@@ -74,7 +68,7 @@ public class TraInvoiceController {
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public Map update(InvoiceRecord invoiceRecord,@RequestParam MultipartFile uploadFile,HttpSession session,RedirectAttributes attr){
+	public Map update(InvoiceRecord invoiceRecord,@RequestParam("uploadFile") MultipartFile uploadFile,HttpSession session,RedirectAttributes attr){
 		//Map<String,Object> jsonMap = new HashMap<String,Object>();
 		
 		Map resultMap = new HashMap<>();  

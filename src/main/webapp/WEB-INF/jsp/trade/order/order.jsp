@@ -268,7 +268,6 @@
                 {
                     title:'操作',
                     field:'action',
-                    width:25,
                     formatter:function(value , row){
                         var str = '';
                         if(row.orderStatus ==0){//待确认

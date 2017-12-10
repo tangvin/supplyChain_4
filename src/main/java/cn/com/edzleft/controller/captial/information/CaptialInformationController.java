@@ -27,9 +27,9 @@ public class CaptialInformationController {
 
     @RequestMapping(value = "updateInformation",method = RequestMethod.POST)
     @ResponseBody
-    public int updateInformation(Information information){
+    public String updateInformation(Information information){
         int i = captialInformationService.updateInformation(information);
-        return i;
+        return "1";
     }
 
     @RequestMapping(value = "upLoInsert",method = RequestMethod.POST)

@@ -131,8 +131,8 @@
    $(function(){
         $("#tb_departments").bootstrapTable({
             columns:[
-                {field:'orderNumber',title:'订单编号',width:100,formatter:operateFormatter,events:operateEvents1},
-                {field:'orderStatus',title:'订单状态',width:100,
+                {field:'orderNumber',title:'订单编号',formatter:operateFormatter,events:operateEvents1},
+                {field:'orderStatus',title:'订单状态',
                     formatter: function(value,row,index){
                     	if( value == '0') {
                             return "待确认";
@@ -153,28 +153,27 @@
                         }
                     }
                 },
-                {field:'orderAmount',title:'订单金额（￥万元）',width:100},
-                {field:'orderConfirmationTime',title:'订单相关时间',width:100,
+                {field:'orderAmount',title:'订单金额（￥万元）'},
+                {field:'orderConfirmationTime',title:'订单相关时间',
                 	formatter:function(value,row,index){
                         return ConvertToDate(value)
                    }
                 },
                 
                 
-                {field:'orderCreatTime',title:'订单创建时间',width:100,
+                {field:'orderCreatTime',title:'订单创建时间',
                 	formatter:function(value,row,index){
                         return ConvertToDate(value)
                    }
                 },
                 
-                {field:'principalOrder',title:'合同',width:100},
-                {field:'creditUse',title:'用信情况&nbsp;￥万元',width:100},
-                {field:'invoice',title:'发票',width:100},
-                {field:'freightNumber',title:'货运及单号',width:100},
+                {field:'principalOrder',title:'合同'},
+                {field:'creditUse',title:'用信情况&nbsp;￥万元'},
+                {field:'invoice',title:'发票'},
+                {field:'freightNumber',title:'货运及单号'},
                 {
                     title:'操作',
                     field:'action',
-                    width:25,
                     formatter:function(value , row){
                         var str = '';
                         if(row.orderStatus == 0){//待确认

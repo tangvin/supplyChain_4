@@ -43,12 +43,11 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-7 col-xs-offset-1">
                                         <table class="table table_one">
                                             <tbody>
                                             <tr>
-                                                <td>企业身份:</td>
-                                                <td>
+                                                <td style="width:20%;" class="text-right">企业身份：</td>
+                                                <td class="text-left">
                                                     <%--0采购方、1贸易方、2资方--%>
                                                     <c:if test="${information.entIdentity == 0}">
                                                         采购方
@@ -62,39 +61,40 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>企业名称:</td>
-                                                <td><span>${information.entName}</span>
+                                                <td  class="text-right">企业名称：</td>
+                                                <td  class="text-left">
+                                                    <span>${information.entName}</span>
                                                     <c:if test="${information.certificationStatus == 0}">
                                                         <a href="#"><span class="drz" id="zlrz">待认证</span></a>
                                                     </c:if>
                                                     <c:if test="${information.certificationStatus == 1}">
-                                                        <span class="drzs">已认证</span>
+                                                    <span class="drzs">已认证</span>
                                                     </c:if>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>社会统一信用代码:</td>
-                                                <td>${information.entCreditCode}</td>
+                                                <td  class="text-right">社会统一信用代码：</td>
+                                                <td  class="text-left">${information.entCreditCode}</td>
                                             </tr>
                                             <tr>
-                                                <td>工商登记注册号：</td>
-                                                <td>${information.registrationNumber}</td>
+                                                <td class="text-right">工商登记注册号：</td>
+                                                <td class="text-left">${information.registrationNumber}</td>
                                             </tr>
                                             <tr>
-                                                <td>税务登记号：</td>
-                                                <td>${information.taxRegistrationNumber}</td>
+                                                <td class="text-right">税务登记号：</td>
+                                                <td class="text-left">${information.taxRegistrationNumber}</td>
                                             </tr>
                                             <tr>
-                                                <td>组织机构代码：</td>
-                                                <td>${information.institutionCode}</td>
+                                                <td  class="text-right">组织机构代码：</td>
+                                                <td  class="text-left">${information.institutionCode}</td>
                                             </tr>
                                             <tr>
-                                                <td>法定代表人</td>
-                                                <td>${information.representative}</td>
+                                                <td  class="text-right">法定代表人</td>
+                                                <td  class="text-left">${information.representative}</td>
                                             </tr>
                                             <tr>
-                                                <td>法定代表人证件类型：</td>
-                                                <td>
+                                                <td  class="text-right">法定代表人证件类型：</td>
+                                                <td  class="text-left">
                                                     <%--0居民身份证、1护照、2港澳居民来往内地通行证、3台湾居民来往大陆通行证--%>
                                                     <c:if test="${information.representativeType==0}">
                                                         护照
@@ -108,102 +108,100 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>组织机构代码：</td>
-                                                <td>${information.institutionCode}</td>
+                                                <td  class="text-right">组织机构代码：</td>
+                                                <td  class="text-left">${information.institutionCode}</td>
                                             </tr>
                                             <tr>
-                                                <td>法定代表人证件号码：</td>
-                                                <td>${information.representativeNum}</td>
-                                            </tr><tr>
-                                                <td>固定电话：</td>
-                                                <td>${information.telephone}</td>
+                                                <td  class="text-right">法定代表人证件号码：</td>
+                                                <td  class="text-left">${information.representativeNum}</td>
                                             </tr>
                                             <tr>
-                                                <td>省市区域：</td>
-                                                <td>${information.municipality}${information.city}${information.county}</td>
+                                                <td  class="text-right">固定电话：</td>
+                                                <td  class="text-left">${information.telephone}</td>
                                             </tr>
                                             <tr>
-                                                <td>详细地址：</td>
-                                                <td>${information.address}</td>
+                                                <td  class="text-right">省市区域：</td>
+                                                <td  class="text-left">${information.municipality}${information.city}${information.county}</td>
                                             </tr>
                                             <tr>
-                                                <td>企业联系人：</td>
-                                                <td>${information.businessContact}</td>
+                                                <td  class="text-right">详细地址：</td>
+                                                <td  class="text-left">${information.address}</td>
                                             </tr>
                                             <tr>
-                                                <td>企业联系人手机：</td>
-                                                <td>${information.mobilePhone}</td>
+                                                <td  class="text-right">企业联系人：</td>
+                                                <td  class="text-left">${information.businessContact}</td>
                                             </tr>
                                             <tr>
-                                                <td>联系人电子邮件：</td>
-                                                <td>${information.emailAddress}</td>
+                                                <td  class="text-right">企业联系人手机：</td>
+                                                <td  class="text-left">${information.mobilePhone}</td>
                                             </tr>
                                             <tr>
-                                                <td>邮编：</td>
-                                                <td>${information.zipCode}</td>
+                                                <td  class="text-right">联系人电子邮件：</td>
+                                                <td  class="text-left">${information.emailAddress}</td>
                                             </tr>
                                             <tr>
-                                                <td>网址：</td>
-                                                <td>${information.webSite}</td>
+                                                <td  class="text-right">邮编：</td>
+                                                <td  class="text-left">${information.zipCode}</td>
+                                            </tr>
+                                            <tr>
+                                                <td  class="text-right">网址：</td>
+                                                <td  class="text-left">${information.webSite}</td>
                                             </tr>
                                             </tbody>
                                         </table>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="jbxx jbxx1">
+                            <div class="jbxx">
                                 <div class="row jbxx_row">
-                                    <div class="col-xs-8">
+                                    <div class="col-xs-12">
                                         <h5>高级资料</h5>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-7 col-xs-offset-1">
                                         <table class="table table_one">
                                             <tbody>
-                                            <tr>
-                                                <td>注册资本:</td>
-                                                <td>${information.registeredCapital}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>主要股东:</td>
-                                                <td><span>${information.majorShareholder}</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>经营范围:</td>
-                                                <td>${information.businessScope}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>登记机关：</td>
-                                                <td>${information.registrationAuthority}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>社会统一信用代码电子档：</td>
-                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>工商登记注册电子档：</td>
-                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>税务登记号电子档：</td>
-                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>组织机构代码电子档：</td>
-                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>法人身份证电子档：</td>
-                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>开户许可证电子档：</td>
-                                                <td><img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
-                                            </tr>
+                                                <tr>
+                                                    <td style="width: 20%;" class="text-right">注册资本：</td>
+                                                    <td class="text-left">${information.registeredCapital}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right">主要股东：</td>
+                                                    <td class="text-left"><span>${information.majorShareholder}</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right">经营范围：</td>
+                                                    <td class="text-left">${information.businessScope}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right">登记机关：</td>
+                                                    <td class="text-left">${information.registrationAuthority}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right">社会统一信用代码电子档：</td>
+                                                    <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right">工商登记注册电子档：</td>
+                                                    <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png"  class="img-responsive jbxx_img"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right">税务登记号电子档：</td>
+                                                    <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png"  class="img-responsive jbxx_img"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right">组织机构代码电子档：</td>
+                                                    <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png"  class="img-responsive jbxx_img"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right">法人身份证电子档：</td>
+                                                    <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png"  class="img-responsive jbxx_img"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right">开户许可证电子档：</td>
+                                                    <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png"  class="img-responsive jbxx_img"></td>
+                                                </tr>
                                             </tbody>
                                         </table>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -211,10 +209,10 @@
                         <!--账户安全 开始-->
                         <div class="tab-pane" id="profile">
                             <div class="row">
-                                <div class="col-xs-10">
+                                <div class="col-xs-12">
                                     <form class="form-horizontal" role="form" id ="f">
                                         <div class="form-group">
-                                            <label class="col-xs-2 control-label">验证码</label>
+                                            <label class="col-xs-2 control-label"><span class="xingxing">*</span>验证码：</label>
                                             <div class="senCode col-xs-8">
                                                 <%--<input type="text" class="form-control col-xs-4" id="phone" name="phone" placeholder="输入手机号">--%>
                                                 <input type="text" id="senCode" placeholder="输入验证码" class="form-control col-xs-4" name="senCode" size="6"/>
@@ -222,19 +220,20 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="newpwd" class="col-xs-2 control-label">新密码</label>
+                                            <label for="newpwd" class="col-xs-2 control-label"><span class="xingxing">*</span>新密码：</label>
                                             <div class="col-xs-8">
                                                 <input type="password" class="form-control" id="newpwd" name="newpwd">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="confirm" class="col-xs-2 control-label">确认密码</label>
+                                            <label for="confirm" class="col-xs-2 control-label"><span class="xingxing">*</span>确认密码：</label>
                                             <div class="col-xs-8">
                                                 <input type="password" class="form-control" id="confirm" name="confirm">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-xs-offset-3 col-xs-8">
+                                            <div class="col-xs-2"></div>
+                                            <div class="col-xs-8">
                                                 <button type="button" class="btn  btn-danger aq_qr_but" id="upda">确认</button>
                                             </div>
                                         </div>
@@ -390,7 +389,7 @@
         var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;
         //设置button效果，开始计时
         $("#btnSendCode").attr("disabled", "true");
-        $("#btnSendCode").val(+ curCount + "秒");
+        $("#btnSendCode").val(+ curCount + "秒后重获验证码");
         InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
         //向后台发送处理数据
         $.ajax({
@@ -413,7 +412,7 @@
         }
         else {
             curCount--;
-            $("#btnSendCode").val( curCount + "秒");
+            $("#btnSendCode").val( curCount + "秒后重获验证码");
         }
     }
     $(function() {

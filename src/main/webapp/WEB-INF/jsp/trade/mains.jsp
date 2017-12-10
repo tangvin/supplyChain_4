@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <html lang="en">
 <head>
     <link type="image/x-icon" rel="icon" href="<%=request.getContextPath()%>/js/static/images/favicon.ico" />
@@ -14,17 +15,21 @@
             <div class='col-xs-12 row_xtsy_zjzh_div'>
                 <div class='row zjzh_wrap'>
                     <div class='panel-body'>
-                        <div class='col-xs-6'>
-                            <ul class="nav zjzh_title">
-                                <li class='col-xs-8'>
-                                    <h3>${information.entName}</h3>
-                                </li>
-                                <li class='col-xs-1 zjzh_logo_sm'>
+                        <ul class="nav zjzh_title">
+                            <li>
+                                <h3>${information.entName}</h3>
+                            </li>
+                            <c:if test="${information.certificationStatus == 0}">
+                                <a href="#" id="zlrz"><li class='yrzs'>待认证</li></a>
+                            </c:if>
+                            <c:if test="${information.certificationStatus == 1}">
+                                <li class='zjzh_logo_sm'>
                                     <img src='<%=request.getContextPath()%>/js/static/images/identify1@1x.png'>
                                 </li>
-                                <li class='col-xs-3 yrz'>|<span>已认证</span>|</li>
-                            </ul>
-
+                                <li class='col-xs-3 yrz'>已认证</li>
+                            </c:if>
+                        </ul>
+                        <div class='col-xs-6'>
                             <div class='row'>
                                 <div class='col-xs-4'>
                                     <div class='zjzh_logo'>
@@ -65,6 +70,9 @@
     })
     $('#zijin').click(function(){
         $('#load').load('<%=request.getContextPath()%>/tradeMain/zijin.action')
+    })
+    $('#zlrz').click(function(){
+        $('#load').load('<%=request.getContextPath()%>/tradeMain/zlrz.action')
     })
 </script>
 

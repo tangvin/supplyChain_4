@@ -13,14 +13,14 @@
 <div class="top">
     <div class="navbar navbar-default">
         <div class='row row_top'>
-            <div class='col-xs-7'>
+            <div class='col-xs-3'>
                 <ul class="nav navbar-nav navbar-left">
                     <li>
                         <a class="navbar-brand"><img src="<%=request.getContextPath()%>/js/static/images/logo1.3@1x.png"  alt="Brand" class='img-responsive sy_logo' /></a>
                     </li>
                 </ul>
             </div>
-            <div class='col-xs-5'>
+            <div class='col-xs-9'>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="navbar-text">
                         <img src="<%=request.getContextPath()%>/js/static/images/message1@1x.png" />
@@ -111,17 +111,21 @@
             <div class='col-xs-12 row_xtsy_zjzh_div'>
                 <div class='row zjzh_wrap'>
                     <div class='panel-body'>
-                        <div class='col-xs-6'>
-                            <ul class="nav zjzh_title">
-                                <li class='col-xs-8'>
-                                    <h3>${information.entName}</h3>
-                                </li>
-                                <li class='col-xs-1 zjzh_logo_sm'>
+                        <ul class="nav zjzh_title">
+                            <li>
+                                <h3>${information.entName}</h3>
+                            </li>
+                            <c:if test="${information.certificationStatus == 0}">
+                                <a href="#" id="zlrz"><li class='col-xs-3 yrzs'>待认证</li></a>
+                            </c:if>
+                            <c:if test="${information.certificationStatus == 1}">
+                                <li class=zjzh_logo_sm'>
                                     <img src='<%=request.getContextPath()%>/js/static/images/identify1@1x.png'>
                                 </li>
-                                <li class='col-xs-3 yrz'>|<span>已认证</span>|</li>
-                            </ul>
-
+                                <li class=yrz'>已认证</li>
+                            </c:if>
+                        </ul>
+                        <div class='col-xs-6'>
                             <div class='row'>
                                 <div class='col-xs-4'>
                                     <div class='zjzh_logo'>
@@ -167,6 +171,9 @@
     })
     $('#xtsy').click(function(){
         $('#load').load('<%=request.getContextPath()%>/procurementMain/xtsy.action')
+    })
+    $('#zlrz').click(function(){
+        $('#load').load('<%=request.getContextPath()%>/procurementMain/zlrz.action')
     })
 </script>
 </body>

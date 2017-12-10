@@ -273,19 +273,23 @@ body{
 }
 
 .zjzh_title{
-    margin-bottom: 45px;
+    margin-bottom: 20px;
 }
 .zjzh_logo_sm{
-    margin-left:-40px;
+margin-left:40px;
+ margin-right:10px;
+    margin-top:22px;
 }
 .zjzh_title li{
-    line-height: 65px;
+    float:left;
 }
 .zjzh_title .yrz{
     color: #26C13F;
+    margin-top:25px;
 }
-.zjzh_title .yrz>span{
-    padding: 0 10px;
+.zjzh_title .yrzs{
+    color: red;
+    margin-top:25px;
 }
 
 .zjzh_logo{
@@ -306,7 +310,6 @@ body{
     color: #464646;
 }
 .zjzh_button{
-    margin-top: 100px;
 }
 .zjzh_button button{
     width: 120px;
@@ -433,10 +436,18 @@ body{
 .jbxx_row h5{
     color: #464646;
 }
-
+#updateInformation{
+    margin-right: -15px;
+    font-size: 12px;
+    height:35px;
+}
+.jbxx_img{
+    width:180px;
+    height:100px;
+}
 .table_one tbody tr td{
     line-height:30px;
-    border:none;
+    border: 1px solid #f3f3f3;
 }
 .table_one tbody tr td input{
     width:250px;
@@ -452,22 +463,25 @@ body{
 }
 
 
-/*.jbxx1{*/
-    /*margin-top: 15px;*/
-/*}*/
-
-
 #profile h5{
     color: #464646;
 }
 #profile .form-group label{
     color: #464646;
     font-weight: normal;
+    font-size: 12px;
 }
 #profile .form-group div input{
     width:200px;
     height:30px;
 }
+
+#profile .form-group div.senCode input:last-child{
+    width:auto;
+    padding:0 10px 0 10px;
+    height:30px;
+}
+
 .aq_qr_but{
     width: 120px;
     height: 30px;
@@ -634,9 +648,6 @@ body{
 .tab-content .tab-pane{
     padding-top: 20px;
 }
-.tab-content .tab-pane h5{
-    margin-bottom:20px;
-}
 
 .table tbody tr td{
     /*border:none!important;*/
@@ -664,6 +675,8 @@ body{
 }
 .xingxing{
     color: red;
+    margin-right: 5px;
+    display: inline-block;
 }
 /*鍚堝悓绛剧害 缁撴潫*/
 /*閰嶇疆鍙戣揣钂欐嘲妗�*/
@@ -869,19 +882,12 @@ body{
 .mys{
     text-align: left!important;
 }
-.mys img{
-    width:250px;
-    height:100px;
-}
-
 #checkCode{
     width: 150px !important;
 }
 #btnSendCode{
-    width:90px!important;
     height:30px;
     margin-left:20px;
-    padding: 2px;
     font-size: 12px;
     color: #ffffff;
     background: #D9534F;
