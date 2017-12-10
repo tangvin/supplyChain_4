@@ -87,8 +87,10 @@ public class BankAccountController {
         //创建人
         bank.setBankAccountCreatePeople(account.getUserName());
         //用户id
-        bank.setBankAccountId(account.getUserId());
-        int i = bankAccountService.addBankAcount(bankAccount, session);
+        bank.setUserId(account.getUserId());
+        //设置银行卡默认设置
+        bank.setDefaultId(0);
+        int i = bankAccountService.addBankAcount(bank, session);
         return i;
     }
 

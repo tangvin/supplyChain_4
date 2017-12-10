@@ -17,6 +17,8 @@ import java.util.List;
 @Transactional
 public class FreightServiceImpl implements FreightService {
 
+
+
     @Autowired
     private FreightMapper freightMapper;
 
@@ -27,14 +29,16 @@ public class FreightServiceImpl implements FreightService {
     }
 
     /**
-     * 查询所有的货运单位
+     * 根据订单表中的货运id查询出对应的所有的货运管理地址
+     * @param id
      * @return
      */
     @Override
-    public List<Freight> queryAllFreight() {
-        List<Freight> freights = freightMapper.selectAllFreight();
-        return freights;
+    public List<Freight> queryFreightByOrder(Integer id) {
+        List<Freight> list = freightMapper.selectFreightListByOrder(id);
+        return list;
     }
+
 
     /**
      * 添加货运单位

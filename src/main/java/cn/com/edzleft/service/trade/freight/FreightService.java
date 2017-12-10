@@ -18,7 +18,7 @@ public interface FreightService {
     /**
      * 查询所有的货运单位
      */
-    public List<Freight> queryAllFreight();
+    public List<Freight> queryFreightByOrder(Integer id);
 
     /**
      * 添加货运单位

@@ -45,7 +45,7 @@
         .active{
             background: red;
         }
-        .tjyhk_one,.tjyhk_two,.tjyhk_three{
+        .tjyhk_one,.tjyhk_two,.tjyhk_three,.tjyhk_four{
             display: none;
         }
 
@@ -120,6 +120,10 @@
             <button style="margin-top: 40px;width: 120px;" class="btn col-xs-offset-2" id="yhk_next_two_bu">完成</button>
         </div>
     </div>
+    <div class="col-xs-12 tjyhk_four">
+        <p>添加成功</p>
+        <button class="btn" id="last_btn">确定</button>
+    </div>
 </div>
 </body>
 <script>
@@ -140,9 +144,6 @@
             data:$("#bankformId").serialize(),
             success:function (data) {
 
-                if(data.bankAccountDepositBank==1){
-                    $('#klx').text('中国建设银行')
-                }
                 $('#phone').text(data.userPhone)
                 $('#sjyzh').text(data.userPhone)
 
@@ -155,7 +156,6 @@
 
 
     $('#yhk_two').click(function(){
-
         $('.tjyhk_one').css('display','none')
         $('.tjyhk_two').css('display','none')
         $('.tjyhk_three').css('display','block')
@@ -165,22 +165,30 @@
         if($('#checkCode').val()==''){
             alert('输入验证码')
         }else{
-            $(this).text('完成添加')
-            console.log($('#yhklx option:selected').text())
-            console.log($('#ckr').val())
-            console.log($('#account').val())
-            console.log($('#phone').text())
-            $.ajax({
-                url:'<%=request.getContextPath()%>/bankAccount/addBankAccount.action',
-                type:'post',
-                data:{bankAccountDepositBank:$('#yhklx option:selected').text(),bankAccountCreditHolder:$('#ckr').val(),bankAccountNumber:$('#account').val(),userPhone:$('#phone').text()},
-                success:function (data) {
-
-                }
-            })
+            $('.tjyhk_one').css('display','none')
+            $('.tjyhk_two').css('display','none')
+            $('.tjyhk_three').css('display','none')
+            $('.tjyhk_four').css('display','block')
         }
     })
 
+    $('#last_btn').on('click',function () {
+        console.log($('#yhklx option:selected').text())
+        console.log($('#ckr').val())
+        console.log($('#account').val())
+        console.log($('#phone').text())
+        $.ajax({
+            url:'<%=request.getContextPath()%>/bankAccount/addBankAccount.action',
+            type:'post',
+            data:{bankAccountDepositBank:$('#yhklx option:selected').text(),bankAccountCreditHolder:$('#ckr').val(),bankAccountNumber:$('#account').val(),userPhone:$('#phone').text()},
+            success:function (data) {
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/yhzh.action')",500);
+
+            }
+        })
+    })
+
+    /*$(this).text('完成添加')*/
 
 
 

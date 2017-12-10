@@ -1,12 +1,10 @@
-package cn.com.edzleft.service.trade.tripartite;
+package cn.com.edzleft.service.trade.reject;
 
 import cn.com.edzleft.dao.trade.reject.RejectMapper;
 import cn.com.edzleft.entity.Reject;
-import cn.com.edzleft.service.trade.RejectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by ibmtech on 2017/12/7.

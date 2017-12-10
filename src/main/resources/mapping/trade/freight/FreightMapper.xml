@@ -24,6 +24,18 @@
   </select>
 
 
+  <!--根据ID查看货运详细信息-->
+  <select id="selectFreightListByOrder" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+        t1.*,
+        t2.*
+    from gyl_freight t1
+    INNER JOIN
+         gyl_order t2
+    ON
+        t1.freight_id=t2.freight_number_id
+    WHERE t2.freight_number_id=#{freightNumberId}
+  </select>
 
   <!--查询所有的货运管理地址-->
   <select id="selectFreightByAccountId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -47,6 +59,8 @@
     from gyl_freight
     WHERE freight_default_address=1
   </select>
+
+
 
   <!--根据id删除货运单位-->
   <delete id="deleteFreight" parameterType="java.lang.Integer" >
