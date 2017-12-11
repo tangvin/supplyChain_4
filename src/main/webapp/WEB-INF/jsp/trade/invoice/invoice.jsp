@@ -39,7 +39,7 @@
         <div class="col-xs-12">
             <!--合同签约 状态-->
             <div class="khh" style="margin-top: 10px;">
-                <form id="invoiceForm" class="form-inline khh_form khh_form1" style="margin-left:-15px;">
+                <form id="invoiceForm" class="form-inline khh_form khh_form1">
                     <div class="form-group">
                         <label>发票编号</label>
                         <input type="text" class="form-control" id="invoiceNumber">
@@ -62,11 +62,12 @@
             <!--合同签约 状态-->
 
             <!--合同表格 开始-->
-           <div class="table-responsive text-center" style="overflow-y: hidden;margin-top: 40px;">
+<%--           <div class="table-responsive text-center" style="overflow-y: hidden;margin-top: 40px;">
 			    <table class="table table-bordered text-center htbg" id="tb_invoice">
 
 			    </table>
-             </div>
+             </div>--%>
+            <table id="tb_invoice" class="cj_table"></table>
             <!--合同表格 结束-->
 
         </div>

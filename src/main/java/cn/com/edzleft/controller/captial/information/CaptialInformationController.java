@@ -2,7 +2,9 @@ package cn.com.edzleft.controller.captial.information;
 
 import cn.com.edzleft.entity.Account;
 import cn.com.edzleft.entity.Information;
+import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.captial.information.CaptialInformationService;
+import cn.com.edzleft.service.trade.account.AccountService;
 import cn.com.edzleft.util.UploadFileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by ASUS on 2017/11/29.
@@ -24,13 +27,27 @@ public class CaptialInformationController {
 
     @Autowired
     private CaptialInformationService captialInformationService;
+    @Autowired
+    private AccountService accountService;
 
 
     @RequestMapping(value = "updateInformation",method = RequestMethod.POST)
     @ResponseBody
-    public String updateInformation(Information information, Account account){
-        if(account.getInformationId() == null){
+    public String updateInformation(Information information, HttpSession session){
+        SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
+        Integer informationId = sessionInfo.getAdmin().getInformationId();
+        Integer userId = sessionInfo.getAdmin().getUserId();
+        if(informationId == null){
+            information.setCreatorId(userId);
             int i = captialInformationService.insertInformation(information);
+            if(i>0){
+                Information informationUserId =  captialInformationService.selectInformation(userId);
+                Integer creatorId = informationUserId.getCreatorId();
+                Account account = new Account();
+                account.setUserId(userId);
+                account.setInformationId(creatorId);
+                int t =  accountService.updataAccount(account);
+            }
         }else{
             int i = captialInformationService.updateInformation(information);
         }

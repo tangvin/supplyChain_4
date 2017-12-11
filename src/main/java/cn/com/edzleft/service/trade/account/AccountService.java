@@ -1,7 +1,6 @@
 package cn.com.edzleft.service.trade.account;
 
 import cn.com.edzleft.entity.Account;
-import cn.com.edzleft.entity.BankAccount;
 import cn.com.edzleft.util.ResultBean;
 
 import javax.servlet.http.HttpSession;
@@ -27,5 +26,6 @@ public interface AccountService {
 
     //根据id 查看账户信息
     public Account queryAcountById(Integer id);
-
+    //添加资料id
+    int updataAccount(Account account);
 }

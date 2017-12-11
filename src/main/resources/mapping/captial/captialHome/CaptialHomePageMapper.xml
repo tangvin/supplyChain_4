@@ -37,6 +37,7 @@
     <result column="organization_electronic_file" property="organizationElectronicFile" jdbcType="VARCHAR" />
     <result column="ent_logo" property="entLogo" jdbcType="VARCHAR" />
     <result column="certification_status" property="certificationStatus" jdbcType="INTEGER" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, ent_identity, ent_name, ent_document_type, ent_credit_code, registration_number, 
@@ -44,9 +45,21 @@
     registered_capital, major_shareholder, business_scope, registration_authority, telephone, 
     municipality, city, county, address, business_contact, mobile_phone, email_address, 
     zip_code, web_site, code_file, business_license, electronic_file, person_idcard, 
-    tax_number, open_account_file, financial_file, organization_electronic_file,
-    ent_logo, certification_status
+    tax_number, open_account_file, financial_file, organization_electronic_file, ent_logo,
+    certification_status, creator_id
   </sql>
+
+
+  <select id="selectInformation" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    gyl_information
+    WHERE
+    creator_id=#{userId}
+    ORDER BY id DESC
+    LIMIT 1
+  </select>
 
   <select id="homePageSelect" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     SELECT
@@ -164,6 +177,9 @@
       <if test="entLogo != null" >
         ent_logo = #{entLogo,jdbcType=VARCHAR},
       </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -276,6 +292,9 @@
       <if test="certificationStatus != null" >
         certification_status,
       </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -382,6 +401,9 @@
       </if>
       <if test="certificationStatus != null" >
         #{certificationStatus,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

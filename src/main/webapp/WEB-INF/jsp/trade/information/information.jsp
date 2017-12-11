@@ -72,19 +72,19 @@
                                                     </c:if>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr class="three_no_certificates">
                                                 <td  class="text-right">社会统一信用代码：</td>
                                                 <td  class="text-left">${information.entCreditCode}</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="three_certificates">
                                                 <td class="text-right">工商登记注册号：</td>
                                                 <td class="text-left">${information.registrationNumber}</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="three_certificates">
                                                 <td class="text-right">税务登记号：</td>
                                                 <td class="text-left">${information.taxRegistrationNumber}</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="three_certificates">
                                                 <td  class="text-right">组织机构代码：</td>
                                                 <td  class="text-left">${information.institutionCode}</td>
                                             </tr>
@@ -179,19 +179,19 @@
                                                     <td class="text-right">登记机关：</td>
                                                     <td class="text-left">${information.registrationAuthority}</td>
                                                 </tr>
-                                                <tr>
+                                                <tr class="three_no_certificates">
                                                     <td class="text-right">社会统一信用代码电子档：</td>
                                                     <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                                                 </tr>
-                                                <tr>
+                                                <tr class="three_certificates">
                                                     <td class="text-right">工商登记注册电子档：</td>
                                                     <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png"  class="img-responsive jbxx_img"></td>
                                                 </tr>
-                                                <tr>
+                                                <tr class="three_certificates">
                                                     <td class="text-right">税务登记号电子档：</td>
                                                     <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png"  class="img-responsive jbxx_img"></td>
                                                 </tr>
-                                                <tr>
+                                                <tr class="three_certificates">
                                                     <td class="text-right">组织机构代码电子档：</td>
                                                     <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png"  class="img-responsive jbxx_img"></td>
                                                 </tr>
@@ -280,9 +280,7 @@
                             </div>
                             <!--三方账户 开户行结束-->
                             <!--三方账户 分页开始-->
-                            <div class="panel-body" style="padding-bottom:0px;">
                                 <table id="incormationTable" class="cj_table"></table>
-                            </div>
                             <!--三方账户 分页结束-->
                         </div>
                         <!--三方账户 结束   -->
@@ -362,6 +360,16 @@
         e.preventDefault();
         $(this).tab('show');
     })
+
+    var entDocumentType= '${information.entDocumentType}'
+//    alert(entDocumentType)
+    if(entDocumentType==0){
+        $('.three_no_certificates').show();
+        $('.three_certificates').hide();
+    }else{
+        $('.three_no_certificates').hide();
+        $('.three_certificates').show();
+    }
 
     $('#updateInformation').click(function(){
         $('#load').load('<%=request.getContextPath()%>/tradeMain/updateInformation.action')

@@ -64,10 +64,8 @@
              <div class="xzht xzdd text-right" id="insertOrder">
                  <a href="#"><button class="btn btn-primary btn-sm text-right">新增订单</button></a>
              </div>
-            <div class="panel-body" style="padding-bottom:0px;">
                <table id="tb_departments" class="cj_table"></table>
-            </div>
-            
+
            <!--领取订单 模态框-->
             <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
                 <div class="modal-dialog modal-sm" role="document">

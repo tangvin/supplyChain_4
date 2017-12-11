@@ -2,7 +2,6 @@ package cn.com.edzleft.service.trade.account;
 
 import cn.com.edzleft.dao.trade.homepage.AccountMapper;
 import cn.com.edzleft.entity.Account;
-import cn.com.edzleft.entity.BankAccount;
 import cn.com.edzleft.util.ResultBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -103,4 +102,10 @@ public class AccountServiceImpl implements AccountService {
 	public Integer insert(Account account) {
 		return accountMapper.insert(account);
 	}
+    //添加资料id
+    @Override
+    public int updataAccount(Account account) {
+        int t = accountMapper.updataAccount(account);
+        return t;
+    }
 }

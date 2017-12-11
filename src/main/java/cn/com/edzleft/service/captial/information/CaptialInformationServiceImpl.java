@@ -24,9 +24,11 @@ public class CaptialInformationServiceImpl implements CaptialInformationService{
     @Override
     public int insertInformation(Information information) {
         int i = captialHomePageMapper.insertInformation(information);
-        if(i > 0){
-//            Information information1 = captialHomePageMapper.selectInformation();
-        }
         return i;
+    }
+
+    @Override
+    public Information selectInformation(Integer userId) {
+        return captialHomePageMapper.selectInformation(userId);
     }
 }
