@@ -148,7 +148,6 @@
     where r_address_id = #{rAddressId,jdbcType=INTEGER}
   </update>
   
->>>>>>> branch 'master' of git@code.aliyun.com:13701071207/supplyChain.git
 
   
 </mapper>
