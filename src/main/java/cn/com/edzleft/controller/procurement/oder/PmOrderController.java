@@ -159,7 +159,7 @@ public class PmOrderController {
 	/**
 	 * 返回地址集合
 	 */
-	@RequestMapping(value="addresshx",method = RequestMethod.POST)
+	@RequestMapping(value="addresshx",method ={RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
 	public Map<String,Object> hxbj(HttpServletResponse response,HttpServletRequest request){
 		/*跨域访问*/
@@ -205,11 +205,15 @@ public class PmOrderController {
 	 */
 	/*@RequestMapping(value = "/get") 
 	@ResponseBody
-	public Object getJson(String value) {
-			List<E>
+	public Map<String,Object> getJson(String value) {
+			value=value==null?"":value;
+			List<> 
 	       Map<String, Object> map = new HashMap<String,Object>();
 	       map.put("name", "dhweicheng");
 	       return map;
+	       if(a==0){
+	       		return true;
+	       }
 	}
 	*/
 }

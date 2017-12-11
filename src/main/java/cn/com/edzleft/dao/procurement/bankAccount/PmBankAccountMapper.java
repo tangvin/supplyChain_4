@@ -2,6 +2,7 @@ package cn.com.edzleft.dao.procurement.bankAccount;
 
 import java.util.List;
 
+import cn.com.edzleft.entity.Account;
 import cn.com.edzleft.entity.BankAccount;
 
 public interface PmBankAccountMapper {
@@ -13,5 +14,9 @@ public interface PmBankAccountMapper {
 	int insertBankAcount(BankAccount bankAccount);
 
 	int deleteBankAccountById(Integer id);
+
+	Account selectAccountById(Integer id);
+
+	BankAccount selectBankAccountByNumber(String number);
 
 }

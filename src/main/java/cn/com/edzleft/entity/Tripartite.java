@@ -56,9 +56,6 @@ public class Tripartite {
     private String tripartiteAmountCreatePeople;
 
     //业务字段
-//户主  采购方
-    private String entName;
-
     /**
      * 户主（采购方）
      */
@@ -71,6 +68,8 @@ public class Tripartite {
      * （资方）
      */
     private String caEntName;
+//户主  采购方
+    private String entName;
 
 
     public String getEntName() {
@@ -80,7 +79,6 @@ public class Tripartite {
     public void setEntName(String entName) {
         this.entName = entName;
     }
-
     public Integer getTripartiteCreditHolderTradeId() {
 		return tripartiteCreditHolderTradeId;
 	}
@@ -129,7 +127,7 @@ public class Tripartite {
 		this.caEntName = caEntName;
 	}
 
-    public Integer getTripartiteId() {
+	public Integer getTripartiteId() {
         return tripartiteId;
     }
 

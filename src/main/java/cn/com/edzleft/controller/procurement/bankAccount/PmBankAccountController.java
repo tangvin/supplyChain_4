@@ -1,8 +1,11 @@
 package cn.com.edzleft.controller.procurement.bankAccount;
 
+import cn.com.edzleft.entity.Account;
 import cn.com.edzleft.entity.BankAccount;
 import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.procurement.bankAccount.PmBankAccountService;
+import cn.com.edzleft.service.trade.account.AccountService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ibmtech on 2017/12/6.
@@ -23,6 +30,9 @@ public class PmBankAccountController {
 
     @Autowired
     private PmBankAccountService pmbankAccountService;
+    
+    @Autowired
+    private AccountService accountService;
 
     /**
      * 查询所有银行卡
@@ -53,7 +63,23 @@ public class PmBankAccountController {
      */
     @RequestMapping(value = "addBankAccount",method = RequestMethod.POST)
     @ResponseBody
-    public  int addBankAccount(BankAccount bankAccount,HttpSession session){
+    public  int addBankAccount(BankAccount bankAccount,HttpSession session,String userPhone,String bankAccountDepositBank,String bankAccountCreditHolder,String bankAccountNumber){
+    	SessionInfo sessions = (SessionInfo) session.getAttribute("sessionInfo");
+        Integer userId = sessions.getAdmin().getUserId();
+        Account account = accountService.queryAcountById(userId);
+        BankAccount bank = new  BankAccount();
+        //账号
+        bank.setBankAccountNumber(bankAccountNumber);
+        //持卡人
+        bank.setBankAccountCreditHolder(bankAccountCreditHolder);
+        //开户行
+        bank.setBankAccountDepositBank(bankAccountDepositBank);
+        //创建时间
+        bank.setBankAccountCreateTime(new Date());
+        //创建人
+        bank.setBankAccountCreatePeople(account.getUserName());
+        //用户id
+        bank.setBankAccountId(account.getUserId());
         int i = pmbankAccountService.addBankAcount(bankAccount, session);
         return i;
     }
@@ -82,4 +108,31 @@ public class PmBankAccountController {
         int i = pmbankAccountService.setbankAccount(id, value, session);
         return i;
     }
+    
+
+    /**
+     * 添加银行卡第三步
+     * @return
+     */
+    @RequestMapping(value = "/bankTwo",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> bankTwo(HttpSession session, BankAccount bankAccount){
+        //获取当前用户填写的银行卡类型(开户行)
+        String bankAccountDepositBank = bankAccount.getBankAccountDepositBank();
+        //获取输入的账号查询银行卡信息（获取手机号）
+        String bankAccountNumber = bankAccount.getBankAccountNumber();
+        BankAccount ba = pmbankAccountService.queryBankAccountByNumber(bankAccountNumber);
+        if(ba!=null){
+            Integer userId = ba.getUserId();
+            Account account = accountService.queryAcountById(userId);
+            String userPhone = account.getUserPhone();
+            Map<String,Object> map = new HashMap<>();
+            map.put("userPhone",userPhone);
+            map.put("bankAccountDepositBank",bankAccountDepositBank);
+            return map;
+        }else {
+            return null;
+        }
+    }
+    
 }

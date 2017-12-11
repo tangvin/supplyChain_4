@@ -4,15 +4,18 @@
   <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Tripartite" >
     <id column="tripartite_id" property="tripartiteId" jdbcType="INTEGER" />
     <result column="tripartite_deposit_bank" property="tripartiteDepositBank" jdbcType="VARCHAR" />
-    <result column="tripartite_credit_holder_trade" property="tripartiteCreditHolderTrade" jdbcType="VARCHAR" />
-    <result column="tripartite_credit_holder_purchaser" property="tripartiteCreditHolderPurchaser" jdbcType="VARCHAR" />
-    <result column="tripartite_credit_holder_capital" property="tripartiteCreditHolderCapital" jdbcType="VARCHAR" />
-    <result column="tripartite_account_number" property="tripartiteAccountNumber" jdbcType="INTEGER" />
+    <result column="tripartite_credit_holder_trade_id" property="tripartiteCreditHolderTradeId" jdbcType="INTEGER" />
+    <result column="tripartite_credit_holder_purchaser_id" property="tripartiteCreditHolderPurchaserId" jdbcType="INTEGER" />
+    <result column="tripartite_credit_holder_capital_id" property="tripartiteCreditHolderCapitalId" jdbcType="INTEGER" />
+    <result column="tripartite_account_number" property="tripartiteAccountNumber" jdbcType="VARCHAR" />
     <result column="tripartite_account_opentime" property="tripartiteAccountOpentime" jdbcType="TIMESTAMP" />
     <result column="tripartite_account_openpeople" property="tripartiteAccountOpenpeople" jdbcType="VARCHAR" />
     <result column="tripartite_balance" property="tripartiteBalance" jdbcType="INTEGER" />
     <result column="tripartite_available_balance" property="tripartiteAvailableBalance" jdbcType="INTEGER" />
     <result column="tripartite_amount_create_time" property="tripartiteAmountCreateTime" jdbcType="TIMESTAMP" />
+    <result column="pmEntName" property="pmEntName" jdbcType="VARCHAR" />
+    <result column="trEntName" property="trEntName" jdbcType="VARCHAR" />
+    <result column="caEntName" property="caEntName" jdbcType="VARCHAR" />
     <result column="tripartite_amount_create_people" property="tripartiteAmountCreatePeople" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -21,198 +24,39 @@
     tripartite_account_openpeople, tripartite_balance, tripartite_available_balance, 
     tripartite_amount_create_time, tripartite_amount_create_people
   </sql>
-
   <!--条件查询-->
   <sql id="where_sql">
     <trim prefix="where" prefixOverrides="and">
-      <if test="whereMap != null &amp;&amp; whereMap.tripartiteDepositBank != null and whereMap.tripartiteDepositBank != ''">
-        AND tripartite_deposit_bank  LIKE '%${whereMap.tripartiteDepositBank}%'
+      <if test="whereMap != null &amp;&amp; whereMap.userId != null and whereMap.userId != ''">
+        AND i.tripartite_credit_holder_trade_id  LIKE '%${whereMap.userId}%'
       </if>
-      <if test="whereMap != null &amp;&amp; whereMap.tripartiteCreditHolderPurchaser != null and whereMap.tripartiteCreditHolderPurchaser != ''">
-        AND tripartite_credit_holder_purchaser LIKE '%${whereMap.tripartiteCreditHolderPurchaser}%'
+      <if test="whereMap != null &amp;&amp; whereMap.caEntName != null and whereMap.caEntName != ''">
+        AND c2.ent_name  LIKE '%${whereMap.caEntName}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.pmEntName != null and whereMap.pmEntName != ''">
+        AND c.ent_name  LIKE '%${whereMap.pmEntName}%'
       </if>
     </trim>
   </sql>
 
   <!--查询总条数-->
   <select id="getTripartiteAllCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
-    select count(*) from gyl_tripartite <include refid="where_sql"/>
+     select count(*) from gyl_tripartite i 
+	inner join gyl_account a on i.tripartite_credit_holder_purchaser_id = a.user_id
+	inner join gyl_account a2 on i.tripartite_credit_holder_capital_id = a2.user_id
+	inner join gyl_information c on a.information_id = c.id
+	inner join gyl_information c2 on a2.information_id = c2.id
+	<include refid="where_sql"/>
   </select>
-
 
   <!--分页查询-->
   <select id="selectAllTripartiteByPage"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
-    select
-    <include refid="Base_Column_List" />
-    from gyl_tripartite
+   select c.ent_name as pmEntname,c2.ent_name as caEntName,i.tripartite_account_number,i.tripartite_account_openpeople,i.tripartite_amount_create_people,i.tripartite_account_opentime,i.tripartite_amount_create_people,i.tripartite_amount_create_time from gyl_tripartite i
+    inner join gyl_account a on i.tripartite_credit_holder_purchaser_id = a.user_id
+    inner join gyl_account a2 on i.tripartite_credit_holder_capital_id = a2.user_id
+    inner join gyl_information c on a.information_id = c.id
+    inner join gyl_information c2 on a2.information_id = c2.id
     <include refid="where_sql"/>
-    ORDER BY tripartite_amount_create_time  DESC
     <![CDATA[	limit #{start},#{pageSize}]]>
   </select>
-
-
-
-
-  <!--根据id查询出三分账户信息-->
-  <select id="selectTripartiteById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from gyl_tripartite
-    where tripartite_id = #{tripartiteId,jdbcType=INTEGER}
-  </select>
-
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from gyl_tripartite
-    where tripartite_id = #{tripartiteId,jdbcType=INTEGER}
-  </delete>
-
-  <insert id="insert" parameterType="cn.com.edzleft.entity.Tripartite" >
-    insert into gyl_tripartite (tripartite_id, tripartite_deposit_bank, 
-      tripartite_credit_holder_trade, tripartite_credit_holder_purchaser, 
-      tripartite_credit_holder_capital, tripartite_account_number, 
-      tripartite_account_opentime, tripartite_account_openpeople, 
-      tripartite_balance, tripartite_available_balance, 
-      tripartite_amount_create_time, tripartite_amount_create_people
-      )
-    values (#{tripartiteId,jdbcType=INTEGER}, #{tripartiteDepositBank,jdbcType=VARCHAR}, 
-      #{tripartiteCreditHolderTrade,jdbcType=VARCHAR}, #{tripartiteCreditHolderPurchaser,jdbcType=VARCHAR}, 
-      #{tripartiteCreditHolderCapital,jdbcType=VARCHAR}, #{tripartiteAccountNumber,jdbcType=INTEGER}, 
-      #{tripartiteAccountOpentime,jdbcType=TIMESTAMP}, #{tripartiteAccountOpenpeople,jdbcType=VARCHAR}, 
-      #{tripartiteBalance,jdbcType=INTEGER}, #{tripartiteAvailableBalance,jdbcType=INTEGER}, 
-      #{tripartiteAmountCreateTime,jdbcType=TIMESTAMP}, #{tripartiteAmountCreatePeople,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="cn.com.edzleft.entity.Tripartite" >
-    insert into gyl_tripartite
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="tripartiteId != null" >
-        tripartite_id,
-      </if>
-      <if test="tripartiteDepositBank != null" >
-        tripartite_deposit_bank,
-      </if>
-      <if test="tripartiteCreditHolderTrade != null" >
-        tripartite_credit_holder_trade,
-      </if>
-      <if test="tripartiteCreditHolderPurchaser != null" >
-        tripartite_credit_holder_purchaser,
-      </if>
-      <if test="tripartiteCreditHolderCapital != null" >
-        tripartite_credit_holder_capital,
-      </if>
-      <if test="tripartiteAccountNumber != null" >
-        tripartite_account_number,
-      </if>
-      <if test="tripartiteAccountOpentime != null" >
-        tripartite_account_opentime,
-      </if>
-      <if test="tripartiteAccountOpenpeople != null" >
-        tripartite_account_openpeople,
-      </if>
-      <if test="tripartiteBalance != null" >
-        tripartite_balance,
-      </if>
-      <if test="tripartiteAvailableBalance != null" >
-        tripartite_available_balance,
-      </if>
-      <if test="tripartiteAmountCreateTime != null" >
-        tripartite_amount_create_time,
-      </if>
-      <if test="tripartiteAmountCreatePeople != null" >
-        tripartite_amount_create_people,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="tripartiteId != null" >
-        #{tripartiteId,jdbcType=INTEGER},
-      </if>
-      <if test="tripartiteDepositBank != null" >
-        #{tripartiteDepositBank,jdbcType=VARCHAR},
-      </if>
-      <if test="tripartiteCreditHolderTrade != null" >
-        #{tripartiteCreditHolderTrade,jdbcType=VARCHAR},
-      </if>
-      <if test="tripartiteCreditHolderPurchaser != null" >
-        #{tripartiteCreditHolderPurchaser,jdbcType=VARCHAR},
-      </if>
-      <if test="tripartiteCreditHolderCapital != null" >
-        #{tripartiteCreditHolderCapital,jdbcType=VARCHAR},
-      </if>
-      <if test="tripartiteAccountNumber != null" >
-        #{tripartiteAccountNumber,jdbcType=INTEGER},
-      </if>
-      <if test="tripartiteAccountOpentime != null" >
-        #{tripartiteAccountOpentime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="tripartiteAccountOpenpeople != null" >
-        #{tripartiteAccountOpenpeople,jdbcType=VARCHAR},
-      </if>
-      <if test="tripartiteBalance != null" >
-        #{tripartiteBalance,jdbcType=INTEGER},
-      </if>
-      <if test="tripartiteAvailableBalance != null" >
-        #{tripartiteAvailableBalance,jdbcType=INTEGER},
-      </if>
-      <if test="tripartiteAmountCreateTime != null" >
-        #{tripartiteAmountCreateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="tripartiteAmountCreatePeople != null" >
-        #{tripartiteAmountCreatePeople,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.com.edzleft.entity.Tripartite" >
-    update gyl_tripartite
-    <set >
-      <if test="tripartiteDepositBank != null" >
-        tripartite_deposit_bank = #{tripartiteDepositBank,jdbcType=VARCHAR},
-      </if>
-      <if test="tripartiteCreditHolderTrade != null" >
-        tripartite_credit_holder_trade = #{tripartiteCreditHolderTrade,jdbcType=VARCHAR},
-      </if>
-      <if test="tripartiteCreditHolderPurchaser != null" >
-        tripartite_credit_holder_purchaser = #{tripartiteCreditHolderPurchaser,jdbcType=VARCHAR},
-      </if>
-      <if test="tripartiteCreditHolderCapital != null" >
-        tripartite_credit_holder_capital = #{tripartiteCreditHolderCapital,jdbcType=VARCHAR},
-      </if>
-      <if test="tripartiteAccountNumber != null" >
-        tripartite_account_number = #{tripartiteAccountNumber,jdbcType=INTEGER},
-      </if>
-      <if test="tripartiteAccountOpentime != null" >
-        tripartite_account_opentime = #{tripartiteAccountOpentime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="tripartiteAccountOpenpeople != null" >
-        tripartite_account_openpeople = #{tripartiteAccountOpenpeople,jdbcType=VARCHAR},
-      </if>
-      <if test="tripartiteBalance != null" >
-        tripartite_balance = #{tripartiteBalance,jdbcType=INTEGER},
-      </if>
-      <if test="tripartiteAvailableBalance != null" >
-        tripartite_available_balance = #{tripartiteAvailableBalance,jdbcType=INTEGER},
-      </if>
-      <if test="tripartiteAmountCreateTime != null" >
-        tripartite_amount_create_time = #{tripartiteAmountCreateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="tripartiteAmountCreatePeople != null" >
-        tripartite_amount_create_people = #{tripartiteAmountCreatePeople,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where tripartite_id = #{tripartiteId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.com.edzleft.entity.Tripartite" >
-    update gyl_tripartite
-    set tripartite_deposit_bank = #{tripartiteDepositBank,jdbcType=VARCHAR},
-      tripartite_credit_holder_trade = #{tripartiteCreditHolderTrade,jdbcType=VARCHAR},
-      tripartite_credit_holder_purchaser = #{tripartiteCreditHolderPurchaser,jdbcType=VARCHAR},
-      tripartite_credit_holder_capital = #{tripartiteCreditHolderCapital,jdbcType=VARCHAR},
-      tripartite_account_number = #{tripartiteAccountNumber,jdbcType=INTEGER},
-      tripartite_account_opentime = #{tripartiteAccountOpentime,jdbcType=TIMESTAMP},
-      tripartite_account_openpeople = #{tripartiteAccountOpenpeople,jdbcType=VARCHAR},
-      tripartite_balance = #{tripartiteBalance,jdbcType=INTEGER},
-      tripartite_available_balance = #{tripartiteAvailableBalance,jdbcType=INTEGER},
-      tripartite_amount_create_time = #{tripartiteAmountCreateTime,jdbcType=TIMESTAMP},
-      tripartite_amount_create_people = #{tripartiteAmountCreatePeople,jdbcType=VARCHAR}
-    where tripartite_id = #{tripartiteId,jdbcType=INTEGER}
-  </update>
 </mapper>

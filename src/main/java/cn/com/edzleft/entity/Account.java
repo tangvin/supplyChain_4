@@ -139,7 +139,7 @@ public class Account implements Serializable{
         return createIp;
     }
 
-    public void setCreatIp(String createIp) {
+    public void setCreateIp(String createIp) {
         this.createIp = createIp == null ? null : createIp.trim();
     }
 

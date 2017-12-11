@@ -28,7 +28,7 @@
                     <li><a href="#profile">账户安全</a></li>
                     <li><a href="#messages">银行账户</a></li>
                     <li><a href="#settings">三方账户</a></li>
-                    <li><a href="#recieverAddress">收获地址</a></li>
+                    <li><a href="#recieverAddress">收货地址</a></li>
                 </ul>
                 <!--tab 导航 结束-->
                 <!--tab 内容 开始-->
@@ -100,6 +100,9 @@
                                                 <td>法定代表人证件类型：</td>
                                                 <%--0居民身份证、1护照、2港澳居民来往内地通行证、3台湾居民来往大陆通行证--%>
                                                 <td>
+                                               	 	<c:if test="${information.representativeType==0}">居民身份证
+                                                       
+                                                    </c:if>
                                                     <c:if test="${information.representativeType==1}">护照
                                                        
                                                     </c:if>
@@ -286,7 +289,7 @@
                         <!--运货单位 结束-->
                         <!--收获地址 开始-->
                         <div class="tab-pane" id="recieverAddress">
-                            <button type="button" class="btn btn-danger btn-default tjyhk" data-toggle="modal" data-target="#exampleModal">添加收获地址</button>
+                            <button type="button" class="btn btn-danger btn-default tjyhk" data-toggle="modal" data-target="#exampleModal">添加收货地址</button>
                             <div class="row">
                                 <div class="col-xs-9 col-xs-offset-1" id="wyb">
 
@@ -304,7 +307,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="exampleModalLabel">选择收获地址</h4>
+                                            <h4 class="modal-title" id="exampleModalLabel">选择收货地址</h4>
                                         </div>
 
                                         <div class="modal-header sh_div">
@@ -406,6 +409,9 @@
         case 'recieverAddress':
             $('#myTab a[href="#recieverAddress"]').tab('show')
             break;
+        case 'messages':
+            $('#myTab a[href="#messages"]').tab('show')
+            break;
     }
 
 </script>
@@ -470,6 +476,7 @@
 				dataType:"json",
 				success:function(data){
 					alert(data);
+					setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/xgmm.action')",500); 
 				}
 			});
 		});
@@ -478,13 +485,6 @@
 	 $(function(){
 	        $("#tb_departments").bootstrapTable({
 	            columns:[
-	                { //field: 'Number',//可不加
-	                    title: '序号',//标题  可不加
-	                    width:100,
-	                    formatter: function (value, row, index) {
-	                        return index+1;
-	                    }
-	                },
 	                {field:'caEntName',title:'开户行',width:100},
 	                {field:'pmEntName',title:'户主（采购方	）',width:100},
 	                {field:'tripartiteAccountNumber',title:'账号',width:100},
@@ -521,6 +521,7 @@
 	            pageNumber: params.pageNumber,
 	            pageSize: params.pageSize,
 	            caEntName:$("#caEntName").val(),
+	            trEntName:$("#trEntName").val(),
 	        };
 	        return temp;
 	    }
@@ -543,7 +544,7 @@
             type:'post',
             success:function(){
                 alert("设置成功")
-                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/shdz.action')",500);
             }
         })
     }
@@ -560,11 +561,25 @@
 	            type:'post',
 	            success:function(){
 	                alert('删除成功')
-	                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);
+	                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/shdz.action')",500);
 	            }
 	        })
 	    }
 	     
+	     /* 添加收获地址 */
+			$("#getAddress").click(function(){
+				/* var ra = $("#d").serialize(); */
+				$.ajax({
+					url:"<%=request.getContextPath()%>/PmReceivingAddress/getaddress.action",
+					type:'post',
+					data:$("#d").serialize(),
+					dataType:"json",
+					success:function(data){
+						alert("添加完成");
+						setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/shdz.action')",500);	
+					}
+				});
+			});
 	     /* 收货地址 ajax 开始 */
 	     $.ajax({
 	         url:"<%=request.getContextPath()%>/pmorder/addresshx.action",
@@ -588,7 +603,6 @@
 	                     '<div class="media-body"><button type="button" class="btn btn-danger btn-default" onclick="deleteAddress('+item.rAddressId+')">删除</button></div>' +
 	                     '</li>' +
 	                     '</ul>'
-
 	                 return wyb_ul
 	             }
 
@@ -599,19 +613,20 @@
 	                 }
 	                 wyb.innerHTML = html;
 	             }
-	             window.onload = getnoApplicationData111()
+	             getnoApplicationData111()
 	             var aaa=document.querySelectorAll('.imgimg')
-	          
-	             var input=$('.hy_moren input[type=radio]')
-	             for(var i=0;i<input.length;i++){
-	                 if(data[i].rAddressDefault=='0'){
-	                     $(input[i]).attr('checked',true)
-	                 }
+	             shdz1();
+	             function shdz1(){
+	            	 var input=$('.hy_moren input[type=radio]')
+	            	 console.log(input.length)
+		             for(var i=0;i<input.length;i++){
+		                 if(data[i].rAddressDefault=='0'){
+		                     $(input[i]).attr('checked',true)
+		                 }
+		             }
 	             }
 	         }
 	     })
-	 /* 收货地址 ajax 开始 */
-	    
 	/*银行账户 ajax 开始*/
     $.ajax({
         url:"<%=request.getContextPath()%>/pmbankAccount/getAllBankAccoun.action",
@@ -656,6 +671,9 @@
                     $(input1[i]).attr('checked',true)
                 }
             }
+            
+            
+            
 
 
 
@@ -685,12 +703,14 @@
      * @param id
      */
     function setDefaultBankAccount(id,value){
+		   //1设为默认
         $.ajax({
             url:'<%=request.getContextPath()%>/bankAccount/setDefaultBank.action?id='+id+'&&value='+value,
             type:'post',
             success:function(){
                 alert("设置成功")
-                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);
+              setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/yhk.action')",500); 
+                
             }
         })
     }
@@ -708,32 +728,12 @@
             type:'post',
             success:function(){
                 alert('删除成功')
-                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/yhk.action')",500); 
             }
         })
     } 
      
-     /* 添加收获地址 */
-		$("#getAddress").click(function(){
-			alert("111111111");
-			var ra = $("#d").serialize();
-			$.ajax({
-				url:"<%=request.getContextPath()%>/PmReceivingAddress/getaddress.action",
-				type:'post',
-				data:$("#d").serialize(),
-				dataType:"json",
-				success:function(data){
-					alert("添加完成");
-					setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);
-				}
-			});
-		});
-     /*三方账户模糊查询*/
-     $("#informationForm").click(function(){
-    	 $.ajax({
-    		 
-    	 });
-     });
+     
      
      function ConvertToDate(datestr) {
          var date=new Date(datestr);

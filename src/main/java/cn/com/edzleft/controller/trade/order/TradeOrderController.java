@@ -3,32 +3,17 @@ package cn.com.edzleft.controller.trade.order;
 import cn.com.edzleft.entity.Freight;
 import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.entity.ReceivingAddress;
-import cn.com.edzleft.entity.SessionInfo;
-import cn.com.edzleft.service.trade.RejectService;
 import cn.com.edzleft.service.trade.freight.FreightService;
 import cn.com.edzleft.service.trade.order.TradeOrderService;
 import cn.com.edzleft.service.trade.receivingAddress.ReceivingAddressService;
-import cn.com.edzleft.util.ConfigUtil;
+import cn.com.edzleft.service.trade.reject.RejectService;
 import cn.com.edzleft.util.page.DataGridJson;
 import cn.com.edzleft.util.page.PageUtil;
-import com.sun.tools.corba.se.idl.constExpr.Or;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -145,9 +130,9 @@ public class TradeOrderController {
     /**
      * 配置发货表单提交 成功后（修改订单状态）
      */
-    @RequestMapping("/pzfh")
+    @RequestMapping(value = "/pzfh",method = RequestMethod.POST)
     @ResponseBody
-    public Order takeOrder(Integer id, Integer flag,Integer freightNumber,String freightUnit,String invoiceNum) throws IOException {
+    public List<Freight> takeOrder(Integer id, Integer flag,Integer freightNumber,String freightUnit,String invoiceNum) throws IOException {
 
 //        //1.接受上传图片 ,保存到服务器上(使用uuid处理文件名)
 //        File f=new File("D:\\tomcat_7.0.75\\apache-tomcat-7.0.75\\webapps\\newFile");
@@ -178,11 +163,14 @@ public class TradeOrderController {
 
         //根据id获取当前的订单对象
         Order order = tradeOrderService.queryOrderById(id);
+        //根据id查询对应订单的货运管理
+        Integer freightNumberId = order.getFreightNumberId();
+        List<Freight> freightList = freightService.queryFreightByOrder(freightNumberId);
         //设置货运编号
         order.setFreightNumberId(freightNumber);
         //设置货运单位
         order.setFreightUnit(freightUnit);
-        //设置发票编号
+        //设置发票号
         order.setInvoiceNum(invoiceNum);
         //调用业务配置发货
         tradeOrderService.updateOrder(order);
@@ -190,7 +178,7 @@ public class TradeOrderController {
         tradeOrderService.setOrderStatus(id,flag);
         System.out.println("表单提交成功");
         System.out.println("设置订单状态结束");
-        return order;
+        return freightList;
     }
 
 }
