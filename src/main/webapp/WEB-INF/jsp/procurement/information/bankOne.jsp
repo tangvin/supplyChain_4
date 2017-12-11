@@ -113,7 +113,7 @@
             <div class="row">
                 <span>验证码：</span>
                 <input type="text" id="checkCode" placeholder="输入验证码" class="form-control" name="checkCode"/>
-                <input style="width: 50px;" id="btnSendCode" class="btn" type="button" value="获取验证码" onclick="sendMessage()" />
+                <input id="btnSendCode" class="btn" type="button" value="获取验证码" onclick="sendMessage()" />
             </div>
         </form>
         <div class="col-xs-12">

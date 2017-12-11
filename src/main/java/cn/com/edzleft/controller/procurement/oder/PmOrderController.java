@@ -43,12 +43,15 @@ public class PmOrderController {
 	 */
 	@RequestMapping(value="/pmgetorder")
 	@ResponseBody
-	public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String orderCreatorTrade,String orderStatus,String creditGrantor){
+	public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String orderCreatorTrade,String orderStatus,String creditGrantor,HttpSession sessionInfo){
+		SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
 		PageUtil<Order> userPage = new PageUtil<>();
         HashMap<String,Object> whereMaps =new HashMap<>();
         whereMaps.put("orderCreatorTrade",orderCreatorTrade);
         whereMaps.put("orderStatus",orderStatus);
         whereMaps.put("creditGrantor",creditGrantor);
+        whereMaps.put("userId",userId);
         DataGridJson dgj = new DataGridJson();
         userPage.setCpage(pageNumber);
         userPage.setPageSize(pageSize);
@@ -161,7 +164,7 @@ public class PmOrderController {
 	 */
 	@RequestMapping(value="addresshx",method ={RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
-	public Map<String,Object> hxbj(HttpServletResponse response,HttpServletRequest request){
+	public Map<String,Object> hxbj(HttpServletResponse response,HttpServletRequest request,HttpSession sessionInfo){
 		/*跨域访问*/
 		response.setContentType("text/plain");
 		response.setHeader("Pragma", "No-cache");
@@ -169,9 +172,10 @@ public class PmOrderController {
 		response.setHeader("Cache-Control", "no-cache");
 		response.setDateHeader("Expires", 0);
 		response.setHeader("Access-Control-Allow-Origin", "*");//添加跨域访问
+		SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
 		Map<String,Object> map = new HashMap<>();
-		List<ReceivingAddress> rs = pmreceivingAddressservice.selectByPrimaryKey(5);
-		System.err.println("");
+		List<ReceivingAddress> rs = pmreceivingAddressservice.selectByPrimaryKey(userId);
 		map.put("data", rs);
 		return map;
 	}

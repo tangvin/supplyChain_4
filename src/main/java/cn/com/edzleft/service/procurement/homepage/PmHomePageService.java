@@ -11,5 +11,7 @@ public interface PmHomePageService {
 
 	int updateInformation(Information information);
 
+	int addInformation(Information information);
+
 
 }

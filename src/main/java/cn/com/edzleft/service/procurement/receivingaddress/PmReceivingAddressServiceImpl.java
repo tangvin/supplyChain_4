@@ -30,8 +30,10 @@ public class PmReceivingAddressServiceImpl implements PmReceivingAddressService{
 		List<ReceivingAddress> list = pmReceivingAddressMapper.selectByPrimaryKey(userId);
         if(ra.getrAddressDefault()==0){
         	for(ReceivingAddress r : list){
-        		ra.setrAddressDefault(1);
-        		pmReceivingAddressMapper.updAddress(r);
+        		if(r.getrAddressDefault()==0){
+        			r.setrAddressDefault(1);
+            		pmReceivingAddressMapper.updAddress(r);
+        		}
         	}
         }
 		ra.setUnionID(userId);;

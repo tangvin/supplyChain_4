@@ -22,7 +22,7 @@
     user_id, user_name, user_pwd, user_phone, create_time, create_ip, login_time, login_ip, 
     user_eamil, account_type, account_state, certificate_state, certificate_type, invite_account,information_id
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="accountSelect" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from gyl_account
