@@ -28,4 +28,6 @@ public interface AccountService {
     public Account queryAcountById(Integer id);
     //添加资料id
     int updataAccount(Account account);
+
+    public int updatePassword(Account account);
 }

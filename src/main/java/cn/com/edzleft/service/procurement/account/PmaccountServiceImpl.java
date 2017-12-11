@@ -62,6 +62,16 @@ public class PmaccountServiceImpl implements Pmaccountservice{
 		}
 	}
 
+	/***
+	 * 根据用户id查询当前用户的对象，查找account_type
+	 */
+
+	@Override
+	public Account accountSelect(Integer userId) {
+	return 	pmaccountMapper.accountSelect(userId);
+		
+	}
+
 }
 
 

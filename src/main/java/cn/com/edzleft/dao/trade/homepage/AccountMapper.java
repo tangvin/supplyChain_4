@@ -24,7 +24,7 @@ public interface AccountMapper {
     /**
      *  添加一个用户账号信息
      */
-    public void insertAccount(Account account);
+    public int insertAccount(Account account);
     
     /**
      * 创建账号

@@ -55,7 +55,7 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public void addAccount(Account account) {
-        accountMapper.insertAccount(account);
+        int i = accountMapper.insertAccount(account);
 
     }
 
@@ -93,7 +93,13 @@ public class AccountServiceImpl implements AccountService {
         return a;
     }
 
-	@Override
+    @Override
+    public int updatePassword(Account account) {
+        int i = accountMapper.updateMessage(account);
+        return i;
+    }
+
+    @Override
 	public Integer findByName(String userName) {
 		return accountMapper.findByName(userName);
 	}

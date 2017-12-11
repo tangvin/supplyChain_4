@@ -53,13 +53,13 @@
                                                 <td style="width: 20%;" class="text-right">企业身份：</td>
                                                 <td class="text-left">
                                                     <%--0采购方、1贸易方、2资方--%>
-                                                <c:if test="${information.entIdentity == 0}">采购方
+                                                <c:if test="${account.accountType == 0}">采购方
                                                  
                                                 </c:if>
-                                                <c:if test="${information.entIdentity == 1}">贸易方
+                                                <c:if test="${account.accountType == 1}">贸易方
                                                     
                                                 </c:if>
-                                                <c:if test="${information.entIdentity == 2}">资方
+                                                <c:if test="${account.accountType == 2}">资方
                                                     
                                                 </c:if>
                                                 </td>
@@ -595,7 +595,7 @@
 	         type:"post",
 	         dataType:"json",
 	         success: function(data){
-	             console.log(data.data)
+	             /* console.log(data.data) */
 	             var data=data.data
 	             var wyb=document.getElementById('wyb')
 	             function setDiv(item){
@@ -644,7 +644,7 @@
         type:"post",
         dataType:"json",
         success: function(data){
-            console.log(data)
+          /*   console.log(data) */
             var yhBank=document.getElementById('yh_bank');
             console.log(yhBank)
             function setDiv(item){
@@ -675,7 +675,7 @@
             window.onload = getnoApplicationDatayh_bank()
       
             var input1=$('.yh_bank_moren input[type=radio]')
-            console.log(input1.length)
+           /*  console.log(input1.length) */
             for(var i=0;i<input1.length;i++){ 
                 if(data[i].defaultId=='1'){
                 	console.log(data[i])

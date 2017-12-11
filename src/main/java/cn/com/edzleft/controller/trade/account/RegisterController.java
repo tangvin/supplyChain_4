@@ -85,6 +85,9 @@ public class RegisterController {
 			ia=ia.getLocalHost();
 			String creatIp=ia.getHostAddress();
 			account.setCreateIp(creatIp);
+			//account_state
+			Integer accountState=0;
+			account.setAccountState(accountState);
 			count = accountService.insert(account);
 			if ( count > 0) {
 				map.put("success", true);
@@ -99,37 +102,6 @@ public class RegisterController {
 		return map;
 	}
 
-
-//	@RequestMapping(value = "/registerOne",method = RequestMethod.POST)
-//    @ResponseBody
-//	public Map first(String accountType, String userLinkman, String userPhone, String checkCode, HttpSession session, HttpServletRequest request) {
-//		Map map=new HashMap<>();
-//		Account account=new Account();
-//		SessionInfo sessionInfo = new SessionInfo();
-//		account.setAccountType(Integer.parseInt(accountType));
-//		account.setUserLinkman(userLinkman);
-//		account.setUserPhone(userPhone);
-//		 sessionInfo.setAdmin(account);
-//		 request.getSession().setAttribute(ConfigUtil.getSessionInfoName(),sessionInfo);
-//		 String sendCode=(String) session.getAttribute("sendCodes");
-//		 if (sendCode.equals(checkCode)) {
-//			map.put("success", true);
-//		}else {
-//			map.put("success", false);
-//		}
-//
-//		return map;
-//		}
-
-
-//	@RequestMapping(value = "/registerOne")
-//    @ResponseBody
-//	public Map<String,Object> first() {
-//		Map<String,Object> map=new HashMap<>();
-//
-//		 map.put("data", "111");
-//		return map;
-//	}
 }
 
 		

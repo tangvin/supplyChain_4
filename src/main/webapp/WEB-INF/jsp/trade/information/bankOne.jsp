@@ -54,6 +54,16 @@
             margin-bottom:30px;
         }
 
+        .tjyhk_four p{
+            margin:40px 0 40px 0;
+            font-size: 20px;
+        }
+        .tjyhk_four button{
+            margin-left: 10px;
+        }
+        #yhk_next_two_bu{
+            margin-top:30px;
+        }
     </style>
 </head>
 <body>
@@ -87,7 +97,7 @@
                 <input type="text" class="form-control" onkeyup="www_zzjs_net(this)" onkeydown="www_zzjs_net(this)" name="bankAccountNumber" id="account">
             </div>
         </form>
-        <a><button class="btn col-xs-offset-3" id="yhk_one">下一步</button></a>
+        <a><button class="btn col-xs-offset-3 btn-danger" id="yhk_one">下一步</button></a>
     </div>
     <div class="col-xs-12 tjyhk_two">
         <form class='form-inline yhk_two_form col-xs-10 col-xs-offset-1'>
@@ -99,30 +109,27 @@
                 <label class="col-xs-2 text-center">手机号：</label>
                 <span class="col-xs-4" id="phone"></span>
             </div>
-            <div class="row">
-                <label class="col-xs-2 text-center">同意<span style="color: blue;margin-left: 5px">服务协议</span></label>
-            </div>
         </form>
-        <button class="btn col-xs-offset-2" id="yhk_two">下一步</button>
+        <button class="btn col-xs-offset-2 btn-danger" id="yhk_two">下一步</button>
     </div>
     <div class="col-xs-12 tjyhk_three">
-        <div class="col-xs-3 col-xs-offset-2 yhk_three">
+        <div class="col-xs-offset-1 yhk_three">
             <p>本次操作需要短信确认，请输入<span id="sjyzh"></span>收到的短信校验码</p>
         </div>
-        <form class='form-inline col-xs-9 col-xs-offset-1'>
+        <form class='form-inline  col-xs-offset-1'>
             <div class="row">
                 <span>验证码：</span>
                 <input type="text" id="checkCode" placeholder="输入验证码" class="form-control" name="checkCode"/>
-                <input style="width: 50px;" id="btnSendCode" class="btn" type="button" value="获取验证码" onclick="sendMessage()" />
+                <input id="btnSendCode" class="btn" type="button" value="获取验证码" onclick="sendMessage()" />
             </div>
         </form>
         <div class="col-xs-12">
-            <button style="margin-top: 40px;width: 120px;" class="btn col-xs-offset-2" id="yhk_next_two_bu">完成</button>
+            <button class="btn btn-danger col-xs-offset-2" id="yhk_next_two_bu">下一步</button>
         </div>
     </div>
-    <div class="col-xs-12 tjyhk_four">
+    <div class="col-xs-offset-2 tjyhk_four">
         <p>添加成功</p>
-        <button class="btn" id="last_btn">确定</button>
+        <button class="btn btn-danger" id="last_btn">确定</button>
     </div>
 </div>
 </body>
@@ -264,7 +271,7 @@
         }
         //设置button效果，开始计时
         $("#btnSendCode").attr("disabled", "true");
-        $("#btnSendCode").val( + curCount + "秒");
+        $("#btnSendCode").val( + curCount + "秒秒后重获验证码");
         InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
         $.ajax({
             type: "POST", //用POST方式传输
@@ -287,7 +294,7 @@
         }
         else {
             curCount--;
-            $("#btnSendCode").val( curCount + "秒");
+            $("#btnSendCode").val( curCount + "秒后重获验证码");
         }
     }
 

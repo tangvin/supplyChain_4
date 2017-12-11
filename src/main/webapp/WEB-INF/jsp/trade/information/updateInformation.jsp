@@ -168,11 +168,11 @@
                         <table class="table table_one">
                             <tbody>
                             <tr>
-                                <td  class="text-right" style="width: 20%;">注册资本:</td>
+                                <td  class="text-right" style="width: 20%;">注册资本：</td>
                                 <td><input type="text"  name="registeredCapital" class="form-control" value="${information.registeredCapital}"></td>
                             </tr>
                             <tr>
-                                <td  class="text-right">主要股东:</td>
+                                <td  class="text-right">主要股东：</td>
                                 <td><input type="text" name="majorShareholder" class="form-control" value="${information.majorShareholder}"></td>
                             </tr>
 

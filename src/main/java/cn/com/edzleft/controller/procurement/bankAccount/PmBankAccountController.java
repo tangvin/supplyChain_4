@@ -78,9 +78,11 @@ public class PmBankAccountController {
         bank.setBankAccountCreateTime(new Date());
         //创建人
         bank.setBankAccountCreatePeople(account.getUserName());
+        //添加一个默认状态为0，不然设为默认不好使
+        bank.setDefaultId(0);
         //用户id
-        bank.setBankAccountId(account.getUserId());
-        int i = pmbankAccountService.addBankAcount(bankAccount, session);
+        bank.setUserId(userId);
+        int i = pmbankAccountService.addBankAcount(bank, session);
         return i;
     }
 

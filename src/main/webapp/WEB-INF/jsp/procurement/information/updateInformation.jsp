@@ -32,16 +32,16 @@
                                     <input type="hidden" name="id" value="${information.id }">
                                     <td style="width: 20%;" class="text-right">企业身份：</td>
                                     <td class="mys">
-                                        <%--0采购方、1贸易方、2资方--%>
-                                        <c:if test="${information.entIdentity == 0}">
-                                            采购方
-                                        </c:if>
-                                        <c:if test="${information.entIdentity == 1}">
-                                            贸易方
-                                        </c:if>
-                                        <c:if test="${information.entIdentity == 2}">
-                                            资方
-                                        </c:if>
+                                           <%--0采购方、1贸易方、2资方--%>
+                                                <c:if test="${account.accountType == 0}">采购方
+                                                 
+                                                </c:if>
+                                                <c:if test="${account.accountType == 1}">贸易方
+                                                    
+                                                </c:if>
+                                                <c:if test="${account.accountType == 2}">资方
+                                                    
+                                                </c:if>
                                     </td>
                                 </tr>
                                 <tr>
