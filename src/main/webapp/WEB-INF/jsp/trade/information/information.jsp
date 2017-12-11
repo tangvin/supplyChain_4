@@ -97,7 +97,7 @@
                                                 <td  class="text-left">
                                                     <%--0居民身份证、1护照、2港澳居民来往内地通行证、3台湾居民来往大陆通行证--%>
                                                     <c:if test="${information.representativeType==0}">
-                                                        护照
+                                                        居民身份证
                                                     </c:if>
                                                     <c:if test="${information.representativeType==1}">
                                                         护照
@@ -196,7 +196,11 @@
                                                     <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png"  class="img-responsive jbxx_img"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-right">法人身份证电子档：</td>
+                                                    <td class="text-right">法人身份证明正面：</td>
+                                                    <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png"  class="img-responsive jbxx_img"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right">法人身份证明背面：</td>
                                                     <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png"  class="img-responsive jbxx_img"></td>
                                                 </tr>
                                                 <tr>

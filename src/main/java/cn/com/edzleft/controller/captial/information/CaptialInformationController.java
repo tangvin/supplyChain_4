@@ -1,5 +1,6 @@
 package cn.com.edzleft.controller.captial.information;
 
+import cn.com.edzleft.entity.Account;
 import cn.com.edzleft.entity.Information;
 import cn.com.edzleft.service.captial.information.CaptialInformationService;
 import cn.com.edzleft.util.UploadFileUtil;
@@ -27,8 +28,12 @@ public class CaptialInformationController {
 
     @RequestMapping(value = "updateInformation",method = RequestMethod.POST)
     @ResponseBody
-    public String updateInformation(Information information){
-        int i = captialInformationService.updateInformation(information);
+    public String updateInformation(Information information, Account account){
+        if(account.getInformationId() == null){
+            int i = captialInformationService.insertInformation(information);
+        }else{
+            int i = captialInformationService.updateInformation(information);
+        }
         return "1";
     }
 

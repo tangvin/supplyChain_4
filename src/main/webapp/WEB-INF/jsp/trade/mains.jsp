@@ -20,7 +20,7 @@
                                 <h3>${information.entName}</h3>
                             </li>
                             <c:if test="${information.certificationStatus == 0}">
-                                <a href="#" id="zlrz"><li class='yrzs'>待认证</li></a>
+                                <a href="#" id="zlrz"><li class='yrzs zjzh_logo_sm'>待认证</li></a>
                             </c:if>
                             <c:if test="${information.certificationStatus == 1}">
                                 <li class='zjzh_logo_sm'>

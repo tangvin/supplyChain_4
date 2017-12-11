@@ -47,7 +47,7 @@
     <p class='text-center copy'><a target="_blank" href="http://www.miitbeian.gov.cn/">京ICP备17069390号-1</a></p>
 </div>
 <script>
-
+$(function(){
         var countdown=10;
         //随机生成验证码图片
         function getImageCode(val){
@@ -68,7 +68,7 @@
                 },1)
             }
         }
-
+})
         function login(){
             var a=$("#name").val();
             var b=$("#pwd").val();

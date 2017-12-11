@@ -32,20 +32,27 @@
                                     <td style="width: 20%;" class="text-right">企业身份：</td>
                                     <td class="mys">
                                         <%--0采购方、1贸易方、2资方--%>
-                                        <c:if test="${information.entIdentity == 0}">
-                                            采购方
+                                        <c:if test="${account.accountType == 0}">
+                                            采购方<input type="hidden" name="entIdentity" value="${account.accountType }">
                                         </c:if>
-                                        <c:if test="${information.entIdentity == 1}">
-                                            贸易方
+                                        <c:if test="${account.accountType == 1}">
+                                            贸易方<input type="hidden" name="entIdentity" value="${account.accountType }">
                                         </c:if>
-                                        <c:if test="${information.entIdentity == 2}">
-                                            资方
+                                        <c:if test="${account.accountType == 2}">
+                                            资方<input type="hidden" name="entIdentity" value="${account.accountType }">
                                         </c:if>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="text-right">企业名称：</td>
-                                    <td><input type="text" class="form-control" name="entName" disabled value="${information.entName}" ></td>
+                                    <td>
+                                        <c:if test="${information.entName != null}">
+                                            <input type="text" class="form-control" name="entName" disabled value="${information.entName}" >
+                                        </c:if>
+                                        <c:if test="${information.entName == null}">
+                                            <input type="text" class="form-control" name="entName" value="${information.entName}" >
+                                        </c:if>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="text-right">企业证件类型：</td>
@@ -57,7 +64,7 @@
                                         </select>
                                     </td>
                                 </tr>
-                                <tr class="three_certificates">
+                                <tr class="three_no_certificates">
                                     <td class="text-right">社会统一信用代码：</td>
                                     <td><input type="text" class="form-control" value="${information.entCreditCode}" name="entCreditCode"></td>
                                 </tr>
@@ -69,7 +76,7 @@
                                     <td class="text-right">税务登记号：</td>
                                     <td><input type="text" class="form-control" value="${information.taxRegistrationNumber}" name="taxRegistrationNumber"></td>
                                 </tr>
-                                <tr>
+                                <tr class="three_certificates">
                                     <td class="text-right">组织机构代码：</td>
                                     <td><input type="text" class="form-control" value="${information.institutionCode}" name="institutionCode"></td>
                                 </tr>
@@ -152,39 +159,43 @@
                             <table class="table table_one">
                                 <tbody>
                                 <tr>
-                                    <td style="width: 20%;" class="text-right">注册资本:</td>
+                                    <td style="width: 20%;" class="text-right">注册资本：</td>
                                     <td><input type="text" class="form-control" name="registeredCapital" value="${information.registeredCapital}"></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-right">主要股东:</td>
+                                    <td class="text-right">主要股东：</td>
                                     <td><input type="text" class="form-control" name="majorShareholder" value="${information.majorShareholder}"></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-right">经营范围:</td>
+                                    <td class="text-right">经营范围：</td>
                                     <td><input type="text" class="form-control" name="businessScope" value="${information.businessScope}"></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-right">登记机关:</td>
+                                    <td class="text-right">登记机关：</td>
                                     <td><input class="form-control" name="registrationAuthority"  value="${information.registrationAuthority}" type="text"></td>
                                 </tr>
-                                <tr>
+                                <tr class="three_no_certificates">
                                     <td class="text-right">社会统一信用代码电子档：</td>
                                     <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                                 </tr>
-                                <tr>
+                                <tr class="three_certificates">
                                     <td class="text-right">工商登记注册号电子档：</td>
                                     <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                                 </tr>
-                                <tr>
+                                <tr class="three_certificates">
                                     <td class="text-right">税务登记号电子档：</td>
                                     <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                                 </tr>
-                                <tr>
+                                <tr class="three_certificates">
                                     <td class="text-right">组织机构代码电子档：</td>
                                     <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-right">法人身份证电子档：</td>
+                                    <td class="text-right">法人身份证明正面：</td>
+                                    <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">法人身份证明背面：</td>
                                     <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                                 </tr>
                                 <tr>
@@ -195,7 +206,7 @@
                             </table>
                     </div>
                 </div>
-                <button class="btn col-xs-offset-3" style="width: 120px;" onclick="updateInformation()">确定</button>
+                <button class="btn col-xs-offset-3 btn-danger" style="width: 120px;" onclick="updateInformation()">确定</button>
             </form>
         </div>
 
@@ -231,16 +242,24 @@
     $(function () {
         if($('#three_certificates').find("option:checked").attr("value")==0){
             $('.three_certificates').hide()
+            $('.three_no_certificates').show()
+            $('tr.three_certificates>td>input:last-of-type').attr('distabled',true);
         }else{
             $('.three_certificates').show()
+            $('.three_no_certificates').hide()
+            $('tr.three_certificates>td>input:last-of-type').removeAttr('distabled');
         }
     })
 
     $("#three_certificates").change(function() {
         if($(this).find("option:checked").attr("value")==0){
-            $('.three_certificates').hide()
+            $('.three_certificates').hide();
+            $('.three_no_certificates').show();
+            $('tr.three_certificates>td>input:last-of-type').attr('distabled',true);
         }else{
-            $('.three_certificates').show()
+            $('.three_certificates').show();
+            $('.three_no_certificates').hide();
+            $('tr.three_certificates>td>input:last-of-type').removeAttr('distabled');
         }
 
     });

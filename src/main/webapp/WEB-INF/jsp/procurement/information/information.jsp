@@ -99,18 +99,17 @@
                                                 <td class="text-right">法定代表人证件类型：</td>
                                                 <%--0居民身份证、1护照、2港澳居民来往内地通行证、3台湾居民来往大陆通行证--%>
                                                 <td class="text-left">
-                                                <td>
-                                               	 	<c:if test="${information.representativeType==0}">居民身份证
-
+                                               	 	<c:if test="${information.representativeType==0}">
+                                                        居民身份证
                                                     </c:if>
-                                                    <c:if test="${information.representativeType==1}">护照
-                                                       
+                                                    <c:if test="${information.representativeType==1}">
+                                                        护照
                                                     </c:if>
-                                                    <c:if test="${information.representativeType==2}">港澳居民来往内地通行证
-                                                      
+                                                    <c:if test="${information.representativeType==2}">
+                                                        港澳居民来往内地通行证
                                                     </c:if>
-                                                    <c:if test="${information.representativeType==3}">台湾居民来往大陆通行证
-                                                        
+                                                    <c:if test="${information.representativeType==3}">
+                                                        台湾居民来往大陆通行证
                                                     </c:if>
                                                 </td>
                                             </tr>
@@ -200,7 +199,11 @@
                                                 <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                                             </tr>
                                             <tr>
-                                                <td class="text-right">法人身份证电子档：</td>
+                                                <td class="text-right">法人身份证明正面：</td>
+                                                <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right">法人身份证明背面：</td>
                                                 <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                                             </tr>
                                             <tr>

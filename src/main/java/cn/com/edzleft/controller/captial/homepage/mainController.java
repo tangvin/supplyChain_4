@@ -5,19 +5,11 @@ import cn.com.edzleft.entity.Information;
 import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.captial.homepage.CaptialHomePageService;
 import cn.com.edzleft.service.trade.account.AccountService;
-import cn.com.edzleft.util.ConfigUtil;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -91,7 +83,10 @@ public class mainController {
         ModelAndView mv = new ModelAndView("capital/information/updateInformation");
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer userId = session.getAdmin().getUserId();
+        String userName = session.getAdmin().getUserName();
         Information information = captialHomePageService.homePageSelect(userId);
+        Account account = accountService.queryAccountByName(userName);
+        mv.addObject("account",account);
         mv.addObject("information",information);
         return mv;
     }

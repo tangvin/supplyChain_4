@@ -29,7 +29,7 @@
                         <table class="table table_one">
                             <tbody>
                             <tr>
-                                <td style="width: 20%;" class="text-right">企业身份:</td>
+                                <td style="width: 20%;" class="text-right">企业身份：</td>
                                 <td class="mys">
                                     <%--0采购方、1贸易方、2资方--%>
                                     <c:if test="${information.entIdentity == 0}">
@@ -57,7 +57,7 @@
                                     </select>
                                 </td>
                             </tr>
-                                <tr class="three_certificates">
+                                <tr class="three_no_certificates">
                                     <td  class="text-right">社会统一信用代码：</td>
                                     <td><input type="text" name="entCreditCode" class="form-control" value="${information.entCreditCode}">
                                     </td>
@@ -71,7 +71,7 @@
                                     <td  class="text-right">税务登记号：</td>
                                     <td><input type="text" name="taxRegistrationNumber" class="form-control" value="${information.taxRegistrationNumber}"></td>
                                 </tr>
-                            <tr>
+                            <tr  class="three_certificates">
                                 <td  class="text-right">组织机构代码：</td>
                                 <td><input type="text" name="institutionCode" class="form-control" value="${information.institutionCode}"></td>
                             </tr>
@@ -147,7 +147,7 @@
             <div class="jbxx">
                 <div class="row jbxx_row jbxx_zlbj">
                     <div class="col-xs-8">
-                        <h5>基本资料</h5>
+                        <h5>高级资料</h5>
                     </div>
                 </div>
                 <div class="row">
@@ -170,24 +170,28 @@
                                 <td  class="text-right">登记机关：</td>
                                 <td><input type="text" name="registrationAuthority" class="form-control" value="${information.registrationAuthority}"></td>
                             </tr>
-                            <tr>
+                            <tr class="three_no_certificates">
                                 <td  class="text-right">社会统一信用代码电子档：</td>
                                 <td class="mys"> <img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                             </tr>
-                            <tr>
+                            <tr  class="three_certificates">
                                 <td  class="text-right">工商登记注册电子档：</td>
                                 <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                             </tr>
-                            <tr>
+                            <tr  class="three_certificates">
                                 <td  class="text-right">税务登记号电子档：</td>
                                 <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                             </tr>
-                            <tr>
+                            <tr  class="three_certificates">
                                 <td class="text-right">组织机构代码电子档：</td>
                                 <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                             </tr>
                             <tr>
-                                <td class="text-right">法人身份证电子档：</td>
+                                <td class="text-right">法人身份证明正面：</td>
+                                <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">法人身份证明背面：</td>
                                 <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                             </tr>
                             <tr>
@@ -199,7 +203,7 @@
                         </table>
                 </div>
             </div>
-            <button id="update" type="button" class="btn col-xs-offset-3" style="width: 120px;">确定</button>
+            <button id="update" type="button" class="btn btn-danger col-xs-offset-3" style="width: 120px;">确定</button>
         </form>
         </div>
 
@@ -228,17 +232,25 @@
     })
     $(function () {
         if($('#three_certificates').find("option:checked").attr("value")==0){
-            $('.three_certificates').hide()
+            $('.three_certificates').hide();
+            $('.three_no_certificates').show();
+            $('tr.three_certificates>td>input:last-of-type').attr('distabled',true);
         }else{
-            $('.three_certificates').show()
+            $('.three_certificates').show();
+            $('.three_no_certificates').hide();
+            $('tr.three_certificates>td>input:last-of-type').removeAttr('distabled');
         }
     })
 
     $("#three_certificates").change(function() {
         if($(this).find("option:checked").attr("value")==0){
-            $('.three_certificates').hide()
+            $('.three_certificates').hide();
+            $('.three_no_certificates').show();
+            $('tr.three_certificates>td>input:last-of-type').attr('distabled',true);
         }else{
-            $('.three_certificates').show()
+            $('.three_certificates').show();
+            $('.three_no_certificates').hide();
+            $('tr.three_certificates>td>input:last-of-type').removeAttr('distabled');
         }
 
     });
