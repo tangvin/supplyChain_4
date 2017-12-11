@@ -11,4 +11,6 @@ public interface CodeService {
 
     Code selectCode(Integer userId);
 
+	Code selectCodePhone(String userPhone);
+
 }

@@ -9,5 +9,7 @@ public interface CodeMapper {
 
     Code selectCode(Integer userId);
 
+	Code selectCodePhone(String userPhone);
+
 
 }

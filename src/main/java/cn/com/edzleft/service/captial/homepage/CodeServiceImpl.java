@@ -32,4 +32,11 @@ public class CodeServiceImpl implements CodeService{
     public Code selectCode(Integer userId) {
         return codeMapper.selectCode(userId);
     }
+    /**
+     * 根据手机查询验证码
+     * @return
+     */
+    public Code selectCodePhone(String userPhone) {
+    	return codeMapper.selectCodePhone(userPhone);
+    }
 }

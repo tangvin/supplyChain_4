@@ -76,6 +76,7 @@ public class CaptialHomeController {
                     code.setCode(img);
                     code.setUserId(sessionAccount.getUserId());
                     code.setCreatTime(new Date());
+                    code.setUserPhone(userPhone);
                     codeService.insertCode(code);
                 }
                 System.out.println("TotalCount=" + querySendDetailsResponse.getTotalCount());
@@ -103,8 +104,8 @@ public class CaptialHomeController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             //获取session中userId
-            SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
-            Account sessionAccount=sessionInfo.getAdmin();
+            //SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
+            //Account sessionAccount=sessionInfo.getAdmin();
             String img = noteMsg.imgCodes();
             session.setAttribute("sendCodes",img);
             response = noteMsg.sendSms(userPhone,img);
@@ -126,8 +127,9 @@ public class CaptialHomeController {
                     System.out.println("SendStatus=" + smsSendDetailDTO.getSendStatus());
                     System.out.println("Template=" + smsSendDetailDTO.getTemplateCode());
                     code.setCode(img);
-                    code.setUserId(sessionAccount.getUserId());
+                    //code.setUserId(sessionAccount.getUserId());
                     code.setCreatTime(new Date());
+                    code.setUserPhone(userPhone);
                     codeService.insertCode(code);
                 }
                 System.out.println("TotalCount=" + querySendDetailsResponse.getTotalCount());
