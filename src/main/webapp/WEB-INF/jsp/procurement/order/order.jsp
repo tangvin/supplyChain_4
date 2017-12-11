@@ -182,6 +182,7 @@
                         }  else if(row.orderStatus == 1){//待付款
                             str +='<button class="btn btn-warning bg_btn" data-toggle="modal"  data-target=".bs-example-modal-sm" href="#" value="取消" onclick="showUserAttach(\''+row.orderId+'\',3)">取消</button>';
                             str +='<button class="btn btn-warning bg_btn"  href="#" value="编辑" onclick="updorder(\''+row.orderId+'\',4)">编辑</button>';
+                           // str +='<button class="btn btn-warning bg_btn"  href="#" value="编辑" onclick="updorder(\''+row.orderId+'\',4)">编辑</button>';
                            if(row.letterStatus == null){
                                str +='<button class="btn btn-warning bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_sq"   value="申请用信" onclick="sqyx(\''+row.orderId+'\',5)">申请用信</button>';
                            }else if(row.letterStatus == 0){

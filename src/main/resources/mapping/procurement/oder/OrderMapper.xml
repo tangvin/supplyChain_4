@@ -46,6 +46,9 @@
       <if test="whereMap != null &amp;&amp; whereMap.orderStatus != null and whereMap.orderStatus != ''">
         AND order_status  LIKE '%${whereMap.orderStatus}%'
       </if>
+      <if test="whereMap != null &amp;&amp; whereMap.userId != null and whereMap.userId != ''">
+        AND order_creator  =#{whereMap.userId}
+      </if>
       <if test="whereMap != null &amp;&amp; whereMap.orderConfirmationTime != null and whereMap.orderConfirmationTime != ''">
         AND order_confirmation_time  LIKE '%${whereMap.orderConfirmationTime}%'
       </if>
