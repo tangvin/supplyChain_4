@@ -18,6 +18,7 @@
         </div>
         <div class="col-xs-12">
             <form id="updateForm">
+            <input type="hidden" value="${information.id}" name="id">
                 <div class="jbxx">
                     <div class="row jbxx_row jbxx_zlbj">
                         <div class="col-xs-8">
@@ -200,7 +201,7 @@
                             </table>
                     </div>
                 </div>
-                <button class="btn btn-danger col-xs-offset-3" style="width: 120px;" onclick="updateInformation()">确定</button>
+                <button class="btn col-xs-offset-3" style="width: 120px;" onclick="updateInformation()">确定</button>
             </form>
         </div>
 

@@ -10,7 +10,11 @@ public class Code {
     private Date creatTime;
 
     private Integer userId;
-
+    
+    private String userPhone;
+    
+ 
+    
     public Integer getId() {
         return id;
     }
@@ -74,6 +78,14 @@ public class Code {
                 ", userId=" + userId +
                 '}';
     }
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
 
 
 }

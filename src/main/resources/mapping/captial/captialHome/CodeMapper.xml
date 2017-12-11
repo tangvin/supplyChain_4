@@ -6,10 +6,20 @@
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="creat_time" property="creatTime" jdbcType="TIMESTAMP" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, code, creat_time, user_id
+    id, code, creat_time, user_id,user_phone
   </sql>
+
+	<!-- 根据手机号进行查询验证码 -->
+   <select id="selectCodePhone" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from gyl_code
+    where user_phone = #{userPhone,jdbcType=VARCHAR}
+    ORDER BY creat_time DESC LIMIT 1
+  </select>
 
   <select id="selectCode" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -34,6 +44,9 @@
       <if test="userId != null" >
         user_id,
       </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -47,6 +60,9 @@
       </if>
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

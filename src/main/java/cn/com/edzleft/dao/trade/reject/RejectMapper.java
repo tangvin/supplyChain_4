@@ -17,7 +17,7 @@ public interface RejectMapper {
     /**
      * 删除驳回记录
      */
-    public int deleteRejectReason(Reject reject);
+    public int deleteRejectReason(Integer id );
 
     /**
      * 根据id查询驳回记录

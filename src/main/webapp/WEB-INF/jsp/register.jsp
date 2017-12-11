@@ -72,6 +72,9 @@
         .rsg_one,.rsg_two{
             display: none;
         }
+        #next_bu_one,#next_bu_two{
+        margin-top:20px;
+        }
     </style>
 </head>
 <body style="padding: 0;margin: 0;overflow: auto;">
@@ -91,20 +94,20 @@
             </div>
             <form  class='form-inline center-block rsg_one_xx' id="formRegist">
                 <div class="row">
-                    <label class="col-xs-4 text-center">联系人</label>
+                    <label class="col-xs-4 text-center">联系人:</label>
                     <input id="reg_sjh" type="text" class="form-control" name="userLinkman" placeholder="姓名">
                 </div>
                 <div class="row">
-                    <label class="col-xs-4 text-center">手机号</label>
+                    <label class="col-xs-4 text-center">手机号:</label>
                     <input type="text" class="form-control" id="phone" name="userPhone" placeholder="输入手机号">
                 </div>
                 <div class="row">
-                    <label class="col-xs-4 text-center">验证码</label>
+                    <label class="col-xs-4 text-center">验证码:</label>
                     <input type="text" id="checkCode" placeholder="输入验证码" class="form-control col-xs-4" name="checkCode"/>
                     <input id="btnSendCode" class="btn" type="button" value="获取验证码" onclick="sendMessage()" />
                 </div>
             </form>
-            <button class="btn center-block btn-primary" id="next_bu_one" >下一步</button>
+            <button class="btn center-block btn-danger" id="next_bu_one" >下一步</button>
         </div>
     </div>
     <p class='text-center rsg_copy'>Copyright © 2017 版权所有 </p>
@@ -117,19 +120,19 @@
 	                <h3 class="text-center">新用户申请</h3>
 	                <form class='form-inline center-block rsg_one_xx'>
 	                    <div class="row">
-	                        <label class="col-xs-4 text-center">账号</label>
+	                        <label class="col-xs-4 text-center">账号:</label>
 	                        <input id="rsg_zh" type="text" class="form-control" placeholder="字母开头，4-16位">
 	                    </div>
 	                    <div class="row">
-	                        <label class="col-xs-4 text-center">密码</label>
+	                        <label class="col-xs-4 text-center">密码:</label>
 	                        <input id="rsg_mm" type="password" class="form-control" placeholder="6-21位字母和数字">
 	                    </div>
 	                    <div class="row">
-	                        <label class="col-xs-4 text-center">确认密码</label>
+	                        <label class="col-xs-4 text-center">确认密码:</label>
 	                        <input id="rsg_qrmm" type="password" class="form-control" placeholder="请与密码保持一致">
 	                    </div>
 	                </form>
-	                <a id="tz"><button class="btn center-block btn-primary" id="next_bu_two">下一步</button></a>
+	                <a id="tz"><button class="btn center-block btn-danger" id="next_bu_two">下一步</button></a>
             </div>
         </div>
         <p class='text-center rsg_copy'>Copyright © 2017 版权所有 </p>
@@ -251,12 +254,12 @@ $(".colseRegister1").click(function(){
            			//alert(data.userLinkman)
            			//alert(data.accountType)
 					//alert(data.success);
-					//alert(data)
+					//alert(data.msg)
                	 	if(data.success){
-                		 $('.rsg_one').css('display','none')
+                		 $('.rsg_one').css('display','none'),
                     	 $('.rsg_two').css('display','block')
                 	}else{
-                		alert("验证码错误");
+                		alert(data.msg);
                 	}
                 
 
@@ -275,9 +278,9 @@ $(".colseRegister1").click(function(){
 //        alert( $(this).children('button').text())
     })
 
-    $('#checkCode').attr('disabled',true)
+    //$('#checkCode').attr('disabled',true)
     var InterValObj; //timer变量，控制时间
-    var count = 10; //间隔函数，1秒执行
+    var count = 60; //间隔函数，1秒执行
     var curCount;//当前剩余秒数
     var code = ""; //验证码
     var codeLength = 6;//验证码长度
@@ -320,7 +323,7 @@ $(".colseRegister1").click(function(){
         }else if(!myreg.test(phone)){
             alert('请输入有效的手机号码11');
         } else{
-            $('#checkCode').attr('disabled',false)
+            /* $('#checkCode').attr('disabled',false) */
             $('#checkCode').val('')
             //产生验证码
             for (var i = 0; i < codeLength; i++) {
@@ -330,21 +333,22 @@ $(".colseRegister1").click(function(){
             $("#btnSendCode").attr("disabled", "true");
             $("#btnSendCode").val( + curCount + "秒");
             InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+            var userPhone=$("#phone").val();//手机号码
             //向后台发送处理数据
-//            $.ajax({
-//                type: "POST", //用POST方式传输
-//                dataType: "text", //数据格式:JSON
-//                url: '', //目标地址
-//                data: "phone=" + phone + "&code=" + code,
-//                error: function (XMLHttpRequest, textStatus, errorThrown) { },
-//                success: function (msg){ }
-//            });
+           $.ajax({
+                type: "POST", //用POST方式传输
+                dataType: "text", //数据格式:JSON userPhone
+                url: '<%=request.getContextPath()%>/captialHomes/sendMsgBank.action', //目标地址
+                data: {userPhone:userPhone},
+                error: function (XMLHttpRequest, textStatus, errorThrown) { },
+                success: function (msg){ }
+            });
         }
     }
     //timer处理函数
     function SetRemainTime() {
         if (curCount == 0) {
-            $('#checkCode').attr('disabled',true)
+            /* $('#checkCode').attr('disabled',true) */
             window.clearInterval(InterValObj);//停止计时器
             $("#btnSendCode").removeAttr("disabled");//启用按钮
             $("#btnSendCode").val("获取验证码");

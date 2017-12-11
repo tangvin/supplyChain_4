@@ -2,6 +2,7 @@ package cn.com.edzleft.controller.trade.information;
 
 import cn.com.edzleft.entity.Account;
 import cn.com.edzleft.entity.Information;
+import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.trade.information.TradeInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,13 +27,21 @@ public class TradeInformationController {
     /**
      * 修改基本信息
      */
-    @RequestMapping("/modifyInformation")
+    @RequestMapping(value = "/modifyInformation",method = RequestMethod.POST)
     @ResponseBody
-    public String updateInformation(Information info){
-        int flag = tradeinformationService.modifyInformation(info);
-        return "1";
+    public String updateInformation(Information info,HttpSession sessionInfo){
+        //获取当前登录用户
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer informationId = session.getAdmin().getInformationId();
+        //判断当前用户是否是新用户（是，新增资料     否，编辑资料）
+        if(informationId==null){
+            int i = tradeinformationService.addInformation(info,sessionInfo);
+            return "新增当前的用户";
+        }else {
+            int flag = tradeinformationService.modifyInformation(info);
+            return "修改";
+        }
     }
-
 
 
 

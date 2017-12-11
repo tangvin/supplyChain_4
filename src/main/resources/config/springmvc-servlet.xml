@@ -94,6 +94,7 @@
 						<value>/captialMain/registerTwo.action</value>
 						<value>/register11/registerOne.action</value>
 						<value>/register11/registerTwo.action</value>
+						<value>/captialHomes/sendMsgBank.action</value>
 						<!--api接口-->
 						<value>/api/letter.action</value>
 						<value>/api/credit.action</value>

@@ -94,6 +94,8 @@ public class AccountServiceImpl implements AccountService {
         return a;
     }
 
+<<<<<<< HEAD
+=======
 	@Override
 	public Integer findByName(String userName) {
 		return accountMapper.findByName(userName);
@@ -103,4 +105,5 @@ public class AccountServiceImpl implements AccountService {
 	public Integer insert(Account account) {
 		return accountMapper.insert(account);
 	}
+>>>>>>> c79cd1eef4b5e6529688ff21f323d4a05cec4988
 }
