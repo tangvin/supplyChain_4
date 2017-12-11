@@ -151,7 +151,9 @@ public class MainsController {
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer userId = session.getAdmin().getUserId();
         Information information = tradeInformationService.queryBaseInformation(userId);
+        Account account = accountService.queryAcountById(userId);
         modelAndView.addObject("information", information);
+        modelAndView.addObject("account",account);
         return modelAndView;
     }
 
@@ -355,9 +357,12 @@ public class MainsController {
     public ModelAndView information(HttpSession sessionInfo){
         ModelAndView mv = new ModelAndView("/trade/information/information");
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+     //   Integer informationId = session.getAdmin().getInformationId();
         Integer userId = session.getAdmin().getUserId();
+        Account account = accountService.queryAcountById(userId);
         Information information = tradeInformationService.queryBaseInformation(userId);
         mv.addObject("information",information);
+        mv.addObject("account",account);
         return mv;
     }
 

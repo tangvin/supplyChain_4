@@ -11,12 +11,13 @@
     <div class='row'>
         <div class="col-xs-12 zlxx_top">
             <a href="<%=request.getContextPath()%>/procurementMain/procurementMain.action">系统首页</a>
-            <span>></span>
-            <a href="#" id="zhxx">资料维护</a>
+            <span></span>
+            <a href="#">资料维护</a>
             <a href="#">资料编辑</a>
         </div>
         <div class="col-xs-12">
             <form id="updateForm">
+            <input type="hidden" value="${information.id}" name="id">
                 <div class="jbxx">
                     <div class="row jbxx_row jbxx_zlbj">
                         <div class="col-xs-8">

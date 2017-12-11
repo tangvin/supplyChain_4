@@ -8,7 +8,7 @@
     <%
         String path = request.getContextPath();
         String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-        String name = request.getParameter("name");//用request得到
+        String name = request.getParameter("name");
     %>
 </head>
 <body>
@@ -42,6 +42,7 @@
                                         <h5>基本资料</h5>
                                     </div>
                                     <div class="col-xs-4 text-right">
+                                    	
                                         <button type="button" class="btn btn-danger" id="updateInformation">编辑</button>
                                     </div>
                                 </div>
@@ -345,10 +346,10 @@
                                                 <div class="col-xs-3"><span class="xingxing xx1">*</span>设为默认</div>
                                                 <div class="col-xs-9">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="rAddressDefault" checked value="0"> 是
+                                                        <input type="radio" name="rAddressDefault"   value="0"> 是
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="rAddressDefault"  value="1"> 否
+                                                        <input type="radio" name="rAddressDefault" checked value="1"> 否
                                                     </label>
                                                 </div>
                                             </div>
@@ -622,6 +623,8 @@
 		             for(var i=0;i<input.length;i++){
 		                 if(data[i].rAddressDefault=='0'){
 		                     $(input[i]).attr('checked',true)
+		                 }else{
+		                	 $(input[i]).removeAttr('checked',false)
 		                 }
 		             }
 	             }
@@ -705,7 +708,7 @@
     function setDefaultBankAccount(id,value){
 		   //1设为默认
         $.ajax({
-            url:'<%=request.getContextPath()%>/bankAccount/setDefaultBank.action?id='+id+'&&value='+value,
+            url:'<%=request.getContextPath()%>/pmbankAccount/setDefaultBank.action?id='+id+'&&value='+value,
             type:'post',
             success:function(){
                 alert("设置成功")

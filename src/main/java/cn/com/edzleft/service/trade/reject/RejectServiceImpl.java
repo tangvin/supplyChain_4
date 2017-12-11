@@ -16,6 +16,12 @@ public class RejectServiceImpl implements RejectService {
    @Autowired
    private RejectMapper rejectMapper;
 
+    /**
+     * 添加驳回记录
+     * @param reject
+     * @param reason
+     * @return
+     */
     @Override
     public int addRejectReason(Reject reject,String reason) {
         Reject r = new Reject();
@@ -27,13 +33,25 @@ public class RejectServiceImpl implements RejectService {
         return i;
     }
 
+    /**
+     * 删除驳回记录
+     * @param
+     * @return
+     */
     @Override
-    public int cutRejectReason(Reject reject) {
-        return 0;
+    public int cutRejectReason(Integer id) {
+        int i = rejectMapper.deleteRejectReason(id);
+        return i;
     }
 
+    /**
+     * 查询驳回记录
+     * @param id
+     * @return
+     */
     @Override
     public int queryRejectReason(Integer id) {
-        return 0;
+        int i = rejectMapper.selectRejectReason(id);
+        return i;
     }
 }

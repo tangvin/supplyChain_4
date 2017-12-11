@@ -33,20 +33,25 @@
                                 <td>企业身份:</td>
                                 <td class="mys">
                                     <%--0采购方、1贸易方、2资方--%>
-                                    <c:if test="${information.entIdentity == 0}">
-                                        采购方
+                                    <c:if test="${account.accountType == 0}">
+                                        采购方<input type="hidden" value="${account.accountType}" name="entIdentity">
                                     </c:if>
-                                    <c:if test="${information.entIdentity == 1}">
-                                        贸易方
+                                    <c:if test="${account.accountType == 1}">
+                                        贸易方<input type="hidden" value="${account.accountType}" name="entIdentity">
                                     </c:if>
-                                    <c:if test="${information.entIdentity == 2}">
-                                        资方
+                                    <c:if test="${account.accountType == 2}">
+                                        资方<input type="hidden" value="${account.accountType}" name="entIdentity">
                                     </c:if>
                                 </td>
                             </tr>
                             <tr>
                                 <td>企业名称:</td>
+                                <c:if test="${account.informationId != null}">
                                 <td><input type="text" name="entName" class="form-control" disabled value=" ${information.entName}">
+                                </c:if>
+                                <c:if test="${account.informationId == null}">
+                                <td><input type="text" name="entName" class="form-control"  value=" ${information.entName}">
+                                </c:if>
                                 </td>
                             </tr>
                             <tr>
@@ -169,7 +174,7 @@
 
                             <tr>
                                 <td>经营范围：</td>
-                                <td><textarea style="width: 250px;" name="businessScope" class="form-control" rows="3">${information.businessScope}</textarea></td>
+                                <td><input type="text" name="registrationAuthority" class="form-control" value="${information.businessScope}"></td>
                             </tr>
                             <tr>
                                 <td>登记机关：</td>

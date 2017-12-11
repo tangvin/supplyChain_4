@@ -1,10 +1,15 @@
 package cn.com.edzleft.service.trade.information;
 
+import cn.com.edzleft.dao.trade.homepage.AccountMapper;
 import cn.com.edzleft.dao.trade.information.TradeInformationMapper;
+import cn.com.edzleft.entity.Account;
 import cn.com.edzleft.entity.Information;
+import cn.com.edzleft.entity.SessionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by ibmtech on 2017/11/21.
@@ -15,6 +20,9 @@ public class TradeInformationServiceImpl implements TradeInformationService {
 
     @Autowired
     private TradeInformationMapper informationMapper;
+    @Autowired
+    private AccountMapper accountMapper;
+
 
     /**
      * 查询基本信息
@@ -105,6 +113,38 @@ public class TradeInformationServiceImpl implements TradeInformationService {
 
         int flag = informationMapper.updateInformation(info);
         return flag;
+    }
+
+    /**
+     * 新用户注册
+     * @param information
+     * @param sessionInfo
+     * @return
+     */
+    @Override
+    public int addInformation(Information information, HttpSession sessionInfo) {
+        int i = informationMapper.insertInformation(information);
+        //判断添加成功后 继续将informatiionId存到数据库
+        if(i>0){
+            //企业身份
+            Integer entIdentity = information.getEntIdentity();
+            //企业名字
+            String entName = information.getEntName();
+            //工商注册登记号registration_number
+            String registrationNumber = information.getRegistrationNumber();
+            //企业社会信用代码
+            String entCreditCode = information.getEntCreditCode();
+            //获取查询对象
+            Information in = informationMapper.selectByParam(entIdentity, entName, registrationNumber, entCreditCode);
+            //获取当前增加的信息id
+            Integer informationId = in.getId();
+            SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+            Integer userId = session.getAdmin().getUserId();
+            Information infor = informationMapper.selectBaseInformation(userId);
+            Account account = accountMapper.selectAccountById(userId);
+            account.setInformationId(informationId);
+        }
+        return i;
     }
 
 }

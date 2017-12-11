@@ -30,6 +30,7 @@ public class Reject {
      */
     private Integer order_id;
 
+
     public Integer getRejectId() {
         return rejectId;
     }
