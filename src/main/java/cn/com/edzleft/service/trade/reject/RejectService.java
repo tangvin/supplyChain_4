@@ -16,7 +16,7 @@ public interface RejectService {
     /**
      * 删除驳回记录
      */
-    public int cutRejectReason(Reject reject);
+    public int cutRejectReason(Integer id);
 
     /**
      * 根据id查询驳回记录

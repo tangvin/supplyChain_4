@@ -84,7 +84,7 @@ public class RegisterController {
 		try {
 			ia=ia.getLocalHost();
 			String creatIp=ia.getHostAddress();
-			account.setCreatIp(creatIp);
+			account.setCreateIp(creatIp);
 			count = accountService.insert(account);
 			if ( count > 0) {
 				map.put("success", true);
