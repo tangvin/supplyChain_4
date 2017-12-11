@@ -160,11 +160,11 @@
                         <table class="table table_one">
                             <tbody>
                             <tr>
-                                <td  class="text-right" style="width: 20%;">注册资本:</td>
+                                <td  class="text-right" style="width: 20%;">注册资本：</td>
                                 <td><input type="text"  name="registeredCapital" class="form-control" value="${information.registeredCapital}"></td>
                             </tr>
                             <tr>
-                                <td  class="text-right">主要股东:</td>
+                                <td  class="text-right">主要股东：</td>
                                 <td><input type="text" name="majorShareholder" class="form-control" value="${information.majorShareholder}"></td>
                             </tr>
 
@@ -224,18 +224,20 @@
     $('#zhxx').click(function(){
         $('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')
     });
-    $("#update").click(function () {
-        $.ajax({
-            url:'<%=request.getContextPath()%>/information/modifyInformation.action',
-            dataType:'json',
-            type:'post',
-            data:$("#formInformation").serialize(),
-            success:function (data) {
-                alert("修改成功！！")
-                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ziliao.action')",500);
-    }
+
+        $(document).on('click','#update',function () {
+            $.ajax({
+                url:'<%=request.getContextPath()%>/information/modifyInformation.action',
+                dataType:'json',
+                type:'post',
+                data:$("#formInformation").serialize(),
+                success:function (data) {
+                    alert("修改成功！！")
+                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ziliao.action')",500);
+                }
+            })
         })
-    })
+    
     $(function () {
         if($('#three_certificates').find("option:checked").attr("value")==0){
             $('.three_certificates').hide();

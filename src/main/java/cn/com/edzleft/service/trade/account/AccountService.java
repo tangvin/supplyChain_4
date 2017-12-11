@@ -28,4 +28,5 @@ public interface AccountService {
     //根据id 查看账户信息
     public Account queryAcountById(Integer id);
 
+    public int updatePassword(Account account);
 }

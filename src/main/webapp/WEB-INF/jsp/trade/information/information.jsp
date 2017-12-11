@@ -89,7 +89,7 @@
                                                 <td  class="text-left">${information.institutionCode}</td>
                                             </tr>
                                             <tr>
-                                                <td  class="text-right">法定代表人</td>
+                                                <td  class="text-right">法定代表人：</td>
                                                 <td  class="text-left">${information.representative}</td>
                                             </tr>
                                             <tr>

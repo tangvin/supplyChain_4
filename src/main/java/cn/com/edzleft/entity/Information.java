@@ -147,6 +147,12 @@ public class Information {
      */
     private Integer certificationStatus;
 
+    /**
+     * 创建者
+     * @return
+     */
+    private Integer creatorId;
+
 
     public Integer getCertificationStatus() {
         return certificationStatus;
@@ -427,7 +433,13 @@ public class Information {
     public void setOrganizationElectronicFile(String organizationElectronicFile) {
         this.organizationElectronicFile = organizationElectronicFile;
     }
+    public Integer getCreatorId() {
+        return creatorId;
+    }
 
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -488,7 +500,9 @@ public class Information {
         if (organizationElectronicFile != null ? !organizationElectronicFile.equals(that.organizationElectronicFile) : that.organizationElectronicFile != null)
             return false;
         if (entLogo != null ? !entLogo.equals(that.entLogo) : that.entLogo != null) return false;
-        return certificationStatus != null ? certificationStatus.equals(that.certificationStatus) : that.certificationStatus == null;
+        if (certificationStatus != null ? !certificationStatus.equals(that.certificationStatus) : that.certificationStatus != null)
+            return false;
+        return creatorId != null ? creatorId.equals(that.creatorId) : that.creatorId == null;
     }
 
     @Override
@@ -528,6 +542,7 @@ public class Information {
         result = 31 * result + (organizationElectronicFile != null ? organizationElectronicFile.hashCode() : 0);
         result = 31 * result + (entLogo != null ? entLogo.hashCode() : 0);
         result = 31 * result + (certificationStatus != null ? certificationStatus.hashCode() : 0);
+        result = 31 * result + (creatorId != null ? creatorId.hashCode() : 0);
         return result;
     }
 
@@ -569,6 +584,7 @@ public class Information {
                 ", organizationElectronicFile='" + organizationElectronicFile + '\'' +
                 ", entLogo='" + entLogo + '\'' +
                 ", certificationStatus=" + certificationStatus +
+                ", creatorId=" + creatorId +
                 '}';
     }
 }

@@ -26,9 +26,10 @@ public interface TradeInformationMapper {
     public int insertInformation(Information information);
 
 
-    /**
-     * 根据时间查询出当前用户的
-     */
-    public Information selectByParam(Integer entIdentity, String ent_name, String registrationNumber, String entCreditCode);
+
+
+    public Information selectByCreatorId(Integer id);
+
+
 
 }

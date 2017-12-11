@@ -23,4 +23,12 @@ public interface TradeInformationService {
      * 新增加一个用户信息
      */
     public int addInformation(Information information, HttpSession session);
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public Information selectByCreatorId(Integer id);
+
 }
