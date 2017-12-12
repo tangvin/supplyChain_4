@@ -28,4 +28,14 @@ public class CapSettingServiceImpl implements CapSettingService {
 		return capSettingMapper.update(setting);
 	}
 
+	@Override
+	public Integer getCount(Integer userId) {
+		return capSettingMapper.getCount(userId);
+	}
+
+	@Override
+	public Integer insert(Settings setting) {
+		return capSettingMapper.insert(setting);
+	}
+
 }

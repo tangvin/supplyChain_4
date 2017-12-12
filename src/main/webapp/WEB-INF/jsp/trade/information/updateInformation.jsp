@@ -299,7 +299,9 @@
             type:'post',
             data:$("#formInformation").serialize(),
             success:function (data) {
-                alert("修改成功！！")
+            	if(data.success){
+            		alert(data.msg)
+            	}
                 setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ziliao.action')",500);
     }
         })

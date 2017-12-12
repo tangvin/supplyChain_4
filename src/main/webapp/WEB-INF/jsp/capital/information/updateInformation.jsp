@@ -289,19 +289,16 @@
     })
 
     function updateInformation(){
-//        alert($("#updateForm").serialize())
         $.ajax({
             url:'<%=request.getContextPath()%>/captialInformation/updateInformation.action',
             data:$("#updateForm").serialize(),
             type:'post',
             dataType:'json',
             success:function(data){
-//                $.messager.alert('消息',data.msg,'info');
-                alert("修改成功")
+            	if(data.success){
+            		alert(data.msg)
+            	}
                 setTimeout("$('#load').load('<%=request.getContextPath()%>/captialMain/ziliao.action')",500);
-            },
-            error:function(){
-//                $.messager.alert('消息','ajax请求失败！','warning');
             }
         });
     }

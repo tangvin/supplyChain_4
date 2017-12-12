@@ -40,26 +40,19 @@
     </div>
 </div>
 <script>
-	 /* $(function () {
-		var shortMessage=$("#shortMessage").val();
-		var email=$("#email").val();
-		console.log(email)
-		//alert(shortMessage);
-		if(shortMessage == 1){
+	 $(function(){
+		 $.ajax({
+			 url:'<%=request.getContextPath()%>/setting/insert.action',
+			 type:'post',
+			 success:function(data){
+				 if (data.success) {
+					 setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/setting.action')",500);
+				}
+			 }
+		 });
+	 })
 			
-			$("#shortMessage2 input[type='checkbox']").prop("checked",true);
-		}else {
-			$("#shortMessage2 input[type='checkbox']").prop("checked",false);
-		}
-		if(email == 1){
-			
-			$("#email2 input[type='checkbox']").prop("checked",true);
-		}else {
-			$("#email2 input[type='checkbox']").prop("checked",false);
-		}
-	}) 
-	 */
-	// console.log($('#shortMessage').val())
+	
 	$(function(){
 		$.ajax({
 			url:'<%=request.getContextPath()%>/setting/settingByUserId.action',
