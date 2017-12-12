@@ -20,7 +20,7 @@
             <div class="khh">
                 <form class="form-inline khh_form khh_form1" id="orderform">
                     <div class="form-group">
-                        <label>状态</label>
+                        <label>状态：</label>
                         <select class="form-control select" id="orderStatus">
                             <option value="">全部</option>
                             <option value="0">待确认</option>
@@ -32,16 +32,16 @@
                         </select>
                     </div>
                     <div class="form-group form-group1">
-                        <label>合同执行期</label>
-                        <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/>至
+                        <label>合同执行期：</label>
+                        <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/><span style="margin: 0 5px;font-size: 12px">至</span>
                         <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
                     </div>
                     <div class="form-group">
-                        <label>签约方</label>
+                        <label>签约方：</label>
                         <input type="text" class="form-control" id="orderCreatorTrade">
                     </div>
                     <div class="form-group">
-                        <label>合同</label>
+                        <label>合同：</label>
                         <input type="text" class="form-control" id="orderContract">
                     </div>
                     <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>
@@ -271,12 +271,12 @@
                     formatter:function(value , row){
                         var str = '';
                         if(row.orderStatus ==0){//待确认
-                            str += '<button  class="btn btn-default bg_btn qran" data-toggle="modal" data-target=".bs-example-modal-sm" href="#" value="待确认" onclick="showUserAttach(\''+row.orderId+'\',1)">领取订单</button>';
-                            str += '<button  class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_bh" href="#" value="待确认" onclick="showUserAttache(\''+row.orderId+'\',2)">驳回</button>';
+                            str += '<button  class="btn  btn-primary bg_btn qran" data-toggle="modal" data-target=".bs-example-modal-sm" href="#" value="待确认" onclick="showUserAttach(\''+row.orderId+'\',1)">领取订单</button>';
+                            str += '<button  class="btn btn-warning bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_bh" href="#" value="待确认" onclick="showUserAttache(\''+row.orderId+'\',2)">驳回</button>';
                         } else if(row.orderStatus ==1){//待付款
                             str+='--';
                         } else if(row.orderStatus ==2){//待发货
-                            str +='<button  id="pz" class="btn-warning btn-sm" data-toggle="modal" data-target=".bs-example-modal-pzfh" href="#" value="待发货" onclick="showUserAttachs(\''+row.orderId+'\',4)">配置发货</button>';
+                            str +='<button  id="pz" class="btn-danger btn-sm" data-toggle="modal" data-target=".bs-example-modal-pzfh" href="#" value="待发货" onclick="showUserAttachs(\''+row.orderId+'\',4)">配置发货</button>';
                         } else if(row.orderStatus ==3){//待收货
                             str+='--';
                         } else if(row.orderStatus ==4){//已完成

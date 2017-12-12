@@ -3,7 +3,6 @@ package cn.com.edzleft.controller.procurement.oder;
 import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.entity.ReceivingAddress;
 import cn.com.edzleft.entity.SessionInfo;
-import cn.com.edzleft.service.procurement.homepage.PmHomePageService;
 import cn.com.edzleft.service.procurement.oder.PmOrderService;
 import cn.com.edzleft.service.procurement.receivingaddress.PmReceivingAddressService;
 import cn.com.edzleft.util.page.DataGridJson;
@@ -95,7 +94,7 @@ public class PmOrderController {
 		String orderAmount = req.getParameter("orderAmount");
 		String principalOrderId = req.getParameter("principalOrderId");
 		String applicationletter = req.getParameter("applicationletter");
-		String orderCreatorTrade = req.getParameter("orderCreatorTrade");
+		Integer orderCreatorTrade = Integer.valueOf(req.getParameter("orderCreatorTrade"));
 		String goods = req.getParameter("goods");
 		Order o=new Order();
 		o.setContactPhone(telephone);
@@ -105,7 +104,7 @@ public class PmOrderController {
 		o.setPrincipalOrderId(Integer.parseInt(principalOrderId));
 		o.setApplicationletter(applicationletter); 
 		o.setGoods(goods);
-		o.setOrderCreatorTrade(orderCreatorTrade);
+		o.setOrderCreatorTradeId(orderCreatorTrade);
 		o.setOrderStatus(0);
 		o.setOrderCreatTime(new Date());
 		int i = pmOrderService.insertSelective(o, sessionInfo);

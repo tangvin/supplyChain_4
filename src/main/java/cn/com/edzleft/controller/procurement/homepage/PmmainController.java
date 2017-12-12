@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 /**
  * Created by ASUS on 2017/11/15.
@@ -151,7 +150,7 @@ public class PmmainController {
 		ModelAndView mv = new ModelAndView("/procurement/order/viewOrder");
 		Order order  = pmHomePageService.selectByPrimaryKey(value);
 		//获取运货单位
-		Integer logisticsUnitId = order.getLogisticsUnitId();
+		Integer logisticsUnitId = order.getFreightNumberId();
 		Integer addressId = order.getReceivingAddressId();
 		
         Freight freight = pmfreightservice.queryFreightById(logisticsUnitId);

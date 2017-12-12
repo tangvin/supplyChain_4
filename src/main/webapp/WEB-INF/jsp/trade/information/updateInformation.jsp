@@ -303,7 +303,7 @@
             		alert(data.msg)
             	}
                 setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ziliao.action')",500);
-    }
+            }
         })
     })
     var   szhy = '${information.entDocumentType}'

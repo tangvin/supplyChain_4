@@ -29,6 +29,7 @@
                                 <tbody>
                                 <tr>
                                     <input type="hidden" name="id" value="${information.id }">
+                                    <input type="hidden" name="informationId" value="${account.informationId}">
                                     <td style="width: 20%;" class="text-right">企业身份：</td>
                                     <td class="mys">
                                         <%--0采购方、1贸易方、2资方--%>
