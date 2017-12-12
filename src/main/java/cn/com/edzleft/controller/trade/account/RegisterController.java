@@ -87,6 +87,8 @@ public class RegisterController {
 			account.setCreateIp(creatIp);
 			//account_state
 			Integer accountState=0;
+			Integer certificateState=1;
+			account.setCertificateState(certificateState);
 			account.setAccountState(accountState);
 			count = accountService.insert(account);
 			if ( count > 0) {

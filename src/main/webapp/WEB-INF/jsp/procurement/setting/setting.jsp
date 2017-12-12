@@ -31,7 +31,17 @@
 </div>
 
 <script>
-	
+$(function(){
+	 $.ajax({
+		 url:'<%=request.getContextPath()%>/proSetting/insert.action',
+		 type:'post',
+		 success:function(data){
+			 if (data.success) {
+				 setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/setting.action')",500);
+			}
+		 }
+	 });
+})
 	$(function(){
 		$.ajax({
 			url:'<%=request.getContextPath()%>/proSetting/settingByUserId.action',

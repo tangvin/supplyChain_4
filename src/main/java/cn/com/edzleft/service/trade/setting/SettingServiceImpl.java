@@ -29,4 +29,14 @@ public class SettingServiceImpl implements SettingService{
 		return settingMapper.update(setting);
 	}
 
+	@Override
+	public Integer getCount(Integer userId) {
+		return settingMapper.getCount(userId);
+	}
+
+	@Override
+	public Integer insert(Settings setting) {
+		return settingMapper.insert(setting);
+	}
+
 }

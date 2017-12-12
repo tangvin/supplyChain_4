@@ -20,7 +20,12 @@
   set short_message =#{shortMessage},email=#{email}
   where user_id=#{userId}
   </update> 
-  <insert id="insert" parameterType="cn.com.edzleft.entity.Settings">
+  <!-- 判断是否存在 -->
+  <select id="getCount" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+  select count(*) from gyl_setting where user_id = #{userId}
+  </select>
+  <!-- 新增 -->
+  <insert id="insert"  parameterType="cn.com.edzleft.entity.Settings">
   insert into gyl_setting (short_message,email,user_id) values (#{shortMessage},#{email},#{userId})
   </insert>
 </mapper>

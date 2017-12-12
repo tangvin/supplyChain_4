@@ -32,7 +32,9 @@
   </select>
   <!-- 创建账号 -->
   <insert id="insert" parameterType="cn.com.edzleft.entity.Account">
-  	INSERT INTO gyl_account (account_type, user_linkman,user_phone,user_name,user_pwd,create_time,create_ip,account_state) VALUES (#{accountType},#{userLinkman},#{userPhone},#{userName},#{userPwd},#{createTime},#{createIp},#{accountState} )
+  	INSERT INTO gyl_account (account_type, user_linkman,user_phone,user_name,user_pwd,create_time,create_ip,account_state,certificate_state) 
+  	VALUES 
+  	(#{accountType},#{userLinkman},#{userPhone},#{userName},#{userPwd},#{createTime},#{createIp},#{accountState},#{certificateState} )
   </insert>
 	
   <!--根据名字查询账号信息-->
