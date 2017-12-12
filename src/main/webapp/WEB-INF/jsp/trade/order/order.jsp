@@ -261,10 +261,10 @@
                     }
                 },
 
-                {field:'principalOrder',title:'合同'},
+                {field:'contractName',title:'合同'},
                 {field:'creditUse',title:'用信情况&nbsp;￥万元'},
                 {field:'invoice',title:'发票'},
-                {field:'freightNumber',title:'货运及单号'},
+                {field:'freightName',title:'货运及单号'},
                 {
                     title:'操作',
                     field:'action',
@@ -284,8 +284,6 @@
                         } else if (row.orderStatus ==5){//已取消
                             str+='--';
                         } else  if(row.orderStatus ==6){//已驳回
-                            str+='--';
-                        } else if (row.orderStatus ==7){//历史
                             str+='--';
                         }
                         return str;

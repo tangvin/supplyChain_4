@@ -120,6 +120,74 @@ public class Order {
      */
     private Integer letterStatus;
 
+    /**
+     * 采购方企业名称
+     * @return
+     */
+    private String procurementEntName;
+
+    /**
+     * 贸易方企业名称
+     * @return
+     */
+    private String tradeEntName;
+    /**
+     * 合同名称
+     */
+    private String contractName;
+
+    /**
+     * 合同编号
+     * @return
+     */
+    private String contractNumber;
+
+    /**
+     * 货运单位名称
+     * @return
+     */
+    private String freightName;
+
+    public String getContractName() {
+        return contractName;
+    }
+
+    public void setContractName(String contractName) {
+        this.contractName = contractName;
+    }
+
+    public String getContractNumber() {
+        return contractNumber;
+    }
+
+    public void setContractNumber(String contractNumber) {
+        this.contractNumber = contractNumber;
+    }
+
+    public String getFreightName() {
+        return freightName;
+    }
+
+    public void setFreightName(String freightName) {
+        this.freightName = freightName;
+    }
+
+    public String getProcurementEntName() {
+        return procurementEntName;
+    }
+
+    public void setProcurementEntName(String procurementEntName) {
+        this.procurementEntName = procurementEntName;
+    }
+
+    public String getTradeEntName() {
+        return tradeEntName;
+    }
+
+    public void setTradeEntName(String tradeEntName) {
+        this.tradeEntName = tradeEntName;
+    }
+
     public Integer getLetterStatus() {
         return letterStatus;
     }
@@ -397,6 +465,7 @@ public class Order {
         if (applicationletter != null ? !applicationletter.equals(order.applicationletter) : order.applicationletter != null)
             return false;
         if (invoiceNum != null ? !invoiceNum.equals(order.invoiceNum) : order.invoiceNum != null) return false;
+        if (tradeEntName != null ? !tradeEntName.equals(order.tradeEntName) : order.tradeEntName != null) return false;
         return letterStatus != null ? letterStatus.equals(order.letterStatus) : order.letterStatus == null;
     }
 
@@ -428,8 +497,10 @@ public class Order {
         result = 31 * result + (applicationletter != null ? applicationletter.hashCode() : 0);
         result = 31 * result + (invoiceNum != null ? invoiceNum.hashCode() : 0);
         result = 31 * result + (letterStatus != null ? letterStatus.hashCode() : 0);
+        result = 31 * result + (tradeEntName != null ? tradeEntName.hashCode() : 0);
         return result;
     }
+
 
     @Override
     public String toString() {
@@ -437,13 +508,13 @@ public class Order {
                 "orderId=" + orderId +
                 ", orderNumber='" + orderNumber + '\'' +
                 ", orderCreatTime=" + orderCreatTime +
-                ", orderCreatorId='" + orderCreatorId + '\'' +
-                ", orderCreatorTradeId='" + orderCreatorTradeId + '\'' +
+                ", orderCreatorId=" + orderCreatorId +
+                ", orderCreatorTradeId=" + orderCreatorTradeId +
                 ", orderConfirmationTime=" + orderConfirmationTime +
                 ", orderStatus=" + orderStatus +
                 ", receivingAddressId=" + receivingAddressId +
                 ", logisticsName='" + logisticsName + '\'' +
-                ", contactPhone=" + contactPhone +
+                ", contactPhone='" + contactPhone + '\'' +
                 ", principalOrderId=" + principalOrderId +
                 ", creditGetId=" + creditGetId +
                 ", creditUseId=" + creditUseId +
@@ -459,6 +530,12 @@ public class Order {
                 ", goods='" + goods + '\'' +
                 ", applicationletter='" + applicationletter + '\'' +
                 ", invoiceNum='" + invoiceNum + '\'' +
+                ", letterStatus=" + letterStatus +
+                ", procurementEntName='" + procurementEntName + '\'' +
+                ", tradeEntName='" + tradeEntName + '\'' +
+                ", contractName='" + contractName + '\'' +
+                ", contractNumber='" + contractNumber + '\'' +
+                ", freightName='" + freightName + '\'' +
                 '}';
     }
 }

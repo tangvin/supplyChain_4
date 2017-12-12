@@ -25,9 +25,9 @@ public class TradeOrderServiceImpl  implements TradeOrderService{
     @Override
     public PageUtil<Order> queryAllOrder(PageUtil<Order> pageUtil) {
        //查询所有的总条数
-        Integer orderCount = orderMapper.selectTotalOrderCount(pageUtil);
+        Integer orderCount = orderMapper.selectAllOrderCountLast(pageUtil);
         //条件查询+分页显示
-        List<Order> orders = orderMapper.selectOrderByPage(pageUtil);
+        List<Order> orders = orderMapper.selectAllOrderLast(pageUtil);
         pageUtil.setTotalCount(orderCount);
         pageUtil.setList(orders);
         return pageUtil;

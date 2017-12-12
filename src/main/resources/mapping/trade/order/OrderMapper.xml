@@ -26,6 +26,11 @@
     <result column="freight_number_id" property="freightNumberId" jdbcType="INTEGER" />
     <result column="invoiceNum" property="invoice_num" jdbcType="VARCHAR" />
     <result column="goods" property="goods" jdbcType="VARCHAR" />
+    <result column="procurementEntName" property="procurementEntName" jdbcType="VARCHAR" />
+    <result column="tradeEntName" property="tradeEntName" jdbcType="VARCHAR" />
+    <result column="contractName" property="contractName" jdbcType="VARCHAR" />
+    <result column="contractNumber" property="contractNumber" jdbcType="VARCHAR" />
+    <result column="freightName" property="freightName" jdbcType="VARCHAR" />
   </resultMap>
 
   <!--条件查询-->
@@ -37,11 +42,14 @@
       <if test="whereMap != null &amp;&amp; whereMap.orderConfirmationTime != null and whereMap.orderConfirmationTime != ''">
         AND order_confirmation_time  LIKE '%${whereMap.orderConfirmationTime}%'
       </if>
-      <if test="whereMap != null &amp;&amp; whereMap.creditGrantorId != null and whereMap.creditGrantorId != ''">
-        AND credit_grantor_id  LIKE '%${whereMap.creditGrantorId}%'
+      <if test="whereMap != null &amp;&amp; whereMap.orderCreator != null and whereMap.orderCreator != ''">
+        AND t2.ent_name  LIKE '%${whereMap.orderCreator}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.principalOrderId != null and whereMap.principalOrderId != ''">
         AND principal_order_id  LIKE '%${whereMap.principalOrderId}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.informationId != null and whereMap.informationId != ''">
+        AND t1.order_creator_trade_id=#{whereMap.informationId}
       </if>
     </trim>
   </sql>
@@ -52,40 +60,82 @@
     principal_order_id, credit_get_id, credit_use_id, credit_grantor_id, order_amount, amount_payable,goods,
     amount_actually_paid, payment_account_id, payment_time, invoice, freight_unit, freight_number_id,invoice_num
   </sql>
+<!--
 
-  <!--查询总条数-->
+  &lt;!&ndash;查询总条数&ndash;&gt;
   <select id="selectTotalOrderCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
     select count(*) from gyl_order <include refid="where_sql"/>
   </select>
-
-  <!--分页查询-->
+  &lt;!&ndash;分页查询&ndash;&gt;
   <select id="selectOrderByPage"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
     select
     <include refid="Base_Column_List" />
     from gyl_order
     <include refid="where_sql"/>
-    ORDER BY order_creat_time  DESC
+    ORDER BY order_creat_time DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select>
+
+-->
+
+
+
+
+
+  <!--查询出订单总条数-->
+  <select id="selectAllOrderCountLast" resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select COUNT(*)
+    from gyl_order t1
+    inner join gyl_information t2 on t1.order_creator_id=t2.id
+    inner join gyl_contract t3  on t1.principal_order_id=t3.contract_id
+    inner join gyl_freight t4 on t1.freight_number_id=t4.freight_id
+    inner join gyl_information my on t1.order_creator_trade_id=my.id
+    <include refid="where_sql"/>
+  </select>
+
+<!--表关联查询出所有符合订单信息-->
+  <select id="selectAllOrderLast" resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+  select  t1.order_creat_time,t1.freight_unit,t1.order_status,t1.order_number,t1.order_confirmation_time,t1.order_amount,
+            t2.ent_name AS procurementEntName,
+            t3.contract_name as contractName,t3.contract_number as contractNumber,
+            t4.freight_name as freightName,
+            my.ent_name as tradeEntName
+    from  gyl_order t1
+    inner join gyl_information t2 on t1.order_creator_id=t2.id
+    inner join gyl_contract t3  on t1.principal_order_id=t3.contract_id
+    inner join gyl_freight t4 on t1.freight_number_id=t4.freight_id
+    inner join gyl_information my on t1.order_creator_trade_id=my.id
+    <include refid="where_sql"/>
     <![CDATA[	limit #{start},#{pageSize}]]>
   </select>
 
 
   <!--根据订单编号orderNumber查询到订单表-->
   <select id="selectOrderByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from gyl_order
     where order_number = #{orderNumber,jdbcType=VARCHAR}
   </select>
 
 
-  <!--根据订单编号orderNumber查询到订单表-->
-  <select id="selectOrderById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from gyl_order
-    where order_id = #{order_id,jdbcType=INTEGER}
+ <!--
+  &lt;!&ndash;根据订单编号orderNumber查询到订单表&ndash;&gt;
+  <select id="selectOrderByNumber" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select  t1.order_creat_time,t1.freight_unit,t1.order_status,t1.order_number,t1.order_confirmation_time,t1.order_amount,
+            t2.ent_name AS procurementEntName,
+            t3.contract_name as contractName,t3.contract_number as contractNumber,
+            t4.freight_name as freightName,
+            my.ent_name as tradeEntName
+    from  gyl_order t1
+    inner join gyl_information t2 on t1.order_creator_id=t2.id
+    inner join gyl_contract t3  on t1.principal_order_id=t3.contract_id
+    inner join gyl_freight t4 on t1.freight_number_id=t4.freight_id
+    inner join gyl_information my on t1.order_creator_trade_id=my.id
+    where t1.order_number = #{orderNumber,jdbcType=VARCHAR}
   </select>
 
+-->
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from gyl_order

@@ -56,13 +56,13 @@
                         <tr>
                             <div class="row">
                                 <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-                                <td class="col-xs-9 text-left"><span>${order.orderCreator}</span></td>
+                                <td class="col-xs-9 text-left"><span>${procurementEntName}</span></td>
                             </div>
                         </tr>
                         <tr>
                             <div class="row">
                                 <td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
-                                <td class="col-xs-9 text-left"><span>合同编号：${contract.contractNumber}       合同名称：${contract.contractName}</span></td>
+                                <td class="col-xs-9 text-left"><span>合同编号：${order.contractNumber}       合同名称：${order.contractName}</span></td>
                             </div>
                         </tr>
                         <tr>
@@ -142,7 +142,6 @@
                 <div class="col-xs-8">
                     <h5>货运信息</h5>
                 </div>
-            </div>
             <!--合同编辑表格 start-->
             <div class="table-responsive text-center col-xs-12">
                 <table class="table table-bordered bj_table">
@@ -150,7 +149,7 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>发货人：</td>
-                            <td class="col-xs-9 text-left"><span>${order.orderCreatorTrade}</span></td>
+                            <td class="col-xs-9 text-left"><span>${order.orderCreatorId}</span></td>
                         </div>
                     </tr>
                     <tr>
@@ -203,7 +202,7 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-                            <td class="col-xs-9 text-left"><span>${order.orderCreator}</span></td>
+                            <td class="col-xs-9 text-left"><span>${order.orderCreatorId}</span></td>
                         </div>
                     </tr>
                     <tr>

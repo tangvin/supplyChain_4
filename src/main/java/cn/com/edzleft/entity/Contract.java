@@ -23,11 +23,11 @@ public class Contract implements Serializable{
     /**
      * 合同签约采购方
      */
-    private String contractBuyer;
+    private Integer contractBuyerId;
     /**
      * 合同签约贸易方
      */
-    private String contractTrader;
+    private Integer contractTraderId;
     /**
      * 合同开始时间
      */
@@ -126,20 +126,20 @@ public class Contract implements Serializable{
         this.contractName = contractName == null ? null : contractName.trim();
     }
 
-    public String getContractBuyer() {
-        return contractBuyer;
+    public Integer getContractBuyerId() {
+        return contractBuyerId;
     }
 
-    public void setContractBuyer(String contractBuyer) {
-        this.contractBuyer = contractBuyer == null ? null : contractBuyer.trim();
+    public void setContractBuyerId(Integer contractBuyerId) {
+        this.contractBuyerId = contractBuyerId == null ? null : contractBuyerId;
     }
 
-    public String getContractTrader() {
-        return contractTrader;
+    public Integer getContractTraderId() {
+        return contractBuyerId;
     }
 
-    public void setContractTrader(String contractTrader) {
-        this.contractTrader = contractTrader == null ? null : contractTrader.trim();
+    public void setContractTraderId(Integer contractTraderId) {
+        this.contractTraderId = contractTraderId == null ? null : contractTraderId;
     }
 
     public Date getCreatTime() {
@@ -290,9 +290,9 @@ public class Contract implements Serializable{
             return false;
         if (contractName != null ? !contractName.equals(contract.contractName) : contract.contractName != null)
             return false;
-        if (contractBuyer != null ? !contractBuyer.equals(contract.contractBuyer) : contract.contractBuyer != null)
+        if (contractBuyerId != null ? !contractBuyerId.equals(contract.contractBuyerId) : contract.contractBuyerId != null)
             return false;
-        if (contractTrader != null ? !contractTrader.equals(contract.contractTrader) : contract.contractTrader != null)
+        if (contractTraderId != null ? !contractTraderId.equals(contract.contractTraderId) : contract.contractTraderId != null)
             return false;
         if (creatTime != null ? !creatTime.equals(contract.creatTime) : contract.creatTime != null) return false;
         if (endTime != null ? !endTime.equals(contract.endTime) : contract.endTime != null) return false;
@@ -332,8 +332,8 @@ public class Contract implements Serializable{
         int result = contractId != null ? contractId.hashCode() : 0;
         result = 31 * result + (contractNumber != null ? contractNumber.hashCode() : 0);
         result = 31 * result + (contractName != null ? contractName.hashCode() : 0);
-        result = 31 * result + (contractBuyer != null ? contractBuyer.hashCode() : 0);
-        result = 31 * result + (contractTrader != null ? contractTrader.hashCode() : 0);
+        result = 31 * result + (contractBuyerId != null ? contractBuyerId.hashCode() : 0);
+        result = 31 * result + (contractTraderId != null ? contractTraderId.hashCode() : 0);
         result = 31 * result + (creatTime != null ? creatTime.hashCode() : 0);
         result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
         result = 31 * result + (signingAddress != null ? signingAddress.hashCode() : 0);
@@ -360,8 +360,8 @@ public class Contract implements Serializable{
                 "contractId=" + contractId +
                 ", contractNumber='" + contractNumber + '\'' +
                 ", contractName='" + contractName + '\'' +
-                ", contractBuyer='" + contractBuyer + '\'' +
-                ", contractTrader='" + contractTrader + '\'' +
+                ", contractBuyerId='" + contractBuyerId + '\'' +
+                ", contractTraderId='" + contractTraderId + '\'' +
                 ", creatTime=" + creatTime +
                 ", endTime=" + endTime +
                 ", signingAddress='" + signingAddress + '\'' +
