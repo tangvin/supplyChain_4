@@ -19,4 +19,15 @@ public interface CapSettingService {
 	 * @return
 	 */
 	public Integer update(Settings setting);
+	
+	/**
+	 * 查询是否存在
+	 * @param userId
+	 * @return
+	 */
+	public Integer getCount(Integer userId);
+	/**
+	 * 创建
+	 */
+	public Integer insert(Settings setting);
 }

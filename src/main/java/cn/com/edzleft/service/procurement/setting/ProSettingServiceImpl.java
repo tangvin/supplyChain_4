@@ -28,4 +28,14 @@ public class ProSettingServiceImpl implements ProSettingService {
 		return proSettingMapper.update(setting);
 	}
 
+	@Override
+	public Integer getCount(Integer userId) {
+		return proSettingMapper.getCount(userId);
+	}
+
+	@Override
+	public Integer insert(Settings setting) {
+		return proSettingMapper.insert(setting);
+	}
+
 }
