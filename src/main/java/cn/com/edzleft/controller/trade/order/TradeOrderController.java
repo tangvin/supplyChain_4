@@ -55,7 +55,7 @@ public class TradeOrderController {
         whereMaps.put("principalOrder",principalOrder);
         SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
         Account sessionAccount=sessionInfo.getAdmin();
-        Integer userId = sessionAccount.getUserId();
+        Integer userId = sessionAccount.getInformationId();
 
         whereMaps.put("userId",userId);
         DataGridJson dgj = new DataGridJson();

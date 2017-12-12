@@ -71,7 +71,7 @@ public class PmmainController {
 	 * 管理收货信息
 	 * @return
 	 */
-	@RequestMapping(value = "glshxx")
+	@RequestMapping(value = "glshxx",method = RequestMethod.POST)
 	public ModelAndView glshxx(HttpSession sessionInfo){
         ModelAndView modelAndView = new ModelAndView("/procurement/information/information");
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
@@ -112,25 +112,27 @@ public class PmmainController {
     
     @RequestMapping(value = "cupdateInformation",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> updateInformation(Information information,HttpSession sessionInfo){
+    public String updateInformation(Information information,HttpSession sessionInfo){
     	 SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
          //根据informationId判断当前用户是否资料为空
-    	 Integer informationId = session.getAdmin().getInformationId();
-    	Map<String,Object> map = new HashMap<>();
+    	Integer informationId = session.getAdmin().getInformationId();
+    	 Integer userId = session.getAdmin().getUserId();
     	if(informationId==null){
-    		int i = pmHomePageService.addInformation(information);
-    		map.put("data", "添加成功");
+    		int i = pmHomePageService.insertSelective(information,sessionInfo);
+    		information.setCreatorId(userId);
+    		if(i>0){
+    			Information infor = pmHomePageService.selectByCreatorId(userId);
+    			 //再次根据information表中的creatorId查询出information表中的主键
+                Integer inforId = infor.getId();
+                Account account = new Account();
+                account.setInformationId(inforId);
+                account.setUserId(userId);
+                int m = pmAccountservice.updatePassword(account);
+    		}
     	}else{
     		int i = pmHomePageService.updateInformation(information);
-        	if(i == 1){
-        		map.put("data", "修改成功");
-        		map.put("success", true);
-        	}else{
-        		map.put("data", "修改失败");
-        		map.put("success", true);
-        	}
     	}
-        return map; 
+    	return "1";
     }
 
     /**
@@ -151,10 +153,10 @@ public class PmmainController {
 		ModelAndView mv = new ModelAndView("/procurement/order/viewOrder");
 		Order order  = pmHomePageService.selectByPrimaryKey(value);
 		//获取运货单位
-		Integer logisticsUnitId = order.getLogisticsUnitId();
+		Integer freightNumberId = order.getFreightNumberId();
 		Integer addressId = order.getReceivingAddressId();
 		
-        Freight freight = pmfreightservice.queryFreightById(logisticsUnitId);
+        Freight freight = pmfreightservice.queryFreightById(freightNumberId);
         ReceivingAddress receivingAddress = pmreceivingAddressservice.queryReceivingAddress(addressId);
 		
         mv.addObject("order", order);
@@ -336,7 +338,6 @@ public class PmmainController {
          String userName = session.getAdmin().getUserName();
          Information information = pmHomePageService.homePageSelect(userId);
          Account account = accountService.queryAccountByName(userName);
-         
          mv.addObject("information",information);
          mv.addObject("account",account);
          return mv;

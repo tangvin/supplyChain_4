@@ -54,9 +54,7 @@
                                 </form>
                             </div>
                             <!--测试 开始-->
-                            <div class="panel-body" style="padding-bottom:0px;">
                                 <table id="tb_departments" class="cj_table"></table>
-                            </div>
                             <!--测试 结束-->
 
                             <!-- Modal -->
@@ -114,9 +112,7 @@
                             </div>
                             <!--用信编号 结束-->
                             <!--授信分页 开始-->
-                            <div class="panel-body" style="padding-bottom:0px;">
                                 <table id="letter" class="cj_table"></table>
-                            </div>
                             <!--用信分页 结束-->
 
                             <!-- Modal -->

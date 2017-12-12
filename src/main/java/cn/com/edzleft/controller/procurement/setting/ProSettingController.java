@@ -68,4 +68,28 @@ public class ProSettingController {
 		}
 		return jsonMap;
 	}
+	@RequestMapping(value="/insert", method =RequestMethod.POST )
+	@ResponseBody
+	public Map<String, Object> insert(HttpSession session) {
+		Map<String, Object> map = new HashMap<>();
+		// 获取session中userId
+		SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
+		Account sessionAccount = sessionInfo.getAdmin();
+		Integer userId = sessionAccount.getUserId();
+		Integer count=proSettingService.getCount(userId);
+		if (count == 0) {
+			Integer shortMessage=1;
+			Integer email=1;
+			Settings setting=new Settings();
+			setting.setShortMessage(shortMessage);
+			setting.setEmail(email);
+			setting.setUserId(userId);
+			proSettingService.insert(setting);
+			map.put("success", true);
+		}else {
+			map.put("success", false);
+		}
+		
+		return map;
+	}
 }

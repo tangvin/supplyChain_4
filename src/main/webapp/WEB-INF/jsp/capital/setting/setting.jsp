@@ -30,6 +30,18 @@
     </div>
 </div>
 <script>
+
+$(function(){
+	 $.ajax({
+		 url:'<%=request.getContextPath()%>/capSetting/insert.action',
+		 type:'post',
+		 success:function(data){
+			 if (data.success) {
+				 setTimeout("$('#load').load('<%=request.getContextPath()%>/captialMain/setting.action')",500);
+			}
+		 }
+	 });
+})
 	
 	$(function(){
 		$.ajax({

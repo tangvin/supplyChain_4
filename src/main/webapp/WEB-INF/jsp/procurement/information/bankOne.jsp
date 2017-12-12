@@ -38,22 +38,30 @@
         }
         #yhk_two{
             margin-top:30px;
-            width:120px;
+            /*width:120px;*/
         }
 
 
         .active{
             background: red;
         }
-        .tjyhk_one,.tjyhk_two,.tjyhk_three{
+        .tjyhk_one,.tjyhk_two,.tjyhk_three,.tjyhk_four{
             display: none;
         }
-
         .yhk_three{
             margin-top:40px;
             margin-bottom:30px;
         }
-
+        .tjyhk_four p{
+            margin:40px 0 40px 0;
+            font-size: 20px;
+        }
+        .tjyhk_four button{
+            margin-left: 10px;
+        }
+        #yhk_next_two_bu{
+            margin-top:30px;
+        }
     </style>
 </head>
 <body>
@@ -70,7 +78,7 @@
     <div class="col-xs-12 tjyhk_one">
         <form   id="bankformId"  class='form-inline yhk_form col-xs-10 col-xs-offset-1'>
             <div class="row">
-                <label class="col-xs-2 text-center">银行卡类型</label>
+                <label class="col-xs-2 text-right"><span class="xingxing">*</span>银行卡类型：</label>
                 <select class="selectpicker form-control" id="yhklx" name="bankAccountDepositBank">
                     <option value="0">中国邮政银行</option>
                     <option value="1">中国建设银行</option>
@@ -78,47 +86,52 @@
                 </select>
             </div>
             <div class="row">
-                <label class="col-xs-2 text-center">持卡人</label>
+                <label class="col-xs-2 text-right"><span class="xingxing">*</span>持卡人：</label>
                 <input type="text" id="ckr" name="bankAccountCreditHolder" class="form-control col-xs-6" placeholder="输入持卡人">
             </div>
             <div class="row">
-                <label class="col-xs-2 text-center">卡号</label>
+                <label class="col-xs-2 text-right"><span class="xingxing">*</span>卡号：</label>
                 <!--<input type="text" id="kh" class="form-control" placeholder="请输入卡号">-->
                 <input type="text" class="form-control" onkeyup="www_zzjs_net(this)" onkeydown="www_zzjs_net(this)" name="bankAccountNumber" id="account">
             </div>
         </form>
-        <a><button class="btn col-xs-offset-3" id="yhk_one">下一步</button></a>
+        <div class="col-xs-12">
+            <label class="col-xs-3 text-right"></label>
+            <button class="btn btn-danger" id="yhk_one">下一步</button>
+        </div>
     </div>
     <div class="col-xs-12 tjyhk_two">
         <form class='form-inline yhk_two_form col-xs-10 col-xs-offset-1'>
             <div class="row">
-                <label class="col-xs-2 text-center">卡类型：</label>
+                <label class="col-xs-2 text-right"><span class="xingxing">*</span>卡类型：</label>
                 <span class="col-xs-4" id="klx"></span>
             </div>
             <div class="row">
-                <label class="col-xs-2 text-center">手机号：</label>
+                <label class="col-xs-2 text-right"><span class="xingxing">*</span>手机号：</label>
                 <span class="col-xs-4" id="phone"></span>
-            </div>
-            <div class="row">
-                <label class="col-xs-2 text-center">同意<span style="color: blue;margin-left: 5px">服务协议</span></label>
-            </div>
-        </form>
-        <button class="btn col-xs-offset-2" id="yhk_two">下一步</button>
-    </div>
-    <div class="col-xs-12 tjyhk_three">
-        <div class="col-xs-3 col-xs-offset-2 yhk_three">
-            <p>本次操作需要短信确认，请输入<span id="sjyzh"></span>收到的短信校验码</p>
-        </div>
-        <form class='form-inline col-xs-9 col-xs-offset-1'>
-            <div class="row">
-                <span>验证码：</span>
-                <input type="text" id="checkCode" placeholder="输入验证码" class="form-control" name="checkCode"/>
-                <input id="btnSendCode" class="btn" type="button" value="获取验证码" onclick="sendMessage()" />
             </div>
         </form>
         <div class="col-xs-12">
-            <button style="margin-top: 40px;width: 120px;" class="btn col-xs-offset-2" id="yhk_next_two_bu">完成</button>
+            <label class="col-xs-3 text-right"></label>
+            <button class="btn btn-danger" id="yhk_two">下一步</button>
         </div>
+    </div>
+    <div class="tjyhk_three col-xs-offset-2">
+        <div class="yhk_three">
+            <p>本次操作需要短信确认，请输入<span id="sjyzh"></span>收到的短信校验码</p>
+        </div>
+        <form class='form-inline'>
+                <span>验证码：</span>
+                <input type="text" id="checkCode" placeholder="输入验证码" class="form-control" name="checkCode"/>
+                <input id="btnSendCode" class="btn" type="button" value="获取验证码" onclick="sendMessage()" />
+        </form>
+        <div>
+            <button class="btn btn-danger col-xs-offset-1" id="yhk_next_two_bu">下一步</button>
+        </div>
+    </div>
+    <div class="tjyhk_four col-xs-offset-2">
+        <p>添加成功</p>
+        <button class="btn btn-danger" id="last_btn">确定</button>
     </div>
 </div>
 </body>
@@ -161,25 +174,42 @@
         $('.tjyhk_three').css('display','block')
     })
 
+
     $('#yhk_next_two_bu').on('click',function () {
         if($('#checkCode').val()==''){
             alert('输入验证码')
         }else{
-            $(this).text('完成添加')
-            console.log($('#yhklx option:selected').text())
-            console.log($('#ckr').val())
-            console.log($('#account').val())
-            console.log($('#phone').text())
-            $.ajax({
-                url:'<%=request.getContextPath()%>/pmbankAccount/addBankAccount.action',
-                type:'post',
-                data:{bankAccountDepositBank:$('#yhklx option:selected').text(),bankAccountCreditHolder:$('#ckr').val(),bankAccountNumber:$('#account').val(),userPhone:$('#phone').text()},
-                success:function (data) {
-                	 setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/yhk.action')",500);
-                }
-            })
+            $('.tjyhk_one').css('display','none')
+            $('.tjyhk_two').css('display','none')
+            $('.tjyhk_three').css('display','none')
+            $('.tjyhk_four').css('display','block')
         }
     })
+
+    $('#last_btn').on('click',function () {
+        console.log($('#yhklx option:selected').text())
+        console.log($('#ckr').val())
+        console.log($('#account').val())
+        console.log($('#phone').text())
+        $.ajax({
+            url:'<%=request.getContextPath()%>/pmbankAccount/addBankAccount.action',
+            type:'post',
+            data:{bankAccountDepositBank:$('#yhklx option:selected').text(),bankAccountCreditHolder:$('#ckr').val(),bankAccountNumber:$('#account').val(),userPhone:$('#phone').text()},
+            success:function (data) {
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/yhk.action')",500);
+            }
+        })
+    })
+
+//    $('#yhk_next_two_bu').on('click',function () {
+//        if($('#checkCode').val()==''){
+//            alert('输入验证码')
+//        }else{
+//            $(this).text('完成添加')
+//
+//
+//        }
+//    })
 
 
 
@@ -256,7 +286,7 @@
         }
         //设置button效果，开始计时
         $("#btnSendCode").attr("disabled", "true");
-        $("#btnSendCode").val( + curCount + "秒");
+        $("#btnSendCode").val( + curCount + "秒后重新发送验证码");
         InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
         $.ajax({
             type: "POST", //用POST方式传输
@@ -279,7 +309,7 @@
         }
         else {
             curCount--;
-            $("#btnSendCode").val( curCount + "秒");
+            $("#btnSendCode").val( curCount + "秒后重新发送验证码");
         }
     }
 

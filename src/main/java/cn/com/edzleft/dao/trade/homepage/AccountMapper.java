@@ -1,7 +1,6 @@
 package cn.com.edzleft.dao.trade.homepage;
 
 import cn.com.edzleft.entity.Account;
-import org.springframework.stereotype.Repository;
 
 /**
  * Created by ibmtech on 2017/11/16.
@@ -45,5 +44,6 @@ public interface AccountMapper {
      * 根据id查询用户信息
      */
     public Account selectAccountById(Integer id);
-
+    //添加资料id
+    int updataAccount(Account account);
 }

@@ -148,11 +148,18 @@ public class Information {
     private Integer certificationStatus;
 
     /**
-     * 创建者
-     * @return
+     * 用户id
      */
     private Integer creatorId;
 
+
+    public Integer getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
+    }
 
     public Integer getCertificationStatus() {
         return certificationStatus;
@@ -432,13 +439,6 @@ public class Information {
 
     public void setOrganizationElectronicFile(String organizationElectronicFile) {
         this.organizationElectronicFile = organizationElectronicFile;
-    }
-    public Integer getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(Integer creatorId) {
-        this.creatorId = creatorId;
     }
 
     @Override

@@ -41,9 +41,7 @@
         	<button type="button" id="apply" class="btn btn-danger btn-default">申请颁发</button>
        		</div>
             <!--ukey表格 开始-->
-            <div class="panel-body" style="padding-bottom:0px;">
             	<table id="tb_ukey" class="cj_table"></table>
-            </div>
             <!--ukey表格 结束-->
             <!--分页 start-->
             

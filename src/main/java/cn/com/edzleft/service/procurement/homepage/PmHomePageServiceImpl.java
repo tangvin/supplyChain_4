@@ -45,34 +45,24 @@ public class PmHomePageServiceImpl implements PmHomePageService{
 	 * 判断用户资料为空，进行添加
 	 * 
 	 */
-	/*@Override
-	public int addInformation(Information information,HttpSession sessionInfo) {
-		int i =pmHomePageMapper.addInformation(information);
-		if(i>0){
-            //企业身份
-            Integer entIdentity = information.getEntIdentity();
-            //企业名字
-            String entName = information.getEntName();
-            //工商注册登记号registration_number
-            String registrationNumber = information.getRegistrationNumber();
-            //企业社会信用代码
-            String entCreditCode = information.getEntCreditCode();
-            //获取查询对象
-            Information in = pmHomePageMapper.selectByParam(entIdentity, entName, registrationNumber, entCreditCode);
-            //获取当前增加的信息id
-            Integer informationId = in.getId();
-            SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
-            Integer userId = session.getAdmin().getUserId();
-            Information infor = pmHomePageMapper.selectBaseInformation(userId);
-            Account account = accountMapper.selectAccountById(userId);
-            account.setInformationId(informationId);
-        }
-		return 0;
-	}*/
 	@Override
-	public int addInformation(Information information) {
-		int i =pmHomePageMapper.addInformation(information);
+	public int insertSelective(Information information,HttpSession sessionInfo) {
+		SessionInfo sessionInfo1 = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+		Integer userId = sessionInfo1.getAdmin().getUserId();
+		information.setCreatorId(userId);
+		int i =pmHomePageMapper.insertSelective(information);
+		  //判断添加成功后 继续将informatiionId存到数据库
 		return i;
+	}
+	
+	
+	/**
+	 * 新用户注册
+	 */
+	@Override
+	public Information selectByCreatorId(Integer userId) {
+		Information information = pmHomePageMapper.selectByCreatorId(userId);
+        return information;
 	}
 
 }

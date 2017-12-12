@@ -19,4 +19,8 @@ public interface ProSettingMapper {
 	 * @return
 	 */
 	public Integer update(Settings setting);
+	
+	public Integer getCount(Integer userId);
+	
+	public Integer insert(Settings setting);
 }

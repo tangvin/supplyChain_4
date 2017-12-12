@@ -294,7 +294,7 @@
 	/*确认新增订单*/
 	$("#confirm").click(function(){
 		var telephone=$("#ppp").val();
-		var orderCreatorTrade=$("#aaa").val();
+		var orderCreatorTradeId=$("#aaa").val();
 		var goods=$("#ccc").val();
 		var orderAmount=$("#ddd").val();
 		var applicationletter=$("#eee").val();
@@ -308,7 +308,7 @@
 			data:{
 				receiver:receiver,
 				telephone:telephone,
-				orderCreatorTrade:orderCreatorTrade,
+				orderCreatorTradeId:orderCreatorTradeId,
 				goods:goods,
 				orderAmount:orderAmount,
 				applicationletter:applicationletter,
