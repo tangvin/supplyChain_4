@@ -49,9 +49,7 @@
             </div>
             <!--合同签约 状态-->
             <!--合同分页 start-->
-            <div class="panel-body" style="padding-bottom:0px;">
                 <table id="financingTable" class="cj_table"></table>
-            </div>
             <!--合同分页 eng-->
         </div>
     </div>

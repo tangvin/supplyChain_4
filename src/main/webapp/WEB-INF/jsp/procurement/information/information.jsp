@@ -53,13 +53,13 @@
                                                 <td style="width: 20%;" class="text-right">企业身份：</td>
                                                 <td class="text-left">
                                                     <%--0采购方、1贸易方、2资方--%>
-                                                <c:if test="${information.entIdentity == 0}">采购方
+                                                <c:if test="${account.accountType == 0}">采购方
                                                  
                                                 </c:if>
-                                                <c:if test="${information.entIdentity == 1}">贸易方
+                                                <c:if test="${account.accountType == 1}">贸易方
                                                     
                                                 </c:if>
-                                                <c:if test="${information.entIdentity == 2}">资方
+                                                <c:if test="${account.accountType == 2}">资方
                                                     
                                                 </c:if>
                                                 </td>
@@ -76,19 +76,19 @@
                                                     </c:if>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr class="three_no_certificates">
                                                 <td class="text-right">社会统一信用代码：</td>
                                                 <td class="text-left">${information.entCreditCode}</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="three_certificates">
                                                 <td  class="text-right">工商登记注册号：</td>
                                                 <td  class="text-left">${information.registrationNumber}</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="three_certificates">
                                                 <td class="text-right">税务登记号：</td>
                                                 <td class="text-left">${information.taxRegistrationNumber}</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="three_certificates">
                                                 <td class="text-right">组织机构代码：</td>
                                                 <td class="text-left">${information.institutionCode}</td>
                                             </tr>
@@ -183,19 +183,19 @@
                                                 <td class="text-right">登记机关：</td>
                                                 <td class="text-left">${information.registrationAuthority}</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="three_no_certificates">
                                                 <td class="text-right">社会统一信用代码电子档：</td>
                                                 <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                                             </tr>
-                                            <tr>
+                                            <tr class="three_certificates">
                                                 <td class="text-right">工商登记注册电子档：</td>
                                                 <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                                             </tr>
-                                            <tr>
+                                            <tr class="three_certificates">
                                                 <td class="text-right">税务登记号电子档：</td>
                                                 <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                                             </tr>
-                                            <tr>
+                                            <tr class="three_certificates">
                                                 <td class="text-right">组织机构代码电子档：</td>
                                                 <td class="text-left"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                                             </tr>
@@ -283,9 +283,7 @@
                                     <button type="button" class="btn  btn-default" onclick="reset()">重置</button>
                                 </form>
                             </div>
-                            <div class="panel-body" style="padding-bottom:0px;">
                                 <table id="tb_departments" class="cj_table"></table>
-                            </div>
                         </div>
                         <!--三方账户 结束   -->
                         <!--运货单位 结束-->
@@ -386,6 +384,15 @@
         e.preventDefault();
         $(this).tab('show');
     })
+
+    var entDocumentType= '${information.entDocumentType}'
+    if(entDocumentType==0){
+        $('.three_no_certificates').show();
+        $('.three_certificates').hide();
+    }else{
+        $('.three_no_certificates').hide();
+        $('.three_certificates').show();
+    }
 
     $(function (){
         initComplexArea('seachprov', 'seachcity', 'seachdistrict', area_array, sub_array, '44', '0', '0');
@@ -588,7 +595,7 @@
 	         type:"post",
 	         dataType:"json",
 	         success: function(data){
-	             console.log(data.data)
+	             /* console.log(data.data) */
 	             var data=data.data
 	             var wyb=document.getElementById('wyb')
 	             function setDiv(item){
@@ -637,7 +644,7 @@
         type:"post",
         dataType:"json",
         success: function(data){
-            console.log(data)
+          /*   console.log(data) */
             var yhBank=document.getElementById('yh_bank');
             console.log(yhBank)
             function setDiv(item){
@@ -668,7 +675,7 @@
             window.onload = getnoApplicationDatayh_bank()
       
             var input1=$('.yh_bank_moren input[type=radio]')
-            console.log(input1.length)
+           /*  console.log(input1.length) */
             for(var i=0;i<input1.length;i++){ 
                 if(data[i].defaultId=='1'){
                 	console.log(data[i])

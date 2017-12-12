@@ -35,6 +35,7 @@
     ON
         t1.freight_id=t2.freight_number_id
     WHERE t2.freight_number_id=#{freightNumberId}
+    ORDER BY t1.freight_id DESC
   </select>
 
   <!--查询所有的货运管理地址-->

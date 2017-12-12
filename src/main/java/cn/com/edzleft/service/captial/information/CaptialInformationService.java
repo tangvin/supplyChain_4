@@ -10,4 +10,6 @@ public interface CaptialInformationService {
     int updateInformation(Information information);
 
     int insertInformation(Information information);
+
+    Information selectInformation(Integer userId);
 }

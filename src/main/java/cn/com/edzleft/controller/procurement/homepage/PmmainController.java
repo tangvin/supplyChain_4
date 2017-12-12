@@ -1,6 +1,7 @@
 package cn.com.edzleft.controller.procurement.homepage;
 
 import cn.com.edzleft.entity.*;
+import cn.com.edzleft.service.procurement.account.Pmaccountservice;
 import cn.com.edzleft.service.procurement.freight.PmFreightService;
 import cn.com.edzleft.service.procurement.homepage.PmHomePageService;
 import cn.com.edzleft.service.procurement.receivingaddress.PmReceivingAddressService;
@@ -28,15 +29,16 @@ public class PmmainController {
 	private PmHomePageService pmHomePageService;
 	
 	@Autowired
-    private AccountService accountService;
-
+	private Pmaccountservice pmAccountservice;
+	
 	@Autowired
 	private PmFreightService pmfreightservice;
 	
 	@Autowired
 	private PmReceivingAddressService pmreceivingAddressservice;
 	
-	
+	 @Autowired
+	    private AccountService accountService;
 	/**
 	 * 添加银行卡第三步
 	 * @return
@@ -99,6 +101,8 @@ public class PmmainController {
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer userId = session.getAdmin().getUserId();
         Information information = pmHomePageService.homePageSelect(userId);
+        Account account = pmAccountservice.accountSelect(userId);
+        mv.addObject("account",account);
         mv.addObject("information",information);
         return mv;
     }
@@ -108,15 +112,23 @@ public class PmmainController {
     
     @RequestMapping(value = "cupdateInformation",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> updateInformation(Information information){
+    public Map<String,Object> updateInformation(Information information,HttpSession sessionInfo){
+    	 SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+         //根据informationId判断当前用户是否资料为空
+    	 Integer informationId = session.getAdmin().getInformationId();
     	Map<String,Object> map = new HashMap<>();
-    	int i = pmHomePageService.updateInformation(information);
-    	if(i == 1){
-    		map.put("data", "修改成功");
-    		map.put("success", true);
+    	if(informationId==null){
+    		int i = pmHomePageService.addInformation(information);
+    		map.put("data", "添加成功");
     	}else{
-    		map.put("data", "修改失败");
-    		map.put("success", true);
+    		int i = pmHomePageService.updateInformation(information);
+        	if(i == 1){
+        		map.put("data", "修改成功");
+        		map.put("success", true);
+        	}else{
+        		map.put("data", "修改失败");
+        		map.put("success", true);
+        	}
     	}
         return map; 
     }
@@ -176,6 +188,8 @@ public class PmmainController {
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer userId = session.getAdmin().getUserId();
         Information information = pmHomePageService.homePageSelect(userId);
+        Account account = pmAccountservice.accountSelect(userId);
+        mv.addObject("account",account);
         mv.addObject("information",information);
         mv.addObject("messages", "home");
         return mv;
@@ -322,6 +336,7 @@ public class PmmainController {
          String userName = session.getAdmin().getUserName();
          Information information = pmHomePageService.homePageSelect(userId);
          Account account = accountService.queryAccountByName(userName);
+         
          mv.addObject("information",information);
          mv.addObject("account",account);
          return mv;
@@ -337,6 +352,8 @@ public class PmmainController {
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer userId = session.getAdmin().getUserId();
         Information information = pmHomePageService.homePageSelect(userId);
+        Account account = pmAccountservice.accountSelect(userId);
+        mv.addObject("account",account);
         mv.addObject("information",information);
         mv.addObject("messages","recieverAddress");
         return mv;

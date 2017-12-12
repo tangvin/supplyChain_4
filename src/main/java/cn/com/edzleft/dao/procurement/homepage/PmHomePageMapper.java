@@ -8,6 +8,8 @@ public interface PmHomePageMapper {
 
 	int updateInformation(Information information);
 
+	int addInformation(Information information);
+
 	
 
 }

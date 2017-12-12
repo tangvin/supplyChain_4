@@ -123,28 +123,18 @@ public class TradeInformationServiceImpl implements TradeInformationService {
      */
     @Override
     public int addInformation(Information information, HttpSession sessionInfo) {
+        SessionInfo sessionInfo1 = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = sessionInfo1.getAdmin().getUserId();
+        information.setCreatorId(userId);
         int i = informationMapper.insertInformation(information);
         //判断添加成功后 继续将informatiionId存到数据库
-        if(i>0){
-            //企业身份
-            Integer entIdentity = information.getEntIdentity();
-            //企业名字
-            String entName = information.getEntName();
-            //工商注册登记号registration_number
-            String registrationNumber = information.getRegistrationNumber();
-            //企业社会信用代码
-            String entCreditCode = information.getEntCreditCode();
-            //获取查询对象
-            Information in = informationMapper.selectByParam(entIdentity, entName, registrationNumber, entCreditCode);
-            //获取当前增加的信息id
-            Integer informationId = in.getId();
-            SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
-            Integer userId = session.getAdmin().getUserId();
-            Information infor = informationMapper.selectBaseInformation(userId);
-            Account account = accountMapper.selectAccountById(userId);
-            account.setInformationId(informationId);
-        }
-        return i;
+            return i;
+    }
+
+    @Override
+    public Information selectByCreatorId(Integer id) {
+        Information information = informationMapper.selectByCreatorId(id);
+        return information;
     }
 
 }

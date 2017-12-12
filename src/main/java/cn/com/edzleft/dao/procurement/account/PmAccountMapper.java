@@ -11,5 +11,7 @@ public interface PmAccountMapper {
 
 	Integer updateByPrimaryKeySelective(Account acc);
 
+	Account accountSelect(Integer userId);
+
 
 }

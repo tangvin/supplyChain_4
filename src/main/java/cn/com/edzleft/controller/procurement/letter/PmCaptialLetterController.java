@@ -2,6 +2,7 @@ package cn.com.edzleft.controller.procurement.letter;
 
 import cn.com.edzleft.entity.CreditTable;
 import cn.com.edzleft.entity.Letter;
+import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.procurement.letter.PmLetterService;
 import cn.com.edzleft.util.page.DataGridJson;
 import cn.com.edzleft.util.page.PageUtil;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
 @RequestMapping("/Pmletter")
 @Controller
 public class PmCaptialLetterController {
@@ -28,13 +31,16 @@ public class PmCaptialLetterController {
      */
 	 @RequestMapping(value = "/pmUseLetter")
 	 @ResponseBody
-    public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String letterNumber,String belongCredit,String letterStatus,String applicant){
-        PageUtil<Letter> userPage = new PageUtil<>();
+    public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String letterNumber,String belongCredit,String letterStatus,String applicant,HttpSession sessionInfo){
+	    SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+	    Integer userId = session.getAdmin().getUserId();
+		PageUtil<Letter> userPage = new PageUtil<>();
         HashMap<String,Object> whereMaps =new HashMap<>();
         whereMaps.put("letterNumber",letterNumber);
         whereMaps.put("belongCredit",belongCredit);
         whereMaps.put("letterStatus",letterStatus);
         whereMaps.put("applicant",applicant);
+        whereMaps.put("userId",userId);
         DataGridJson dgj = new DataGridJson();
         userPage.setCpage(pageNumber);
         userPage.setPageSize(pageSize);

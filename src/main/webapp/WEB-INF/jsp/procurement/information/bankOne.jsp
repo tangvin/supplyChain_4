@@ -48,10 +48,16 @@
         .tjyhk_one,.tjyhk_two,.tjyhk_three,.tjyhk_four{
             display: none;
         }
-
         .yhk_three{
             margin-top:40px;
             margin-bottom:30px;
+        }
+        .tjyhk_four p{
+            margin:40px 0 40px 0;
+            font-size: 20px;
+        }
+        .tjyhk_four button{
+            margin-left: 10px;
         }
 
     </style>
@@ -60,7 +66,7 @@
 <div class='col-xs-12'>
     <div class='row row_zhxx'>
         <div class="col-xs-12 zlxx_top">
-            <a href="<%=request.getContextPath()%>/tradeMain/tradeMain.action">系统首页</a>
+            <a href="<%=request.getContextPath()%>/procurementMain/procurementMain.action">系统首页</a>
             <span>></span>
             <a id="zlwh2" href="#">资料维护</a>
             <span>></span>
@@ -87,7 +93,7 @@
                 <input type="text" class="form-control" onkeyup="www_zzjs_net(this)" onkeydown="www_zzjs_net(this)" name="bankAccountNumber" id="account">
             </div>
         </form>
-        <a><button class="btn col-xs-offset-3" id="yhk_one">下一步</button></a>
+        <a><button class="btn col-xs-offset-3 btn-danger" id="yhk_one">下一步</button></a>
     </div>
     <div class="col-xs-12 tjyhk_two">
         <form class='form-inline yhk_two_form col-xs-10 col-xs-offset-1'>
@@ -99,37 +105,34 @@
                 <label class="col-xs-2 text-center">手机号：</label>
                 <span class="col-xs-4" id="phone"></span>
             </div>
-            <div class="row">
-                <label class="col-xs-2 text-center">同意<span style="color: blue;margin-left: 5px">服务协议</span></label>
-            </div>
         </form>
-        <button class="btn col-xs-offset-2" id="yhk_two">下一步</button>
+        <button class="btn btn-danger col-xs-offset-2" id="yhk_two">下一步</button>
     </div>
-    <div class="col-xs-12 tjyhk_three">
-        <div class="col-xs-3 col-xs-offset-2 yhk_three">
+    <div class="tjyhk_three">
+        <div class="yhk_three col-xs-offset-1">
             <p>本次操作需要短信确认，请输入<span id="sjyzh"></span>收到的短信校验码</p>
         </div>
-        <form class='form-inline col-xs-9 col-xs-offset-1'>
+        <form class='form-inline  col-xs-offset-1'>
             <div class="row">
                 <span>验证码：</span>
                 <input type="text" id="checkCode" placeholder="输入验证码" class="form-control" name="checkCode"/>
-                <input style="width: 50px;" id="btnSendCode" class="btn" type="button" value="获取验证码" onclick="sendMessage()" />
+                <input id="btnSendCode" class="btn" type="button" value="获取验证码" onclick="sendMessage()" />
             </div>
         </form>
-        <div class="col-xs-12">
-            <button style="margin-top: 40px;width: 120px;" class="btn col-xs-offset-2" id="yhk_next_two_bu">完成</button>
+        <div class="col-xs-offset-2" style="margin-top: 30px;">
+            <button  class="btn btn-danger" id="yhk_next_two_bu">下一步</button>
         </div>
     </div>
-    <div class="col-xs-12 tjyhk_four">
+    <div class="tjyhk_four col-xs-offset-2">
         <p>添加成功</p>
-        <button class="btn" id="last_btn">确定</button>
+        <button class="btn btn-danger" id="last_btn">确定</button>
     </div>
 </div>
 </body>
 <script>
 
     $('#zlwh2').click(function(){
-        $('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')
+        $('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')
     })
     $('#yhk_one').click(function(){
         if($.trim($('#ckr').val())==''){
@@ -144,6 +147,9 @@
             data:$("#bankformId").serialize(),
             success:function (data) {
 
+                if(data.bankAccountDepositBank==1){
+                    $('#klx').text('中国建设银行')
+                }
                 $('#phone').text(data.userPhone)
                 $('#sjyzh').text(data.userPhone)
 
@@ -156,10 +162,12 @@
 
 
     $('#yhk_two').click(function(){
+
         $('.tjyhk_one').css('display','none')
         $('.tjyhk_two').css('display','none')
         $('.tjyhk_three').css('display','block')
     })
+
 
     $('#yhk_next_two_bu').on('click',function () {
         if($('#checkCode').val()==''){
@@ -178,17 +186,25 @@
         console.log($('#account').val())
         console.log($('#phone').text())
         $.ajax({
-            url:'<%=request.getContextPath()%>/bankAccount/addBankAccount.action',
+            url:'<%=request.getContextPath()%>/pmbankAccount/addBankAccount.action',
             type:'post',
             data:{bankAccountDepositBank:$('#yhklx option:selected').text(),bankAccountCreditHolder:$('#ckr').val(),bankAccountNumber:$('#account').val(),userPhone:$('#phone').text()},
             success:function (data) {
-                setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/yhzh.action')",500);
-
+                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/yhk.action')",500);
             }
         })
     })
 
-    /*$(this).text('完成添加')*/
+//    $('#yhk_next_two_bu').on('click',function () {
+//        if($('#checkCode').val()==''){
+//            alert('输入验证码')
+//        }else{
+//            $(this).text('完成添加')
+//
+//
+//        }
+//    })
+
 
 
 
@@ -264,7 +280,7 @@
         }
         //设置button效果，开始计时
         $("#btnSendCode").attr("disabled", "true");
-        $("#btnSendCode").val( + curCount + "秒");
+        $("#btnSendCode").val( + curCount + "秒后重新发送验证码");
         InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
         $.ajax({
             type: "POST", //用POST方式传输
@@ -287,7 +303,7 @@
         }
         else {
             curCount--;
-            $("#btnSendCode").val( curCount + "秒");
+            $("#btnSendCode").val( curCount + "秒后重新发送验证码");
         }
     }
 

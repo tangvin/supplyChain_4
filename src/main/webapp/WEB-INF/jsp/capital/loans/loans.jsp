@@ -45,9 +45,7 @@
                     </form>
                 </div>
                 <!--测试 开始-->
-                <div class="panel-body" style="padding-bottom:0px;">
                     <table id="loansTable" class="cj_table"></table>
-                </div>
                 <!--测试 结束-->
             </div>
         </div>

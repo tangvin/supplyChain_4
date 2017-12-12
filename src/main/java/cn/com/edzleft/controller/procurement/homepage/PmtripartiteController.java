@@ -41,8 +41,6 @@ public class PmtripartiteController {
         whereMaps.put("caEntName",caEntName);
         whereMaps.put("trEntName",trEntName);
         whereMaps.put("userId",userId);
-       System.out.println("=========="+caEntName);
-       System.out.println("=========="+trEntName);
        
         userPage.setCpage(pageNumber);
         userPage.setPageSize(pageSize);

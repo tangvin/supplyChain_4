@@ -49,9 +49,7 @@
                 </form>
             </div>
 
-            <div class="panel-body" style="padding-bottom:0px;">
                 <table id="tb_departments" class="cj_table"></table>
-            </div>
 
             <!--领取订单 模态框-->
             <div class="modal fade bs-example-modal-sm lqdd_fh" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">

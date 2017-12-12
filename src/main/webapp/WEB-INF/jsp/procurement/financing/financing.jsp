@@ -44,9 +44,7 @@
                     <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
                 </form>
             </div>
-            <div class="panel-body" style="padding-bottom:0px;">
             <table id="tb_departments" class="cj_table"></table>
-            </div>
             <!--合同分页 start-->
         </div>
     </div>

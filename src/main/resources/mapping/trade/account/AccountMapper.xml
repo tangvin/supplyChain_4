@@ -32,7 +32,9 @@
   </select>
   <!-- 创建账号 -->
   <insert id="insert" parameterType="cn.com.edzleft.entity.Account">
-  	INSERT INTO gyl_account (account_type, user_linkman,user_phone,user_name,user_pwd,create_time,create_ip,account_state) VALUES (#{accountType},#{userLinkman},#{userPhone},#{userName},#{userPwd},#{createTime},#{createIp},#{0} )
+  	INSERT INTO gyl_account (account_type, user_linkman,user_phone,user_name,user_pwd,create_time,create_ip,account_state,certificate_state) 
+  	VALUES 
+  	(#{accountType},#{userLinkman},#{userPhone},#{userName},#{userPwd},#{createTime},#{createIp},#{accountState},#{certificateState} )
   </insert>
 	
   <!--根据名字查询账号信息-->
@@ -153,6 +155,56 @@
 
   <!--修改账信息-->
   <update id="updateMessage" parameterType="cn.com.edzleft.entity.Account" >
+    update gyl_account
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null" >
+        login_time = #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null" >
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userEamil != null" >
+        user_eamil = #{userEamil,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        account_type = #{accountType,jdbcType=INTEGER},
+      </if>
+      <if test="accountState != null" >
+        account_state = #{accountState,jdbcType=INTEGER},
+      </if>
+      <if test="certificateState != null" >
+        certificate_state = #{certificateState,jdbcType=INTEGER},
+      </if>
+      <if test="certificateType != null" >
+        certificate_type = #{certificateType,jdbcType=INTEGER},
+      </if>
+      <if test="inviteAccount != null" >
+        invite_account = #{inviteAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="informationId != null" >
+        information_id = #{informationId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <!--修改账信息-->
+  <update id="updataAccount" parameterType="cn.com.edzleft.entity.Account" >
     update gyl_account
     <set >
       <if test="userName != null" >

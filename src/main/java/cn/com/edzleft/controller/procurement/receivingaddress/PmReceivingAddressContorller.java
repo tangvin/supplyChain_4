@@ -23,7 +23,6 @@ public class PmReceivingAddressContorller {
 	@ResponseBody
 	@RequestMapping(value="getaddress")
 	public boolean getAddress(ReceivingAddress ra,HttpSession sessionInfo){
-		
 		int i = pmreceivingAddressservice.insert(ra,sessionInfo);
 		return i>0?true:false;
 	}

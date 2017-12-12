@@ -31,7 +31,7 @@
             <div class="input-group col-xs-12 login-input clearfix">
                 <input id="code" type="text" name="imageCode" class="form-control yzm_con" placeholder="验证码">
                 <div class='yzm_img'>
-                    <img alt="验证码" src="<%=request.getContextPath()%>/imageCode" title="点击更换" id="imgcoode" onclick="getImageCode(this)" style="height:40px;width:128px;"/>
+                    <img alt="验证码" src="<%=request.getContextPath()%>/imageCode" title="点击更换" id="imgcoode"  style="height:40px;width:128px;"/>
                 </div>
             </div>
             <!-- 登录 -->
@@ -47,28 +47,38 @@
     <p class='text-center copy'><a target="_blank" href="http://www.miitbeian.gov.cn/">京ICP备17069390号-1</a></p>
 </div>
 <script>
+
 $(function(){
+
+
         var countdown=10;
         //随机生成验证码图片
-        function getImageCode(val){
-            if (countdown == 0) {
-                var thisDate =  new Date();
-                //区分当前请求和上一次请求
-                document.getElementById("imgcoode").src="<%=request.getContextPath()%>/imageCode?sjNum="+thisDate.getTime();
 
-                $(val).attr("disabled",false);
-                $(val).val("免费获取验证码");
-                countdown = 10;
-            } else {
-                $(val).attr("disabled", true);
-                $(val).val('重新发送('+countdown+')');
-                countdown--;
-                setTimeout(function() {
-                    getImageCode(val)
-                },1)
-            }
-        }
-})
+
+        <%--function getImageCode(val){--%>
+            <%--if (countdown == 0) {--%>
+                <%--var thisDate =  new Date();--%>
+                <%--//区分当前请求和上一次请求--%>
+                <%--document.getElementById("imgcoode").src="<%=request.getContextPath()%>/imageCode?sjNum="+thisDate.getTime();--%>
+                <%--$(val).attr("disabled",false);--%>
+                <%--$(val).val("免费获取验证码");--%>
+                <%--countdown = 10;--%>
+            <%--} else {--%>
+                <%--$(val).attr("disabled", true);--%>
+                <%--$(val).val('重新发送('+countdown+')');--%>
+                <%--countdown--;--%>
+                <%--setTimeout(function() {--%>
+                    <%--getImageCode(val)--%>
+                <%--},1)--%>
+            <%--}--%>
+        <%--}--%>
+
+        $(document).on('click','#imgcoode',function () {
+            var src_ = $(this).attr('src');
+            $(this).attr('src',src_+'?='+Math.random());
+        })
+});
+
         function login(){
             var a=$("#name").val();
             var b=$("#pwd").val();

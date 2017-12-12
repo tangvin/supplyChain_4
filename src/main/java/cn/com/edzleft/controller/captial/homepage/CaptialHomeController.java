@@ -126,14 +126,14 @@ public class CaptialHomeController {
                     session.setAttribute("SendDate",smsSendDetailDTO.getSendDate());
                     System.out.println("SendStatus=" + smsSendDetailDTO.getSendStatus());
                     System.out.println("Template=" + smsSendDetailDTO.getTemplateCode());
-                    code.setCode(img);
-                    //code.setUserId(sessionAccount.getUserId());
-                    code.setCreatTime(new Date());
-                    code.setUserPhone(userPhone);
-                    codeService.insertCode(code);
                 }
                 System.out.println("TotalCount=" + querySendDetailsResponse.getTotalCount());
                 System.out.println("RequestId=" + querySendDetailsResponse.getRequestId());
+                code.setCode(img);
+                //code.setUserId(sessionAccount.getUserId());
+                code.setCreatTime(new Date());
+                code.setUserPhone(userPhone);
+                codeService.insertCode(code);
             }
         } catch (ClientException e) {
             e.printStackTrace();

@@ -3,13 +3,17 @@
  * version: 1.11.1
  * https://github.com/wenzhixin/bootstrap-table/
  */
-
+.bootstrap-table{
+  margin-left: -15px!important;
+    margin-right: -15px;
+}
 .bootstrap-table .table {
     margin-bottom: 0 !important;
     border-bottom: 1px solid #dddddd;
     border-collapse: collapse !important;
     border-radius: 1px;
     margin-top:15px;
+
 }
 
 .bootstrap-table .table:not(.table-condensed),
@@ -294,6 +298,7 @@ div.fixed-table-scroll-outer {
 .cj_table{
     border:1px solid #ddd;
     margin-top:40px;
+    width:100%;
 }
 .cj_table  tbody tr td{
     vertical-align: middle;

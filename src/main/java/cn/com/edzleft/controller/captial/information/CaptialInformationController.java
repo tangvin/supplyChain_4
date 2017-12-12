@@ -2,7 +2,9 @@ package cn.com.edzleft.controller.captial.information;
 
 import cn.com.edzleft.entity.Account;
 import cn.com.edzleft.entity.Information;
+import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.captial.information.CaptialInformationService;
+import cn.com.edzleft.service.trade.account.AccountService;
 import cn.com.edzleft.util.UploadFileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by ASUS on 2017/11/29.
@@ -24,17 +30,39 @@ public class CaptialInformationController {
 
     @Autowired
     private CaptialInformationService captialInformationService;
+    @Autowired
+    private AccountService accountService;
 
 
     @RequestMapping(value = "updateInformation",method = RequestMethod.POST)
     @ResponseBody
-    public String updateInformation(Information information, Account account){
-        if(account.getInformationId() == null){
+    public Map<String,Object> updateInformation(Information information, HttpSession session){
+    	Map<String,Object> map = new HashMap<>();
+        SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
+        Integer userId = sessionInfo.getAdmin().getUserId();
+        Integer informationId =  (Integer) session.getAttribute("informationId");
+        if(informationId == null){
+            information.setCreatorId(userId);
+            information.setCertificationStatus(0);
             int i = captialInformationService.insertInformation(information);
+            if(i>0){
+                Information informationUserId =  captialInformationService.selectInformation(userId);
+                Integer creatorId = informationUserId.getId();
+                Account account = new Account();
+                account.setUserId(userId);
+                account.setInformationId(creatorId);
+                int t =  accountService.updataAccount(account);
+                session.setAttribute("informationId", creatorId);
+            }
+            map.put("msg", "添加成功");
+            map.put("success", true);
+            return map;
         }else{
             int i = captialInformationService.updateInformation(information);
+            map.put("msg", "修改成功");
+            map.put("success", true);
+            return map;
         }
-        return "1";
     }
 
     @RequestMapping(value = "upLoInsert",method = RequestMethod.POST)
