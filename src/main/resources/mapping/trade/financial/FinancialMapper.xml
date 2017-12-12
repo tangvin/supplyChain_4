@@ -46,9 +46,6 @@
     <include refid="Base_Column_List" />
     from gyl_financial
     <include refid="where_sql"/>
-
-        bill_time
-
     ORDER BY bill_time  DESC
     <![CDATA[	limit #{start},#{pageSize}]]>
   </select>

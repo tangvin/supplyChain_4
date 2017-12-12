@@ -356,7 +356,7 @@
     function showUserAttache(w,e){
         $("#ddbh").click(function () {
             $.ajax({
-                url:'<%=request.getContextPath()%>/tradeOrder/lqdd.action?id='+w+'&&flag='+e,
+                url:'<%=request.getContextPath()%>/tradeOrder/bohui.action?id='+w+'&&flag='+e,
                 type:'post',
                 dataType:"json",
                 // data:$("#f").serialize(),
@@ -367,7 +367,8 @@
 
         })
     }
-   //待确认按钮
+
+   //领取订单按钮
     function showUserAttach(w,e){
         $("#lqdd").click(function () {
 

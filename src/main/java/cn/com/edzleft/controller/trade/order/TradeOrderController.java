@@ -1,8 +1,6 @@
 package cn.com.edzleft.controller.trade.order;
 
-import cn.com.edzleft.entity.Freight;
-import cn.com.edzleft.entity.Order;
-import cn.com.edzleft.entity.ReceivingAddress;
+import cn.com.edzleft.entity.*;
 import cn.com.edzleft.service.trade.freight.FreightService;
 import cn.com.edzleft.service.trade.order.TradeOrderService;
 import cn.com.edzleft.service.trade.receivingAddress.ReceivingAddressService;
@@ -13,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
@@ -46,18 +45,24 @@ public class TradeOrderController {
      */
     @RequestMapping(value = "/orderSelect" ,method = RequestMethod.POST)
     @ResponseBody
-    public DataGridJson queryByPage(Integer pageNumber,Integer pageSize ,String orderStatus,String orderCreatTime,String orderCreator,String principalOrder){
+    public DataGridJson queryByPage(Integer pageNumber, Integer pageSize , String orderStatus, String orderCreatTime, String orderCreator, String principalOrder, HttpSession session){
         PageUtil<Order> pageUtil = new PageUtil<Order>();
         HashMap<String,Object> whereMaps =new HashMap<>();
+
         whereMaps.put("orderStatus",orderStatus);
         whereMaps.put("orderCreatTime",orderCreatTime);
         whereMaps.put("orderCreator",orderCreator);
         whereMaps.put("principalOrder",principalOrder);
+        SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
+        Account sessionAccount=sessionInfo.getAdmin();
+        Integer userId = sessionAccount.getUserId();
 
+        whereMaps.put("userId",userId);
         DataGridJson dgj = new DataGridJson();
         pageUtil.setCpage(pageNumber);
         pageUtil.setPageSize(pageSize);
         pageUtil.setWhereMap(whereMaps);
+
         pageUtil=tradeOrderService.queryAllOrder(pageUtil);
         dgj.setTotal(pageUtil.getTotalCount());
         dgj.setRows(pageUtil.getList());
@@ -76,9 +81,9 @@ public class TradeOrderController {
         Order order = tradeOrderService.queryOrderByNumber(orderNumber);
 
         //根据订单中货运单号获取货运id
-        Integer logisticsUnitId = order.getLogisticsUnitId();
+        Integer freightNumberId = order.getFreightNumberId();
         //根据id获取货运单位信息
-        Freight freight = freightService.queryFreightById(logisticsUnitId);
+        Freight freight = freightService.queryFreightById(freightNumberId);
 
         //根据订单中的收货地址获取收货地址id
         Integer addressId = order.getReceivingAddressId();
@@ -103,10 +108,8 @@ public class TradeOrderController {
      */
     @RequestMapping(value = "/lqdd",method = RequestMethod.POST)
     @ResponseBody
-    public Order lqdd(Integer id,Integer flag){
-        System.out.println("~~~~~~~~~~~");
-        Order order = tradeOrderService.setOrderStatus(id,flag);
-        System.out.println(order);
+    public Order lqdd(Integer id,Integer flag, HttpSession session){
+        Order order = tradeOrderService.setOrderStatus(id,flag,session);
         return order;
     }
 
@@ -117,10 +120,8 @@ public class TradeOrderController {
      */
     @RequestMapping(value = "/bohui",method = RequestMethod.POST)
     @ResponseBody
-    public Order rejectReason(Integer id,Integer flag){
-        System.out.println("~~~~~~~~~~~");
-        Order order = tradeOrderService.setOrderStatus(id,flag);
-        System.out.println(order);
+    public Order rejectReason(Integer id,Integer flag,HttpSession session){
+        Order order = tradeOrderService.setOrderStatus(id,flag, session);
         return order;
     }
 
@@ -132,7 +133,7 @@ public class TradeOrderController {
      */
     @RequestMapping(value = "/pzfh",method = RequestMethod.POST)
     @ResponseBody
-    public List<Freight> takeOrder(Integer id, Integer flag,Integer freightNumber,String freightUnit,String invoiceNum) throws IOException {
+    public List<Freight> takeOrder(Integer id, Integer flag,Integer freightNumber,String freightUnit,String invoiceNum,HttpSession session) throws IOException {
 
 //        //1.接受上传图片 ,保存到服务器上(使用uuid处理文件名)
 //        File f=new File("D:\\tomcat_7.0.75\\apache-tomcat-7.0.75\\webapps\\newFile");
@@ -175,7 +176,7 @@ public class TradeOrderController {
         //调用业务配置发货
         tradeOrderService.updateOrder(order);
         //设置订单状态
-        tradeOrderService.setOrderStatus(id,flag);
+        tradeOrderService.setOrderStatus(id,flag,session);
         System.out.println("表单提交成功");
         System.out.println("设置订单状态结束");
         return freightList;

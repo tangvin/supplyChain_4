@@ -36,12 +36,13 @@ public class TripartiteController {
         SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
         Account sessionAccount=sessionInfo.getAdmin();
         Integer userId = sessionAccount.getUserId();
-        //  System.out.println(sessionAccount);
+
         whereMaps.put("userId",userId);
         DataGridJson dgj = new DataGridJson();
         userPage.setCpage(pageNumber);
         userPage.setPageSize(pageSize);
         userPage.setWhereMap(whereMaps);
+
         userPage = tripartiteService.queryAllTripartite(userPage);
         dgj.setTotal(userPage.getTotalCount());
         dgj.setRows(userPage.getList());
