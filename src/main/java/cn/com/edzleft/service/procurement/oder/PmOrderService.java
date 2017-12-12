@@ -1,5 +1,7 @@
 package cn.com.edzleft.service.procurement.oder;
 
+import cn.com.edzleft.entity.Contract;
+import cn.com.edzleft.entity.Information;
 import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.util.page.PageUtil;
 
@@ -40,4 +42,6 @@ public interface PmOrderService {
 	 * @return
 	 */
     List<Map<String, Object>> selectOrderLetter();
+
+
 }

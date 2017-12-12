@@ -156,7 +156,7 @@
                                     <tr>
                                         <div class="row">
                                             <td class="col-xs-3 text-right">合同签约方：</td>
-                                            <td class="col-xs-9 text-left"><input  id="aaa" name="orderCreatorTrade"></td>
+                                            <td class="col-xs-9 text-left"><input  id="aaa" name="contractTraderId"></td>
                                         </div>
                                     </tr>
                                     <tr>
@@ -318,8 +318,12 @@
 				},
 			dataType:"json",
 			success:function(data){
-				alert("添加完成");
-                setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/ddgl.action')",500);
+				if(data.success){
+					alert(data.msg);
+					setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/ddgl.action')",500);
+				}else{
+					alert(data.msg);
+				}
 			}
 		}); 
 	});
