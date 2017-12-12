@@ -293,6 +293,7 @@
         $('#load').load('<%=request.getContextPath()%>/tradeMain/zhxx.action')
     });
     $("#update").click(function () {
+    	
         $.ajax({
             url:'<%=request.getContextPath()%>/information/modifyInformation.action',
             dataType:'json',
