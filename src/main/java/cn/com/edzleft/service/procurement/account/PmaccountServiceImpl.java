@@ -72,6 +72,16 @@ public class PmaccountServiceImpl implements Pmaccountservice{
 		
 	}
 
+	/**
+	 * 添加资料id
+	 */
+
+	@Override
+	public int updatePassword(Account account) {
+		int m = pmaccountMapper.updatePassword(account);
+		return m;
+	}
+
 }
 
 

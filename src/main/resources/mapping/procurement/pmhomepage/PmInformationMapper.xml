@@ -37,6 +37,7 @@
     <result column="organization_electronic_file" property="organizationElectronicFile" jdbcType="VARCHAR" />
     <result column="ent_logo" property="entLogo" jdbcType="VARCHAR" />
     <result column="certification_status" property="certificationStatus" jdbcType="INTEGER" />
+ 	<result column="creator_id" property="creatorId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, ent_identity, ent_name, ent_document_type, ent_credit_code, registration_number,
@@ -45,7 +46,7 @@
     municipality, city, county, address, business_contact, mobile_phone, email_address,
     zip_code, web_site, code_file, business_license, electronic_file, person_idcard,
     tax_number, open_account_file, financial_file, organization_electronic_file,
-    ent_logo,certification_status
+    ent_logo,certification_status,creator_id
   </sql>
 
   <select id="homePageSelect" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -61,6 +62,18 @@
     WHERE
     t2.user_id=#{userId}
   </select>
+  
+  <!--企业信息表和用户表相关联-->
+  <select id="selectByCreatorId" resultMap="BaseResultMap" parameterType="Integer">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    gyl_information
+    WHERE
+    creator_id =#{id}
+    order by id desc
+    limit 1
+  </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -71,7 +84,7 @@
  <!--修改基本资料-->
   <update id="updateInformation" parameterType="cn.com.edzleft.entity.Information" >
     update gyl_information
-    <set >
+   <set >
       <if test="entIdentity != null" >
         ent_identity = #{entIdentity,jdbcType=INTEGER},
       </if>
@@ -171,13 +184,13 @@
       <if test="entLogo != null" >
         ent_logo = #{entLogo,jdbcType=VARCHAR},
       </if>
-      <if test="certificationStatus != null" >
-        certification_status = #{certificationStatus,jdbcType=VARCHAR},
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-	<insert id="addInformation" parameterType="cn.com.edzleft.entity.Information" >
+	<insert id="insertSelective" parameterType="cn.com.edzleft.entity.Information" >
     insert into gyl_information
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -279,11 +292,14 @@
       <if test="organizationElectronicFile != null" >
         organization_electronic_file,
       </if>
-      <if test="accountId != null" >
-        account_id,
-      </if>
       <if test="entLogo != null" >
         ent_logo,
+      </if>
+      <if test="certificationStatus != null" >
+        certification_status,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -386,11 +402,14 @@
       <if test="organizationElectronicFile != null" >
         #{organizationElectronicFile,jdbcType=VARCHAR},
       </if>
-      <if test="accountId != null" >
-        #{accountId,jdbcType=INTEGER},
-      </if>
       <if test="entLogo != null" >
         #{entLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="certificationStatus != null" >
+        #{certificationStatus,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

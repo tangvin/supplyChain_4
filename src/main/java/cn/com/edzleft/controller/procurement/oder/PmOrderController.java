@@ -88,14 +88,14 @@ public class PmOrderController {
 	 */
 	@RequestMapping(value="confirmOder")
 	@ResponseBody
-	public boolean confirmOder(HttpServletRequest req,HttpSession sessionInfo){
+	public boolean confirmOder(HttpServletRequest req,HttpSession sessionInfo,Integer creditGrantorId){
 		String telephone = req.getParameter("telephone");
 		String receiver = req.getParameter("receiver");
 		String receivingAddressId = req.getParameter("receivingAddressId");
 		String orderAmount = req.getParameter("orderAmount");
 		String principalOrderId = req.getParameter("principalOrderId");
 		String applicationletter = req.getParameter("applicationletter");
-		String orderCreatorTrade = req.getParameter("orderCreatorTrade");
+		Integer orderCreatorTradeId =Integer.valueOf(req.getParameter("orderCreatorTradeId"));
 		String goods = req.getParameter("goods");
 		Order o=new Order();
 		o.setContactPhone(telephone);
@@ -105,8 +105,9 @@ public class PmOrderController {
 		o.setPrincipalOrderId(Integer.parseInt(principalOrderId));
 		o.setApplicationletter(applicationletter); 
 		o.setGoods(goods);
-		o.setOrderCreatorTrade(orderCreatorTrade);
+		o.setOrderCreatorTradeId(orderCreatorTradeId);
 		o.setOrderStatus(0);
+		o.setCreditGrantorId(creditGrantorId);
 		o.setOrderCreatTime(new Date());
 		int i = pmOrderService.insertSelective(o, sessionInfo);
 		return i>0?true:false;

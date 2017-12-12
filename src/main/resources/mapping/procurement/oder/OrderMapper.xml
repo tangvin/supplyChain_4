@@ -5,12 +5,11 @@
     <id column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
     <result column="order_creat_time" property="orderCreatTime" jdbcType="TIMESTAMP" />
-    <result column="order_creator" property="orderCreator" jdbcType="VARCHAR" />
-    <result column="order_creator_trade" property="orderCreatorTrade" jdbcType="VARCHAR" />
+    <result column="order_creator_id" property="orderCreatorId" jdbcType="INTEGER" />
+    <result column="order_creator_trade_id" property="orderCreatorTradeId" jdbcType="INTEGER" />
     <result column="order_confirmation_time" property="orderConfirmationTime" jdbcType="TIMESTAMP" />
     <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
-    <result column="logistics_unit_id" property="logisticsUnitId" jdbcType="INTEGER" />
-    <result column="logistics_num" property="logisticsNum" jdbcType="VARCHAR" />
+    <result column="receiving_address_id" property="receivingAddressId" jdbcType="INTEGER" />
     <result column="logistics_name" property="logisticsName" jdbcType="VARCHAR" />
     <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
     <result column="principal_order_id" property="principalOrderId" jdbcType="INTEGER" />
@@ -25,11 +24,8 @@
     <result column="invoice" property="invoice" jdbcType="VARCHAR" />
     <result column="freight_unit" property="freightUnit" jdbcType="VARCHAR" />
     <result column="freight_number_id" property="freightNumberId" jdbcType="INTEGER" />
+    <result column="invoiceNum" property="invoice_num" jdbcType="VARCHAR" />
     <result column="goods" property="goods" jdbcType="VARCHAR" />
-    <result column="applicationletter" property="applicationletter" jdbcType="VARCHAR" />
-    <result column="receiving_address_id" property="receivingAddressId" jdbcType="INTEGER" />
-    <result column="invoice_num" property="invoiceNum" jdbcType="VARCHAR" />
-    <result column="letter_status" property="letterStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     order_id, order_number, order_creat_time, order_creator, order_creator_trade, order_confirmation_time,

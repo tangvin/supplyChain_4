@@ -45,6 +45,7 @@
     municipality, city, county, address, business_contact, mobile_phone, email_address, 
     zip_code, web_site, code_file, business_license, electronic_file, person_idcard, tax_number,
     open_account_file,financial_file,organization_electronic_file,ent_logo,certification_status
+  	
   </sql>
 
   <select id="getInformationList" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -70,6 +71,7 @@
 </select>
 
 
+ <!--修改基本资料-->
   <update id="updateInformation" parameterType="cn.com.edzleft.entity.Information" >
     update gyl_information
     <set >
@@ -172,8 +174,236 @@
       <if test="entLogo != null" >
         ent_logo = #{entLogo,jdbcType=VARCHAR},
       </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
     </set>
+    where id = #{id,jdbcType=INTEGER}
   </update>
   
+  
+  <insert id="insertSelective" parameterType="cn.com.edzleft.entity.Information" >
+    insert into gyl_information
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="entIdentity != null" >
+        ent_identity,
+      </if>
+      <if test="entName != null" >
+        ent_name,
+      </if>
+      <if test="entDocumentType != null" >
+        ent_document_type,
+      </if>
+      <if test="entCreditCode != null" >
+        ent_credit_code,
+      </if>
+      <if test="registrationNumber != null" >
+        registration_number,
+      </if>
+      <if test="taxRegistrationNumber != null" >
+        tax_registration_number,
+      </if>
+      <if test="institutionCode != null" >
+        institution_code,
+      </if>
+      <if test="representative != null" >
+        representative,
+      </if>
+      <if test="representativeType != null" >
+        representative_type,
+      </if>
+      <if test="representativeNum != null" >
+        representative_num,
+      </if>
+      <if test="registeredCapital != null" >
+        registered_capital,
+      </if>
+      <if test="majorShareholder != null" >
+        major_shareholder,
+      </if>
+      <if test="businessScope != null" >
+        business_scope,
+      </if>
+      <if test="registrationAuthority != null" >
+        registration_authority,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="municipality != null" >
+        municipality,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="county != null" >
+        county,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="businessContact != null" >
+        business_contact,
+      </if>
+      <if test="mobilePhone != null" >
+        mobile_phone,
+      </if>
+      <if test="emailAddress != null" >
+        email_address,
+      </if>
+      <if test="zipCode != null" >
+        zip_code,
+      </if>
+      <if test="webSite != null" >
+        web_site,
+      </if>
+      <if test="codeFile != null" >
+        code_file,
+      </if>
+      <if test="businessLicense != null" >
+        business_license,
+      </if>
+      <if test="electronicFile != null" >
+        electronic_file,
+      </if>
+      <if test="personIdcard != null" >
+        person_idcard,
+      </if>
+      <if test="taxNumber != null" >
+        tax_number,
+      </if>
+      <if test="openAccountFile != null" >
+        open_account_file,
+      </if>
+      <if test="financialFile != null" >
+        financial_file,
+      </if>
+      <if test="organizationElectronicFile != null" >
+        organization_electronic_file,
+      </if>
+      <if test="entLogo != null" >
+        ent_logo,
+      </if>
+      <if test="certificationStatus != null" >
+        certification_status,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="entIdentity != null" >
+        #{entIdentity,jdbcType=INTEGER},
+      </if>
+      <if test="entName != null" >
+        #{entName,jdbcType=VARCHAR},
+      </if>
+      <if test="entDocumentType != null" >
+        #{entDocumentType,jdbcType=INTEGER},
+      </if>
+      <if test="entCreditCode != null" >
+        #{entCreditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationNumber != null" >
+        #{registrationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRegistrationNumber != null" >
+        #{taxRegistrationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="institutionCode != null" >
+        #{institutionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="representative != null" >
+        #{representative,jdbcType=VARCHAR},
+      </if>
+      <if test="representativeType != null" >
+        #{representativeType,jdbcType=INTEGER},
+      </if>
+      <if test="representativeNum != null" >
+        #{representativeNum,jdbcType=INTEGER},
+      </if>
+      <if test="registeredCapital != null" >
+        #{registeredCapital,jdbcType=INTEGER},
+      </if>
+      <if test="majorShareholder != null" >
+        #{majorShareholder,jdbcType=VARCHAR},
+      </if>
+      <if test="businessScope != null" >
+        #{businessScope,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationAuthority != null" >
+        #{registrationAuthority,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="municipality != null" >
+        #{municipality,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="businessContact != null" >
+        #{businessContact,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="emailAddress != null" >
+        #{emailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        #{zipCode,jdbcType=INTEGER},
+      </if>
+      <if test="webSite != null" >
+        #{webSite,jdbcType=VARCHAR},
+      </if>
+      <if test="codeFile != null" >
+        #{codeFile,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicense != null" >
+        #{businessLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="electronicFile != null" >
+        #{electronicFile,jdbcType=VARCHAR},
+      </if>
+      <if test="personIdcard != null" >
+        #{personIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNumber != null" >
+        #{taxNumber,jdbcType=INTEGER},
+      </if>
+      <if test="openAccountFile != null" >
+        #{openAccountFile,jdbcType=VARCHAR},
+      </if>
+      <if test="financialFile != null" >
+        #{financialFile,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationElectronicFile != null" >
+        #{organizationElectronicFile,jdbcType=VARCHAR},
+      </if>
+      <if test="entLogo != null" >
+        #{entLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="certificationStatus != null" >
+        #{certificationStatus,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
   
 </mapper>

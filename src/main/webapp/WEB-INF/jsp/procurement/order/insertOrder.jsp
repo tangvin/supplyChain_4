@@ -308,7 +308,7 @@
 			data:{
 				receiver:receiver,
 				telephone:telephone,
-				orderCreatorTrade:orderCreatorTrade,
+				orderCreatorTradeId:orderCreatorTradeId,
 				goods:goods,
 				orderAmount:orderAmount,
 				applicationletter:applicationletter,

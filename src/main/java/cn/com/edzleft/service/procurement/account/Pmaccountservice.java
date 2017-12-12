@@ -13,6 +13,8 @@ public interface Pmaccountservice {
 
 	Account accountSelect(Integer userId);
 
+	int updatePassword(Account account);
+
 
 
 }
