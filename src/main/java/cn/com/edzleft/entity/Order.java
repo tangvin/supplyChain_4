@@ -23,11 +23,11 @@ public class Order {
     /**
      * 订单创建者（采方）
      */
-    private String orderCreator;
+    private Integer orderCreatorId;
     /**
      * 订单确认者（贸方）
      */
-    private String orderCreatorTrade;
+    private Integer orderCreatorTradeId;
     /**
      * 订单确认时间
      */
@@ -37,14 +37,6 @@ public class Order {
      * 订单状态
      */
     private Integer orderStatus;
-    /**
-     * 订单物流运货单位(关联到运货单位表)
-     */
-    private Integer logisticsUnitId;
-    /**
-     * 订单物流运单编号(关联到运货单位表)
-     */
-    private String logisticsNum;
     /**
      * 收货地址(关联到收货地址表)
      */
@@ -110,7 +102,7 @@ public class Order {
      * 货物商品
      */
     private String goods;
-    
+
     /**
      * 申请用信
      * @return
@@ -169,22 +161,22 @@ public class Order {
     }
 
     public String getApplicationletter() {
-		return applicationletter;
-	}
+        return applicationletter;
+    }
 
-	public void setApplicationletter(String applicationletter) {
-		this.applicationletter = applicationletter;
-	}
+    public void setApplicationletter(String applicationletter) {
+        this.applicationletter = applicationletter;
+    }
 
-	public String getGoods() {
-		return goods;
-	}
+    public String getGoods() {
+        return goods;
+    }
 
-	public void setGoods(String goods) {
-		this.goods = goods;
-	}
+    public void setGoods(String goods) {
+        this.goods = goods;
+    }
 
-	public Integer getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
@@ -208,20 +200,20 @@ public class Order {
         this.orderCreatTime = orderCreatTime;
     }
 
-    public String getOrderCreator() {
-        return orderCreator;
+    public Integer getOrderCreatorId() {
+        return orderCreatorId;
     }
 
-    public void setOrderCreator(String orderCreator) {
-        this.orderCreator = orderCreator == null ? null : orderCreator.trim();
+    public void setOrderCreatorId(Integer orderCreatorId) {
+        this.orderCreatorId = orderCreatorId == null ? null : orderCreatorId;
     }
 
-    public String getOrderCreatorTrade() {
-        return orderCreatorTrade;
+    public Integer getOrderCreatorTradeId() {
+        return orderCreatorTradeId;
     }
 
-    public void setOrderCreatorTrade(String orderCreatorTrade) {
-        this.orderCreatorTrade = orderCreatorTrade == null ? null : orderCreatorTrade.trim();
+    public void setOrderCreatorTradeId(Integer orderCreatorTradeId) {
+        this.orderCreatorTradeId = orderCreatorTradeId == null ? null : orderCreatorTradeId;
     }
 
     public Date getOrderConfirmationTime() {
@@ -240,21 +232,6 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public Integer getLogisticsUnitId() {
-        return logisticsUnitId;
-    }
-
-    public void setLogisticsUnitId(Integer logisticsUnitId) {
-        this.logisticsUnitId = logisticsUnitId == null ? null : logisticsUnitId;
-    }
-
-    public String getLogisticsNum() {
-        return logisticsNum;
-    }
-
-    public void setLogisticsNum(String logisticsNum) {
-        this.logisticsNum = logisticsNum == null ? null : logisticsNum;
-    }
 
     public Integer getReceivingAddressId() {
         return receivingAddressId;
@@ -264,7 +241,7 @@ public class Order {
         this.receivingAddressId = receivingAddressId == null ? null : receivingAddressId;
     }
 
-	public String getLogisticsName() {
+    public String getLogisticsName() {
         return logisticsName;
     }
 
@@ -387,15 +364,12 @@ public class Order {
         if (orderNumber != null ? !orderNumber.equals(order.orderNumber) : order.orderNumber != null) return false;
         if (orderCreatTime != null ? !orderCreatTime.equals(order.orderCreatTime) : order.orderCreatTime != null)
             return false;
-        if (orderCreator != null ? !orderCreator.equals(order.orderCreator) : order.orderCreator != null) return false;
-        if (orderCreatorTrade != null ? !orderCreatorTrade.equals(order.orderCreatorTrade) : order.orderCreatorTrade != null)
+        if (orderCreatorId != null ? !orderCreatorId.equals(order.orderCreatorId) : order.orderCreatorId != null) return false;
+        if (orderCreatorTradeId != null ? !orderCreatorTradeId.equals(order.orderCreatorTradeId) : order.orderCreatorTradeId != null)
             return false;
         if (orderConfirmationTime != null ? !orderConfirmationTime.equals(order.orderConfirmationTime) : order.orderConfirmationTime != null)
             return false;
         if (orderStatus != null ? !orderStatus.equals(order.orderStatus) : order.orderStatus != null) return false;
-        if (logisticsUnitId != null ? !logisticsUnitId.equals(order.logisticsUnitId) : order.logisticsUnitId != null)
-            return false;
-        if (logisticsNum != null ? !logisticsNum.equals(order.logisticsNum) : order.logisticsNum != null) return false;
         if (receivingAddressId != null ? !receivingAddressId.equals(order.receivingAddressId) : order.receivingAddressId != null)
             return false;
         if (logisticsName != null ? !logisticsName.equals(order.logisticsName) : order.logisticsName != null)
@@ -431,12 +405,10 @@ public class Order {
         int result = orderId != null ? orderId.hashCode() : 0;
         result = 31 * result + (orderNumber != null ? orderNumber.hashCode() : 0);
         result = 31 * result + (orderCreatTime != null ? orderCreatTime.hashCode() : 0);
-        result = 31 * result + (orderCreator != null ? orderCreator.hashCode() : 0);
-        result = 31 * result + (orderCreatorTrade != null ? orderCreatorTrade.hashCode() : 0);
+        result = 31 * result + (orderCreatorId != null ? orderCreatorId.hashCode() : 0);
+        result = 31 * result + (orderCreatorTradeId != null ? orderCreatorTradeId.hashCode() : 0);
         result = 31 * result + (orderConfirmationTime != null ? orderConfirmationTime.hashCode() : 0);
         result = 31 * result + (orderStatus != null ? orderStatus.hashCode() : 0);
-        result = 31 * result + (logisticsUnitId != null ? logisticsUnitId.hashCode() : 0);
-        result = 31 * result + (logisticsNum != null ? logisticsNum.hashCode() : 0);
         result = 31 * result + (receivingAddressId != null ? receivingAddressId.hashCode() : 0);
         result = 31 * result + (logisticsName != null ? logisticsName.hashCode() : 0);
         result = 31 * result + (contactPhone != null ? contactPhone.hashCode() : 0);
@@ -465,12 +437,10 @@ public class Order {
                 "orderId=" + orderId +
                 ", orderNumber='" + orderNumber + '\'' +
                 ", orderCreatTime=" + orderCreatTime +
-                ", orderCreator='" + orderCreator + '\'' +
-                ", orderCreatorTrade='" + orderCreatorTrade + '\'' +
+                ", orderCreatorId='" + orderCreatorId + '\'' +
+                ", orderCreatorTradeId='" + orderCreatorTradeId + '\'' +
                 ", orderConfirmationTime=" + orderConfirmationTime +
                 ", orderStatus=" + orderStatus +
-                ", logisticsUnitId=" + logisticsUnitId +
-                ", logisticsNum='" + logisticsNum + '\'' +
                 ", receivingAddressId=" + receivingAddressId +
                 ", logisticsName='" + logisticsName + '\'' +
                 ", contactPhone=" + contactPhone +

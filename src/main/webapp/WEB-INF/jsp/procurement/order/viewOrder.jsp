@@ -56,7 +56,7 @@
                         <tr>
                             <div class="row">
                                 <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-                                <td class="col-xs-9 text-left"><span>${order.orderCreator}</span></td>
+                                <td class="col-xs-9 text-left"><span>${order.orderCreatorId}</span></td>
                             </div>
                         </tr>
                         <tr>
@@ -154,7 +154,7 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>发货人：</td>
-                            <td class="col-xs-9 text-left"><span>${order.orderCreatorTrade}</span></td>
+                            <td class="col-xs-9 text-left"><span>${order.orderCreatorTradeId}</span></td>
                         </div>
                     </tr>
                     <tr>
@@ -203,7 +203,7 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-                            <td class="col-xs-9 text-left"><span>${order.orderCreator}</span></td>
+                            <td class="col-xs-9 text-left"><span>${order.orderCreatorId}</span></td>
                         </div>
                     </tr>
                     <tr>

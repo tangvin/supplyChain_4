@@ -5,12 +5,11 @@
     <id column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
     <result column="order_creat_time" property="orderCreatTime" jdbcType="TIMESTAMP" />
-    <result column="order_creator" property="orderCreator" jdbcType="VARCHAR" />
-    <result column="order_creator_trade" property="orderCreatorTrade" jdbcType="VARCHAR" />
+    <result column="order_creator_id" property="orderCreatorId" jdbcType="INTEGER" />
+    <result column="order_creator_trade_id" property="orderCreatorTradeId" jdbcType="INTEGER" />
     <result column="order_confirmation_time" property="orderConfirmationTime" jdbcType="TIMESTAMP" />
     <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
-    <result column="logistics_unit_id" property="logisticsUnitId" jdbcType="INTEGER" />
-    <result column="logistics_num" property="logisticsNum" jdbcType="VARCHAR" />
+    <result column="receiving_address_id" property="receivingAddressId" jdbcType="INTEGER" />
     <result column="logistics_name" property="logisticsName" jdbcType="VARCHAR" />
     <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
     <result column="principal_order_id" property="principalOrderId" jdbcType="INTEGER" />
@@ -25,15 +24,12 @@
     <result column="invoice" property="invoice" jdbcType="VARCHAR" />
     <result column="freight_unit" property="freightUnit" jdbcType="VARCHAR" />
     <result column="freight_number_id" property="freightNumberId" jdbcType="INTEGER" />
+    <result column="invoiceNum" property="invoice_num" jdbcType="VARCHAR" />
     <result column="goods" property="goods" jdbcType="VARCHAR" />
-    <result column="applicationletter" property="applicationletter" jdbcType="VARCHAR" />
-    <result column="receiving_address_id" property="receivingAddressId" jdbcType="INTEGER" />
-    <result column="invoice_num" property="invoiceNum" jdbcType="VARCHAR" />
-    <result column="letter_status" property="letterStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    order_id, order_number, order_creat_time, order_creator, order_creator_trade, order_confirmation_time,
-    order_status, logistics_unit_id, logistics_num, logistics_name, contact_phone, principal_order_id,
+    order_id, order_number, order_creat_time, order_creator_id, order_creator_trade_id, order_confirmation_time,
+    order_status, logistics_name, contact_phone, principal_order_id,
     credit_get_id, credit_use_id, credit_grantor_id, order_amount, amount_payable, amount_actually_paid,
     payment_account_id, payment_time, invoice, freight_unit, freight_number_id, goods,
     applicationletter, receiving_address_id, invoice_num, letter_status
@@ -47,7 +43,7 @@
         AND order_status  LIKE '%${whereMap.orderStatus}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.userId != null and whereMap.userId != ''">
-        AND order_creator  =#{whereMap.userId}
+        AND order_creator_id  =#{whereMap.userId}
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.orderConfirmationTime != null and whereMap.orderConfirmationTime != ''">
         AND order_confirmation_time  LIKE '%${whereMap.orderConfirmationTime}%'
@@ -148,23 +144,17 @@
       <if test="orderCreatTime != null" >
         order_creat_time,
       </if>
-      <if test="orderCreator != null" >
-        order_creator,
+      <if test="orderCreatorId != null" >
+        order_creator_id,
       </if>
-      <if test="orderCreatorTrade != null" >
-        order_creator_trade,
+      <if test="orderCreatorTradeId != null" >
+        order_creator_trade_id,
       </if>
       <if test="orderConfirmationTime != null" >
         order_confirmation_time,
       </if>
       <if test="orderStatus != null" >
         order_status,
-      </if>
-      <if test="logisticsUnitId != null" >
-        logistics_unit_id,
-      </if>
-      <if test="logisticsNum != null" >
-        logistics_num,
       </if>
       <if test="logisticsName != null" >
         logistics_name,
@@ -234,23 +224,17 @@
       <if test="orderCreatTime != null" >
         #{orderCreatTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="orderCreator != null" >
-        #{orderCreator,jdbcType=VARCHAR},
+      <if test="orderCreatorId != null" >
+        #{orderCreatorId,jdbcType=INTEGER},
       </if>
-      <if test="orderCreatorTrade != null" >
-        #{orderCreatorTrade,jdbcType=VARCHAR},
+      <if test="orderCreatorTradeId != null" >
+        #{orderCreatorTradeId,jdbcType=INTEGER},
       </if>
       <if test="orderConfirmationTime != null" >
         #{orderConfirmationTime,jdbcType=TIMESTAMP},
       </if>
       <if test="orderStatus != null" >
         #{orderStatus,jdbcType=INTEGER},
-      </if>
-      <if test="logisticsUnitId != null" >
-        #{logisticsUnitId,jdbcType=INTEGER},
-      </if>
-      <if test="logisticsNum != null" >
-        #{logisticsNum,jdbcType=VARCHAR},
       </if>
       <if test="logisticsName != null" >
         #{logisticsName,jdbcType=VARCHAR},
@@ -320,23 +304,17 @@
       <if test="orderCreatTime != null" >
         order_creat_time = #{orderCreatTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="orderCreator != null" >
-        order_creator = #{orderCreator,jdbcType=VARCHAR},
+      <if test="orderCreatorId != null" >
+        order_creator_id = #{orderCreatorId,jdbcType=INTEGER},
       </if>
-      <if test="orderCreatorTrade != null" >
-        order_creator_trade = #{orderCreatorTrade,jdbcType=VARCHAR},
+      <if test="orderCreatorTradeId != null" >
+        order_creator_trade_id = #{orderCreatorTradedId,jdbcType=INTEGER},
       </if>
       <if test="orderConfirmationTime != null" >
         order_confirmation_time = #{orderConfirmationTime,jdbcType=TIMESTAMP},
       </if>
       <if test="orderStatus != null" >
         order_status = #{orderStatus,jdbcType=INTEGER},
-      </if>
-      <if test="logisticsUnitId != null" >
-        logistics_unit_id = #{logisticsUnitId,jdbcType=INTEGER},
-      </if>
-      <if test="logisticsNum != null" >
-        logistics_num = #{logisticsNum,jdbcType=VARCHAR},
       </if>
       <if test="logisticsName != null" >
         logistics_name = #{logisticsName,jdbcType=VARCHAR},
@@ -407,23 +385,17 @@
       <if test="orderCreatTime != null" >
         order_creat_time = #{orderCreatTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="orderCreator != null" >
-        order_creator = #{orderCreator,jdbcType=VARCHAR},
+      <if test="orderCreatorId != null" >
+        order_creator_id = #{orderCreatorId,jdbcType=INTEGER},
       </if>
-      <if test="orderCreatorTrade != null" >
-        order_creator_trade = #{orderCreatorTrade,jdbcType=VARCHAR},
+      <if test="orderCreatorTradeId != null" >
+        order_creator_trade_id = #{orderCreatorTradeId,jdbcType=INTEGER},
       </if>
       <if test="orderConfirmationTime != null" >
         order_confirmation_time = #{orderConfirmationTime,jdbcType=TIMESTAMP},
       </if>
       <if test="orderStatus != null" >
         order_status = #{orderStatus,jdbcType=INTEGER},
-      </if>
-      <if test="logisticsUnitId != null" >
-        logistics_unit_id = #{logisticsUnitId,jdbcType=INTEGER},
-      </if>
-      <if test="logisticsNum != null" >
-        logistics_num = #{logisticsNum,jdbcType=VARCHAR},
       </if>
       <if test="logisticsName != null" >
         logistics_name = #{logisticsName,jdbcType=VARCHAR},

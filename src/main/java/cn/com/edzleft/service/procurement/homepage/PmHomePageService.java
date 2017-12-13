@@ -1,5 +1,7 @@
 package cn.com.edzleft.service.procurement.homepage;
 
+import javax.servlet.http.HttpSession;
+
 import cn.com.edzleft.entity.Information;
 import cn.com.edzleft.entity.Order;
 
@@ -11,7 +13,9 @@ public interface PmHomePageService {
 
 	int updateInformation(Information information);
 
-	int addInformation(Information information);
+	Information selectByCreatorId(Integer userId);
 
+	int insertSelective(Information information, HttpSession sessionInfo);
+	
 
 }

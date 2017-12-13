@@ -1,9 +1,11 @@
 package cn.com.edzleft.controller.procurement.oder;
 
+import cn.com.edzleft.dao.procurement.contractaward.PmContractWardMapper;
+import cn.com.edzleft.entity.Contract;
 import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.entity.ReceivingAddress;
 import cn.com.edzleft.entity.SessionInfo;
-import cn.com.edzleft.service.procurement.homepage.PmHomePageService;
+import cn.com.edzleft.service.procurement.contractaward.PmContractWardService;
 import cn.com.edzleft.service.procurement.oder.PmOrderService;
 import cn.com.edzleft.service.procurement.receivingaddress.PmReceivingAddressService;
 import cn.com.edzleft.util.page.DataGridJson;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +41,8 @@ public class PmOrderController {
 	@Autowired
 	private PmReceivingAddressService pmreceivingAddressservice;
 	
-	
+	@Autowired
+	private PmContractWardService pmContractWardService;
 	/**
 	 * 查询订单列表
 	 */
@@ -45,7 +50,7 @@ public class PmOrderController {
 	@ResponseBody
 	public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String orderCreatorTrade,String orderStatus,String creditGrantor,HttpSession sessionInfo){
 		SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
-        Integer userId = session.getAdmin().getUserId();
+        Integer userId = session.getAdmin().getInformationId();
 		PageUtil<Order> userPage = new PageUtil<>();
         HashMap<String,Object> whereMaps =new HashMap<>();
         whereMaps.put("orderCreatorTrade",orderCreatorTrade);
@@ -88,28 +93,40 @@ public class PmOrderController {
 	 */
 	@RequestMapping(value="confirmOder")
 	@ResponseBody
-	public boolean confirmOder(HttpServletRequest req,HttpSession sessionInfo){
+	public Map<String,Object> confirmOder(HttpServletRequest req,HttpSession sessionInfo){
+		Map<String,Object> map = new HashMap<>();
 		String telephone = req.getParameter("telephone");
 		String receiver = req.getParameter("receiver");
 		String receivingAddressId = req.getParameter("receivingAddressId");
 		String orderAmount = req.getParameter("orderAmount");
 		String principalOrderId = req.getParameter("principalOrderId");
 		String applicationletter = req.getParameter("applicationletter");
-		String orderCreatorTrade = req.getParameter("orderCreatorTrade");
-		String goods = req.getParameter("goods");
-		Order o=new Order();
-		o.setContactPhone(telephone);
-		o.setLogisticsName(receiver);
-		o.setReceivingAddressId(Integer.parseInt(receivingAddressId));
-		o.setOrderAmount(Double.parseDouble(orderAmount));
-		o.setPrincipalOrderId(Integer.parseInt(principalOrderId));
-		o.setApplicationletter(applicationletter); 
-		o.setGoods(goods);
-		o.setOrderCreatorTrade(orderCreatorTrade);
-		o.setOrderStatus(0);
-		o.setOrderCreatTime(new Date());
-		int i = pmOrderService.insertSelective(o, sessionInfo);
-		return i>0?true:false;
+		Integer orderCreatorTradeId =Integer.valueOf(req.getParameter("orderCreatorTradeId"));
+		/*String goods = req.getParameter("goods");*/
+		//根据合同编号查询合同
+		Contract contract = pmContractWardService.getContract(principalOrderId);
+		if(contract == null){
+			map.put("msg", "合同名称错误");
+			map.put("success", false);
+		}else{
+			Order o=new Order();
+			o.setContactPhone(telephone);
+			o.setPrincipalOrderId(contract.getContractId());
+			o.setOrderCreatorTradeId(contract.getContractTraderId());
+			o.setLogisticsName(receiver);
+			o.setReceivingAddressId(Integer.parseInt(receivingAddressId));
+			o.setOrderAmount(Double.parseDouble(orderAmount));
+			o.setApplicationletter(applicationletter); 
+			/*o.setGoods(goods);*/
+			o.setOrderStatus(0);
+			SessionInfo sessionInfo1 = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+			o.setOrderCreatorId(sessionInfo1.getAdmin().getInformationId());
+			o.setOrderCreatTime(new Date());
+			int i = pmOrderService.insertSelective(o, sessionInfo);
+			map.put("msg", "添加成功");
+			map.put("success", true);
+		}
+		return map;
 	}
 	
 	/**

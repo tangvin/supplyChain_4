@@ -13,5 +13,7 @@ public interface PmAccountMapper {
 
 	Account accountSelect(Integer userId);
 
+	int updatePassword(Account account);
+
 
 }
