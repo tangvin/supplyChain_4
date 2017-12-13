@@ -33,7 +33,7 @@ public class ProInvoiceController {
 		HashMap<String, Object> whereMaps = new HashMap<>();
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
 		Account sessionAccount=sessionInfo.getAdmin();
-		Integer invoiceUserId=sessionAccount.getUserId();
+		Integer invoiceUserId=sessionAccount.getInformationId();
 		whereMaps.put("invoiceUserId", invoiceUserId);
 		whereMaps.put("invoiceNumber",invoiceNumber);
 		whereMaps.put("drawer",drawer);
