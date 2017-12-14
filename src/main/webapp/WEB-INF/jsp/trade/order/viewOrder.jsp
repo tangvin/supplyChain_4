@@ -46,7 +46,7 @@
             <a href="#">订单详情</a>
         </div>
         <!--合同签约 头部 end-->
-        <div class="col-xs-12">
+        <div class="col-xs-12" id="ddxx_open">
                 <div class="row jbxx_row ckdd">
                     <div class="col-xs-8">
                         <h5>订单信息</h5>
@@ -58,11 +58,11 @@
                 <tbody>
                 <tr>
                     <td class="col-xs-3  text-right"><span class="xingxing">*</span>合同签约方：</td>
-                    <td class="col-xs-9 text-left"><span>${order.orderCreator}</span></td>
+                    <td class="col-xs-9 text-left"><span>${procurementEntName}</span></td>
                 </tr>
                 <tr>
                     <td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
-                    <td class="col-xs-9 text-left"><span>合同编号：${contract.contractNumber}       合同名称：${contract.contractName}</span></td>
+                    <td class="col-xs-9 text-left"><span>合同编号：${order.contractNumber}       合同名称：${order.contractName}</span></td>
                 </tr>
                 <tr>
                     <td class="col-xs-3 text-right"><span class="xingxing">*</span>货物商品：</td>
@@ -118,12 +118,16 @@
                         </form>
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单驳回记录：</td>
+                    <td class="col-xs-9 text-left">${rejectList.size()}</td>
+                </tr>
                 </tbody>
             </table>
             <!--合同编辑表格 end-->
         </div>
 
-        <div class="col-xs-12" id="open">
+        <div class="col-xs-12" id="hyxx_open">
             <div class="row jbxx_row ckdd">
                 <div class="col-xs-8">
                     <h5>货运信息</h5>
@@ -136,7 +140,7 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>发货人：</td>
-                            <td class="col-xs-9 text-left"><span>${order.orderCreatorTrade}</span></td>
+                            <td class="col-xs-9 text-left"><span>${order.orderCreatorId}</span></td>
                         </div>
                     </tr>
                     <tr>
@@ -173,10 +177,7 @@
             <!--合同编辑表格 end-->
         </div>
 
-
-
-
-        <div class="col-xs-12">
+        <div class="col-xs-12" id="shxx_open">
             <div class="row jbxx_row ckdd">
                 <div class="col-xs-8">
                     <h5>收货信息</h5>
@@ -189,7 +190,7 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-                            <td class="col-xs-9 text-left"><span>${order.orderCreator}</span></td>
+                            <td class="col-xs-9 text-left"><span>${order.orderCreatorId}</span></td>
                         </div>
                     </tr>
                     <tr>
@@ -224,6 +225,18 @@
 </body>
 <script>
 
+    $(function(){
+        if(${order.orderStatus}==3||${order.orderStatus}==4){
+           $('#ddxx_open').show();
+            $('#hyxx_open').show();
+            $('#shxx_open').show();
+        }else {
+            $('#ddxx_open').show();
+            $('#shxx_open').show();
+            $('#hyxx_open').hide();
+        }
+    })
+
     $('#ddgl').click(function(){
         $('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')
     })
@@ -236,13 +249,7 @@
         }
     })
 
-$(function(){
-        if(${order.orderStatus}==3||${order.orderStatus}==4){
-            $('#open').css('display','block')
-        }else{
-            $('#open').css('display','none')
-        }
-    })
+
 
 
 

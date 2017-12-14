@@ -12,7 +12,9 @@ public class Contract implements Serializable{
      * 合同id
      */
     private Integer contractId;
-    /**
+
+
+	/**
      * 合同编号
      */
     private String contractNumber;
@@ -23,11 +25,11 @@ public class Contract implements Serializable{
     /**
      * 合同签约采购方
      */
-    private String contractBuyer;
+    private Integer contractBuyerId;
     /**
      * 合同签约贸易方
      */
-    private String contractTrader;
+    private Integer contractTraderId;
     /**
      * 合同开始时间
      */
@@ -124,22 +126,6 @@ public class Contract implements Serializable{
 
     public void setContractName(String contractName) {
         this.contractName = contractName == null ? null : contractName.trim();
-    }
-
-    public String getContractBuyer() {
-        return contractBuyer;
-    }
-
-    public void setContractBuyer(String contractBuyer) {
-        this.contractBuyer = contractBuyer == null ? null : contractBuyer.trim();
-    }
-
-    public String getContractTrader() {
-        return contractTrader;
-    }
-
-    public void setContractTrader(String contractTrader) {
-        this.contractTrader = contractTrader == null ? null : contractTrader.trim();
     }
 
     public Date getCreatTime() {
@@ -278,7 +264,30 @@ public class Contract implements Serializable{
         this.letterApply = letterApply;
     }
 
-    @Override
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+
+    public Integer getContractBuyerId() {
+		return contractBuyerId;
+	}
+
+	public void setContractBuyerId(Integer contractBuyerId) {
+		this.contractBuyerId = contractBuyerId;
+	}
+
+	public Integer getContractTraderId() {
+		return contractTraderId;
+	}
+
+	public void setContractTraderId(Integer contractTraderId) {
+		this.contractTraderId = contractTraderId;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -290,9 +299,9 @@ public class Contract implements Serializable{
             return false;
         if (contractName != null ? !contractName.equals(contract.contractName) : contract.contractName != null)
             return false;
-        if (contractBuyer != null ? !contractBuyer.equals(contract.contractBuyer) : contract.contractBuyer != null)
+        if (contractBuyerId != null ? !contractBuyerId.equals(contract.contractBuyerId) : contract.contractBuyerId != null)
             return false;
-        if (contractTrader != null ? !contractTrader.equals(contract.contractTrader) : contract.contractTrader != null)
+        if (contractTraderId != null ? !contractTraderId.equals(contract.contractTraderId) : contract.contractTraderId != null)
             return false;
         if (creatTime != null ? !creatTime.equals(contract.creatTime) : contract.creatTime != null) return false;
         if (endTime != null ? !endTime.equals(contract.endTime) : contract.endTime != null) return false;
@@ -332,8 +341,8 @@ public class Contract implements Serializable{
         int result = contractId != null ? contractId.hashCode() : 0;
         result = 31 * result + (contractNumber != null ? contractNumber.hashCode() : 0);
         result = 31 * result + (contractName != null ? contractName.hashCode() : 0);
-        result = 31 * result + (contractBuyer != null ? contractBuyer.hashCode() : 0);
-        result = 31 * result + (contractTrader != null ? contractTrader.hashCode() : 0);
+        result = 31 * result + (contractBuyerId != null ? contractBuyerId.hashCode() : 0);
+        result = 31 * result + (contractTraderId != null ? contractTraderId.hashCode() : 0);
         result = 31 * result + (creatTime != null ? creatTime.hashCode() : 0);
         result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
         result = 31 * result + (signingAddress != null ? signingAddress.hashCode() : 0);
@@ -354,31 +363,16 @@ public class Contract implements Serializable{
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "Contract{" +
-                "contractId=" + contractId +
-                ", contractNumber='" + contractNumber + '\'' +
-                ", contractName='" + contractName + '\'' +
-                ", contractBuyer='" + contractBuyer + '\'' +
-                ", contractTrader='" + contractTrader + '\'' +
-                ", creatTime=" + creatTime +
-                ", endTime=" + endTime +
-                ", signingAddress='" + signingAddress + '\'' +
-                ", signingTime=" + signingTime +
-                ", tradeSignatories='" + tradeSignatories + '\'' +
-                ", buyerSignatory='" + buyerSignatory + '\'' +
-                ", assistContractId=" + assistContractId +
-                ", orderContractId=" + orderContractId +
-                ", contractStatus=" + contractStatus +
-                ", contractLetterPerson='" + contractLetterPerson + '\'' +
-                ", contractCredit=" + contractCredit +
-                ", contractLetter=" + contractLetter +
-                ", contractCreateTime=" + contractCreateTime +
-                ", contractFounder='" + contractFounder + '\'' +
-                ", contractElectronicsId=" + contractElectronicsId +
-                ", contractScanner=" + contractScanner +
-                ", letterApply=" + letterApply +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Contract [contractId=" + contractId + ", contractNumber=" + contractNumber + ", contractName="
+				+ contractName + ", contractBuyerId=" + contractBuyerId + ", contractTraderId=" + contractTraderId
+				+ ", creatTime=" + creatTime + ", endTime=" + endTime + ", signingAddress=" + signingAddress
+				+ ", signingTime=" + signingTime + ", tradeSignatories=" + tradeSignatories + ", buyerSignatory="
+				+ buyerSignatory + ", assistContractId=" + assistContractId + ", orderContractId=" + orderContractId
+				+ ", contractStatus=" + contractStatus + ", contractLetterPerson=" + contractLetterPerson
+				+ ", contractCredit=" + contractCredit + ", contractLetter=" + contractLetter + ", contractCreateTime="
+				+ contractCreateTime + ", contractFounder=" + contractFounder + ", contractElectronicsId="
+				+ contractElectronicsId + ", contractScanner=" + contractScanner + ", letterApply=" + letterApply + "]";
+	}
 }

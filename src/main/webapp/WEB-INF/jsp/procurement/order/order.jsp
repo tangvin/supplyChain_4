@@ -21,98 +21,84 @@
 </head>
 <body>
 <div class='col-xs-12'>
-    <div class='row'>
-        <!--订单管理 头部-->
-        <div class="col-xs-12 zlxx_top">
-            <a href="<%=request.getContextPath()%>/procurementMain/procurementMain.action">系统首页</a>
-            <span>></span>
-            <a id="ddglyy">订单管理</a>
-        </div>
-        <!--订单管理 头部 end-->
-        <div class="col-xs-12">
-            <!--合同签约 状态-->
-            <div class="khh">
-                <form class="form-inline khh_form khh_form1" id="ordersform">
-                    <div class="form-group">
-                        <label>状态：</label>
-                        <select class="form-control select" id="orderStatus">
-                            <option value="">全部</option>
-                            <option value="0">待确认</option>
-                            <option value="1">待付款</option>
-                            <option value="2">待发货</option>
-                            <option value="3">待收货</option>
-                            <option value="4">已完成</option>
-                            <option value="5">已关闭</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>开户行：</label>
-                        <input type="text" class="form-control" id="creditGrantor">
-                    </div>
-                    <!-- <div class="form-group form-group1">
-                        <label>合同执行期</label>
-                        <input type="text" readonly="readonly"  name="birthday" id="birthday1" class="form-control" value="03/18/2013" />--
-                        <input type="text" readonly="readonly"  name="birthday" id="birthday" class="form-control" value="03/18/2013" />
-                    </div> -->
-                    <div class="form-group">
-                        <label>签约方：</label>
-                        <input type="text" class="form-control" id="orderCreatorTrade">
-                    </div>
-                    <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>
-                    <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
-                </form>
-            </div>
-             <div class="xzht xzdd text-right" id="insertOrder">
-                 <a href="#"><button class="btn btn-primary btn-sm text-right">新增订单</button></a>
-             </div>
-               <table id="tb_departments" class="cj_table"></table>
+<div class="row">
+<!--订单管理 头部-->
+	<div class="col-xs-12 zlxx_top">
+		<a href="<%=request.getContextPath()%>/procurementMain/procurementMain.action">系统首页</a>
+		<span>></span>
+		<a id="ddglyy">订单管理</a>
+	</div>
+<!--订单管理 头部 end-->
+<div class="col-xs-12">
+		   <div class="khh">
+			   <form class="form-inline khh_form khh_form1" id="ordersform">
+			        <div class="form-group">
+			             <label>状态：</label>
+			             <select class="form-control select" id="orderStatus">
+			                   <option value="">全部</option>
+			                   <option value="0">待确认</option>
+			                   <option value="1">待付款</option>
+			                   <option value="2">待发货</option>
+			                   <option value="3">待收货</option>
+			                   <option value="4">已完成</option>
+			                   <option value="5">已关闭</option>
+			              </select>
+			          </div>
+			          <div class="form-group">
+			               <label>订单时间：</label>
+			               <select class="form-control select" id="aa">
+			                   <option value="">自定义时间</option>
+			                   <option value="0">一月内</option>
+			                   <option value="1">三月内</option>
+			                   <option value="2">六月内</option>
+			                   <option value="3">一年内</option>
+			               </select>
+			               <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/>至
+		                   <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
+		               </div>
 
-           <!--领取订单 模态框-->
-            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-                <div class="modal-dialog modal-sm" role="document">
-                    <div class="modal-content">
-                        <div class="panel-body text-center">
-                            	确定执行此操作吗？
-                        </div>
-                        <div class="modal-footer">
-                            <button id="lqdd" type="button" class="btn btn-default" data-dismiss="modal">确定</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+			           <div class="form-group">
+			               <label>订单签约方：</label>
+			               <input type="text" class="form-control" id="entname">
+			           </div>
 
- <!-- Modal -->
-                <div class="modal fade bs-example-modal-sm_sq" id="myModalLetter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabelLetter">Modal title</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive text-center">
-                                	<form class="form-inline khh_form" id="orderForm">
-	                                    <table class="table table-bordered bj_table" >
-	                                        <tbody id="wybLetter">
-	
-	                                        </tbody>
-	                                    </table>
-                                    </form>
-                                </div>
-                            </div>
-                          
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal" id="orderClike">Close</button>
-                                <button type="button" class="btn btn-primary" id="qx">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
- 			<!--申请融信 模态框-->
-           
-        </div>
-    </div>
+			           <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>
+			           <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
+			       </form>
+         </div>
+</div>
+<!-- 订单开户行 开始 -->
+
+<div class="col-xs-12 text-right">
+    <button style="margin-right:-15px" class="btn btn-primary" id="insertOrder">新增订单</button>
+</div>
+<!-- 订单开户行 结束 -->
+<!-- 订单表格 开始    -->
+<div class="col-xs-12">
+	<table id="tb_departments" class="cj_table">
+
+	</table>
+</div>
+<!-- 订单表格 结束    -->
+
+<!--领取订单 模态框-->
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		  <div class="modal-dialog modal-sm" role="document">
+		       <div class="modal-content">
+		            <div class="panel-body text-center">
+		                                                     确定执行此操作吗？
+		            </div>
+		            <div class="modal-footer">
+		                  <button id="lqdd" type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+		                  <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+		             </div>
+		         </div>
+		    </div>
+     </div>
+<!--领取订单 模态框 结束-->
+<!--申请融信 模态框-->
+
+</div>
 </div>
 </body>
 <script>
@@ -154,32 +140,32 @@
                 },
                 {field:'orderAmount',title:'订单金额（￥万元）'},
                 {field:'orderConfirmationTime',title:'订单相关时间',
-                	formatter:function(value,row,index){
-                        return ConvertToDate(value)
-                   }
+                	 formatter:function(value,row,index){
+                         return ConvertToDate(value)
+                     }
                 },
                 
                 
                 {field:'orderCreatTime',title:'订单创建时间',
                 	formatter:function(value,row,index){
-                        var str='';
-                        str+='<p>'+row.orderAmount+'</p><p>'+ConvertToDate(value)+'</p>';
-//                        return ConvertToDate(value)
-                        return str
+                	  var str='';
+                		 str +='<p>'+row.username+'</p>'+ConvertToDate(value)+'<p></p>';
+                        return str;
                    }
                 },
                 
-                {field:'principalOrder',title:'合同'},
-                {field:'creditUse',title:'用信情况&nbsp;￥万元'},
-                {field:'invoice',title:'发票'},
+                {field:'cName',title:'合同'},
+                {field:'entname',title:'合同签约方'},
+                {field:'applicationletter',title:'用信情况&nbsp;￥万元'},
+                {field:'amount',title:'发票'},
                 {field:'freightNumber',title:'货运及单号',
-                    formatter:function(value,row,index){
-                        var str='';
-                        str+='<p>'+row.orderAmount+'</p><p>'+ConvertToDate(value)+'</p>';
-//                        return ConvertToDate(value)
-                        return str
-                    }
+                	formatter:function(value,row,index){
+                  	  var str='';
+                  		 str +='<p>'+row.fName+'</p>'+row.invoiceNo+'<p></p>';
+                          return str;
+                     }
                 },
+
                 {
                     title:'操作',
                     field:'action',
@@ -236,7 +222,11 @@
             pageSize: params.pageSize,
             orderStatus:$("#orderStatus").val(),
             orderCreator:$("#orderCreator").val(), 
-            orderCreatorTrade:$("#orderCreatorTrade").val(),
+            entname:$("#entname").val(),
+            orderCreatTime:$("#creatTime").val(),
+            orderConfirmationTime:$("#endTime").val(),
+            aa:$("#aa").val(),
+
         };
         return temp;
     }
@@ -246,7 +236,7 @@
     }
     //重置查询
     function reset(){
-        $("#ordersform").form('reset');
+        $("#ordersform").from('reset');
         search();
     }
 

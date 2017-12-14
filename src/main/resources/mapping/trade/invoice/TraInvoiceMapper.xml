@@ -82,4 +82,72 @@
    <update id="update" parameterType="cn.com.edzleft.entity.InvoiceRecord">
  	update gyl_invoice set invoice_no=#{invoiceNo} where id=#{id} 
    </update>
+
+
+
+<!--新增发票-->
+<insert id="insertInvoiceRecord" parameterType="cn.com.edzleft.entity.InvoiceRecord" >
+
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+        <!-- SELECT LAST_INSERT_ID()：得到刚insert到数据表中的记录的主键值，只适用于自增主键 -->
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+
+    insert into gyl_invoice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="id != null" >
+            id,
+        </if>
+        <if test="invoiceNumber != null" >
+            invoice_number,
+        </if>
+        <if test="userId != null" >
+            user_id,
+        </if>
+        <if test="invoiceFileAttachment != null" >
+            invoice_file_attachment,
+        </if>
+        <if test="invoiceNo != null" >
+            invoice_no,
+        </if>
+        <if test="createTime != null" >
+            create_time,
+        </if>
+        <if test="orderId != null" >
+            order_id,
+        </if>
+        <if test="invoiceUserId != null" >
+            invoice_user_id,
+        </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="id != null" >
+            #{id,jdbcType=INTEGER},
+        </if>
+        <if test="invoiceNumber != null" >
+            #{invoiceNumber,jdbcType=VARCHAR},
+        </if>
+        <if test="userId != null" >
+            #{userId,jdbcType=INTEGER},
+        </if>
+        <if test="invoiceFileAttachment != null" >
+            #{invoiceFileAttachment,jdbcType=INTEGER},
+        </if>
+        <if test="invoiceNo != null" >
+            #{invoiceNo,jdbcType=VARCHAR},
+        </if>
+        <if test="createTime != null" >
+            #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="orderId != null" >
+            #{orderId,jdbcType=INTEGER},
+        </if>
+        <if test="invoiceUserId != null" >
+            #{invoiceUserId,jdbcType=INTEGER},
+        </if>
+    </trim>
+</insert>
+
+
 </mapper>

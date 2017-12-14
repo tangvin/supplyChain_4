@@ -353,7 +353,7 @@ public class PmmainController {
         Account account = pmAccountservice.accountSelect(userId);
         mv.addObject("account",account);
         mv.addObject("information",information);
-        mv.addObject("messages","recieverAddress");
+        //mv.addObject("messages","recieverAddress");
         return mv;
     }
     

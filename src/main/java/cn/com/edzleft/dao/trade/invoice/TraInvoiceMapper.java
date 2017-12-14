@@ -25,5 +25,10 @@ public interface TraInvoiceMapper {
 	//List<InvoiceRecord> getByUserId(Integer userId);
 	InvoiceRecord getById(Integer id);
 	Integer update(InvoiceRecord invoiceRecord);
+
+
+
+	//上传发票
+	public int insertInvoiceRecord(InvoiceRecord invoiceRecord);
 	
 }

@@ -1,8 +1,10 @@
 package cn.com.edzleft.controller.procurement.oder;
 
+import cn.com.edzleft.entity.Contract;
 import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.entity.ReceivingAddress;
 import cn.com.edzleft.entity.SessionInfo;
+import cn.com.edzleft.service.procurement.contractaward.PmContractWardService;
 import cn.com.edzleft.service.procurement.oder.PmOrderService;
 import cn.com.edzleft.service.procurement.receivingaddress.PmReceivingAddressService;
 import cn.com.edzleft.util.page.DataGridJson;
@@ -18,9 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -36,21 +41,27 @@ public class PmOrderController {
 	@Autowired
 	private PmReceivingAddressService pmreceivingAddressservice;
 	
-	
+	@Autowired
+	private PmContractWardService pmContractWardService;
 	/**
 	 * 查询订单列表
 	 */
 	@RequestMapping(value="/pmgetorder")
 	@ResponseBody
-	public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String orderCreatorTrade,String orderStatus,String creditGrantor,HttpSession sessionInfo){
+	public DataGridJson letterSelect(String username,String fName,Integer aa,String orderCreatTime,String orderConfirmationTime,Integer pageNumber,Integer pageSize ,String entname,String orderStatus,String creditGrantor,HttpSession sessionInfo){
 		SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer userId = session.getAdmin().getInformationId();
 		PageUtil<Order> userPage = new PageUtil<>();
         HashMap<String,Object> whereMaps =new HashMap<>();
-        whereMaps.put("orderCreatorTrade",orderCreatorTrade);
+        whereMaps.put("entname",entname);
         whereMaps.put("orderStatus",orderStatus);
+        whereMaps.put("fName",fName);
+        whereMaps.put("username",username);
         whereMaps.put("creditGrantor",creditGrantor);
         whereMaps.put("userId",userId);
+        whereMaps.put("orderConfirmationTime",orderConfirmationTime);
+        whereMaps.put("orderCreatTime",orderCreatTime);
+        whereMaps.put("aa",aa);
         DataGridJson dgj = new DataGridJson();
         userPage.setCpage(pageNumber);
         userPage.setPageSize(pageSize);
@@ -87,30 +98,40 @@ public class PmOrderController {
 	 */
 	@RequestMapping(value="confirmOder")
 	@ResponseBody
-	public boolean confirmOder(HttpServletRequest req,HttpSession sessionInfo){
+	public Map<String,Object> confirmOder(HttpServletRequest req,HttpSession sessionInfo){
+		Map<String,Object> map = new HashMap<>();
 		String telephone = req.getParameter("telephone");
 		String receiver = req.getParameter("receiver");
 		String receivingAddressId = req.getParameter("receivingAddressId");
 		String orderAmount = req.getParameter("orderAmount");
 		String principalOrderId = req.getParameter("principalOrderId");
 		String applicationletter = req.getParameter("applicationletter");
-		Integer orderCreatorTradeId =Integer.valueOf(req.getParameter("orderCreatorTradeId"));
 		String goods = req.getParameter("goods");
-		Order o=new Order();
-		o.setContactPhone(telephone);
-		o.setLogisticsName(receiver);
-		o.setReceivingAddressId(Integer.parseInt(receivingAddressId));
-		o.setOrderAmount(Double.parseDouble(orderAmount));
-		o.setPrincipalOrderId(Integer.parseInt(principalOrderId));
-		o.setApplicationletter(applicationletter); 
-		o.setGoods(goods);
-		o.setOrderCreatorTradeId(orderCreatorTradeId);
-		o.setOrderStatus(0);
-		SessionInfo sessionInfo1 = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
-		o.setOrderCreatorId(sessionInfo1.getAdmin().getInformationId());
-		o.setOrderCreatTime(new Date());
-		int i = pmOrderService.insertSelective(o, sessionInfo);
-		return i>0?true:false;
+		//根据关联合同查询合同
+		Contract contract = pmContractWardService.getContract(principalOrderId);
+		if(contract == null){
+			map.put("msg", "合同名称错误");
+			map.put("success", false);
+		}else{
+			Order o=new Order();
+			o.setContactPhone(telephone);
+			o.setPrincipalOrderId(contract.getContractId());
+			o.setOrderCreatorTradeId(contract.getContractTraderId());
+			o.setLogisticsName(receiver);
+			o.setReceivingAddressId(Integer.parseInt(receivingAddressId));
+			o.setOrderAmount(Double.parseDouble(orderAmount));
+			o.setApplicationletter(applicationletter);
+			o.setGoods(goods);
+			o.setOrderStatus(0);
+			SessionInfo sessionInfo1 = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+			o.setOrderCreatorId(sessionInfo1.getAdmin().getInformationId());
+			o.setOrderCreatTime(new Date());
+			o.setOrderCreatorId(sessionInfo1.getAdmin().getInformationId());
+			int i = pmOrderService.insertSelective(o, sessionInfo);
+			map.put("msg", "添加成功");
+			map.put("success", true);
+		}
+		return map;
 	}
 	
 	/**
