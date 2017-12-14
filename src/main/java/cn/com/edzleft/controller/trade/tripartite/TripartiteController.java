@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ibmtech on 2017/11/22.
@@ -30,7 +32,6 @@ public class TripartiteController {
     public DataGridJson getTripartiteByPage(Integer pageNumber, Integer pageSize , String caEntName, String pmEntName, HttpSession session){
         PageUtil<Tripartite> userPage = new PageUtil<>();
         HashMap<String,Object> whereMaps =new HashMap<>(); /*从session获取当前用户的信息*/
-
         whereMaps.put("caEntName",caEntName);
         whereMaps.put("pmEntName",pmEntName);
         SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");

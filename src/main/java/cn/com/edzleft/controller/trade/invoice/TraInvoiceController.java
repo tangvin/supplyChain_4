@@ -42,7 +42,7 @@ public class TraInvoiceController {
 		HashMap<String, Object> whereMaps = new HashMap<>();
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
 		Account sessionAccount=sessionInfo.getAdmin();
-		Integer userId=sessionAccount.getUserId();
+		Integer userId=sessionAccount.getInformationId();
 		whereMaps.put("userId", userId);
 		whereMaps.put("invoiceNumber",invoiceNumber);
 		whereMaps.put("checkTaker",checkTaker);

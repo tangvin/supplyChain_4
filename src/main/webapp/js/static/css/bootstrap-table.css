@@ -182,6 +182,7 @@
 
 .fixed-table-pagination .page-list {
     display: inline-block;
+    display:none;
 }
 
 
