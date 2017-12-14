@@ -12,6 +12,7 @@
         }
         .bj_table tbody tr td input{
             width:200px;
+            font-size: 12px;
         }
         .xzdd_hx_table tr td input{
             width:300px!important;
@@ -53,6 +54,68 @@
         #ddd,#eee{
             width:100px;
         }
+
+
+
+
+        .select-span{
+            margin:0;
+            padding:0;
+            position:relative;
+            width:auto;
+            height:auto;
+            overflow:hidden;
+        }
+        .select-span>input,.select-span>select{
+            box-sizing:border-box;
+        }
+        .select-span>input{
+            margin:0;
+            padding:0 5px 0 5px;
+            width:200px;
+            height:34px;
+            line-height:34px;
+            vertical-align:middle;
+            background:#fff;
+            border:1px solid #ddd;
+            outline:none;
+            font-size:12px;
+            overflow:hidden;
+        }
+        .select-span>select{
+            position:absolute;
+            margin:0;
+            padding:0;
+            top:25px;
+            left:0;
+            width:200px;
+            min-height:102px;
+            height:100%;
+            background:#fff;
+            border:1px solid #ddd;
+            font-size:12px;
+            outline:none;
+        }
+        .select-span>select>option{
+            margin:0;
+            padding:3px 5px;
+            width:200px;
+            height:auto;
+            background:#fff;
+            font-size:12px;
+            color:#000;
+        }
+        .select-span>select>option[for=no-con]{
+            color:#f00;
+        }
+        .select-span>select>option:hover{
+            background:#ddd;
+            cursor:pointer;
+        }
+        .select-span>select>option[for=no-con]:hover{
+            background:#fff;
+            cursor:default;
+        }
     </style>
 </head>
 <body>
@@ -75,7 +138,26 @@
                     <tbody>
                     <tr>
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-                            <td class="col-xs-9 text-left"><input type="text" id="orderCreatorTrade"  class="form-control" placeholder="模糊检索匹配"></td>
+                            <td class="col-xs-9 text-left">
+                                    <span class="select-span">
+                                        <%--<input type="text" id="orderCreatorTrade"  class="form-control" placeholder="模糊检索匹配">--%>
+                                        <input type="text" name="orderCreatorTrade" id="orderCreatorTrade" placeholder="模糊检索匹配"/>
+                                        <select name="input-select"  id="input-select" size="10" style="display:none;">
+                                            <option value="1">贸易方名称1</option>
+                                            <option value="2">贸易方名称1--22033</option>
+                                            <option value="3">贸易方9098891</option>
+                                            <option value="4">贸易方名称2</option>
+                                            <option value="5">贸易方</option>
+                                            <option value="6">贸易</option>
+                                            <option value="7">这里是是名称</option>
+                                            <option value="8">好好好</option>
+                                            <option value="9">测试数据</option>
+                                            <option value="10">有数据</option>
+                                            <option value="11">看这里</option>
+                                            <option value="12">很好</option>
+                                        </select>
+                                     </span>
+                            </td>
                     </tr>
                     <tr>
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
@@ -166,7 +248,7 @@
                                             <td class="col-xs-9 text-left">
                                                 <form class="form-inline">
                                                     <div class="checkbox">
-                                                            <input id="eee" readonly="readonly" name="applicationletter">￥万元
+                                                            <input id="eee" readonly="readonly"  name="applicationletter">￥万元
                                                     </div>
                                                 </form>
                                             </td>
@@ -210,6 +292,66 @@
 	$("#glshxx").click(function(){
 		$('#load').load('<%=request.getContextPath()%>/procurementMain/glshxx.action')
 	});
+
+    $(function(){
+
+        var TempArr=[];//存储option
+        var select = $('#input-select');//取得select的当前对象
+
+        $('#input-select>option').each(function(k,v){//将数据存入数组
+            TempArr[k] = $(this).text();
+        });
+
+        $(document).on('click', function(e){
+            var e = e || window.event; //浏览器兼容
+            var elem = e.target || e.srcElement;
+            while (elem){ //循环判断至根节点
+                if(elem.id && (elem.id == 'input-select' || elem.id == 'orderCreatorTrade')){
+                    return;
+                }
+                elem = elem.parentNode;
+            }
+            select.css('display','none');
+        });
+
+        /**
+         * input op
+         */
+        $(document).on({
+            focus:function(){
+                select.css('display','');
+            },
+            input:function(){
+                select.html('');
+                var this_val = $(this).val();
+                $.each(TempArr,function(k,v){
+                    //若找到option中包含input的内容，添加对应的option
+                    if(new RegExp(this_val).test(v)){
+                        //var option = $('<option></option>').text(TempArr[k]);
+                        var option = '<option value='+v+'>'+v+'</option>';
+                        select.append(option);
+                    }
+                });
+                //取总共匹合的数量
+                if(!select.find('option').length){
+                    var option = '<option for=no-con>暂无数据</option>';
+                    select.append(option);
+                }
+            }
+        },'#orderCreatorTrade');
+
+        /**
+         * select op
+         */
+        $(document).on('change','#input-select',function(){
+            if($(this).children('option').attr('for')=='no-con'){return false;}
+            $(this).prev('input').val($(this).find('option:selected').text());
+            $(this).css('display','none');
+        });
+
+
+    });
+
 	$(function(){
 		$.post(
 			"<%=request.getContextPath()%>/pmorder/insetOrder.action",
