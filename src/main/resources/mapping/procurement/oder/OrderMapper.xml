@@ -78,7 +78,7 @@
       <if test="whereMap != null &amp;&amp; whereMap.cname != null and whereMap.cname != ''">
         AND c.contract_name  LIKE '%${whereMap.cname}%'
       </if>
-      <if test="whereMap != null &amp;&amp; whereMap.userId != null and whereMap.userId != ''">
+      <if test="whereMap != null">
         AND o.order_creator_id  = #{whereMap.userId}
       </if>
       <!-- 根据本时间查询 -->
@@ -153,11 +153,37 @@
 	INNER JOIN gyl_information i2 on o.order_creator_trade_id = i2.id -->
 	
 	select o.order_id, o.order_number as orderNumber, o.order_status as orderStatus,
-	o.order_amount as orderAmount,o.order_creat_time,i2.ent_name entname,
-	i.ent_name  as entName , f.freight_name as fName ,contract_name as cname, 
-	a.user_name as username,o.applicationletter,order_confirmation_time,
+	o.order_amount as orderAmount,o.order_creat_time,i2.ent_name entname,o.freight_unit,
+	i.ent_name  as centName , f.freight_name as fName ,c.contract_name as cName, 
+	a.user_name as username,o.applicationletter,o.order_confirmation_time,o.goods,
+	r.r_address_area as area,r.r_address_person as person ,r.r_address_phone phone, r.r_address_address,
+	f.freight_contact_person as fperson,f.freight_contact_phone as fphone,
+	v.amount AS amount,v.invoice_no AS invoiceNo,v.id,c.contract_number as contractnumber
+	from gyl_order o
+ 	left JOIN(SELECT  COUNT(1)AS amount,invoice_no,id FROM  gyl_invoice v left JOIN gyl_order o
+            ON v.order_id =o.order_id GROUP BY o.order_id
+            ) v  ON o.invoice_id=v.id
+	left join gyl_information i on o.order_creator_id = i.id
+	left JOIN gyl_freight f on o.freight_number_id  = f.freight_id
+	left JOIN gyl_contract c on o.principal_order_id = c.contract_id
+	left JOIN gyl_information i2 on o.order_creator_trade_id = i2.id
+	left JOIN gyl_account a on o.payment_account_id  = a.user_id
+	left JOIN gyl_receiving_address r on o.receiving_address_id  = r.r_address_id 
+    <include refid="where_sql"/>
+    ORDER BY  o.order_creat_time  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select>
 
-	v.amount AS amount,v.invoice_no AS invoiceNo,v.id
+
+  <!--根据订单编号orderNumber查询到订单表-->
+  <select id="selectOrder" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select o.order_id, o.order_number as orderNumber, o.order_status as orderStatus,
+	o.order_amount as orderAmount,o.order_creat_time,i2.ent_name entname,o.freight_unit,
+	i.ent_name  as centName , f.freight_name as fName ,c.contract_name as cName, 
+	a.user_name as username,o.applicationletter,o.order_confirmation_time,o.goods,
+	r.r_address_area as area,r.r_address_person as person ,r.r_address_phone phone, r.r_address_address address,
+	f.freight_contact_person as fperson,f.freight_contact_phone as fphone,
+	v.amount AS amount,v.invoice_no AS invoiceNo,v.id,c.contract_number as contractnumber
 	from gyl_order o
  	left JOIN(SELECT  COUNT(1)AS amount,invoice_no,id FROM  gyl_invoice v left JOIN gyl_order o
             ON v.order_id =o.order_id GROUP BY o.order_id
@@ -169,22 +195,12 @@
 	left JOIN gyl_contract c on o.principal_order_id = c.contract_id
 	left JOIN gyl_information i2 on o.order_creator_trade_id = i2.id
 	left JOIN gyl_account a on o.payment_account_id  = a.user_id
-
-    <include refid="where_sql"/>
-    ORDER BY  o.order_creat_time  DESC
-    <![CDATA[	limit #{start},#{pageSize}]]>
-  </select>
-
-
-  <!--根据订单编号orderNumber查询到订单表-->
-  <select id="selectOrder" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select
-    <include refid="Base_Column_List" />
-    from gyl_order
+	left JOIN gyl_receiving_address r on o.receiving_address_id  = r.r_address_id 
     where order_number = #{orderNumber,jdbcType=VARCHAR}
+ 
+ 
   </select>
 
-  <!--根据订单编号orderNumber查询到订单表-->
   <select id="ddbj" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
@@ -369,6 +385,92 @@
     </trim>
   </insert>
   <update id="updOrderStatus" parameterType="cn.com.edzleft.entity.Order" >
+   update gyl_order
+    <set >
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCreatTime != null" >
+        order_creat_time = #{orderCreatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderCreatorId != null" >
+        order_creator_id = #{orderCreatorId,jdbcType=INTEGER},
+      </if>
+      <if test="orderCreatorTradeId != null" >
+        order_creator_trade_id = #{orderCreatorTradeId,jdbcType=INTEGER},
+      </if>
+      <if test="orderConfirmationTime != null" >
+        order_confirmation_time = #{orderConfirmationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="freightNumberId != null" >
+        freight_number_id = #{freightNumberId,jdbcType=INTEGER},
+      </if>
+      <if test="freightUnit != null" >
+        freight_unit = #{freightUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsName != null" >
+        logistics_name = #{logisticsName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="principalOrderId != null" >
+        principal_order_id = #{principalOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="creditGetId != null" >
+        credit_get_id = #{creditGetId,jdbcType=INTEGER},
+      </if>
+      <if test="creditUseId != null" >
+        credit_use_id = #{creditUseId,jdbcType=INTEGER},
+      </if>
+      <if test="creditGrantorId != null" >
+        credit_grantor_id = #{creditGrantorId,jdbcType=INTEGER},
+      </if>
+      <if test="orderAmount != null" >
+        order_amount = #{orderAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="amountPayable != null" >
+        amount_payable = #{amountPayable,jdbcType=DOUBLE},
+      </if>
+      <if test="amountActuallyPaid != null" >
+        amount_actually_paid = #{amountActuallyPaid,jdbcType=INTEGER},
+      </if>
+      <if test="paymentAccountId != null" >
+        payment_account_id = #{paymentAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="paymentTime != null" >
+        payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invoiceId != null" >
+        invoice_id = #{invoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="goods != null" >
+        goods = #{goods,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationletter != null" >
+        applicationletter = #{applicationletter,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingAddressId != null" >
+        receiving_address_id = #{receivingAddressId,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNum != null" >
+        invoice_num = #{invoiceNum,jdbcType=VARCHAR},
+      </if>
+      <if test="letterStatus != null" >
+        letter_status = #{letterStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderCreatorUserid != null" >
+        order_creator_userId = #{orderCreatorUserid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 编辑 -->
+  <update id="updataOreder" parameterType="cn.com.edzleft.entity.Order" >
    update gyl_order
     <set >
       <if test="orderNumber != null" >

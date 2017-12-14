@@ -21,11 +21,11 @@
   <!--条件查询-->
   <sql id="where_sql">
     <trim prefix="where" prefixOverrides="and">
-    	<if test="whereMap != null &amp;&amp; whereMap.invoiceUserId != null and whereMap.invoiceUserId != ''">
-        AND invoice_user_id =#{whereMap.invoiceUserId}
+    	<if test="whereMap != null">
+        AND i.invoice_user_id =#{whereMap.invoiceUserId}
       	</if>
       <if test="whereMap != null &amp;&amp; whereMap.invoiceNumber != null and whereMap.invoiceNumber != ''">
-        AND invoice_number  LIKE '%${whereMap.invoiceNumber}%'
+        AND i.invoice_number  LIKE '%${whereMap.invoiceNumber}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.drawer != null and whereMap.drawer != ''">
         AND inf.ent_name LIKE '%${whereMap.drawer}%'<!-- LIKE '%${whereMap.drawer}%' -->

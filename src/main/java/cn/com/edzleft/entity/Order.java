@@ -915,6 +915,7 @@ public class Order {
 	}
 
     @Override
+
 	public String toString() {
 		return "Order [orderId=" + orderId + ", orderNumber=" + orderNumber + ", orderCreatTime=" + orderCreatTime
 				+ ", orderCreatorId=" + orderCreatorId + ", orderCreatorTradeId=" + orderCreatorTradeId
@@ -933,5 +934,6 @@ public class Order {
 				+ ", contractName=" + contractName + ", contractNumber=" + contractNumber + ", freightName="
 				+ freightName + ", orderCreatorUserId=" + orderCreatorUserId + ", amount=" + amount
 				+ ", contractnumber=" + contractnumber + "]";
-	}
+
+}
 }
