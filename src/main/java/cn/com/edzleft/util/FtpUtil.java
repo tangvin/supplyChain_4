@@ -1,5 +1,14 @@
 package cn.com.edzleft.util;
 
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -35,6 +44,8 @@ public class FtpUtil {
             ftp.connect(host, port);// 连接FTP服务器  
             // 如果采用默认端口，可以使用ftp.connect(host)的方式直接连接FTP服务器  
             ftp.login(username, password);// 登录  
+           /* ftp.enterLocalPassiveMode();
+            ftp.setFileTransferMode(FTP.STREAM_TRANSFER_MODE);*/
             reply = ftp.getReplyCode();  
             if (!FTPReply.isPositiveCompletion(reply)) {  
                 ftp.disconnect();  

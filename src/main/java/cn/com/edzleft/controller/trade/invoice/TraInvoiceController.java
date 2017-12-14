@@ -68,10 +68,10 @@ public class TraInvoiceController {
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public Map update(InvoiceRecord invoiceRecord,@RequestParam("uploadFile") MultipartFile uploadFile,HttpSession session,RedirectAttributes attr){
+	public Map<String,Object> update(InvoiceRecord invoiceRecord,@RequestParam("uploadFile") MultipartFile uploadFile,HttpSession session,RedirectAttributes attr){
 		//Map<String,Object> jsonMap = new HashMap<String,Object>();
 		
-		Map resultMap = new HashMap<>();  
+		Map<String,Object> resultMap = new HashMap<>();  
 		Attachment attachment = new Attachment();
 		String newName="";
 		String imagePath="";
@@ -89,13 +89,13 @@ public class TraInvoiceController {
                // newName = newName + oldName.substring(oldName.lastIndexOf("."));  
                 //上传的路径  
               //  Date date = new Date();
-                imagePath = "/ukey";
+                imagePath = "/ukey/";
                 //端口号  
                 int port = Integer.parseInt("21");  
                // System.out.println(FTP_BASEPATH);  
                 //调用方法，上传文件  
                 result = FtpUtil.uploadFile("47.104.103.141", port,  
-                        "gylftpuser", "gylftppwd", "/home/gylftpuser", imagePath,  
+                        "gylftpuser", "gylftppwd", "/home/gylftpuser/uploadfile", imagePath,  
                         newName, uploadFile.getInputStream());  
 			}
            
@@ -106,10 +106,17 @@ public class TraInvoiceController {
                 return resultMap;  
             }  
             resultMap.put("error", 0);  
-            resultMap.put("url", "47.104.103.141" + imagePath + newName); 
+            resultMap.put("url", "http://47.104.103.141" + imagePath + newName); 
             attachment.setAttachmentName(newName);
             attachment.setAttachmentId(invoiceRecord.getInvoiceFileAttachment());
-			attachment.setAttachmentUrl((String)resultMap.get("url"));
+
+            if (!uploadFile.isEmpty()) {
+				attachment.setAttachmentUrl((String)resultMap.get("url"));
+			}else {
+				attachment.setAttachmentUrl(invoiceRecord.getAttachmentUrl());
+			}
+
+	
             traAttService.updateImg(attachment);
             traInvoiceService.update(invoiceRecord);
             return resultMap;  

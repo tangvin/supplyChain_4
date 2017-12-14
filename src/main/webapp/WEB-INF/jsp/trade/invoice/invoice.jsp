@@ -93,7 +93,6 @@
                 },
                 {field:'attachmentUrl',title:'发票预览',
                   formatter:function (value) {
-                    alert(value)
                       var str_img = '';
                       str_img += '<img style="width:40px;height:30px" src=\"'+value+'\">';
                       return str_img;
