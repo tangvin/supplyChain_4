@@ -65,7 +65,7 @@
                 <span>主要适用于需通过资金融通满足优质订单生产需求，且具有较强资信实力和生产能力的客户。</span>
                 <span>订单阶段性融资又可分为：订单融资阶段和交货后融资阶段。</span>
                 <div class="xtsy_div">
-
+                    <img src="<%=request.getContextPath()%>/js/static/images/images1/product-ico-1.png">
                 </div>
             </div>
 
