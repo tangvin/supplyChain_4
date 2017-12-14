@@ -8,7 +8,9 @@ public interface PmHomePageMapper {
 
 	int updateInformation(Information information);
 
-	int addInformation(Information information);
+	int insertSelective(Information information);
+
+	Information selectByCreatorId(Integer userId);
 
 	
 

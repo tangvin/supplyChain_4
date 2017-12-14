@@ -1,15 +1,15 @@
 package cn.com.edzleft.util;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
+import org.apache.log4j.Logger;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class FtpUtil {  
 	  
@@ -129,6 +129,71 @@ public class FtpUtil {
             }  
         }  
         return result;  
-    }  
-}  
+    }
+
+    private static final Logger log = Logger.getLogger(FtpUtil.class);
+    /**
+     * <p>方法描述: [从ftp中获得图片流返给页面]</p>
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @param ftpUrl  ftp的url
+     * @param fileUrl 文件路径
+     * @param response Response对象
+     */
+    public static void getFtpImage(String username, String password, String ftpUrl, String fileUrl,
+                                   HttpServletResponse response) {
+        InputStream isr = null;
+        OutputStream out = null;
+        URL u  = null;
+        try {
+            if ((fileUrl != null) && !"".equals(fileUrl)) {
+                response.setHeader("Content-Type", "image/png"); //response.setContentType("image/*"); // 设置返回的文件类型
+                out = response.getOutputStream();
+                StringBuffer sb = new StringBuffer("ftp://");
+                sb.append(username + ":");
+                sb.append(password + "@");
+                sb.append(ftpUrl + "/" + fileUrl);
+                u = new URL(sb.toString());
+                URLConnection urlconn = u.openConnection();
+                isr = urlconn.getInputStream();
+                int len = urlconn.getContentLength();
+                int i = len;
+                int c;
+                while (((c = isr.read()) != -1) && (--i > 0)) {
+                    out.write(c);
+                }
+                log.info("获取ftp图片" + fileUrl);
+            } else {
+                log.warn("所要显示的图片路径为空");
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        } finally {
+            try {
+                if (isr != null) {
+                    isr.close();
+                }
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                log.error(e.getMessage());
+            }
+        }
+    }
+
+    /**
+     *      * @param username 用户名
+     * @param password 密码
+     * @param ftpUrl  ftp的url
+     * @param fileUrl 文件路径
+     * @param area
+     */
+
+
+
+
+
+}
 

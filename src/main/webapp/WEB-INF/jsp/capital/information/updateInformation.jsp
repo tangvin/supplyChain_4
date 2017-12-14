@@ -175,7 +175,8 @@
                                 </tr>
                                 <tr>
                                     <td class="text-right">经营范围：</td>
-                                    <td><input type="text" class="form-control" name="businessScope" value="${information.businessScope}"></td>
+                                    <td><textarea style="width: 250px;" class="form-control" name="businessScope">${information.businessScope}</textarea></td>
+                                    <%--<input type="text" class="form-control" name="businessScope" value="${information.businessScope}">--%>
                                 </tr>
                                 <tr>
                                     <td class="text-right">登记机关：</td>

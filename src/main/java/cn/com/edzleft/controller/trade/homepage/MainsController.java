@@ -14,11 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by ASUS on 2017/11/15.
@@ -111,11 +111,12 @@ public class MainsController {
      */
     @RequestMapping(value = "ddck")
     public ModelAndView ddck(String value){
+        //根据订单编号查看订单详细信息
         Order order = tradeOrderService.queryOrderByNumber(value);
         //获取货运管理表id
-        Integer logisticsUnitId = order.getLogisticsUnitId();
+        Integer freightNumberId = order.getFreightNumberId();
         //查询出货运单位信息
-        Freight freight = freightService.queryFreightById(logisticsUnitId);
+        Freight freight = freightService.queryFreightById(freightNumberId);
         //获取收货地址的id
         Integer addressId = order.getReceivingAddressId();
         //查询出地址信息

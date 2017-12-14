@@ -10,7 +10,8 @@
     <title>订单管理</title>
     <style>
        .xzdd{
-          margin-right:40px;
+          /*margin-right:40px;*/
+           margin-right:-15px;
        }
         #butt{
             cursor: pointer;
@@ -33,7 +34,7 @@
             <div class="khh">
                 <form class="form-inline khh_form khh_form1" id="ordersform">
                     <div class="form-group">
-                        <label>状态</label>
+                        <label>状态：</label>
                         <select class="form-control select" id="orderStatus">
                             <option value="">全部</option>
                             <option value="0">待确认</option>
@@ -45,7 +46,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>开户行</label>
+                        <label>开户行：</label>
                         <input type="text" class="form-control" id="creditGrantor">
                     </div>
                     <!-- <div class="form-group form-group1">
@@ -54,7 +55,7 @@
                         <input type="text" readonly="readonly"  name="birthday" id="birthday" class="form-control" value="03/18/2013" />
                     </div> -->
                     <div class="form-group">
-                        <label>签约方</label>
+                        <label>签约方：</label>
                         <input type="text" class="form-control" id="orderCreatorTrade">
                     </div>
                     <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>
@@ -161,14 +162,24 @@
                 
                 {field:'orderCreatTime',title:'订单创建时间',
                 	formatter:function(value,row,index){
-                        return ConvertToDate(value)
+                        var str='';
+                        str+='<p>'+row.orderAmount+'</p><p>'+ConvertToDate(value)+'</p>';
+//                        return ConvertToDate(value)
+                        return str
                    }
                 },
                 
                 {field:'principalOrder',title:'合同'},
                 {field:'creditUse',title:'用信情况&nbsp;￥万元'},
                 {field:'invoice',title:'发票'},
-                {field:'freightNumber',title:'货运及单号'},
+                {field:'freightNumber',title:'货运及单号',
+                    formatter:function(value,row,index){
+                        var str='';
+                        str+='<p>'+row.orderAmount+'</p><p>'+ConvertToDate(value)+'</p>';
+//                        return ConvertToDate(value)
+                        return str
+                    }
+                },
                 {
                     title:'操作',
                     field:'action',

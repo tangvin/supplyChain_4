@@ -44,7 +44,7 @@ public class PmOrderController {
 	@ResponseBody
 	public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String orderCreatorTrade,String orderStatus,String creditGrantor,HttpSession sessionInfo){
 		SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
-        Integer userId = session.getAdmin().getUserId();
+        Integer userId = session.getAdmin().getInformationId();
 		PageUtil<Order> userPage = new PageUtil<>();
         HashMap<String,Object> whereMaps =new HashMap<>();
         whereMaps.put("orderCreatorTrade",orderCreatorTrade);
@@ -94,7 +94,7 @@ public class PmOrderController {
 		String orderAmount = req.getParameter("orderAmount");
 		String principalOrderId = req.getParameter("principalOrderId");
 		String applicationletter = req.getParameter("applicationletter");
-		Integer orderCreatorTrade = Integer.valueOf(req.getParameter("orderCreatorTrade"));
+		Integer orderCreatorTradeId =Integer.valueOf(req.getParameter("orderCreatorTradeId"));
 		String goods = req.getParameter("goods");
 		Order o=new Order();
 		o.setContactPhone(telephone);
@@ -104,8 +104,10 @@ public class PmOrderController {
 		o.setPrincipalOrderId(Integer.parseInt(principalOrderId));
 		o.setApplicationletter(applicationletter); 
 		o.setGoods(goods);
-		o.setOrderCreatorTradeId(orderCreatorTrade);
+		o.setOrderCreatorTradeId(orderCreatorTradeId);
 		o.setOrderStatus(0);
+		SessionInfo sessionInfo1 = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+		o.setOrderCreatorId(sessionInfo1.getAdmin().getInformationId());
 		o.setOrderCreatTime(new Date());
 		int i = pmOrderService.insertSelective(o, sessionInfo);
 		return i>0?true:false;

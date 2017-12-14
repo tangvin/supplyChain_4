@@ -2,11 +2,13 @@ package cn.com.edzleft.service.trade.order;
 
 import cn.com.edzleft.dao.trade.order.OrderMapper;
 import cn.com.edzleft.entity.Order;
+import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.util.page.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -55,7 +57,7 @@ public class TradeOrderServiceImpl  implements TradeOrderService{
      * @param id
      */
     @Override
-    public Order setOrderStatus(Integer id,Integer flag) {
+    public Order setOrderStatus(Integer id, Integer flag, HttpSession session) {
         //根据id查询当前的订单
         Order order = orderMapper.selectOrderById(id);
         //Integer orderStatus = order.getOrderStatus();
@@ -63,8 +65,12 @@ public class TradeOrderServiceImpl  implements TradeOrderService{
            //领取订单（0---1）
            order.setOrderId(id);
            order.setOrderStatus(1);
+           //将当前时间存到订单表
            order.setOrderConfirmationTime(new Date());
-           order.setOrderCreatorTrade("贸易方名称");
+           //将用户表中的information_id存到订单表
+        SessionInfo s = (SessionInfo) session.getAttribute("sessionInfo");
+        Integer informationId = s.getAdmin().getInformationId();
+        order.setOrderCreatorTradeId(informationId);
        } else if (flag == 2) { //待确认--驳回
            //驳回（0--6）
             order.setOrderId(id);

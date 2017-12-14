@@ -124,6 +124,58 @@ public class Order {
         return letterStatus;
     }
 
+    public void setLetterStatus(Integer letterStatus) {
+        this.letterStatus = letterStatus;
+    }
+
+    public Integer getCreditGetId() {
+        return creditGetId;
+    }
+
+    public void setCreditGetId(Integer creditGetId) {
+        this.creditGetId = creditGetId;
+    }
+
+    public void setCreditUseId(Integer creditUseId) {
+        this.creditUseId = creditUseId;
+    }
+
+    public void setCreditGrantorId(Integer creditGrantorId) {
+        this.creditGrantorId = creditGrantorId;
+    }
+
+    public void setPaymentAccountId(Integer paymentAccountId) {
+        this.paymentAccountId = paymentAccountId;
+    }
+
+    public Integer getFreightNumberId() {
+        return freightNumberId;
+    }
+
+    public String getInvoiceNum() {
+        return invoiceNum;
+    }
+
+    public void setInvoiceNum(String invoiceNum) {
+        this.invoiceNum = invoiceNum;
+    }
+
+    public String getApplicationletter() {
+        return applicationletter;
+    }
+
+    public void setApplicationletter(String applicationletter) {
+        this.applicationletter = applicationletter;
+    }
+
+    public String getGoods() {
+        return goods;
+    }
+
+    public void setGoods(String goods) {
+        this.goods = goods;
+    }
+
     public Integer getOrderId() {
         return orderId;
     }
@@ -137,7 +189,7 @@ public class Order {
     }
 
     public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
+        this.orderNumber = orderNumber == null ? null : orderNumber.trim();
     }
 
     public Date getOrderCreatTime() {
@@ -153,7 +205,7 @@ public class Order {
     }
 
     public void setOrderCreatorId(Integer orderCreatorId) {
-        this.orderCreatorId = orderCreatorId;
+        this.orderCreatorId = orderCreatorId == null ? null : orderCreatorId;
     }
 
     public Integer getOrderCreatorTradeId() {
@@ -161,7 +213,7 @@ public class Order {
     }
 
     public void setOrderCreatorTradeId(Integer orderCreatorTradeId) {
-        this.orderCreatorTradeId = orderCreatorTradeId;
+        this.orderCreatorTradeId = orderCreatorTradeId == null ? null : orderCreatorTradeId;
     }
 
     public Date getOrderConfirmationTime() {
@@ -180,12 +232,13 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
+
     public Integer getReceivingAddressId() {
         return receivingAddressId;
     }
 
     public void setReceivingAddressId(Integer receivingAddressId) {
-        this.receivingAddressId = receivingAddressId;
+        this.receivingAddressId = receivingAddressId == null ? null : receivingAddressId;
     }
 
     public String getLogisticsName() {
@@ -193,7 +246,7 @@ public class Order {
     }
 
     public void setLogisticsName(String logisticsName) {
-        this.logisticsName = logisticsName;
+        this.logisticsName = logisticsName == null ? null : logisticsName;
     }
 
     public String getContactPhone() {
@@ -212,11 +265,11 @@ public class Order {
         this.principalOrderId = principalOrderId;
     }
 
-    public Integer getCreditGetId() {
+    public Integer getCreditGet() {
         return creditGetId;
     }
 
-    public void setCreditGetId(Integer creditGetId) {
+    public void setCreditGet(Integer creditGet) {
         this.creditGetId = creditGetId;
     }
 
@@ -224,7 +277,7 @@ public class Order {
         return creditUseId;
     }
 
-    public void setCreditUseId(Integer creditUseId) {
+    public void setCreditUse(Integer creditUse) {
         this.creditUseId = creditUseId;
     }
 
@@ -232,8 +285,8 @@ public class Order {
         return creditGrantorId;
     }
 
-    public void setCreditGrantorId(Integer creditGrantorId) {
-        this.creditGrantorId = creditGrantorId;
+    public void setCreditGrantor(Integer creditGrantor) {
+        this.creditGrantorId = creditGrantorId == null ? null : creditGrantorId;
     }
 
     public Double getOrderAmount() {
@@ -264,8 +317,8 @@ public class Order {
         return paymentAccountId;
     }
 
-    public void setPaymentAccountId(Integer paymentAccountId) {
-        this.paymentAccountId = paymentAccountId;
+    public void setPaymentAccount(String paymentAccount) {
+        this.paymentAccountId = paymentAccountId == null ? null : paymentAccountId;
     }
 
     public Date getPaymentTime() {
@@ -292,40 +345,12 @@ public class Order {
         this.freightUnit = freightUnit;
     }
 
-    public Integer getFreightNumberId() {
+    public Integer getFreightNumber() {
         return freightNumberId;
     }
 
     public void setFreightNumberId(Integer freightNumberId) {
         this.freightNumberId = freightNumberId;
-    }
-
-    public String getGoods() {
-        return goods;
-    }
-
-    public void setGoods(String goods) {
-        this.goods = goods;
-    }
-
-    public String getApplicationletter() {
-        return applicationletter;
-    }
-
-    public void setApplicationletter(String applicationletter) {
-        this.applicationletter = applicationletter;
-    }
-
-    public String getInvoiceNum() {
-        return invoiceNum;
-    }
-
-    public void setInvoiceNum(String invoiceNum) {
-        this.invoiceNum = invoiceNum;
-    }
-
-    public void setLetterStatus(Integer letterStatus) {
-        this.letterStatus = letterStatus;
     }
 
     @Override

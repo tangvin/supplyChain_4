@@ -126,7 +126,7 @@
                                 </td>
                             </tr>
                             <tr  class="three_certificates">
-                                <td class="text-right">组织机构代码：</td>
+                                <td class="text-right"><span class="xingxing">*</span>组织机构代码：</td>
                                 <td><input type="text" class="form-control" value="${information.institutionCode}" name="institutionCode"></td>
                             </tr>
                             <tr class="three_certificates">
