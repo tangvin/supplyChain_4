@@ -3,7 +3,7 @@
 <html style="overflow: auto;">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>飞迅金服 - 注册</title>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/js/static/css/bootstrap.css"/>
     <script src="<%=request.getContextPath()%>/js/static/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/static/js/bootstrap.js"></script>
@@ -80,7 +80,7 @@
 <body style="padding: 0;margin: 0;overflow: auto;">
 <div class="container-fluid login-top">
     <div class='container container-logo'>
-        <img src='<%=request.getContextPath()%>/js/static/images/logo1.3@1x.png'>
+        <a href="<%=request.getContextPath()%>/"><img src='<%=request.getContextPath()%>/js/static/images/logo1.5@1x.png'></a>
     </div>
     <div class="col-xs-12 rsg_one">
     <div class='rsg center-block'>

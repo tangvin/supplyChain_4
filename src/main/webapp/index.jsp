@@ -30,7 +30,7 @@
             <!--头部左边 logo 开始-->
             <div class="home_top-left">
                 <div class="hone_top_logo">
-                    <img src="<%=request.getContextPath()%>/js/static/images/images1/logo-topbar.png">
+                    <a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/js/static/images/images1/logo-topbar.png"></a>
                 </div>
             </div>
             <!--头部左边 logo 结束-->
@@ -75,7 +75,7 @@
                     <span class="home_cpzx">产品中心</span>
                     <span class="home_xian"></span>
                 </p>
-                <p class="home_cpjs_con">飞迅金服供应链金融系统，通过将供应链上的相关企业作为一个整体，根据交易中构成的链条关系和行业特点 设定融资方案，对供应链上单个企业或上下游多个企业提供的全面金融系统支撑；同时飞讯金服金融资产账户 管理系统，实现业务系统与资产端的交互，为整个供应链条提供资金账户、资金流向、账目明细等资产端服务， 助力企业快速打造供应链金融生态圈</p>
+                <p class="home_cpjs_con">飞迅金服供应链金融系统，通过将供应链上的相关企业作为一个整体，根据交易中构成的链条关系和行业特点设定融资方案，对供应链上单个企业或上下游多个企业提供的全面金融系统支撑；同时飞讯金服金融资产账户 管理系统，实现业务系统与资产端的交互，为整个供应链条提供资金账户、资金流向、账目明细等资产端服务， 助力企业快速打造供应链金融生态圈</p>
                 <div class="home_cpjs_img">
                     <img src="<%=request.getContextPath()%>/js/static/images/images1/home-ico-1.png">
                 </div>
@@ -214,7 +214,7 @@
 </div>
 <a href="#0" class="cd-top">Top</a>
 </body>
-<script src="js/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/static/js/jquery.min.js"></script>
 <script>
     $(document).ready(function($){
 

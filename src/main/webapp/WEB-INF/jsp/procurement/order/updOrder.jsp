@@ -152,6 +152,7 @@
 					<div class="col-xs-12">
 		            <div class="row jbxx_row ckdd">
 		                <div class="col-xs-8">
+		                <!-- 收货信息1是待确认状态 -->
 		                    <h5>收货信息</h5>
 		                </div>
 		            </div>
@@ -280,6 +281,7 @@
 					<div class="row jbxx_row ckdd">
 					<div class="col-xs-8">
 					<h5>收货信息</h5>
+					 <!-- 收货信息2是待付款状态 -->
 					</div>
 					</div>
 					<div class="table-responsive text-center col-xs-12">
@@ -404,7 +406,7 @@ $(function(){
         }
     })
 });  
-  /*   编辑待确认和已驳回 */
+  		/* 编辑待确认和已驳回 */
     
      $("#sureUpdate1").click(function(){
 	   	 $.ajax({
@@ -413,21 +415,29 @@ $(function(){
 	            type:'post',
 	            dataType:'json',
 	            success:function(data){
-	            	alert("编辑完成");
-	            	setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/ddgl.action')",500);
+	            	if(data.success){
+	            		alert(data.msg);
+		            	setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/ddgl.action')",500);
+	            	}else{
+	            		alert(data.msg);
+	            	}
 	            }
 	        });
-   });
-	/*编辑daifukua*/
-    $("#sureUpdate2").click(function(){
+  		 });
+		/*编辑待付款*/
+    	$("#sureUpdate2").click(function(){
 		 $.ajax({
 	         url:'<%=request.getContextPath()%>/pmorder/updateOrder.action',
 	         data:$("#form2").serialize(),
 	         type:'post',
 	         dataType:'json',
 	         success:function(data){
-	         	alert("编辑完成");
-	         	setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/ddgls.action')",500);
+	         	if(data.success){
+            		alert(data.msg);
+	            	setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/ddgl.action')",500);
+            	}else{
+            		alert(data.msg);
+            	}
 	         }
 	     });
  });

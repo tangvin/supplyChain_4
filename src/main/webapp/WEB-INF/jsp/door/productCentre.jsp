@@ -16,7 +16,7 @@
             <!--头部左边 logo 开始-->
             <div class="home_top-left">
                 <div class="hone_top_logo">
-                    <img src="<%=request.getContextPath()%>/js/static/images/images1/logo-topbar.png">
+                    <a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/js/static/images/images1/logo-topbar.png"></a>
                 </div>
             </div>
             <!--头部左边 logo 结束-->
@@ -44,7 +44,11 @@
     <!--top 结束-->
     <!--banner 开始-->
     <div class="home_banner cpzx_banner">
-        <div class="home_width"></div>
+        <div class="home_width">
+            <div id="rightArrow">
+                咨询热线：400 - 888 - 6660
+            </div>
+        </div>
     </div>
     <!--banner 结束-->
 
@@ -60,17 +64,23 @@
                 <span>企业凭信用良好的交易订单，金融机构为其经营提供融资。</span>
                 <span>主要适用于需通过资金融通满足优质订单生产需求，且具有较强资信实力和生产能力的客户。</span>
                 <span>订单阶段性融资又可分为：订单融资阶段和交货后融资阶段。</span>
-                <div class="xtsy_div"></div>
+                <div class="xtsy_div">
+
+                </div>
             </div>
 
             <div class="cpzx_xtjs">
                 <p>业务流程</p>
-                <div class="xtsy_div"></div>
+                <div class="xtsy_div">
+                    <img src="<%=request.getContextPath()%>/js/static/images/images1/product-ico-2.png">
+                </div>
             </div>
 
             <div class="cpzx_xtjs">
                 <p>系统使用</p>
-                <div class="xtsy_div"></div>
+                <div class="xtsy_div">
+
+                </div>
             </div>
 
         </div>
@@ -101,5 +111,27 @@
     </div>
     <!--home 底部 结束-->
 </div>
+<a href="#0" class="cd-top">Top</a>
 </body>
+<script src="<%=request.getContextPath()%>/js/static/js/jquery.min.js"></script>
+<script>
+    $(document).ready(function($){
+
+        var offset = 300,
+            offset_opacity = 1200,
+            scroll_top_duration = 700,
+            $back_to_top = $('.cd-top');
+        $(window).scroll(function(){
+            ( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+        });
+        $back_to_top.on('click', function(event){
+            event.preventDefault();
+            $('body,html').animate({
+                    scrollTop: 0 ,
+                }, scroll_top_duration
+            );
+        });
+
+    });
+</script>
 </html>

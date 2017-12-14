@@ -96,6 +96,30 @@
 		    </div>
      </div>
 <!--领取订单 模态框 结束-->
+<div class="modal fade bs-example-modal-sm_sq" id="myModalLetter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabelLetter">申请用信</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="table-responsive text-center">
+                                	<form class="form-inline khh_form" id="orderForm">
+	                                    <table class="table table-bordered bj_table" >
+	                                        <tbody id="wybLetter">
+	
+	                                        </tbody>
+	                                    </table>
+                                    </form>
+                                </div>
+                            </div>
+                          
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" id="orderClike">确认</button>
+                            </div>
+                        </div>
+                    </div>
 <!--申请融信 模态框-->
 
 </div>
@@ -276,14 +300,13 @@
     function sqyx(id,flag){
     	 /* 提交申请用信 */
     	  $("#orderClike").click(function(){
-    		  alert($("#orderForm").serialize())
     		  $.ajax({
     			  url: '<%=request.getContextPath()%>/pmorder/commitSqyx.action?id='+id+'&&flag='+flag,
     	          data:$("#orderForm").serialize(),
     	          type:"POST",
     	          dataType:"json",
     	          success: function(data){
-    	        	  alert("申请用信成功");
+    	        	  alert("已申请用信,请等待审核。");
                       setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/ddgl.action')",500);
     	          }
     		  });

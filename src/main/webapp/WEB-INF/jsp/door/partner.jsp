@@ -16,7 +16,7 @@
             <!--头部左边 logo 开始-->
             <div class="home_top-left">
                 <div class="hone_top_logo">
-                    <img src="<%=request.getContextPath()%>/js/static/images/images1/logo-topbar.png">
+                    <a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/js/static/images/images1/logo-topbar.png"></a>
                 </div>
             </div>
             <!--头部左边 logo 结束-->
@@ -44,7 +44,11 @@
     <!--top 结束-->
     <!--banner 开始-->
     <div class="home_banner cpzx_banner hzhb_banner">
-        <div class="home_width"></div>
+        <div class="home_width">
+            <div id="rightArrow">
+                咨询热线：400 - 888 - 6660
+            </div>
+        </div>
     </div>
     <!--banner 结束-->
 
@@ -160,5 +164,27 @@
     </div>
     <!--home 底部 结束-->
 </div>
+<a href="#0" class="cd-top">Top</a>
 </body>
+<script src="<%=request.getContextPath()%>/js/static/js/jquery.min.js"></script>
+<script>
+    $(document).ready(function($){
+
+        var offset = 300,
+            offset_opacity = 1200,
+            scroll_top_duration = 700,
+            $back_to_top = $('.cd-top');
+        $(window).scroll(function(){
+            ( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+        });
+        $back_to_top.on('click', function(event){
+            event.preventDefault();
+            $('body,html').animate({
+                    scrollTop: 0 ,
+                }, scroll_top_duration
+            );
+        });
+
+    });
+</script>
 </html>
