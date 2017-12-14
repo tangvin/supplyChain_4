@@ -9,16 +9,18 @@ import cn.com.edzleft.service.trade.freight.FreightService;
 import cn.com.edzleft.service.trade.information.TradeInformationService;
 import cn.com.edzleft.service.trade.order.TradeOrderService;
 import cn.com.edzleft.service.trade.receivingAddress.ReceivingAddressService;
+import cn.com.edzleft.service.trade.reject.RejectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ASUS on 2017/11/15.
@@ -41,7 +43,8 @@ public class MainsController {
     private ContractSigningService contractSigningService;
     @Autowired
     private BankAccountService bankAccountService;
-
+    @Autowired
+    private RejectService rejectService;
 
     /**
      * 货运管理
@@ -113,6 +116,7 @@ public class MainsController {
     public ModelAndView ddck(String value){
         //根据订单编号查看订单详细信息
         Order order = tradeOrderService.queryOrderByNumber(value);
+        Integer orderId = order.getOrderId();
         //获取货运管理表id
         Integer freightNumberId = order.getFreightNumberId();
         //查询出货运单位信息
@@ -125,11 +129,14 @@ public class MainsController {
         Integer principalOrderId = order.getPrincipalOrderId();
         //查询出合同信息
         Contract contract = contractSigningService.queryContractById(principalOrderId);
+        //查看驳回记录
+        List<Reject> rejectList = rejectService.queryRejectByOrderId(orderId);
         ModelAndView modelAndView = new ModelAndView("/trade/order/viewOrder");
         modelAndView.addObject("order",order);
         modelAndView.addObject("freight",freight);
         modelAndView.addObject("receivingAddress",receivingAddress);
         modelAndView.addObject("contract",contract);
+        modelAndView.addObject("rejectList",rejectList);
         return modelAndView;
     }
 

@@ -77,5 +77,17 @@ public class FreightController {
         return flag;
     }
 
+    /**
+     * 根据用户id查询查询出当前的货运单位
+     */
+    @RequestMapping(value = "/freightSelect",method = RequestMethod.POST)
+    @ResponseBody
+    public List<Freight> freightSelect(HttpSession sessionInfo){
+        SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getUserId();
+        List<Freight> freightList = freightService.queryFreightByAccountId(userId);
+        return  freightList;
+    }
+
 
 }

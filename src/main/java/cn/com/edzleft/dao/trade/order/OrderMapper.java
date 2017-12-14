@@ -11,6 +11,22 @@ import java.util.List;
 public interface OrderMapper {
 
     /**
+     * 表连接查询总条数
+     * @param pageUtil
+     * @return
+     */
+    public Integer selectAllOrderCountLast(PageUtil<Order> pageUtil);
+
+
+    /**
+     * 表连接查询出所有的订单
+     * @param pageUtil
+     * @return
+     */
+    public List<Order> selectAllOrderLast(PageUtil<Order> pageUtil);
+
+
+    /**
      * 查询出订单总条数
      * @param pageUtil
      * @return

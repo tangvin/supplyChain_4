@@ -9,6 +9,9 @@
         .xzdd{
             margin-top:40px;
         }
+        .bj_table{
+            margin-left: -15px;
+        }
         .bj_table tbody tr td input{
             width:200px;
         }
@@ -40,65 +43,52 @@
             <span>></span>
             <a href="#" id="ddgl">订单管理</a>
             <span>></span>
-            <a href="#">新增订单</a>
+            <a href="#">订单详情</a>
         </div>
         <!--合同签约 头部 end-->
-        <div class="col-xs-12">
+        <div class="col-xs-12" id="ddxx_open">
                 <div class="row jbxx_row ckdd">
                     <div class="col-xs-8">
                         <h5>订单信息</h5>
                     </div>
                 </div>
-                <!--合同编辑表格 start-->
-                <div class="table-responsive text-center col-xs-12">
-                    <table class="table table-bordered bj_table">
-                        <tbody>
-                        <tr>
-                            <div class="row">
-                                <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-                                <td class="col-xs-9 text-left"><span>${order.orderCreator}</span></td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div class="row">
-                                <td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
-                                <td class="col-xs-9 text-left"><span>合同编号：${contract.contractNumber}       合同名称：${contract.contractName}</span></td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div class="row">
-                                <td class="col-xs-3 text-right"><span class="xingxing">*</span>货物商品：</td>
-                                <td class="col-xs-9 text-left"><span>${order.goods}</span></td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div class="row">
-                                <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单编号：</td>
-                                <td class="col-xs-8 text-left"><span>${order.orderNumber}</span></td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div class="row">
-                                <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单金额：</td>
-                                <td class="col-xs-8 text-left"><span>${order.orderAmount}</span></td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div class="row">
-                                <td class="col-xs-3 text-right"><span class="xingxing">*</span>发票：</td>
-                                <td class="col-xs-8 text-left">${order.invoiceNum}<img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div class="row">
-                                <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单状态：</td>
-                                <td class="col-xs-8 text-left">
+                <%--<div class="col-xs-12" style="background: red"></div>--%>
+            <!--合同编辑表格 start-->
+            <table class="table table-bordered bj_table">
+                <tbody>
+                <tr>
+                    <td class="col-xs-3  text-right"><span class="xingxing">*</span>合同签约方：</td>
+                    <td class="col-xs-9 text-left"><span>${procurementEntName}</span></td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
+                    <td class="col-xs-9 text-left"><span>合同编号：${order.contractNumber}       合同名称：${order.contractName}</span></td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>货物商品：</td>
+                    <td class="col-xs-9 text-left"><span>${order.goods}</span></td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单编号：</td>
+                    <td class="col-xs-9 text-left"><span>${order.orderNumber}</span></td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单金额：</td>
+                    <td class="col-xs-9 text-left"><span>${order.orderAmount}</span></td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>发票：</td>
+                    <td class="col-xs-9 text-left">${order.invoiceNum}<img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单状态：</td>
+                    <td class="col-xs-9 text-left">
                                     <span>
                                         <c:if test="${order.orderStatus==0}">
                                             待确认
                                         </c:if>
                                         <c:if test="${order.orderStatus==1}">
-                                           待付款
+                                            待付款
                                         </c:if>
                                         <c:if test="${order.orderStatus==2}">
                                             待发货
@@ -116,28 +106,28 @@
                                             已驳回
                                         </c:if>
                                     </span>
-                                </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>申请用信：</td>
+                    <td class="col-xs-9 text-left">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <input name="creditAmount" type="text" class="form-control" id="id1" disabled VALUE="${order.orderAmount}">￥万元
                             </div>
-                        </tr>
-                        <tr>
-                            <div class="row">
-                                <td class="col-xs-3 text-right"><span class="xingxing">*</span>申请用信：</td>
-                                <td class="col-xs-9 text-left">
-                                    <form class="form-inline">
-                                        <div class="form-group">
-                                            <input name="creditAmount" type="text" class="form-control" id="id1" disabled VALUE="${order.orderAmount}">￥万元
-                                        </div>
-                                    </form>
-                                </td>
-                            </div>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!--合同编辑表格 end-->
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单驳回记录：</td>
+                    <td class="col-xs-9 text-left">${rejectList.size()}</td>
+                </tr>
+                </tbody>
+            </table>
+            <!--合同编辑表格 end-->
         </div>
 
-        <div class="col-xs-12" id="open">
+        <div class="col-xs-12" id="hyxx_open">
             <div class="row jbxx_row ckdd">
                 <div class="col-xs-8">
                     <h5>货运信息</h5>
@@ -150,7 +140,7 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>发货人：</td>
-                            <td class="col-xs-9 text-left"><span>${order.orderCreatorTrade}</span></td>
+                            <td class="col-xs-9 text-left"><span>${order.orderCreatorId}</span></td>
                         </div>
                     </tr>
                     <tr>
@@ -168,7 +158,7 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right">联系收货人：</td>
-                            <td class="col-xs-8 text-left">
+                            <td class="col-xs-9 text-left">
                                 <span style="float: left;margin-top: 5px;">${freight.freightContactPerson}</span>
                             </td>
                         </div>
@@ -187,10 +177,7 @@
             <!--合同编辑表格 end-->
         </div>
 
-
-
-
-        <div class="col-xs-12">
+        <div class="col-xs-12" id="shxx_open">
             <div class="row jbxx_row ckdd">
                 <div class="col-xs-8">
                     <h5>收货信息</h5>
@@ -203,7 +190,7 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-                            <td class="col-xs-9 text-left"><span>${order.orderCreator}</span></td>
+                            <td class="col-xs-9 text-left"><span>${order.orderCreatorId}</span></td>
                         </div>
                     </tr>
                     <tr>
@@ -238,6 +225,18 @@
 </body>
 <script>
 
+    $(function(){
+        if(${order.orderStatus}==3||${order.orderStatus}==4){
+           $('#ddxx_open').show();
+            $('#hyxx_open').show();
+            $('#shxx_open').show();
+        }else {
+            $('#ddxx_open').show();
+            $('#shxx_open').show();
+            $('#hyxx_open').hide();
+        }
+    })
+
     $('#ddgl').click(function(){
         $('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')
     })
@@ -250,13 +249,7 @@
         }
     })
 
-$(function(){
-        if(${order.orderStatus}==3||${order.orderStatus}==4){
-            $('#open').css('display','block')
-        }else{
-            $('#open').css('display','none')
-        }
-    })
+
 
 
 

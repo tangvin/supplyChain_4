@@ -33,10 +33,10 @@ public class TraInvoiceController {
     
 	@Autowired
 	private TraAttService traAttService;
-	
+
 	@RequestMapping(value = "/invoiceList",method = RequestMethod.POST)
-    @ResponseBody
-    public DataGridJson invoiceList(HttpSession session,Integer pageNumber,Integer pageSize,String invoiceNumber,String checkTaker) {
+	@ResponseBody
+	public DataGridJson invoiceList(HttpSession session,Integer pageNumber,Integer pageSize,String invoiceNumber,String checkTaker) {
 		DataGridJson dgj = new DataGridJson();
 		PageUtil<InvoiceRecord> userPage = new PageUtil<>();
 		HashMap<String, Object> whereMaps = new HashMap<>();
@@ -51,11 +51,11 @@ public class TraInvoiceController {
 		System.out.println("================");*/
 		userPage.setCpage(pageNumber);
 		userPage.setPageSize(pageSize);
-        userPage.setWhereMap(whereMaps);
-        
-        userPage = traInvoiceService.getInvoiceRecordEntityListByConditions(userPage);
-        dgj.setTotal(userPage.getTotalCount());
-        dgj.setRows(userPage.getList());
+		userPage.setWhereMap(whereMaps);
+
+		userPage = traInvoiceService.getInvoiceRecordEntityListByConditions(userPage);
+		dgj.setTotal(userPage.getTotalCount());
+		dgj.setRows(userPage.getList());
 		return dgj;
 	}
 	
@@ -109,11 +109,14 @@ public class TraInvoiceController {
             resultMap.put("url", "http://47.104.103.141" + imagePath + newName); 
             attachment.setAttachmentName(newName);
             attachment.setAttachmentId(invoiceRecord.getInvoiceFileAttachment());
+
             if (!uploadFile.isEmpty()) {
 				attachment.setAttachmentUrl((String)resultMap.get("url"));
 			}else {
 				attachment.setAttachmentUrl(invoiceRecord.getAttachmentUrl());
 			}
+
+	
             traAttService.updateImg(attachment);
             traInvoiceService.update(invoiceRecord);
             return resultMap;  

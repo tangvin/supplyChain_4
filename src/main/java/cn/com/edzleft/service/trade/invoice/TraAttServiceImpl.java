@@ -11,12 +11,22 @@ public class TraAttServiceImpl implements TraAttService {
 	
 	@Autowired
 	private TraAttMapper traAttMapper;
+
 	@Override
 	public Integer updateImg(Attachment attachment) {
-		
-		
 		Integer res=traAttMapper.updateImg(attachment);
 		return res;
+	}
+
+	/**
+	 * 添加发票附件（图片存储信息）
+	 * @param attachment
+	 * @return
+	 */
+	@Override
+	public Integer addAttachment(Attachment attachment) {
+        int i = traAttMapper.insertAttachment(attachment);
+        return i;
 	}
 
 }

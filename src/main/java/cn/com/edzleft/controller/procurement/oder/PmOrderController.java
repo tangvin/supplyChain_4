@@ -1,6 +1,5 @@
 package cn.com.edzleft.controller.procurement.oder;
 
-import cn.com.edzleft.dao.procurement.contractaward.PmContractWardMapper;
 import cn.com.edzleft.entity.Contract;
 import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.entity.ReceivingAddress;
@@ -26,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -48,15 +48,20 @@ public class PmOrderController {
 	 */
 	@RequestMapping(value="/pmgetorder")
 	@ResponseBody
-	public DataGridJson letterSelect(Integer pageNumber,Integer pageSize ,String orderCreatorTrade,String orderStatus,String creditGrantor,HttpSession sessionInfo){
+	public DataGridJson letterSelect(String username,String fName,Integer aa,String orderCreatTime,String orderConfirmationTime,Integer pageNumber,Integer pageSize ,String entname,String orderStatus,String creditGrantor,HttpSession sessionInfo){
 		SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer userId = session.getAdmin().getInformationId();
 		PageUtil<Order> userPage = new PageUtil<>();
         HashMap<String,Object> whereMaps =new HashMap<>();
-        whereMaps.put("orderCreatorTrade",orderCreatorTrade);
+        whereMaps.put("entname",entname);
         whereMaps.put("orderStatus",orderStatus);
+        whereMaps.put("fName",fName);
+        whereMaps.put("username",username);
         whereMaps.put("creditGrantor",creditGrantor);
         whereMaps.put("userId",userId);
+        whereMaps.put("orderConfirmationTime",orderConfirmationTime);
+        whereMaps.put("orderCreatTime",orderCreatTime);
+        whereMaps.put("aa",aa);
         DataGridJson dgj = new DataGridJson();
         userPage.setCpage(pageNumber);
         userPage.setPageSize(pageSize);
@@ -101,9 +106,8 @@ public class PmOrderController {
 		String orderAmount = req.getParameter("orderAmount");
 		String principalOrderId = req.getParameter("principalOrderId");
 		String applicationletter = req.getParameter("applicationletter");
-		Integer orderCreatorTradeId =Integer.valueOf(req.getParameter("orderCreatorTradeId"));
-		/*String goods = req.getParameter("goods");*/
-		//根据合同编号查询合同
+		String goods = req.getParameter("goods");
+		//根据关联合同查询合同
 		Contract contract = pmContractWardService.getContract(principalOrderId);
 		if(contract == null){
 			map.put("msg", "合同名称错误");
@@ -116,12 +120,13 @@ public class PmOrderController {
 			o.setLogisticsName(receiver);
 			o.setReceivingAddressId(Integer.parseInt(receivingAddressId));
 			o.setOrderAmount(Double.parseDouble(orderAmount));
-			o.setApplicationletter(applicationletter); 
-			/*o.setGoods(goods);*/
+			o.setApplicationletter(applicationletter);
+			o.setGoods(goods);
 			o.setOrderStatus(0);
 			SessionInfo sessionInfo1 = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
 			o.setOrderCreatorId(sessionInfo1.getAdmin().getInformationId());
 			o.setOrderCreatTime(new Date());
+			o.setOrderCreatorId(sessionInfo1.getAdmin().getInformationId());
 			int i = pmOrderService.insertSelective(o, sessionInfo);
 			map.put("msg", "添加成功");
 			map.put("success", true);

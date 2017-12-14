@@ -8,10 +8,13 @@
     <title>新增订单</title>
     <style>
         .xzdd{
-            margin-top:40px;
+            /*margin-top:40px;*/
         }
         .bj_table tbody tr td input{
             width:200px;
+        }
+        .xzdd_hx_table tr td input{
+            width:300px!important;
         }
         #id{
             width:20px;
@@ -30,14 +33,26 @@
         }
         .next{
           width: 120px;
-            height: 40px;
-            font-size: 16px;
+          height: 40px;
+          font-size: 16px;
+            margin-top:20px;
         }
-       
         #glshxx{
             text-decoration: none;
         }
-       
+
+        #span{
+            display: block;
+            float: right;
+            margin-top: 1px;
+        }
+        .xzdd_hx_table tr td input{
+            border: none;
+            outline: none;
+        }
+        #ddd,#eee{
+            width:100px;
+        }
     </style>
 </head>
 <body>
@@ -54,96 +69,73 @@
          <!--合同签约 头部 end-->
         <div class="col-xs-12 xzdd">
              <!--合同编辑表格 start-->
-             
-            <div class="table-responsive text-center">
+            <div class="table-responsive text-center" style="margin-right:-15px;margin-left:-15px;">
             <form method="post">
                 <table class="table table-bordered bj_table">
                     <tbody>
                     <tr>
-                        <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
                             <td class="col-xs-9 text-left"><input type="text" id="orderCreatorTrade"  class="form-control" placeholder="模糊检索匹配"></td>
-                        </div>
                     </tr>
                     <tr>
-                        <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
                             <td class="col-xs-9 text-left"><input type="text" id="principalOrderId" class="form-control" placeholder="模糊检索匹配"></td>
-                        </div>
                     </tr>
                     <tr>
-                        <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>货物商品：</td>
                             <td class="col-xs-9 text-left"><input type="text" id="goods" class="form-control"></td>
-                        </div>
                     </tr>
                     <tr>
-                        <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单金额：</td>
                             <td class="col-xs-8 text-left"><input type="text" id="orderAmount" class="form-control" placeholder="￥万元"></td>
-                        </div>
                     </tr>
                     <tr>
-                        <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>申请用信：</td>
                             <td class="col-xs-9 text-left">
-                                <form class="form-inline">
+                                <div class="form-inline">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" id="id"> 是
+                                            <input type="checkbox" id="id"> <span id="span">是</span>
                                         </label>
                                     </div>
                                     <div class="form-group">
                                         <input type="text" id="applicationletter" class="form-control" disabled>￥万元
                                     </div>
-                                </form>
+                                </div>
                             </td>
-                        </div>
                     </tr>
                     <tr>
-                        <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息：</td>
                             <td class="col-xs-8 text-left">
-	                            <p class="qwer">
+	                            <span class="qwer">
+                                    <span style="padding-right: 10px">收货地址：</span>
 	                                <span id="address"></span>
-	                            </p>
-	                            <input id="receivingAddressId" type="hidden">
-	                            <a class="glshxx" id="glshxx"  href="#">
-	                                <div class="gl">管理收货信息</div>
-	                            </a>
+	                            </span>
+                                    <input id="receivingAddressId" type="hidden">
+                                    <a class="glshxx" id="glshxx">
+                                        <div class="gl">管理收货信息</div>
+                                    </a>
                             </td>
-                        </div>
                     </tr>
                     <tr class="qwer">
-                        <div class="row">
                             <td class="col-xs-3 text-right"></td>
-                            <td class="col-xs-8 text-left">
-                                <div class="col-xs-8 text-left">收货人:<span id="rAddressPerson"></span></div>
+                            <td class="col-xs-9 text-left">
+                                <div class="text-left"><span style="padding-right: 25px">收货人：</span><span id="rAddressPerson"></span></div>
                             </td>
-                        </div>
                     </tr>
                     <tr class="qwer">
-                        <div class="row">
                             <td class="col-xs-3 text-right"></td>
-                            <td class="col-xs-8 text-left">
-                                <div class="col-xs-8 text-left">收货人手机:<span id="rAddressPhone"></span></div>
+                            <td class="col-xs-9 text-left">
+                                <div class="text-left"><span style="padding-right: 25px">手机号：</span><span id="rAddressPhone"></span></div>
                             </td>
-                        </div>
                     </tr>
                     </tbody>
                 </table>
             </form>
             </div>
 
-            
-            <button id="bbb" type="button" class="btn btn-primary btn-lg col-xs-offset-4 next" data-toggle="modal" data-target="#myModal">
-               下一步
-               
-            </button>
-            
+            <button id="bbb" type="button" class="btn btn-primary btn-lg col-xs-offset-3 next" data-toggle="modal" data-target="#myModal">下一步</button>
             </form>
-            
-            
              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <form method="post" id="order"> 
                 <div class="modal-dialog" role="document">
@@ -151,68 +143,49 @@
                         <div class="modal-body">
                             <div class="table-responsive text-center">
                             
-                                <table class="table table-bordered bj_table">
+                                <table class="table table-bordered bj_table xzdd_hx_table">
                                     <tbody>
                                     <tr>
-                                        <div class="row">
                                             <td class="col-xs-3 text-right">合同签约方：</td>
-                                            <td class="col-xs-9 text-left"><input  id="aaa" name="contractTraderId"></td>
-                                        </div>
+                                            <td class="col-xs-9 text-left"><input  readonly="readonly" style="border: none;outline: none;" id="aaa" name="contractTraderId"></td>
                                     </tr>
                                     <tr>
-                                        <div class="row">
                                             <td class="col-xs-3 text-right">关联到合同：</td>
-                                            <td class="col-xs-9 text-left"><input id="fff" name="principalOrderId"><!-- <span>编号：2636464774376    名称：xxxx合同</span> --></td>
-                                        </div>
+                                            <td class="col-xs-9 text-left"><input readonly="readonly" id="fff" name="principalOrderId"><!-- <span>编号：2636464774376    名称：xxxx合同</span> --></td>
                                     </tr>
                                     <tr>
-                                        <div class="row">
                                             <td class="col-xs-3 text-right">货物商品：</td>
-                                            <td class="col-xs-9 text-left"><input id="ccc" name="goods"><span>XXXXX货物</span></td>
-                                        </div>
+                                            <td class="col-xs-9 text-left"><input readonly="readonly" id="ccc" name="goods"></td>
                                     </tr>
                                     <tr>
-                                        <div class="row">
                                             <td class="col-xs-3 text-right">订单金额：</td>
-                                            <td class="col-xs-8 text-left"><input id="ddd" name="orderAmount"><span>200 ￥万元</span></td>
-                                        </div>
+                                            <td class="col-xs-9 text-left"><input readonly="readonly" id="ddd" name="orderAmount">￥万元</td>
                                     </tr>
                                     <tr>
-                                        <div class="row">
-                                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>申请用信：</td>
+                                            <td class="col-xs-3 text-right">申请用信：</td>
                                             <td class="col-xs-9 text-left">
                                                 <form class="form-inline">
                                                     <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" class="redio">
-                                                            <input id="eee" name="applicationletter"><span>￥200万元</span>
-                                                        </label>
+                                                            <input id="eee" readonly="readonly" name="applicationletter">￥万元
                                                     </div>
                                                 </form>
                                             </td>
-                                        </div>
                                     </tr>
                                     <tr>
-                                        <div class="row">
                                             <td class="col-xs-3 text-right">收货信息：</td>
-                                            <td class="col-xs-8 text-left"><input id="sss" name="receivingAddress"><input id="zzz" type="hidden" name="receivingAddressId"></td>
-                                        </div>
+                                            <td class="col-xs-9 text-left"><span style="padding-right: 15px">收货地址：</span><input id="sss" readonly="readonly" name="receivingAddress"><input id="zzz" type="hidden" name="receivingAddressId"></td>
                                     </tr>
                                     <tr>
-                                        <div class="row">
                                             <td class="col-xs-3 text-right"></td>
-                                            <td class="col-xs-8 text-left">
-                                                <span>收货人:<input id="mmm" name="ogisticsName"></span>
+                                            <td class="col-xs-9 text-left">
+                                                <span><span style="padding-right: 25px">收货人：</span><input readonly="readonly" id="mmm" name="ogisticsName"></span>
                                             </td>
-                                        </div>
                                     </tr>
                                     <tr>
-                                        <div class="row">
                                             <td class="col-xs-3 text-right"></td>
-                                            <td class="col-xs-8 text-left">
-                                                <span>联系人手机号:<input id="ppp" name="contactPhone"></span>
+                                            <td class="col-xs-9 text-left">
+                                                <span><span style="padding-right: 25px">手机号：</span><input readonly="readonly" id="ppp" name="contactPhone"></span>
                                             </td>
-                                        </div>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -220,8 +193,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" id="confirm">确定</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirm">确定</button>
+                            <button type="button" class="btn" data-dismiss="modal">取消</button>
                         </div>
                        
                     </div>
@@ -242,7 +215,6 @@
 			"<%=request.getContextPath()%>/pmorder/insetOrder.action",
 			function(obj){
 				/* //2有数据 */
-				console.log(obj)
 				if(obj.receivingAddressId==null){
 					$('#glshxx').show()
 					$('.qwer').hide()

@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
 /**
@@ -356,7 +353,7 @@ public class PmmainController {
         Account account = pmAccountservice.accountSelect(userId);
         mv.addObject("account",account);
         mv.addObject("information",information);
-        mv.addObject("messages","recieverAddress");
+        //mv.addObject("messages","recieverAddress");
         return mv;
     }
     

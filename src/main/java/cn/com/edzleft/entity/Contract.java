@@ -12,7 +12,7 @@ public class Contract implements Serializable{
      * 合同id
      */
     private Integer contractId;
-    
+
 
 	/**
      * 合同编号
@@ -268,8 +268,8 @@ public class Contract implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
+
+
 
     public Integer getContractBuyerId() {
 		return contractBuyerId;

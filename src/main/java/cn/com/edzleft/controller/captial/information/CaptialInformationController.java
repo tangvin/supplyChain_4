@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by ASUS on 2017/11/29.
@@ -36,11 +35,11 @@ public class CaptialInformationController {
 
     @RequestMapping(value = "updateInformation",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> updateInformation(Information information, HttpSession session){
+    public Map<String,Object> updateInformation(Information information, HttpSession session,Account accounts){
     	Map<String,Object> map = new HashMap<>();
         SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
         Integer userId = sessionInfo.getAdmin().getUserId();
-        Integer informationId =  (Integer) session.getAttribute("informationId");
+        Integer informationId = accounts.getInformationId();
         if(informationId == null){
             information.setCreatorId(userId);
             information.setCertificationStatus(0);
@@ -52,7 +51,6 @@ public class CaptialInformationController {
                 account.setUserId(userId);
                 account.setInformationId(creatorId);
                 int t =  accountService.updataAccount(account);
-                session.setAttribute("informationId", creatorId);
             }
             map.put("msg", "添加成功");
             map.put("success", true);

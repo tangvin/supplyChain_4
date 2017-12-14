@@ -20,7 +20,7 @@
             <div class="khh">
                 <form class="form-inline khh_form khh_form1" id="orderform">
                     <div class="form-group">
-                        <label>状态</label>
+                        <label>状态：</label>
                         <select class="form-control select" id="orderStatus">
                             <option value="">全部</option>
                             <option value="0">待确认</option>
@@ -32,18 +32,26 @@
                         </select>
                     </div>
                     <div class="form-group form-group1">
-                        <label>合同执行期</label>
+                        <label>订单时间：</label>
+                        <select class="form-control" id="custom">
+                            <option value="">自定义时间</option>
+                            <option value="">请选择</option>
+                            <option value="0">一月内</option>
+                            <option value="1">三月内</option>
+                            <option value="2">六月内</option>
+                            <option value="3">一年内</option>
+                        </select>
                         <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/>至
                         <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
                     </div>
                     <div class="form-group">
-                        <label>签约方</label>
-                        <input type="text" class="form-control" id="orderCreatorTrade">
+                        <label>签约方：</label>
+                        <input type="text" class="form-control" id="procurementEntName">
                     </div>
-                    <div class="form-group">
-                        <label>合同</label>
-                        <input type="text" class="form-control" id="orderContract">
-                    </div>
+                    <%--<div class="form-group">--%>
+                        <%--<label>合同</label>--%>
+                        <%--<input type="text" class="form-control" id="contractName">--%>
+                    <%--</div>--%>
                     <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>
                     <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
                 </form>
@@ -119,15 +127,10 @@
                                                 <div class="row pzfh_row">
                                                     <div class="col-xs-5 pzfh_row_div">
                                                         <select class="form-control" id="pzfh_select" name="freightUnit">
-                                                            <%--<option>韵达</option>--%>
-                                                            <%--<option>申通</option>--%>
-                                                            <%--<option>圆通</option>--%>
-                                                            <%--<option>顺丰</option>--%>
-                                                            <%--<option>菜鸟</option>--%>
                                                         </select>
                                                     </div>
                                                     <div class="col-xs-5">
-                                                    <button type="button" class="btn btn-danger btn-default">管理货运单位</button>
+                                                    <button  id="orderFreight" type="button" data-dismiss="modal" class="btn btn-danger btn-default">管理货运单位</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -139,7 +142,7 @@
                                         <td class="col-xs-8">
                                             <div class="row row_ddje">
                                                 <div class="col-xs-5 row_ddje_div">
-                                                    <input type="text" name="freightNumber" class="form-control">
+                                                    <input type="text" name="freightUnit" class="form-control">
                                                 </div>
                                             <div class="col-xs-6 row_ddje_con">
                                                 暂未查询到货运单位，请检查
@@ -154,7 +157,7 @@
                                             <td class="col-xs-8">
                                                 <div class="row row_ddje">
                                                     <div class="col-xs-5 row_ddje_div">
-                                                        <input type="text" name="invoiceNum" class="form-control">
+                                                        <input type="text" name="invoiceNo class="form-control">
                                                     </div>
                                                 </div>
                                             </td>
@@ -173,9 +176,6 @@
                                                     </div>
                                                     <div class="col-xs-8">
                                                         <div id="imgBox"></div>
-                                                    </div>
-                                                    <div class="col-xs-1">
-                                                        <button type="button" class="btn btn-danger" id="btn">上传</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -211,7 +211,9 @@
         console.log(start.toISOString(), end.toISOString(), label);
     });
 
-
+   $('#orderFreight').click(function () {
+       setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/hygl.action')",500);
+   });
 
     imgUpload({
         inputId:'file', //input框id
@@ -250,33 +252,43 @@
                     }
                 },
                 {field:'orderAmount',title:'订单金额（￥万元）'},
-                {field:'orderConfirmationTime',title:'订单确认时间',
+                {field:'orderConfirmationTime',title:'订单相关时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }
                 },
                 {field:'orderCreatTime',title:'订单创建时间',
                     formatter:function(value,row,index){
-                        return ConvertToDate(value)
+                        var str='';
+                        str+='<p>'+row.procurementEntName+'</p><p>'+ConvertToDate(value)+'</p>'
+                        return str
                     }
                 },
 
-                {field:'principalOrder',title:'合同'},
-                {field:'creditUse',title:'用信情况&nbsp;￥万元'},
-                {field:'invoice',title:'发票'},
-                {field:'freightNumber',title:'货运及单号'},
+                {field:'contractName',title:'合同'},
+                {field:'procurementEntName',title:'签约方'},
+                {field:'applicationletter',title:'用信情况&nbsp;￥万元'},
+                {field:'amount',title:'发票'},
+                {field:'freightName',title:'货运及单号',
+                    formatter:function(value,row,index){
+                    console.log(row)
+                        var str='';
+                        str+='<p>'+row.freightName+'</p><p>'+row.freightUnit+'</p>'
+                        return str
+                    }
+                },
                 {
                     title:'操作',
                     field:'action',
                     formatter:function(value , row){
                         var str = '';
                         if(row.orderStatus ==0){//待确认
-                            str += '<button  class="btn btn-default bg_btn qran" data-toggle="modal" data-target=".bs-example-modal-sm" href="#" value="待确认" onclick="showUserAttach(\''+row.orderId+'\',1)">领取订单</button>';
-                            str += '<button  class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_bh" href="#" value="待确认" onclick="showUserAttache(\''+row.orderId+'\',2)">驳回</button>';
+                            str += '<button  class="btn  btn-primary bg_btn qran" data-toggle="modal" data-target=".bs-example-modal-sm" href="#" value="待确认" onclick="showUserAttach(\''+row.orderId+'\',1)">领取订单</button>';
+                            str += '<button  class="btn btn-warning bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_bh" href="#" value="待确认" onclick="showUserAttache(\''+row.orderId+'\',2)">驳回</button>';
                         } else if(row.orderStatus ==1){//待付款
                             str+='--';
                         } else if(row.orderStatus ==2){//待发货
-                            str +='<button  id="pz" class="btn-warning btn-sm" data-toggle="modal" data-target=".bs-example-modal-pzfh" href="#" value="待发货" onclick="showUserAttachs(\''+row.orderId+'\',4)">配置发货</button>';
+                            str +='<button  id="pz" class="btn-danger btn-sm" data-toggle="modal" data-target=".bs-example-modal-pzfh" href="#" value="待发货" onclick="showUserAttachs(\''+row.orderId+'\',4)">配置发货</button>';
                         } else if(row.orderStatus ==3){//待收货
                             str+='--';
                         } else if(row.orderStatus ==4){//已完成
@@ -284,8 +296,6 @@
                         } else if (row.orderStatus ==5){//已取消
                             str+='--';
                         } else  if(row.orderStatus ==6){//已驳回
-                            str+='--';
-                        } else if (row.orderStatus ==7){//历史
                             str+='--';
                         }
                         return str;
@@ -320,9 +330,11 @@
             pageNumber: params.pageNumber,
             pageSize: params.pageSize,
             orderStatus:$("#orderStatus").val(),
-            orderCreator:$("#orderCreator").val(),
-            orderCreatTime:$("#orderCreatTime").val(),
-            principalOrder:$("#principalOrder").val(),
+            orderCreatTime:$("#creatTime").val(),
+            orderConfirmationTime:$("#endTime").val(),
+            procurementEntName:$("#procurementEntName").val(),
+            contractName:$("#contractName").val(),
+            custom:$("#custom").val()
         };
         return temp;
     }
@@ -384,27 +396,9 @@
     }
 
 
+
     //配置发货数据回显
-        function showUserAttachs(w,e){
-            /**
-             * 配置发货表单提交
-             */
-            $("#pzfh").click(function () {
-                $.ajax({
-                    url:'<%=request.getContextPath()%>/tradeOrder/pzfh.action?id='+w+'&&flag='+e,
-                    type:'post',
-                    dataType:'json',
-                    data:$('#formId').serialize(),
-                    success:function(data) {
-                        setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')",500);
-            }
-                })
-            })
-
-
-
-
-
+    function showUserAttachs(w,e){
             $.ajax({
             url:"<%=request.getContextPath()%>/tradeOrder/orderSelect.action",
             data:{ pageNumber:1, pageSize: 10},
@@ -421,19 +415,51 @@
                 $('#wyb').append(data_con);
 
                 $.ajax({
-                    url:'<%=request.getContextPath()%>/tradeOrder/pzfh.action?id='+w+'&&flag='+e,
-                    type:'post',
+                    url:'<%=request.getContextPath()%>/freight/freightSelect.action',
+                    type:'POST',
                     dataType:'json',
                     success:function (data) {
                         console.log(data)
+
+                        if(data==''){
+                         $('#pzfh_select').hide()
+                         }else if(data!=''){
+                            var option=''
+                            for(var i=0;i<data.length;i++){
+                                option +='<option  value='+data[i].freightDefaultAddress+'>'+data[i].freightName+'</option>'
+                                console.log(option)
+                            }
+                         }
+
+                        $('#pzfh_select').append(option);
+
+                         var aaa= $('#pzfh_select')[0]
+                         for(var i=0;i<aaa.children.length;i++){
+                            if(aaa.children[i].value==1){
+                              aaa.children[i].selected='selected'
+                            }
+                         }
+
                     }
                 })
+
+
             }
-
         });
-
-
-
+        /**
+         * 配置发货表单提交
+         */
+        $("#pzfh").click(function () {
+            $.ajax({
+                url: '<%=request.getContextPath()%>/tradeOrder/pzfh.action?id=' + w + '&&flag=' + e,
+                type: 'post',
+                dataType: 'json',
+                data: $('#formId').serialize(),
+                success: function (data) {
+                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')", 500);
+                }
+            })
+        })
     }
 
 // 定义时间格式
@@ -470,7 +496,7 @@
         }else{
             seconds = ''+seconds
         }
-        return year+"-"+month+"-"+day+"-"+hours+":"+minutes+":"+seconds;
+        return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
     }
 
 </script>

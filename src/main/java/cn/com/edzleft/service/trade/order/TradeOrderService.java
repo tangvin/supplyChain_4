@@ -31,7 +31,7 @@ public interface TradeOrderService {
      * @param id
      * @param flag
      */
-    public Order setOrderStatus(Integer id, Integer flag, HttpSession session);
+    public Order setOrderStatus(Integer id, Integer flag, HttpSession sessionInfo);
 
 
     /**

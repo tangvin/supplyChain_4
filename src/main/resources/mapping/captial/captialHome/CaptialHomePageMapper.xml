@@ -185,6 +185,14 @@
   </update>
 
   <insert id="insertInformation" parameterType="cn.com.edzleft.entity.Information" >
+    <!-- 将插入数据的主键返回，返回到User对象中 -->
+    <!-- keyProperty：将查询到的主键值设置到parameterType对象的哪个属性中 -->
+    <!-- order：SELECT LAST_INSERT_ID()语句的执行顺序（相对于insert语句来说的执行顺序） -->
+    <!-- resultType：指定SELECT LAST_INSERT_ID()语句的结果类型 -->
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      <!-- SELECT LAST_INSERT_ID()：得到刚insert到数据表中的记录的主键值，只适用于自增主键 -->
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into gyl_information
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
