@@ -60,25 +60,27 @@ public class TradeOrderServiceImpl  implements TradeOrderService{
     public Order setOrderStatus(Integer id, Integer flag, HttpSession session) {
         //根据id查询当前的订单
         Order order = orderMapper.selectOrderById(id);
-        //Integer orderStatus = order.getOrderStatus();
+        //将用户表中的information_id存到订单表
+        SessionInfo s = (SessionInfo) session.getAttribute("sessionInfo");
+        Integer informationId = s.getAdmin().getInformationId();
+        order.setOrderCreatorTradeId(informationId);
         if(flag==1) {   //待确认--领取订单
            //领取订单（0---1）
            order.setOrderId(id);
            order.setOrderStatus(1);
-           //将当前时间存到订单表
+           //将当前时间存到订单表(订单领取时间)
            order.setOrderConfirmationTime(new Date());
-           //将用户表中的information_id存到订单表
-        SessionInfo s = (SessionInfo) session.getAttribute("sessionInfo");
-        Integer informationId = s.getAdmin().getInformationId();
-        order.setOrderCreatorTradeId(informationId);
        } else if (flag == 2) { //待确认--驳回
            //驳回（0--6）
             order.setOrderId(id);
             order.setOrderStatus(6);
-           //order.setOrderState("信息不完整");
+            //订单驳回时间
+            order.setOrderConfirmationTime(new Date());
         }else if(flag==4){  //待付款 2 --3配置发货
             order.setOrderId(id);
             order.setOrderStatus(3);
+            //订单配置发货时间
+            order.setOrderConfirmationTime(new Date());
         }
         orderMapper.updateStatus(order);
         System.out.println("状态修改完毕");
@@ -89,6 +91,7 @@ public class TradeOrderServiceImpl  implements TradeOrderService{
      * @param order
      */
         public void updateOrder(Order order){
+
             orderMapper.updateStatus(order);
         }
 

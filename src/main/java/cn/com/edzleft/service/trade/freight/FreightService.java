@@ -39,4 +39,9 @@ public interface FreightService {
      * 根据id查询货运单位信息
      */
     public Freight queryFreightById(Integer id);
+
+    /**
+     * 根据货运单位名称查
+     */
+    public Freight queryFreightByName(String name);
 }

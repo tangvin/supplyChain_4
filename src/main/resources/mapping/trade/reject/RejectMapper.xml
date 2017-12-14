@@ -13,12 +13,23 @@
     reject_id, reject_reason, bussiness_type, contract_id,order_id
   </sql>
 
-  <!--查询驳回记录-->
-  <select id="selectRejectReason" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+
+  <!--根据订单id查询驳回记录-->
+  <select id="selectRejectCountByorderId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from gyl_reject
-    where reject_id = #{rejectId,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+
+
+  <!--根据合同id查询驳回记录-->
+  <select id="selectRejectCountByContractId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from gyl_reject
+    where contract_id = #{orderId,jdbcType=INTEGER}
   </select>
 
   <!--删除驳回记录-->

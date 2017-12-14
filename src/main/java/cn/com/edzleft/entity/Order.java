@@ -87,9 +87,9 @@ public class Order {
     @JSONField(format="yyyy-MM-dd")
     private Date paymentTime;
     /**
-     * 发票
+     * 发票表id
      */
-    private String invoice;
+    private Integer invoiceId;
     /**
      * 货运单位
      */
@@ -147,6 +147,32 @@ public class Order {
      * @return
      */
     private String freightName;
+
+    /**
+     * 订单创建账号id
+     * @return
+     */
+    public Integer orderCreatorUserId;
+    /**
+     * 发票数量
+     */
+    public Integer amount;
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public Integer getOrderCreatorUserId() {
+        return orderCreatorUserId;
+    }
+
+    public void setOrderCreatorUserId(Integer orderCreatorUserId) {
+        this.orderCreatorUserId = orderCreatorUserId;
+    }
 
     public String getContractName() {
         return contractName;
@@ -397,12 +423,12 @@ public class Order {
         this.paymentTime = paymentTime;
     }
 
-    public String getInvoice() {
-        return invoice;
+    public Integer getInvoiceId() {
+        return invoiceId;
     }
 
-    public void setInvoice(String invoice) {
-        this.invoice = invoice;
+    public void setInvoiceId(Integer invoiceId) {
+        this.invoiceId = invoiceId;
     }
 
     public String getFreightUnit() {
@@ -432,7 +458,8 @@ public class Order {
         if (orderNumber != null ? !orderNumber.equals(order.orderNumber) : order.orderNumber != null) return false;
         if (orderCreatTime != null ? !orderCreatTime.equals(order.orderCreatTime) : order.orderCreatTime != null)
             return false;
-        if (orderCreatorId != null ? !orderCreatorId.equals(order.orderCreatorId) : order.orderCreatorId != null) return false;
+        if (orderCreatorId != null ? !orderCreatorId.equals(order.orderCreatorId) : order.orderCreatorId != null)
+            return false;
         if (orderCreatorTradeId != null ? !orderCreatorTradeId.equals(order.orderCreatorTradeId) : order.orderCreatorTradeId != null)
             return false;
         if (orderConfirmationTime != null ? !orderConfirmationTime.equals(order.orderConfirmationTime) : order.orderConfirmationTime != null)
@@ -457,7 +484,7 @@ public class Order {
         if (paymentAccountId != null ? !paymentAccountId.equals(order.paymentAccountId) : order.paymentAccountId != null)
             return false;
         if (paymentTime != null ? !paymentTime.equals(order.paymentTime) : order.paymentTime != null) return false;
-        if (invoice != null ? !invoice.equals(order.invoice) : order.invoice != null) return false;
+        if (invoiceId != null ? !invoiceId.equals(order.invoiceId) : order.invoiceId != null) return false;
         if (freightUnit != null ? !freightUnit.equals(order.freightUnit) : order.freightUnit != null) return false;
         if (freightNumberId != null ? !freightNumberId.equals(order.freightNumberId) : order.freightNumberId != null)
             return false;
@@ -465,8 +492,17 @@ public class Order {
         if (applicationletter != null ? !applicationletter.equals(order.applicationletter) : order.applicationletter != null)
             return false;
         if (invoiceNum != null ? !invoiceNum.equals(order.invoiceNum) : order.invoiceNum != null) return false;
+        if (letterStatus != null ? !letterStatus.equals(order.letterStatus) : order.letterStatus != null) return false;
+        if (procurementEntName != null ? !procurementEntName.equals(order.procurementEntName) : order.procurementEntName != null)
+            return false;
         if (tradeEntName != null ? !tradeEntName.equals(order.tradeEntName) : order.tradeEntName != null) return false;
-        return letterStatus != null ? letterStatus.equals(order.letterStatus) : order.letterStatus == null;
+        if (contractName != null ? !contractName.equals(order.contractName) : order.contractName != null) return false;
+        if (contractNumber != null ? !contractNumber.equals(order.contractNumber) : order.contractNumber != null)
+            return false;
+        if (freightName != null ? !freightName.equals(order.freightName) : order.freightName != null) return false;
+        if (orderCreatorUserId != null ? !orderCreatorUserId.equals(order.orderCreatorUserId) : order.orderCreatorUserId != null)
+            return false;
+        return amount != null ? amount.equals(order.amount) : order.amount == null;
     }
 
     @Override
@@ -490,17 +526,22 @@ public class Order {
         result = 31 * result + (amountActuallyPaid != null ? amountActuallyPaid.hashCode() : 0);
         result = 31 * result + (paymentAccountId != null ? paymentAccountId.hashCode() : 0);
         result = 31 * result + (paymentTime != null ? paymentTime.hashCode() : 0);
-        result = 31 * result + (invoice != null ? invoice.hashCode() : 0);
+        result = 31 * result + (invoiceId != null ? invoiceId.hashCode() : 0);
         result = 31 * result + (freightUnit != null ? freightUnit.hashCode() : 0);
         result = 31 * result + (freightNumberId != null ? freightNumberId.hashCode() : 0);
         result = 31 * result + (goods != null ? goods.hashCode() : 0);
         result = 31 * result + (applicationletter != null ? applicationletter.hashCode() : 0);
         result = 31 * result + (invoiceNum != null ? invoiceNum.hashCode() : 0);
         result = 31 * result + (letterStatus != null ? letterStatus.hashCode() : 0);
+        result = 31 * result + (procurementEntName != null ? procurementEntName.hashCode() : 0);
         result = 31 * result + (tradeEntName != null ? tradeEntName.hashCode() : 0);
+        result = 31 * result + (contractName != null ? contractName.hashCode() : 0);
+        result = 31 * result + (contractNumber != null ? contractNumber.hashCode() : 0);
+        result = 31 * result + (freightName != null ? freightName.hashCode() : 0);
+        result = 31 * result + (orderCreatorUserId != null ? orderCreatorUserId.hashCode() : 0);
+        result = 31 * result + (amount != null ? amount.hashCode() : 0);
         return result;
     }
-
 
     @Override
     public String toString() {
@@ -524,7 +565,7 @@ public class Order {
                 ", amountActuallyPaid=" + amountActuallyPaid +
                 ", paymentAccountId=" + paymentAccountId +
                 ", paymentTime=" + paymentTime +
-                ", invoice='" + invoice + '\'' +
+                ", invoiceId=" + invoiceId +
                 ", freightUnit='" + freightUnit + '\'' +
                 ", freightNumberId=" + freightNumberId +
                 ", goods='" + goods + '\'' +
@@ -536,6 +577,8 @@ public class Order {
                 ", contractName='" + contractName + '\'' +
                 ", contractNumber='" + contractNumber + '\'' +
                 ", freightName='" + freightName + '\'' +
+                ", orderCreatorUserId=" + orderCreatorUserId +
+                ", amount=" + amount +
                 '}';
     }
 }

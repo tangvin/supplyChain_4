@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by ibmtech on 2017/12/7.
  */
@@ -27,8 +29,8 @@ public class RejectServiceImpl implements RejectService {
         Reject r = new Reject();
         r.setBussinessType(reject.getBussinessType());
         r.setRejectReason(reason);
-        r.setContract_id(reject.getContract_id());
-        r.setOrder_id(reject.getRejectId());
+        r.setContractId(reject.getContractId());
+        r.setOrderId(reject.getRejectId());
         int i = rejectMapper.insertRejectReason(reject);
         return i;
     }
@@ -54,4 +56,18 @@ public class RejectServiceImpl implements RejectService {
         int i = rejectMapper.selectRejectReason(id);
         return i;
     }
+
+    @Override
+    public List<Reject> queryRejectByOrderId(Integer id) {
+        List<Reject> rejectList = rejectMapper.selectRejectCountByorderId(id);
+        return rejectList;
+    }
+
+    @Override
+    public List<Reject> queryRejectByContractId(Integer id) {
+        List<Reject> rejectList = rejectMapper.selectRejectCountByContractId(id);
+        return rejectList;
+    }
+
+
 }

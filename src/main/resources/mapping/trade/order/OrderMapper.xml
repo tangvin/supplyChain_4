@@ -5,11 +5,10 @@
     <id column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
     <result column="order_creat_time" property="orderCreatTime" jdbcType="TIMESTAMP" />
-    <result column="order_creator_id" property="orderCreatorId" jdbcType="INTEGER" />
-    <result column="order_creator_trade_id" property="orderCreatorTradeId" jdbcType="INTEGER" />
+    <result column="order_creator_id" property="orderCreatorId" jdbcType="VARCHAR" />
+    <result column="order_creator_trade_id" property="orderCreatorTradeId" jdbcType="VARCHAR" />
     <result column="order_confirmation_time" property="orderConfirmationTime" jdbcType="TIMESTAMP" />
     <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
-    <result column="receiving_address_id" property="receivingAddressId" jdbcType="INTEGER" />
     <result column="logistics_name" property="logisticsName" jdbcType="VARCHAR" />
     <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
     <result column="principal_order_id" property="principalOrderId" jdbcType="INTEGER" />
@@ -21,64 +20,71 @@
     <result column="amount_actually_paid" property="amountActuallyPaid" jdbcType="INTEGER" />
     <result column="payment_account_id" property="paymentAccountId" jdbcType="INTEGER" />
     <result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
-    <result column="invoice" property="invoice" jdbcType="VARCHAR" />
+    <result column="invoice_id" property="invoiceId" jdbcType="VARCHAR" />
     <result column="freight_unit" property="freightUnit" jdbcType="VARCHAR" />
     <result column="freight_number_id" property="freightNumberId" jdbcType="INTEGER" />
-    <result column="invoiceNum" property="invoice_num" jdbcType="VARCHAR" />
     <result column="goods" property="goods" jdbcType="VARCHAR" />
-    <result column="procurementEntName" property="procurementEntName" jdbcType="VARCHAR" />
-    <result column="tradeEntName" property="tradeEntName" jdbcType="VARCHAR" />
-    <result column="contractName" property="contractName" jdbcType="VARCHAR" />
-    <result column="contractNumber" property="contractNumber" jdbcType="VARCHAR" />
-    <result column="freightName" property="freightName" jdbcType="VARCHAR" />
+    <result column="applicationletter" property="applicationletter" jdbcType="VARCHAR" />
+    <result column="receiving_address_id" property="receivingAddressId" jdbcType="INTEGER" />
+    <result column="invoice_num" property="invoiceNum" jdbcType="VARCHAR" />
+    <result column="letter_status" property="letterStatus" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
   </resultMap>
 
   <!--条件查询-->
   <sql id="where_sql">
     <trim prefix="where" prefixOverrides="and">
       <if test="whereMap != null &amp;&amp; whereMap.orderStatus != null and whereMap.orderStatus != ''">
-        AND order_status  LIKE '%${whereMap.orderStatus}%'
+        AND t1.order_status  LIKE '%${whereMap.orderStatus}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.orderCreatTime != null and whereMap.orderCreatTime != ''">
+        AND t1.order_creat_time  &gt;= '${whereMap.orderCreatTime}'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.orderConfirmationTime != null and whereMap.orderConfirmationTime != ''">
-        AND order_confirmation_time  LIKE '%${whereMap.orderConfirmationTime}%'
+        AND t1.order_creat_time  &lt;= '${whereMap.orderConfirmationTime}'
       </if>
-      <if test="whereMap != null &amp;&amp; whereMap.orderCreator != null and whereMap.orderCreator != ''">
-        AND t2.ent_name  LIKE '%${whereMap.orderCreator}%'
+      <if test="whereMap != null &amp;&amp; whereMap.procurementEntName != null and whereMap.procurementEntName != ''">
+        AND t2.ent_name  LIKE '%${whereMap.procurementEntName}%'
       </if>
-      <if test="whereMap != null &amp;&amp; whereMap.principalOrderId != null and whereMap.principalOrderId != ''">
-        AND principal_order_id  LIKE '%${whereMap.principalOrderId}%'
+      <if test="whereMap != null &amp;&amp; whereMap.contractName != null and whereMap.contractName != ''">
+        AND t3.contract_name  LIKE '%${whereMap.contractName}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.informationId != null and whereMap.informationId != ''">
         AND t1.order_creator_trade_id=#{whereMap.informationId}
+      </if>
+      <!-- 一个月内 -->
+      <if test="whereMap != null &amp;&amp; whereMap.custom != null &amp;&amp; whereMap.custom == 0 &amp;&amp; whereMap.custom != ''" >
+        AND DATE_FORMAT(t1.order_creat_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+      </if>
+      <!-- 三个月内 -->
+      <if test="whereMap != null &amp;&amp; whereMap.custom != null &amp;&amp; whereMap.custom == 1 " >
+        AND QUARTER(t1.order_creat_time)=QUARTER(now())
+      </if>
+      <!-- 六个月内 -->
+      <if test="whereMap != null &amp;&amp; whereMap.custom != null &amp;&amp; whereMap.custom == 2 " >
+        AND  t1.order_creat_time between date_sub(now(),interval 6 month) and now()
+      </if>
+      <!-- 一年内 -->
+      <if test="whereMap != null &amp;&amp; whereMap.custom != null &amp;&amp; whereMap.custom == 3 " >
+        AND  YEAR(t1.order_creat_time)=YEAR(NOW())
       </if>
     </trim>
   </sql>
 
   <sql id="Base_Column_List" >
     order_id, order_number, order_creat_time, order_creator_id, order_creator_trade_id, order_confirmation_time,
-    order_status,  receiving_address_id,logistics_name, contact_phone,
-    principal_order_id, credit_get_id, credit_use_id, credit_grantor_id, order_amount, amount_payable,goods,
-    amount_actually_paid, payment_account_id, payment_time, invoice, freight_unit, freight_number_id,invoice_num
+    order_status, logistics_name, contact_phone, principal_order_id,
+    credit_get_id, credit_use_id, credit_grantor_id, order_amount, amount_payable, amount_actually_paid,
+    payment_account_id, payment_time, invoice_id, freight_unit, freight_number_id, goods,
+    applicationletter, receiving_address_id, invoice_num, letter_status
   </sql>
-<!--
 
-  &lt;!&ndash;查询总条数&ndash;&gt;
-  <select id="selectTotalOrderCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
-    select count(*) from gyl_order <include refid="where_sql"/>
-  </select>
-  &lt;!&ndash;分页查询&ndash;&gt;
-  <select id="selectOrderByPage"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
-    select
-    <include refid="Base_Column_List" />
+
+  <select id="selectOrderById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select <include refid="Base_Column_List"/>
     from gyl_order
-    <include refid="where_sql"/>
-    ORDER BY order_creat_time DESC
-    <![CDATA[	limit #{start},#{pageSize}]]>
+    where  order_id=#{id}
   </select>
-
--->
-
-
 
 
 
@@ -86,27 +92,42 @@
   <select id="selectAllOrderCountLast" resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
     select COUNT(*)
     from gyl_order t1
-    inner join gyl_information t2 on t1.order_creator_id=t2.id
-    inner join gyl_contract t3  on t1.principal_order_id=t3.contract_id
-    inner join gyl_freight t4 on t1.freight_number_id=t4.freight_id
-    inner join gyl_information my on t1.order_creator_trade_id=my.id
+    LEFT JOIN
+              (SELECT  COUNT(1)AS amount,invoice_no,id
+                        FROM  gyl_invoice t5
+                        INNER JOIN gyl_order t1
+                        ON t5.order_id =t1.order_id
+                        GROUP BY t1.order_id) t5
+              ON t1.invoice_id=t5.id
+    LEFT JOIN gyl_information t2 ON t1.order_creator_id=t2.id
+    LEFT JOIN gyl_contract t3  ON t1.principal_order_id=t3.contract_id
+    LEFT JOIN gyl_freight t4 ON t1.freight_number_id=t4.freight_id
+    LEFT JOIN gyl_information my ON t1.order_creator_trade_id=my.id
     <include refid="where_sql"/>
+    ORDER BY  t1.order_creat_time DESC
   </select>
 
-<!--表关联查询出所有符合订单信息-->
+  <!--表关联查询出所有符合订单信息-->
   <select id="selectAllOrderLast" resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
-  select  t1.order_creat_time,t1.freight_unit,t1.order_status,t1.order_number,t1.order_confirmation_time,t1.order_amount,
+    SELECT
+            t1.order_id,t1.order_creat_time,t1.freight_unit,t1.order_status,t1.order_number,t1.applicationletter,
+            t1.order_confirmation_time,t1.order_amount,
             t2.ent_name AS procurementEntName,
             t3.contract_name as contractName,t3.contract_number as contractNumber,
             t4.freight_name as freightName,
-            my.ent_name as tradeEntName
-    from  gyl_order t1
-    inner join gyl_information t2 on t1.order_creator_id=t2.id
-    inner join gyl_contract t3  on t1.principal_order_id=t3.contract_id
-    inner join gyl_freight t4 on t1.freight_number_id=t4.freight_id
-    inner join gyl_information my on t1.order_creator_trade_id=my.id
+            my.ent_name as tradeEntName,
+            t5.amount AS amount,t5.invoice_no AS invoiceNo,t5.id
+    FROM gyl_order t1
+    LEFT JOIN(SELECT  COUNT(1)AS amount,invoice_no,id FROM  gyl_invoice t5 INNER JOIN gyl_order t1
+              ON t5.order_id =t1.order_id GROUP BY t1.order_id
+              ) t5  ON t1.invoice_id=t5.id
+    LEFT JOIN gyl_information t2 ON t1.order_creator_id=t2.id
+    LEFT JOIN gyl_contract t3  ON t1.principal_order_id=t3.contract_id
+    LEFT JOIN gyl_freight t4 ON t1.freight_number_id=t4.freight_id
+    LEFT JOIN gyl_information my ON t1.order_creator_trade_id=my.id
     <include refid="where_sql"/>
-    <![CDATA[	limit #{start},#{pageSize}]]>
+    ORDER BY  t1.order_creat_time DESC
+    <![CDATA[  limit #{start},#{pageSize}]]>
   </select>
 
 
@@ -118,24 +139,6 @@
     where order_number = #{orderNumber,jdbcType=VARCHAR}
   </select>
 
-
- <!--
-  &lt;!&ndash;根据订单编号orderNumber查询到订单表&ndash;&gt;
-  <select id="selectOrderByNumber" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select  t1.order_creat_time,t1.freight_unit,t1.order_status,t1.order_number,t1.order_confirmation_time,t1.order_amount,
-            t2.ent_name AS procurementEntName,
-            t3.contract_name as contractName,t3.contract_number as contractNumber,
-            t4.freight_name as freightName,
-            my.ent_name as tradeEntName
-    from  gyl_order t1
-    inner join gyl_information t2 on t1.order_creator_id=t2.id
-    inner join gyl_contract t3  on t1.principal_order_id=t3.contract_id
-    inner join gyl_freight t4 on t1.freight_number_id=t4.freight_id
-    inner join gyl_information my on t1.order_creator_trade_id=my.id
-    where t1.order_number = #{orderNumber,jdbcType=VARCHAR}
-  </select>
-
--->
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from gyl_order
@@ -203,8 +206,8 @@
       <if test="paymentTime != null" >
         payment_time,
       </if>
-      <if test="invoice != null" >
-        invoice,
+      <if test="invoiceId != null" >
+        invoice_id,
       </if>
       <if test="freightUnit != null" >
         freight_unit,
@@ -217,6 +220,15 @@
       </if>
       <if test="goods != null" >
         goods,
+      </if>
+      <if test="orderCreatorUserId != null" >
+        order_creator_userId,
+      </if>
+      <if test="applicationletter != null" >
+        applicationletter,
+      </if>
+      <if test="amount != null" >
+        amount,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -277,8 +289,8 @@
       <if test="paymentTime != null" >
         #{paymentTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="invoice != null" >
-        #{invoice,jdbcType=VARCHAR},
+      <if test="invoiceId != null" >
+        #{invoiceId,jdbcType=INTEGER},
       </if>
       <if test="freightUnit != null" >
         #{freightUnit,jdbcType=VARCHAR},
@@ -291,6 +303,15 @@
       </if>
       <if test="goods != null" >
         #{goods,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCreatorUserId != null" >
+        #{orderCreatorUserId,jdbcType=INTEGER},
+      </if>
+      <if test="applicationletter != null" >
+        #{applicationletter,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -354,8 +375,8 @@
       <if test="paymentTime != null" >
         payment_time = #{paymentTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="invoice != null" >
-        invoice = #{invoice,jdbcType=VARCHAR},
+      <if test="invoiceId != null" >
+        invoice_id = #{invoiceId,jdbcType=INTEGER},
       </if>
       <if test="freightUnit != null" >
         freight_unit = #{freightUnit,jdbcType=VARCHAR},
@@ -365,6 +386,15 @@
       </if>
       <if test="invoiceNum != null" >
         invoice_num = #{invoiceNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCreatorUserId != null" >
+        order_creator_userId = #{orderCreatorUserId,jdbcType=INTEGER},
+      </if>
+      <if test="applicationletter != null" >
+        applicationletter = #{applicationletter,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=INTEGER},
       </if>
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}

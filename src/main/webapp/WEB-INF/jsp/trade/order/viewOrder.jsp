@@ -40,10 +40,10 @@
             <span>></span>
             <a href="#" id="ddgl">订单管理</a>
             <span>></span>
-            <a href="#">新增订单</a>
+            <a href="#">相关信息</a>
         </div>
         <!--合同签约 头部 end-->
-        <div class="col-xs-12">
+        <div class="col-xs-12" id="ddxx_open">
                 <div class="row jbxx_row ckdd">
                     <div class="col-xs-8">
                         <h5>订单信息</h5>
@@ -131,17 +131,24 @@
                                 </td>
                             </div>
                         </tr>
+                        <tr>
+                            <div class="row">
+                                <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单驳回记录：</td>
+                                <td class="col-xs-9 text-left">${rejectList.size()}</td>
+                            </div>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
                 <!--合同编辑表格 end-->
         </div>
 
-        <div class="col-xs-12" id="open">
+        <div class="col-xs-12" id="hyxx_open">
             <div class="row jbxx_row ckdd">
                 <div class="col-xs-8">
                     <h5>货运信息</h5>
                 </div>
+            </div>
             <!--合同编辑表格 start-->
             <div class="table-responsive text-center col-xs-12">
                 <table class="table table-bordered bj_table">
@@ -186,10 +193,7 @@
             <!--合同编辑表格 end-->
         </div>
 
-
-
-
-        <div class="col-xs-12">
+        <div class="col-xs-12" id="shxx_open">
             <div class="row jbxx_row ckdd">
                 <div class="col-xs-8">
                     <h5>收货信息</h5>
@@ -237,6 +241,18 @@
 </body>
 <script>
 
+    $(function(){
+        if(${order.orderStatus}==3||${order.orderStatus}==4){
+           $('#ddxx_open').show();
+            $('#hyxx_open').show();
+            $('#shxx_open').show();
+        }else {
+            $('#ddxx_open').show();
+            $('#shxx_open').show();
+            $('#hyxx_open').hide();
+        }
+    })
+
     $('#ddgl').click(function(){
         $('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')
     })
@@ -249,13 +265,7 @@
         }
     })
 
-$(function(){
-        if(${order.orderStatus}==3||${order.orderStatus}==4){
-            $('#open').css('display','block')
-        }else{
-            $('#open').css('display','none')
-        }
-    })
+
 
 
 

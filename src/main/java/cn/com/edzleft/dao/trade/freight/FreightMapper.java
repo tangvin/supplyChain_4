@@ -49,4 +49,9 @@ public interface FreightMapper {
      * 根据货运id查询订单中对应的货运地址
      */
     public List<Freight> selectFreightListByOrder(Integer id);
+
+    /**
+     * 根据货运单位名称查询货运信息
+     */
+    public Freight selectFreightByName(String freightName);
 }

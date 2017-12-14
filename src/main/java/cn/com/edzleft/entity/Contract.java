@@ -12,7 +12,9 @@ public class Contract implements Serializable{
      * 合同id
      */
     private Integer contractId;
-    /**
+
+
+	/**
      * 合同编号
      */
     private String contractNumber;
@@ -124,22 +126,6 @@ public class Contract implements Serializable{
 
     public void setContractName(String contractName) {
         this.contractName = contractName == null ? null : contractName.trim();
-    }
-
-    public Integer getContractBuyerId() {
-        return contractBuyerId;
-    }
-
-    public void setContractBuyerId(Integer contractBuyerId) {
-        this.contractBuyerId = contractBuyerId == null ? null : contractBuyerId;
-    }
-
-    public Integer getContractTraderId() {
-        return contractBuyerId;
-    }
-
-    public void setContractTraderId(Integer contractTraderId) {
-        this.contractTraderId = contractTraderId == null ? null : contractTraderId;
     }
 
     public Date getCreatTime() {
@@ -278,7 +264,30 @@ public class Contract implements Serializable{
         this.letterApply = letterApply;
     }
 
-    @Override
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+
+    public Integer getContractBuyerId() {
+		return contractBuyerId;
+	}
+
+	public void setContractBuyerId(Integer contractBuyerId) {
+		this.contractBuyerId = contractBuyerId;
+	}
+
+	public Integer getContractTraderId() {
+		return contractTraderId;
+	}
+
+	public void setContractTraderId(Integer contractTraderId) {
+		this.contractTraderId = contractTraderId;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -354,31 +363,16 @@ public class Contract implements Serializable{
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "Contract{" +
-                "contractId=" + contractId +
-                ", contractNumber='" + contractNumber + '\'' +
-                ", contractName='" + contractName + '\'' +
-                ", contractBuyerId='" + contractBuyerId + '\'' +
-                ", contractTraderId='" + contractTraderId + '\'' +
-                ", creatTime=" + creatTime +
-                ", endTime=" + endTime +
-                ", signingAddress='" + signingAddress + '\'' +
-                ", signingTime=" + signingTime +
-                ", tradeSignatories='" + tradeSignatories + '\'' +
-                ", buyerSignatory='" + buyerSignatory + '\'' +
-                ", assistContractId=" + assistContractId +
-                ", orderContractId=" + orderContractId +
-                ", contractStatus=" + contractStatus +
-                ", contractLetterPerson='" + contractLetterPerson + '\'' +
-                ", contractCredit=" + contractCredit +
-                ", contractLetter=" + contractLetter +
-                ", contractCreateTime=" + contractCreateTime +
-                ", contractFounder='" + contractFounder + '\'' +
-                ", contractElectronicsId=" + contractElectronicsId +
-                ", contractScanner=" + contractScanner +
-                ", letterApply=" + letterApply +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Contract [contractId=" + contractId + ", contractNumber=" + contractNumber + ", contractName="
+				+ contractName + ", contractBuyerId=" + contractBuyerId + ", contractTraderId=" + contractTraderId
+				+ ", creatTime=" + creatTime + ", endTime=" + endTime + ", signingAddress=" + signingAddress
+				+ ", signingTime=" + signingTime + ", tradeSignatories=" + tradeSignatories + ", buyerSignatory="
+				+ buyerSignatory + ", assistContractId=" + assistContractId + ", orderContractId=" + orderContractId
+				+ ", contractStatus=" + contractStatus + ", contractLetterPerson=" + contractLetterPerson
+				+ ", contractCredit=" + contractCredit + ", contractLetter=" + contractLetter + ", contractCreateTime="
+				+ contractCreateTime + ", contractFounder=" + contractFounder + ", contractElectronicsId="
+				+ contractElectronicsId + ", contractScanner=" + contractScanner + ", letterApply=" + letterApply + "]";
+	}
 }

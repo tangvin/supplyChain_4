@@ -23,6 +23,15 @@
     WHERE freight_id=#{freightId}
   </select>
 
+  <!--根据ID查看货运详细信息-->
+  <select id="selectFreightByName" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from gyl_freight
+    WHERE freight_name=#{freightName}
+  </select>
+
+
 
   <!--根据ID查看货运详细信息-->
   <select id="selectFreightListByOrder" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

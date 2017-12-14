@@ -23,12 +23,12 @@ public class Reject {
     /**
      * 合同表id
      */
-    private Integer contract_id;
+    private Integer contractId;
 
     /**
      * 订单表id
      */
-    private Integer order_id;
+    private Integer orderId;
 
 
     public Integer getRejectId() {
@@ -55,20 +55,20 @@ public class Reject {
         this.bussinessType = bussinessType;
     }
 
-    public Integer getContract_id() {
-        return contract_id;
+    public Integer getContractId() {
+        return contractId;
     }
 
-    public void setContract_id(Integer contract_id) {
-        this.contract_id = contract_id;
+    public void setContractId(Integer contractId) {
+        this.contractId = contractId;
     }
 
-    public Integer getOrder_id() {
-        return order_id;
+    public Integer getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(Integer order_id) {
-        this.order_id = order_id;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     @Override
@@ -77,8 +77,8 @@ public class Reject {
                 "rejectId=" + rejectId +
                 ", rejectReason='" + rejectReason + '\'' +
                 ", bussinessType=" + bussinessType +
-                ", contract_id=" + contract_id +
-                ", order_id=" + order_id +
+                ", contractId=" + contractId +
+                ", orderId=" + orderId +
                 '}';
     }
 }
