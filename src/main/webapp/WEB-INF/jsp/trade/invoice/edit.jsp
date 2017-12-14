@@ -84,7 +84,31 @@
 <script>
 $(function(){
 	$("#upBtn").click(function(){
-		$("#invoiceForm").submit();
+		/* $("#invoiceForm").submit(); */
+		
+		var formData = new FormData($( "#invoiceForm" )[0]);  
+	     $.ajax({  
+	          url: '<%=request.getContextPath()%>/traInvoice/update.action' ,  
+	          type: 'POST',  
+	          data: formData,  
+	          async: false,  
+	          cache: false,  
+	          contentType: false,  
+	          processData: false,  
+	          success: function (returndata) { 
+	        	  if (returndata.error==0) {
+	        		  alert("更新成功");
+	        		  setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/fpgl.action')",500);
+	        		  
+				}else {
+					alert(returndata.message);
+				}
+	                
+	          },  
+	          error: function (returndata) {  
+	              alert(returndata);  
+	          }  
+	     });  
 	});
 
 	$("#invoiceNo").blur(function(){
