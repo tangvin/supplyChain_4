@@ -126,7 +126,7 @@
                                             <td class="col-xs-8">
                                                 <div class="row pzfh_row">
                                                     <div class="col-xs-5 pzfh_row_div">
-                                                        <select class="form-control" id="pzfh_select" name="freightUnit">
+                                                        <select class="form-control" id="pzfh_select" name="freightName">
                                                         </select>
                                                     </div>
                                                     <div class="col-xs-5">
@@ -357,7 +357,7 @@
     window.operateEvents1={
         'click #butt':function (e,value,index,row) {
             $('#load').load('<%=request.getContextPath()%>/tradeMain/ddck.action?value='+value)
-            console.log('<%=request.getContextPath()%>/tradeMain/ddck.action?value='+value)
+            //console.log('<%=request.getContextPath()%>/tradeMain/ddck.action?value='+value)
         }
     }
 
@@ -369,7 +369,7 @@
                 url:'<%=request.getContextPath()%>/tradeOrder/bohui.action?id='+w+'&&flag='+e,
                 type:'post',
                 dataType:"json",
-                // data:$("#f").serialize(),
+                 data:$("#bohuireason").serialize(),
                 success:function (data) {
                     setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')",500);
                 }
@@ -396,7 +396,7 @@
     }
 
 
-
+    var abc=''
     //配置发货数据回显
     function showUserAttachs(w,e){
             $.ajax({
@@ -419,29 +419,34 @@
                     type:'POST',
                     dataType:'json',
                     success:function (data) {
-                        console.log(data)
-
+                        value=data;
+                        //console.log(data);
                         if(data==''){
                          $('#pzfh_select').hide()
                          }else if(data!=''){
-                            var option=''
+                            var option='';
                             for(var i=0;i<data.length;i++){
-                                option +='<option  value='+data[i].freightDefaultAddress+'>'+data[i].freightName+'</option>'
-                                console.log(option)
+                                option +='<option  value='+data[i].freightDefaultAddress+' id='+data[i].freightId+'>'+data[i].freightName+'</option>';
+                                //console.log(option)
                             }
                          }
 
                         $('#pzfh_select').append(option);
 
-                         var aaa= $('#pzfh_select')[0]
+
+                        var bb = $("#pzfh_select option:selected").attr("id");
+                        var aaa= $('#pzfh_select')[0];
                          for(var i=0;i<aaa.children.length;i++){
                             if(aaa.children[i].value==1){
                               aaa.children[i].selected='selected'
                             }
                          }
-
+                        //alert($("#pzfh_select option:selected").attr("id"))
+                        abc=$("#pzfh_select option:selected").attr("id")
                     }
                 })
+
+
 
 
             }
@@ -449,9 +454,11 @@
         /**
          * 配置发货表单提交
          */
+
+
         $("#pzfh").click(function () {
             $.ajax({
-                url: '<%=request.getContextPath()%>/tradeOrder/pzfh.action?id=' + w + '&&flag=' + e,
+                url: '<%=request.getContextPath()%>/tradeOrder/pzfh.action?id=' + w + '&&flag=' + e+'&&val=' + abc,
                 type: 'post',
                 dataType: 'json',
                 data: $('#formId').serialize(),

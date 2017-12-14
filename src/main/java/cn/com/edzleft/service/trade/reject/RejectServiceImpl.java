@@ -21,16 +21,10 @@ public class RejectServiceImpl implements RejectService {
     /**
      * 添加驳回记录
      * @param reject
-     * @param reason
      * @return
      */
     @Override
-    public int addRejectReason(Reject reject,String reason) {
-        Reject r = new Reject();
-        r.setBussinessType(reject.getBussinessType());
-        r.setRejectReason(reason);
-        r.setContractId(reject.getContractId());
-        r.setOrderId(reject.getRejectId());
+    public int addRejectReason(Reject reject) {
         int i = rejectMapper.insertRejectReason(reject);
         return i;
     }

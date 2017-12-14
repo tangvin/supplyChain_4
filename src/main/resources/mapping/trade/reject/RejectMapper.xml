@@ -55,7 +55,7 @@
       <if test="contractId != null" >
         contract_id,
       </if>
-      <if test="C != null" >
+      <if test="orderId != null" >
         order_id,
       </if>
     </trim>

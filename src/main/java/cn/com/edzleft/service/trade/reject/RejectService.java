@@ -13,7 +13,7 @@ public interface RejectService {
      * @param reject
      * @return
      */
-    public int addRejectReason(Reject reject, String reason);
+    public int addRejectReason(Reject reject);
 
     /**
      * 删除驳回记录

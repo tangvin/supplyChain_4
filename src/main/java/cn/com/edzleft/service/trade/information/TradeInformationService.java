@@ -31,4 +31,10 @@ public interface TradeInformationService {
      */
     public Information selectByCreatorId(Integer id);
 
+    /**
+     * 根据合同id查询企业资料
+     * @param contractBuyerId
+     * @return
+     */
+    Information getContract(Integer contractBuyerId);
 }

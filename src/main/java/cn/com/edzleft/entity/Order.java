@@ -147,29 +147,29 @@ public class Order {
     private Integer aa;
 
     /**
-     * 采购方企业名称
+     * 采购方企业名称 别名)
      * @return
      */
     private String procurementEntName;
 
     /**
-     * 贸易方企业名称
+     * 贸易方企业名称-别名
      * @return
      */
     private String tradeEntName;
     /**
-     * 合同名称
+     * 合同名称-别名
      */
     private String contractName;
 
     /**
-     * 合同编号
+     * 合同编号-别名
      * @return
      */
     private String contractNumber;
 
     /**
-     * 货运单位名称
+     * 货运单位名称-别名
      * @return
      */
     private String freightName;
@@ -183,6 +183,70 @@ public class Order {
      * 发票数量
      */
     public Integer amount;
+
+    public Integer getOrderCreatorUserid() {
+        return orderCreatorUserid;
+    }
+
+    public void setOrderCreatorUserid(Integer orderCreatorUserid) {
+        this.orderCreatorUserid = orderCreatorUserid;
+    }
+
+    public String getProcurementEntName() {
+        return procurementEntName;
+    }
+
+    public void setProcurementEntName(String procurementEntName) {
+        this.procurementEntName = procurementEntName;
+    }
+
+    public String getTradeEntName() {
+        return tradeEntName;
+    }
+
+    public void setTradeEntName(String tradeEntName) {
+        this.tradeEntName = tradeEntName;
+    }
+
+    public String getContractName() {
+        return contractName;
+    }
+
+    public void setContractName(String contractName) {
+        this.contractName = contractName;
+    }
+
+    public String getContractNumber() {
+        return contractNumber;
+    }
+
+    public void setContractNumber(String contractNumber) {
+        this.contractNumber = contractNumber;
+    }
+
+    public String getFreightName() {
+        return freightName;
+    }
+
+    public void setFreightName(String freightName) {
+        this.freightName = freightName;
+    }
+
+    public Integer getOrderCreatorUserId() {
+        return orderCreatorUserId;
+    }
+
+    public void setOrderCreatorUserId(Integer orderCreatorUserId) {
+        this.orderCreatorUserId = orderCreatorUserId;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
 
     public Integer getLetterStatus() {
         return letterStatus;
