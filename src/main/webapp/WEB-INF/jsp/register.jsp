@@ -142,20 +142,12 @@
 </body>
 <script>
 $(".colseRegister").click(function(){
-	window.location="<%=request.getContextPath()%>/captialMain/login.action";
+	window.location="<%=request.getContextPath()%>/login.action";
 })
 $(".colseRegister1").click(function(){
-	window.location="<%=request.getContextPath()%>/captialMain/login.action";
+	window.location="<%=request.getContextPath()%>/login.action";
 })
-	
-    /* $(document).on('click','#next_bu_two',function(){
-        if($('#rsg_qrmm').val()!=$('#rsg_mm').val()){
-            alert('请输入相同密码')
-        }else{
-            $(this).text('注册成功')
-        }
-    }) */
-    
+
     $("#rsg_zh").blur(function(){
     	  $.ajax({
     		  url:'<%=request.getContextPath()%>/account/findByName.action',
@@ -209,7 +201,7 @@ $(".colseRegister1").click(function(){
 						
 						if (data.success) {
 							alert("注册成功");
-							window.location="<%=request.getContextPath()%>/captialMain/login.action";
+							window.location="<%=request.getContextPath()%>/login.action";
 						}else{
 							alert("注册失败");
 						}
@@ -221,64 +213,53 @@ $(".colseRegister1").click(function(){
     	})
     
 	$('#next_bu_one').click(function(){
-		 if($('#reg_sjh').val()==''){
-	            alert('请输入姓名')
-	        }else if($('#phone').val()==''||!myreg.test($('#phone').val())){
-	            alert('请输入正确手机号')
-	        }else if($('#checkCode').val()==''){
-	            alert('请输入验证码')
-	        }else if(!$('.registeredIdentity div button').hasClass('btn-danger')){
-	            alert('请选择注册身份')
-	        }else{
-	        	var userPhone=$("#phone").val();//手机号码
-	            var userLinkman=$('#reg_sjh').val();//联系人
-	            var checkCode=$('#checkCode').val();//验证码
-	            var accountType = $('.registeredIdentity div button[class$=btn-danger]').val(); 
-	          //  alert($("#formRegist").serialize())
-            $.ajax({
-            	url:'<%=request.getContextPath()%>/register11/registerOne.action',
-//            	dataType:'json',
-            	type:'POST',
-            	/* data:{
-            		account:$("#formRegist").serialize(),
-            		accountType : $('.registeredIdentity div button[class$=btn-danger]').val()
-				}, */
-				data:{
-					userPhone:userPhone,
-					userLinkman:userLinkman,
-					checkCode:checkCode,
-					accountType:accountType
-				},
-           		success:function (data) {
-           			//alert(data.userPhone)
-           			//alert(data.userLinkman)
-           			//alert(data.accountType)
-					//alert(data.success);
-					//alert(data.msg)
-               	 	if(data.success){
-                		 $('.rsg_one').css('display','none'),
-                    	 $('.rsg_two').css('display','block')
-                	}else{
-                		alert(data.msg);
-                	}
-                
-
-           		 }
-            });
-           
+        if(!$('.registeredIdentity div button').hasClass('btn-danger')){
+            alert('请选择注册身份')
+            return false;
         }
+        if($('#reg_sjh').val()==''){
+            alert('请输入姓名')
+            return false;
+        }
+        if($('#phone').val()==''||!myreg.test($('#phone').val())){
+            alert('请输入正确手机号')
+            return false;
+        }
+        if($('#checkCode').val()==''){
+            alert('请输入验证码')
+            return false;
+        }
+            var userPhone=$("#phone").val();//手机号码
+            var userLinkman=$('#reg_sjh').val();//联系人
+            var checkCode=$('#checkCode').val();//验证码
+            var accountType = $('.registeredIdentity div button[class$=btn-danger]').val();
+        $.ajax({
+            url:'<%=request.getContextPath()%>/register11/registerOne.action',
+            type:'POST',
+            data:{
+                userPhone:userPhone,
+                userLinkman:userLinkman,
+                checkCode:checkCode,
+                accountType:accountType
+            },
+            success:function (data) {
+                if(data.success){
+                     $('.rsg_one').css('display','none');
+                     $('.rsg_two').css('display','block');
+                }else{
+                    alert(data.msg);
+                }
+             }
+        });
     });
 	
 	
-    $('.rsg_one').css('display','block')
-//    alert($('.registeredIdentity div button[class$=btn-danger]').text())
+    $('.rsg_one').css('display','block');
     $(".registeredIdentity>div").click(function(){
        $(this).children('button').addClass('btn-danger');
        $(this).siblings().children('button').removeClass('btn-danger');
-//        alert( $(this).children('button').text())
-    })
+    });
 
-    //$('#checkCode').attr('disabled',true)
     var InterValObj; //timer变量，控制时间
     var count = 60; //间隔函数，1秒执行
     var curCount;//当前剩余秒数
@@ -290,25 +271,6 @@ $(".colseRegister1").click(function(){
 	var userPwd=$('#rsg_mm').val();
     var rsg_qrmm=$('#rsg_qrmm').val();
     function next_bu(){
-//        if($('.registeredIdentity div button').hasClass('btn-danger')){
-//            alert('111')
-//        }else{
-//            alert('222')
-//        }
-//        if(!$('.registeredIdentity div button').hasClass('btn-danger')){
-//            alert('请选择注册身份')
-//        }else if($('#reg_sjh').val()==''){
-//            alert('请输入姓名')
-//        }else if($('#phone').val()==''||!myreg.test($('#phone').val())){
-//            alert('请输入正确手机号')
-//        }else if($('#checkCode').val()==''){
-//           alert('请输入验证码')
-//        }else if(!$('.registeredIdentity div button').hasClass('btn-danger')){
-//                alert('请选择注册身份')
-//        }else{
-//           $('#tz').attr('href','rsg_two.html')
-//        }
-
         $('.rsg_one').css('display','none')
         $('.rsg_two').css('display','block')
     }
@@ -323,7 +285,6 @@ $(".colseRegister1").click(function(){
         }else if(!myreg.test(phone)){
             alert('请输入有效的手机号码11');
         } else{
-            /* $('#checkCode').attr('disabled',false) */
             $('#checkCode').val('')
             //产生验证码
             for (var i = 0; i < codeLength; i++) {
@@ -348,7 +309,6 @@ $(".colseRegister1").click(function(){
     //timer处理函数
     function SetRemainTime() {
         if (curCount == 0) {
-            /* $('#checkCode').attr('disabled',true) */
             window.clearInterval(InterValObj);//停止计时器
             $("#btnSendCode").removeAttr("disabled");//启用按钮
             $("#btnSendCode").val("获取验证码");

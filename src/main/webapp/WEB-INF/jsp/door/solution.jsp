@@ -2,8 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
+    <link type="image/x-icon" rel="icon" href="<%=request.getContextPath()%>/js/static/images/favicon.ico" />
+    <link type="image/x-icon" rel="shortcut icon" href="<%=request.getContextPath()%>/js/static/images/favicon.ico" />
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>解决方案 - 飞迅金服</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/js/static/css/css.css">
 </head>
 <body>
@@ -21,19 +23,19 @@
             <!--头部中间 导航 开始-->
             <div class="home_top_center">
                 <ul class="home_top_nav clearfix">
-                    <li><a href="<%=request.getContextPath()%>/captialMain/homeDoor.action">首页</a></li>
-                    <li><a href="<%=request.getContextPath()%>/captialMain/productCentre.action">产品中心</a></li>
-                    <li><a href="<%=request.getContextPath()%>/captialMain/solution.action">解决方案</a></li>
-                    <li><a href="<%=request.getContextPath()%>/captialMain/partner.action">合作伙伴</a></li>
-                    <li><a href="<%=request.getContextPath()%>/captialMain/about.action">关于我们</a></li>
+                    <li><a href="<%=request.getContextPath()%>/">首页</a></li>
+                    <li><a href="<%=request.getContextPath()%>/productCentre.action">产品中心</a></li>
+                    <li><a href="<%=request.getContextPath()%>/solution.action">解决方案</a></li>
+                    <li><a href="<%=request.getContextPath()%>/partner.action">合作伙伴</a></li>
+                    <li><a href="<%=request.getContextPath()%>/about.action">关于我们</a></li>
                 </ul>
             </div>
             <!--头部中间 导航 结束-->
             <!--头部右边 登录注册 开始-->
             <div class="home_top_right">
                 <div class="home_login clearfix">
-                    <a href="<%=request.getContextPath()%>/captialMain/login.action">登录</a>
-                    <a href="<%=request.getContextPath()%>/captialMain/register.action">免费注册</a>
+                    <a href="<%=request.getContextPath()%>/login.action">登录</a>
+                    <a href="<%=request.getContextPath()%>/register.action">免费注册</a>
                 </div>
             </div>
             <!--头部右边 登录注册 结束-->
@@ -41,7 +43,9 @@
     </div>
     <!--top 结束-->
     <!--banner 开始-->
-    <div class="home_banner cpzx_banner"></div>
+    <div class="home_banner cpzx_banner">
+        <div class="home_width"></div>
+    </div>
     <!--banner 结束-->
 
     <!--解决方案 开始-->
@@ -49,7 +53,7 @@
         <div class="jjfa_ywxz">
             <p class="home_main_title clearfix">
                 <span class="home_xian"></span>
-                <span class="home_cpzx">产品中心</span>
+                <span class="home_cpzx">业态现状</span>
                 <span class="home_xian"></span>
             </p>
             <div class="jjfa_ywxz_main clearfix">
@@ -64,7 +68,7 @@
             <div class="home_width">
                 <p class="home_main_title clearfix">
                     <span class="home_xian"></span>
-                    <span class="home_cpzx">如何应对</span>
+                    <span class="home_cpzx">如何应对？</span>
                     <span class="home_xian"></span>
                 </p>
                 <ul class="jjfa_rhyd_list clearfix">
@@ -108,10 +112,10 @@
                     <p class="home_footer_fwrxdh">400-888-6660</p>
                 </div>
                 <ul class="home_footer_lxwm">
-                    <li><a href="#">联系我们 </a></li>
-                    <li class="wyb"><a href="#">公司地址：北京市朝阳区朝阳北路1008号</a></li>
-                    <li class="wyb"><a href="#">业务邮箱：service@cnfinatech.com</a></li>
-                    <li class="wyb"><a href="#">业务咨询：010-88660066</a></li>
+                    <li>联系我们</li>
+                    <li class="wyb">公司地址：北京市朝阳区朝阳北路1008号</li>
+                    <li class="wyb">业务邮箱：service@cnfinatech.com</li>
+                    <li class="wyb">业务咨询：010-88660066</li>
                 </ul>
             </div>
         </div>

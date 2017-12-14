@@ -11,7 +11,7 @@
 <body style="padding:0;margin:0;overflow:auto;">
 <div class="container-fluid login-top">
     <div class='container container-logo'>
-        <img src='<%=request.getContextPath()%>/js/static/images/logo1.5@1x.png'>
+        <a href="<%=request.getContextPath()%>/"><img src='<%=request.getContextPath()%>/js/static/images/logo1.5@1x.png'></a>
     </div>
     <img src='<%=request.getContextPath()%>/js/static/images/img@1x.png' class='img-responsive center-block img-responsive1' >
     <div class='form_div center-block' id="div" >
@@ -39,7 +39,7 @@
                 <input  id="account" type="button" onclick="login()" class="form-control btn btn-danger" value="登录"  style="height: 45px;font-size: 18px;">
             </div>
             <!-- 申请 -->
-            <p class="text-right apply_for"><a href='<%=request.getContextPath()%>/captialMain/register.action'>新用户申请</a></p>
+            <p class="text-right apply_for"><a href='<%=request.getContextPath()%>/register.action'>新用户申请</a></p>
         </form>
 
     </div>
@@ -48,36 +48,14 @@
 </div>
 <script>
 
-$(function(){
-
-
+    $(function(){
         var countdown=10;
         //随机生成验证码图片
-
-
-        <%--function getImageCode(val){--%>
-            <%--if (countdown == 0) {--%>
-                <%--var thisDate =  new Date();--%>
-                <%--//区分当前请求和上一次请求--%>
-                <%--document.getElementById("imgcoode").src="<%=request.getContextPath()%>/imageCode?sjNum="+thisDate.getTime();--%>
-                <%--$(val).attr("disabled",false);--%>
-                <%--$(val).val("免费获取验证码");--%>
-                <%--countdown = 10;--%>
-            <%--} else {--%>
-                <%--$(val).attr("disabled", true);--%>
-                <%--$(val).val('重新发送('+countdown+')');--%>
-                <%--countdown--;--%>
-                <%--setTimeout(function() {--%>
-                    <%--getImageCode(val)--%>
-                <%--},1)--%>
-            <%--}--%>
-        <%--}--%>
-
         $(document).on('click','#imgcoode',function () {
             var src_ = $(this).attr('src');
             $(this).attr('src',src_+'?='+Math.random());
         })
-});
+    });
 
         function login(){
             var a=$("#name").val();
