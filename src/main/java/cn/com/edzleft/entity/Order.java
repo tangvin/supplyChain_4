@@ -719,4 +719,84 @@ public class Order {
                 ", amount=" + amount +
                 '}';
     }
+
+	public Integer getOrderCreatorUserid() {
+		return orderCreatorUserid;
+	}
+
+	public void setOrderCreatorUserid(Integer orderCreatorUserid) {
+		this.orderCreatorUserid = orderCreatorUserid;
+	}
+
+	public String getInvoiceNo() {
+		return invoiceNo;
+	}
+
+	public void setInvoiceNo(String invoiceNo) {
+		this.invoiceNo = invoiceNo;
+	}
+
+	public Integer getAa() {
+		return aa;
+	}
+
+	public void setAa(Integer aa) {
+		this.aa = aa;
+	}
+
+	public String getProcurementEntName() {
+		return procurementEntName;
+	}
+
+	public void setProcurementEntName(String procurementEntName) {
+		this.procurementEntName = procurementEntName;
+	}
+
+	public String getTradeEntName() {
+		return tradeEntName;
+	}
+
+	public void setTradeEntName(String tradeEntName) {
+		this.tradeEntName = tradeEntName;
+	}
+
+	public String getContractName() {
+		return contractName;
+	}
+
+	public void setContractName(String contractName) {
+		this.contractName = contractName;
+	}
+
+	public String getContractNumber() {
+		return contractNumber;
+	}
+
+	public void setContractNumber(String contractNumber) {
+		this.contractNumber = contractNumber;
+	}
+
+	public String getFreightName() {
+		return freightName;
+	}
+
+	public void setFreightName(String freightName) {
+		this.freightName = freightName;
+	}
+
+	public Integer getOrderCreatorUserId() {
+		return orderCreatorUserId;
+	}
+
+	public void setOrderCreatorUserId(Integer orderCreatorUserId) {
+		this.orderCreatorUserId = orderCreatorUserId;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
 }

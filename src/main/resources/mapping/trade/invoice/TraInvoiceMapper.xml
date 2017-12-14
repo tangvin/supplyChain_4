@@ -21,7 +21,7 @@
   <!--条件查询-->
   <sql id="where_sql">
     <trim prefix="where" prefixOverrides="and">
-    	<if test="whereMap != null &amp;&amp; whereMap.userId != null and whereMap.userId != ''">
+    	<if test="whereMap != null">
         AND i.user_id =#{whereMap.userId}
       	</if>
       <if test="whereMap != null &amp;&amp; whereMap.invoiceNumber != null and whereMap.invoiceNumber != ''">
