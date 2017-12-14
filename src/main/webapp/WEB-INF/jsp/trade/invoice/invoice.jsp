@@ -91,7 +91,7 @@
                         return changeDateFormat(value)
                     }
                 },
-                {field:'orderNumber',title:'发票预览',
+                {field:'attachmentUrl',title:'发票预览',
                   formatter:function (value) {
                       var str_img = '';
                       str_img += '<img style="width:40px;height:30px" src=\"'+value+'\">';
