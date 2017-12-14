@@ -131,7 +131,7 @@ public class Order {
 
 
     //采购商公司别名
-    private String entName;
+    private String centName;
     //货运别名
     private String fName;
     //合同别名
@@ -141,11 +141,24 @@ public class Order {
 
     //订单创建者姓名
     private String username;
-
+    //货运编号
     private String invoiceNo;
-
+    //根据时间模糊查询条件
     private Integer aa;
-
+    
+    //收货地址
+    private String address;
+    //收货区域
+    private String  area;
+   // 收货人
+    private String person;
+    //收货人手机
+    private String phone;
+    
+    //货运单位 发货人
+    private String fperson;
+    //发货人手机
+    private String fphone;
     /**
      * 采购方企业名称
      * @return
@@ -183,8 +196,79 @@ public class Order {
      * 发票数量
      */
     public Integer amount;
+    
+    /**
+     * 合同编号
+     * @return
+     */
 
-    public Integer getLetterStatus() {
+    private String contractnumber;
+    
+    
+    public String getContractnumber() {
+		return contractnumber;
+	}
+    
+
+	public void setContractnumber(String contractnumber) {
+		this.contractnumber = contractnumber;
+	}
+	
+	
+
+	public String getFperson() {
+		return fperson;
+	}
+
+
+	public void setFperson(String fperson) {
+		this.fperson = fperson;
+	}
+
+
+	public String getFphone() {
+		return fphone;
+	}
+
+
+	public void setFphone(String fphone) {
+		this.fphone = fphone;
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public String getPerson() {
+		return person;
+	}
+
+	public void setPerson(String person) {
+		this.person = person;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Integer getLetterStatus() {
         return letterStatus;
     }
 
@@ -200,7 +284,88 @@ public class Order {
         this.letterStatus = letterStatus;
     }
 
-    public Integer getCreditGetId() {
+	
+    public Integer getOrderCreatorUserid() {
+		return orderCreatorUserid;
+	}
+
+	public void setOrderCreatorUserid(Integer orderCreatorUserid) {
+		this.orderCreatorUserid = orderCreatorUserid;
+	}
+
+	public String getInvoiceNo() {
+		return invoiceNo;
+	}
+
+	public void setInvoiceNo(String invoiceNo) {
+		this.invoiceNo = invoiceNo;
+	}
+
+	public Integer getAa() {
+		return aa;
+	}
+
+	public void setAa(Integer aa) {
+		this.aa = aa;
+	}
+
+	public String getProcurementEntName() {
+		return procurementEntName;
+	}
+
+	public void setProcurementEntName(String procurementEntName) {
+		this.procurementEntName = procurementEntName;
+	}
+
+	public String getTradeEntName() {
+		return tradeEntName;
+	}
+
+	public void setTradeEntName(String tradeEntName) {
+		this.tradeEntName = tradeEntName;
+	}
+
+	public String getContractName() {
+		return contractName;
+	}
+
+	public void setContractName(String contractName) {
+		this.contractName = contractName;
+	}
+
+	public String getContractNumber() {
+		return contractNumber;
+	}
+
+	public void setContractNumber(String contractNumber) {
+		this.contractNumber = contractNumber;
+	}
+
+	public String getFreightName() {
+		return freightName;
+	}
+
+	public void setFreightName(String freightName) {
+		this.freightName = freightName;
+	}
+
+	public Integer getOrderCreatorUserId() {
+		return orderCreatorUserId;
+	}
+
+	public void setOrderCreatorUserId(Integer orderCreatorUserId) {
+		this.orderCreatorUserId = orderCreatorUserId;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+	public Integer getCreditGetId() {
         return creditGetId;
     }
 
@@ -427,12 +592,13 @@ public class Order {
         this.freightNumberId = freightNumberId;
     }
 
-    public String getEntName() {
-		return entName;
+
+	public String getCentName() {
+		return centName;
 	}
 
-	public void setEntName(String entName) {
-		this.entName = entName;
+	public void setCentName(String centName) {
+		this.centName = centName;
 	}
 
 	public String getfName() {
@@ -467,6 +633,11 @@ public class Order {
 				return false;
 		} else if (!aa.equals(other.aa))
 			return false;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
 		if (amount == null) {
 			if (other.amount != null)
 				return false;
@@ -487,15 +658,40 @@ public class Order {
 				return false;
 		} else if (!applicationletter.equals(other.applicationletter))
 			return false;
+		if (area == null) {
+			if (other.area != null)
+				return false;
+		} else if (!area.equals(other.area))
+			return false;
 		if (cName == null) {
 			if (other.cName != null)
 				return false;
 		} else if (!cName.equals(other.cName))
 			return false;
+		if (centName == null) {
+			if (other.centName != null)
+				return false;
+		} else if (!centName.equals(other.centName))
+			return false;
 		if (contactPhone == null) {
 			if (other.contactPhone != null)
 				return false;
 		} else if (!contactPhone.equals(other.contactPhone))
+			return false;
+		if (contractName == null) {
+			if (other.contractName != null)
+				return false;
+		} else if (!contractName.equals(other.contractName))
+			return false;
+		if (contractNumber == null) {
+			if (other.contractNumber != null)
+				return false;
+		} else if (!contractNumber.equals(other.contractNumber))
+			return false;
+		if (contractnumber == null) {
+			if (other.contractnumber != null)
+				return false;
+		} else if (!contractnumber.equals(other.contractnumber))
 			return false;
 		if (creditGetId == null) {
 			if (other.creditGetId != null)
@@ -512,11 +708,6 @@ public class Order {
 				return false;
 		} else if (!creditUseId.equals(other.creditUseId))
 			return false;
-		if (entName == null) {
-			if (other.entName != null)
-				return false;
-		} else if (!entName.equals(other.entName))
-			return false;
 		if (entname == null) {
 			if (other.entname != null)
 				return false;
@@ -526,6 +717,11 @@ public class Order {
 			if (other.fName != null)
 				return false;
 		} else if (!fName.equals(other.fName))
+			return false;
+		if (freightName == null) {
+			if (other.freightName != null)
+				return false;
+		} else if (!freightName.equals(other.freightName))
 			return false;
 		if (freightNumberId == null) {
 			if (other.freightNumberId != null)
@@ -592,6 +788,11 @@ public class Order {
 				return false;
 		} else if (!orderCreatorTradeId.equals(other.orderCreatorTradeId))
 			return false;
+		if (orderCreatorUserId == null) {
+			if (other.orderCreatorUserId != null)
+				return false;
+		} else if (!orderCreatorUserId.equals(other.orderCreatorUserId))
+			return false;
 		if (orderCreatorUserid == null) {
 			if (other.orderCreatorUserid != null)
 				return false;
@@ -622,15 +823,35 @@ public class Order {
 				return false;
 		} else if (!paymentTime.equals(other.paymentTime))
 			return false;
+		if (person == null) {
+			if (other.person != null)
+				return false;
+		} else if (!person.equals(other.person))
+			return false;
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
 		if (principalOrderId == null) {
 			if (other.principalOrderId != null)
 				return false;
 		} else if (!principalOrderId.equals(other.principalOrderId))
 			return false;
+		if (procurementEntName == null) {
+			if (other.procurementEntName != null)
+				return false;
+		} else if (!procurementEntName.equals(other.procurementEntName))
+			return false;
 		if (receivingAddressId == null) {
 			if (other.receivingAddressId != null)
 				return false;
 		} else if (!receivingAddressId.equals(other.receivingAddressId))
+			return false;
+		if (tradeEntName == null) {
+			if (other.tradeEntName != null)
+				return false;
+		} else if (!tradeEntName.equals(other.tradeEntName))
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -640,22 +861,29 @@ public class Order {
 		return true;
 	}
 
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((aa == null) ? 0 : aa.hashCode());
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
 		result = prime * result + ((amountActuallyPaid == null) ? 0 : amountActuallyPaid.hashCode());
 		result = prime * result + ((amountPayable == null) ? 0 : amountPayable.hashCode());
 		result = prime * result + ((applicationletter == null) ? 0 : applicationletter.hashCode());
+		result = prime * result + ((area == null) ? 0 : area.hashCode());
 		result = prime * result + ((cName == null) ? 0 : cName.hashCode());
+		result = prime * result + ((centName == null) ? 0 : centName.hashCode());
 		result = prime * result + ((contactPhone == null) ? 0 : contactPhone.hashCode());
+		result = prime * result + ((contractName == null) ? 0 : contractName.hashCode());
+		result = prime * result + ((contractNumber == null) ? 0 : contractNumber.hashCode());
+		result = prime * result + ((contractnumber == null) ? 0 : contractnumber.hashCode());
 		result = prime * result + ((creditGetId == null) ? 0 : creditGetId.hashCode());
 		result = prime * result + ((creditGrantorId == null) ? 0 : creditGrantorId.hashCode());
 		result = prime * result + ((creditUseId == null) ? 0 : creditUseId.hashCode());
-		result = prime * result + ((entName == null) ? 0 : entName.hashCode());
 		result = prime * result + ((entname == null) ? 0 : entname.hashCode());
 		result = prime * result + ((fName == null) ? 0 : fName.hashCode());
+		result = prime * result + ((freightName == null) ? 0 : freightName.hashCode());
 		result = prime * result + ((freightNumberId == null) ? 0 : freightNumberId.hashCode());
 		result = prime * result + ((freightUnit == null) ? 0 : freightUnit.hashCode());
 		result = prime * result + ((goods == null) ? 0 : goods.hashCode());
@@ -669,54 +897,41 @@ public class Order {
 		result = prime * result + ((orderCreatTime == null) ? 0 : orderCreatTime.hashCode());
 		result = prime * result + ((orderCreatorId == null) ? 0 : orderCreatorId.hashCode());
 		result = prime * result + ((orderCreatorTradeId == null) ? 0 : orderCreatorTradeId.hashCode());
+		result = prime * result + ((orderCreatorUserId == null) ? 0 : orderCreatorUserId.hashCode());
 		result = prime * result + ((orderCreatorUserid == null) ? 0 : orderCreatorUserid.hashCode());
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
 		result = prime * result + ((orderNumber == null) ? 0 : orderNumber.hashCode());
 		result = prime * result + ((orderStatus == null) ? 0 : orderStatus.hashCode());
 		result = prime * result + ((paymentAccountId == null) ? 0 : paymentAccountId.hashCode());
 		result = prime * result + ((paymentTime == null) ? 0 : paymentTime.hashCode());
+		result = prime * result + ((person == null) ? 0 : person.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result + ((principalOrderId == null) ? 0 : principalOrderId.hashCode());
+		result = prime * result + ((procurementEntName == null) ? 0 : procurementEntName.hashCode());
 		result = prime * result + ((receivingAddressId == null) ? 0 : receivingAddressId.hashCode());
+		result = prime * result + ((tradeEntName == null) ? 0 : tradeEntName.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
     @Override
-    public String toString() {
-        return "Order{" +
-                "orderId=" + orderId +
-                ", orderNumber='" + orderNumber + '\'' +
-                ", orderCreatTime=" + orderCreatTime +
-                ", orderCreatorId=" + orderCreatorId +
-                ", orderCreatorTradeId=" + orderCreatorTradeId +
-                ", orderConfirmationTime=" + orderConfirmationTime +
-                ", orderStatus=" + orderStatus +
-                ", receivingAddressId=" + receivingAddressId +
-                ", logisticsName='" + logisticsName + '\'' +
-                ", contactPhone='" + contactPhone + '\'' +
-                ", principalOrderId=" + principalOrderId +
-                ", creditGetId=" + creditGetId +
-                ", creditUseId=" + creditUseId +
-                ", creditGrantorId=" + creditGrantorId +
-                ", orderAmount=" + orderAmount +
-                ", amountPayable=" + amountPayable +
-                ", amountActuallyPaid=" + amountActuallyPaid +
-                ", paymentAccountId=" + paymentAccountId +
-                ", paymentTime=" + paymentTime +
-                ", invoiceId=" + invoiceId +
-                ", freightUnit='" + freightUnit + '\'' +
-                ", freightNumberId=" + freightNumberId +
-                ", goods='" + goods + '\'' +
-                ", applicationletter='" + applicationletter + '\'' +
-                ", invoiceNum='" + invoiceNum + '\'' +
-                ", letterStatus=" + letterStatus +
-                ", procurementEntName='" + procurementEntName + '\'' +
-                ", tradeEntName='" + tradeEntName + '\'' +
-                ", contractName='" + contractName + '\'' +
-                ", contractNumber='" + contractNumber + '\'' +
-                ", freightName='" + freightName + '\'' +
-                ", orderCreatorUserId=" + orderCreatorUserId +
-                ", amount=" + amount +
-                '}';
-    }
+	public String toString() {
+		return "Order [orderId=" + orderId + ", orderNumber=" + orderNumber + ", orderCreatTime=" + orderCreatTime
+				+ ", orderCreatorId=" + orderCreatorId + ", orderCreatorTradeId=" + orderCreatorTradeId
+				+ ", orderConfirmationTime=" + orderConfirmationTime + ", orderStatus=" + orderStatus
+				+ ", receivingAddressId=" + receivingAddressId + ", logisticsName=" + logisticsName + ", contactPhone="
+				+ contactPhone + ", principalOrderId=" + principalOrderId + ", creditGetId=" + creditGetId
+				+ ", creditUseId=" + creditUseId + ", creditGrantorId=" + creditGrantorId + ", orderAmount="
+				+ orderAmount + ", amountPayable=" + amountPayable + ", amountActuallyPaid=" + amountActuallyPaid
+				+ ", paymentAccountId=" + paymentAccountId + ", paymentTime=" + paymentTime + ", invoiceId=" + invoiceId
+				+ ", freightUnit=" + freightUnit + ", freightNumberId=" + freightNumberId + ", goods=" + goods
+				+ ", applicationletter=" + applicationletter + ", invoiceNum=" + invoiceNum + ", letterStatus="
+				+ letterStatus + ", orderCreatorUserid=" + orderCreatorUserid + ", centName=" + centName + ", fName="
+				+ fName + ", cName=" + cName + ", entname=" + entname + ", username=" + username + ", invoiceNo="
+				+ invoiceNo + ", aa=" + aa + ", address=" + address + ", area=" + area + ", person=" + person
+				+ ", phone=" + phone + ", procurementEntName=" + procurementEntName + ", tradeEntName=" + tradeEntName
+				+ ", contractName=" + contractName + ", contractNumber=" + contractNumber + ", freightName="
+				+ freightName + ", orderCreatorUserId=" + orderCreatorUserId + ", amount=" + amount
+				+ ", contractnumber=" + contractnumber + "]";
+	}
 }

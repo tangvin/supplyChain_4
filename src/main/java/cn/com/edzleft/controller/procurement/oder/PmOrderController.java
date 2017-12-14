@@ -212,14 +212,22 @@ public class PmOrderController {
 	 */
 	@RequestMapping(value="updateOrder")
 	@ResponseBody
-	public boolean updataOreder(Order order,Integer rAddressId){
+	public Map<String,Object> updataOreder(Order order,Integer rAddressId){
+		Map<String,Object> map = new HashMap<>();
 		System.out.println(order);
 		System.out.println(rAddressId);
 		Integer receivingAddressId = order.getReceivingAddressId();
 		order.setReceivingAddressId(rAddressId);
 		System.out.println(rAddressId+"======"+receivingAddressId);
 		int i = pmOrderService.updataOreder(order);
-		return i>0?true:false;
+		if(i>0){
+			map.put("success", true);
+			map.put("msg", "修改成功");
+		}else{
+			map.put("success", false);
+			map.put("msg", "修改失败");
+		}
+		return map;
 	}
 	
 	@RequestMapping(value="ddbjaa")

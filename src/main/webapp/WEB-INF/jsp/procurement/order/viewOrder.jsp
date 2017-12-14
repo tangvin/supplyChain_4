@@ -57,11 +57,11 @@
                         <tbody>
                         <tr>
                                 <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-                                <td class="col-xs-9 text-left"><span>${order.orderCreatorId}</span></td>
+                                <td class="col-xs-9 text-left"><span>${order.entname}</span></td>
                         </tr>
                         <tr>
                                 <td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
-                                <td class="col-xs-9 text-left"><span>编号：${contract.contractNumber}    名称：${contract.contractName} </span></td>
+                                <td class="col-xs-9 text-left"><span>编号：${order.contractnumber}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名称：${order.cName} </span></td>
                         </tr>
                         <tr>
                                 <td class="col-xs-3 text-right"><span class="xingxing">*</span>货物商品：</td>
@@ -77,7 +77,9 @@
                         </tr>
                         <tr>
                                 <td class="col-xs-3 text-right"><span class="xingxing">*</span>发票：</td>
-                                <td class="col-xs-8 text-left"><img src="images/card_minsheng@1x.png"></td>
+                                <td class="col-xs-8 text-left"><img src="images/card_minsheng@1x.png">
+                                	<span class="xingxing1">${rejectList.size()}</span>
+                                </td>
                         </tr>
                         <tr>
                                 <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单状态：</td>
@@ -121,6 +123,12 @@
                                     </form>
                                 </td>
                         </tr>
+                        <tr>
+					   <div class="row">
+				        <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单驳回记录：</td>
+				        <td class="col-xs-9 text-left">${rejectList.size()}</td>
+					   </div>
+</tr>
                         </tbody>
                     </table>
                 </div>
@@ -139,26 +147,26 @@
                     <tbody>
                     <tr>
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>发货人：</td>
-                            <td class="col-xs-9 text-left"><span>${order.orderCreatorTradeId}</span></td>
+                            <td class="col-xs-9 text-left"><span>${order.entname}</span></td>
                     </tr>
                     <tr>
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>货运单位：</td>
-                            <td class="col-xs-9 text-left"><span>${freight.freightName}</span></td>
+                            <td class="col-xs-9 text-left"><span>${order.fName}</span></td>
                     </tr>
                     <tr>
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>货运单号：</td>
-                            <td class="col-xs-9 text-left"><span>${freight.freightNumber}</span><button class="btn" style="margin-left: 30px">查询物流信息</button></td>
+                            <td class="col-xs-9 text-left"><span>${order.freightUnit}</span><button class="btn" style="margin-left: 30px">查询物流信息</button></td>
                     </tr>
                     <tr>
                             <td class="col-xs-3 text-right">联系收货人：</td>
                             <td class="col-xs-9 text-left">
-                                <span style="float: left;margin-top: 5px;">${freight.freightContactPerson}</span>
+                                <span style="float: left;margin-top: 5px;">${order.fperson}</span>
                             </td>
                     </tr>
                     <tr>
                             <td class="col-xs-3 text-right">联系人手机号：</td>
                             <td class="col-xs-9 text-left">
-                                <span>${freight.freightContactPhone}</span>
+                                <span>${order.fphone}</span>
                             </td>
                     </tr>
                     </tbody>
@@ -177,24 +185,24 @@
                 <table class="table table-bordered bj_table">
                     <tbody>
                     <tr>
-                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-                            <td class="col-xs-9 text-left"><span>${order.orderCreatorId}</span></td>
+                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货人：</td>
+                            <td class="col-xs-9 text-left"><span>${order.centName}</span></td>
                     </tr>
                     <tr>
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息：</td>
-                            <td class="col-xs-9 text-left"><span>${receivingAddress.rAddressArea}${receivingAddress.rAddressAddress}</span></td>
+                            <td class="col-xs-9 text-left"><span>${order.area}${order.address}</span></td>
                     </tr>
                     <tr>
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货人：</td>
                             <td class="col-xs-9 text-left">
-                                <span>${receivingAddress.rAddressPerson}</span>
+                                <span>${order.person}</span>
                             </td>
                     </tr>
                     <tr>
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>联系人手机号：</td>
                             <td class="col-xs-9 text-left">
                                <%--  <span>${receivingAddress.rAddressPhone}</span> --%>
-                            	 <span>${receivingAddress.rAddressPhone}</span>
+                            	 <span>${order.phone}</span>
                             </td>
                     </tr>
                     </tbody>
