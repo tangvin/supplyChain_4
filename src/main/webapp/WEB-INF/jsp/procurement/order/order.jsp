@@ -8,11 +8,19 @@
 <head>
     <meta charset="UTF-8">
     <title>订单管理</title>
-
+    <style>
+       .xzdd{
+          /*margin-right:40px;*/
+           margin-right:-15px;
+       }
+        #butt{
+            cursor: pointer;
+        }
+    </style>
 
 </head>
 <body>
-<div class='col-xs-12'>	 
+<div class='col-xs-12'>
 <div class="row">
 <!--订单管理 头部-->
 	<div class="col-xs-12 zlxx_top">
@@ -25,7 +33,7 @@
 		   <div class="khh">
 			   <form class="form-inline khh_form khh_form1" id="ordersform">
 			        <div class="form-group">
-			             <label>状态</label>
+			             <label>状态：</label>
 			             <select class="form-control select" id="orderStatus">
 			                   <option value="">全部</option>
 			                   <option value="0">待确认</option>
@@ -37,7 +45,7 @@
 			              </select>
 			          </div>
 			          <div class="form-group">
-			               <label>订单时间</label>
+			               <label>订单时间：</label>
 			               <select class="form-control select" id="aa">
 			                   <option value="">自定义时间</option>
 			                   <option value="0">一月内</option>
@@ -46,14 +54,14 @@
 			                   <option value="3">一年内</option>
 			               </select>
 			               <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/>至
-		                   <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>                    
+		                   <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
 		               </div>
-		
+
 			           <div class="form-group">
-			               <label>订单签约方</label>
+			               <label>订单签约方：</label>
 			               <input type="text" class="form-control" id="entname">
 			           </div>
-			                   
+
 			           <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>
 			           <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
 			       </form>
@@ -65,13 +73,13 @@
     <button style="margin-right:-15px" class="btn btn-primary" id="insertOrder">新增订单</button>
 </div>
 <!-- 订单开户行 结束 -->
-<!-- 订单表格 开始    -->    
+<!-- 订单表格 开始    -->
 <div class="col-xs-12">
 	<table id="tb_departments" class="cj_table">
-	                  
+
 	</table>
 </div>
-<!-- 订单表格 结束    --> 
+<!-- 订单表格 结束    -->
 
 <!--领取订单 模态框-->
     <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -88,6 +96,30 @@
 		    </div>
      </div>
 <!--领取订单 模态框 结束-->
+<div class="modal fade bs-example-modal-sm_sq" id="myModalLetter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabelLetter">申请用信</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="table-responsive text-center">
+                                	<form class="form-inline khh_form" id="orderForm">
+	                                    <table class="table table-bordered bj_table" >
+	                                        <tbody id="wybLetter">
+	
+	                                        </tbody>
+	                                    </table>
+                                    </form>
+                                </div>
+                            </div>
+                          
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" id="orderClike">确认</button>
+                            </div>
+                        </div>
+                    </div>
 <!--申请融信 模态框-->
 
 </div>
@@ -138,10 +170,10 @@
                 },
                 
                 
-                {field:'orderCreatTime',title:'订单创建',
+                {field:'orderCreatTime',title:'订单创建时间',
                 	formatter:function(value,row,index){
                 	  var str='';
-                		 str +='<p>'+row.username+'</p>'+ConvertToDate(value)+'<p></p>'; 
+                		 str +='<p>'+row.username+'</p>'+ConvertToDate(value)+'<p></p>';
                         return str;
                    }
                 },
@@ -157,12 +189,11 @@
                           return str;
                      }
                 },
-          
+
                 {
                     title:'操作',
                     field:'action',
                     formatter:function(value , row){
-                    	console.log(row)
                         var str = '';
                         if(row.orderStatus == 0){//待确认
    	                        str += '<button class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm"  href="#" value="取消" onclick="showUserAttach(\''+row.orderId+'\',1)">取消</button>';
@@ -215,11 +246,11 @@
             pageSize: params.pageSize,
             orderStatus:$("#orderStatus").val(),
             orderCreator:$("#orderCreator").val(), 
-            entname:$("#entname").val(), 
+            entname:$("#entname").val(),
             orderCreatTime:$("#creatTime").val(),
             orderConfirmationTime:$("#endTime").val(),
             aa:$("#aa").val(),
-            
+
         };
         return temp;
     }
@@ -247,7 +278,6 @@
 
     //待确认状态下按钮触发事件
     function showUserAttach(w,e){
-    console.log(w)
     $("#lqdd").click(function () {
         $.ajax({
             url:'<%=request.getContextPath()%>/pmorder/cancelOrderStatus.action?id='+w+'&&flag='+e,
@@ -265,20 +295,18 @@
     /* 订单编辑 */
      function updorder(id,flag){
     	$('#load').load('<%=request.getContextPath()%>/pmorder/ddbj.action?orderId='+id);
-    	alert(id)
     }
     
     function sqyx(id,flag){
     	 /* 提交申请用信 */
     	  $("#orderClike").click(function(){
-    		  alert($("#orderForm").serialize())
     		  $.ajax({
     			  url: '<%=request.getContextPath()%>/pmorder/commitSqyx.action?id='+id+'&&flag='+flag,
     	          data:$("#orderForm").serialize(),
     	          type:"POST",
     	          dataType:"json",
     	          success: function(data){
-    	        	  alert("申请用信成功");
+    	        	  alert("已申请用信,请等待审核。");
                       setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/ddgl.action')",500);
     	          }
     		  });

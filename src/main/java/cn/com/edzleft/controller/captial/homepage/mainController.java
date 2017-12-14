@@ -240,4 +240,49 @@ public class mainController {
         return "login";
     }
 
+    /**
+     * 门户首页
+     * @return
+     */
+    @RequestMapping("homeDoor")
+    public String homeDoor(){
+        return "door/home";
+    }
+
+    /**
+     * 门户产品中心
+     * @return
+     */
+    @RequestMapping("productCentre")
+    public String productCentre(){
+        return "door/productCentre";
+    }
+
+    /**
+     * 门户合作伙伴
+     * @return
+     */
+    @RequestMapping("solution")
+    public String solution(){
+        return "door/solution";
+    }
+
+    /**
+     * 门户合作伙伴
+     * @return
+     */
+    @RequestMapping("partner")
+    public String partner(){
+        return "door/partner";
+    }
+
+    /**
+     * 门户关于我们
+     * @return
+     */
+    @RequestMapping("about")
+    public String about(){
+        return "door/about";
+    }
+
 }

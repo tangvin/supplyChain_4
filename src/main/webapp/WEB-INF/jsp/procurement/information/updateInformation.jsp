@@ -175,19 +175,20 @@
                             <table class="table table_one">
                                 <tbody>
                                 <tr>
-                                    <td style="width: 20%;" class="text-right">注册资本:</td>
+                                    <td style="width: 20%;" class="text-right">注册资本：</td>
                                     <td><input type="text" class="form-control" name="registeredCapital" value="${information.registeredCapital}"></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-right">主要股东:</td>
+                                    <td class="text-right">主要股东：</td>
                                     <td><input type="text" class="form-control" name="majorShareholder" value="${information.majorShareholder}"></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-right">经营范围:</td>
-                                    <td><input type="text" class="form-control" name="businessScope" value="${information.businessScope}"></td>
+                                    <td class="text-right">经营范围：</td>
+                                    <td><textarea style="width: 250px;" class="form-control" name="businessScope" >${information.businessScope}</textarea></td>
+                                    <%--<input type="text" class="form-control" name="businessScope" value="${information.businessScope}">--%>
                                 </tr>
                                 <tr>
-                                    <td class="text-right">登记机关:</td>
+                                    <td class="text-right">登记机关：</td>
                                     <td><input class="form-control" name="registrationAuthority"  value="${information.registrationAuthority}" type="text"></td>
                                 </tr>
                                 <tr class="three_no_certificates">

@@ -188,6 +188,7 @@ public class PmOrderServiceImpl implements PmOrderService{
 	 */
 	@Override
 	public int updataOreder(Order order) {
+		order.setOrderStatus(0);
 		int i = pmOrderMapper.updataOreder(order);
 		return i;
 	}

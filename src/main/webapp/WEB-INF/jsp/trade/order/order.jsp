@@ -20,7 +20,7 @@
             <div class="khh">
                 <form class="form-inline khh_form khh_form1" id="orderform">
                     <div class="form-group">
-                        <label>状态</label>
+                        <label>状态：</label>
                         <select class="form-control select" id="orderStatus">
                             <option value="">全部</option>
                             <option value="0">待确认</option>
@@ -32,7 +32,7 @@
                         </select>
                     </div>
                     <div class="form-group form-group1">
-                        <label>订单时间</label>
+                        <label>订单时间：</label>
                         <select class="form-control" id="custom">
                             <option value="">自定义时间</option>
                             <option value="">请选择</option>
@@ -45,7 +45,7 @@
                         <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
                     </div>
                     <div class="form-group">
-                        <label>签约方</label>
+                        <label>签约方：</label>
                         <input type="text" class="form-control" id="procurementEntName">
                     </div>
                     <%--<div class="form-group">--%>
@@ -283,12 +283,12 @@
                     formatter:function(value , row){
                         var str = '';
                         if(row.orderStatus ==0){//待确认
-                            str += '<button  class="btn btn-default bg_btn qran" data-toggle="modal" data-target=".bs-example-modal-sm" href="#" value="待确认" onclick="showUserAttach(\''+row.orderId+'\',1)">领取订单</button>';
-                            str += '<button  class="btn btn-default bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_bh" href="#" value="待确认" onclick="showUserAttache(\''+row.orderId+'\',2)">驳回</button>';
+                            str += '<button  class="btn  btn-primary bg_btn qran" data-toggle="modal" data-target=".bs-example-modal-sm" href="#" value="待确认" onclick="showUserAttach(\''+row.orderId+'\',1)">领取订单</button>';
+                            str += '<button  class="btn btn-warning bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_bh" href="#" value="待确认" onclick="showUserAttache(\''+row.orderId+'\',2)">驳回</button>';
                         } else if(row.orderStatus ==1){//待付款
                             str+='--';
                         } else if(row.orderStatus ==2){//待发货
-                            str +='<button  id="pz" class="btn-warning btn-sm" data-toggle="modal" data-target=".bs-example-modal-pzfh" href="#" value="待发货" onclick="showUserAttachs(\''+row.orderId+'\',4)">配置发货</button>';
+                            str +='<button  id="pz" class="btn-danger btn-sm" data-toggle="modal" data-target=".bs-example-modal-pzfh" href="#" value="待发货" onclick="showUserAttachs(\''+row.orderId+'\',4)">配置发货</button>';
                         } else if(row.orderStatus ==3){//待收货
                             str+='--';
                         } else if(row.orderStatus ==4){//已完成

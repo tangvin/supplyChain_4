@@ -178,7 +178,8 @@
 
                             <tr>
                                 <td  class="text-right">经营范围：</td>
-                                <td><input type="text" name="businessScope" class="form-control" value="${information.businessScope}"></td>
+                                <td><textarea style="width: 250px;" name="businessScope" class="form-control">${information.businessScope}</textarea></td>
+                                <%--<input type="text" name="registrationAuthority" class="form-control" value="${information.businessScope}">--%>
                             </tr>
                             <tr>
                                 <td  class="text-right">登记机关：</td>
@@ -304,7 +305,7 @@
             		alert(data.msg)
             	}
                 setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ziliao.action')",500);
-    }
+            }
         })
     })
     var   szhy = '${information.entDocumentType}'

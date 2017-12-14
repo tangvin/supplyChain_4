@@ -29,6 +29,7 @@
                                 <tbody>
                                 <tr>
                                     <input type="hidden" name="id" value="${information.id }">
+                                    <input type="hidden" name="informationId" value="${account.informationId}">
                                     <td style="width: 20%;" class="text-right">企业身份：</td>
                                     <td class="mys">
                                         <%--0采购方、1贸易方、2资方--%>
@@ -174,7 +175,8 @@
                                 </tr>
                                 <tr>
                                     <td class="text-right">经营范围：</td>
-                                    <td><input type="text" class="form-control" name="businessScope" value="${information.businessScope}"></td>
+                                    <td><textarea style="width: 250px;" class="form-control" name="businessScope">${information.businessScope}</textarea></td>
+                                    <%--<input type="text" class="form-control" name="businessScope" value="${information.businessScope}">--%>
                                 </tr>
                                 <tr>
                                     <td class="text-right">登记机关：</td>

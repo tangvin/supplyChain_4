@@ -107,7 +107,7 @@ public class PmOrderController {
 		String principalOrderId = req.getParameter("principalOrderId");
 		String applicationletter = req.getParameter("applicationletter");
 		String goods = req.getParameter("goods");
-		//根据关联合同查询合同 
+		//根据关联合同查询合同
 		Contract contract = pmContractWardService.getContract(principalOrderId);
 		if(contract == null){
 			map.put("msg", "合同名称错误");
@@ -120,7 +120,7 @@ public class PmOrderController {
 			o.setLogisticsName(receiver);
 			o.setReceivingAddressId(Integer.parseInt(receivingAddressId));
 			o.setOrderAmount(Double.parseDouble(orderAmount));
-			o.setApplicationletter(applicationletter); 
+			o.setApplicationletter(applicationletter);
 			o.setGoods(goods);
 			o.setOrderStatus(0);
 			SessionInfo sessionInfo1 = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
@@ -212,14 +212,22 @@ public class PmOrderController {
 	 */
 	@RequestMapping(value="updateOrder")
 	@ResponseBody
-	public boolean updataOreder(Order order,Integer rAddressId){
+	public Map<String,Object> updataOreder(Order order,Integer rAddressId){
+		Map<String,Object> map = new HashMap<>();
 		System.out.println(order);
 		System.out.println(rAddressId);
 		Integer receivingAddressId = order.getReceivingAddressId();
 		order.setReceivingAddressId(rAddressId);
 		System.out.println(rAddressId+"======"+receivingAddressId);
 		int i = pmOrderService.updataOreder(order);
-		return i>0?true:false;
+		if(i>0){
+			map.put("success", true);
+			map.put("msg", "修改成功");
+		}else{
+			map.put("success", false);
+			map.put("msg", "修改失败");
+		}
+		return map;
 	}
 	
 	@RequestMapping(value="ddbjaa")

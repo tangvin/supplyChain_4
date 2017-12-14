@@ -6,6 +6,8 @@ import cn.com.edzleft.service.procurement.freight.PmFreightService;
 import cn.com.edzleft.service.procurement.homepage.PmHomePageService;
 import cn.com.edzleft.service.procurement.receivingaddress.PmReceivingAddressService;
 import cn.com.edzleft.service.trade.account.AccountService;
+import cn.com.edzleft.service.trade.reject.RejectService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -38,7 +39,10 @@ public class PmmainController {
 	private PmReceivingAddressService pmreceivingAddressservice;
 	
 	 @Autowired
-	    private AccountService accountService;
+	 private AccountService accountService;
+	 
+	 @Autowired
+	   private RejectService rejectService;
 	/**
 	 * 添加银行卡第三步
 	 * @return
@@ -152,6 +156,7 @@ public class PmmainController {
 	public ModelAndView ddck(String value){
 		ModelAndView mv = new ModelAndView("/procurement/order/viewOrder");
 		Order order  = pmHomePageService.selectByPrimaryKey(value);
+		Integer orderId = order.getOrderId();
 		//获取运货单位
 		Integer freightNumberId = order.getFreightNumberId();
 		Integer addressId = order.getReceivingAddressId();
@@ -159,9 +164,13 @@ public class PmmainController {
         Freight freight = pmfreightservice.queryFreightById(freightNumberId);
         ReceivingAddress receivingAddress = pmreceivingAddressservice.queryReceivingAddress(addressId);
 		
+        //查看驳回记录
+        List<Reject> rejectList = rejectService.queryRejectByOrderId(orderId);
+        
         mv.addObject("order", order);
 		mv.addObject("freight", freight);
 		mv.addObject("receivingAddress",receivingAddress);
+		mv.addObject("rejectList",rejectList);
         return mv;
     }
 
