@@ -56,9 +56,9 @@ public class TradeContractController {
     /**
      * 根据id 查询合同相信信息
      */
-    public Contract contractDetail(Integer id){
-        Contract contract = contractSigningService.queryContractById(id);
-        return contract;
-    }
+//    public Contract contractDetail(Integer id){
+//        Contract contract = contractSigningService.queryContractById(id);
+//        return contract;
+//    }
 
 }

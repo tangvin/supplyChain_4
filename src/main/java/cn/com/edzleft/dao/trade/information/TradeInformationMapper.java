@@ -31,5 +31,5 @@ public interface TradeInformationMapper {
     public Information selectByCreatorId(Integer id);
 
 
-
+    Information getContract(Integer contractBuyerId);
 }

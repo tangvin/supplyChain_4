@@ -137,4 +137,8 @@ public class TradeInformationServiceImpl implements TradeInformationService {
         return information;
     }
 
+    @Override
+    public Information getContract(Integer contractBuyerId) {
+        return informationMapper.getContract(contractBuyerId);
+    }
 }

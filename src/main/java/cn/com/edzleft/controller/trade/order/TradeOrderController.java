@@ -137,9 +137,21 @@ public class TradeOrderController {
      */
     @RequestMapping(value = "/bohui",method = RequestMethod.POST)
     @ResponseBody
-    public List<Reject> rejectReason(Integer id,Integer flag,HttpSession session){
-        Order order = tradeOrderService.setOrderStatus(id,flag, session);
-     //   rejectService.addRejectReason("");
+    public List<Reject> rejectReason(Integer id,Integer flag,String rejectReason,HttpSession session){
+       //查询当前订单对象
+        Order order = tradeOrderService.queryOrderById(id);
+        Integer orderId = order.getOrderId();
+        //调用驳回记录表serivce
+        Reject reject = new Reject();
+        //将订单id存到驳回表中
+        reject.setOrderId(orderId);
+        //设置驳回业务类型--(1.合同    2.订单)
+        reject.setBussinessType(2);
+        //收集页面传回的驳回理由
+        reject.setRejectReason(rejectReason);
+        //确认驳回之前先将驳回理由存到添加驳回记录表
+        rejectService.addRejectReason(reject);
+        tradeOrderService.setOrderStatus(id, flag, session);
         List<Reject> rejectList = rejectService.queryRejectByOrderId(id);
         return rejectList;
     }
@@ -151,7 +163,7 @@ public class TradeOrderController {
      */
     @RequestMapping(value = "/pzfh",method = RequestMethod.POST)
     @ResponseBody
-    public String takeOrder(Integer id, Integer flag,String freightUnit,String freightNumber,String invoiceNo,HttpSession sessionInfo) throws IOException {
+    public String takeOrder(Integer id, Integer flag,String freightUnit,String freightName,String invoiceNo,Integer val,HttpSession sessionInfo) throws IOException {
         //根据id获取当前的订单对象
         Order order = tradeOrderService.queryOrderById(id);
         Integer orderId = order.getOrderId();//需存到发票表
@@ -190,20 +202,18 @@ public class TradeOrderController {
         Integer n = invoiceRecord.getId();
 
 
-        //第三步：添加订单
+//        //第三步：设置货运单位信息
 
-        //获取订单编号
-        String orderNumber = order.getOrderNumber();
-        //获取订单金额
-        Double orderAmount = order.getOrderAmount();
-        //收集参数--货运单位名称--根据货运单位名称选择对应的货运地址（一个订单只有一个货运地址）
+        order.setFreightNumberId(val);
+        //货运单位名字
+        order.setFreightName(freightName);
+        //收集参数--货运编号(单号)--存入订单表（注：只存订单表）
         order.setFreightUnit(freightUnit);
-        //选择某一地址时，可以对该地址进行管理，修改
-        Freight freight = freightService.queryFreightByName(freightUnit);
-        //收集参数--货运编号--存入订单表（注：只存订单表）
-        order.setFreightUnit(freightNumber);
-        //收集参数--发票号--存入订单表（不存发票表）
+        //收集参数--发票号--存入订单表（只存在订单表中）
         order.setInvoiceNum(invoiceNo);
+        //设置发票id
+        order.setInvoiceId(n);
+
         //更新数据库订单表信息
         tradeOrderService.updateOrder(order);
         //设置订单状态

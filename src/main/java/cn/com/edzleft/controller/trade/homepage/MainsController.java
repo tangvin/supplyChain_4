@@ -113,10 +113,15 @@ public class MainsController {
      * @return
      */
     @RequestMapping(value = "ddck")
+    @ResponseBody
     public ModelAndView ddck(String value){
         //根据订单编号查看订单详细信息
         Order order = tradeOrderService.queryOrderByNumber(value);
         Integer orderId = order.getOrderId();
+        //获取采方企业id
+        Integer orderCreatorId = order.getOrderCreatorTradeId();
+
+        Information information = tradeInformationService.selectByCreatorId(orderCreatorId);
         //获取货运管理表id
         Integer freightNumberId = order.getFreightNumberId();
         //查询出货运单位信息
@@ -129,14 +134,18 @@ public class MainsController {
         Integer principalOrderId = order.getPrincipalOrderId();
         //查询出合同信息
         Contract contract = contractSigningService.queryContractById(principalOrderId);
+        Integer contractBuyerId = contract.getContractBuyerId();
+        Information information1 = tradeInformationService.getContract(contractBuyerId);
         //查看驳回记录
         List<Reject> rejectList = rejectService.queryRejectByOrderId(orderId);
         ModelAndView modelAndView = new ModelAndView("/trade/order/viewOrder");
         modelAndView.addObject("order",order);
         modelAndView.addObject("freight",freight);
         modelAndView.addObject("receivingAddress",receivingAddress);
+        modelAndView.addObject("information1",information1);
         modelAndView.addObject("contract",contract);
         modelAndView.addObject("rejectList",rejectList);
+        modelAndView.addObject("information",information.getEntName());
         return modelAndView;
     }
 
