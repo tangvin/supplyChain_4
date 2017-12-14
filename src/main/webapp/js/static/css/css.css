@@ -61,9 +61,18 @@
     float: left;
 }
 .home_top_nav li a{
+    transition: .5s ease;
+}
+.home_top_nav li a:hover{
+    color: #F24646 ;
+}
+a.home_top_nav_class:visited{
+    color: #F24646;
+}
+.home_top_nav li a{
     padding: 0 17px;
     font-size: 16px;
-    border-right: 1px solid #525252;
+    border-right: 1px solid #ddd;
     color: #808080;
 }
 .home_top_nav li:last-child a{
@@ -290,7 +299,13 @@
     margin-top:13px;
     margin-bottom:11px;
 }
+.home_footer_bottom  p:nth-child(2) a{
+    color: #808080;
 
+}
+.home_footer_bottom  p:nth-child(2) a:hover{
+    text-decoration:underline;
+}
 
 .cpzx_banner{
     width:100%;
@@ -324,7 +339,7 @@
 .xtsy_div{
     width:1020px;
     height:100%;
-    padding: 20px;
+    padding: 30px;
     box-sizing: border-box;
     margin-top:50px;
     margin-bottom:50px;
@@ -394,10 +409,19 @@
     float: left;
     width:272px;
     height:308px;
-    padding: 24px;
     box-sizing: border-box;
     box-shadow: 0px 1px 4px rgba(0,0,0,0.3),0 0 5px rgba(0,0,0,0.1);
     margin-right: 102px;
+}
+.jjfa_rhyd_list li .jjfa_rhyd_list_img{
+    display: table-cell;
+    vertical-align:middle;
+    text-align:center;
+    width:272px;
+    height:308px;
+}
+.jjfa_rhyd_list li .jjfa_rhyd_list_img img{
+    vertical-align: middle;
 }
 .jjfa_rhyd_list li:last-child{
     margin-right:0;
@@ -418,11 +442,13 @@
     box-shadow: 0px 1px 4px rgba(0,0,0,0.3),0 0 5px rgba(0,0,0,0.1);
     margin-top:70px;
     position: relative;
+    padding-top: 40px;
 }
 .jjfa_jjfa_div button{
     position: absolute;
-    right:50px;
-    bottom:30px;
+    right:30px;
+    bottom:20px;
+    cursor: pointer;
     width: 120px;
     height:46px;
     background: #E75352;
@@ -431,6 +457,13 @@
     outline: none;
     border-radius: 6px;
     font-size:16px;
+}
+.jjfa_jjfa_div_img{
+    text-align: center;
+}
+.jjfa_jjfa_div_img img{
+    margin: 0 auto;
+    display: block;
 }
 
 .hzhb_banner{

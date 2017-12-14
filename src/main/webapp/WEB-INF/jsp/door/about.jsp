@@ -27,7 +27,7 @@
                     <li><a href="<%=request.getContextPath()%>/productCentre.action">产品中心</a></li>
                     <li><a href="<%=request.getContextPath()%>/solution.action">解决方案</a></li>
                     <li><a href="<%=request.getContextPath()%>/partner.action">合作伙伴</a></li>
-                    <li><a href="<%=request.getContextPath()%>/about.action">关于我们</a></li>
+                    <li><a href="<%=request.getContextPath()%>/about.action" class="home_top_nav_class">关于我们</a></li>
                 </ul>
             </div>
             <!--头部中间 导航 结束-->
@@ -131,7 +131,7 @@
         </div>
         <div class="home_footer_bottom">
             <p>copyright © 2017 版权所有 All Rights Reseved.</p>
-            <p>京ICP备17069390号-1</p>
+            <p><a target="_blank" href="http://www.miitbeian.gov.cn/">京ICP备17069390号-1</a></p>
         </div>
 
     </div>

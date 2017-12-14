@@ -24,7 +24,7 @@
             <div class="home_top_center">
                 <ul class="home_top_nav clearfix">
                     <li><a href="<%=request.getContextPath()%>/">首页</a></li>
-                    <li><a href="<%=request.getContextPath()%>/productCentre.action">产品中心</a></li>
+                    <li><a href="<%=request.getContextPath()%>/productCentre.action" class="home_top_nav_class">产品中心</a></li>
                     <li><a href="<%=request.getContextPath()%>/solution.action">解决方案</a></li>
                     <li><a href="<%=request.getContextPath()%>/partner.action">合作伙伴</a></li>
                     <li><a href="<%=request.getContextPath()%>/about.action">关于我们</a></li>
@@ -79,7 +79,7 @@
             <div class="cpzx_xtjs">
                 <p>系统使用</p>
                 <div class="xtsy_div">
-
+                    <img src="<%=request.getContextPath()%>/js/static/images/images1/product-ico-3.png">
                 </div>
             </div>
 
@@ -105,7 +105,7 @@
         </div>
         <div class="home_footer_bottom">
             <p>copyright © 2017 版权所有 All Rights Reseved.</p>
-            <p>京ICP备17069390号-1</p>
+            <p><a target="_blank" href="http://www.miitbeian.gov.cn/">京ICP备17069390号-1</a></p>
         </div>
 
     </div>

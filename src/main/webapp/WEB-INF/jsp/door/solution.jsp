@@ -25,7 +25,7 @@
                 <ul class="home_top_nav clearfix">
                     <li><a href="<%=request.getContextPath()%>/">首页</a></li>
                     <li><a href="<%=request.getContextPath()%>/productCentre.action">产品中心</a></li>
-                    <li><a href="<%=request.getContextPath()%>/solution.action">解决方案</a></li>
+                    <li><a href="<%=request.getContextPath()%>/solution.action" class="home_top_nav_class">解决方案</a></li>
                     <li><a href="<%=request.getContextPath()%>/partner.action">合作伙伴</a></li>
                     <li><a href="<%=request.getContextPath()%>/about.action">关于我们</a></li>
                 </ul>
@@ -77,16 +77,19 @@
                 </p>
                 <ul class="jjfa_rhyd_list clearfix">
                     <li>
-                        <div></div>
-                        <p class="jjfa_rhyd_list_con">唯品会 - 全球精选，正品特卖！都是傲娇的品牌，只卖呆萌的价格！商品囊括了时尚女装、童装、美妆、美鞋、男装、居...</p>
+                        <div class="jjfa_rhyd_list_img">
+                          <img src="<%=request.getContextPath()%>/js/static/images/images1/solution-ico-2.png">
+                        </div>
                     </li>
                     <li>
-                        <div></div>
-                        <p class="jjfa_rhyd_list_con">唯品会 - 全球精选，正品特卖！都是傲娇的品牌，只卖呆萌的价格！商品囊括了时尚女装、童装、美妆、美鞋、男装、居...</p>
+                        <div class="jjfa_rhyd_list_img">
+                        <img src="<%=request.getContextPath()%>/js/static/images/images1/solution-ico-3.png">
+                        </div>
                     </li>
                     <li>
-                        <div></div>
-                        <p class="jjfa_rhyd_list_con">唯品会 - 全球精选，正品特卖！都是傲娇的品牌，只卖呆萌的价格！商品囊括了时尚女装、童装、美妆、美鞋、男装、居...</p>
+                        <div class="jjfa_rhyd_list_img">
+                        <img src="<%=request.getContextPath()%>/js/static/images/images1/solution-ico-1.png">
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -99,7 +102,10 @@
                     <span class="home_xian"></span>
                 </p>
                 <div class="jjfa_jjfa_div">
-                    <button>立即体验</button>
+                    <div class="jjfa_jjfa_div_img">
+                        <img src="<%=request.getContextPath()%>/js/static/images/images1/solution-ico-4.png">
+                    </div>
+                    <a href="<%=request.getContextPath()%>/login.action"><button>立即体验</button></a>
                 </div>
             </div>
         </div>
@@ -125,7 +131,7 @@
         </div>
         <div class="home_footer_bottom">
             <p>copyright © 2017 版权所有 All Rights Reseved.</p>
-            <p>京ICP备17069390号-1</p>
+            <p><a target="_blank" href="http://www.miitbeian.gov.cn/">京ICP备17069390号-1</a></p>
         </div>
 
     </div>

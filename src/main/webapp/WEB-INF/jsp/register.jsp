@@ -36,6 +36,12 @@
             margin-top:40px;
             padding-left: 30px;
         }
+        .rsg_one_xx1{
+            width:80%;
+            box-sizing: border-box;
+            padding-left: 30px;
+            margin: auto;
+        }
         .rsg_one_xx div{
             margin-bottom:10px !important;
         }
@@ -107,7 +113,10 @@
                     <input id="btnSendCode" class="btn" type="button" value="获取验证码" onclick="sendMessage()" />
                 </div>
             </form>
-            <button class="btn center-block btn-danger" id="next_bu_one" >下一步</button>
+            <div class="rsg_one_xx1">
+                  <label class="col-xs-4"></label>
+                  <button class="btn btn-danger" id="next_bu_one" >下一步</button>
+            </div>
         </div>
     </div>
     <p class='text-center rsg_copy'>Copyright © 2017 版权所有 </p>
@@ -132,7 +141,10 @@
 	                        <input id="rsg_qrmm" type="password" class="form-control" placeholder="请与密码保持一致">
 	                    </div>
 	                </form>
-	                <a id="tz"><button class="btn center-block btn-danger" id="next_bu_two">下一步</button></a>
+                    <div class="rsg_one_xx1">
+                        <label class="col-xs-4"></label>
+                        <a id="tz"><button class="btn center-block btn-danger" id="next_bu_two">下一步</button></a>
+                    </div>
             </div>
         </div>
         <p class='text-center rsg_copy'>Copyright © 2017 版权所有 </p>
