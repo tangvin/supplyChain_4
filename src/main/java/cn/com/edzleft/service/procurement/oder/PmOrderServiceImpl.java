@@ -34,7 +34,13 @@ public class PmOrderServiceImpl implements PmOrderService{
 	public PageUtil<Order> getOrderEntityList(PageUtil<Order> userPage) {
 		//查询总条数
         int totalCount = pmOrderMapper.getCrownEntityCounts(userPage);
-        //查询集合
+        //根据月份进行判断
+       /* if(userPage.getWhereMap().get("aa")=="1"){  //月份为一个月
+        	userPage.getWhereMap().put("aa","month");
+        } else if(userPage.getWhereMap().get("aa")=="2"){ //月份为一年
+        	userPage.getWhereMap().put("aa","month");
+        }*/
+       //查询集合
         List<Order> userList = pmOrderMapper.getCrownEntityList(userPage);
         userPage.setTotalCount(totalCount);
         userPage.setList(userList);
@@ -100,18 +106,21 @@ public class PmOrderServiceImpl implements PmOrderService{
 		if(flag==1){//取消按钮，0-->5
 			order.setOrderStatus(5);
 			order.setOrderId(id);
+			order.setOrderConfirmationTime(new Date());
 		}else if(flag==2){//编辑按钮
 			order.setOrderStatus(0);
 			order.setOrderId(id);
 		}else if(flag==3){//取消
 			order.setOrderStatus(5);
 			order.setOrderId(id);
+			order.setOrderConfirmationTime(new Date());
 		}else if(flag==4){//编辑
 			order.setOrderStatus(1);
 			order.setOrderId(id);
 		}else if(flag==5){//申请用信
 			order.setOrderStatus(1);
 			order.setOrderId(id);
+			order.setOrderConfirmationTime(new Date());
 		}else if(flag==6){//提醒发货
 			order.setOrderStatus(2);
 			order.setOrderId(id);
@@ -122,12 +131,14 @@ public class PmOrderServiceImpl implements PmOrderService{
 		}else if(flag==8){//取消
 			order.setOrderStatus(0);
 			order.setOrderId(id);
+			order.setOrderConfirmationTime(new Date());
 		}else if(flag==9){//编辑
 			order.setOrderId(id);
 			order.setOrderStatus(5);
 		}else if(flag==10){//取消
 			order.setOrderStatus(5);
 			order.setOrderId(id);
+			order.setOrderConfirmationTime(new Date());
 		}else if(flag==11){//编辑
 			order.setOrderStatus(0);
 			order.setOrderId(id);

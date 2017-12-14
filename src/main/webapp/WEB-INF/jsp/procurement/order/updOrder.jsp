@@ -65,7 +65,7 @@
 									<tr>
 										<div class="row">
 											<td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-											<td class="col-xs-9 text-left"><input type="text" value="${order.orderCreator}" name="orderCreator"></td>
+											<td class="col-xs-9 text-left"><input type="text" value="${order.orderCreatorId}" name="orderCreatorId"></td>
 										</div>
 									</tr>
 									<tr>
@@ -161,7 +161,7 @@
 	                    <tr>
 	                        <div class="row">
 	                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-	                            <td class="col-xs-9 text-left"> <input type="text"  value="${order.orderCreator}"></td>
+	                            <td class="col-xs-9 text-left"> <input type="text"  value="${order.orderCreatorId}"></td>
 	                        </div>
 	                    </tr>
 	                    <tr>
@@ -218,7 +218,7 @@
 					<tr>
 					<div class="row">
 					<td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-					<td class="col-xs-9 text-left"><input type="text" disabled="disabled" value="${order.orderCreator}" name="orderCreator"></td>
+					<td class="col-xs-9 text-left"><input type="text" disabled="disabled" value="${order.orderCreatorId}" name="orderCreatorId"></td>
 					</div>
 					</tr>
 					<tr>
@@ -288,7 +288,7 @@
 					<tr>
 					<div class="row">
 					<td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-					<td class="col-xs-9 text-left"> <input type="text" disabled value="${order.orderCreator}"></td>
+					<td class="col-xs-9 text-left"> <input type="text" disabled value="${order.orderCreatorId}"></td>
 					</div>
 					</tr>
 					<tr>

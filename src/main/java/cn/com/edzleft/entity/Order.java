@@ -2,6 +2,7 @@ package cn.com.edzleft.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+
 import java.util.Date;
 
 /**订单表
@@ -89,7 +90,7 @@ public class Order {
     /**
      * 发票
      */
-    private String invoice;
+    private Integer invoiceId;
     /**
      * 货运单位
      */
@@ -119,12 +120,84 @@ public class Order {
      * 申请用信状态 0已提交 1拒绝 2同意
      */
     private Integer letterStatus;
+    
+    /**
+     * 订单创建账号id
+     * @return
+     */
+    public Integer orderCreatorUserid;
+    
 
-    public Integer getLetterStatus() {
+    //采购商公司别名
+    private String entName;
+    //货运别名
+    private String fName;
+    //合同别名
+    private String cName;
+    //贸易商公司别名
+    private String entname;
+    
+    //订单创建者姓名
+    private String username;
+    
+    //发票数量
+    private Integer amount;
+    
+    private String invoiceNo;
+    
+    private Integer aa;
+    
+    
+    
+    public Integer getAa() {
+		return aa;
+	}
+
+	public void setAa(Integer aa) {
+		this.aa = aa;
+	}
+
+	
+	public String getInvoiceNo() {
+		return invoiceNo;
+	}
+
+	public void setInvoiceNo(String invoiceNo) {
+		this.invoiceNo = invoiceNo;
+	}
+
+
+
+	
+	public Integer getOrderCreatorUserid() {
+		return orderCreatorUserid;
+	}
+
+	public void setOrderCreatorUserid(Integer orderCreatorUserid) {
+		this.orderCreatorUserid = orderCreatorUserid;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+	public Integer getLetterStatus() {
         return letterStatus;
     }
 
-    public void setLetterStatus(Integer letterStatus) {
+    public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setLetterStatus(Integer letterStatus) {
         this.letterStatus = letterStatus;
     }
 
@@ -132,7 +205,15 @@ public class Order {
         return creditGetId;
     }
 
-    public void setCreditGetId(Integer creditGetId) {
+    public String getEntname() {
+		return entname;
+	}
+
+	public void setEntname(String entname) {
+		this.entname = entname;
+	}
+
+	public void setCreditGetId(Integer creditGetId) {
         this.creditGetId = creditGetId;
     }
 
@@ -269,17 +350,10 @@ public class Order {
         return creditGetId;
     }
 
-    public void setCreditGet(Integer creditGet) {
-        this.creditGetId = creditGetId;
-    }
-
     public Integer getCreditUseId() {
         return creditUseId;
     }
 
-    public void setCreditUse(Integer creditUse) {
-        this.creditUseId = creditUseId;
-    }
 
     public Integer getCreditGrantorId() {
         return creditGrantorId;
@@ -329,19 +403,22 @@ public class Order {
         this.paymentTime = paymentTime;
     }
 
-    public String getInvoice() {
-        return invoice;
-    }
 
-    public void setInvoice(String invoice) {
-        this.invoice = invoice;
-    }
 
-    public String getFreightUnit() {
+	public String getFreightUnit() {
         return freightUnit;
     }
 
-    public void setFreightUnit(String freightUnit) {
+	
+    public Integer getInvoiceId() {
+		return invoiceId;
+	}
+
+	public void setInvoiceId(Integer invoiceId) {
+		this.invoiceId = invoiceId;
+	}
+
+	public void setFreightUnit(String freightUnit) {
         this.freightUnit = freightUnit;
     }
 
@@ -352,113 +429,277 @@ public class Order {
     public void setFreightNumberId(Integer freightNumberId) {
         this.freightNumberId = freightNumberId;
     }
+    
+
+    public String getEntName() {
+		return entName;
+	}
+
+	public void setEntName(String entName) {
+		this.entName = entName;
+	}
+
+	public String getfName() {
+		return fName;
+	}
+
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+
+	public String getcName() {
+		return cName;
+	}
+
+	public void setcName(String cName) {
+		this.cName = cName;
+	}
+
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		if (aa == null) {
+			if (other.aa != null)
+				return false;
+		} else if (!aa.equals(other.aa))
+			return false;
+		if (amount == null) {
+			if (other.amount != null)
+				return false;
+		} else if (!amount.equals(other.amount))
+			return false;
+		if (amountActuallyPaid == null) {
+			if (other.amountActuallyPaid != null)
+				return false;
+		} else if (!amountActuallyPaid.equals(other.amountActuallyPaid))
+			return false;
+		if (amountPayable == null) {
+			if (other.amountPayable != null)
+				return false;
+		} else if (!amountPayable.equals(other.amountPayable))
+			return false;
+		if (applicationletter == null) {
+			if (other.applicationletter != null)
+				return false;
+		} else if (!applicationletter.equals(other.applicationletter))
+			return false;
+		if (cName == null) {
+			if (other.cName != null)
+				return false;
+		} else if (!cName.equals(other.cName))
+			return false;
+		if (contactPhone == null) {
+			if (other.contactPhone != null)
+				return false;
+		} else if (!contactPhone.equals(other.contactPhone))
+			return false;
+		if (creditGetId == null) {
+			if (other.creditGetId != null)
+				return false;
+		} else if (!creditGetId.equals(other.creditGetId))
+			return false;
+		if (creditGrantorId == null) {
+			if (other.creditGrantorId != null)
+				return false;
+		} else if (!creditGrantorId.equals(other.creditGrantorId))
+			return false;
+		if (creditUseId == null) {
+			if (other.creditUseId != null)
+				return false;
+		} else if (!creditUseId.equals(other.creditUseId))
+			return false;
+		if (entName == null) {
+			if (other.entName != null)
+				return false;
+		} else if (!entName.equals(other.entName))
+			return false;
+		if (entname == null) {
+			if (other.entname != null)
+				return false;
+		} else if (!entname.equals(other.entname))
+			return false;
+		if (fName == null) {
+			if (other.fName != null)
+				return false;
+		} else if (!fName.equals(other.fName))
+			return false;
+		if (freightNumberId == null) {
+			if (other.freightNumberId != null)
+				return false;
+		} else if (!freightNumberId.equals(other.freightNumberId))
+			return false;
+		if (freightUnit == null) {
+			if (other.freightUnit != null)
+				return false;
+		} else if (!freightUnit.equals(other.freightUnit))
+			return false;
+		if (goods == null) {
+			if (other.goods != null)
+				return false;
+		} else if (!goods.equals(other.goods))
+			return false;
+		if (invoiceId == null) {
+			if (other.invoiceId != null)
+				return false;
+		} else if (!invoiceId.equals(other.invoiceId))
+			return false;
+		if (invoiceNo == null) {
+			if (other.invoiceNo != null)
+				return false;
+		} else if (!invoiceNo.equals(other.invoiceNo))
+			return false;
+		if (invoiceNum == null) {
+			if (other.invoiceNum != null)
+				return false;
+		} else if (!invoiceNum.equals(other.invoiceNum))
+			return false;
+		if (letterStatus == null) {
+			if (other.letterStatus != null)
+				return false;
+		} else if (!letterStatus.equals(other.letterStatus))
+			return false;
+		if (logisticsName == null) {
+			if (other.logisticsName != null)
+				return false;
+		} else if (!logisticsName.equals(other.logisticsName))
+			return false;
+		if (orderAmount == null) {
+			if (other.orderAmount != null)
+				return false;
+		} else if (!orderAmount.equals(other.orderAmount))
+			return false;
+		if (orderConfirmationTime == null) {
+			if (other.orderConfirmationTime != null)
+				return false;
+		} else if (!orderConfirmationTime.equals(other.orderConfirmationTime))
+			return false;
+		if (orderCreatTime == null) {
+			if (other.orderCreatTime != null)
+				return false;
+		} else if (!orderCreatTime.equals(other.orderCreatTime))
+			return false;
+		if (orderCreatorId == null) {
+			if (other.orderCreatorId != null)
+				return false;
+		} else if (!orderCreatorId.equals(other.orderCreatorId))
+			return false;
+		if (orderCreatorTradeId == null) {
+			if (other.orderCreatorTradeId != null)
+				return false;
+		} else if (!orderCreatorTradeId.equals(other.orderCreatorTradeId))
+			return false;
+		if (orderCreatorUserid == null) {
+			if (other.orderCreatorUserid != null)
+				return false;
+		} else if (!orderCreatorUserid.equals(other.orderCreatorUserid))
+			return false;
+		if (orderId == null) {
+			if (other.orderId != null)
+				return false;
+		} else if (!orderId.equals(other.orderId))
+			return false;
+		if (orderNumber == null) {
+			if (other.orderNumber != null)
+				return false;
+		} else if (!orderNumber.equals(other.orderNumber))
+			return false;
+		if (orderStatus == null) {
+			if (other.orderStatus != null)
+				return false;
+		} else if (!orderStatus.equals(other.orderStatus))
+			return false;
+		if (paymentAccountId == null) {
+			if (other.paymentAccountId != null)
+				return false;
+		} else if (!paymentAccountId.equals(other.paymentAccountId))
+			return false;
+		if (paymentTime == null) {
+			if (other.paymentTime != null)
+				return false;
+		} else if (!paymentTime.equals(other.paymentTime))
+			return false;
+		if (principalOrderId == null) {
+			if (other.principalOrderId != null)
+				return false;
+		} else if (!principalOrderId.equals(other.principalOrderId))
+			return false;
+		if (receivingAddressId == null) {
+			if (other.receivingAddressId != null)
+				return false;
+		} else if (!receivingAddressId.equals(other.receivingAddressId))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Order order = (Order) o;
-
-        if (orderId != null ? !orderId.equals(order.orderId) : order.orderId != null) return false;
-        if (orderNumber != null ? !orderNumber.equals(order.orderNumber) : order.orderNumber != null) return false;
-        if (orderCreatTime != null ? !orderCreatTime.equals(order.orderCreatTime) : order.orderCreatTime != null)
-            return false;
-        if (orderCreatorId != null ? !orderCreatorId.equals(order.orderCreatorId) : order.orderCreatorId != null) return false;
-        if (orderCreatorTradeId != null ? !orderCreatorTradeId.equals(order.orderCreatorTradeId) : order.orderCreatorTradeId != null)
-            return false;
-        if (orderConfirmationTime != null ? !orderConfirmationTime.equals(order.orderConfirmationTime) : order.orderConfirmationTime != null)
-            return false;
-        if (orderStatus != null ? !orderStatus.equals(order.orderStatus) : order.orderStatus != null) return false;
-        if (receivingAddressId != null ? !receivingAddressId.equals(order.receivingAddressId) : order.receivingAddressId != null)
-            return false;
-        if (logisticsName != null ? !logisticsName.equals(order.logisticsName) : order.logisticsName != null)
-            return false;
-        if (contactPhone != null ? !contactPhone.equals(order.contactPhone) : order.contactPhone != null) return false;
-        if (principalOrderId != null ? !principalOrderId.equals(order.principalOrderId) : order.principalOrderId != null)
-            return false;
-        if (creditGetId != null ? !creditGetId.equals(order.creditGetId) : order.creditGetId != null) return false;
-        if (creditUseId != null ? !creditUseId.equals(order.creditUseId) : order.creditUseId != null) return false;
-        if (creditGrantorId != null ? !creditGrantorId.equals(order.creditGrantorId) : order.creditGrantorId != null)
-            return false;
-        if (orderAmount != null ? !orderAmount.equals(order.orderAmount) : order.orderAmount != null) return false;
-        if (amountPayable != null ? !amountPayable.equals(order.amountPayable) : order.amountPayable != null)
-            return false;
-        if (amountActuallyPaid != null ? !amountActuallyPaid.equals(order.amountActuallyPaid) : order.amountActuallyPaid != null)
-            return false;
-        if (paymentAccountId != null ? !paymentAccountId.equals(order.paymentAccountId) : order.paymentAccountId != null)
-            return false;
-        if (paymentTime != null ? !paymentTime.equals(order.paymentTime) : order.paymentTime != null) return false;
-        if (invoice != null ? !invoice.equals(order.invoice) : order.invoice != null) return false;
-        if (freightUnit != null ? !freightUnit.equals(order.freightUnit) : order.freightUnit != null) return false;
-        if (freightNumberId != null ? !freightNumberId.equals(order.freightNumberId) : order.freightNumberId != null)
-            return false;
-        if (goods != null ? !goods.equals(order.goods) : order.goods != null) return false;
-        if (applicationletter != null ? !applicationletter.equals(order.applicationletter) : order.applicationletter != null)
-            return false;
-        if (invoiceNum != null ? !invoiceNum.equals(order.invoiceNum) : order.invoiceNum != null) return false;
-        return letterStatus != null ? letterStatus.equals(order.letterStatus) : order.letterStatus == null;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((aa == null) ? 0 : aa.hashCode());
+		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
+		result = prime * result + ((amountActuallyPaid == null) ? 0 : amountActuallyPaid.hashCode());
+		result = prime * result + ((amountPayable == null) ? 0 : amountPayable.hashCode());
+		result = prime * result + ((applicationletter == null) ? 0 : applicationletter.hashCode());
+		result = prime * result + ((cName == null) ? 0 : cName.hashCode());
+		result = prime * result + ((contactPhone == null) ? 0 : contactPhone.hashCode());
+		result = prime * result + ((creditGetId == null) ? 0 : creditGetId.hashCode());
+		result = prime * result + ((creditGrantorId == null) ? 0 : creditGrantorId.hashCode());
+		result = prime * result + ((creditUseId == null) ? 0 : creditUseId.hashCode());
+		result = prime * result + ((entName == null) ? 0 : entName.hashCode());
+		result = prime * result + ((entname == null) ? 0 : entname.hashCode());
+		result = prime * result + ((fName == null) ? 0 : fName.hashCode());
+		result = prime * result + ((freightNumberId == null) ? 0 : freightNumberId.hashCode());
+		result = prime * result + ((freightUnit == null) ? 0 : freightUnit.hashCode());
+		result = prime * result + ((goods == null) ? 0 : goods.hashCode());
+		result = prime * result + ((invoiceId == null) ? 0 : invoiceId.hashCode());
+		result = prime * result + ((invoiceNo == null) ? 0 : invoiceNo.hashCode());
+		result = prime * result + ((invoiceNum == null) ? 0 : invoiceNum.hashCode());
+		result = prime * result + ((letterStatus == null) ? 0 : letterStatus.hashCode());
+		result = prime * result + ((logisticsName == null) ? 0 : logisticsName.hashCode());
+		result = prime * result + ((orderAmount == null) ? 0 : orderAmount.hashCode());
+		result = prime * result + ((orderConfirmationTime == null) ? 0 : orderConfirmationTime.hashCode());
+		result = prime * result + ((orderCreatTime == null) ? 0 : orderCreatTime.hashCode());
+		result = prime * result + ((orderCreatorId == null) ? 0 : orderCreatorId.hashCode());
+		result = prime * result + ((orderCreatorTradeId == null) ? 0 : orderCreatorTradeId.hashCode());
+		result = prime * result + ((orderCreatorUserid == null) ? 0 : orderCreatorUserid.hashCode());
+		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
+		result = prime * result + ((orderNumber == null) ? 0 : orderNumber.hashCode());
+		result = prime * result + ((orderStatus == null) ? 0 : orderStatus.hashCode());
+		result = prime * result + ((paymentAccountId == null) ? 0 : paymentAccountId.hashCode());
+		result = prime * result + ((paymentTime == null) ? 0 : paymentTime.hashCode());
+		result = prime * result + ((principalOrderId == null) ? 0 : principalOrderId.hashCode());
+		result = prime * result + ((receivingAddressId == null) ? 0 : receivingAddressId.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
 
     @Override
-    public int hashCode() {
-        int result = orderId != null ? orderId.hashCode() : 0;
-        result = 31 * result + (orderNumber != null ? orderNumber.hashCode() : 0);
-        result = 31 * result + (orderCreatTime != null ? orderCreatTime.hashCode() : 0);
-        result = 31 * result + (orderCreatorId != null ? orderCreatorId.hashCode() : 0);
-        result = 31 * result + (orderCreatorTradeId != null ? orderCreatorTradeId.hashCode() : 0);
-        result = 31 * result + (orderConfirmationTime != null ? orderConfirmationTime.hashCode() : 0);
-        result = 31 * result + (orderStatus != null ? orderStatus.hashCode() : 0);
-        result = 31 * result + (receivingAddressId != null ? receivingAddressId.hashCode() : 0);
-        result = 31 * result + (logisticsName != null ? logisticsName.hashCode() : 0);
-        result = 31 * result + (contactPhone != null ? contactPhone.hashCode() : 0);
-        result = 31 * result + (principalOrderId != null ? principalOrderId.hashCode() : 0);
-        result = 31 * result + (creditGetId != null ? creditGetId.hashCode() : 0);
-        result = 31 * result + (creditUseId != null ? creditUseId.hashCode() : 0);
-        result = 31 * result + (creditGrantorId != null ? creditGrantorId.hashCode() : 0);
-        result = 31 * result + (orderAmount != null ? orderAmount.hashCode() : 0);
-        result = 31 * result + (amountPayable != null ? amountPayable.hashCode() : 0);
-        result = 31 * result + (amountActuallyPaid != null ? amountActuallyPaid.hashCode() : 0);
-        result = 31 * result + (paymentAccountId != null ? paymentAccountId.hashCode() : 0);
-        result = 31 * result + (paymentTime != null ? paymentTime.hashCode() : 0);
-        result = 31 * result + (invoice != null ? invoice.hashCode() : 0);
-        result = 31 * result + (freightUnit != null ? freightUnit.hashCode() : 0);
-        result = 31 * result + (freightNumberId != null ? freightNumberId.hashCode() : 0);
-        result = 31 * result + (goods != null ? goods.hashCode() : 0);
-        result = 31 * result + (applicationletter != null ? applicationletter.hashCode() : 0);
-        result = 31 * result + (invoiceNum != null ? invoiceNum.hashCode() : 0);
-        result = 31 * result + (letterStatus != null ? letterStatus.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderId=" + orderId +
-                ", orderNumber='" + orderNumber + '\'' +
-                ", orderCreatTime=" + orderCreatTime +
-                ", orderCreatorId='" + orderCreatorId + '\'' +
-                ", orderCreatorTradeId='" + orderCreatorTradeId + '\'' +
-                ", orderConfirmationTime=" + orderConfirmationTime +
-                ", orderStatus=" + orderStatus +
-                ", receivingAddressId=" + receivingAddressId +
-                ", logisticsName='" + logisticsName + '\'' +
-                ", contactPhone=" + contactPhone +
-                ", principalOrderId=" + principalOrderId +
-                ", creditGetId=" + creditGetId +
-                ", creditUseId=" + creditUseId +
-                ", creditGrantorId=" + creditGrantorId +
-                ", orderAmount=" + orderAmount +
-                ", amountPayable=" + amountPayable +
-                ", amountActuallyPaid=" + amountActuallyPaid +
-                ", paymentAccountId=" + paymentAccountId +
-                ", paymentTime=" + paymentTime +
-                ", invoice='" + invoice + '\'' +
-                ", freightUnit='" + freightUnit + '\'' +
-                ", freightNumberId=" + freightNumberId +
-                ", goods='" + goods + '\'' +
-                ", applicationletter='" + applicationletter + '\'' +
-                ", invoiceNum='" + invoiceNum + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "Order [orderId=" + orderId + ", orderNumber=" + orderNumber + ", orderCreatTime=" + orderCreatTime
+				+ ", orderCreatorId=" + orderCreatorId + ", orderCreatorTradeId=" + orderCreatorTradeId
+				+ ", orderConfirmationTime=" + orderConfirmationTime + ", orderStatus=" + orderStatus
+				+ ", receivingAddressId=" + receivingAddressId + ", logisticsName=" + logisticsName + ", contactPhone="
+				+ contactPhone + ", principalOrderId=" + principalOrderId + ", creditGetId=" + creditGetId
+				+ ", creditUseId=" + creditUseId + ", creditGrantorId=" + creditGrantorId + ", orderAmount="
+				+ orderAmount + ", amountPayable=" + amountPayable + ", amountActuallyPaid=" + amountActuallyPaid
+				+ ", paymentAccountId=" + paymentAccountId + ", paymentTime=" + paymentTime + ", invoiceId=" + invoiceId
+				+ ", freightUnit=" + freightUnit + ", freightNumberId=" + freightNumberId + ", goods=" + goods
+				+ ", applicationletter=" + applicationletter + ", invoiceNum=" + invoiceNum + ", letterStatus="
+				+ letterStatus + ", orderCreatorUserid=" + orderCreatorUserid + ", entName=" + entName + ", fName="
+				+ fName + ", cName=" + cName + ", entname=" + entname + ", username=" + username + ", amount=" + amount
+				+ ", invoiceNo=" + invoiceNo + ", aa=" + aa + "]";
+	}
 }

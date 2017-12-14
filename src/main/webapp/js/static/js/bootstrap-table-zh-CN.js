@@ -9,14 +9,9 @@
         formatLoadingMessage: function () {
             return '正在努力地加载数据中，请稍候……';
         },
-        formatRecordsPerPage: function (pageNumber) {
-            return '每页显示 ' + pageNumber + ' 条记录';
-        },
-        // formatShowingRows: function (pageFrom, pageTo, totalRows) {
-        //     return '显示第 ' + pageFrom + ' 到第 ' + pageTo + ' 条记录，总共 ' + totalRows + ' 条记录';
-        // },
         formatShowingRows: function (pageFrom, pageTo, totalRows) {
-            return '共' + parseInt((totalRows/2)<1 ? (totalRows/2)+1 :totalRows/2 )  + '页, 共' +totalRows+ '条';
+        	console.log(totalRows,pageTo,pageFrom)
+            return '共' + parseInt((totalRows/2)<1 ? (totalRows/2)+1 :totalRows/2)  + '页, 共' +totalRows+ '条';
         },
         formatSearch: function () {
             return '搜索';
