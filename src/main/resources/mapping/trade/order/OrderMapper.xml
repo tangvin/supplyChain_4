@@ -34,6 +34,9 @@
   <!--条件查询-->
   <sql id="where_sql">
     <trim prefix="where" prefixOverrides="and">
+      <if test="whereMap != null ">
+        AND t1.order_creator_trade_id=#{whereMap.informationId}
+      </if>
       <if test="whereMap != null &amp;&amp; whereMap.orderStatus != null and whereMap.orderStatus != ''">
         AND t1.order_status  LIKE '%${whereMap.orderStatus}%'
       </if>
@@ -49,9 +52,7 @@
       <if test="whereMap != null &amp;&amp; whereMap.contractName != null and whereMap.contractName != ''">
         AND t3.contract_name  LIKE '%${whereMap.contractName}%'
       </if>
-      <if test="whereMap != null &amp;&amp; whereMap.informationId != null and whereMap.informationId != ''">
-        AND t1.order_creator_trade_id=#{whereMap.informationId}
-      </if>
+
       <!-- 一个月内 -->
       <if test="whereMap != null &amp;&amp; whereMap.custom != null &amp;&amp; whereMap.custom == 0 &amp;&amp; whereMap.custom != ''" >
         AND DATE_FORMAT(t1.order_creat_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )

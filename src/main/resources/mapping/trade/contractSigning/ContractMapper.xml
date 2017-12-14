@@ -68,7 +68,7 @@
 
   <!--根据id查询合同详细信息-->
   <select id="selectContractById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from gyl_contract
     where contract_id = #{contractId,jdbcType=INTEGER}

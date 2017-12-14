@@ -100,6 +100,16 @@ public class Contract implements Serializable{
      */
     private Integer letterApply;
 
+    private String entName;
+
+    public String getEntName() {
+        return entName;
+    }
+
+    public void setEntName(String entName) {
+        this.entName = entName;
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }

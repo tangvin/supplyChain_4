@@ -73,7 +73,19 @@
     FROM
     gyl_information
     WHERE
-    creator_id =#{id}
+    id =#{id}
+    order by id desc
+    limit 1
+  </select>
+
+  <!--企业信息表和用户表相关联-->
+  <select id="getContract" resultMap="BaseResultMap" parameterType="Integer">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    gyl_information
+    WHERE
+    id =#{getContract}
     order by id desc
     limit 1
   </select>
