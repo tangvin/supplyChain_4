@@ -408,7 +408,7 @@
     $(function(){
         var select = $('#input-select'),TempArr;//取得select的当前对象
         $.ajax({
-            url:'http://192.168.17.228:8080/supplyChain/pmorder/getMohujs.action',
+            url:'<%=request.getContextPath()%>/pmorder/getMohujs.action',
             type:'post',
             dataType:'json',
             timeout:5000,

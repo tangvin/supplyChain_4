@@ -74,11 +74,11 @@
 									<tbody>
 									<tr>
 										<td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-										<td class="col-xs-9 text-left"><input class="form-control"  type="text" value="${order.orderCreatorId}" name="orderCreatorId"></td>
+										<td class="col-xs-9 text-left"><input class="form-control"  type="text" value="${order.entname}" name="entname"></td>
 									</tr>
 									<tr>
 										<td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
-										<td class="col-xs-9 text-left"><input class="form-control"  type="text" value="${contract.contractNumber}  name="contractName"></td>
+										<td class="col-xs-9 text-left"><input class="form-control"  type="text" value="编号：${order.contractnumber}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名称：${order.cName}"  name="contractName"></td>
 									</tr>
 									<tr>
 										<td class="col-xs-3 text-right"><span class="xingxing">*</span>货物商品：</td>
@@ -94,7 +94,7 @@
 									</tr>
 									<tr>
 										<td class="col-xs-3 text-right"><span class="xingxing">*</span>发票：</td>
-										<td class="col-xs-9 text-left"><img src="images/card_minsheng@1x.png"></td>
+										<td class="col-xs-9 text-left"><img src="<%=request.getContextPath()%>/js/static/images/card_minsheng@1x.png"></td>
 									</tr>
 									<tr>
 										<td class="col-xs-3 text-right"><span class="xingxing">*</span>订单状态：</td>
@@ -161,7 +161,7 @@
 	                            <td class="col-xs-9 text-left"> <input type="text" class="form-control"  value="${order.orderCreatorId}"></td>
 	                    </tr>
 	                    <tr>
-	                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息1：</td>
+	                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息：</td>
 	                            <td class="col-xs-9 text-left">
 									<div class="form-inline">
 										<input type="text" style="width: 200px;" value="" disabled class="xxdz form-control" name="rAddressArea">
@@ -173,13 +173,13 @@
 	                            <input  type="hidden" name="rAddressId" id="rAddressId" />
 	                    </tr>
 	                    <tr>
-	                            <td class="col-xs-3 text-right">收货人1：</td>
+	                            <td class="col-xs-3 text-right">收货人：</td>
 	                            <td class="col-xs-9 text-left">
 	                            <input type="text"  value="" disabled name="rAddressPerson" class="shr form-control">
 	                            </td>
 	                    </tr>
 	                    <tr>
-	                            <td class="col-xs-3 text-right">联系人手机号1：</td>
+	                            <td class="col-xs-3 text-right">联系人手机号：</td>
 	                            <td class="col-xs-9 text-left">
 	                            <input type="text"  value="" disabled name="rAddressPhone" class="sjh form-control">
 	                            </td>
