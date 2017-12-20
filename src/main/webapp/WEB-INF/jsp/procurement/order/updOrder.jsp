@@ -65,13 +65,13 @@
 									<tr>
 										<div class="row">
 											<td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-											<td class="col-xs-9 text-left"><input type="text" value="${order.orderCreatorId}" name="orderCreatorId"></td>
+											<td class="col-xs-9 text-left"><input type="text" value="${order.entname}" name="entname"></td>
 										</div>
 									</tr>
 									<tr>
 										<div class="row">
 											<td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
-											<td class="col-xs-9 text-left"><input type="text" value="${contract.contractNumber}  name="contractName"></td>
+											<td class="col-xs-9 text-left"><input type="text" value="编号：${order.contractnumber}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名称：${order.cName} name="contractName"></td>
 										</div>
 									</tr>
 									<tr>
@@ -95,7 +95,7 @@
 									<tr>
 										<div class="row">
 											<td class="col-xs-3 text-right"><span class="xingxing">*</span>发票：</td>
-											<td class="col-xs-8 text-left"><img src="images/card_minsheng@1x.png"></td>
+											<td class="col-xs-8 text-left"><span class="xingxing1">${rejectList.size()}</span><img src="images/card_minsheng@1x.png"></td>
 										</div>
 									</tr>
 									<tr>
@@ -161,14 +161,14 @@
 	                    <tbody>
 	                    <tr>
 	                        <div class="row">
-	                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-	                            <td class="col-xs-9 text-left"> <input type="text"  value="${order.orderCreatorId}"></td>
+	                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货人：</td>
+	                            <td class="col-xs-9 text-left"> <input type="text"  value="${order.centName}"></td>
 	                        </div>
 	                    </tr>
 	                    <tr>
 	                        <div class="row">
-	                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息1：</td>
-	                            <td class="col-xs-8 text-left"> <input type="text" value="" disabled class="xxdz" name="rAddressArea">
+	                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息：</td>
+	                            <td class="col-xs-8 text-left"> <input type="text" value="${order.area}${order.address}" disabled class="xxdz" name="rAddressArea">
 	                            	<select class="ss">
 	                            		
 	                            	</select>
@@ -178,17 +178,17 @@
 	                    </tr>
 	                    <tr>
 	                        <div class="row">
-	                            <td class="col-xs-3 text-right">收货人1：</td>
+	                            <td class="col-xs-3 text-right">收货联系人：</td>
 	                            <td class="col-xs-8 text-left">
-	                            <input type="text" value="" disabled name="rAddressPerson" class="shr">
+	                            <input type="text" value="${order.person}" disabled name="rAddressPerson" class="shr">
 	                            </td>
 	                        </div>
 	                    </tr>
 	                    <tr>
 	                        <div class="row">
-	                            <td class="col-xs-3 text-right">联系人手机号1：</td>
+	                            <td class="col-xs-3 text-right">联系人手机号：</td>
 	                            <td class="col-xs-8 text-left">
-	                            <input type="text" value="" disabled name="rAddressPhone" class="sjh">
+	                            <input type="text" value="${order.phone}" disabled name="rAddressPhone" class="sjh">
 	                            </td>
 	                        </div>
 	                    </tr>
@@ -196,7 +196,7 @@
 	                </table>
 	            </div>
 	            </div>
-	                <button id="sureUpdate1">确定修改</button>
+	                <button onclick="sureUpdate1()">确定修改</button>
 	            </form>
 	<%--eid1 from 表单 结束--%>
 		    </div>
@@ -219,13 +219,13 @@
 					<tr>
 					<div class="row">
 					<td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-					<td class="col-xs-9 text-left"><input type="text" disabled="disabled" value="${order.orderCreatorId}" name="orderCreatorId"></td>
+					<td class="col-xs-9 text-left"><input type="text" disabled="disabled" value="${order.centName}" name="orderCreatorId"></td>
 					</div>
 					</tr>
 					<tr>
 					<div class="row">
 					<td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
-					<td class="col-xs-9 text-left"><input type="text" disabled="disabled" value="${contract.contractNumber}  name="contractName"></td>
+					<td class="col-xs-9 text-left"><input type="text" disabled="disabled" value="编号：${order.contractnumber}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名称：${order.cName}  name="contractName"></td>
 					</div>
 					</tr>
 					<tr>
@@ -255,7 +255,29 @@
 					<tr>
 					<div class="row">
 					<td class="col-xs-3 text-right"><span class="xingxing">*</span>订单状态：</td>
-					<td class="col-xs-8 text-left"><input type="text" disabled='disabled' value="${order.orderStatus}" name="orderStatus"><span></span></td>
+					<td class="col-xs-8 text-left">
+							<c:if test="${order.orderStatus == 0}"> 待确认
+                                           
+                                        </c:if>
+                                        <c:if test="${order.orderStatus == 1}">待付款
+                                           
+                                        </c:if>
+                                        <c:if test="${order.orderStatus == 2}">待发货
+                                        
+                                        </c:if>
+                                        <c:if test="${order.orderStatus == 3}">待收货
+                                     
+                                        </c:if>
+                                        <c:if test="${order.orderStatus == 4}">已完成
+                                          
+                                        </c:if>
+                                        <c:if test="${order.orderStatus == 5}">已关闭
+                                         
+                                        </c:if>
+                                        <c:if test="${order.orderStatus == 6}">已驳回
+                                       
+                                        </c:if>
+					</td>
 					</div>
 					</tr>
 					<tr>
@@ -285,44 +307,43 @@
 					</div>
 					</div>
 					<div class="table-responsive text-center col-xs-12">
-					<table class="table table-bordered bj_table">
-					<tbody>
-					<tr>
-					<div class="row">
-					<td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
-					<td class="col-xs-9 text-left"> <input type="text" disabled value="${order.orderCreatorId}"></td>
-					</div>
-					</tr>
-					<tr>
-					<div class="row">
-					<td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息2：</td>
-					<td class="col-xs-8 text-left"> <input type="text" value="${ra.rAddressAddress}" disabled class="xxdz" name="rAddressArea">
-					<select class="ss" id="dd">
-					
-					</select>
-					<input type="hidden" name="rAddressId" id="rAddressId" />
-					</td>
-
-					</div>
-					</tr>
-					<tr>
-					<div class="row">
-					<td class="col-xs-3 text-right">收货人2：</td>
-					<td class="col-xs-8 text-left">
-					<input type="text" value="${ra.rAddressPerson}" disabled name="rAddressPerson" class="shr">
-					</td>
-					</div>
-					</tr>
-					<tr>
-					<div class="row">
-					<td class="col-xs-3 text-right">联系人手机号2：</td>
-					<td class="col-xs-8 text-left">
-					<input type="text" value="${ra.rAddressPhone}" disabled name="rAddressPhone" class="sjh">
-					</td>
-					</div>
-					</tr>
-					</tbody>
-					</table>
+					 <table class="table table-bordered bj_table">
+	                    <tbody>
+	                    <tr>
+	                        <div class="row">
+	                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货人：</td>
+	                            <td class="col-xs-9 text-left"> <input type="text"  value="${order.centName}"></td>
+	                        </div>
+	                    </tr>
+	                    <tr>
+	                        <div class="row">
+	                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息：</td>
+	                            <td class="col-xs-8 text-left"> <input type="text" value="${order.area}${order.address}" disabled class="xxdz" name="rAddressArea">
+	                            	<select class="ss">
+	                            		
+	                            	</select>
+	                            </td>
+	                            <input type="hidden" name="rAddressId" id="rAddressId" />
+	                        </div>
+	                    </tr>
+	                    <tr>
+	                        <div class="row">
+	                            <td class="col-xs-3 text-right">收货联系人：</td>
+	                            <td class="col-xs-8 text-left">
+	                            <input type="text" value="${order.person}" disabled name="rAddressPerson" class="shr">
+	                            </td>
+	                        </div>
+	                    </tr>
+	                    <tr>
+	                        <div class="row">
+	                            <td class="col-xs-3 text-right">联系人手机号：</td>
+	                            <td class="col-xs-8 text-left">
+	                            <input type="text" value="${order.phone}" disabled name="rAddressPhone" class="sjh">
+	                            </td>
+	                        </div>
+	                    </tr>
+	                    </tbody>
+	                </table>
 					</div>
 					</div>
 					<button id="sureUpdate2">确定修改</button>
@@ -407,8 +428,9 @@ $(function(){
     })
 });  
   		/* 编辑待确认和已驳回 */
-    
-     $("#sureUpdate1").click(function(){
+    function sureUpdate1(){
+     /* $("#sureUpdate1").click(function(){ */
+    	 alert($("#form1").serialize())
 	   	 $.ajax({
 	            url:'<%=request.getContextPath()%>/pmorder/updateOrder.action',
 	            data:$("#form1").serialize(),
@@ -423,7 +445,8 @@ $(function(){
 	            	}
 	            }
 	        });
-  		 });
+  		/*  }); */
+		}
 		/*编辑待付款*/
     	$("#sureUpdate2").click(function(){
 		 $.ajax({

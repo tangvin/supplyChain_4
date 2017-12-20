@@ -158,7 +158,7 @@
 	a.user_name as username,o.applicationletter,o.order_confirmation_time,o.goods,
 	r.r_address_area as area,r.r_address_person as person ,r.r_address_phone phone, r.r_address_address,
 	f.freight_contact_person as fperson,f.freight_contact_phone as fphone,
-	v.amount AS amount,v.invoice_no AS invoiceNo,v.id,c.contract_number as contractnumber
+	v.amount AS amount,v.invoice_no AS invoiceNo,v.id,c.contract_number as contractnumber,a.user_name as username
 	from gyl_order o
  	left JOIN(SELECT  COUNT(1)AS amount,invoice_no,id FROM  gyl_invoice v left JOIN gyl_order o
             ON v.order_id =o.order_id GROUP BY o.order_id
@@ -167,7 +167,7 @@
 	left JOIN gyl_freight f on o.freight_number_id  = f.freight_id
 	left JOIN gyl_contract c on o.principal_order_id = c.contract_id
 	left JOIN gyl_information i2 on o.order_creator_trade_id = i2.id
-	left JOIN gyl_account a on o.payment_account_id  = a.user_id
+	left JOIN gyl_account a on o.order_creator_userId  = a.user_id
 	left JOIN gyl_receiving_address r on o.receiving_address_id  = r.r_address_id 
     <include refid="where_sql"/>
     ORDER BY  o.order_creat_time  DESC
@@ -201,10 +201,25 @@
  
   </select>
 
+	<!-- 订单编辑根据用户ID回写 -->
   <select id="ddbj" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from gyl_order
+   select o.order_id, o.order_number as orderNumber, o.order_status as orderStatus,
+	o.order_amount as orderAmount,o.order_creat_time,i2.ent_name entname,o.freight_unit,
+	i.ent_name  as centName , f.freight_name as fName ,c.contract_name as cName, 
+	a.user_name as username,o.applicationletter,o.order_confirmation_time,o.goods,
+	r.r_address_area as area,r.r_address_person as person ,r.r_address_phone phone, r.r_address_address address,
+	f.freight_contact_person as fperson,f.freight_contact_phone as fphone,
+	v.amount AS amount,v.invoice_no AS invoiceNo,v.id,c.contract_number as contractnumber
+	from gyl_order o
+ 	left JOIN(SELECT  COUNT(1)AS amount,invoice_no,id FROM  gyl_invoice v left JOIN gyl_order o
+            ON v.order_id =o.order_id GROUP BY o.order_id
+            ) v  ON o.invoice_id=v.id
+	left join gyl_information i on o.order_creator_id = i.id
+	left JOIN gyl_freight f on o.freight_number_id  = f.freight_id
+	left JOIN gyl_contract c on o.principal_order_id = c.contract_id
+	left JOIN gyl_information i2 on o.order_creator_trade_id = i2.id
+	left JOIN gyl_account a on o.payment_account_id  = a.user_id
+	left JOIN gyl_receiving_address r on o.receiving_address_id  = r.r_address_id 
     where order_id = #{order_id,jdbcType=INTEGER}
   </select>
 
@@ -272,9 +287,6 @@
       <if test="amountActuallyPaid != null" >
         amount_actually_paid,
       </if>
-      <if test="paymentAccountId != null" >
-        payment_account_id,
-      </if>
       <if test="paymentTime != null" >
         payment_time,
       </if>
@@ -296,7 +308,7 @@
       <if test="letterStatus != null" >
         letter_status,
       </if>
-      <if test="orderCreatorUserid != null" >
+      <if test="orderCreatorUserId != null" >
         order_creator_userId,
       </if>
     </trim>
@@ -379,8 +391,8 @@
       <if test="letterStatus != null" >
         #{letterStatus,jdbcType=INTEGER},
       </if>
-      <if test="orderCreatorUserid != null" >
-        #{orderCreatorUserid,jdbcType=INTEGER},
+      <if test="orderCreatorUserId != null" >
+        #{orderCreatorUserId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

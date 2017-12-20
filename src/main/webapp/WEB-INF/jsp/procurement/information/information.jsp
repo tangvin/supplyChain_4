@@ -275,10 +275,6 @@
                                         <label>开户行</label>
                                         <input type="text" class="form-control" name="caEntName" id="caEntName">
                                     </div>
-                                    <div class="form-group form-group1">
-                                        <label for="tripartiteCreditHolderPurchaser">户主</label>
-                                        <input type="email" class="form-control" name="tripartiteCreditHolderPurchaser" id="tripartiteCreditHolderPurchaser">
-                                    </div>
                                     <button type="button" class="btn  btn-danger" onclick="search()">查询</button>
                                     <button type="button" class="btn  btn-default" onclick="reset()">重置</button>
                                 </form>
@@ -564,7 +560,6 @@
 	     * @constructor
 	     */
 	    function deleteAddress(id){
-	    	 alert("111")
 	        $.ajax({
 	            url:'<%=request.getContextPath()%>/PmReceivingAddress/deleteAddress.action?id='+id,
 	            type:'post',

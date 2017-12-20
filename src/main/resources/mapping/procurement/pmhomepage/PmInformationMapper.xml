@@ -74,6 +74,11 @@
     order by id desc
     limit 1
   </select>
+	<!-- 模糊检索 -->
+	
+	<select id="getInfor" resultMap="BaseResultMap" parameterType="cn.com.edzleft.entity.Information">
+		select * from gyl_information  where  ent_identity = 1 	
+	</select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -81,6 +86,18 @@
     from gyl_information
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="getInformationName" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+	select  i.ent_name
+	
+	FROM gyl_information i
+	
+	INNER JOIN gyl_account a on i.creator_id = a.user_id
+	
+	where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  
+  
+  
  <!--修改基本资料-->
   <update id="updateInformation" parameterType="cn.com.edzleft.entity.Information" >
     update gyl_information

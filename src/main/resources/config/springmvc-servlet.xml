@@ -105,6 +105,14 @@
 						<value>/pmorder/addresshx.action</value>
 						<value>/captialInformation/upLoInsert.action</value>
 						<!--门户页面-->
+						<value>/captialMain/homeDoor.action</value>
+						<value>/captialMain/productCentre.action</value>
+						<value>/captialMain/solution.action</value>
+						<value>/captialMain/partner.action</value>
+						<value>/captialMain/about.action</value>
+						<!-- 模糊检索 -->
+						<value>/pmorder/getMohujs.action</value>
+						<value>/pmorder/getInforIdContract.action</value>
 						<value>/homeDoor.action</value>
 						<value>/productCentre.action</value>
 						<value>/solution.action</value>

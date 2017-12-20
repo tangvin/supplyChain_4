@@ -11,11 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by ASUS on 2017/11/15.
@@ -73,7 +78,7 @@ public class PmmainController {
 	 * 管理收货信息
 	 * @return
 	 */
-	@RequestMapping(value = "glshxx",method = RequestMethod.POST)
+	@RequestMapping(value = "glshxx",method = {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView glshxx(HttpSession sessionInfo){
         ModelAndView modelAndView = new ModelAndView("/procurement/information/information");
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
@@ -112,11 +117,12 @@ public class PmmainController {
      * 确认修改资料
      */
     
-    @RequestMapping(value = "cupdateInformation",method = RequestMethod.POST)
+    @RequestMapping(value = "cupdateInformation")
     @ResponseBody
-    public String updateInformation(Information information,HttpSession sessionInfo){
+    public Map<String,Object> updateInformation(Information information,HttpSession sessionInfo){
     	 SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
-         //根据informationId判断当前用户是否资料为空
+    	 Map<String,Object> map = new HashMap<>();
+    	 //根据informationId判断当前用户是否资料为空
     	Integer informationId = session.getAdmin().getInformationId();
     	 Integer userId = session.getAdmin().getUserId();
     	if(informationId==null){
@@ -130,11 +136,27 @@ public class PmmainController {
                 account.setInformationId(inforId);
                 account.setUserId(userId);
                 int m = pmAccountservice.updatePassword(account);
+                if(m>0){
+                	map.put("msg", "添加成功");
+        			map.put("success", true);
+                }else{
+                	map.put("msg","添加失败");
+                	map.put("success",false);
+                }
+                
     		}
     	}else{
     		int i = pmHomePageService.updateInformation(information);
+    		if(i>0){
+    			map.put("msg", "编辑成功");
+    			map.put("success", true);
+    		}else{
+    			map.put("msg", "编辑失败");
+    			map.put("success", false);
+    		}
+    		
     	}
-    	return "1";
+    	return map;
     }
 
     /**

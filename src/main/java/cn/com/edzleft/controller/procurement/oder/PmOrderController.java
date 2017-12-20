@@ -1,15 +1,19 @@
 package cn.com.edzleft.controller.procurement.oder;
 
 import cn.com.edzleft.entity.Contract;
+
+import cn.com.edzleft.entity.Information;
 import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.entity.ReceivingAddress;
 import cn.com.edzleft.entity.SessionInfo;
 import cn.com.edzleft.service.procurement.contractaward.PmContractWardService;
+import cn.com.edzleft.service.procurement.homepage.PmHomePageService;
 import cn.com.edzleft.service.procurement.oder.PmOrderService;
 import cn.com.edzleft.service.procurement.receivingaddress.PmReceivingAddressService;
 import cn.com.edzleft.util.page.DataGridJson;
 import cn.com.edzleft.util.page.PageUtil;
 import com.alibaba.fastjson.JSONObject;
+
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +47,9 @@ public class PmOrderController {
 	
 	@Autowired
 	private PmContractWardService pmContractWardService;
+	
+	@Autowired
+	private PmHomePageService pmHomePageService;
 	/**
 	 * 查询订单列表
 	 */
@@ -126,7 +133,7 @@ public class PmOrderController {
 			SessionInfo sessionInfo1 = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
 			o.setOrderCreatorId(sessionInfo1.getAdmin().getInformationId());
 			o.setOrderCreatTime(new Date());
-			o.setOrderCreatorId(sessionInfo1.getAdmin().getInformationId());
+			o.setOrderCreatorUserId(sessionInfo1.getAdmin().getUserId());
 			int i = pmOrderService.insertSelective(o, sessionInfo);
 			map.put("msg", "添加成功");
 			map.put("success", true);
@@ -210,7 +217,7 @@ public class PmOrderController {
 	 * @throws JsonMappingException 
 	 * @throws JsonParseException 
 	 */
-	@RequestMapping(value="updateOrder")
+	@RequestMapping(value="updateOrder",method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> updataOreder(Order order,Integer rAddressId){
 		Map<String,Object> map = new HashMap<>();
@@ -237,17 +244,52 @@ public class PmOrderController {
 	/**
 	 * 模糊检索
 	 */
-	/*@RequestMapping(value = "/get") 
+	@RequestMapping(value = "/getMohujs",method= {RequestMethod.POST,RequestMethod.GET} ) 
 	@ResponseBody
-	public Map<String,Object> getJson(String value) {
-			value=value==null?"":value;
-			List<> 
-	       Map<String, Object> map = new HashMap<String,Object>();
-	       map.put("name", "dhweicheng");
-	       return map;
-	       if(a==0){
-	       		return true;
-	       }
+	public Map<String,Object>  getInfor(HttpServletResponse response,HttpServletRequest request,Integer entIdentity){
+		response.setContentType("text/plain");
+		response.setHeader("Pragma", "No-cache");
+		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Cache-Control", "no-cache");
+		response.setDateHeader("Expires", 0);
+		response.setHeader("Access-Control-Allow-Origin", "*");//添加跨域访问
+		String jsonpCallback = request.getParameter("jsonpCallback");
+		Map<String,Object> map = new HashMap<>();
+		List<Information> infor = pmHomePageService.getInfor(entIdentity);
+		map.put("data", infor);
+		return map;
 	}
-	*/
+	/**
+	 * 根据ID查询对应的合同
+	 * 
+	 */
+	@RequestMapping(value = "/getInforIdContract",method = {RequestMethod.POST,RequestMethod.GET}) 
+	@ResponseBody
+	public DataGridJson   getInforIdContract(HttpServletResponse response,HttpServletRequest request,String aid,HttpSession sessionInfo,Integer pageNumber,Integer pageSize,String creatTime,String endTime ){
+		response.setContentType("text/plain");
+		response.setHeader("Pragma", "No-cache");
+		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Cache-Control", "no-cache");
+		response.setDateHeader("Expires", 0);
+		response.setHeader("Access-Control-Allow-Origin", "*");//添加跨域访问
+		String jsonpCallback = request.getParameter("jsonpCallback");
+		PageUtil<Contract> userPage = new PageUtil<>();
+		DataGridJson dj = new DataGridJson();
+		SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
+        Integer userId = session.getAdmin().getInformationId();
+        Integer cid = Integer.valueOf(request.getParameter("aid"));
+        HashMap<String,Object> whereMaps =new HashMap<>();
+        whereMaps.put("cid", cid);
+        whereMaps.put("userId", userId);
+        whereMaps.put("creatTime", creatTime);
+        whereMaps.put("endTime", endTime);
+        userPage.setCpage(pageNumber);
+        userPage.setPageSize(pageSize);
+        userPage.setWhereMap(whereMaps);
+        userPage = pmContractWardService.getInforIdContract(userPage);
+		//map.put("data", contract);
+		dj.setTotal(userPage.getTotalCount());
+		dj.setRows(userPage.getList());
+		return dj;
+	}
 }
