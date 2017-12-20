@@ -296,14 +296,16 @@
                                     <form class="form-inline khh_form">
                                         <div class="form-group">
                                             <label>订单时间：</label>
-                                            <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/><span class="zhi">至</span>
-                                            <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
+                                            <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/>至
+		                   					<input class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
                                         </div>
                                         <button type="button" style="height: 30px;font-size: 12px" class="btn btn-danger btn-default" onclick="crownSearch()">查询</button>
                                         <button type="button" style="height: 30px;font-size: 12px" class="btn btn-danger btn-default" onclick="reset()">重置</button>
                                     </form>
                                 </div>
-                               <table id="tb_departments" class="cj_table"></table>
+                                <div id="qweqwe">
+                                  <table id="tb_departments" class="cj_table"></table>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -325,134 +327,81 @@
 	});
 
 
-    //授信分页查询
-    <%--$(function(){--%>
-        <%--$("#tb_departments").bootstrapTable({--%>
-            <%--columns:[--%>
-                <%--{checkbox: true},--%>
-                <%--{field:'creditNumber',title:'授信编号'},--%>
-                <%--{field:'creditAmount',title:'授信额（万元）'},--%>
-                <%--{field:'creditGrantor',title:'授信方'},--%>
-                <%--{field:'creditTime',title:'授信时间',--%>
-                    <%--formatter:function(value,row,index){--%>
-                        <%--return ConvertToDate(value)--%>
-                    <%--}--%>
-                <%--},--%>
-                <%--{field:'creditMasterContract',title:'合同'},--%>
-                <%--{field:'applicant',title:'申请人'},--%>
-                <%--{field:'applicationTime',title:'申请时间',--%>
-                    <%--formatter:function(value,row,index){--%>
-                        <%--return ConvertToDate(value)--%>
-                    <%--}--%>
-                <%--}--%>
-            <%--],--%>
-            <%--url:'<%=request.getContextPath()%>/Pmletter/pmcreditLetter.action',--%>
-            <%--method:'post',--%>
-            <%--queryParamsType:'',--%>
-            <%--singleSelect : true,--%>
-            <%--queryParams: queryParams,//传递参数（*）--%>
-            <%--//【其它设置】--%>
-            <%--locale:'zh-CN',//中文支持--%>
-            <%--pagination: true,//是否开启分页（*）--%>
-            <%--pageNumber:1,//初始化加载第一页，默认第一页--%>
-            <%--pageSize: 3,//每页的记录行数（*）--%>
-            <%--sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）--%>
-            <%--//发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}--%>
-            <%--contentType:'application/x-www-form-urlencoded;charset=UTF-8'   //数据编码纯文本  offset=0&limit=5--%>
-        <%--});--%>
-    <%--});--%>
-
-    $('#item_info_btn_do').click(function(){
-        var selectContent = $("#tb_departments").bootstrapTable('getSelections')[0];
-        if(typeof(selectContent) == 'undefined') {
-            alert('请选择数据')
-            return false;
-        }else{
-            var readonly=selectContent.applicant;
-            var readonlyId=selectContent.id;
-            $('#principalOrderId').val(readonly);
-            $('#readonlyId').val(readonlyId);
-            $('#item_project_modal').modal('show');   // 项目立项面板
-        }
-    });
-
-    //得到查询的参数
-    function queryParams (params) {
-        var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-            pageNumber: params.pageNumber,
-            pageSize: params.pageSize,
-            creditNumber:$("#creditNumber").val(),
-            creditGrantor:$("#creditGrantor").val(),
-            creditStatus:$("#creditStatus").val(),
-            applicant:$("#creditApplicant").val()
-        };
-        return temp;
-    }
-    //授信搜索
-    function crownSearch(){
-        $("#tb_departments").bootstrapTable('refresh');
-    }
-    //授信重置查询
-    function reset(){
-        $("#crownForm").form('reset');
-        crownSearch();
-    }
-
     $('#glht').click(function () {
+    	$("#tb_departments").bootstrapTable(
+				"refresh",
+				{
+					url:"<%=request.getContextPath()%>/pmorder/getInforIdContract.action"
+				}
+			)
+    	var glhtId=$('#input-select').children('option:selected').attr('id');
         if($('#orderCreatorTrade').val()==''||$('#orderCreatorTrade').val()==undefined){
             alert('请先选择合同签约人')
-            return false;
         }else{
-            var glhtId=$('#input-select').children('option:selected').attr('id');
-            $.ajax({
-                url:'http://192.168.17.228:8080/supplyChain/pmorder/getInforIdContract.action?id='+glhtId,
-                type:'post',
-                data:{getInforIdContract:$('#input-select').children('option:selected').attr('id')},
-                success:function (data) {
-                     console.log(data)
-//                    $("#tb_departments").bootstrapTable({
-//                        columns:[
-//                            {checkbox: true},
-//                            {field:'creditNumber',title:'授信编号'},
-//                            {field:'creditAmount',title:'授信额（万元）'},
-//                            {field:'creditGrantor',title:'授信方'},
-//                            {field:'creditTime',title:'授信时间',
-//                                formatter:function(value,row,index){
-//                                    return ConvertToDate(value)
-//                                }
-//                            },
-//                            {field:'creditMasterContract',title:'合同'},
-//                            {field:'applicant',title:'申请人'},
-//                            {field:'applicationTime',title:'申请时间',
-//                                formatter:function(value,row,index){
-//                                    return ConvertToDate(value)
-//                                }
-//                            }
-//                        ],
-//                        url:'http://192.168.17.228:8080/supplyChain/pmorder/getInforIdContract.action',
-//                        method:'post',
-//                        queryParamsType:'',
-//                        singleSelect : true,
-//                        queryParams: queryParam,//传递参数（*）
-//                        //【其它设置】
-//                        locale:'zh-CN',//中文支持
-//                        pagination: true,//是否开启分页（*）
-//                        pageNumber:1,//初始化加载第一页，默认第一页
-//                        pageSize: 3,//每页的记录行数（*）
-//                        sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
-//                        //发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}
-//                        contentType:'application/x-www-form-urlencoded;charset=UTF-8'   //数据编码纯文本  offset=0&limit=5
-//                    });
+        		$("#tb_departments").bootstrapTable({
+        		      columns:[
+        		          {checkbox: true},
+        		          {field:'contractNumber',title:'合同编号'},
+        		          {field:'contractName',title:'合同名称'},
+        		          {field:'contractNumber',title:'辅合同'},
+        		          {field:'contractCreateTime',title:'合同执行期',
+        		        	  formatter:function(value,row,index){
+        	                		var str = '';
+        	                		if(row.contractCreateTime==null){
+        	                			str = '--'
+        	                		}else{
+        	                			 var str='';
+        	                      		 str +='<p>'+ConvertToDate(value)+'</p>';
+        	                              return str;
+        	                		}
 
-                    function queryParam (params) {
-                        var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-                            glhtId: glhtId
-                        };
-                        return temp;
-                    }
+        	                     }
+        		          },
+        		          {field:'contractFounder',title:'合同创建人'}
+        		      ],
+        		      url:'<%=request.getContextPath()%>/pmorder/getInforIdContract.action',
+        		      method:'post',
+        		      queryParamsType:'',
+        		      singleSelect : true,
+        		      queryParams: queryParam,//传递参数（*）
+        		      //【其它设置】
+        		      locale:'zh-CN',//中文支持
+        		      pagination: true,//是否开启分页（*）
+        		      pageNumber:1,//初始化加载第一页，默认第一页
+        		      pageSize: 3,//每页的记录行数（*）
+        		      sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+        		      //发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}
+        		      contentType:'application/x-www-form-urlencoded;charset=UTF-8'   //数据编码纯文本  offset=0&limit=5
+        		  });
+        		  //创建面板
+        		  $('#item_info_btn_do').click(function(){
+        	        var selectContent = $("#tb_departments").bootstrapTable('getSelections')[0];
+        	        if(typeof(selectContent) == 'undefined') {
+        	            /* toastr.wraning('请选择数据') */
+        	            return false;
+        	        }else{
+        	            var readonly=selectContent.contractName;
+        	            var readonlyId=selectContent.contractId;
+        	            $('#principalOrderId').val(readonly);
+        	            $('#readonlyId').val(readonlyId);
+        	            $('#item_project_modal').modal('show');   // 项目立项面板
+        	        }
+        	    });
+        		  function queryParam (params) {
+        		      var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+        		         // aid: $('#input-select').children('option:selected').attr('id'),
+        		          aid: $('#input-select').children('option:selected').attr('id'),
+        		      	  pageNumber: params.pageNumber,
+        	              pageSize: params.pageSize,
+        	              creatTime:$("#creatTime").val(),
+        	              endTime:$("#endTime").val(),
+        		      };
+        		      console.log(temp.aid)
+        		      return temp;
 
-                }
-            })
+        		  }
+
+
         }
     })
 

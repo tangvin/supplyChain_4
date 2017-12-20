@@ -9,7 +9,6 @@
             return '正在努力地加载数据中，请稍候……';
         },
         formatShowingRows: function (pageFrom, pageTo, totalRows) {
-            console.log(totalRows)
             return '共' + Math.ceil((totalRows/3)<1 ? (totalRows/3) :totalRows/3)  + '页, 共' +totalRows+ '条';
         },
         formatSearch: function () {

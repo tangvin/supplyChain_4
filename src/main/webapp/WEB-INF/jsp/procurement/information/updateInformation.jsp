@@ -18,7 +18,7 @@
         </div>
         <div class="col-xs-12">
             <form id="updateForm">
-            <%-- <input type="hidden" value="${information.id}" name="id"> --%>
+          <input type="hidden" value="${information.id}" name="id">
                 <div class="jbxx">
                     <div class="row jbxx_row jbxx_zlbj">
                         <div class="col-xs-8">
@@ -29,7 +29,6 @@
                             <table class="table table_one">
                                 <tbody>
                                 <tr>
-                                    <input type="hidden" name="id" value="${information.id }">
                                     <td style="width: 20%;" class="text-right">企业身份：</td>
                                     <td class="mys">
                                            <%--0采购方、1贸易方、2资方--%>
@@ -57,20 +56,6 @@
                                 </tr>
                                 <tr>
                                     <td class="text-right">企业证件类型：</td>
-                                    <%--<td>--%>
-                                        <%--<select class="form-control zlbj_select" id="three_certificates" name="entDocumentType">--%>
-                                            <%--&lt;%&ndash;0三证合一，1非三证合一&ndash;%&gt;--%>
-                                            <%--<option value="">全部</option>--%>
-                                            <%--<option value="0" <c:if test="${'0' eq information.entDocumentType}">selected</c:if> >三证合一</option>--%>
-                                            <%--<option value="1" <c:if test="${'1' eq information.entDocumentType}">selected</c:if> >非三证合一</option>--%>
-                                        <%--</select>--%>
-                                    <%--</td>--%>
-                                    <td>
-                                        <%--                         <select class="form-control zlbj_select" name="entDocumentType" id="three_certificates">
-                                                                     &lt;%&ndash;0三证合一，1非三证合一&ndash;%&gt;
-                                                                     <option value="0" <c:if test="${'0' eq information.entDocumentType}">selected</c:if> >三证合一</option>
-                                                                     <option value="1" <c:if test="${'1' eq information.entDocumentType}">selected</c:if> >非三证合一</option>
-                                                                 </select>--%>
                                         <c:if test="${information.entDocumentType == 0}">三证合一
                                             <input type="hidden" class="form-control" name="entDocumentType"  value="${information.entDocumentType}" >
                                         </c:if>
@@ -201,10 +186,10 @@
                                     <td class="text-right">组织机构代码电子档：</td>
                                     <td class="mys"><img src="<%=request.getContextPath()%>/js/static/images/no_img.png" class="img-responsive jbxx_img"></td>
                                 </tr>
-                                <tr>
+                              <tr>
                                     <td class="text-right">法人身份证明正面：</td>
                                     <td>
-                                        <form>
+                                        
                                             <div style="float: left;" class="form-group" class="uploadForm" enctype='multipart/form-data'>
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                                     <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
@@ -220,15 +205,15 @@
                                                         <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </div> 
+                                        
 
                                     </td>
-                                </tr>
-                                <tr>
+                                </tr> 
+                                 <tr>
                                     <td class="text-right">法人身份证明背面：</td>
                                     <td>
-                                        <form>
+                                        
                                             <div style="float: left;" class="form-group" class="uploadForm" enctype='multipart/form-data'>
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                                     <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
@@ -245,14 +230,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        
 
                                     </td>
                                 </tr>
-                                <tr>
+                                 <tr>
                                     <td class="text-right">开户许可证电子档：</td>
                                     <td>
-                                        <form>
+                                        
                                             <div style="float: left;" class="form-group" class="uploadForm" enctype='multipart/form-data'>
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                                     <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
@@ -269,17 +254,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        
 
                                     </td>
-                                </tr>
+                                </tr> 
                                 </tbody>
                             </table>
                     </div>
                 </div>
+                </form>
+                </div>
                 <button class="btn btn-danger col-xs-offset-3" style="width: 120px;" onclick="updateInformation()">确定</button>
-            </form>
-        </div>
+            
+        
 
 
     </div>
@@ -310,12 +297,16 @@ $(function() {
             dataType:'json',
             data:$("#updateForm").serialize(),
             success:function(data){
-            	alert("修改成功")
-            	setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500);
+            	if(data.success){
+            		alert(data.msg);
+            	}else{
+            		alert(data.msg);
+            	}
+            	<%-- setTimeout("$('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')",500); --%>
             },
         });
     }
-    var   szhy = '${information.entDocumentType}'
+  /*   var   szhy = '${information.entDocumentType}'
     if(szhy==0){
         $('.three_no_certificates').show();
         $('tr.three_no_certificates>td>input:last-of-type').attr('disabled',true);
@@ -325,6 +316,6 @@ $(function() {
         $('.three_no_certificates').hide();
         $('.three_certificates').show();
         $('tr.three_certificates>td>input:last-of-type').attr('disabled',true);
-    }
+    } */
 </script>
 </html>

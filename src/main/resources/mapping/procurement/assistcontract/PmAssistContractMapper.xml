@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.edzleft.dao.procurement.assistcontract.PmAssistContractMapper" >
+   <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.AssistContract" >
+    <id column="assist_id" property="assistId" jdbcType="INTEGER" />
+    <result column="contract_number" property="contractNumber" jdbcType="VARCHAR" />
+    <result column="assist_name" property="assistName" jdbcType="VARCHAR" />
+    <result column="assist_creat_time" property="assistCreatTime" jdbcType="TIMESTAMP" />
+    <result column="assist_founder_id" property="assistFounderId" jdbcType="INTEGER" />
+    <result column="contract_id" property="contractId" jdbcType="INTEGER" />
+    <result column="assist_record" property="assistRecord" jdbcType="VARCHAR" />
+    <result column="assist_buyer_id" property="assistBuyerId" jdbcType="INTEGER" />
+    <result column="assist_trade_id" property="assistTradeId" jdbcType="INTEGER" />
+    <result column="assist_site" property="assistSite" jdbcType="VARCHAR" />
+    <result column="assist_time" property="assistTime" jdbcType="TIMESTAMP" />
+    <result column="assist_status" property="assistStatus" jdbcType="INTEGER" />
+    <result column="assist_letter_apply" property="assistLetterApply" jdbcType="INTEGER" />
+    <!--别名-->
+    <result column="buyerEntName" property="buyerEntName" jdbcType="VARCHAR" />
+    <result column="buyerName" property="buyerName" jdbcType="VARCHAR" />
+    <result column="assistAttachmentAmount" property="assistAttachmentAmount" jdbcType="INTEGER" />
+    <result column="assistRejectAmount" property="assistRejectAmount" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    assist_id, contract_number, assist_name, assist_creat_time, assist_founder_id, contract_id,
+    assist_record, assist_buyer_id, assist_trade_id, assist_site, assist_time,
+    assist_status,assist_letter_apply
+  </sql>
+
+  <select id="selectContractListById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    t1.contract_number,t1.assist_name,t1.assist_status,t1.assist_creat_time,t1.assist_letter_apply,
+    t2.ent_name AS buyerEntName,
+    t3.user_name AS buyerName,
+    (SELECT count(*) FROM gyl_assist_contract t1 JOIN gyl_attachment t4 ON  t1.assist_id=t4.attachment_assist_id) AS assistAttachmentAmount,
+    (SELECT count(*) FROM gyl_assist_contract t1 JOIN gyl_reject t5 ON t1.assist_id=t5.assist_id)AS assistRejectAmount
+
+    from gyl_assist_contract t1
+    INNER JOIN gyl_information t2 ON t1.assist_buyer_id=t2.id
+    INNER JOIN gyl_account t3 ON t1.assist_founder_id=t3.user_id
+    INNER JOIN gyl_attachment t4 ON t1.assist_id=t4.attachment_assist_id
+    INNER JOIN gyl_reject t5 ON t1.assist_id=t5.assist_id
+    where t1.contract_id = #{contractId,jdbcType=INTEGER}
+    ORDER BY t1.assist_creat_time  DESC
+  </select>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gyl_assist_contract
+    where assist_id = #{assistId,jdbcType=INTEGER}
+  </delete>
+
+
+  <!--编辑辅合同信息-->
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.edzleft.entity.AssistContract" >
+    update gyl_assist_contract
+    <set >
+      <if test="contractNumber != null" >
+        contract_number = #{contractNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="assistName != null" >
+        assist_name = #{assistName,jdbcType=VARCHAR},
+      </if>
+      <if test="assistCreatTime != null" >
+        assist_creat_time = #{assistCreatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assistFounderId != null" >
+        assist_founder_id = #{assistFounderId,jdbcType=INTEGER},
+      </if>
+      <if test="contractId != null" >
+        contract_id = #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="assistRecord != null" >
+        assist_record = #{assistRecord,jdbcType=VARCHAR},
+      </if>
+      <if test="assistBuyerId != null" >
+        assist_buyer_id = #{assistBuyerId,jdbcType=INTEGER},
+      </if>
+      <if test="assistTradeId != null" >
+        assist_trade_id = #{assistTradeId,jdbcType=INTEGER},
+      </if>
+      <if test="assistSite != null" >
+        assist_site = #{assistSite,jdbcType=VARCHAR},
+      </if>
+      <if test="assistTime != null" >
+        assist_time = #{assistTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assistStatus != null" >
+        assist_status = #{assistStatus,jdbcType=INTEGER},
+      </if>
+      <if test="assistLetterApply != null" >
+        assist_letter_apply = #{assistLetterApply,jdbcType=INTEGER},
+      </if>
+    </set>
+    where assist_id = #{assistId,jdbcType=INTEGER}
+  </update>
+
+</mapper>

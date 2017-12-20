@@ -7,15 +7,15 @@ import java.util.Date;
  */
 public class BuyerFinancial {
     /**
-     * id
+     * 财务表主键id
      */
     private Integer id;
     /**
      * 财务编号
      */
-    private String financialNumbers;
+    private String financialNumber;
     /**
-     * （订单）0付款、1还款
+     * 财务类型
      */
     private Integer financialType;
     /**
@@ -23,21 +23,34 @@ public class BuyerFinancial {
      */
     private Double amount;
     /**
-     * 支方
+     * 发生方（关联到采购方企业信息表）
      */
-    private String payer;
-    /**
-     * 收方
-     */
-    private String receivingSide;
+    private  Integer payerId;
+
     /**
      * 所属订单
      */
-    private String belongOrder;
+    private Integer belongOrderId;
     /**
      * 账单时间
      */
     private Date billTime;
+    /**
+     * 银行卡账户类型
+     */
+    private Integer bankAccountId;
+    /**
+     * 银行卡账户id(关联到银行表)
+     * @return
+     */
+    private Integer bankCardId;
+
+    /**
+     * 企业信息id(关联到企业信息表)
+     * @return
+     */
+    private Integer informationId;
+
 
     public Integer getId() {
         return id;
@@ -47,12 +60,12 @@ public class BuyerFinancial {
         this.id = id;
     }
 
-    public String getFinancialNumbers() {
-        return financialNumbers;
+    public String getFinancialNumber() {
+        return financialNumber;
     }
 
-    public void setFinancialNumbers(String financialNumbers) {
-        this.financialNumbers = financialNumbers == null ? null : financialNumbers.trim();
+    public void setFinancialNumber(String financialNumber) {
+        this.financialNumber = financialNumber;
     }
 
     public Integer getFinancialType() {
@@ -71,28 +84,20 @@ public class BuyerFinancial {
         this.amount = amount;
     }
 
-    public String getPayer() {
-        return payer;
+    public Integer getPayerId() {
+        return payerId;
     }
 
-    public void setPayer(String payer) {
-        this.payer = payer == null ? null : payer.trim();
+    public void setPayerId(Integer payerId) {
+        this.payerId = payerId;
     }
 
-    public String getReceivingSide() {
-        return receivingSide;
+    public Integer getBelongOrderId() {
+        return belongOrderId;
     }
 
-    public void setReceivingSide(String receivingSide) {
-        this.receivingSide = receivingSide == null ? null : receivingSide.trim();
-    }
-
-    public String getBelongOrder() {
-        return belongOrder;
-    }
-
-    public void setBelongOrder(String belongOrder) {
-        this.belongOrder = belongOrder == null ? null : belongOrder.trim();
+    public void setBelongOrderId(Integer belongOrderId) {
+        this.belongOrderId = belongOrderId;
     }
 
     public Date getBillTime() {
@@ -103,36 +108,66 @@ public class BuyerFinancial {
         this.billTime = billTime;
     }
 
+    public Integer getBankAccountId() {
+        return bankAccountId;
+    }
+
+    public void setBankAccountId(Integer bankAccountId) {
+        this.bankAccountId = bankAccountId;
+    }
+
+    public Integer getBankCardId() {
+        return bankCardId;
+    }
+
+    public void setBankCardId(Integer bankCardId) {
+        this.bankCardId = bankCardId;
+    }
+
+    public Integer getInformationId() {
+        return informationId;
+    }
+
+    public void setInformationId(Integer informationId) {
+        this.informationId = informationId;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof BuyerFinancial)) return false;
 
         BuyerFinancial that = (BuyerFinancial) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (financialNumbers != null ? !financialNumbers.equals(that.financialNumbers) : that.financialNumbers != null)
+        if (financialNumber != null ? !financialNumber.equals(that.financialNumber) : that.financialNumber != null)
             return false;
         if (financialType != null ? !financialType.equals(that.financialType) : that.financialType != null)
             return false;
         if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
-        if (payer != null ? !payer.equals(that.payer) : that.payer != null) return false;
-        if (receivingSide != null ? !receivingSide.equals(that.receivingSide) : that.receivingSide != null)
+        if (payerId != null ? !payerId.equals(that.payerId) : that.payerId != null) return false;
+        if (belongOrderId != null ? !belongOrderId.equals(that.belongOrderId) : that.belongOrderId != null)
             return false;
-        if (belongOrder != null ? !belongOrder.equals(that.belongOrder) : that.belongOrder != null) return false;
-        return billTime != null ? billTime.equals(that.billTime) : that.billTime == null;
+        if (billTime != null ? !billTime.equals(that.billTime) : that.billTime != null) return false;
+        if (bankAccountId != null ? !bankAccountId.equals(that.bankAccountId) : that.bankAccountId != null)
+            return false;
+        if (bankCardId != null ? !bankCardId.equals(that.bankCardId) : that.bankCardId != null) return false;
+        return informationId != null ? informationId.equals(that.informationId) : that.informationId == null;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (financialNumbers != null ? financialNumbers.hashCode() : 0);
+        result = 31 * result + (financialNumber != null ? financialNumber.hashCode() : 0);
         result = 31 * result + (financialType != null ? financialType.hashCode() : 0);
         result = 31 * result + (amount != null ? amount.hashCode() : 0);
-        result = 31 * result + (payer != null ? payer.hashCode() : 0);
-        result = 31 * result + (receivingSide != null ? receivingSide.hashCode() : 0);
-        result = 31 * result + (belongOrder != null ? belongOrder.hashCode() : 0);
+        result = 31 * result + (payerId != null ? payerId.hashCode() : 0);
+        result = 31 * result + (belongOrderId != null ? belongOrderId.hashCode() : 0);
         result = 31 * result + (billTime != null ? billTime.hashCode() : 0);
+        result = 31 * result + (bankAccountId != null ? bankAccountId.hashCode() : 0);
+        result = 31 * result + (bankCardId != null ? bankCardId.hashCode() : 0);
+        result = 31 * result + (informationId != null ? informationId.hashCode() : 0);
         return result;
     }
 
@@ -140,13 +175,15 @@ public class BuyerFinancial {
     public String toString() {
         return "BuyerFinancial{" +
                 "id=" + id +
-                ", financialNumbers='" + financialNumbers + '\'' +
+                ", financialNumber='" + financialNumber + '\'' +
                 ", financialType=" + financialType +
                 ", amount=" + amount +
-                ", payer='" + payer + '\'' +
-                ", receivingSide='" + receivingSide + '\'' +
-                ", belongOrder='" + belongOrder + '\'' +
+                ", payerId=" + payerId +
+                ", belongOrderId=" + belongOrderId +
                 ", billTime=" + billTime +
+                ", bankAccountId=" + bankAccountId +
+                ", bankCardId=" + bankCardId +
+                ", informationId=" + informationId +
                 '}';
     }
 }

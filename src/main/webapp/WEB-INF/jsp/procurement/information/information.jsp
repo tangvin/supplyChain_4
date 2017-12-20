@@ -567,7 +567,6 @@
 	     * @constructor
 	     */
 	    function deleteAddress(id){
-	    	 alert("111")
 	        $.ajax({
 	            url:'<%=request.getContextPath()%>/PmReceivingAddress/deleteAddress.action?id='+id,
 	            type:'post',

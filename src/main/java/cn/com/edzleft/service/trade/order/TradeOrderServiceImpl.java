@@ -83,7 +83,7 @@ public class TradeOrderServiceImpl  implements TradeOrderService{
             order.setOrderConfirmationTime(new Date());
         }
         orderMapper.updateStatus(order);
-        System.out.println("状态修改完毕");
+        System.out.println("订单状态修改完毕");
         return order;
     }
     /**
