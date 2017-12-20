@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+
+    </style>
 </head>
 <body>
 <div class='col-xs-12'>
@@ -20,7 +23,7 @@
             <div class="khh">
                 <form class="form-inline khh_form khh_form1 cwgl_input">
                     <div class="form-group">
-                        <label>财务类型</label>
+                        <label>财务类型：</label>
                         <select class="form-control select" id="financialType">
                             <option value="">请选择</option>
                             <option value="0">转入</option>
@@ -28,16 +31,16 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>发生时间</label>
-                        <input type="text" readonly="readonly"  name="birthday" id="billTime" class="form-control"  />--
-                        <input type="text" readonly="readonly"  name="birthday" id="billTime" class="form-control"  />
+                        <label>发生时间：</label>
+                        <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/><span class="zhi">至</span>
+                        <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
                     </div>
                     <div class="form-group">
-                        <label>发生方</label>
+                        <label>发生方：</label>
                         <input type="text" class="form-control" id="payer">
                     </div>
                     <div class="form-group">
-                        <label>银行账户</label>
+                        <label>银行账户：</label>
                         <input type="text" id="bankcardaccount" class="form-control">
                     </div>
                     <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>

@@ -1,4 +1,5 @@
-/*鐧诲綍椤甸潰鏍峰紡 寮�濮�*/
+@charset "utf-8";
+/*登录页面样式开始*/
 *{
     margin: 0;
     padding: 0;
@@ -96,8 +97,8 @@
     color: #888;
 }
 
-/*鐧诲綍椤甸潰鏍峰紡 缁撴潫*/
-
+/*登录页面样式结束*/
+/*修改row 开始*/
 .row_top{
     margin-right:0;
     /*margin-left: 0;*/
@@ -116,9 +117,9 @@
 .row_dh{
     /*margin-left:0px;*/
 }
+/*修改row 结束*/
 
-
-/*鏁翠綋甯冨眬 寮�濮�*/
+/*整体布局开始*/
 body,html{
     width:100%;
     height:100%;
@@ -167,10 +168,10 @@ body{
     background: #fff;
     overflow: auto;
 }
-/*鏁翠綋甯冨眬 缁撴潫*/
+/*整体布局结束*/
 
 
-/*瀵艰埅鏍峰紡 寮�濮�*/
+/*导航样式开始*/
 .navbar-default {
     border: none!important;
     padding: 5px 30px;
@@ -204,12 +205,11 @@ body{
 #one{
    margin-bottom: 10px;
 }
-/*瀵艰埅鏍峰紡 缁撴潫*/
+/*导航样式结束*/
 
 
 
-
-/*鍒楄〃瀵艰埅 寮�濮�*/
+/*列表导航开始*/
 .page-sidebar{
     width:100%;
     display: block;
@@ -264,9 +264,9 @@ body{
 .panel-group {
     margin-bottom: -20px;
 }
-/*鍒楄〃瀵艰埅缁撴潫*/
+/*列表导航结束*/
 
-/*绯荤粺棣栭〉 寮�濮�*/
+/*系统首页开始*/
 .zjzh_wrap{
     background: #f9f9f9;
     /*border-radius: 5px;*/
@@ -309,109 +309,16 @@ margin-left:40px;
     margin-bottom: 14px;
     color: #464646;
 }
-.zjzh_button{
-}
 .zjzh_button button{
     width: 120px;
     height: 30px;
     margin-right: 20px;
     font-size: 12px;
 }
+/*系统首页 结束*/
 
 
-.index_ksh{
-    margin-top: 15px;
-    padding-right: 0;
-}
-
-.row_rz_one{
-    margin-bottom:25px;
-}
-.ksh_con{
-    background: #f9f9f9;
-    /*border-radius: 5px;*/
-}
-.ksh_con .ksh_con_h5{
-    margin: 30px 0 10px 40px;
-}
-.ksh_con .yuan{
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    border:5px solid #eeeeee;
-    margin: auto;
-}
-.ksh_con .yuan h4{
-    color: #0068C5;
-}
-.ksh_con .yuan .kyze{
-    margin-top: 40px;
-}
-.yuan_div{
-    margin-top: 30px;
-    margin-bottom: 40px;
-}
-.ed_p1{
-    border-right: 1px solid #eeeeee;
-}
-
-.ed_p p{
-    line-height: 22px;
-    margin: 0 0 0;
-
-}
-.ed_p2{
-    color: #FF7D0C;
-}
-
-.yuan_button{
-    margin-top: 40px;
-    margin-bottom: 20px;
-}
-.yuan_button button{
-    font-size: 12px;
-    margin-right: 20px;
-    width: 120px;
-    height: 30px;
-}
-.rzqk{
-    /*border-radius: 5px;*/
-    background: #f9f9f9;
-    height:200px;
-}
-.rzqk h5{
-    margin: 30px 0 10px 10px;
-}
-
-
-.ye_list{
-    margin-left: 10px;
-    margin-top: 50px;
-    margin-bottom: 55px;
-}
-
-
-.ye_list li{
-    display: inline-block;
-    font-size: 14px;
-    margin-right: 1%;
-}
-.ye_list li span{
-    color: red;
-}
-.scfp_left{
-    border-left:10px solid #ffffff
-}
-.scfp_btn{
-    font-size: 12px;
-    height: 30px;
-    margin-right: 0;
-    margin-top: -7px;
-}
-/*绯荤粺棣栭〉 缁撴潫*/
-
-
-/*璧勬枡淇℃伅*/
+/*资料信息 开始*/
 
 .zlxx_top{
     line-height: 38px;
@@ -489,7 +396,7 @@ margin-left:40px;
     margin-bottom: 20px;
 }
 
-/*閾惰璐︽埛 寮�濮�*/
+/*银行账户开始*/
 
 .yhzh_yhk{
     width:300px;
@@ -545,50 +452,11 @@ margin-left:40px;
     margin-right: 20px
 }
 
-/*閾惰璐︽埛 缁撴潫*/
+/*银行账户结束*/
 
-/*涓夋柟璐︽埛 寮�濮�*/
 
-.fy_row{
-    margin-left: -15px;
-}
-.fy .fy_con{
-    margin-top: 30px;
-}
-.khh{
-    box-sizing: border-box;
-    /*margin: auto;*/
-    padding-left: 3px;
-    margin-left: -15px;
-    margin-right:-15px;
 
-}
-.khh_form .form-group{
-    margin-right:10px;
-}
-.khh_form .form-group label{
-    font-weight: normal;
-    font-size: 12px;
-}
-.form-group1{
-    margin-right:15px;
-}
-.khh_form .form-group input{
-    width:140px;
-    height:30px;
-}
-.khh_form1 button{
-    width:60px;
-    height:30px;
-    font-size:12px;
-}
-
-.form-group_red_btn button{
-    height:30px;
-}
-/*涓夋柟璐︽埛 缁撴潫*/
-
-/*璐ц繍绠＄悊 寮�濮�*/
+/*货运管理开始*/
 .hygl{
     width:350px;
     height:140px;
@@ -623,7 +491,7 @@ margin-left:40px;
 .tjhydw{
     margin-bottom: 30px;
 }
-/*璐ц繍绠＄悊 缁撴潫*/
+/*货运管理结束*/
 
 
 
@@ -659,9 +527,9 @@ margin-left:40px;
 .media-body {
     width:0;
 }
-/*璧勬枡缁存姢*/
+/*资料维护 结束*/
 
-/*鍚堝悓绛剧害 寮�濮�*/
+/*合同签约 开始*/
 .select{
     width: 140px !important;
     height:30px;
@@ -682,8 +550,8 @@ margin-left:40px;
     margin-right: 5px;
     display: inline-block;
 }
-/*鍚堝悓绛剧害 缁撴潫*/
-/*閰嶇疆鍙戣揣钂欐嘲妗�*/
+/*合同签约结束*/
+/*配置发货萌态框 开始*/
 .pzfh_row{
     padding: 0;
     margin: 0;
@@ -724,7 +592,7 @@ margin-left:40px;
     margin-left:-10px;
 }
 
-/*缂栬緫鍚堝悓*/
+/*编辑合同*/
 .htxx{
     margin-left:15px;
 }
@@ -769,14 +637,15 @@ margin-left:40px;
 }
 .sh_input{
     width:300px;
-    margin-left:-15px;
-    height:25px;
 }
 .sh_div{
     margin-left:20px;
 }
 .sh_div div{
     margin-bottom:10px;
+}
+.sh_div div .radio-inline{
+    margin-top:8px;
 }
 #seachcity{
     margin-left:20px;
@@ -898,3 +767,110 @@ margin-left:40px;
     outline: none;
     border: none;
 }
+
+.text-right{
+    line-height:35px;
+}
+a,input,label{
+    display: inline;
+}
+
+textarea{resize:none;}
+
+/*财务管理 开始*/
+#creatTime,#endTime{
+    font-size: 12px;
+}
+.zhi{
+    margin:0 5px;
+    font-size: 12px;
+}
+/*财务管理 结束*/
+
+/*添加银行卡 开始*/
+.yhk_form{
+    margin-top:40px;
+}
+.yhk_form div label{
+    line-height: 40px;
+    font-weight: normal;
+}
+.yhk_form div{
+    margin-bottom:20px;
+}
+.yhk_form div select {
+    width:250px!important;
+}
+.yhk_form div input{
+    width:250px!important;
+}
+
+.yhk_two_form{
+    margin-top:40px;
+}
+.yhk_two_form div label{
+    line-height: 30px;
+    font-weight: normal;
+}
+.yhk_two_form div span{
+    line-height: 30px;
+}
+.yhk_two_form div{
+    margin-bottom:10px;
+}
+#yhk_two{
+    margin-top:30px;
+    /*width:120px;*/
+}
+.tjyhk_one,.tjyhk_two,.tjyhk_three,.tjyhk_four{
+    display: none;
+}
+.yhk_three{
+    margin-top:40px;
+    margin-bottom:30px;
+}
+.tjyhk_four p{
+    margin:40px 0 40px 0;
+    font-size: 20px;
+}
+.tjyhk_four button{
+    margin-left: 10px;
+}
+#yhk_next_two_bu{
+    margin-top:30px;
+}
+/*添加银行卡 结束*/
+
+/*公用头部*/
+.khh{
+    box-sizing: border-box;
+    /*margin: auto;*/
+    padding-left: 3px;
+    margin-left: -15px;
+    margin-right:-15px;
+
+}
+.khh_form .form-group{
+    margin-right:10px;
+}
+.khh_form .form-group label{
+    font-weight: normal;
+    font-size: 12px;
+}
+.form-group1{
+    margin-right:15px;
+}
+.khh_form .form-group input{
+    width:140px;
+    height:30px;
+}
+.khh_form1 button{
+    width:60px;
+    height:30px;
+    font-size:12px;
+}
+
+.form-group_red_btn button{
+    height:30px;
+}
+/*公用头部 结束*/

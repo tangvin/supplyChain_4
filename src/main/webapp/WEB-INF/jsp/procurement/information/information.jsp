@@ -272,11 +272,11 @@
                             <div class="khh sfzh">
                                 <form class="form-inline khh_form khh_form1" id="informationForm">
                                     <div class="form-group form-group1">
-                                        <label>开户行</label>
+                                        <label>开户行：</label>
                                         <input type="text" class="form-control" name="caEntName" id="caEntName">
                                     </div>
                                     <div class="form-group form-group1">
-                                        <label for="tripartiteCreditHolderPurchaser">户主</label>
+                                        <label for="tripartiteCreditHolderPurchaser">户主：</label>
                                         <input type="email" class="form-control" name="tripartiteCreditHolderPurchaser" id="tripartiteCreditHolderPurchaser">
                                     </div>
                                     <button type="button" class="btn  btn-danger" onclick="search()">查询</button>
@@ -312,37 +312,35 @@
 
                                         <div class="modal-header sh_div">
                                             <div class="row">
-                                                <div class="col-xs-3">
-                                                    <span class="xingxing xx1">*</span>收货区域
+                                                <div class="col-xs-3 text-right">
+                                                    <span class="xingxing xx1">*</span>收货区域：
                                                 </div>
                                                 <div class="col-xs-9">
-                                                    <div class="row sjld ">
-                                                        <select class="col-xs-3 form-control" id="seachprov" name="rAddressArea" onChange="changeComplexProvince(this.value, sub_array, 'seachcity', 'seachdistrict');"></select>
-                                                        <select style="margin-left:20px;" class="col-xs-3 form-control" id="seachcity" name="rAddressArea" onChange="changeCity(this.value,'seachdistrict','seachdistrict');"></select>
-                                                        <span class="col-xs-3"  id="seachdistrict_div">
-                                                            <select class="form-control" id="seachdistrict" name="rAddressArea"></select>
-                                                        </span>
+                                                    <div id="city_select" class="form-inline">
+                                                        <select class="prov form-control" name="municipality"></select>
+                                                        <select class="city form-control" name="city" disabled="disabled" ></select>
+                                                        <select class="dist form-control" name="county" disabled="disabled"></select>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>收货地址</div>
+                                                <div class="col-xs-3 text-right"><span class="xingxing xx1">*</span>收货地址：</div>
                                                 <div class="col-xs-9"><input type="text" class="form-control sh_input" name="rAddressAddress"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>邮政编码</div>
+                                                <div class="col-xs-3 text-right"><span class="xingxing xx1">*</span>邮政编码：</div>
                                                 <div class="col-xs-9"><input type="text" class="form-control sh_input" name="rAddressZipcode"></div>
                                             </div>
                                              <div class="row">
-                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>收货人</div>
+                                                <div class="col-xs-3 text-right"><span class="xingxing xx1">*</span>收货人：</div>
                                                 <div class="col-xs-9"><input type="text" class="form-control sh_input" name="rAddressPerson"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>收货人手机号</div>
+                                                <div class="col-xs-3 text-right"><span class="xingxing xx1">*</span>收货人手机号：</div>
                                                 <div class="col-xs-9"><input type="text" class="form-control sh_input" name="rAddressPhone"></div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xs-3"><span class="xingxing xx1">*</span>设为默认</div>
+                                                <div class="col-xs-3 text-right"><span class="xingxing xx1">*</span>设为默认：</div>
                                                 <div class="col-xs-9">
                                                     <label class="radio-inline">
                                                         <input type="radio" name="rAddressDefault"   value="0"> 是
@@ -394,8 +392,13 @@
         $('.three_certificates').show();
     }
 
-    $(function (){
-        initComplexArea('seachprov', 'seachcity', 'seachdistrict', area_array, sub_array, '44', '0', '0');
+    $(function() {
+        $("#city_select").citySelect({
+            prov: "",
+            city: "",
+            dist: "",
+            nodata: "none"
+        });
     });
     
     $('#updateInformation').click(function(){

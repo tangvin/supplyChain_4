@@ -22,11 +22,12 @@
                     <div class="form-group">
                         <label>状态</label>
                         <select class="form-control select">
-                            <option>全部</option>
-                            <option>全部1</option>
-                            <option>全部2</option>
-                            <option>全部3</option>
-                            <option>全部4</option>
+                            <option value="">请选择</option>
+                            <option value="0">待领取</option>
+                            <option value="1">正常</option>
+                            <option value="2">已终止</option>
+                            <option value="3">驳回</option>
+                            <option value="4">历史</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -104,11 +105,12 @@
                         <td>1</td>
                         <td>
                             <select class="form-control">
-                                <option>123123123</option>
-                                <option>全部1</option>
-                                <option>全部2</option>
-                                <option>全部3</option>
-                                <option>全部4</option>
+                                <option value="">请选择</option>
+                                <option value="0">待领取</option>
+                                <option value="1">正常</option>
+                                <option value="2">已终止</option>
+                                <option value="3">驳回</option>
+                                <option value="4">历史</option>
                             </select>
                         </td>
                         <td><a id="htbj" href="#">xxx合同</a></td>
@@ -126,30 +128,56 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
+                        <td>2</td>
+                        <td>
+                            <select class="form-control">
+                                <option value="">请选择</option>
+                                <option value="0">待领取</option>
+                                <option value="1">正常</option>
+                                <option value="2">已终止</option>
+                                <option value="3">驳回</option>
+                                <option value="4">历史</option>
+                            </select>
+                        </td>
+                        <td><a id="htbj" href="#">xxx合同</a></td>
+                        <td><span>正常</span></td>
+                        <td>1</td>
+                        <td>采购企业名称</td>
+                        <td>2017/09/02<br>2017/12/21</td>
+                        <td>采方企业名称<br>2017-10-12 20:15:30</td>
+                        <td>13</td>
+                        <td>x</td>
+                        <td>
+                            <a id="htxq" href="#" class="btn btn-sm">查看</a>
+                            <a id="htxq2" href="#" class="btn btn-primary btn-sm">驳回</a>
+                            <a class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm">认领</a>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
+                        <td>3</td>
+                        <td>
+                            <select class="form-control">
+                                <option value="">请选择</option>
+                                <option value="0">待领取</option>
+                                <option value="1">正常</option>
+                                <option value="2">已终止</option>
+                                <option value="3">驳回</option>
+                                <option value="4">历史</option>
+                            </select>
+                        </td>
+                        <td><a id="htbj" href="#">xxx合同</a></td>
+                        <td><span>正常</span></td>
+                        <td>1</td>
+                        <td>采购企业名称</td>
+                        <td>2017/09/02<br>2017/12/21</td>
+                        <td>采方企业名称<br>2017-10-12 20:15:30</td>
+                        <td>13</td>
+                        <td>x</td>
+                        <td>
+                            <a id="htxq" href="#" class="btn btn-sm">查看</a>
+                            <a id="htxq2" href="#" class="btn btn-primary btn-sm">驳回</a>
+                            <a class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm">认领</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

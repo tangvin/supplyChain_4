@@ -96,7 +96,7 @@
                                     <td>
                                         <%--0居民身份证、1护照、2港澳居民来往内地通行证、3台湾居民来往大陆通行证--%>
                                         <select class="form-control zlbj_select" name="representativeType">
-                                            <option>请选择</option>
+                                            <option value="">请选择</option>
                                             <option value="0" <c:if test="${'0' eq information.representativeType}">selected</c:if> >居民身份证</option>
                                             <option value="1" <c:if test="${'1' eq information.representativeType}">selected</c:if> >护照</option>
                                             <option value="2" <c:if test="${'2' eq information.representativeType}">selected</c:if> >港澳居民来往内地通行证</option>
@@ -115,16 +115,10 @@
                                 <tr>
                                     <td class="text-right">省直辖市：</td>
                                     <td>
-                                        <div class="sjld" style="margin-left:0 ;">
-                                            <select class="col-xs-3 form-control" id="seachprov" name="municipality"
-                                                    onChange="changeComplexProvince(this.value, sub_array, 'seachcity', 'seachdistrict');"></select>
-                                            <select style="margin-left:20px;" class="col-xs-3 form-control" id="seachcity"
-                                                    name="city"
-                                                    onChange="changeCity(this.value,'seachdistrict','seachdistrict');"></select>
-                                            <div class="col-xs-2" id="seachdistrict_div">
-                                                <select class="form-control" id="seachdistrict"
-                                                        name="county"></select>
-                                            </div>
+                                        <div id="city_select" class="form-inline">
+                                            <select class="prov form-control" name="municipality" ${information.municipality}></select>
+                                            <select class="city form-control" name="city" disabled="disabled" ${information.city}></select>
+                                            <select class="dist form-control" name="county" disabled="disabled" ${information.county}></select>
                                         </div>
                                     </td>
                                 </tr>
@@ -283,14 +277,21 @@
 </div>
 </body>
 <script>
-    $(function (){
-        initComplexArea('seachprov', 'seachcity', 'seachdistrict', area_array, sub_array, '44', '0', '0');
-    });
+
     $('#zhxx').click(function(){
         $('#load').load('<%=request.getContextPath()%>/captialMain/zhxx.action')
     })
 
+    $(function() {
+        $("#city_select").citySelect({
+            prov: "${information.municipality}",
+            city: "${information.city}",
+            dist: "${information.county}",
+            nodata: "none"
+        });
+    });
     function updateInformation(){
+
         $.ajax({
             url:'<%=request.getContextPath()%>/captialInformation/updateInformation.action',
             data:$("#updateForm").serialize(),

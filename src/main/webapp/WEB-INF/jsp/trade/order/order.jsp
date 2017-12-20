@@ -41,7 +41,7 @@
                             <option value="2">六月内</option>
                             <option value="3">一年内</option>
                         </select>
-                        <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/>至
+                        <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/><span style="margin: 0 5px">至</span>
                         <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
                     </div>
                     <div class="form-group">
@@ -396,14 +396,16 @@
     }
 
 
-    var abc=''
+    var abc;
     //配置发货数据回显
     function showUserAttachs(w,e){
+            $('#pzfh_select').html('');
             $.ajax({
             url:"<%=request.getContextPath()%>/tradeOrder/orderSelect.action",
             data:{ pageNumber:1, pageSize: 10},
             type:"POST",
             dataType:"json",
+            cache:false,
             success: function(data){
                 for(var i=0;i<data.rows.length;i++){
                     $('#wyb').empty()
@@ -418,6 +420,7 @@
                     url:'<%=request.getContextPath()%>/freight/freightSelect.action',
                     type:'POST',
                     dataType:'json',
+                    cache:false,
                     success:function (data) {
                         value=data;
                         //console.log(data);

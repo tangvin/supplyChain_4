@@ -124,16 +124,10 @@
                                 <tr>
                                     <td class="text-right">省直辖市：</td>
                                     <td>
-                                        <div class="sjld" style="margin-left:0 ;">
-                                            <select class="col-xs-3 form-control" id="seachprov" name="municipality"
-                                                    onChange="changeComplexProvince(this.value, sub_array, 'seachcity', 'seachdistrict');"></select>
-                                            <select style="margin-left:20px;" class="col-xs-3 form-control" id="seachcity"
-                                                    name="city"
-                                                    onChange="changeCity(this.value,'seachdistrict','seachdistrict');"></select>
-                                            <div class="col-xs-2" id="seachdistrict_div">
-                                                <select class="form-control" id="seachdistrict"
-                                                        name="county"></select>
-                                            </div>
+                                        <div id="city_select" class="form-inline">
+                                            <select class="prov form-control" name="municipality"></select>
+                                            <select class="city form-control" name="city" disabled="disabled"></select>
+                                            <select class="dist form-control" name="county" disabled="disabled"></select>
                                         </div>
                                     </td>
                                 </tr>
@@ -292,14 +286,22 @@
 </div>
 </body>
 <script>
-    $(function (){
-        initComplexArea('seachprov', 'seachcity', 'seachdistrict', area_array, sub_array, '44', '0', '0');
-    });
+//    $(function (){
+//        initComplexArea('seachprov', 'seachcity', 'seachdistrict', area_array, sub_array, '44', '0', '0');
+//    });
+
     $('#zhxx').click(function(){
         $('#load').load('<%=request.getContextPath()%>/procurementMain/zhxx.action')
     })
 
-
+$(function() {
+    $("#city_select").citySelect({
+        prov: "",
+        city: "",
+        dist: "",
+        nodata: "none"
+    });
+});
 
     function updateInformation(){
         $.ajax({

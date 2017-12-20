@@ -22,14 +22,14 @@
 <body>
 <div class='col-xs-12'>
 <div class="row">
-<!--订单管理 头部-->
-	<div class="col-xs-12 zlxx_top">
-		<a href="<%=request.getContextPath()%>/procurementMain/procurementMain.action">系统首页</a>
-		<span>></span>
-		<a id="ddglyy">订单管理</a>
-	</div>
-<!--订单管理 头部 end-->
-<div class="col-xs-12">
+		<!--订单管理 头部-->
+			<div class="col-xs-12 zlxx_top">
+				<a href="<%=request.getContextPath()%>/procurementMain/procurementMain.action">系统首页</a>
+				<span>></span>
+				<a id="ddglyy">订单管理</a>
+			</div>
+		<!--订单管理 头部 end-->
+        <div class="col-xs-12">
 		   <div class="khh">
 			   <form class="form-inline khh_form khh_form1" id="ordersform">
 			        <div class="form-group">
@@ -53,7 +53,7 @@
 			                   <option value="2">六月内</option>
 			                   <option value="3">一年内</option>
 			               </select>
-			               <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/>至
+			               <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/><span class="zhi">至</span>
 		                   <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
 		               </div>
 
@@ -67,26 +67,25 @@
 			       </form>
          </div>
 </div>
-<!-- 订单开户行 开始 -->
-
-<div class="col-xs-12 text-right">
-    <button style="margin-right:-15px" class="btn btn-primary" id="insertOrder">新增订单</button>
+         <!-- 订单开户行 开始 -->
+         <div class="col-xs-12 text-right">
+    <button style="margin-right:-15px" class="btn btn-danger" id="insertOrder">新增订单</button>
 </div>
-<!-- 订单开户行 结束 -->
-<!-- 订单表格 开始    -->
-<div class="col-xs-12">
-	<table id="tb_departments" class="cj_table">
+         <!-- 订单开户行 结束 -->
+		<!-- 订单表格 开始    -->
+		<div class="col-xs-12">
+			<table id="tb_departments" class="cj_table">
 
-	</table>
-</div>
-<!-- 订单表格 结束    -->
+			</table>
+		</div>
+		<!-- 订单表格 结束    -->
 
-<!--领取订单 模态框-->
+    <!--领取订单 模态框-->
     <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		  <div class="modal-dialog modal-sm" role="document">
 		       <div class="modal-content">
 		            <div class="panel-body text-center">
-		                                                     确定执行此操作吗？
+						确定执行此操作吗？
 		            </div>
 		            <div class="modal-footer">
 		                  <button id="lqdd" type="button" class="btn btn-default" data-dismiss="modal">确定</button>
@@ -95,8 +94,8 @@
 		         </div>
 		    </div>
      </div>
-<!--领取订单 模态框 结束-->
-<div class="modal fade bs-example-modal-sm_sq" id="myModalLetter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<!--领取订单 模态框 结束-->
+	<div class="modal fade bs-example-modal-sm_sq" id="myModalLetter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -124,9 +123,10 @@
 
 </div>
 </div>
+</div>
 </body>
+<%--<script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/bootstrap-table-zh-CN.js"></script>--%>
 <script>
-    
     $('#insertOrder').click(function(){
         $('#load').load('<%=request.getContextPath()%>/procurementMain/insertOrder.action')
     })
@@ -168,8 +168,7 @@
                          return ConvertToDate(value)
                      }
                 },
-                
-                
+
                 {field:'orderCreatTime',title:'订单创建时间',
                 	formatter:function(value,row,index){
                 	  var str='';

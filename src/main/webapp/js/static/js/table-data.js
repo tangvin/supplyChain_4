@@ -10,7 +10,7 @@ $(function(){
 		//处理分页显示
 		var page_view = function(){
 			//这里写样式
-			$('page_tb').html('<span onlick="data_page(30,1)">上一页');
+			$('page_tb').html('<span onlick="data_page(3,1)">上一页');
 		}
 
 
@@ -24,13 +24,12 @@ $(function(){
 				*/
 			
 				//对数据进行排序
-				data.rows = data.rows.sort(function(a,b){  
-					return a - b;
-				});
+				data.rows = data.rows.reverse();
 
 				$('#tb').attr('data',data.rows.length);
 
 				$.each(data.rows,function(i,v){
+
 					//需要创建的内容
 					var data_con = '<tr class="for_arr_'+i+'">';
 						data_con += '<td>'+v.id+'</td>';

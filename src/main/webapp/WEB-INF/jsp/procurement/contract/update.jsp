@@ -25,7 +25,7 @@
                 </div>
             </div>
             <!--合同编辑表格 start-->
-            <div class="table-responsive text-center">
+            <div class="table-responsive text-center" style="margin: 0 -15px">
                 <table class="table table-bordered bj_table">
                     <tbody>
                     <tr>

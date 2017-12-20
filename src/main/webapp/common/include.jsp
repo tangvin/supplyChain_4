@@ -49,8 +49,10 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/static/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/moment.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/daterangepicker.js"></script>
-<script  src="<%=request.getContextPath() %>/js/static/js/Area.js"></script>
-<script src="<%=request.getContextPath() %>/js/static/js/AreaData_min.js"></script>
+<%--<script  src="<%=request.getContextPath() %>/js/static/js/Area.js"></script>--%>
+<%--<script src="<%=request.getContextPath() %>/js/static/js/AreaData_min.js"></script>--%>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/city.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/cityselect.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/index.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/uploadImg.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/static/js/bootstrap-table.js"></script>
