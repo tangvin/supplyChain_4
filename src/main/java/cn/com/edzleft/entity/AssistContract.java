@@ -23,13 +23,17 @@ public class AssistContract {
      */
     private Date assistCreatTime;
     /**
-     * 辅合同创建人
+     * 辅合同结束时间
      */
-    private String assistFounder;
+    private Date assistEndTime;
+    /**
+     * 辅合同创建人(关联到用户表)
+     */
+    private Integer assistFounderId;
     /**
      * 对应主合同外键
      */
-    private String contractId;
+    private Integer contractId;
     /**
      * 辅合同电子档
      */
@@ -37,11 +41,11 @@ public class AssistContract {
     /**
      * 辅合同签约采购方
      */
-    private String assistBuyer;
+    private Integer assistBuyerId;
     /**
      * 辅合同签约贸易方
      */
-    private String assistTrade;
+    private Integer assistTradeId;
     /**
      * 辅合同签约地点
      */
@@ -50,6 +54,70 @@ public class AssistContract {
      * 辅合同签约时间
      */
     private Date assistTime;
+
+    /**
+     * 辅合同状态
+     * @return
+     */
+    private Integer  assistStatus;
+
+    /**
+     * 辅合同附件id（关联到附件表）
+     * @return
+     */
+    private  Integer assistAttachmentId;
+
+    /**
+     * 是否申请融信
+     * @return
+     */
+    private Integer assistLetterApply;
+
+    /* <result column="buyerEntName" property="buyerEntName" jdbcType="VARCHAR" />
+    <result column="buyerName" property="buyerName" jdbcType="VARCHAR" />
+    <result column="assistAttachmentAmount" property="assistAttachmentAmount" jdbcType="INTEGER" />
+    <result column="assistRejectAmount" property="assistRejectAmount" jdbcType="INTEGER" />*/
+
+
+    /**
+     * 别名
+     */
+    private String buyerEntName;
+    private String buyerName;
+    private String assistAttachmentAmount;
+    private String assistRejectAmount;
+
+    public String getBuyerEntName() {
+        return buyerEntName;
+    }
+
+    public void setBuyerEntName(String buyerEntName) {
+        this.buyerEntName = buyerEntName;
+    }
+
+    public String getBuyerName() {
+        return buyerName;
+    }
+
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
+    }
+
+    public String getAssistAttachmentAmount() {
+        return assistAttachmentAmount;
+    }
+
+    public void setAssistAttachmentAmount(String assistAttachmentAmount) {
+        this.assistAttachmentAmount = assistAttachmentAmount;
+    }
+
+    public String getAssistRejectAmount() {
+        return assistRejectAmount;
+    }
+
+    public void setAssistRejectAmount(String assistRejectAmount) {
+        this.assistRejectAmount = assistRejectAmount;
+    }
 
     public Integer getAssistId() {
         return assistId;
@@ -64,7 +132,7 @@ public class AssistContract {
     }
 
     public void setContractNumber(String contractNumber) {
-        this.contractNumber = contractNumber == null ? null : contractNumber.trim();
+        this.contractNumber = contractNumber;
     }
 
     public String getAssistName() {
@@ -72,7 +140,7 @@ public class AssistContract {
     }
 
     public void setAssistName(String assistName) {
-        this.assistName = assistName == null ? null : assistName.trim();
+        this.assistName = assistName;
     }
 
     public Date getAssistCreatTime() {
@@ -83,20 +151,20 @@ public class AssistContract {
         this.assistCreatTime = assistCreatTime;
     }
 
-    public String getAssistFounder() {
-        return assistFounder;
+    public Integer getAssistFounderId() {
+        return assistFounderId;
     }
 
-    public void setAssistFounder(String assistFounder) {
-        this.assistFounder = assistFounder == null ? null : assistFounder.trim();
+    public void setAssistFounderId(Integer assistFounderId) {
+        this.assistFounderId = assistFounderId;
     }
 
-    public String getContractId() {
+    public Integer getContractId() {
         return contractId;
     }
 
-    public void setContractId(String contractId) {
-        this.contractId = contractId == null ? null : contractId.trim();
+    public void setContractId(Integer contractId) {
+        this.contractId = contractId;
     }
 
     public String getAssistRecord() {
@@ -104,23 +172,23 @@ public class AssistContract {
     }
 
     public void setAssistRecord(String assistRecord) {
-        this.assistRecord = assistRecord == null ? null : assistRecord.trim();
+        this.assistRecord = assistRecord;
     }
 
-    public String getAssistBuyer() {
-        return assistBuyer;
+    public Integer getAssistBuyerId() {
+        return assistBuyerId;
     }
 
-    public void setAssistBuyer(String assistBuyer) {
-        this.assistBuyer = assistBuyer == null ? null : assistBuyer.trim();
+    public void setAssistBuyerId(Integer assistBuyerId) {
+        this.assistBuyerId = assistBuyerId;
     }
 
-    public String getAssistTrade() {
-        return assistTrade;
+    public Integer getAssistTradeId() {
+        return assistTradeId;
     }
 
-    public void setAssistTrade(String assistTrade) {
-        this.assistTrade = assistTrade == null ? null : assistTrade.trim();
+    public void setAssistTradeId(Integer assistTradeId) {
+        this.assistTradeId = assistTradeId;
     }
 
     public String getAssistSite() {
@@ -128,7 +196,7 @@ public class AssistContract {
     }
 
     public void setAssistSite(String assistSite) {
-        this.assistSite = assistSite == null ? null : assistSite.trim();
+        this.assistSite = assistSite;
     }
 
     public Date getAssistTime() {
@@ -139,10 +207,42 @@ public class AssistContract {
         this.assistTime = assistTime;
     }
 
+    public Integer getAssistStatus() {
+        return assistStatus;
+    }
+
+    public void setAssistStatus(Integer assistStatus) {
+        this.assistStatus = assistStatus;
+    }
+
+    public Integer getAssistAttachmentId() {
+        return assistAttachmentId;
+    }
+
+    public void setAssistAttachmentId(Integer assistAttachmentId) {
+        this.assistAttachmentId = assistAttachmentId;
+    }
+
+    public Integer getAssistLetterApply() {
+        return assistLetterApply;
+    }
+
+    public void setAssistLetterApply(Integer assistLetterApply) {
+        this.assistLetterApply = assistLetterApply;
+    }
+
+    public Date getAssistEndTime() {
+        return assistEndTime;
+    }
+
+    public void setAssistEndTime(Date assistEndTime) {
+        this.assistEndTime = assistEndTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof AssistContract)) return false;
 
         AssistContract that = (AssistContract) o;
 
@@ -152,14 +252,27 @@ public class AssistContract {
         if (assistName != null ? !assistName.equals(that.assistName) : that.assistName != null) return false;
         if (assistCreatTime != null ? !assistCreatTime.equals(that.assistCreatTime) : that.assistCreatTime != null)
             return false;
-        if (assistFounder != null ? !assistFounder.equals(that.assistFounder) : that.assistFounder != null)
+        if (assistFounderId != null ? !assistFounderId.equals(that.assistFounderId) : that.assistFounderId != null)
             return false;
         if (contractId != null ? !contractId.equals(that.contractId) : that.contractId != null) return false;
         if (assistRecord != null ? !assistRecord.equals(that.assistRecord) : that.assistRecord != null) return false;
-        if (assistBuyer != null ? !assistBuyer.equals(that.assistBuyer) : that.assistBuyer != null) return false;
-        if (assistTrade != null ? !assistTrade.equals(that.assistTrade) : that.assistTrade != null) return false;
+        if (assistBuyerId != null ? !assistBuyerId.equals(that.assistBuyerId) : that.assistBuyerId != null)
+            return false;
+        if (assistTradeId != null ? !assistTradeId.equals(that.assistTradeId) : that.assistTradeId != null)
+            return false;
         if (assistSite != null ? !assistSite.equals(that.assistSite) : that.assistSite != null) return false;
-        return assistTime != null ? assistTime.equals(that.assistTime) : that.assistTime == null;
+        if (assistTime != null ? !assistTime.equals(that.assistTime) : that.assistTime != null) return false;
+        if (assistEndTime != null ? !assistEndTime.equals(that.assistEndTime) : that.assistEndTime != null) return false;
+        if (assistStatus != null ? !assistStatus.equals(that.assistStatus) : that.assistStatus != null) return false;
+        if (assistAttachmentId != null ? !assistAttachmentId.equals(that.assistAttachmentId) : that.assistAttachmentId != null)
+            return false;
+        if (assistLetterApply != null ? !assistLetterApply.equals(that.assistLetterApply) : that.assistLetterApply != null)
+            return false;
+        if (buyerEntName != null ? !buyerEntName.equals(that.buyerEntName) : that.buyerEntName != null) return false;
+        if (buyerName != null ? !buyerName.equals(that.buyerName) : that.buyerName != null) return false;
+        if (assistAttachmentAmount != null ? !assistAttachmentAmount.equals(that.assistAttachmentAmount) : that.assistAttachmentAmount != null)
+            return false;
+        return assistRejectAmount != null ? assistRejectAmount.equals(that.assistRejectAmount) : that.assistRejectAmount == null;
     }
 
     @Override
@@ -168,13 +281,21 @@ public class AssistContract {
         result = 31 * result + (contractNumber != null ? contractNumber.hashCode() : 0);
         result = 31 * result + (assistName != null ? assistName.hashCode() : 0);
         result = 31 * result + (assistCreatTime != null ? assistCreatTime.hashCode() : 0);
-        result = 31 * result + (assistFounder != null ? assistFounder.hashCode() : 0);
+        result = 31 * result + (assistFounderId != null ? assistFounderId.hashCode() : 0);
         result = 31 * result + (contractId != null ? contractId.hashCode() : 0);
         result = 31 * result + (assistRecord != null ? assistRecord.hashCode() : 0);
-        result = 31 * result + (assistBuyer != null ? assistBuyer.hashCode() : 0);
-        result = 31 * result + (assistTrade != null ? assistTrade.hashCode() : 0);
+        result = 31 * result + (assistBuyerId != null ? assistBuyerId.hashCode() : 0);
+        result = 31 * result + (assistTradeId != null ? assistTradeId.hashCode() : 0);
         result = 31 * result + (assistSite != null ? assistSite.hashCode() : 0);
         result = 31 * result + (assistTime != null ? assistTime.hashCode() : 0);
+        result = 31 * result + (assistStatus != null ? assistStatus.hashCode() : 0);
+        result = 31 * result + (assistAttachmentId != null ? assistAttachmentId.hashCode() : 0);
+        result = 31 * result + (assistLetterApply != null ? assistLetterApply.hashCode() : 0);
+        result = 31 * result + (buyerEntName != null ? buyerEntName.hashCode() : 0);
+        result = 31 * result + (buyerName != null ? buyerName.hashCode() : 0);
+        result = 31 * result + (assistAttachmentAmount != null ? assistAttachmentAmount.hashCode() : 0);
+        result = 31 * result + (assistRejectAmount != null ? assistRejectAmount.hashCode() : 0);
+        result = 31 * result + (assistEndTime != null ? assistEndTime.hashCode() : 0);
         return result;
     }
 
@@ -185,13 +306,21 @@ public class AssistContract {
                 ", contractNumber='" + contractNumber + '\'' +
                 ", assistName='" + assistName + '\'' +
                 ", assistCreatTime=" + assistCreatTime +
-                ", assistFounder='" + assistFounder + '\'' +
-                ", contractId='" + contractId + '\'' +
+                ", assistEndTime=" + assistEndTime +
+                ", assistFounderId=" + assistFounderId +
+                ", contractId=" + contractId +
                 ", assistRecord='" + assistRecord + '\'' +
-                ", assistBuyer='" + assistBuyer + '\'' +
-                ", assistTrade='" + assistTrade + '\'' +
+                ", assistBuyerId=" + assistBuyerId +
+                ", assistTradeId=" + assistTradeId +
                 ", assistSite='" + assistSite + '\'' +
                 ", assistTime=" + assistTime +
+                ", assistStatus=" + assistStatus +
+                ", assistAttachmentId=" + assistAttachmentId +
+                ", assistLetterApply=" + assistLetterApply +
+                ", buyerEntName='" + buyerEntName + '\'' +
+                ", buyerName='" + buyerName + '\'' +
+                ", assistAttachmentAmount='" + assistAttachmentAmount + '\'' +
+                ", assistRejectAmount='" + assistRejectAmount + '\'' +
                 '}';
     }
 }

@@ -178,8 +178,7 @@
 
                             <tr>
                                 <td  class="text-right">经营范围：</td>
-                                <td><textarea style="width: 250px;" name="businessScope" class="form-control">${information.businessScope}</textarea></td>
-                                <%--<input type="text" name="registrationAuthority" class="form-control" value="${information.businessScope}">--%>
+                                <td><input type="text" name="businessScope" class="form-control" value="${information.businessScope}"></textarea></td>
                             </tr>
                             <tr>
                                 <td  class="text-right">登记机关：</td>
