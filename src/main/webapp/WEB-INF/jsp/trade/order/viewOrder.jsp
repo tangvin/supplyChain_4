@@ -9,9 +9,6 @@
         .xzdd{
             margin-top:40px;
         }
-        .bj_table{
-            margin-left: -15px;
-        }
         .bj_table tbody tr td input{
             width:200px;
         }
@@ -29,9 +26,6 @@
             height: 40px;
             font-size: 16px;
         }
-        .ckdd{
-            margin-bottom:15px;
-        }
     </style>
 </head>
 <body>
@@ -47,14 +41,15 @@
         </div>
         <!--合同签约 头部 end-->
         <div class="col-xs-12" id="ddxx_open">
-                <div class="row jbxx_row ckdd">
+                <div class="row jbxx_row">
                     <div class="col-xs-8">
                         <h5>订单信息</h5>
                     </div>
                 </div>
                 <%--<div class="col-xs-12" style="background: red"></div>--%>
             <!--合同编辑表格 start-->
-            <table class="table table-bordered bj_table">
+            <div class="table-responsive" style="margin: 0 -15px;">
+              <table class="table table-bordered bj_table">
                 <tbody>
                 <tr>
                     <td class="col-xs-3  text-right"><span class="xingxing">*</span>合同签约方：</td>
@@ -124,52 +119,43 @@
                 </tr>
                 </tbody>
             </table>
+            </div>
             <!--合同编辑表格 end-->
         </div>
 
         <div class="col-xs-12" id="hyxx_open">
-            <div class="row jbxx_row ckdd">
+            <div class="row jbxx_row">
                 <div class="col-xs-8">
                     <h5>货运信息</h5>
                 </div>
             </div>
             <!--合同编辑表格 start-->
-            <div class="table-responsive text-center col-xs-12">
+            <div class="table-responsive" style="margin: 0 -15px;">
                 <table class="table table-bordered bj_table">
                     <tbody>
                     <tr>
-                        <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>发货人：</td>
                             <td class="col-xs-9 text-left"><span>${information}</span></td>
-                        </div>
                     </tr>
                     <tr>
-                        <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>货运单位：</td>
                             <td class="col-xs-9 text-left"><span>${freight.freightName}</span></td>
-                        </div>
                     </tr>
                     <tr>
-                        <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>货运单号：</td>
                             <td class="col-xs-9 text-left"><span>${order.freightUnit}</span></td>
-                        </div>
                     </tr>
                     <tr>
-                        <div class="row">
                             <td class="col-xs-3 text-right">联系收货人：</td>
                             <td class="col-xs-9 text-left">
                                 <span style="float: left;margin-top: 5px;">${freight.freightContactPerson}</span>
                             </td>
-                        </div>
                     </tr>
                     <tr>
-                        <div class="row">
                             <td class="col-xs-3 text-right">联系人手机号：</td>
                             <td class="col-xs-8 text-left">
                                 <span>${freight.freightContactPhone}</span>
                             </td>
-                        </div>
                     </tr>
                     </tbody>
                 </table>
@@ -178,42 +164,34 @@
         </div>
 
         <div class="col-xs-12" id="shxx_open">
-            <div class="row jbxx_row ckdd">
+            <div class="row jbxx_row">
                 <div class="col-xs-8">
                     <h5>收货信息</h5>
                 </div>
             </div>
             <!--合同编辑表格 start-->
-            <div class="table-responsive text-center col-xs-12">
+            <div class="table-responsive" style="margin: 0 -15px;">
                 <table class="table table-bordered bj_table">
                     <tbody>
                     <tr>
-                        <div class="row">
-                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
+                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货人：</td>
                             <td class="col-xs-9 text-left"><span>${information}</span></td>
-                        </div>
                     </tr>
                     <tr>
-                        <div class="row">
-                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货信息：</td>
-                            <td class="col-xs-8 text-left"><span>收货地址：${receivingAddress.rAddressArea}${receivingAddress.rAddressAddress} ${receivingAddress.rAddressAddress}（默认收货信息）</span></td>
-                        </div>
+                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货地址：</td>
+                            <td class="col-xs-8 text-left"><span>${receivingAddress.rAddressArea}${receivingAddress.rAddressAddress} （默认收货信息）</span></td>
                     </tr>
                     <tr>
-                        <div class="row">
-                            <td class="col-xs-3 text-right">收货人：</td>
+                            <td class="col-xs-3 text-right">收货联系人：</td>
                             <td class="col-xs-8 text-left">
                                 <span style="float: left;margin-top: 5px;">${receivingAddress.rAddressPerson}</span>
                             </td>
-                        </div>
                     </tr>
                     <tr>
-                        <div class="row">
                             <td class="col-xs-3 text-right">联系人手机号：</td>
                             <td class="col-xs-8 text-left">
                                 <span>${receivingAddress.rAddressPhone}</span>
                             </td>
-                        </div>
                     </tr>
                     </tbody>
                 </table>

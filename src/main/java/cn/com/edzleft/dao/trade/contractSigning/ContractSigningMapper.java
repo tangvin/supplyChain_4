@@ -12,6 +12,14 @@ public interface ContractSigningMapper {
 
 
     /**
+     * 表关联条件查询+分页显示
+     */
+    public Integer getContractCount(PageUtil pageUtil);
+    public List<Contract> getContractByPage(PageUtil pageUtil);
+
+
+
+    /**
      *  查询总条数
      */
     public Integer selectTotalCount(PageUtil pageUtil);
@@ -30,5 +38,14 @@ public interface ContractSigningMapper {
      */
     public Contract selectContractById(Integer id);
 
+    /**
+     * 根据主合同编号查看合同详细信息
+     */
+    public Contract selectDetailContractByContractNumber(String number);
+
+    /**
+     * 修改合同信息
+     */
+    public int updateContract(Contract contract);
 
 }

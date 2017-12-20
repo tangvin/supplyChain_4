@@ -413,7 +413,6 @@
                     }
                 }
                 $('#wyb').append(data_con);
-
                 $.ajax({
                     url:'<%=request.getContextPath()%>/freight/freightSelect.action',
                     type:'POST',
@@ -430,24 +429,18 @@
                                 //console.log(option)
                             }
                          }
-
                         $('#pzfh_select').append(option);
-
-
-                        var bb = $("#pzfh_select option:selected").attr("id");
                         var aaa= $('#pzfh_select')[0];
                          for(var i=0;i<aaa.children.length;i++){
                             if(aaa.children[i].value==1){
                               aaa.children[i].selected='selected'
                             }
                          }
-                        //alert($("#pzfh_select option:selected").attr("id"))
-                        abc=$("#pzfh_select option:selected").attr("id")
+                        $('#pzfh_select').change(function () {
+                            abc=$(this).children('option:selected').attr("id")
+                        })
                     }
                 })
-
-
-
 
             }
         });

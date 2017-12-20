@@ -3,18 +3,19 @@
 <mapper namespace="cn.com.edzleft.dao.trade.financial.FinancialMapper" >
   <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Financial" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="financial_numbers" property="financialNumbers" jdbcType="VARCHAR" />
+    <result column="financial_number" property="financialNumber" jdbcType="VARCHAR" />
     <result column="financial_type" property="financialType" jdbcType="INTEGER" />
     <result column="amount" property="amount" jdbcType="INTEGER" />
-    <result column="payer" property="payer" jdbcType="VARCHAR" />
+    <result column="payer_id" property="payerId" jdbcType="INTEGER" />
     <result column="belong_order_id" property="belongOrderId" jdbcType="INTEGER" />
     <result column="bill_time" property="billTime" jdbcType="TIMESTAMP" />
     <result column="bank_account_id" property="bankAccountId" jdbcType="INTEGER" />
-    <result column="bank_card" property="bankCard" jdbcType="VARCHAR" />
+    <result column="bank_card_id" property="bankCardId" jdbcType="INTEGER" />
+    <result column="information_id" property="informationId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, financial_numbers, financial_type, amount, payer, belong_order_id,
-    bill_time, bank_account_id,bank_card
+    id, financial_number, financial_type, amount, payer, belong_order_id,
+    bill_time, bank_account_id,bank_card_id,information_id
   </sql>
 
   <!--条件查询-->
@@ -26,8 +27,8 @@
       <if test="whereMap != null &amp;&amp; whereMap.billTime != null and whereMap.billTime != ''">
         AND bill_time &gt;= '%${whereMap.billTime}%'
       </if>
-      <if test="whereMap != null &amp;&amp; whereMap.payer != null and whereMap.payer != ''">
-        AND payer LIKE '${whereMap.payer}'
+      <if test="whereMap != null &amp;&amp; whereMap.payerId != null and whereMap.payerId != ''">
+        AND payer_id LIKE '${whereMap.payerId}'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.bankAccountId != null and whereMap.bankAccountId != ''">
         AND bank_account_id LIKE '%${whereMap.bankAccountId}%'
@@ -35,28 +36,32 @@
     </trim>
   </sql>
 
-<!--
-  &lt;!&ndash;表连接查询总条数&ndash;&gt;
-  <select id="getTripartiteAllCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
-    select count(*) from gyl_financial t1
-    inner join gyl_account a on i.tripartite_credit_holder_purchaser_id = a.user_id
-    inner join gyl_account a2 on i.tripartite_credit_holder_capital_id = a2.user_id
-    inner join gyl_information c on a.information_id = c.id
-    inner join gyl_information c2 on a2.information_id = c2.id
+  <!--表连接查询总条数-->
+  <select id="getFinancialCountLast"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select count(*)
+    from gyl_trade_financial t1
+    inner join gyl_order  t2  on  t1.belong_order_id=t2.order_id
+    inner join gyl_tripartite t3 on t1.bank_account_id = t3.tripartite_id
+    INNER JOIN gyl_bank_account t4 ON t1.bank_card_id=t4.bank_account_id
+    INNER JOIN gyl_information t5 ON t3.tripartite_credit_holder_purchaser_id=t5.id
     <include refid="where_sql"/>
   </select>
 
-  &lt;!&ndash;分页查询&ndash;&gt;
-  <select id="selectAllTripartiteByPage"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
-    select c.ent_name as pmEntname,c2.ent_name as caEntName,i.tripartite_account_number,i.tripartite_account_openpeople,i.tripartite_amount_create_people,i.tripartite_account_opentime,i.tripartite_amount_create_people,i.tripartite_amount_create_time from gyl_tripartite i
-    inner join gyl_account a on i.tripartite_credit_holder_purchaser_id = a.user_id
-    inner join gyl_account a2 on i.tripartite_credit_holder_capital_id = a2.user_id
-    inner join gyl_information c on a.information_id = c.id
-    inner join gyl_information c2 on a2.information_id = c2.id
+  <!--表连接条件查询-->
+  <select id="selectFinancialByPageLast"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select t1.financial_number ,t1.amount,t1.bill_time,t1.financial_type,
+    t2.order_number,
+    t3.tripartite_account_number,
+    t4.bank_account_number,
+    t5.ent_name
+    from gyl_trade_financial t1
+    inner join gyl_order  t2  on  t1.belong_order_id=t2.order_id
+    inner join gyl_tripartite t3 on t1.bank_account_id = t3.tripartite_id
+    INNER JOIN gyl_bank_account t4 ON t1.bank_card_id=t4.bank_account_id
+    INNER JOIN gyl_information t5 ON t3.tripartite_credit_holder_purchaser_id=t5.id
     <include refid="where_sql"/>
     <![CDATA[	limit #{start},#{pageSize}]]>
   </select>
-  -->
 
 
   <!--查询财务总条数-->
@@ -98,8 +103,8 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="financialNumbers != null" >
-        financial_numbers,
+      <if test="financialNumber != null" >
+        financial_number,
       </if>
       <if test="financialType != null" >
         financial_type,
@@ -119,16 +124,19 @@
       <if test="bankAccountId != null" >
         bank_account_id,
       </if>
-      <if test="bankCard != null" >
-        bank_card,
+      <if test="bankCardId != null" >
+        bank_card_id,
+      </if>
+      <if test="informationId != null" >
+        information_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="financialNumbers != null" >
-        #{financialNumbers,jdbcType=VARCHAR},
+      <if test="financialNumber != null" >
+        #{financialNumber,jdbcType=VARCHAR},
       </if>
       <if test="financialType != null" >
         #{financialType,jdbcType=INTEGER},
@@ -136,8 +144,8 @@
       <if test="amount != null" >
         #{amount,jdbcType=INTEGER},
       </if>
-      <if test="payer != null" >
-        #{payer,jdbcType=VARCHAR},
+      <if test="payerId != null" >
+        #{payerId,jdbcType=INTEGER},
       </if>
       <if test="belongOrderId != null" >
         #{belongOrderId,jdbcType=INTEGER},
@@ -148,8 +156,11 @@
       <if test="bankAccountId != null" >
         #{bankAccountId,jdbcType=INTEGER},
       </if>
-      <if test="bankCard != null" >
-        #{bankCard,jdbcType=INTEGER},
+      <if test="bankCardId != null" >
+        #{bankCardId,jdbcType=INTEGER},
+      </if>
+      <if test="informationId != null" >
+        #{informationId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -158,8 +169,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.com.edzleft.entity.Financial" >
     update gyl_financial
     <set >
-      <if test="financialNumbers != null" >
-        financial_numbers = #{financialNumbers,jdbcType=VARCHAR},
+      <if test="financialNumber != null" >
+        financial_number = #{financialNumber,jdbcType=VARCHAR},
       </if>
       <if test="financialType != null" >
         financial_type = #{financialType,jdbcType=INTEGER},
@@ -167,20 +178,23 @@
       <if test="amount != null" >
         amount = #{amount,jdbcType=INTEGER},
       </if>
-      <if test="payer != null" >
-        payer = #{payer,jdbcType=VARCHAR},
+      <if test="payerId != null" >
+        payer_id = #{payerId,jdbcType=INTEGER},
       </if>
-      <if test="belongOrder != null" >
+      <if test="belongOrderId != null" >
         belong_order_id = #{belongOrderId,jdbcType=INTEGER},
       </if>
       <if test="billTime != null" >
         bill_time = #{billTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="bankAccount != null" >
+      <if test="bankAccountId != null" >
         bank_account_id = #{bankAccountId,jdbcType=INTEGER},
       </if>
-      <if test="bankCard != null" >
-        bank_card= #{bankCard,jdbcType=VARCHAR},
+      <if test="bankCardId != null" >
+        bank_card_id= #{bankCardId,jdbcType=INTEGER},
+      </if>
+      <if test="informationId != null" >
+        information_id= #{informationId,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}

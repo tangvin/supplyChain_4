@@ -23,6 +23,10 @@ public class AssistContract {
      */
     private Date assistCreatTime;
     /**
+     * 辅合同结束时间
+     */
+    private Date assistEndTime;
+    /**
      * 辅合同创建人(关联到用户表)
      */
     private Integer assistFounderId;
@@ -69,12 +73,6 @@ public class AssistContract {
      */
     private Integer assistLetterApply;
 
-    /* <result column="buyerEntName" property="buyerEntName" jdbcType="VARCHAR" />
-    <result column="buyerName" property="buyerName" jdbcType="VARCHAR" />
-    <result column="assistAttachmentAmount" property="assistAttachmentAmount" jdbcType="INTEGER" />
-    <result column="assistRejectAmount" property="assistRejectAmount" jdbcType="INTEGER" />*/
-
-
     /**
      * 别名
      */
@@ -82,38 +80,6 @@ public class AssistContract {
     private String buyerName;
     private String assistAttachmentAmount;
     private String assistRejectAmount;
-
-    public String getBuyerEntName() {
-        return buyerEntName;
-    }
-
-    public void setBuyerEntName(String buyerEntName) {
-        this.buyerEntName = buyerEntName;
-    }
-
-    public String getBuyerName() {
-        return buyerName;
-    }
-
-    public void setBuyerName(String buyerName) {
-        this.buyerName = buyerName;
-    }
-
-    public String getAssistAttachmentAmount() {
-        return assistAttachmentAmount;
-    }
-
-    public void setAssistAttachmentAmount(String assistAttachmentAmount) {
-        this.assistAttachmentAmount = assistAttachmentAmount;
-    }
-
-    public String getAssistRejectAmount() {
-        return assistRejectAmount;
-    }
-
-    public void setAssistRejectAmount(String assistRejectAmount) {
-        this.assistRejectAmount = assistRejectAmount;
-    }
 
     public Integer getAssistId() {
         return assistId;
@@ -145,6 +111,14 @@ public class AssistContract {
 
     public void setAssistCreatTime(Date assistCreatTime) {
         this.assistCreatTime = assistCreatTime;
+    }
+
+    public Date getAssistEndTime() {
+        return assistEndTime;
+    }
+
+    public void setAssistEndTime(Date assistEndTime) {
+        this.assistEndTime = assistEndTime;
     }
 
     public Integer getAssistFounderId() {
@@ -227,6 +201,38 @@ public class AssistContract {
         this.assistLetterApply = assistLetterApply;
     }
 
+    public String getBuyerEntName() {
+        return buyerEntName;
+    }
+
+    public void setBuyerEntName(String buyerEntName) {
+        this.buyerEntName = buyerEntName;
+    }
+
+    public String getBuyerName() {
+        return buyerName;
+    }
+
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
+    }
+
+    public String getAssistAttachmentAmount() {
+        return assistAttachmentAmount;
+    }
+
+    public void setAssistAttachmentAmount(String assistAttachmentAmount) {
+        this.assistAttachmentAmount = assistAttachmentAmount;
+    }
+
+    public String getAssistRejectAmount() {
+        return assistRejectAmount;
+    }
+
+    public void setAssistRejectAmount(String assistRejectAmount) {
+        this.assistRejectAmount = assistRejectAmount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -239,6 +245,8 @@ public class AssistContract {
             return false;
         if (assistName != null ? !assistName.equals(that.assistName) : that.assistName != null) return false;
         if (assistCreatTime != null ? !assistCreatTime.equals(that.assistCreatTime) : that.assistCreatTime != null)
+            return false;
+        if (assistEndTime != null ? !assistEndTime.equals(that.assistEndTime) : that.assistEndTime != null)
             return false;
         if (assistFounderId != null ? !assistFounderId.equals(that.assistFounderId) : that.assistFounderId != null)
             return false;
@@ -268,6 +276,7 @@ public class AssistContract {
         result = 31 * result + (contractNumber != null ? contractNumber.hashCode() : 0);
         result = 31 * result + (assistName != null ? assistName.hashCode() : 0);
         result = 31 * result + (assistCreatTime != null ? assistCreatTime.hashCode() : 0);
+        result = 31 * result + (assistEndTime != null ? assistEndTime.hashCode() : 0);
         result = 31 * result + (assistFounderId != null ? assistFounderId.hashCode() : 0);
         result = 31 * result + (contractId != null ? contractId.hashCode() : 0);
         result = 31 * result + (assistRecord != null ? assistRecord.hashCode() : 0);
@@ -292,6 +301,7 @@ public class AssistContract {
                 ", contractNumber='" + contractNumber + '\'' +
                 ", assistName='" + assistName + '\'' +
                 ", assistCreatTime=" + assistCreatTime +
+                ", assistEndTime=" + assistEndTime +
                 ", assistFounderId=" + assistFounderId +
                 ", contractId=" + contractId +
                 ", assistRecord='" + assistRecord + '\'' +

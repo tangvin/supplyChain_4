@@ -42,7 +42,7 @@ public class TradeInformationController {
         SessionInfo session = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
         Integer informationId = session.getAdmin().getInformationId();
         Integer userId = session.getAdmin().getUserId();
-        //判断当前用户是否是新用户（是，新增资料     否，编辑资料）
+        //判断当前用户是否是新用户（是,新增资料     否，编辑资料 ）
         if(informationId==null){
         	info.setCertificationStatus(0);
             int i = tradeinformationService.addInformation(info,sessionInfo);

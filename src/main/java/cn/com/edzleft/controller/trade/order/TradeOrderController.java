@@ -24,26 +24,18 @@ import java.util.*;
 @RequestMapping("/tradeOrder")
 public class TradeOrderController {
 
-    /**
-     * 订单
-     */
+    //订单
     @Autowired
     private TradeOrderService tradeOrderService;
-
-    /**
-     * 货运管理
-     */
+    //货运管理
     @Autowired
     private FreightService freightService;
-
     //收货地址
     @Autowired
     private ReceivingAddressService receivingAddressService;
-
     //驳回表
     @Autowired
     private RejectService rejectService;
-
     //发票
     @Autowired
     private TraInvoiceService traInvoiceService;
