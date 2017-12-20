@@ -61,9 +61,18 @@
     float: left;
 }
 .home_top_nav li a{
+    transition: .5s ease;
+}
+.home_top_nav li a:hover{
+    color: #F24646 ;
+}
+a.home_top_nav_class:visited{
+    color: #F24646;
+}
+.home_top_nav li a{
     padding: 0 17px;
-    font-size: 14px;
-    border-right: 1px solid #525252;
+    font-size: 16px;
+    border-right: 1px solid #ddd;
     color: #808080;
 }
 .home_top_nav li:last-child a{
@@ -117,15 +126,24 @@
     background: url("../images/images1/banner_shouye.png") no-repeat center center;
     background-size: cover;
 }
+.home_xsxx{
+    margin-top:50px;
+    /*margin-bottom: 0px;*/
+}
+.home_xsxx p{
+    font-size: 24px;
+    margin-bottom: 40px;
+}
 /*home banner 结束*/
 
 .home_cpjs{
-    height:600px;
+    /*height:600px;*/
     padding-top: 40px;
     box-sizing: border-box;
+    padding-bottom:40px;
 }
 .home_main_title{
-    width:150px;
+    width:170px;
     height:20px;
     margin:0 auto;
 }
@@ -134,7 +152,9 @@
 }
 .home_main_title .home_cpzx{
     margin:0 5px;
-    width:80px;
+    width:100px;
+    font-size: 20px;
+    /*font-weight: bold;*/
     text-align: center;
 }
 .home_xian{
@@ -142,10 +162,11 @@
     width:30px;
     height:1px;
     background: #464646;
-    margin-top:11px;
+    margin-top:15px;
 }
 .home_cpjs_con{
-    width:68%;
+    text-indent: 24px;
+    width:100%;
     height:112px;
     margin:0 auto;
     margin-top:25px;
@@ -157,8 +178,8 @@
 
 .home_cpjs_img{
     width:100%;
-    height:370px;
-    border: 1px solid #1b6d85;
+    /*height:370px;*/
+    /*border: 1px solid #1b6d85;*/
     box-sizing: border-box;
 }
 .home_ywms{
@@ -167,13 +188,13 @@
 }
 
 .home_ywms_list{
-    width:940px;
+    width:1020px;
     margin:auto;
     margin-top:25px;
 }
 .home_ywms_list li{
     float: left;
-    width:460px;
+    width:500px;
     height:160px;
     background: #FFFFFF;
     margin-right: 20px;
@@ -206,7 +227,7 @@
     font-weight: bold;
 }
 .home_ywms_list_right_con{
-    width:320px;
+    width:350px;
     height:100%;
     font-size: 12px;
     color: #464646;
@@ -217,7 +238,7 @@
 }
 .home_gyljrxt_title{
     width:200px;
-    margin-bottom:98px;
+    margin-bottom:60px;
 }
 .home_gyljrxt_title .home_gyljrxt_span{
     width:120px;
@@ -254,12 +275,12 @@
     margin-top:45px;
     float: left;
 }
-.home_footer_lxwm li a{
+.home_footer_lxwm li{
     font-size: 14px;
     color: #DDDDDD;
     /*line-height:25px;*/
 }
-.home_footer_lxwm li:nth-child(1) a{
+.home_footer_lxwm li:nth-child(1){
     font-size: 16px;
 
 }
@@ -278,7 +299,13 @@
     margin-top:13px;
     margin-bottom:11px;
 }
+.home_footer_bottom  p:nth-child(2) a{
+    color: #808080;
 
+}
+.home_footer_bottom  p:nth-child(2) a:hover{
+    text-decoration:underline;
+}
 
 .cpzx_banner{
     width:100%;
@@ -310,16 +337,22 @@
     line-height: 25px;
 }
 .xtsy_div{
-    width:100%;
-    height:460px;
+    width:1020px;
+    height:100%;
+    padding: 30px;
+    box-sizing: border-box;
     margin-top:50px;
     margin-bottom:50px;
     border: 1px solid #E8E8E8;
     border-radius: 6px;
+    text-align: center;
     box-shadow: 0px 0px 0px rgba(0,0,0,0.3),0 0 3px rgba(0,0,0,0.1);
     /*-webkit-box-shadow:0px 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;*/
     /*-o-box-shadow:0px 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;*/
     /*-moz-box-shadow:0px 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;*/
+}
+.cpzx_xtjs .xtsy_div img{
+    margin:0 auto;display:block
 }
 
 
@@ -376,10 +409,19 @@
     float: left;
     width:272px;
     height:308px;
-    padding: 24px;
     box-sizing: border-box;
     box-shadow: 0px 1px 4px rgba(0,0,0,0.3),0 0 5px rgba(0,0,0,0.1);
     margin-right: 102px;
+}
+.jjfa_rhyd_list li .jjfa_rhyd_list_img{
+    display: table-cell;
+    vertical-align:middle;
+    text-align:center;
+    width:272px;
+    height:308px;
+}
+.jjfa_rhyd_list li .jjfa_rhyd_list_img img{
+    vertical-align: middle;
 }
 .jjfa_rhyd_list li:last-child{
     margin-right:0;
@@ -400,11 +442,13 @@
     box-shadow: 0px 1px 4px rgba(0,0,0,0.3),0 0 5px rgba(0,0,0,0.1);
     margin-top:70px;
     position: relative;
+    padding-top: 40px;
 }
 .jjfa_jjfa_div button{
     position: absolute;
-    right:50px;
-    bottom:30px;
+    right:30px;
+    bottom:20px;
+    cursor: pointer;
     width: 120px;
     height:46px;
     background: #E75352;
@@ -413,6 +457,13 @@
     outline: none;
     border-radius: 6px;
     font-size:16px;
+}
+.jjfa_jjfa_div_img{
+    text-align: center;
+}
+.jjfa_jjfa_div_img img{
+    margin: 0 auto;
+    display: block;
 }
 
 .hzhb_banner{
@@ -427,7 +478,7 @@
     margin-top:65px;
 }
 .hzhb_main_title{
-    width:260px;
+    width:240px;
     height:50px;
     margin: auto;
     margin-bottom:65px;
@@ -442,8 +493,8 @@
 .hzhb_main_title .hzhb_main_title_con{
     /*width:220px;*/
     /*height:50px;*/
+
     padding: 0 10px;
-    margin:0 10px;
     text-align: center;
     float: left;
 }
@@ -457,17 +508,18 @@
     color: #A8A8A8;
 }
 .hzhb_main_list{
-    width:1160px;
+    width:1020px;
     margin: auto;
+    margin-bottom: 60px;
 }
 .hzhb_main_list li{
     float: left;
     box-sizing: border-box;
     box-shadow: 0px 1px 4px rgba(0,0,0,0.3),0 0 5px rgba(0,0,0,0.1);
-    width:272px;
+    width:240px;
     height:308px;
-    margin-right: 24px;
-    margin-bottom:24px;
+    margin-right: 20px;
+    margin-bottom:20px;
 }
 .hzhb_main_list .hzhb_main_list_none{
     margin-right: 0;
@@ -477,11 +529,12 @@
     vertical-align:middle;
     text-align:center;
     height:154px;
-    width:272px;
+    width:240px;
     border-bottom: 1px solid #E8E8E8;
 }
 .hzhb_main_list li .hzhb_main_list_img img{
     vertical-align: middle;
+    width:240px;
 }
 .hzhb_main_list li .hzhb_main_list_con{
    padding: 20px;
@@ -591,15 +644,15 @@
     position: fixed;
     right:0;
     top: 30%;
-    padding:0 0 0 60px;
+    padding:0 0 0 75px;
     width:0;
     height:45px;
     line-height:45px;
     border-radius: 8px 0 0 8px;
     font-size:15px;
     color:#fff;
-    transition:.5s ease;
-    background:#E75352 url("../images/images1/phone.png") no-repeat 19px 7px;
+    transition:.8s ease;
+    background:#E75352 url("../images/images1/phone.png") no-repeat 10px 9px;
     cursor:pointer;
     text-align:left;
     overflow:hidden;
@@ -607,11 +660,6 @@
 }
 #rightArrow:hover{
     width:220px;
-}
-
-#rightArrow a{
-    display: inline-block;
-    width:50px;
-    height:50px;
-    background: url("../images/images1/phone.png") no-repeat center;
+    padding:0 0 0 83px;
+    background:#E75352 url("../images/images1/phone.png") no-repeat -79px 9px;
 }

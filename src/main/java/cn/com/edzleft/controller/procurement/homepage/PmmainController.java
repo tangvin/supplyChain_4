@@ -7,7 +7,6 @@ import cn.com.edzleft.service.procurement.homepage.PmHomePageService;
 import cn.com.edzleft.service.procurement.receivingaddress.PmReceivingAddressService;
 import cn.com.edzleft.service.trade.account.AccountService;
 import cn.com.edzleft.service.trade.reject.RejectService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -87,11 +87,11 @@
 				<property name="excludeUrls">
 					<list>
 						<!--登录-->
-						<value>/captialMain/login.action</value>
+						<value>/login.action</value>
 						<value>/account/login.action</value>
 						<!--注册-->
-						<value>/captialMain/register.action</value>
-						<value>/captialMain/registerTwo.action</value>
+						<value>/register.action</value>
+						<value>/registerTwo.action</value>
 						<value>/register11/registerOne.action</value>
 						<value>/register11/registerTwo.action</value>
 						<value>/captialHomes/sendMsgBank.action</value>
@@ -113,6 +113,11 @@
 						<!-- 模糊检索 -->
 						<value>/pmorder/getMohujs.action</value>
 						<value>/pmorder/getInforIdContract.action</value>
+						<value>/homeDoor.action</value>
+						<value>/productCentre.action</value>
+						<value>/solution.action</value>
+						<value>/partner.action</value>
+						<value>/about.action</value>
 					</list>
 				</property>
 			</bean>

@@ -285,4 +285,10 @@ public class mainController {
         return "door/about";
     }
 
+
+    @RequestMapping(value = "homeIndex")
+    public String homeIndex(){
+        return "../../index";
+    }
+
 }
