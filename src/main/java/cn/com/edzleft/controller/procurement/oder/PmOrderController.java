@@ -133,7 +133,7 @@ public class PmOrderController {
 			SessionInfo sessionInfo1 = (SessionInfo) sessionInfo.getAttribute("sessionInfo");
 			o.setOrderCreatorId(sessionInfo1.getAdmin().getInformationId());
 			o.setOrderCreatTime(new Date());
-			o.setOrderCreatorUserId(sessionInfo1.getAdmin().getUserId());
+			o.setOrderCreatorUserid(sessionInfo1.getAdmin().getUserId());
 			int i = pmOrderService.insertSelective(o, sessionInfo);
 			map.put("msg", "添加成功");
 			map.put("success", true);
