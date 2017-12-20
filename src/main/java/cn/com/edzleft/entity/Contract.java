@@ -2,6 +2,7 @@ package cn.com.edzleft.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**合同表
  * gyl_contract
@@ -49,11 +50,11 @@ public class Contract implements Serializable{
     /**
      * 贸易方签约人
      */
-    private String tradeSignatories;
+    private Integer tradeSignatoriesId;
     /**
      * 采购方签约人
      */
-    private String buyerSignatory;
+    private Integer buyerSignatoryId;
     /**
      * 合同附加辅合同  关联到合同辅表，可多个辅表内数据。
      */
@@ -99,8 +100,136 @@ public class Contract implements Serializable{
      * 融信申请（是与否）
      */
     private Integer letterApply;
+    /**
+     * 合同表别名
+     <result column="procurementEntName" property="procurementEntName" jdbcType="VARCHAR" />
+     <result column="buyerSignatory" property="buyerSignatory" jdbcType="VARCHAR" />
+     <result column="tradeSignatory" property="tradeSignatory" jdbcType="VARCHAR" />
+     <result column="assistName" property="assistName" jdbcType="VARCHAR" />
+     <result column="assistContractNumber" property="assistContractNumber" jdbcType="VARCHAR" />
+     <result column="assistContractAmount" property="assistContractAmount" jdbcType="INTEGER" />
+     <result column="attachmentAmount" property="attachmentAmount" jdbcType="INTEGER" />
 
+     */
+    /**
+     * 采购方企业名字
+     */
+    private String procurementEntName;
+    /**
+     * 贸易方企业名称
+     */
+    private String tradeEntName;
+    /**
+     * 采购方签约人
+     */
+    private String buyerSignatory;
+    /**
+     * 贸易方签约人
+     */
+    private  String tradeSignatory;
+    /**
+     * 辅合同名称
+     */
+    private String assistName;
+    /**
+     * 辅合同编号
+     */
+    private String assistContractNumber;
+    /**
+     * 辅合同数量
+     */
+    private Integer assistContractAmount;
+    /**
+     * 附件数量
+     */
+    private Integer attachmentAmount;
+
+    /**
+     * 未知
+     * @return
+     */
     private String entName;
+
+    /**
+     * 辅合同集合
+     * @return
+     */
+    private List<AssistContract> assistContractList;
+
+    public List<AssistContract> getAssistContractList() {
+        return assistContractList;
+    }
+
+    public void setAssistContractList(List<AssistContract> assistContractList) {
+        this.assistContractList = assistContractList;
+    }
+
+    public String getTradeEntName() {
+        return tradeEntName;
+    }
+
+    public void setTradeEntName(String tradeEntName) {
+        this.tradeEntName = tradeEntName;
+    }
+
+    public String getTradeSignatory() {
+        return tradeSignatory;
+    }
+
+    public void setTradeSignatory(String tradeSignatory) {
+        this.tradeSignatory = tradeSignatory;
+    }
+
+    public Integer getAttachmentAmount() {
+        return attachmentAmount;
+    }
+
+    public void setAttachmentAmount(Integer attachmentAmount) {
+        this.attachmentAmount = attachmentAmount;
+    }
+
+    public String getProcurementEntName() {
+        return procurementEntName;
+    }
+
+    public void setProcurementEntName(String procurementEntName) {
+        this.procurementEntName = procurementEntName;
+    }
+
+    public String getBuyerSignatory() {
+        return buyerSignatory;
+    }
+
+    public void setBuyerSignatory(String buyerSignatory) {
+        this.buyerSignatory = buyerSignatory;
+    }
+
+    public String getAssistName() {
+        return assistName;
+    }
+
+    public void setAssistName(String assistName) {
+        this.assistName = assistName;
+    }
+
+    public String getAssistContractNumber() {
+        return assistContractNumber;
+    }
+
+    public void setAssistContractNumber(String assistContractNumber) {
+        this.assistContractNumber = assistContractNumber;
+    }
+
+    public Integer getAssistContractAmount() {
+        return assistContractAmount;
+    }
+
+    public void setAssistContractAmount(Integer assistContractAmount) {
+        this.assistContractAmount = assistContractAmount;
+    }
+
+
+
 
     public String getEntName() {
         return entName;
@@ -170,20 +299,20 @@ public class Contract implements Serializable{
         this.signingTime = signingTime;
     }
 
-    public String getTradeSignatories() {
-        return tradeSignatories;
+    public Integer getTradeSignatoriesId() {
+        return tradeSignatoriesId;
     }
 
-    public void setTradeSignatories(String tradeSignatories) {
-        this.tradeSignatories = tradeSignatories == null ? null : tradeSignatories.trim();
+    public void setTradeSignatoriesId(Integer tradeSignatoriesId) {
+        this.tradeSignatoriesId = tradeSignatoriesId;
     }
 
-    public String getBuyerSignatory() {
-        return buyerSignatory;
+    public Integer getBuyerSignatoryId() {
+        return buyerSignatoryId;
     }
 
-    public void setBuyerSignatory(String buyerSignatory) {
-        this.buyerSignatory = buyerSignatory == null ? null : buyerSignatory.trim();
+    public void setBuyerSignatoryId(Integer buyerSignatoryId) {
+        this.buyerSignatoryId = buyerSignatoryId;
     }
 
     public Integer getAssistContractId() {
@@ -319,9 +448,9 @@ public class Contract implements Serializable{
             return false;
         if (signingTime != null ? !signingTime.equals(contract.signingTime) : contract.signingTime != null)
             return false;
-        if (tradeSignatories != null ? !tradeSignatories.equals(contract.tradeSignatories) : contract.tradeSignatories != null)
+        if (tradeSignatoriesId != null ? !tradeSignatoriesId.equals(contract.tradeSignatoriesId) : contract.tradeSignatoriesId != null)
             return false;
-        if (buyerSignatory != null ? !buyerSignatory.equals(contract.buyerSignatory) : contract.buyerSignatory != null)
+        if (buyerSignatoryId != null ? !buyerSignatoryId.equals(contract.buyerSignatoryId) : contract.buyerSignatoryId != null)
             return false;
         if (assistContractId != null ? !assistContractId.equals(contract.assistContractId) : contract.assistContractId != null)
             return false;
@@ -357,8 +486,8 @@ public class Contract implements Serializable{
         result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
         result = 31 * result + (signingAddress != null ? signingAddress.hashCode() : 0);
         result = 31 * result + (signingTime != null ? signingTime.hashCode() : 0);
-        result = 31 * result + (tradeSignatories != null ? tradeSignatories.hashCode() : 0);
-        result = 31 * result + (buyerSignatory != null ? buyerSignatory.hashCode() : 0);
+        result = 31 * result + (tradeSignatoriesId != null ? tradeSignatoriesId.hashCode() : 0);
+        result = 31 * result + (buyerSignatoryId != null ? buyerSignatoryId.hashCode() : 0);
         result = 31 * result + (assistContractId != null ? assistContractId.hashCode() : 0);
         result = 31 * result + (orderContractId != null ? orderContractId.hashCode() : 0);
         result = 31 * result + (contractStatus != null ? contractStatus.hashCode() : 0);
@@ -378,8 +507,8 @@ public class Contract implements Serializable{
 		return "Contract [contractId=" + contractId + ", contractNumber=" + contractNumber + ", contractName="
 				+ contractName + ", contractBuyerId=" + contractBuyerId + ", contractTraderId=" + contractTraderId
 				+ ", creatTime=" + creatTime + ", endTime=" + endTime + ", signingAddress=" + signingAddress
-				+ ", signingTime=" + signingTime + ", tradeSignatories=" + tradeSignatories + ", buyerSignatory="
-				+ buyerSignatory + ", assistContractId=" + assistContractId + ", orderContractId=" + orderContractId
+				+ ", signingTime=" + signingTime + ", tradeSignatoriesId=" + tradeSignatoriesId + ", buyerSignatoryId="
+				+ buyerSignatoryId + ", assistContractId=" + assistContractId + ", orderContractId=" + orderContractId
 				+ ", contractStatus=" + contractStatus + ", contractLetterPerson=" + contractLetterPerson
 				+ ", contractCredit=" + contractCredit + ", contractLetter=" + contractLetter + ", contractCreateTime="
 				+ contractCreateTime + ", contractFounder=" + contractFounder + ", contractElectronicsId="

@@ -1,5 +1,7 @@
 package cn.com.edzleft.service.procurement.homepage;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +65,19 @@ public class PmHomePageServiceImpl implements PmHomePageService{
 	public Information selectByCreatorId(Integer userId) {
 		Information information = pmHomePageMapper.selectByCreatorId(userId);
         return information;
+	}
+	/**
+	 * 模糊检索
+	 */
+	@Override
+	public List<Information> getInfor(Integer entIdentity) {
+		// TODO Auto-generated method stub
+		return pmHomePageMapper.getInfor(entIdentity);
+	}
+	//根据当前用户id查询公司名称
+	@Override
+	public Information getInformationName(Integer userId) {
+		return pmHomePageMapper.getInformationName(userId);
 	}
 
 }

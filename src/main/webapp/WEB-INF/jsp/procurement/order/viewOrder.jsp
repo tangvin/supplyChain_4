@@ -84,26 +84,26 @@
                         <tr>
                                 <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单状态：</td>
                                 <td class="col-xs-8 text-left">
-                                		<c:if test="${order.orderStatus == 0}">
-                                            待确认
+                                		<c:if test="${order.orderStatus == 0}"> 待确认
+                                           
                                         </c:if>
-                                        <c:if test="${order.orderStatus == 1}">
-                                           待付款
+                                        <c:if test="${order.orderStatus == 1}">待付款
+                                           
                                         </c:if>
-                                        <c:if test="${order.orderStatus == 2}">
-                                          待发货
+                                        <c:if test="${order.orderStatus == 2}">待发货
+                                        
                                         </c:if>
-                                        <c:if test="${order.orderStatus == 3}">
-                                          待收货
+                                        <c:if test="${order.orderStatus == 3}">待收货
+                                     
                                         </c:if>
-                                        <c:if test="${order.orderStatus == 4}">
-                                          已完成
+                                        <c:if test="${order.orderStatus == 4}">已完成
+                                          
                                         </c:if>
-                                        <c:if test="${order.orderStatus == 5}">
-                                          已关闭
+                                        <c:if test="${order.orderStatus == 5}">已关闭
+                                         
                                         </c:if>
-                                        <c:if test="${order.orderStatus == 6}">
-                                         已驳回
+                                        <c:if test="${order.orderStatus == 6}">已驳回
+                                       
                                         </c:if>
                                 
                                 </td>
@@ -193,7 +193,7 @@
                             <td class="col-xs-9 text-left"><span>${order.area}${order.address}</span></td>
                     </tr>
                     <tr>
-                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货人：</td>
+                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>收货联系人：</td>
                             <td class="col-xs-9 text-left">
                                 <span>${order.person}</span>
                             </td>

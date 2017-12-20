@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%-- <%@ include file="/common/include.jsp"%> --%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <html lang="en">
 <head>
@@ -54,6 +53,10 @@
         #ddd,#eee{
             width:100px;
         }
+        #glht,#principalOrderId{
+            height:30px;
+            font-size: 12px;
+        }
 
 
 
@@ -64,7 +67,7 @@
             position:relative;
             width:auto;
             height:auto;
-            overflow:hidden;
+            display:block;
         }
         .select-span>input,.select-span>select{
             box-sizing:border-box;
@@ -86,7 +89,7 @@
             position:absolute;
             margin:0;
             padding:0;
-            top:25px;
+            top:35px;
             left:0;
             width:200px;
             min-height:102px;
@@ -140,28 +143,21 @@
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同签约方：</td>
                             <td class="col-xs-9 text-left">
                                     <span class="select-span">
-                                        <%--<input type="text" id="orderCreatorTrade"  class="form-control" placeholder="模糊检索匹配">--%>
-                                        <input type="text" name="orderCreatorTrade" id="orderCreatorTrade" placeholder="模糊检索匹配"/>
-                                        <select name="input-select"  id="input-select" size="10" style="display:none;">
-                                            <option value="1">贸易方名称1</option>
-                                            <option value="2">贸易方名称1--22033</option>
-                                            <option value="3">贸易方9098891</option>
-                                            <option value="4">贸易方名称2</option>
-                                            <option value="5">贸易方</option>
-                                            <option value="6">贸易</option>
-                                            <option value="7">这里是是名称</option>
-                                            <option value="8">好好好</option>
-                                            <option value="9">测试数据</option>
-                                            <option value="10">有数据</option>
-                                            <option value="11">看这里</option>
-                                            <option value="12">很好</option>
-                                        </select>
+                                        <input type="text" name="orderCreatorTrade" class="form-control" autocomplete="off" id="orderCreatorTrade" placeholder="模糊检索匹配"/>
+                                        <select name="input-select"  id="input-select" size="10" style="display:none;"></select>
                                      </span>
                             </td>
                     </tr>
                     <tr>
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
-                            <td class="col-xs-9 text-left"><input type="text" id="principalOrderId" class="form-control" placeholder="模糊检索匹配"></td>
+                            <td class="col-xs-9 text-left">
+                                <div class="form-inline">
+                                    <div class="btn btn-danger" id="glht"  data-toggle="modal" data-target="#myModalGlht">管理合同</div>
+                                    <input type="text" class="form-control" readonly="readonly" id="principalOrderId">
+                                    <input type="hidden" readonly="readonly" id="readonlyId" name="id">
+                                </div>
+                            </td>
+                        <%--<input type="text" id="principalOrderId" class="form-control" placeholder="模糊检索匹配">--%>
                     </tr>
                     <tr>
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>货物商品：</td>
@@ -216,7 +212,7 @@
             </form>
             </div>
 
-            <button id="bbb" type="button" class="btn btn-primary btn-lg col-xs-offset-3 next" data-toggle="modal" data-target="#myModal">下一步</button>
+            <button id="bbb" type="button" class="btn btn-danger btn-lg col-xs-offset-3 next" data-toggle="modal" data-target="#myModal">下一步</button>
             </form>
              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <form method="post" id="order"> 
@@ -233,7 +229,10 @@
                                     </tr>
                                     <tr>
                                             <td class="col-xs-3 text-right">关联到合同：</td>
-                                            <td class="col-xs-9 text-left"><input readonly="readonly" id="fff" name="principalOrderId"><!-- <span>编号：2636464774376    名称：xxxx合同</span> --></td>
+                                            <td class="col-xs-9 text-left">
+                                                <input readonly="readonly" id="fff" name="principalOrderId"><!-- <span>编号：2636464774376    名称：xxxx合同</span> -->
+                                                <input readonly="readonly" id="contractId" name="readonlyId" type="hidden">
+                                            </td>
                                     </tr>
                                     <tr>
                                             <td class="col-xs-3 text-right">货物商品：</td>
@@ -283,6 +282,40 @@
                 </div>
                 </form>
             </div>
+            <%--合同管理模态框--%>
+            <div class="modal fade" id="myModalGlht" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabelLetter">详情</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="panel-body">
+                                <div class="khh">
+                                    <form class="form-inline khh_form">
+                                        <div class="form-group">
+                                            <label>订单时间：</label>
+                                            <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/>至
+		                   					<input class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
+                                        </div>
+                                        <button type="button" style="height: 30px;font-size: 12px" class="btn btn-danger btn-default" onclick="crownSearch()">查询</button>
+                                        <button type="button" style="height: 30px;font-size: 12px" class="btn btn-danger btn-default" onclick="reset()">重置</button>
+                                    </form>
+                                </div>
+                                <div id="qweqwe">
+                                  <table id="tb_departments" class="cj_table"></table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="item_info_btn_do" class="btn btn-default" data-dismiss="modal">确定</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%--合同管理模态框结束--%>
         </div>
 
     </div>
@@ -293,14 +326,132 @@
 		$('#load').load('<%=request.getContextPath()%>/procurementMain/glshxx.action')
 	});
 
+	 
+    $('#glht').click(function () {
+    	$("#tb_departments").bootstrapTable(
+				"refresh",
+				{
+					url:"<%=request.getContextPath()%>/pmorder/getInforIdContract.action"
+				}
+			)
+    	var glhtId=$('#input-select').children('option:selected').attr('id');
+        if($('#orderCreatorTrade').val()==''||$('#orderCreatorTrade').val()==undefined){
+            alert('请先选择合同签约人')
+        }else{
+        		$("#tb_departments").bootstrapTable({
+        		      columns:[
+        		          {checkbox: true},
+        		          {field:'contractNumber',title:'合同编号'},
+        		          {field:'contractName',title:'合同名称'},
+        		          {field:'contractNumber',title:'辅合同'},
+        		          {field:'contractCreateTime',title:'合同执行期',
+        		        	  formatter:function(value,row,index){
+        	                		var str = '';
+        	                		if(row.contractCreateTime==null){
+        	                			str = '--'
+        	                		}else{
+        	                			 var str='';
+        	                      		 str +='<p>'+ConvertToDate(value)+'</p>';
+        	                              return str;
+        	                		}
+        	                  	 
+        	                     }
+        		          },
+        		          {field:'contractFounder',title:'合同创建人'}
+        		      ],
+        		      url:'<%=request.getContextPath()%>/pmorder/getInforIdContract.action',
+        		      method:'post',
+        		      queryParamsType:'',
+        		      singleSelect : true,
+        		      queryParams: queryParam,//传递参数（*）
+        		      //【其它设置】
+        		      locale:'zh-CN',//中文支持
+        		      pagination: true,//是否开启分页（*）
+        		      pageNumber:1,//初始化加载第一页，默认第一页
+        		      pageSize: 3,//每页的记录行数（*） 
+        		      sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+        		      //发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}
+        		      contentType:'application/x-www-form-urlencoded;charset=UTF-8'   //数据编码纯文本  offset=0&limit=5
+        		  });
+        		  //创建面板
+        		  $('#item_info_btn_do').click(function(){
+        	        var selectContent = $("#tb_departments").bootstrapTable('getSelections')[0];
+        	        if(typeof(selectContent) == 'undefined') {
+        	            /* toastr.wraning('请选择数据') */
+        	            return false;
+        	        }else{
+        	            var readonly=selectContent.contractName;
+        	            var readonlyId=selectContent.contractId;
+        	            $('#principalOrderId').val(readonly);
+        	            $('#readonlyId').val(readonlyId);
+        	            $('#item_project_modal').modal('show');   // 项目立项面板
+        	        }
+        	    });
+        		  function queryParam (params) {
+        		      var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+        		         // aid: $('#input-select').children('option:selected').attr('id'),
+        		          aid: $('#input-select').children('option:selected').attr('id'),
+        		      	  pageNumber: params.pageNumber,
+        	              pageSize: params.pageSize,
+        	              creatTime:$("#creatTime").val(),
+        	              endTime:$("#endTime").val(),
+        		      };
+        		      console.log(temp.aid)
+        		      return temp;
+        		      
+        		  }
+       
+        	
+        }
+    })
+
     $(function(){
+        var select = $('#input-select'),TempArr;//取得select的当前对象
+        $.ajax({
+            url:'http://192.168.17.228:8080/supplyChain/pmorder/getMohujs.action',
+            type:'post',
+            dataType:'json',
+            timeout:5000,
+            success:function (data) {
+                console.log(data.data)
+                var data=data.data;
+                TempArr = data;
+                $.each(data,function(k,v){
+                    var option = '<option id='+v.id+' value='+v.id+'>'+v.entName+'</option>';
+                    select.append(option);
+                    //TempArr[k] = v.entName;
+                });
 
-        var TempArr=[];//存储option
-        var select = $('#input-select');//取得select的当前对象
-
-        $('#input-select>option').each(function(k,v){//将数据存入数组
-            TempArr[k] = $(this).text();
+            },
+            error:function(){
+                select.html('');
+                var option = '<option for=no-con>获取数据失败，请重试</option>';
+                select.append(option);
+            }
         });
+
+        $(document).on({
+            focus:function(){
+                select.css('display','');
+            },
+            input:function(){
+                select.html('');
+                var this_val = $(this).val();
+                $.each(TempArr,function(k,v){
+                    //若找到option中包含input的内容，添加对应的option
+                    if(new RegExp(this_val).test(v.entName)){
+                        //var option = $('<option></option>').text(TempArr[k]);
+                        var option = '<option id='+v.id+' value='+v.entName+'>'+v.entName+'</option>';
+                        select.append(option);
+                    }
+                });
+                //取总共匹合的数量
+                if(!select.find('option').length){
+                    var option = '<option for=no-con>暂无数据</option>';
+                    select.append(option);
+                }
+            }
+        },'#orderCreatorTrade');
 
         $(document).on('click', function(e){
             var e = e || window.event; //浏览器兼容
@@ -317,28 +468,7 @@
         /**
          * input op
          */
-        $(document).on({
-            focus:function(){
-                select.css('display','');
-            },
-            input:function(){
-                select.html('');
-                var this_val = $(this).val();
-                $.each(TempArr,function(k,v){
-                    //若找到option中包含input的内容，添加对应的option
-                    if(new RegExp(this_val).test(v)){
-                        //var option = $('<option></option>').text(TempArr[k]);
-                        var option = '<option value='+v+'>'+v+'</option>';
-                        select.append(option);
-                    }
-                });
-                //取总共匹合的数量
-                if(!select.find('option').length){
-                    var option = '<option for=no-con>暂无数据</option>';
-                    select.append(option);
-                }
-            }
-        },'#orderCreatorTrade');
+
 
         /**
          * select op
@@ -379,6 +509,8 @@
 		$("#aaa").val(a);
 		var b=$("#principalOrderId").val();
 		$("#fff").val(b);
+		var id = $("#readonlyId").val();
+		$("#contractId").val(id);
 		var c=$("#goods").val();
 		$("#ccc").val(c);
 		var d=$("#orderAmount").val();
@@ -404,7 +536,9 @@
 	$('#ddglOrder').click(function(){
 	    $('#load').load('<%=request.getContextPath()%>/procurementMain/ddgl.action')
 	})
-	
+
+
+
 	/*确认新增订单*/
 	$("#confirm").click(function(){
 		var telephone=$("#ppp").val();
@@ -413,6 +547,7 @@
 		var orderAmount=$("#ddd").val();
 		var applicationletter=$("#eee").val();
 		var principalOrderId=$("#fff").val();
+		var contractId=$("#contractId").val();
 		var receiver=$("#mmm").val();
 		//var address=$("#sss").val();
 		var receivingAddressId=$("#zzz").val();
@@ -429,6 +564,7 @@
 				principalOrderId:principalOrderId,
 				//address:address,
 				receivingAddressId:receivingAddressId,
+                contractId:contractId
 				},
 			dataType:"json",
 			success:function(data){
@@ -441,7 +577,5 @@
 			}
 		}); 
 	});
-    
-    
 </script>
 </html>

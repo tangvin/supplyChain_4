@@ -110,6 +110,9 @@
 						<value>/captialMain/solution.action</value>
 						<value>/captialMain/partner.action</value>
 						<value>/captialMain/about.action</value>
+						<!-- 模糊检索 -->
+						<value>/pmorder/getMohujs.action</value>
+						<value>/pmorder/getInforIdContract.action</value>
 					</list>
 				</property>
 			</bean>

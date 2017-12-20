@@ -66,7 +66,7 @@
 			           <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
 			       </form>
          </div>
-</div>
+		</div>
 <!-- 订单开户行 开始 -->
 
 <div class="col-xs-12 text-right">
@@ -89,7 +89,7 @@
 		                                                     确定执行此操作吗？
 		            </div>
 		            <div class="modal-footer">
-		                  <button id="lqdd" type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+		                  <button id="lqht" type="button" class="btn btn-default" data-dismiss="modal">确定</button>
 		                  <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
 		             </div>
 		         </div>
@@ -164,8 +164,16 @@
                 },
                 {field:'orderAmount',title:'订单金额（￥万元）'},
                 {field:'orderConfirmationTime',title:'订单相关时间',
-                	 formatter:function(value,row,index){
-                         return ConvertToDate(value)
+                	formatter:function(value,row,index){
+                		var str = '';
+                		if(row.orderConfirmationTime==null){
+                			str = '--'
+                		}else{
+                			 var str='';
+                      		 str +='<p>'+ConvertToDate(value)+'</p>';
+                              return str;
+                		}
+                  	 
                      }
                 },
                 
@@ -173,8 +181,12 @@
                 {field:'orderCreatTime',title:'订单创建时间',
                 	formatter:function(value,row,index){
                 	  var str='';
-                		 str +='<p>'+row.username+'</p>'+ConvertToDate(value)+'<p></p>';
-                        return str;
+                	  if(row.username==null ){
+             			 str +='<p>--</p>'+ConvertToDate(value);
+ 		                }else{
+ 		                	str +='<p>'+row.username+'</p>'+ConvertToDate(value)+'<p></p>';
+ 		                }
+                		 return str;
                    }
                 },
                 
@@ -184,9 +196,14 @@
                 {field:'amount',title:'发票'},
                 {field:'freightNumber',title:'货运及单号',
                 	formatter:function(value,row,index){
-                  	  var str='';
-                  		 str +='<p>'+row.fName+'</p>'+row.invoiceNo+'<p></p>';
-                          return str;
+                		if(row.fName==null || row.invoiceNo==null){
+                			str = '--'
+                		}else{
+                			 var str='';
+                      		 str +='<p>'+row.fName+'</p>'+row.invoiceNo+'<p></p>';
+                              return str;
+                		}
+                  	 
                      }
                 },
 
@@ -278,7 +295,7 @@
 
     //待确认状态下按钮触发事件
     function showUserAttach(w,e){
-    $("#lqdd").click(function () {
+    $("#lqht").click(function () {
         $.ajax({
             url:'<%=request.getContextPath()%>/pmorder/cancelOrderStatus.action?id='+w+'&&flag='+e,
             type:'post',

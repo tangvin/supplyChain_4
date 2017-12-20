@@ -11,8 +11,8 @@
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="signing_address" property="signingAddress" jdbcType="VARCHAR" />
     <result column="signing_time" property="signingTime" jdbcType="TIMESTAMP" />
-    <result column="trade_signatories" property="tradeSignatories" jdbcType="VARCHAR" />
-    <result column="buyer_signatory" property="buyerSignatory" jdbcType="VARCHAR" />
+    <result column="trade_signatories_id" property="tradeSignatoriesId" jdbcType="INTEGER" />
+    <result column="buyer_signatory_id" property="buyerSignatoryId" jdbcType="INTEGER" />
     <result column="assist_contract_id" property="assistContractId" jdbcType="INTEGER" />
     <result column="order_contract_id" property="orderContractId" jdbcType="INTEGER" />
     <result column="contract_status" property="contractStatus" jdbcType="INTEGER" />
@@ -24,42 +24,150 @@
     <result column="contract_electronics_id" property="contractElectronicsId" jdbcType="INTEGER" />
     <result column="contract_scanner" property="contractScanner" jdbcType="INTEGER" />
     <result column="letter_apply" property="letterApply" jdbcType="INTEGER" />
+<!--别名-->
+    <result column="procurementEntName" property="procurementEntName" jdbcType="VARCHAR" />
+    <result column="buyerSignatory" property="buyerSignatory" jdbcType="VARCHAR" />
+    <result column="tradeSignatory" property="tradeSignatory" jdbcType="VARCHAR" />
+    <result column="assistName" property="assistName" jdbcType="VARCHAR" />
+    <result column="assistContractNumber" property="assistContractNumber" jdbcType="VARCHAR" />
+    <result column="assistContractAmount" property="assistContractAmount" jdbcType="INTEGER" />
+    <result column="attachmentAmount" property="attachmentAmount" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    contract_id, contract_number, contract_name, contract_buyer_id, contract_trader_id, creat_time, 
-    end_time, signing_address, signing_time, trade_signatories, buyer_signatory, assist_contract_id, 
+    contract_id, contract_number, contract_name, contract_buyer_id, contract_trader_id, creat_time,
+    end_time, signing_address, signing_time, trade_signatories_id, buyer_signatory_id, assist_contract_id,
     order_contract_id, contract_status, contract_letter_person, contract_credit, contract_letter, 
     contract_create_time, contract_founder, contract_electronics_id, contract_scanner, 
     letter_apply
   </sql>
-  <select id="getContract" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+
+  <!--条件查询-->
+  <sql id="where_sql">
+    <trim prefix="where" prefixOverrides="and">
+      <if test="whereMap != null &amp;&amp; whereMap.contractStatus != null and whereMap.contractStatus != ''">
+        AND contract_status  LIKE '%${whereMap.contractStatus}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.creatTime != null and whereMap.creatTime != ''">
+        AND creat_time  LIKE '%${whereMap.creatTime}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.endTime != null and whereMap.endTime != ''">
+        AND end_time  LIKE '%${whereMap.endTime}%'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.buyerSignatory != null and whereMap.buyerSignatory != ''">
+        AND buyer_signatory  LIKE '%${whereMap.buyerSignatory}%'
+      </if>
+    </trim>
+  </sql>
+
+
+  <!--表关联查询合同总条数-->
+  <select id="getContractCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select COUNT(*)
+    from gyl_contract t1
+    LEFT JOIN  (SELECT t5.assist_id,t5.contract_id
+    FROM gyl_assist_contract t5
+    INNER JOIN gyl_contract t1
+    ON t5.contract_id=t1.contract_id
+    GROUP BY t1.contract_id)t5
+    ON t5.assist_id=t1.assist_contract_id
+    INNER  JOIN gyl_information t2 on t1.contract_buyer_id=t2.id
+    INNER  JOIN gyl_account t3 on t1.buyer_signatory_id=t3.user_id
+    INNER  JOIN gyl_attachment t4 ON t1.contract_electronics_id=t4.attachment_id
+    <include refid="where_sql"/>
+  </select>
+
+
+  <!--表关联查询合同总数-->
+  <select id="getContractByPage"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
+    select  t1.contract_id,t1.assist_contract_id,t1.contract_number,t1.contract_name,t1.creat_time,t1.end_time,
+    t1.contract_status,t1.letter_apply,
+    t2.ent_name AS ProcurementEntName,
+    t3.user_name AS buyerSignatory,
+    t5.assist_id AS assistId,t5.contract_id AS assistContractId,
+    (SELECT count(*) FROM gyl_contract t1 JOIN gyl_assist_contract t5 ON  t1.assist_contract_id=t5.contract_id) AS assistContractAmount,
+    (SELECT count(*) FROM gyl_contract t1 JOIN gyl_attachment t4 ON t1.contract_electronics_id=t4.attachment_credit_id) AS attachmentAmount
+    from gyl_contract t1
+    LEFT JOIN  (SELECT t5.assist_id,t5.contract_id
+    FROM gyl_assist_contract t5
+    INNER JOIN gyl_contract t1
+    ON t5.contract_id=t1.contract_id
+    GROUP BY t1.contract_id)t5
+    ON t5.assist_id=t1.contract_id
+    INNER  JOIN gyl_information t2 on t1.contract_buyer_id=t2.id
+    INNER  JOIN gyl_account t3 on t1.buyer_signatory_id=t3.user_id
+    INNER  JOIN gyl_attachment t4 ON t1.contract_electronics_id=t4.attachment_id
+    <include refid="where_sql"/>
+    ORDER BY contract_create_time  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+  </select>
+
+
+  <!--根据主合同编号查看合同详细信息-->
+  <select id="selectDetailContractByContractNumber"  resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
     <include refid="Base_Column_List" />
     from gyl_contract
-    where contract_name = #{principalOrderId,jdbcType=VARCHAR}
+    WHERE contract_number=#{contractNumbery}
   </select>
+  
+  <!--添加订单   查询总条数 -->
+  <select id="getOrderContractCount"  resultType="Integer" parameterType="cn.com.edzleft.util.page.PageUtil">
+    	select count(*)
+	   	contract_id,contract_name,contract_founder,contract_number,contract_create_time,creat_time,end_time,contract_buyer_id from 
+		gyl_contract
+		<include refid="where_sql2"/>
+  </select>
+  <!-- 添加 订单   查询合同的 查询条件-->
+  <sql id="where_sql2">
+    <trim prefix="where" prefixOverrides="and">
+      <if test="whereMap != null &amp;&amp; whereMap.userId != null and whereMap.userId != ''">
+        AND contract_buyer_id  =#{whereMap.userId}
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.cid != null and whereMap.cid != ''">
+        AND contract_trader_id  =#{whereMap.cid}
+      </if>
+      <if test="whereMap != null ">
+        AND contract_status  = 0
+      </if>
+       <!-- 根据本时间查询 -->
+      <if test="whereMap != null &amp;&amp; whereMap.creatTime != null and whereMap.creatTime != ''">
+      	AND creat_time &gt;= '${whereMap.creatTime}'
+      </if>
+      <if test="whereMap != null &amp;&amp; whereMap.endTime != null and whereMap.endTime != ''">
+        AND end_time &lt;= '${whereMap.endTime}'
+      </if>
+    </trim>
+  </sql>
+	<!-- 新增订单      查询合同 -->
+	<select id="getInforIdContract"  resultMap="BaseResultMap" parameterType="java.util.Map">
+		select contract_id,contract_name,contract_founder,contract_number,contract_create_time,creat_time,end_time,contract_buyer_id from 
+		gyl_contract
+		 <include refid="where_sql2"/>
+    	ORDER BY contract_create_time  DESC
+    <![CDATA[	limit #{start},#{pageSize}]]>
+	</select>
+	
+	<!-- 查询合同 签约方是否存在--> 
+	 <select id="getContract" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    select 
+	    <include refid="Base_Column_List" />
+	    from gyl_contract
+	    where contract_name = #{principalOrderId,jdbcType=VARCHAR}
+	  </select>
+
+  <!--根据主合同id查询合同详细信息-->
+  <select id="selectContractById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List"/>
+    from gyl_contract
+    where contract_id = #{contractId,jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from gyl_contract
     where contract_id = #{contractId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.com.edzleft.entity.Contract" >
-    insert into gyl_contract (contract_id, contract_number, contract_name, 
-      contract_buyer_id, contract_trader_id, creat_time, 
-      end_time, signing_address, signing_time, 
-      trade_signatories, buyer_signatory, assist_contract_id, 
-      order_contract_id, contract_status, contract_letter_person, 
-      contract_credit, contract_letter, contract_create_time, 
-      contract_founder, contract_electronics_id, 
-      contract_scanner, letter_apply)
-    values (#{contractId,jdbcType=INTEGER}, #{contractNumber,jdbcType=VARCHAR}, #{contractName,jdbcType=VARCHAR}, 
-      #{contractBuyer,jdbcType=VARCHAR}, #{contractTrader,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP}, #{signingAddress,jdbcType=VARCHAR}, #{signingTime,jdbcType=TIMESTAMP}, 
-      #{tradeSignatories,jdbcType=VARCHAR}, #{buyerSignatory,jdbcType=VARCHAR}, #{assistContractId,jdbcType=INTEGER}, 
-      #{orderContractId,jdbcType=INTEGER}, #{contractStatus,jdbcType=INTEGER}, #{contractLetterPerson,jdbcType=VARCHAR}, 
-      #{contractCredit,jdbcType=DOUBLE}, #{contractLetter,jdbcType=DOUBLE}, #{contractCreateTime,jdbcType=TIMESTAMP}, 
-      #{contractFounder,jdbcType=VARCHAR}, #{contractElectronicsId,jdbcType=INTEGER}, 
-      #{contractScanner,jdbcType=INTEGER}, #{letterApply,jdbcType=INTEGER})
-  </insert>
+
   <insert id="insertSelective" parameterType="cn.com.edzleft.entity.Contract" >
     insert into gyl_contract
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -90,11 +198,11 @@
       <if test="signingTime != null" >
         signing_time,
       </if>
-      <if test="tradeSignatories != null" >
-        trade_signatories,
+      <if test="tradeSignatoriesId != null" >
+        trade_signatories_id,
       </if>
-      <if test="buyerSignatory != null" >
-        buyer_signatory,
+      <if test="buyerSignatoryId != null" >
+        buyer_signatory_id,
       </if>
       <if test="assistContractId != null" >
         assist_contract_id,
@@ -199,6 +307,8 @@
       </if>
     </trim>
   </insert>
+
+
   <update id="updateByPrimaryKeySelective" parameterType="cn.com.edzleft.entity.Contract" >
     update gyl_contract
     <set >
@@ -226,11 +336,11 @@
       <if test="signingTime != null" >
         signing_time = #{signingTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="tradeSignatories != null" >
-        trade_signatories = #{tradeSignatories,jdbcType=VARCHAR},
+      <if test="tradeSignatoriesId != null" >
+        trade_signatories_id = #{tradeSignatoriesId,jdbcType=INTEGRE},
       </if>
-      <if test="buyerSignatory != null" >
-        buyer_signatory = #{buyerSignatory,jdbcType=VARCHAR},
+      <if test="buyerSignatoryId != null" >
+        buyer_signatory_id = #{buyerSignatoryId,jdbcType=INTEGRE},
       </if>
       <if test="assistContractId != null" >
         assist_contract_id = #{assistContractId,jdbcType=INTEGER},
@@ -268,29 +378,5 @@
     </set>
     where contract_id = #{contractId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.com.edzleft.entity.Contract" >
-    update gyl_contract
-    set contract_number = #{contractNumber,jdbcType=VARCHAR},
-      contract_name = #{contractName,jdbcType=VARCHAR},
-      contract_buyer = #{contractBuyer,jdbcType=VARCHAR},
-      contract_trader = #{contractTrader,jdbcType=VARCHAR},
-      creat_time = #{creatTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP},
-      signing_address = #{signingAddress,jdbcType=VARCHAR},
-      signing_time = #{signingTime,jdbcType=TIMESTAMP},
-      trade_signatories = #{tradeSignatories,jdbcType=VARCHAR},
-      buyer_signatory = #{buyerSignatory,jdbcType=VARCHAR},
-      assist_contract_id = #{assistContractId,jdbcType=INTEGER},
-      order_contract_id = #{orderContractId,jdbcType=INTEGER},
-      contract_status = #{contractStatus,jdbcType=INTEGER},
-      contract_letter_person = #{contractLetterPerson,jdbcType=VARCHAR},
-      contract_credit = #{contractCredit,jdbcType=DOUBLE},
-      contract_letter = #{contractLetter,jdbcType=DOUBLE},
-      contract_create_time = #{contractCreateTime,jdbcType=TIMESTAMP},
-      contract_founder = #{contractFounder,jdbcType=VARCHAR},
-      contract_electronics_id = #{contractElectronicsId,jdbcType=INTEGER},
-      contract_scanner = #{contractScanner,jdbcType=INTEGER},
-      letter_apply = #{letterApply,jdbcType=INTEGER}
-    where contract_id = #{contractId,jdbcType=INTEGER}
-  </update>
+
 </mapper>

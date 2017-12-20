@@ -1,5 +1,6 @@
 package cn.com.edzleft.service.procurement.oder;
 
+import cn.com.edzleft.entity.Information;
 import cn.com.edzleft.entity.Order;
 import cn.com.edzleft.util.page.PageUtil;
 
@@ -31,6 +32,7 @@ public interface PmOrderService {
 
 	Integer insetOrder5(Integer userId);
 
+	//
 	Order ddbj(Integer orderId);
 
 	int updataOreder(Order order);
@@ -40,6 +42,7 @@ public interface PmOrderService {
 	 * @return
 	 */
     List<Map<String, Object>> selectOrderLetter();
+
 
 
 }

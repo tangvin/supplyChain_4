@@ -40,6 +40,7 @@ public interface PmOrderMapper {
 	Order selectOrder(String orderNumber);
 
 
+	//编辑回写订单
 	Order ddbj(Integer orderId);
 
 
@@ -52,4 +53,7 @@ public interface PmOrderMapper {
 
 
 	void updateInformation(Information information);
+
+
+	List<Information> getIfor();
 }
