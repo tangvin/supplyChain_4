@@ -120,11 +120,18 @@ a.home_top_nav_class:visited{
     /*width:100%;*/
     /*height:460px;*/
 /*}*/
+
 .home_banner{
     width:100%;
     height: 460px;
-    background: url("../images/images1/banner_shouye.png") no-repeat center center;
-    background-size: cover;
+    text-align: center;
+    background: url("../images/images1/jianbian.png") center center;
+}
+.home_banner .home_width img{
+    width:1020px;
+    height:460px;
+    background: url('../images/images1/loading.gif');
+    overflow: hidden;
 }
 .home_xsxx{
     margin-top:50px;
@@ -261,7 +268,7 @@ a.home_top_nav_class:visited{
 .home_footer_lxdh{
     float: left;
     margin-top:45px;
-    margin-right:108px;
+    margin-right:58px;
 }
 .home_footer_lxdh .home_footer_fwrx{
     color: #DDDDDD;
@@ -310,8 +317,8 @@ a.home_top_nav_class:visited{
 .cpzx_banner{
     width:100%;
     height: 460px;
-    background: url("../images/images1/banner_23.png") no-repeat center center;
-    background-size: cover;
+   text-align: center;
+    background: #1858A1;
 }
 .cpzx_main{
     width:100%;
@@ -469,8 +476,8 @@ a.home_top_nav_class:visited{
 .hzhb_banner{
     width:100%;
     height: 460px;
-    background: url("../images/images1/banner_hezuo.png") no-repeat center center;
-    background-size: cover;
+    text-align: center;
+    background: #066B8B;
 }
 
 .hzhb_main{
@@ -554,8 +561,8 @@ a.home_top_nav_class:visited{
 .gywm_banner{
     width:100%;
     height: 460px;
-    background: url("../images/images1/banner_aboutus.png") no-repeat center center;
-    background-size: cover;
+   text-align: center;
+    background: #286ABD;
 }
 
 .gywm_main{

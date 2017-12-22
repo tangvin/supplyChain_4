@@ -59,9 +59,10 @@
     <!--banner 开始-->
     <div class="home_banner">
         <div class="home_width">
-            <div id="rightArrow">
-                咨询热线：400 - 888 - 6660
-            </div>
+            <img src="<%=request.getContextPath()%>/js/static/images/images1/banner_main.png">
+        </div>
+        <div id="rightArrow">
+            咨询热线：400 - 888 - 6660
         </div>
     </div>
     <!--banner 结束-->
@@ -196,7 +197,7 @@
             </div>
             <ul class="home_footer_lxwm">
                 <li>联系我们</li>
-                <li class="wyb">公司地址：北京市朝阳区朝阳北路1008号</li>
+                <li class="wyb">公司地址：北京市丰台区南四环西路186号汉威国际广场2号楼5层</li>
                 <li class="wyb">业务邮箱：service@cnfinatech.com</li>
                 <li class="wyb">业务咨询：010-88660066</li>
             </ul>

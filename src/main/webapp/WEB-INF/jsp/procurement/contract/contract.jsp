@@ -3,7 +3,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>订单管理</title>
+    <meta HTTP-EQUIV="Pragma" content="no-cache">
+    <meta HTTP-EQUIV="Expires" content="-1">
+    <title>合同签约</title>
     <style>
         body{width:100%;}
         #tb{width:100%;border-top:1px solid #ccc;border-right:1px solid #ccc;}
@@ -19,6 +21,71 @@
         .page>ul>li{padding:0 10px 0 10px;list-style:none outside;display:inline-block;height:26px;line-height:26px;background:#fff;border:1px solid #ddd;border-right:0;font-size:12px;cursor:pointer;overflow:hidden;}
         .page>ul>li:hover,.page>ul>li.current{background:#DC143C;color:#fff;}
         .page>ul>li:last-of-type{border-right:1px solid #ddd;}
+        .span{
+            width:0;
+            height:0;
+            border-left:5px solid transparent;
+            border-right:5px solid transparent;
+            border-top:8px solid red;
+            display: inline-block;
+            margin-left:20px;
+        }
+        .fy_bg div span{
+            /*background: #ddd;*/
+            float: left;
+            padding: 6px 10px;
+            border:1px solid #ddd;
+            cursor: pointer;
+            color: #337AB7;
+        }
+        .fy_bg div span:hover{
+            background: #f5f5f5;
+        }
+        .page_tbs>span,.page_tbw>span{
+            border-radius: 3px;
+        }
+        .page_all{
+            width:150px;
+            float: left;
+            margin-right:10px;
+        }
+        .fy_bg p .tiao{
+            float: left;
+            padding: 6px 10px;
+        }
+        #jumpWhere{
+            float: left;
+        }
+        #jumpWhere li{
+            cursor: pointer;
+            float: left;
+            list-style: none;
+            border: 1px solid #ddd;
+            padding: 6px 15px;
+            cursor: pointer;
+            color: #337AB7;
+        }
+        #jumpWhere li:hover{
+            background: #f5f5f5;
+        }
+        .right{
+            float: right;
+            width: 400px;
+        }
+        #bt{
+            font-size: 16px;
+            height:30px;
+            font-weight: bold;
+        }
+        .lj a{
+            margin-right:10px;
+        }
+        .cg_xzht{
+            margin:20px 0px;
+        }
+        #xzht2{
+            margin-right:-15px;
+        }
     </style>
 </head>
 <body>
@@ -28,7 +95,7 @@
         <div class="col-xs-12 zlxx_top">
            <a href="<%=request.getContextPath()%>/procurementMain/procurementMain.action">系统首页</a>
             <span>></span>
-            <a href="#">订单管理</a>
+            <a href="#">合同管理</a>
         </div>
         <!--订单管理 头部 end-->
         <div class="col-xs-12">
@@ -295,7 +362,7 @@
                         data_con += '<td>' + v.contractName + '</td>';
                         data_con += '<td><span id="start"></span></td>';
                         data_con += '<td>' + v.assistContractAmount + '</td>';
-                        data_con += '<td>' + v.procurementEntName + '</td>';
+                        data_con += '<td>' + v.tradeEntName + '</td>';
                         data_con += '<td>' + v.creatTime + '</td>';
                         data_con += '<td>' + v.buyerSignatory + '</td>';
                         data_con += '<td>' + v.attachmentAmount + '</td>';
@@ -322,20 +389,20 @@
                                 data_con += '</tr>';
                                 $('#bt').after(data_con);
                                 if(v.assistContractList[i].assistStatus==0){
-                                    $('#fu_anniu').html('<button>认领</button><button>驳回</button>');
-                                    $('#fu_start').html('待领取')
+                                	$('#fu_start').html('待领取')
+                                	$('#fu_anniu').html('<button>编辑</button><button>取消</button>');
                                 }else if(v.assistContractList[i].assistStatus==1){
-                                    $('#fu_anniu').html('<button>终止</button>');
-                                    $('#fu_start').html('正常')
+                                	$('#fu_start').html('正常')
+                                	$('#fu_anniu').html('<button>终止</button>');
+                                }else if(v.assistContractList[i].assistStatus==2){
+                                	$('#fu_start').html('已终止')
+                                	$('#fu_anniu').html('---');
                                 }else if(v.assistContractList[i].assistStatus==3){
-                                    $('#fu_anniu').html('---');
-                                    $('#fu_start').html('驳回')
-                                } else if(v.assistContractList[i].assistStatus==2){
-                                    $('#fu_anniu').html('---');
-                                    $('#fu_start').html('已终止')
-                                }else if(v.assistContractList[i].assistStatus==4){
-                                    $('#fu_anniu').html('---');
-                                    $('#fu_start').html('历史')
+                                	$('#fu_start').html('驳回')
+                                	$('#fu_anniu').html('<button>编辑</button><button>取消</button>');
+                                } else if(v.assistContractList[i].assistStatus==4){
+                                	$('#fu_start').html('历史')
+                                	$('#fu_anniu').html('---');
                                 }
 
 
@@ -355,20 +422,20 @@
                         $('.for_arr_' + cr_i + '>td:nth-of-type(2)').append('<span class="span"></span>')
 
                         if(data.rows[i].contractStatus==0){
-                            $('#anniu').html('<button>认领</button><button>驳回</button>');
-                            $('#start').html('待领取')
+                        	$('#start').html('待领取')
+                        	$('#anniu').html('<button>取消</button><button>编辑</button>');
                         }else if(data.rows[i].contractStatus==1){
-                            $('#anniu').html('<button>终止</button>');
-                            $('#start').html('正常')
+                        	$('#start').html('正常')
+                        	$('#anniu').html('<button>终止</button>');
+                        }else if(data.rows[i].contractStatus==2){
+                        	$('#start').html('已终止')
+                        	$('#anniu').html('---');
                         }else if(data.rows[i].contractStatus==3){
-                            $('#anniu').html('---');
-                            $('#start').html('驳回')
-                        } else if(data.rows[i].contractStatus==2){
-                            $('#anniu').html('---');
-                            $('#start').html('已终止')
-                        }else if(data.rows[i].contractStatus==4){
-                            $('#anniu').html('---');
+                        	$('#start').html('驳回')
+                        	$('#anniu').html('<button>取消</button><button>编辑</button>');
+                        } else if(data.rows[i].contractStatus==4){
                             $('#start').html('历史')
+                            $('#anniu').html('---');
                         }
 
                         if(data.rows[i].letterApply==0){
@@ -561,107 +628,6 @@
         'click #butt':function (e,value,index,row) {
             $('#load').load('<%=request.getContextPath()%>/tradeMain/ddck.action?value='+value)
         }
-    }
-
-
-    //驳回按钮
-    function showUserAttache(w,e){
-        $("#ddbh").click(function () {
-            $.ajax({
-                url:'<%=request.getContextPath()%>/tradeOrder/bohui.action?id='+w+'&&flag='+e,
-                type:'post',
-                dataType:"json",
-                data:$("#bohuireason").serialize(),
-                success:function (data) {
-                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')",500);
-                }
-            })
-
-        })
-    }
-
-    //领取订单按钮
-    function showUserAttach(w,e){
-        $("#lqdd").click(function () {
-
-            $.ajax({
-                url:'<%=request.getContextPath()%>/tradeOrder/lqdd.action?id='+w+'&&flag='+e,
-                type:'post',
-                dataType:"json",
-                data:$("#bohuireason").serialize(),
-                success:function (data) {
-                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')",500);
-                }
-            })
-
-        })
-    }
-
-
-    var abc=''
-    //配置发货数据回显
-    function showUserAttachs(w,e){
-        $.ajax({
-            url:"<%=request.getContextPath()%>/tradeOrder/orderSelect.action",
-            data:{ pageNumber:1, pageSize: 10},
-            type:"POST",
-            dataType:"json",
-            success: function(data){
-                for(var i=0;i<data.rows.length;i++){
-                    $('#wyb').empty()
-                    if(data.rows[i].orderId==w){
-                        var data_con = '<tr><td class="col-xs-4">订单编号：</td> <td class="col-xs-4">'+data.rows[i].orderNumber+'</td></tr>';
-                        data_con += '<tr><td class="col-xs-4">订单金额：</td> <td class="col-xs-4">'+data.rows[i].orderAmount+'</td></tr>';
-                    }
-                }
-                $('#wyb').append(data_con);
-                $.ajax({
-                    url:'<%=request.getContextPath()%>/freight/freightSelect.action',
-                    type:'POST',
-                    dataType:'json',
-                    success:function (data) {
-                        value=data;
-                        //console.log(data);
-                        if(data==''){
-                            $('#pzfh_select').hide()
-                        }else if(data!=''){
-                            var option='';
-                            for(var i=0;i<data.length;i++){
-                                option +='<option  value='+data[i].freightDefaultAddress+' id='+data[i].freightId+'>'+data[i].freightName+'</option>';
-                                //console.log(option)
-                            }
-                        }
-                        $('#pzfh_select').append(option);
-                        var aaa= $('#pzfh_select')[0];
-                        for(var i=0;i<aaa.children.length;i++){
-                            if(aaa.children[i].value==1){
-                                aaa.children[i].selected='selected'
-                            }
-                        }
-                        $('#pzfh_select').change(function () {
-                            abc=$(this).children('option:selected').attr("id")
-                        })
-                    }
-                })
-
-            }
-        });
-        /**
-         * 配置发货表单提交
-         */
-
-
-        $("#pzfh").click(function () {
-            $.ajax({
-                url: '<%=request.getContextPath()%>/tradeOrder/pzfh.action?id=' + w + '&&flag=' + e+'&&val=' + abc,
-                type: 'post',
-                dataType: 'json',
-                data: $('#formId').serialize(),
-                success: function (data) {
-                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')", 500);
-                }
-            })
-        })
     }
 
     // 定义时间格式

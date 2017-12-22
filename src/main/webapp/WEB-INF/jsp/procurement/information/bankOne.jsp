@@ -5,64 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>添加银行卡</title>
-    <style>
-        .yhk_form{
-            margin-top:40px;
-        }
-        .yhk_form div label{
-            line-height: 40px;
-            font-weight: normal;
-        }
-        .yhk_form div{
-            margin-bottom:20px;
-        }
-        .yhk_form div select {
-            width:250px!important;
-        }
-        .yhk_form div input{
-            width:250px!important;
-        }
-
-        .yhk_two_form{
-            margin-top:40px;
-        }
-        .yhk_two_form div label{
-            line-height: 30px;
-            font-weight: normal;
-        }
-        .yhk_two_form div span{
-            line-height: 30px;
-        }
-        .yhk_two_form div{
-            margin-bottom:10px;
-        }
-        #yhk_two{
-            margin-top:30px;
-            /*width:120px;*/
-        }
-
-
-        .active{
-            background: red;
-        }
-        .tjyhk_one,.tjyhk_two,.tjyhk_three,.tjyhk_four{
-            display: none;
-        }
-        .yhk_three{
-            margin-top:40px;
-            margin-bottom:30px;
-        }
-        .tjyhk_four p{
-            margin:40px 0 40px 0;
-            font-size: 20px;
-        }
-        .tjyhk_four button{
-            margin-left: 10px;
-        }
-        #yhk_next_two_bu{
-            margin-top:30px;
-        }
-    </style>
 </head>
 <body>
 <div class='col-xs-12'>

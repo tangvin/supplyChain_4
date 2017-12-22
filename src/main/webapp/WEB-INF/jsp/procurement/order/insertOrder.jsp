@@ -326,7 +326,7 @@
 		$('#load').load('<%=request.getContextPath()%>/procurementMain/glshxx.action')
 	});
 
-	 
+
     $('#glht').click(function () {
     	$("#tb_departments").bootstrapTable(
 				"refresh",
@@ -354,7 +354,7 @@
         	                      		 str +='<p>'+ConvertToDate(value)+'</p>';
         	                              return str;
         	                		}
-        	                  	 
+
         	                     }
         		          },
         		          {field:'contractFounder',title:'合同创建人'}
@@ -368,7 +368,7 @@
         		      locale:'zh-CN',//中文支持
         		      pagination: true,//是否开启分页（*）
         		      pageNumber:1,//初始化加载第一页，默认第一页
-        		      pageSize: 3,//每页的记录行数（*） 
+        		      pageSize: 3,//每页的记录行数（*）
         		      sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
         		      //发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}
         		      contentType:'application/x-www-form-urlencoded;charset=UTF-8'   //数据编码纯文本  offset=0&limit=5
@@ -398,17 +398,17 @@
         		      };
         		      console.log(temp.aid)
         		      return temp;
-        		      
+
         		  }
-       
-        	
+
+
         }
     })
 
     $(function(){
         var select = $('#input-select'),TempArr;//取得select的当前对象
         $.ajax({
-            url:'http://192.168.17.228:8080/supplyChain/pmorder/getMohujs.action',
+            url:'<%=request.getContextPath()%>/pmorder/getMohujs.action',
             type:'post',
             dataType:'json',
             timeout:5000,

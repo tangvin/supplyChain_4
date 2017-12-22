@@ -4,14 +4,12 @@
  */
 (function ($) {
     'use strict';
-
     $.fn.bootstrapTable.locales['zh-CN'] = {
         formatLoadingMessage: function () {
             return '正在努力地加载数据中，请稍候……';
         },
         formatShowingRows: function (pageFrom, pageTo, totalRows) {
-
-            return '共' + parseInt((totalRows/2)<1 ? (totalRows/2)+1 :totalRows/2)  + '页, 共' +totalRows+ '条';
+            return '共' + Math.ceil((totalRows/3)<1 ? (totalRows/3) :totalRows/3)  + '页, 共' +totalRows+ '条';
         },
         formatSearch: function () {
             return '搜索';

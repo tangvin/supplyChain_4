@@ -22,22 +22,23 @@
             <div class="khh">
                 <form class="form-inline khh_form">
                     <div class="form-group">
-                        <label>状态</label>
+                        <label>状态：</label>
                         <select class="form-control select">
-                            <option>全部</option>
-                            <option>全部1</option>
-                            <option>全部2</option>
-                            <option>全部3</option>
-                            <option>全部4</option>
+                            <option value="">请选择</option>
+                            <option value="0">待领取</option>
+                            <option value="1">正常</option>
+                            <option value="2">已终止</option>
+                            <option value="3">驳回</option>
+                            <option value="4">历史</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>合同执行期</label>
+                        <label>合同执行期：</label>
                         <input type="text" readonly="readonly" name="birthday" id="birthday1" class="form-control" value="03/18/2013" />--
                         <input type="text" readonly="readonly" name="birthday" id="birthday" class="form-control" value="03/18/2013" />
                     </div>
                     <div class="form-group">
-                        <label>签约方</label>
+                        <label>签约方：</label>
                         <input type="text" class="form-control">
                     </div>
                     <div class="form-group form-group_red_btn">
@@ -82,7 +83,7 @@
             </div>
             <!--合同分页 eng-->
             <!--合同表格 开始-->
-            <div class="table-responsive text-center">
+            <div class="table-responsive text-center" style="margin:0 -15px">
                 <table class="table table-bordered text-center htbg">
                     <tbody>
                     <tr class="active">

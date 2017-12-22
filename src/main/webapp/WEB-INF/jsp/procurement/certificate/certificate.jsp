@@ -46,9 +46,6 @@
             
             <!--分页 end-->
         </div>
-        
-        
-        
     </div>
 </div>
 </body>
@@ -160,9 +157,6 @@ function changeDateFormat(cellval) {
 				});
 			}
 		})
-		
-		
-		
 	}
 </script>
 </html>

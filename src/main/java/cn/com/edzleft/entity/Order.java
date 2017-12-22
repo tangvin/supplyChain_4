@@ -123,7 +123,7 @@ public class Order {
      * 订单创建账号id
      * @return
      */
-    private Integer orderCreatorUserId;
+    private Integer orderCreatorUserid;
 
 
     //采购商公司别名
@@ -136,7 +136,13 @@ public class Order {
     private String entname;
     //订单创建者姓名
     private String username;
-    //货运编号
+    public Integer getOrderCreatorUserid() {
+		return orderCreatorUserid;
+	}
+	public void setOrderCreatorUserid(Integer orderCreatorUserid) {
+		this.orderCreatorUserid = orderCreatorUserid;
+	}
+	//货运编号
     private String invoiceNo;
     //根据时间模糊查询条件
     private Integer aa;
@@ -343,18 +349,13 @@ public class Order {
 	public void setLetterStatus(Integer letterStatus) {
 		this.letterStatus = letterStatus;
 	}
-	public Integer getOrderCreatorUserId() {
-		return orderCreatorUserId;
-	}
-	public void setOrderCreatorUserId(Integer orderCreatorUserId) {
-		this.orderCreatorUserId = orderCreatorUserId;
-	}
 	public String getCentName() {
 		return centName;
 	}
 	public void setCentName(String centName) {
 		this.centName = centName;
 	}
+	
 	public String getfName() {
 		return fName;
 	}
@@ -507,7 +508,7 @@ public class Order {
 		result = prime * result + ((orderCreatTime == null) ? 0 : orderCreatTime.hashCode());
 		result = prime * result + ((orderCreatorId == null) ? 0 : orderCreatorId.hashCode());
 		result = prime * result + ((orderCreatorTradeId == null) ? 0 : orderCreatorTradeId.hashCode());
-		result = prime * result + ((orderCreatorUserId == null) ? 0 : orderCreatorUserId.hashCode());
+		result = prime * result + ((orderCreatorUserid == null) ? 0 : orderCreatorUserid.hashCode());
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
 		result = prime * result + ((orderNumber == null) ? 0 : orderNumber.hashCode());
 		result = prime * result + ((orderStatus == null) ? 0 : orderStatus.hashCode());
@@ -701,10 +702,10 @@ public class Order {
 				return false;
 		} else if (!orderCreatorTradeId.equals(other.orderCreatorTradeId))
 			return false;
-		if (orderCreatorUserId == null) {
-			if (other.orderCreatorUserId != null)
+		if (orderCreatorUserid == null) {
+			if (other.orderCreatorUserid != null)
 				return false;
-		} else if (!orderCreatorUserId.equals(other.orderCreatorUserId))
+		} else if (!orderCreatorUserid.equals(other.orderCreatorUserid))
 			return false;
 		if (orderId == null) {
 			if (other.orderId != null)
@@ -780,7 +781,7 @@ public class Order {
 				+ ", paymentAccountId=" + paymentAccountId + ", paymentTime=" + paymentTime + ", invoiceId=" + invoiceId
 				+ ", freightUnit=" + freightUnit + ", freightNumberId=" + freightNumberId + ", goods=" + goods
 				+ ", applicationletter=" + applicationletter + ", invoiceNum=" + invoiceNum + ", letterStatus="
-				+ letterStatus + ", orderCreatorUserId=" + orderCreatorUserId + ", centName=" + centName + ", fName="
+				+ letterStatus + ", orderCreatorUserid=" + orderCreatorUserid + ", centName=" + centName + ", fName="
 				+ fName + ", cName=" + cName + ", entname=" + entname + ", username=" + username + ", invoiceNo="
 				+ invoiceNo + ", aa=" + aa + ", address=" + address + ", area=" + area + ", person=" + person
 				+ ", phone=" + phone + ", fperson=" + fperson + ", fphone=" + fphone + ", procurementEntName="
