@@ -13,7 +13,7 @@ public class Financial {
     /**
      * 财务编号
      */
-    private String financialNumbers;
+    private String financialNumber;
     /**
      * 财务类型  0贷款、1还款
      */
@@ -65,12 +65,12 @@ public class Financial {
         this.id = id;
     }
 
-    public String getFinancialNumbers() {
-        return financialNumbers;
+    public String getFinancialNumber() {
+        return financialNumber;
     }
 
-    public void setFinancialNumbers(String financialNumbers) {
-        this.financialNumbers = financialNumbers == null ? null : financialNumbers.trim();
+    public void setFinancialNumber(String financialNumber) {
+        this.financialNumber = financialNumber == null ? null : financialNumber;
     }
 
     public Integer getFinancialType() {
@@ -140,7 +140,7 @@ public class Financial {
         Financial financial = (Financial) o;
 
         if (id != null ? !id.equals(financial.id) : financial.id != null) return false;
-        if (financialNumbers != null ? !financialNumbers.equals(financial.financialNumbers) : financial.financialNumbers != null)
+        if (financialNumber != null ? !financialNumber.equals(financial.financialNumber) : financial.financialNumber != null)
             return false;
         if (financialType != null ? !financialType.equals(financial.financialType) : financial.financialType != null)
             return false;
@@ -158,7 +158,7 @@ public class Financial {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (financialNumbers != null ? financialNumbers.hashCode() : 0);
+        result = 31 * result + (financialNumber != null ? financialNumber.hashCode() : 0);
         result = 31 * result + (financialType != null ? financialType.hashCode() : 0);
         result = 31 * result + (amount != null ? amount.hashCode() : 0);
         result = 31 * result + (payer != null ? payer.hashCode() : 0);
@@ -174,7 +174,7 @@ public class Financial {
     public String toString() {
         return "Financial{" +
                 "id=" + id +
-                ", financialNumbers='" + financialNumbers + '\'' +
+                ", financialNumber='" + financialNumber + '\'' +
                 ", financialType=" + financialType +
                 ", amount=" + amount +
                 ", payer='" + payer + '\'' +

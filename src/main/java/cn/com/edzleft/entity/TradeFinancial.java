@@ -5,7 +5,7 @@ import java.util.Date;
 /**贸易方财务表
  * gyl_trade_finance
  */
-public class TradeFinance {
+public class TradeFinancial {
     /**
      * 财务表主键id
      */
@@ -51,6 +51,50 @@ public class TradeFinance {
      */
     private Integer informationId;
 
+    /**
+     * <result column="orderNumber" property="orderNumber" jdbcType="VARCHAR" />
+     <result column="tripartipeNumber" property="tripartipeNumber" jdbcType="VARCHAR" />
+     <result column="bankAccountNumber" property="bankAccountNumber" jdbcType="VARCHAR" />
+     <result column="entName" property="entName" jdbcType="VARCHAR" />
+     * @return
+     */
+    //别名
+    private String orderNumber;
+    private String tripartipeNumber;
+    private String bankAccountNumber;
+    private  String entName;
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public String getTripartipeNumber() {
+        return tripartipeNumber;
+    }
+
+    public void setTripartipeNumber(String tripartipeNumber) {
+        this.tripartipeNumber = tripartipeNumber;
+    }
+
+    public String getBankAccountNumber() {
+        return bankAccountNumber;
+    }
+
+    public void setBankAccountNumber(String bankAccountNumber) {
+        this.bankAccountNumber = bankAccountNumber;
+    }
+
+    public String getEntName() {
+        return entName;
+    }
+
+    public void setEntName(String entName) {
+        this.entName = entName;
+    }
 
     public Integer getId() {
         return id;
@@ -135,9 +179,9 @@ public class TradeFinance {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TradeFinance)) return false;
+        if (!(o instanceof TradeFinancial)) return false;
 
-        TradeFinance that = (TradeFinance) o;
+        TradeFinancial that = (TradeFinancial) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (financialNumber != null ? !financialNumber.equals(that.financialNumber) : that.financialNumber != null)
@@ -152,7 +196,14 @@ public class TradeFinance {
         if (bankAccountId != null ? !bankAccountId.equals(that.bankAccountId) : that.bankAccountId != null)
             return false;
         if (bankCardId != null ? !bankCardId.equals(that.bankCardId) : that.bankCardId != null) return false;
-        return informationId != null ? informationId.equals(that.informationId) : that.informationId == null;
+        if (informationId != null ? !informationId.equals(that.informationId) : that.informationId != null)
+            return false;
+        if (orderNumber != null ? !orderNumber.equals(that.orderNumber) : that.orderNumber != null) return false;
+        if (tripartipeNumber != null ? !tripartipeNumber.equals(that.tripartipeNumber) : that.tripartipeNumber != null)
+            return false;
+        if (bankAccountNumber != null ? !bankAccountNumber.equals(that.bankAccountNumber) : that.bankAccountNumber != null)
+            return false;
+        return entName != null ? entName.equals(that.entName) : that.entName == null;
     }
 
     @Override
@@ -167,12 +218,16 @@ public class TradeFinance {
         result = 31 * result + (bankAccountId != null ? bankAccountId.hashCode() : 0);
         result = 31 * result + (bankCardId != null ? bankCardId.hashCode() : 0);
         result = 31 * result + (informationId != null ? informationId.hashCode() : 0);
+        result = 31 * result + (orderNumber != null ? orderNumber.hashCode() : 0);
+        result = 31 * result + (tripartipeNumber != null ? tripartipeNumber.hashCode() : 0);
+        result = 31 * result + (bankAccountNumber != null ? bankAccountNumber.hashCode() : 0);
+        result = 31 * result + (entName != null ? entName.hashCode() : 0);
         return result;
     }
 
-
     @Override
-    public String toString() {
+    public String
+    toString() {
         return "TradeFinance{" +
                 "id=" + id +
                 ", financialNumber='" + financialNumber + '\'' +
@@ -184,6 +239,10 @@ public class TradeFinance {
                 ", bankAccountId=" + bankAccountId +
                 ", bankCardId=" + bankCardId +
                 ", informationId=" + informationId +
+                ", orderNumber='" + orderNumber + '\'' +
+                ", tripartipeNumber='" + tripartipeNumber + '\'' +
+                ", bankAccountNumber='" + bankAccountNumber + '\'' +
+                ", entName='" + entName + '\'' +
                 '}';
     }
 }

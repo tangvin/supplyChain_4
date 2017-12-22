@@ -3,6 +3,7 @@ package cn.com.edzleft.controller.trade.homepage;
 
 import cn.com.edzleft.entity.*;
 import cn.com.edzleft.service.trade.account.AccountService;
+import cn.com.edzleft.service.trade.assistContract.AssistConotractService;
 import cn.com.edzleft.service.trade.bankAccount.BankAccountService;
 import cn.com.edzleft.service.trade.contractSigning.ContractSigningService;
 import cn.com.edzleft.service.trade.freight.FreightService;
@@ -45,6 +46,8 @@ public class MainsController {
     private BankAccountService bankAccountService;
     @Autowired
     private RejectService rejectService;
+    @Autowired
+    private AssistConotractService assistConotractService;
 
     /**
      * 货运管理
@@ -305,13 +308,28 @@ public class MainsController {
     public String htbj(){
         return "/trade/contract/update";
     }
+
+
     /**
      * 合同详情
      * @return
      */
     @RequestMapping(value = "htxq")
-    public String htxq(){
-        return "/trade/contract/particulars";
+    public ModelAndView htxq(String number,HttpSession sessionInfo){
+        ModelAndView modelAndView = new ModelAndView("/trade/contract/particulars");
+        //根据主合同编号查询主合同详情
+        Contract contract = contractSigningService.queryContractByContractnumber(number);
+        //获取主合同下辅合同id,并根据此id查询辅合同集合
+        Integer assistContractId = contract.getAssistContractId();
+        List<AssistContract> assistList = assistConotractService.selectAssistContract(assistContractId);
+        //判断主合同下的辅合同是否为空
+        if(assistList.size()!=0){
+            contract.setAssistContractList(assistList);
+            modelAndView.addObject("contract",contract);
+        }else if (assistList.size()==0){
+            modelAndView.addObject("contract",contract);
+        }
+        return modelAndView;
     }
 
     /**
@@ -319,8 +337,11 @@ public class MainsController {
      * @return
      */
     @RequestMapping(value = "htqy")
-    public String htqy(){
-        return "/trade/contract/contract";
+    @ResponseBody
+    public ModelAndView htqy(){
+        ModelAndView mv = new ModelAndView("/trade/contract/contract");
+        mv.addObject("aa","aa");
+        return mv;
     }
 
     /**
@@ -382,6 +403,8 @@ public class MainsController {
         mv.addObject("account",account);
         return mv;
     }
+
+
 
 
 }

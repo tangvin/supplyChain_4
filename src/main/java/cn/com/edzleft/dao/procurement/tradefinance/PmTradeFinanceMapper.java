@@ -2,13 +2,13 @@ package cn.com.edzleft.dao.procurement.tradefinance;
 
 import java.util.List;
 
-import cn.com.edzleft.entity.TradeFinance;
+import cn.com.edzleft.entity.TradeFinancial;
 import cn.com.edzleft.util.page.PageUtil;
 
 public interface PmTradeFinanceMapper {
 
-	int getTradeEntityCounts(PageUtil<TradeFinance> userPage);
+	int getTradeEntityCounts(PageUtil<TradeFinancial> userPage);
 
-	List<TradeFinance> getTradeEntityList(PageUtil<TradeFinance> userPage);
+	List<TradeFinancial> getTradeEntityList(PageUtil<TradeFinancial> userPage);
 
 }

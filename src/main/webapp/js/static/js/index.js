@@ -52,7 +52,7 @@ $(function(){
         $('#load').load(projectName+'/tradeMain/syxgl.action')
     })
     $('#htqy2').click(function(){
-        $('#load').load(projectName+'/tradeMain/htqy.action')
+         $('#load').load(projectName+'/tradeMain/htqy.action?rd='+Math.random())
     })
     $('#ddgl2').click(function(){
         $('#load').load(projectName+'/tradeMain/ddgl.action')

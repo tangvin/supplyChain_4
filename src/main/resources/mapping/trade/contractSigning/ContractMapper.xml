@@ -45,16 +45,16 @@
   <sql id="where_sql">
     <trim prefix="where" prefixOverrides="and">
       <if test="whereMap != null &amp;&amp; whereMap.contractStatus != null and whereMap.contractStatus != ''">
-        AND contract_status  LIKE '%${whereMap.contractStatus}%'
+        AND contract_status  = '${whereMap.contractStatus}'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.creatTime != null and whereMap.creatTime != ''">
-        AND creat_time  LIKE '%${whereMap.creatTime}%'
+        AND creat_time  &gt;= '${whereMap.creatTime}'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.endTime != null and whereMap.endTime != ''">
-        AND end_time  LIKE '%${whereMap.endTime}%'
+        AND end_time  &lt;= '${whereMap.endTime}'
       </if>
-      <if test="whereMap != null &amp;&amp; whereMap.buyerSignatory != null and whereMap.buyerSignatory != ''">
-        AND buyer_signatory  LIKE '%${whereMap.buyerSignatory}%'
+      <if test="whereMap != null &amp;&amp; whereMap.procurementEntName != null and whereMap.procurementEntName != ''">
+        AND t2.ent_name  LIKE '%${whereMap.procurementEntName}%'
       </if>
     </trim>
   </sql>
@@ -98,7 +98,7 @@
     INNER  JOIN gyl_attachment t4 ON t1.contract_electronics_id=t4.attachment_id
 
     <include refid="where_sql"/>
-    ORDER BY contract_create_time  DESC
+
     <![CDATA[	limit #{start},#{pageSize}]]>
   </select>
 

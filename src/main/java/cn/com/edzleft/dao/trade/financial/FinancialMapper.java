@@ -15,14 +15,14 @@ public interface FinancialMapper {
      * @param  pageUtil
      * @return
      */
-    public Integer getAllFinancialCount(PageUtil<Financial> pageUtil);
+    public Integer getFinancialCountLast(PageUtil<Financial> pageUtil);
 
     /**
      * 分页
      * @param pageUtil
      * @return
      */
-    public List<Financial> selectAllFinancialByPage(PageUtil<Financial> pageUtil);
+    public List<Financial> selectFinancialByPageLast(PageUtil<Financial> pageUtil);
 
 
     /**

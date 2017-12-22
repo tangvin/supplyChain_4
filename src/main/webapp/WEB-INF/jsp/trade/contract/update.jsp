@@ -20,8 +20,8 @@
         <div class="col-xs-12">
             <div class="row">
                 <div class="panel-body htbh">
-                    <p class="col-xs-3">合同编号<span class="htxx">12312312312</span></p>
-                    <p class="col-xs-3">合同名称<span class="htxx">xxx合同</span></p>
+                    <p class="col-xs-3">合同编号<span class="htxx">${contract.contractNumber}</span></p>
+                    <p class="col-xs-3">合同名称<span class="htxx">${contract. contractName}</span></p>
                 </div>
             </div>
             <!--合同编辑表格 start-->
@@ -30,38 +30,36 @@
                     <tbody>
                     <tr>
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同编号：</td>
-                            <td class="col-xs-3 text-left">12312312312312</td>
+                            <td class="col-xs-3 text-left">${contract.contractNumber}</td>
                     </tr>
                     <tr>
 
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同名称：</td>
-                            <td class="col-xs-9 text-left"><input type="text"></td>
+                            <td class="col-xs-9 text-left"><input type="text">${contract. contractName}</td>
 
                     </tr>
                     <tr>
 
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>签约方：</td>
-                            <td class="col-xs-9 text-left">供应商企业名称：</td>
+                            <td class="col-xs-9 text-left">供应商企业名称：${procurementName}</td>
 
                     </tr>
                     <tr>
 
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同执行期：</td>
                             <td class="col-xs-9 text-left clezrfix htbj_zxq">
-                                <input type="text" readonly="readonly"  name="birthday" id="birthday1" class="form-control" value="03/18/2013" />
+                                <input type="text" readonly="readonly"  name="creatTime" id="birthday1" class="form-control" value="${contract.creatTime}" />
                                 <p>--</p>
-                                <input type="text" readonly="readonly"  name="birthday" id="birthday" class="form-control" value="03/18/2013" />
+                                <input type="text" readonly="readonly"  name="endTime" id="birthday" class="form-control" value="${contract.endTime}" />
                             </td>
-                        </div>
                     </tr>
                     <tr>
 
-                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同状态：</td>
+                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同状态：${contract.contractStatus}</td>
                             <td class="col-xs-9 text-left">
                                 <span>正常</span>
                                 <button type="button" class="btn btn-danger">终止合同</button>
                             </td>
-                        </div>
                     </tr>
                     <tr>
 
@@ -70,11 +68,11 @@
                                 <form class="form-inline">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" id="id"> 是
+                                            <input type="checkbox" name="letterApply" id="id"> ${contract.letterApply}
                                         </label>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="id1" disabled>￥万元
+                                        <input type="text" name="amount" class="form-control" id="id1" disabled>￥${contract.amount}万元
                                     </div>
                                 </form>
                             </td>

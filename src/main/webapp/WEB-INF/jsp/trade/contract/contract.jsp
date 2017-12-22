@@ -3,7 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>订单管理</title>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>合同管理</title>
     <style>
         body{width:100%;}
         #tb{width:100%;border-top:1px solid #ccc;border-right:1px solid #ccc;}
@@ -28,7 +31,7 @@
         <div class="col-xs-12 zlxx_top">
             <a href="<%=request.getContextPath()%>/tradeMain/tradeMain.action">系统首页</a>
             <span>></span>
-            <a href="#">订单管理</a>
+            <a href="#">合同管理</a>
         </div>
         <!--订单管理 头部 end-->
         <div class="col-xs-12">
@@ -37,7 +40,7 @@
                 <form class="form-inline khh_form khh_form1" id="orderform">
                     <div class="form-group">
                         <label>合同状态：</label>
-                        <select class="form-control select" id="orderStatus">
+                        <select class="form-control select" id="contractStatus" name="contractStatus">
                             <option value="">全部</option>
                             <option value="0">待领取</option>
                             <option value="1">正常</option>
@@ -48,18 +51,14 @@
                     </div>
                     <div class="form-group form-group1">
                         <label>合同执行期：</label>
-                        <input class="form-control"  readonly="readonly"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="开始日期"/>至
-                        <input  class="form-control"  readonly="readonly"  id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="结束日期"/>
+                        <input class="form-control"  readonly="readonly" name="creatTime"  id="creatTime" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'creatTime\')}'})" placeholder="开始日期"/>至
+                        <input  class="form-control"  readonly="readonly" name="endTime" id="endTime" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'endTime\')}'})" placeholder="结束日期"/>
                     </div>
                     <div class="form-group">
                         <label>签约方：</label>
-                        <input type="text" class="form-control" id="procurementEntName">
+                        <input type="text" name="procurementEntName" class="form-control" id="procurementEntName">
                     </div>
-                    <%--<div class="form-group">--%>
-                    <%--<label>合同</label>--%>
-                    <%--<input type="text" class="form-control" id="contractName">--%>
-                    <%--</div>--%>
-                    <button type="button" class="btn btn-danger btn-default" onclick="search()">查询</button>
+                    <button type="button" class="btn btn-danger btn-default" id="search">查询</button>
                     <button type="button" class="btn btn-danger btn-default" onclick="reset()">重置</button>
                 </form>
             </div>
@@ -90,175 +89,92 @@
                     </div>
             </div>
 
-            <!--领取订单 模态框-->
-            <div class="modal fade bs-example-modal-sm lqdd_fh" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <!--领取合同 模态框-->
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
                 <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
                         <div class="panel-body text-center">
                             确定领取合同吗？
                         </div>
                         <div class="modal-footer">
-                            <button id="lqdd" type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+                            <button id="lqht" type="button" class="btn btn-default" data-dismiss="modal">确定</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--领取订单 模态框-->
+            <!--领取合同 模态框-->
 
-            <!--领取订单 模态框-->
-            <div class="modal fade bs-example-modal-sm_bh lqdd_fh" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+            <!--驳回理由 模态框-->
+            <div class="modal fade bs-example-modal-bohui" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button   type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">请输入驳回理由：</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel" style="font-size: 14px;">输入驳回理由</h4>
                         </div>
-                        <form id="bohuireason">
-                            <div class="panel-body text-center">
-                                <textarea  name="rejectReason" class="form-control" rows="3" width="200px"></textarea>
-                            </div>
+                        <form id="contractReject">
+                        <div class="panel-body text-center">
+                            <textarea name="rejectReason" style="resize: none" class="form-control" rows="3"></textarea>
+                        </div>
                         </form>
                         <div class="modal-footer">
-                            <button type="button" id="ddbh" class="btn btn-default" data-dismiss="modal">确定</button>
+                            <button  id="contractBohui" type="button" class="btn btn-default" data-dismiss="modal">确定</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--领取订单 模态框-->
+            <!--驳回理由 模态框-->
 
-            <!--配置发货 模态框-->
-            <div class="modal fade bs-example-modal-pzfh" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <form  id="formId" method="post" >
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button   type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">配置发货</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="table-responsive text-center">
-                                    <table class="table table-bordered bj_table">
-                                        <tbody id="wyb">
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="table-responsive">
-                                    <%--<form id="pzfh"  action="<%=request.getContextPath()%>/tradeOrder/pzfh.action"  method="post" enctype="multipart/form-data">--%>
-
-                                    <table class="table htbg pzfh">
-                                        <tbody>
-                                        <tr>
-                                            <div class="row">
-                                                <td class="col-xs-3"><span class="xingxing">*</span>货运单位：</td>
-                                                <td class="col-xs-8">
-                                                    <div class="row pzfh_row">
-                                                        <div class="col-xs-5 pzfh_row_div">
-                                                            <select class="form-control" id="pzfh_select" name="freightName">
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-xs-5">
-                                                            <button  id="orderFreight" type="button" data-dismiss="modal" class="btn btn-danger btn-default">管理货运单位</button>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </div>
-                                        </tr>
-                                        <tr>
-                                            <div class="row">
-                                                <td class="col-xs-3"><span class="xingxing">*</span>货运编号:</td>
-                                                <td class="col-xs-8">
-                                                    <div class="row row_ddje">
-                                                        <div class="col-xs-5 row_ddje_div">
-                                                            <input type="text" name="freightUnit" class="form-control">
-                                                        </div>
-                                                        <div class="col-xs-6 row_ddje_con">
-                                                            暂未查询到货运单位，请检查
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </div>
-                                        </tr>
-                                        <tr>
-                                            <div class="row">
-                                                <td class="col-xs-3"><span class="xingxing">*</span>发票号:</td>
-                                                <td class="col-xs-8">
-                                                    <div class="row row_ddje">
-                                                        <div class="col-xs-5 row_ddje_div">
-                                                            <input type="text" name="invoiceNo class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </div>
-                                        </tr>
-                                        <tr>
-                                            <div class="row">
-                                                <td class="col-xs-3"><span class="xingxing">*</span>上传发票：</td>
-                                                <td class="col-xs-9 text-left">
-                                                    <div class="row" style="margin-right:0;">
-                                                        <div class="col-xs-2">
-                                                            <div id="inputBox" class="inputBox1 inputBox2">
-                                                                <input type="file" title="请选择图片" id="file" multiple accept="image/png,image/jpg,image/gif,image/JPEG"/>
-                                                                <span class="jiahao jaihao1">+</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-8">
-                                                            <div id="imgBox"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </div>
-                                        </tr>
-
-                                        </tbody>
-                                    </table>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-default" data-dismiss="modal" id="pzfh">确认</button>
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-                                    </div>
-                    </form>
+            <!--终止合同 模态框-->
+            <div class="modal fade bs-example-modal-zhongzhi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_zhongzhi">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="panel-body text-center">
+                           确认终止合同吗？
+                        </div>
+                        <div class="modal-footer">
+                            <button id="stopContract" type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
                 </div>
-
             </div>
+            <!--终止合同 模态框-->
+
+
 
         </div><!-- /.modal-content -->
-
     </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!--配置发货 模态框-->
-<!--合同表格 结束-->
-</div>
-</div>
 </div>
 </body>
 <script>
+
     $(function(){
-        var page_size = 2,page_num = 1;
+        var page_size = 2,page_num = 1,obj = null,obj_values = {};
 
         /*
          * ajax 读取数据
          */
-        var data_page = function(page_size,page_num){
-
-            //清除垃圾数据
-            $('#bt').nextAll().remove();
+        var data_page = function(page_size,page_num,obj){
 
             //显示数据
             $.ajax({
                 //url:projectName+'/letter.letterSelect.action',
                 url: '<%=request.getContextPath()%>/contract/contractShow.action',
                 type: 'post',
-                data: {'pageSize': page_size, 'pageNumber': page_num},
+                data: {'pageSize': page_size, 'pageNumber': page_num,'obj':obj},
+                cache:false,
                 success:function(data){
-                    console.log(data)
+                    //清除垃圾数据
+                    $('#bt').nextAll().remove();
                     /*
                      * ajax-data view
                      */
                     //对数据进行排序
                     data.rows = data.rows.reverse();
+                    console.log(data);
 
                     //赋值数据数量和页数
                     $('.page>div>span:first-of-type').html(data.total);
@@ -268,18 +184,12 @@
                     var page_view = function(){
                         //初始化分页数据
                         $('.page>ul>li[for*=op]').remove();
-
                         var fix_num = 6,pn,tempOption='';//显示的数字分页数量
-
                         fix_num = Math.ceil(data.total/page_size)>fix_num ? fix_num : Math.ceil(data.total/page_size);
                         pn = page_num - 1;
-
-
-
                         for(i=1;i<=fix_num;i++){
                             if((i+pn)>Math.ceil(data.total/page_size)) break;
-                            //i+pn = (i+pn)>Math.ceil(data.total/page_size)
-
+                            //i+pn = (i+pn)>Math.ceil(data.total/page_size);
                             tempOption+='<li for=op>'+(i+pn)+'</li>';
                         }
 
@@ -287,7 +197,6 @@
                     }
                     //分页显示
                     page_view();
-
                     $.each(data.rows,function(i,v){
                         //需要创建的内容（主合同）
                         var data_con = '<tr class="for_arr_' + i + '">';
@@ -304,10 +213,9 @@
                         data_con += '</tr>';
                         //是否有下级数据
                         if (data.rows[i].assistContractList.length > 0) {
-                            // console.log($("#tb tr[for^='arr_']").length)
                             var cr_i = i;
-                            $.each(v.assistContractList, function (index, value) {
-                                //需要创建的内容
+                            $.each(v.assistContractList, function (index, value){
+                                //需要创建的内容(辅合同)
                                 var data_con = '<tr class="arr_' + i + '" style="display:none;">';
                                 data_con += '<td>' + value.contractNumber + '</td>';
                                 data_con += '<td>' + value.assistName + '</td>';
@@ -321,78 +229,79 @@
                                 data_con += '<td><div id="fu_anniu"></div></td>';
                                 data_con += '</tr>';
                                 $('#bt').after(data_con);
-                                if(v.assistContractList[i].assistStatus==0){
-                                    $('#fu_anniu').html('<button>认领</button><button>驳回</button>');
+                                //辅合同按钮
+                                if(v.assistContractList[index].assistStatus==0){
+                                    $('#fu_anniu').html('<button data-toggle="modal" data-target=".bs-example-modal-sm" onclick="qweShowAssist(\''+v.assistContractList[index].assistId+'\',1)">认领</button><button data-toggle="modal" data-target=".bs-example-modal-bohui" onclick="RejectAssistContract(\''+v.assistContractList[index].assistId+'\',2)">驳回</button>');
                                     $('#fu_start').html('待领取')
-                                }else if(v.assistContractList[i].assistStatus==1){
-                                    $('#fu_anniu').html('<button>终止</button>');
+                                }else if(v.assistContractList[index].assistStatus==1){
+                                    $('#fu_anniu').html('<button data-toggle="modal" data-target=".bs-example-modal-zhongzhi" onclick="qweUserAttachAssist(\''+v.assistContractList[index].assistId+'\',3)">终止</button>');
                                     $('#fu_start').html('正常')
-                                }else if(v.assistContractList[i].assistStatus==3){
+                                }else if(v.assistContractList[index].assistStatus==3){
                                     $('#fu_anniu').html('---');
                                     $('#fu_start').html('驳回')
-                                } else if(v.assistContractList[i].assistStatus==2){
+                                } else if(v.assistContractList[index].assistStatus==2){
                                     $('#fu_anniu').html('---');
                                     $('#fu_start').html('已终止')
-                                }else if(v.assistContractList[i].assistStatus==4){
+                                }else if(v.assistContractList[index].assistStatus==4){
                                     $('#fu_anniu').html('---');
                                     $('#fu_start').html('历史')
                                 }
-
-
-                                if(v.assistContractList[i].assistLetterApply==0){
+                                if(v.assistContractList[index].assistLetterApply==0){
                                     $('#assistLetterApply').html('否')
-                                }else if(v.assistContractList[i].assistLetterApply==1){
+                                }else if(v.assistContractList[index].assistLetterApply==1){
                                     $('#assistLetterApply').html('是')
                                 }
-
                             });
                         }
-
                         $('#bt').after(data_con);
                         //给产生后续循环的数据创建一个图标样式并为构造做准备
                         $('.for_arr_' + cr_i).css({'background': '#eee', 'cursor': 'pointer'});
                         $('.for_arr_' + cr_i).attr('for', 'arr_' + cr_i);
                         $('.for_arr_' + cr_i + '>td:nth-of-type(2)').append('<span class="span"></span>')
-
+                        //主合同按钮开始
                         if(data.rows[i].contractStatus==0){
-                            $('#anniu').html('<button>认领</button><button>驳回</button>');
+                            $('#anniu').html('<button data-toggle="modal" data-target=".bs-example-modal-sm" onclick="qweShow(\''+data.rows[i].contractId+'\',1)">认领</button><button data-toggle="modal" data-target=".bs-example-modal-bohui" onclick="showReject(\''+data.rows[i].contractId+'\',2)">驳回</button>');
                             $('#start').html('待领取')
                         }else if(data.rows[i].contractStatus==1){
-                            $('#anniu').html('<button>终止</button>');
+                            $('#anniu').html('<button data-toggle="modal" data-target=".bs-example-modal-zhongzhi" onclick="showUserAttach(\''+data.rows[i].contractId+'\',3)">终止</button>');
                             $('#start').html('正常')
                         }else if(data.rows[i].contractStatus==3){
-                            $('#anniu').html('---');
+                            $('#anniu').html('--');
                             $('#start').html('驳回')
                         } else if(data.rows[i].contractStatus==2){
-                            $('#anniu').html('---');
+                            $('#anniu').html('--');
                             $('#start').html('已终止')
                         }else if(data.rows[i].contractStatus==4){
-                            $('#anniu').html('---');
+                            $('#anniu').html('--');
                             $('#start').html('历史')
                         }
-
                         if(data.rows[i].letterApply==0){
                             $('#letterApply').html('否')
                         }else if(data.rows[i].letterApply==1){
                             $('#letterApply').html('是')
                         }
-
-
                     });
-
                 },
                 error: function (data) {
-                    alert('Data error,try again later.');
+                    //alert('Data error,try again later.');
                 }
             });
 
         }
 
         //初始数据
-        data_page(page_size,page_num);
+        data_page(page_size,page_num,obj);
 
         //分页处理
-        $(document).on('click','.page>ul>li',function(){
+        $(document).on('click','.page>ul>li,#search',function(){
+            if($(this).attr('id')=='search'){
+                obj_temp = $('#orderform').serializeArray();
+                for(x in obj_temp){
+                    obj_values[obj_temp[x].name] = obj_temp[x].value;
+                }
+                obj = JSON.stringify(obj_values);
+            }
+            //处理
             switch($(this).text()){
                 case '首页':
                     page_num = 1;
@@ -407,11 +316,11 @@
                     page_num = parseInt($('.page>div>span:last-of-type').text());
                     break;
                 default:
-                    page_num = parseInt($(this).text());
+                    page_num = $(this).attr('for')=='op' ? parseInt($(this).text()) : page_num;
                     break;
             }
             //分页请求
-            data_page(page_size,page_num);
+            data_page(page_size,page_num,obj);
         });
 
         //展开折叠数据
@@ -424,245 +333,141 @@
                 $(this).parent().nextAll('tr[class='+this_for+']').css('display','none');
             }
         });
-
     });
 
 
 
+    //注意：主合同开始啦！！！
+
+    //主合同领取按钮
+    function qweShow(w,e){
+        $("#lqht").click(function () {
+           $.ajax({
+                url:'<%=request.getContextPath()%>/contract/lqht.action?id='+w+'&&flag='+e,
+                type:'post',
+                dataType:"json",
+                //data:$("#bohuireason").serialize(),
+                success:function (data) {
+                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/htqy.action')",500);
+                }
+            })
+
+       })
+    }
+
+    //主合同终止按钮
+    function showUserAttach(w,e){
+        $("#stopContract").click(function () {
+            $.ajax({
+                url:'<%=request.getContextPath()%>/contract/lqht.action?id='+w+'&&flag='+e,
+                type:'post',
+                dataType:"json",
+               // data:$("#bohuireason").serialize(),
+                success:function (data) {
+                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/htqy.action')",500);
+                }
+            })
+
+        })
+    }
+
+
+    //主合同驳回按钮
+    function showReject(w,e){
+        $("#contractBohui").click(function () {
+            $.ajax({
+                url:'<%=request.getContextPath()%>/contract/bohuiContract.action?id='+w+'&&flag='+e,
+                type:'post',
+                dataType:"json",
+                data:$("#contractReject").serialize(),
+                success:function (data) {
+                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/htqy.action')",500);
+                }
+            })
+
+        })
+    }
+
+
+    /**
+     * 注意：以下是辅合同ajax
+     * @param w
+     * @param e
+     */
+
+    //辅合同领取按钮
+    function qweShowAssist(w,e){
+        $("#lqht").click(function () {
+            $.ajax({
+                url:'<%=request.getContextPath()%>/contract/lqAssist.action?id='+w+'&&flag='+e,
+                type:'post',
+                dataType:"json",
+                //data:$("#bohuireason").serialize(),
+                success:function (data) {
+                    if (data.success){
+                        alert(data.message);
+                    }else{
+                        alert(data.message);
+                    }
+                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/htqy.action')",500);
+                }
+            })
+
+        })
+    }
+
+
+    //辅合同终止合同按钮
+    function qweUserAttachAssist(w,e){
+        $("#stopContract").click(function () {
+            $.ajax({
+                url:'<%=request.getContextPath()%>/contract/lqAssist.action?id='+w+'&&flag='+e,
+                type:'post',
+                dataType:"json",
+                // data:$("#bohuireason").serialize(),
+                success:function (data) {
+                    if (data.success){
+                        alert(data.message);
+                    }else{
+                        alert(data.message);
+                    }
+                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/htqy.action')",500);
+                }
+            })
+
+        })
+    }
+
+
+    //辅合同驳回按钮
+    function RejectAssistContract(w,e){
+        $("#contractBohui").click(function () {
+            $.ajax({
+                url:'<%=request.getContextPath()%>/contract/rejectAssist.action?id='+w+'&&flag='+e,
+                type:'post',
+                dataType:"json",
+                data:$("#contractReject").serialize(),
+                success:function (data) {
+                    if (data.success){
+                        alert(data.message);
+                    }else{
+                        alert(data.message);
+                    }
+                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/htqy.action')",500);
+                }
+            })
+
+        })
+    }
 
 
 
-    $('#orderFreight').click(function () {
+
+
+
+    $('#orderFreight').click(function(){
         setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/hygl.action')",500);
     });
-
-    imgUpload({
-        inputId:'file', //input框id
-        imgBox:'imgBox', //图片容器id
-        buttonId:'btn', //提交按钮id
-        upUrl:'',  //提交地址
-        data:'file1',//参数名
-    })
-
-    /* 订单列表展示 */
-    $(function(){
-        $("#tb_departments").bootstrapTable({
-            //隔行变色
-//            striped:true,
-            columns:[
-                {field:'contractNumber',title:'合同编号',formatter:operateFormatter,events:operateEvents1},
-                {field:'contractName',title:'合同名称',formatter:operateFormatter,events:operateEvents1},
-                {field:'contractStatus',title:'合同状态',
-                    formatter: function(value,row,index){
-                        if( value == '0') {
-                            return "待领取";
-                        } else if(value == '1') {
-                            return "正常";
-                        } else if(value == '2') {
-                            return "已终止";
-                        }else if(value==6){
-                            return "驳回";
-                        }else if(value==7){
-                            return "历史";
-                        }
-                    }
-                },
-                {field:'assistContractAmount',title:'辅合同'},
-                {field:'procurementEntName',title:'签约方'},
-                {field:'contractCreateTime',title:'合同执行期',
-                    formatter:function(value,row,index){
-                        console.log(row)
-                        return ConvertToDate(value)
-                    }
-                },
-                {field:'signingTime',title:'合同创建',
-                    formatter:function(value,row,index){
-                        var str='';
-                        str+='<p>'+row.buyerSignatory+'</p><p>'+ConvertToDate(value)+'</p>'
-                        return str
-                    }
-                },
-                {field:'attachmentAmount',title:'合同扫描件'},
-                {field:'letterApply',title:'融信申请'},
-                {
-                    title:'操作',
-                    field:'action',
-                    formatter:function(value , row){
-                        var str = '';
-                        if(row.contractStatus ==0){//待确认
-                            str += '<button  class="btn  btn-primary bg_btn qran" data-toggle="modal" data-target=".bs-example-modal-sm" href="#" value="待领取" onclick="showUserAttach(\''+row.contractId+'\',1)">认领</button>';
-                            str += '<button  class="btn btn-warning bg_btn" data-toggle="modal" data-target=".bs-example-modal-sm_bh" href="#" value="待领取" onclick="showUserAttache(\''+row.contractId+'\',2)">驳回</button>';
-                        } else if(row.contractStatus ==0){//待付款
-                            str+='--';
-                        } else if(row.contractStatus ==1){//待发货
-                            str+='--';
-                        } else if(row.contractStatus ==2){//待收货
-                            str+='--';
-                        } else if(row.contractStatus ==3){//已完成
-                            str+='--';
-                        } else if(row.contractStatus ==4){//已取消
-                            str+='--';
-                        }
-                        return str;
-                    }
-                }
-            ],
-            url:'<%=request.getContextPath()%>/contract/contractShow.action',
-            method:'post',
-            queryParamsType:'',
-            queryParams: queryParamss,//传递参数（*）
-//            queryParams: function queryParams(params) {
-//                var param = {
-//                    pageNumber: params.pageNumber,
-//                    pageSize: params.pageSize
-//                };
-//                return param;
-//            },
-            //【其它设置】
-            locale:'zh-CN',//中文支持
-            pagination: true,//是否开启分页（*）
-            pageNumber:1,//初始化加载第一页，默认第一页
-            pageSize: 3,//每页的记录行数（*）
-//            pageList: [2,3,4],//可供选择的每页的行数（*）
-            sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
-            //发送到服务器的数据编码类型  {order: "asc", offset: 0, limit: 5}
-            contentType:'application/x-www-form-urlencoded;charset=UTF-8'   //数据编码纯文本  offset=0&limit=5
-        });
-    });
-    //得到查询的参数
-    function queryParamss (params) {
-        var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-            pageNumber: params.pageNumber,
-            pageSize: params.pageSize,
-            contractStatus:$("#orderStatus").val(),
-            creatTime:$("#creatTime").val(),
-            endTime:$("#endTime").val(),
-            buyerSignatory:$("#buyerSignatory").val(),
-        };
-        return temp;
-    }
-    //搜索
-    function search() {
-        $("#tb_departments").bootstrapTable('refresh');
-    }
-    <%--<%=request.getContextPath()%>/tradeMain/ddck.action--%>
-    //重置查询
-    function reset(){
-        $("#orderform").form('reset');
-        search();
-    }
-    function operateFormatter(value,index,row) {
-        var le=''
-        le='<a id="butt">'+value+'</a>'
-        return le
-    }
-
-    window.operateEvents1={
-        'click #butt':function (e,value,index,row) {
-            $('#load').load('<%=request.getContextPath()%>/tradeMain/ddck.action?value='+value)
-        }
-    }
-
-
-    //驳回按钮
-    function showUserAttache(w,e){
-        $("#ddbh").click(function () {
-            $.ajax({
-                url:'<%=request.getContextPath()%>/tradeOrder/bohui.action?id='+w+'&&flag='+e,
-                type:'post',
-                dataType:"json",
-                data:$("#bohuireason").serialize(),
-                success:function (data) {
-                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')",500);
-                }
-            })
-
-        })
-    }
-
-    //领取订单按钮
-    function showUserAttach(w,e){
-        $("#lqdd").click(function () {
-
-            $.ajax({
-                url:'<%=request.getContextPath()%>/tradeOrder/lqdd.action?id='+w+'&&flag='+e,
-                type:'post',
-                dataType:"json",
-                data:$("#bohuireason").serialize(),
-                success:function (data) {
-                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')",500);
-                }
-            })
-
-        })
-    }
-
-
-    var abc=''
-    //配置发货数据回显
-    function showUserAttachs(w,e){
-        $.ajax({
-            url:"<%=request.getContextPath()%>/tradeOrder/orderSelect.action",
-            data:{ pageNumber:1, pageSize: 10},
-            type:"POST",
-            dataType:"json",
-            success: function(data){
-                for(var i=0;i<data.rows.length;i++){
-                    $('#wyb').empty()
-                    if(data.rows[i].orderId==w){
-                        var data_con = '<tr><td class="col-xs-4">订单编号：</td> <td class="col-xs-4">'+data.rows[i].orderNumber+'</td></tr>';
-                        data_con += '<tr><td class="col-xs-4">订单金额：</td> <td class="col-xs-4">'+data.rows[i].orderAmount+'</td></tr>';
-                    }
-                }
-                $('#wyb').append(data_con);
-                $.ajax({
-                    url:'<%=request.getContextPath()%>/freight/freightSelect.action',
-                    type:'POST',
-                    dataType:'json',
-                    success:function (data) {
-                        value=data;
-                        //console.log(data);
-                        if(data==''){
-                            $('#pzfh_select').hide()
-                        }else if(data!=''){
-                            var option='';
-                            for(var i=0;i<data.length;i++){
-                                option +='<option  value='+data[i].freightDefaultAddress+' id='+data[i].freightId+'>'+data[i].freightName+'</option>';
-                                //console.log(option)
-                            }
-                        }
-                        $('#pzfh_select').append(option);
-                        var aaa= $('#pzfh_select')[0];
-                        for(var i=0;i<aaa.children.length;i++){
-                            if(aaa.children[i].value==1){
-                                aaa.children[i].selected='selected'
-                            }
-                        }
-                        $('#pzfh_select').change(function () {
-                            abc=$(this).children('option:selected').attr("id")
-                        })
-                    }
-                })
-
-            }
-        });
-        /**
-         * 配置发货表单提交
-         */
-
-
-        $("#pzfh").click(function () {
-            $.ajax({
-                url: '<%=request.getContextPath()%>/tradeOrder/pzfh.action?id=' + w + '&&flag=' + e+'&&val=' + abc,
-                type: 'post',
-                dataType: 'json',
-                data: $('#formId').serialize(),
-                success: function (data) {
-                    setTimeout("$('#load').load('<%=request.getContextPath()%>/tradeMain/ddgl.action')", 500);
-                }
-            })
-        })
-    }
 
     // 定义时间格式
     function ConvertToDate(datestr) {

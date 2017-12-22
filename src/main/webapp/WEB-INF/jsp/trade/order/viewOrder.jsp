@@ -47,80 +47,80 @@
                     </div>
                 </div>
                 <%--<div class="col-xs-12" style="background: red"></div>--%>
-            <!--合同编辑表格 start-->
-            <div class="table-responsive" style="margin: 0 -15px;">
-              <table class="table table-bordered bj_table">
-                <tbody>
-                <tr>
-                    <td class="col-xs-3  text-right"><span class="xingxing">*</span>合同签约方：</td>
-                    <td class="col-xs-9 text-left"><span>${information1.entName}</span></td>
-                </tr>
-                <tr>
-                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
-                    <td class="col-xs-9 text-left"><span>合同编号：${contract.contractNumber}       合同名称：${contract.contractName}</span></td>
-                </tr>
-                <tr>
-                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>货物商品：</td>
-                    <td class="col-xs-9 text-left"><span>${order.goods}</span></td>
-                </tr>
-                <tr>
-                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单编号：</td>
-                    <td class="col-xs-9 text-left"><span>${order.orderNumber}</span></td>
-                </tr>
-                <tr>
-                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单金额：</td>
-                    <td class="col-xs-9 text-left"><span>${order.orderAmount}</span></td>
-                </tr>
-                <tr>
-                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>发票：</td>
-                    <td class="col-xs-9 text-left">${order.invoiceNum}<img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
-                </tr>
-                <tr>
-                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单状态：</td>
-                    <td class="col-xs-9 text-left">
-                                    <span>
-                                        <c:if test="${order.orderStatus==0}">
-                                            待确认
-                                        </c:if>
-                                        <c:if test="${order.orderStatus==1}">
-                                            待付款
-                                        </c:if>
-                                        <c:if test="${order.orderStatus==2}">
-                                            待发货
-                                        </c:if>
-                                        <c:if test="${order.orderStatus==3}">
-                                            待收货
-                                        </c:if>
-                                        <c:if test="${order.orderStatus==4}">
-                                            已完成
-                                        </c:if>
-                                        <c:if test="${order.orderStatus==5}">
-                                            已关闭
-                                        </c:if>
-                                        <c:if test="${order.orderStatus==6}">
-                                            已驳回
-                                        </c:if>
-                                    </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>申请用信：</td>
-                    <td class="col-xs-9 text-left">
-                        <form class="form-inline">
-                            <div class="form-group">
-                                <input name="creditAmount" type="text" class="form-control" id="id1" disabled VALUE="${order.orderAmount}">￥万元
-                            </div>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单驳回记录：</td>
-                    <td class="col-xs-9 text-left">${rejectList.size()}</td>
-                </tr>
-                </tbody>
-            </table>
-            </div>
-            <!--合同编辑表格 end-->
+                <!--合同编辑表格 start-->
+                <div class="table-responsive" style="margin: 0 -15px;">
+                  <table class="table table-bordered bj_table">
+                    <tbody>
+                    <tr>
+                        <td class="col-xs-3  text-right"><span class="xingxing">*</span>合同签约方：</td>
+                        <td class="col-xs-9 text-left"><span>${information1.entName}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-3 text-right"><span class="xingxing">*</span>关联到合同：</td>
+                        <td class="col-xs-9 text-left"><span>合同编号：${contract.contractNumber}       合同名称：${contract.contractName}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-3 text-right"><span class="xingxing">*</span>货物商品：</td>
+                        <td class="col-xs-9 text-left"><span>${order.goods}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单编号：</td>
+                        <td class="col-xs-9 text-left"><span>${order.orderNumber}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单金额：</td>
+                        <td class="col-xs-9 text-left"><span>${order.orderAmount}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-3 text-right"><span class="xingxing">*</span>发票：</td>
+                        <td class="col-xs-9 text-left">${order.invoiceNum}<img src="<%=request.getContextPath()%>/js/static/images/softcopy@1x.png"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单状态：</td>
+                        <td class="col-xs-9 text-left">
+                                        <span>
+                                            <c:if test="${order.orderStatus==0}">
+                                                待确认
+                                            </c:if>
+                                            <c:if test="${order.orderStatus==1}">
+                                                待付款
+                                            </c:if>
+                                            <c:if test="${order.orderStatus==2}">
+                                                待发货
+                                            </c:if>
+                                            <c:if test="${order.orderStatus==3}">
+                                                待收货
+                                            </c:if>
+                                            <c:if test="${order.orderStatus==4}">
+                                                已完成
+                                            </c:if>
+                                            <c:if test="${order.orderStatus==5}">
+                                                已关闭
+                                            </c:if>
+                                            <c:if test="${order.orderStatus==6}">
+                                                已驳回
+                                            </c:if>
+                                        </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-3 text-right"><span class="xingxing">*</span>申请用信：</td>
+                        <td class="col-xs-9 text-left">
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <input name="creditAmount" type="text" class="form-control" id="id1" disabled VALUE="${order.orderAmount}">￥万元
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-3 text-right"><span class="xingxing">*</span>订单驳回记录：</td>
+                        <td class="col-xs-9 text-left">${rejectList.size()}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+                <!--合同编辑表格 end-->
         </div>
 
         <div class="col-xs-12" id="hyxx_open">

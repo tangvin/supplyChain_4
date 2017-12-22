@@ -4,6 +4,7 @@ import cn.com.edzleft.entity.AssistContract;
 import cn.com.edzleft.util.page.PageUtil;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ibmtech on 2017/12/18.
@@ -15,4 +16,5 @@ public interface AssistConotractService {
     public List<AssistContract> selectAssistContract(Integer id);
 
 
+    Map<String,Object> claimAssistContract(Integer id, Integer flag);
 }

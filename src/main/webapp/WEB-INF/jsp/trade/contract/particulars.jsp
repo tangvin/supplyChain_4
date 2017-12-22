@@ -20,8 +20,8 @@
         <div class="col-xs-12">
             <div class="row">
                 <div class="panel-body htbh">
-                    <p class="col-xs-3">合同编号<span class="htxx">12312312312</span></p>
-                    <p class="col-xs-3">合同名称<span class="htxx">xxx合同</span></p>
+                    <p class="col-xs-3">合同编号<span class="htxx">${contract.contractNumber}</span></p>
+                    <p class="col-xs-3">合同名称<span class="htxx">${contract.contractName}</span></p>
                 </div>
             </div>
             <!--合同编辑表格 start-->
@@ -31,32 +31,32 @@
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同编号：</td>
-                            <td class="col-xs-9 text-left">12312312312312</td>
+                            <td class="col-xs-9 text-left">${contract.contractNumber}</td>
                         </div>
                     </tr>
                     <tr>
                         <div class="row">
-                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同名称：</td>
-                            <td class="col-xs-9 text-left"><input type="text"></td>
+                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同名称：${contract.contractName}</td>
+                            <td class="col-xs-9 text-left"><input type="text" ></td>
                         </div>
                     </tr>
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>签约方：</td>
-                            <td class="col-xs-9 text-left">供应商企业名称：</td>
+                            <td class="col-xs-9 text-left">供应商企业名称：${contract.procurementEntName}</td>
                         </div>
                     </tr>
                     <tr>
                         <div class="row">
                             <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同执行期：</td>
                             <td class="col-xs-9 text-left clezrfix htbj_zxq">
-                                <p>2017-10-01  2018-10-0</p>
+                                <p>${contract.creatTime}--${contract.endTime}</p>
                             </td>
                         </div>
                     </tr>
                     <tr>
                         <div class="row">
-                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同状态：</td>
+                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>合同状态：${contract.conotractStatus}</td>
                             <td class="col-xs-9 text-left">
                                 <span>待领取</span>
                             </td>
@@ -64,7 +64,7 @@
                     </tr>
                     <tr>
                         <div class="row">
-                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>申请融信：</td>
+                            <td class="col-xs-3 text-right"><span class="xingxing">*</span>申请融信：${contract.letterApply}</td>
                             <td class="col-xs-9 text-left">
                                 <form class="form-inline">
                                     <div class="checkbox">
@@ -73,7 +73,7 @@
                                         </label>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="id1" disabled>￥万元
+                                        <input type="text" class="form-control" id="id1" disabled>￥${contract.amount}万元
                                     </div>
                                 </form>
                             </td>

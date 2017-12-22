@@ -21,15 +21,28 @@ public class Reject {
     private Integer bussinessType;
 
     /**
-     * 合同表id
+     * 主合同表id
      */
     private Integer contractId;
+
+    /**
+     * 辅合同id
+     * @return
+     */
+    private Integer assistId;
 
     /**
      * 订单表id
      */
     private Integer orderId;
 
+    public Integer getAssistId() {
+        return assistId;
+    }
+
+    public void setAssistId(Integer assistId) {
+        this.assistId = assistId;
+    }
 
     public Integer getRejectId() {
         return rejectId;
@@ -79,6 +92,7 @@ public class Reject {
                 ", bussinessType=" + bussinessType +
                 ", contractId=" + contractId +
                 ", orderId=" + orderId +
+                ", assistId=" + assistId +
                 '}';
     }
 }

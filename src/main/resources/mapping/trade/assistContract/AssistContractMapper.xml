@@ -31,6 +31,8 @@
 
   <select id="selectAssistContractListById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
+    DISTINCT
+    t1.assist_id,
     t1.contract_number,t1.assist_name,t1.assist_status,t1.assist_creat_time,t1.assist_letter_apply,t1.assist_end_time,
     t2.ent_name AS buyerEntName,
     t3.user_name AS buyerName,
@@ -47,6 +49,14 @@
   </select>
 
 
+  <!--根据辅合同id查询辅合同-->
+  <select id="selectAssistContractById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from gyl_assist_contract
+    where assist_id = #{assistId,jdbcType=INTEGER}
+  </select>
+
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from gyl_assist_contract
@@ -54,8 +64,11 @@
   </delete>
 
 
+
+
+
   <!--编辑辅合同信息-->
-  <update id="updateByPrimaryKeySelective" parameterType="cn.com.edzleft.entity.AssistContract" >
+  <update id="claimAssistContract" parameterType="cn.com.edzleft.entity.AssistContract" >
     update gyl_assist_contract
     <set >
       <if test="contractNumber != null" >

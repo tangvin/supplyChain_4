@@ -35,11 +35,13 @@ public class ContractSigningServiceImpl implements ContractSigningService {
         Integer totalCount = contractSigningMapper.getContractCount(pageUtil);
         //查询所有满足条件的条数
         List<Contract> list = contractSigningMapper.getContractByPage(pageUtil);
+        int size = list.size();
         //调用辅合同id查询主合同下的辅合同
         for (Contract contract : list) {
             Integer contractId = contract.getContractId();
             List<AssistContract> assistContracts = assistConotractService.selectAssistContract(contractId);
              //将辅合同集合放到主合同下面
+            int size1 = assistContracts.size();
             contract.setAssistContractList(assistContracts);
         }
         pageUtil.setTotalCount(totalCount);
@@ -79,18 +81,20 @@ public class ContractSigningServiceImpl implements ContractSigningService {
     @Override
     public int setContractMessage(Integer id, Integer flag, HttpSession sessionInfo) {
          //根据id查询出当前的合同
-        Contract contract = contractSigningMapper.selectContractById(id);
-        if(flag==0) {   //待确认--领取订单
+        //Contract contract = contractSigningMapper.selectContractById(id);
+        Contract contract = new Contract();
+        if(flag==1) {   //待领取--领取合同
             //领取合同（0---1）
             contract.setContractId(id);
             contract.setContractStatus(1);
-        } else if (flag == 1) { //待确认--驳回
+        } else if (flag == 2) { //待领取--驳回
             //驳回（0--3）
             contract.setContractId(id);
-            contract.setContractStatus(6);
-        }else if(flag==2){  //正常 1 --3终止
-            contract.setContractId(id);
             contract.setContractStatus(3);
+        }else if(flag==3){  //正常 1 --2终止
+            //终止（1--2）
+            contract.setContractId(id);
+            contract.setContractStatus(2);
         }
         int i = contractSigningMapper.updateContract(contract);
         System.out.println("合同状态修改完毕！！！");

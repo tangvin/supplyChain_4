@@ -35,14 +35,14 @@
                         <label>发生方(采方)</label>
                         <input type="text" name="payer" class="form-control" >
                     </div>
-                    <div class="form-group">
+                    <%--<div class="form-group">
                         <label>银行账户</label>
                         <select class="form-control" name="bankAccount">
                             <option value="">全部</option>
                             <option value="0">账户1</option>
                             <option value="1">账户2</option>
                         </select>
-                    </div>
+                    </div>--%>
                     <button type="button" class="btn btn-danger btn-default">查询</button>
                     <button type="button" class="btn btn-danger btn-default">重置</button>
                 </form>
@@ -67,25 +67,33 @@
     $(function(){
         $("#financingTable").bootstrapTable({
             columns:[
-                {field:'financialNumbers',title:'财务编号'},
+                {field:'financialNumber',title:'财务编号'},
                 {field:'amount',title:'金额'},
                 {field:'billTime',title:'发生时间',
                     formatter:function(value,row,index){
                         return ConvertToDate(value)
                     }
                 },
-                {field:'financialType',title:'财务类型'},
-                {field:'belongOrderId',title:'所属订单'},
-                {field:'payer',title:'发生方'},
+                {field:'financialType',title:'财务类型',
+                    formatter:function(value,row,index){
+                        if( value == '0') {
+                            return "转出";
+                        }else if(value=='1'){
+                            return "转入";
+                        }
+                    }
+                },
+                {field:'orderNumber',title:'所属订单'},
+                {field:'entName',title:'发生方'},
                 {field:'bankAcountId',title:'发生银行账户及类型',
                     formatter:function(value,row,index){
                         console.log(row)
                         var str=''
-                        str += '<p>'+row.financialType+'</p><p>'+row.bankCard+'</p>'
+                        str += '<p>三方账户</p><p>'+row.tripartipeNumber+'</p>'
                         return str
                     }
                 },
-                {field:'bankCard',title:'发生方账户(采方)'},
+                {field:'bankAccountNumber',title:'发生方账户(采方)'},
             ],
             url:'<%=request.getContextPath()%>/financial/getAllFinancial.action',
             method:'post',
@@ -107,8 +115,8 @@
             pageNumber: params.pageNumber,
             pageSize: params.pageSize,
             financialType:$("#financialType").val(),
-            payer:$("#payer").val(),
-            bankCard:$("#bankCard").val()
+            billTime:$("#billTime").val(),
+            entName:$("#entName").val(),
         };
         return temp;
     }

@@ -27,9 +27,9 @@ public class FinancialServiceImpl implements FinancialService {
     @Override
     public PageUtil<Financial> queryAllCredit(PageUtil<Financial> pageUtil) {
         //查询总条数
-        Integer count = financialMapper.getAllFinancialCount(pageUtil);
+        Integer count = financialMapper.getFinancialCountLast(pageUtil);
         //查询出条件后的所有的授信信息集合
-        List<Financial> credits = financialMapper.selectAllFinancialByPage(pageUtil);
+        List<Financial> credits = financialMapper.selectFinancialByPageLast(pageUtil);
         pageUtil.setTotalCount(count);
         pageUtil.setList(credits);
         return pageUtil;

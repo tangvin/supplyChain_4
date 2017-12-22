@@ -7,10 +7,11 @@
     <result column="bussiness_type" property="bussinessType" jdbcType="INTEGER" />
     <result column="contract_id" property="contractId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="assist_id" property="assistId" jdbcType="INTEGER" />
 
   </resultMap>
   <sql id="Base_Column_List" >
-    reject_id, reject_reason, bussiness_type, contract_id,order_id
+    reject_id, reject_reason, bussiness_type, contract_id,order_id,assist_id
   </sql>
 
 
@@ -74,6 +75,9 @@
       </if>
       <if test="orderId != null" >
         #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="assistId != null" >
+        #{assist_id,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

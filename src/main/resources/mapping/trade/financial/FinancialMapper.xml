@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.com.edzleft.dao.trade.financial.FinancialMapper" >
-  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.Financial" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.TradeFinancial" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="financial_number" property="financialNumber" jdbcType="VARCHAR" />
     <result column="financial_type" property="financialType" jdbcType="INTEGER" />
@@ -12,6 +12,11 @@
     <result column="bank_account_id" property="bankAccountId" jdbcType="INTEGER" />
     <result column="bank_card_id" property="bankCardId" jdbcType="INTEGER" />
     <result column="information_id" property="informationId" jdbcType="INTEGER" />
+    <!--别名-->
+    <result column="orderNumber" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="tripartipeNumber" property="tripartipeNumber" jdbcType="VARCHAR" />
+    <result column="bankAccountNumber" property="bankAccountNumber" jdbcType="VARCHAR" />
+    <result column="entName" property="entName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, financial_number, financial_type, amount, payer, belong_order_id,
@@ -22,16 +27,16 @@
   <sql id="where_sql">
     <trim prefix="where" prefixOverrides="and">
       <if test="whereMap != null &amp;&amp; whereMap.financialType != null and whereMap.financialType != ''">
-        AND financial_type  LIKE '%${whereMap.financialType}%'
+        AND t1.financial_type  LIKE '%${whereMap.financialType}%'
       </if>
       <if test="whereMap != null &amp;&amp; whereMap.billTime != null and whereMap.billTime != ''">
-        AND bill_time &gt;= '%${whereMap.billTime}%'
+        AND t1.bill_time &gt;= '${whereMap.billTime}'
       </if>
-      <if test="whereMap != null &amp;&amp; whereMap.payerId != null and whereMap.payerId != ''">
-        AND payer_id LIKE '${whereMap.payerId}'
+      <if test="whereMap != null &amp;&amp; whereMap.billTime != null and whereMap.billTime != ''">
+        AND t1.bill_time &lt;= '${whereMap.billTime}'
       </if>
-      <if test="whereMap != null &amp;&amp; whereMap.bankAccountId != null and whereMap.bankAccountId != ''">
-        AND bank_account_id LIKE '%${whereMap.bankAccountId}%'
+      <if test="whereMap != null &amp;&amp; whereMap.entName != null and whereMap.entName != ''">
+        AND t5.entName LIKE '%${whereMap.entName}%'
       </if>
     </trim>
   </sql>
@@ -50,10 +55,10 @@
   <!--表连接条件查询-->
   <select id="selectFinancialByPageLast"  resultMap="BaseResultMap" parameterType="cn.com.edzleft.util.page.PageUtil">
     select t1.financial_number ,t1.amount,t1.bill_time,t1.financial_type,
-    t2.order_number,
-    t3.tripartite_account_number,
-    t4.bank_account_number,
-    t5.ent_name
+    t2.order_number AS orderNumber,
+    t3.tripartite_account_number AS tripartipeNumber,
+    t4.bank_account_number AS bankAccountNumber,
+    t5.ent_name AS entName
     from gyl_trade_financial t1
     inner join gyl_order  t2  on  t1.belong_order_id=t2.order_id
     inner join gyl_tripartite t3 on t1.bank_account_id = t3.tripartite_id

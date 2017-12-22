@@ -16,5 +16,15 @@ public interface AssistContractMapper {
      */
     public List<AssistContract> selectAssistContractListById(Integer contractId);
 
+    /**
+     * 修改辅合同状态
+     * @param assistContract
+     * @return
+     */
+    int claimAssistContract(AssistContract assistContract);
 
+    /**
+     * 根据辅合同id查询辅合同信息
+     */
+    public AssistContract selectAssistContractById(Integer id);
 }

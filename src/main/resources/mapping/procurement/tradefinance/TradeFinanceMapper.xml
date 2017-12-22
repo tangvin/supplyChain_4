@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.com.edzleft.dao.procurement.tradefinance.PmTradeFinanceMapper" >
-  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.TradeFinance" >
+  <resultMap id="BaseResultMap" type="cn.com.edzleft.entity.TradeFinancial" >
     <id column="financial_id" property="financialId" jdbcType="INTEGER" />
     <result column="financial_numbers" property="financialNumbers" jdbcType="VARCHAR" />
     <result column="financial_type" property="financialType" jdbcType="INTEGER" />
